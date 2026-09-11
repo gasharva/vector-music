@@ -1,0 +1,6989 @@
+{
+  "format": "CanonicalNotation",
+  "version": "0.1",
+  "metadata": {
+    "title": "When Almonds Blossomed",
+    "composer": "Giya Kancheli"
+  },
+  "parts": [
+    {
+      "id": "P1",
+      "name": "Фортепиано",
+      "measures": [
+        {
+          "number": 1,
+          "events": [
+            {
+              "id": "m1.d1",
+              "type": "text",
+              "at": "0",
+              "staff": 1,
+              "text": "Pastoso (sempre legato)",
+              "placement": "above"
+            },
+            {
+              "id": "m1.d2",
+              "type": "dynamic",
+              "at": "0",
+              "staff": 1,
+              "value": "pp",
+              "placement": "below"
+            },
+            {
+              "id": "m1.d3",
+              "type": "tempo",
+              "at": "0",
+              "staff": 1,
+              "beatUnit": "quarter",
+              "bpm": 75,
+              "placement": "above"
+            },
+            {
+              "id": "m1.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m1.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m1.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m1.e4",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m1.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m1.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G3"
+                },
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ],
+          "attributes": {
+            "key": {
+              "fifths": 0
+            },
+            "time": {
+              "beats": 3,
+              "beatType": 4
+            },
+            "staves": 2,
+            "clefs": [
+              {
+                "staff": 1,
+                "sign": "G",
+                "line": 2
+              },
+              {
+                "staff": 2,
+                "sign": "F",
+                "line": 4
+              }
+            ]
+          }
+        },
+        {
+          "number": 2,
+          "events": [
+            {
+              "id": "m2.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/40",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "32nd",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e5",
+              "type": "chord",
+              "at": "13/20",
+              "duration": "1/40",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "32nd",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e6",
+              "type": "chord",
+              "at": "27/40",
+              "duration": "1/40",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "32nd",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e7",
+              "type": "chord",
+              "at": "7/10",
+              "duration": "1/40",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "32nd",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e8",
+              "type": "chord",
+              "at": "29/40",
+              "duration": "1/40",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "32nd",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m2.e9",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m2.e10",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C3"
+                },
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "events": [
+            {
+              "id": "m3.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m3.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m3.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m3.e4",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m3.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m3.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F2"
+                },
+                {
+                  "pitch": "C3"
+                },
+                {
+                  "pitch": "G3"
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "events": [
+            {
+              "id": "m4.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m4.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m4.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m4.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "Eb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m4.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B2",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "events": [
+            {
+              "id": "m5.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m5.e2",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m5.e3",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m5.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m5.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m5.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E3"
+                },
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "events": [
+            {
+              "id": "m6.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m6.e2",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m6.e3",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m6.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m6.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "F#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m6.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "G3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 7,
+          "events": [
+            {
+              "id": "m7.d1",
+              "type": "text",
+              "at": "0",
+              "staff": 1,
+              "text": "poco accelerando",
+              "placement": "above"
+            },
+            {
+              "id": "m7.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m7.e2",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m7.e3",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m7.e4",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "C#4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m7.e5",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m7.e6",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m7.e7",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C#4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m7.d2",
+              "type": "dynamic",
+              "at": "0",
+              "staff": 2,
+              "value": "pp",
+              "placement": "below"
+            },
+            {
+              "id": "m7.e8",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m7.e9",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m7.e10",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m7.e11",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m7.e12",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m7.e13",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m7.e14",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "D2"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "events": [
+            {
+              "id": "m8.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m8.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#4"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "F#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m8.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#4"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "F#4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m8.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#4"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "F#4"
+                },
+                {
+                  "pitch": "G#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m8.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#4"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "F#4"
+                },
+                {
+                  "pitch": "G#4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m8.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#4"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "F#4"
+                },
+                {
+                  "pitch": "G#4"
+                },
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m8.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "G#3",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m8.e8",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m8.e9",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m8.e10",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m8.e11",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m8.d2",
+              "type": "dynamic",
+              "at": "5/8",
+              "staff": 2,
+              "value": "mf",
+              "placement": "below"
+            },
+            {
+              "id": "m8.e12",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3"
+                },
+                {
+                  "pitch": "G#3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "events": [
+            {
+              "id": "m9.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                },
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m9.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m9.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m9.e4",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4"
+                },
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m9.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m9.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G2"
+                },
+                {
+                  "pitch": "F3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m9.e7",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/4",
+              "staff": 2,
+              "voice": 6,
+              "notation": {
+                "noteType": "quarter"
+              }
+            },
+            {
+              "id": "m9.e8",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "events": [
+            {
+              "id": "m10.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m10.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m10.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m10.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m10.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C3"
+                },
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "events": [
+            {
+              "id": "m11.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m11.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m11.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m11.e4",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m11.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "F4"
+                },
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m11.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B2",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                },
+                {
+                  "pitch": "F3"
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 12,
+          "events": [
+            {
+              "id": "m12.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "3/16",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e4",
+              "type": "chord",
+              "at": "7/16",
+              "duration": "1/16",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/16",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e6",
+              "type": "chord",
+              "at": "9/16",
+              "duration": "1/16",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F#5",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e7",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/16",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5",
+                  "accidental": {
+                    "type": "natural"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e8",
+              "type": "chord",
+              "at": "11/16",
+              "duration": "1/16",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m12.e9",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "F4"
+                },
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m12.e10",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B2",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                },
+                {
+                  "pitch": "F3"
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "events": [
+            {
+              "id": "m13.e1",
+              "type": "rest",
+              "at": "0",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1
+              }
+            },
+            {
+              "id": "m13.e2",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m13.e3",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m13.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m13.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m13.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B2"
+                },
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "events": [
+            {
+              "id": "m14.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                },
+                {
+                  "pitch": "E5"
+                },
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m14.e2",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m14.e3",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m14.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m14.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "G#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m14.e6",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m14.e7",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#2",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "G#2",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m14.e8",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#2"
+                },
+                {
+                  "pitch": "G#2"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m14.e9",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "E1"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "events": [
+            {
+              "id": "m15.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#5",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m15.e2",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m15.e3",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C#5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m15.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m15.e5",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m15.e6",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m15.e7",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m15.e8",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "E3"
+                },
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "C#4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "events": [
+            {
+              "id": "m16.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m16.e2",
+              "type": "rest",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m16.e3",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m16.e4",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m16.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "D2"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m16.e6",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m16.e7",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m16.e8",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m16.e9",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G3"
+                },
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "down"
+              }
+            }
+          ],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 17,
+          "events": [
+            {
+              "id": "m17.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C3"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e8",
+              "type": "chord",
+              "at": "1/16",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G3"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e9",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e10",
+              "type": "chord",
+              "at": "3/16",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m17.e11",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C3"
+                },
+                {
+                  "pitch": "G3"
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 18,
+          "events": [
+            {
+              "id": "m18.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e8",
+              "type": "chord",
+              "at": "1/16",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E3"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e9",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e10",
+              "type": "chord",
+              "at": "3/16",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C4"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m18.e11",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "E3"
+                },
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 19,
+          "events": [
+            {
+              "id": "m19.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D6"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m19.e2",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B2"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m19.e3",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m19.e4",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m19.e5",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m19.e6",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m19.e7",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 20,
+          "events": [
+            {
+              "id": "m20.d1",
+              "type": "text",
+              "at": "0",
+              "staff": 1,
+              "text": "loco",
+              "placement": "above"
+            },
+            {
+              "id": "m20.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "G#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m20.e2",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m20.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m20.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E3"
+                },
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 21,
+          "events": [
+            {
+              "id": "m21.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e8",
+              "type": "chord",
+              "at": "1/16",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E3"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e9",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e10",
+              "type": "chord",
+              "at": "3/16",
+              "duration": "1/16",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C4"
+                }
+              ],
+              "notation": {
+                "noteType": "16th",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m21.e11",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "E3"
+                },
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            }
+          ],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 22,
+          "events": [
+            {
+              "id": "m22.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m22.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m22.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m22.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m22.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m22.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m22.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "E3"
+                },
+                {
+                  "pitch": "B3"
+                },
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 23,
+          "events": [
+            {
+              "id": "m23.d1",
+              "type": "text",
+              "at": "0",
+              "staff": 1,
+              "text": "loco",
+              "placement": "above"
+            },
+            {
+              "id": "m23.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m23.e2",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G2"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m23.e3",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m23.e4",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m23.e5",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m23.e6",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "D4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m23.e7",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 24,
+          "events": [
+            {
+              "id": "m24.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m24.d2",
+              "type": "dynamic",
+              "at": "1/2",
+              "staff": 1,
+              "value": "mp",
+              "placement": "below"
+            },
+            {
+              "id": "m24.e2",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m24.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m24.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C3"
+                },
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 25,
+          "events": [
+            {
+              "id": "m25.d1",
+              "type": "dynamic",
+              "at": "0",
+              "staff": 1,
+              "value": "ppp",
+              "placement": "below"
+            },
+            {
+              "id": "m25.d2",
+              "type": "text",
+              "at": "0",
+              "staff": 1,
+              "text": "a tempo",
+              "placement": "above"
+            },
+            {
+              "id": "m25.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m25.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m25.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m25.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m25.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "E4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m25.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "F#3",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "C4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 26,
+          "events": [
+            {
+              "id": "m26.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m26.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m26.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m26.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "D#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m26.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "B2"
+                },
+                {
+                  "pitch": "A3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ],
+          "layout": {
+            "breakBefore": "page"
+          }
+        },
+        {
+          "number": 27,
+          "events": [
+            {
+              "id": "m27.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m27.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m27.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m27.e4",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m27.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "D4",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m27.e6",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "E2"
+                },
+                {
+                  "pitch": "G3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            }
+          ]
+        },
+        {
+          "number": 28,
+          "events": [
+            {
+              "id": "m28.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m28.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m28.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m28.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                },
+                {
+                  "pitch": "F#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m28.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "G3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 29,
+          "events": [
+            {
+              "id": "m29.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m29.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m29.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m29.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m29.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m29.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m29.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C5"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m29.e8",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "D3"
+                },
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "E4"
+                },
+                {
+                  "pitch": "F4",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 30,
+          "events": [
+            {
+              "id": "m30.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m30.e2",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m30.e3",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m30.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m30.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G2"
+                },
+                {
+                  "pitch": "F3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m30.e6",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 6,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m30.e7",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m30.e8",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "A3"
+                },
+                {
+                  "pitch": "B3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 31,
+          "events": [
+            {
+              "id": "m31.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                },
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m31.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                },
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m31.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                },
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m31.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4"
+                },
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m31.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "Bb4"
+                },
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m31.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m31.e7",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/4",
+              "staff": 2,
+              "voice": 5,
+              "notation": {
+                "noteType": "quarter"
+              }
+            },
+            {
+              "id": "m31.e8",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                },
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m31.e9",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "E2"
+                },
+                {
+                  "pitch": "D3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ]
+        },
+        {
+          "number": 32,
+          "events": [
+            {
+              "id": "m32.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m32.e2",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m32.e3",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G4"
+                },
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m32.e4",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m32.e5",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "Bb3",
+                  "accidental": {
+                    "type": "flat"
+                  }
+                },
+                {
+                  "pitch": "C#4",
+                  "accidental": {
+                    "type": "sharp"
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m32.e6",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "Bb3"
+                },
+                {
+                  "pitch": "C#4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m32.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 6,
+              "notes": [
+                {
+                  "pitch": "A2"
+                },
+                {
+                  "pitch": "G3"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            }
+          ],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 33,
+          "events": [
+            {
+              "id": "m33.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                },
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m33.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G5"
+                },
+                {
+                  "pitch": "B5",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m33.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G5"
+                },
+                {
+                  "pitch": "B5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m33.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                },
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m33.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "G5"
+                },
+                {
+                  "pitch": "B5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m33.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "A5"
+                },
+                {
+                  "pitch": "C6"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m33.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "D4"
+                },
+                {
+                  "pitch": "F4"
+                },
+                {
+                  "pitch": "A4"
+                },
+                {
+                  "pitch": "C5",
+                  "accidental": {
+                    "type": "natural",
+                    "cautionary": true,
+                    "parentheses": false
+                  }
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            }
+          ],
+          "attributes": {
+            "clefs": [
+              {
+                "staff": 2,
+                "sign": "G",
+                "line": 2
+              }
+            ]
+          }
+        },
+        {
+          "number": 34,
+          "events": [
+            {
+              "id": "m34.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C6"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m34.e2",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B5"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m34.e3",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m34.e4",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "G3"
+                },
+                {
+                  "pitch": "F4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            }
+          ]
+        },
+        {
+          "number": 35,
+          "events": [
+            {
+              "id": "m35.d1",
+              "type": "text",
+              "at": "0",
+              "staff": 1,
+              "text": "allargando",
+              "placement": "above"
+            },
+            {
+              "id": "m35.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                },
+                {
+                  "pitch": "C6"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m35.e2",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notation": {
+                "noteType": "eighth"
+              }
+            },
+            {
+              "id": "m35.e3",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m35.e4",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "A5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m35.e5",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m35.e6",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "G5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m35.e7",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m35.e8",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            }
+          ]
+        },
+        {
+          "number": 36,
+          "events": [
+            {
+              "id": "m36.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "F5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m36.e2",
+              "type": "chord",
+              "at": "1/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m36.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "E5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m36.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m36.e5",
+              "type": "chord",
+              "at": "1/2",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "D5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m36.e6",
+              "type": "chord",
+              "at": "5/8",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "C5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m36.e7",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            }
+          ]
+        },
+        {
+          "number": 37,
+          "events": [
+            {
+              "id": "m37.e1",
+              "type": "chord",
+              "at": "0",
+              "duration": "3/4",
+              "staff": 1,
+              "voice": 1,
+              "notes": [
+                {
+                  "pitch": "B4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "dots": 1,
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m37.e2",
+              "type": "rest",
+              "at": "0",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 2,
+              "notation": {
+                "noteType": "quarter"
+              }
+            },
+            {
+              "id": "m37.e3",
+              "type": "chord",
+              "at": "1/4",
+              "duration": "1/8",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C5"
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m37.e4",
+              "type": "chord",
+              "at": "3/8",
+              "duration": "1/4",
+              "staff": 1,
+              "voice": 2,
+              "notes": [
+                {
+                  "pitch": "C6"
+                }
+              ],
+              "notation": {
+                "noteType": "quarter",
+                "stem": "down"
+              }
+            },
+            {
+              "id": "m37.e5",
+              "type": "chord",
+              "at": "0",
+              "duration": "1/2",
+              "staff": 2,
+              "voice": 5,
+              "notes": [
+                {
+                  "pitch": "C4"
+                },
+                {
+                  "pitch": "G4"
+                }
+              ],
+              "notation": {
+                "noteType": "half",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "m37.e6",
+              "type": "rest",
+              "at": "1/2",
+              "duration": "1/4",
+              "staff": 2,
+              "voice": 5,
+              "notation": {
+                "noteType": "quarter"
+              }
+            }
+          ],
+          "rightBarline": "final"
+        }
+      ]
+    }
+  ],
+  "relations": {
+    "beams": [
+      {
+        "id": "beam-1",
+        "level": 1,
+        "events": [
+          "m1.e1",
+          "m1.e2"
+        ]
+      },
+      {
+        "id": "beam-2",
+        "level": 1,
+        "events": [
+          "m2.e1",
+          "m2.e2"
+        ]
+      },
+      {
+        "id": "beam-3",
+        "level": 1,
+        "events": [
+          "m2.e4",
+          "m2.e5",
+          "m2.e6",
+          "m2.e7",
+          "m2.e8"
+        ]
+      },
+      {
+        "id": "beam-4",
+        "level": 2,
+        "events": [
+          "m2.e4",
+          "m2.e5",
+          "m2.e6",
+          "m2.e7",
+          "m2.e8"
+        ]
+      },
+      {
+        "id": "beam-5",
+        "level": 3,
+        "events": [
+          "m2.e4",
+          "m2.e5",
+          "m2.e6",
+          "m2.e7",
+          "m2.e8"
+        ]
+      },
+      {
+        "id": "beam-6",
+        "level": 1,
+        "events": [
+          "m3.e1",
+          "m3.e2"
+        ]
+      },
+      {
+        "id": "beam-7",
+        "level": 1,
+        "events": [
+          "m4.e1",
+          "m4.e2"
+        ]
+      },
+      {
+        "id": "beam-8",
+        "level": 1,
+        "events": [
+          "m5.e3",
+          "m5.e4"
+        ]
+      },
+      {
+        "id": "beam-9",
+        "level": 1,
+        "events": [
+          "m6.e3",
+          "m6.e4"
+        ]
+      },
+      {
+        "id": "beam-10",
+        "level": 1,
+        "events": [
+          "m7.e4",
+          "m7.e5"
+        ]
+      },
+      {
+        "id": "beam-11",
+        "level": 1,
+        "events": [
+          "m7.e6",
+          "m7.e7"
+        ]
+      },
+      {
+        "id": "beam-12",
+        "level": 1,
+        "events": [
+          "m7.e10",
+          "m7.e11"
+        ]
+      },
+      {
+        "id": "beam-13",
+        "level": 1,
+        "events": [
+          "m7.e12",
+          "m7.e13"
+        ]
+      },
+      {
+        "id": "beam-14",
+        "level": 1,
+        "events": [
+          "m8.e1",
+          "m8.e2"
+        ]
+      },
+      {
+        "id": "beam-15",
+        "level": 1,
+        "events": [
+          "m8.e3",
+          "m8.e4"
+        ]
+      },
+      {
+        "id": "beam-16",
+        "level": 1,
+        "events": [
+          "m8.e5",
+          "m8.e6"
+        ]
+      },
+      {
+        "id": "beam-17",
+        "level": 1,
+        "events": [
+          "m8.e7",
+          "m8.e8"
+        ]
+      },
+      {
+        "id": "beam-18",
+        "level": 1,
+        "events": [
+          "m8.e9",
+          "m8.e10"
+        ]
+      },
+      {
+        "id": "beam-19",
+        "level": 1,
+        "events": [
+          "m8.e11",
+          "m8.e12"
+        ]
+      },
+      {
+        "id": "beam-20",
+        "level": 1,
+        "events": [
+          "m9.e1",
+          "m9.e2"
+        ]
+      },
+      {
+        "id": "beam-21",
+        "level": 1,
+        "events": [
+          "m10.e1",
+          "m10.e2"
+        ]
+      },
+      {
+        "id": "beam-22",
+        "level": 1,
+        "events": [
+          "m11.e1",
+          "m11.e2"
+        ]
+      },
+      {
+        "id": "beam-23",
+        "level": 1,
+        "events": [
+          "m12.e1",
+          "m12.e2"
+        ]
+      },
+      {
+        "id": "beam-24",
+        "level": 1,
+        "events": [
+          "m12.e3",
+          "m12.e4"
+        ]
+      },
+      {
+        "id": "beam-25",
+        "level": 2,
+        "events": [
+          "m12.e4"
+        ],
+        "hook": "backward"
+      },
+      {
+        "id": "beam-26",
+        "level": 1,
+        "events": [
+          "m12.e5",
+          "m12.e6",
+          "m12.e7",
+          "m12.e8"
+        ]
+      },
+      {
+        "id": "beam-27",
+        "level": 2,
+        "events": [
+          "m12.e5",
+          "m12.e6",
+          "m12.e7",
+          "m12.e8"
+        ]
+      },
+      {
+        "id": "beam-28",
+        "level": 1,
+        "events": [
+          "m13.e3",
+          "m13.e4"
+        ]
+      },
+      {
+        "id": "beam-29",
+        "level": 1,
+        "events": [
+          "m14.e3",
+          "m14.e4"
+        ]
+      },
+      {
+        "id": "beam-30",
+        "level": 1,
+        "events": [
+          "m15.e2",
+          "m15.e3"
+        ]
+      },
+      {
+        "id": "beam-31",
+        "level": 1,
+        "events": [
+          "m15.e4",
+          "m15.e5"
+        ]
+      },
+      {
+        "id": "beam-32",
+        "level": 1,
+        "events": [
+          "m15.e6",
+          "m15.e7"
+        ]
+      },
+      {
+        "id": "beam-33",
+        "level": 1,
+        "events": [
+          "m16.e5",
+          "m16.e6"
+        ]
+      },
+      {
+        "id": "beam-34",
+        "level": 1,
+        "events": [
+          "m16.e7",
+          "m16.e8"
+        ]
+      },
+      {
+        "id": "beam-35",
+        "level": 1,
+        "events": [
+          "m17.e1",
+          "m17.e2"
+        ]
+      },
+      {
+        "id": "beam-36",
+        "level": 1,
+        "events": [
+          "m17.e3",
+          "m17.e4"
+        ]
+      },
+      {
+        "id": "beam-37",
+        "level": 1,
+        "events": [
+          "m17.e5",
+          "m17.e6"
+        ]
+      },
+      {
+        "id": "beam-38",
+        "level": 1,
+        "events": [
+          "m17.e7",
+          "m17.e8",
+          "m17.e9",
+          "m17.e10"
+        ]
+      },
+      {
+        "id": "beam-39",
+        "level": 2,
+        "events": [
+          "m17.e7",
+          "m17.e8",
+          "m17.e9",
+          "m17.e10"
+        ]
+      },
+      {
+        "id": "beam-40",
+        "level": 1,
+        "events": [
+          "m18.e1",
+          "m18.e2"
+        ]
+      },
+      {
+        "id": "beam-41",
+        "level": 1,
+        "events": [
+          "m18.e3",
+          "m18.e4"
+        ]
+      },
+      {
+        "id": "beam-42",
+        "level": 1,
+        "events": [
+          "m18.e5",
+          "m18.e6"
+        ]
+      },
+      {
+        "id": "beam-43",
+        "level": 1,
+        "events": [
+          "m18.e7",
+          "m18.e8",
+          "m18.e9",
+          "m18.e10"
+        ]
+      },
+      {
+        "id": "beam-44",
+        "level": 2,
+        "events": [
+          "m18.e7",
+          "m18.e8",
+          "m18.e9",
+          "m18.e10"
+        ]
+      },
+      {
+        "id": "beam-45",
+        "level": 1,
+        "events": [
+          "m19.e2",
+          "m19.e3"
+        ]
+      },
+      {
+        "id": "beam-46",
+        "level": 1,
+        "events": [
+          "m19.e4",
+          "m19.e5"
+        ]
+      },
+      {
+        "id": "beam-47",
+        "level": 1,
+        "events": [
+          "m19.e6",
+          "m19.e7"
+        ]
+      },
+      {
+        "id": "beam-48",
+        "level": 1,
+        "events": [
+          "m21.e1",
+          "m21.e2"
+        ]
+      },
+      {
+        "id": "beam-49",
+        "level": 1,
+        "events": [
+          "m21.e3",
+          "m21.e4"
+        ]
+      },
+      {
+        "id": "beam-50",
+        "level": 1,
+        "events": [
+          "m21.e5",
+          "m21.e6"
+        ]
+      },
+      {
+        "id": "beam-51",
+        "level": 1,
+        "events": [
+          "m21.e7",
+          "m21.e8",
+          "m21.e9",
+          "m21.e10"
+        ]
+      },
+      {
+        "id": "beam-52",
+        "level": 2,
+        "events": [
+          "m21.e7",
+          "m21.e8",
+          "m21.e9",
+          "m21.e10"
+        ]
+      },
+      {
+        "id": "beam-53",
+        "level": 1,
+        "events": [
+          "m22.e1",
+          "m22.e2"
+        ]
+      },
+      {
+        "id": "beam-54",
+        "level": 1,
+        "events": [
+          "m22.e3",
+          "m22.e4"
+        ]
+      },
+      {
+        "id": "beam-55",
+        "level": 1,
+        "events": [
+          "m22.e5",
+          "m22.e6"
+        ]
+      },
+      {
+        "id": "beam-56",
+        "level": 1,
+        "events": [
+          "m23.e2",
+          "m23.e3"
+        ]
+      },
+      {
+        "id": "beam-57",
+        "level": 1,
+        "events": [
+          "m23.e4",
+          "m23.e5"
+        ]
+      },
+      {
+        "id": "beam-58",
+        "level": 1,
+        "events": [
+          "m23.e6",
+          "m23.e7"
+        ]
+      },
+      {
+        "id": "beam-59",
+        "level": 1,
+        "events": [
+          "m25.e1",
+          "m25.e2"
+        ]
+      },
+      {
+        "id": "beam-60",
+        "level": 1,
+        "events": [
+          "m26.e1",
+          "m26.e2"
+        ]
+      },
+      {
+        "id": "beam-61",
+        "level": 1,
+        "events": [
+          "m27.e1",
+          "m27.e2"
+        ]
+      },
+      {
+        "id": "beam-62",
+        "level": 1,
+        "events": [
+          "m28.e1",
+          "m28.e2"
+        ]
+      },
+      {
+        "id": "beam-63",
+        "level": 1,
+        "events": [
+          "m29.e1",
+          "m29.e2"
+        ]
+      },
+      {
+        "id": "beam-64",
+        "level": 1,
+        "events": [
+          "m29.e3",
+          "m29.e4"
+        ]
+      },
+      {
+        "id": "beam-65",
+        "level": 1,
+        "events": [
+          "m29.e5",
+          "m29.e6"
+        ]
+      },
+      {
+        "id": "beam-66",
+        "level": 1,
+        "events": [
+          "m31.e1",
+          "m31.e2"
+        ]
+      },
+      {
+        "id": "beam-67",
+        "level": 1,
+        "events": [
+          "m31.e3",
+          "m31.e4"
+        ]
+      },
+      {
+        "id": "beam-68",
+        "level": 1,
+        "events": [
+          "m31.e5",
+          "m31.e6"
+        ]
+      },
+      {
+        "id": "beam-69",
+        "level": 1,
+        "events": [
+          "m33.e1",
+          "m33.e2"
+        ]
+      },
+      {
+        "id": "beam-70",
+        "level": 1,
+        "events": [
+          "m33.e3",
+          "m33.e4"
+        ]
+      },
+      {
+        "id": "beam-71",
+        "level": 1,
+        "events": [
+          "m33.e5",
+          "m33.e6"
+        ]
+      },
+      {
+        "id": "beam-72",
+        "level": 1,
+        "events": [
+          "m35.e4",
+          "m35.e5"
+        ]
+      },
+      {
+        "id": "beam-73",
+        "level": 1,
+        "events": [
+          "m35.e6",
+          "m35.e7"
+        ]
+      },
+      {
+        "id": "beam-74",
+        "level": 1,
+        "events": [
+          "m36.e1",
+          "m36.e2"
+        ]
+      },
+      {
+        "id": "beam-75",
+        "level": 1,
+        "events": [
+          "m36.e3",
+          "m36.e4"
+        ]
+      },
+      {
+        "id": "beam-76",
+        "level": 1,
+        "events": [
+          "m36.e5",
+          "m36.e6"
+        ]
+      }
+    ],
+    "ties": [
+      {
+        "id": "tie-1",
+        "from": {
+          "event": "m11.e5",
+          "note": "D4"
+        },
+        "to": {
+          "event": "m12.e9",
+          "note": "D4"
+        }
+      },
+      {
+        "id": "tie-2",
+        "from": {
+          "event": "m11.e5",
+          "note": "F4"
+        },
+        "to": {
+          "event": "m12.e9",
+          "note": "F4"
+        }
+      },
+      {
+        "id": "tie-3",
+        "from": {
+          "event": "m11.e5",
+          "note": "A4"
+        },
+        "to": {
+          "event": "m12.e9",
+          "note": "A4"
+        }
+      },
+      {
+        "id": "tie-4",
+        "from": {
+          "event": "m11.e6",
+          "note": "B2"
+        },
+        "to": {
+          "event": "m12.e10",
+          "note": "B2"
+        }
+      },
+      {
+        "id": "tie-5",
+        "from": {
+          "event": "m11.e6",
+          "note": "F3"
+        },
+        "to": {
+          "event": "m12.e10",
+          "note": "F3"
+        }
+      },
+      {
+        "id": "tie-6",
+        "from": {
+          "event": "m11.e6",
+          "note": "A3"
+        },
+        "to": {
+          "event": "m12.e10",
+          "note": "A3"
+        }
+      },
+      {
+        "id": "tie-7",
+        "from": {
+          "event": "m14.e7",
+          "note": "F#2"
+        },
+        "to": {
+          "event": "m14.e8",
+          "note": "F#2"
+        }
+      },
+      {
+        "id": "tie-8",
+        "from": {
+          "event": "m14.e7",
+          "note": "G#2"
+        },
+        "to": {
+          "event": "m14.e8",
+          "note": "G#2"
+        }
+      },
+      {
+        "id": "tie-9",
+        "from": {
+          "event": "m15.e4",
+          "note": "A2"
+        },
+        "to": {
+          "event": "m15.e8",
+          "note": "A2"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-10",
+        "from": {
+          "event": "m15.e5",
+          "note": "E3"
+        },
+        "to": {
+          "event": "m15.e8",
+          "note": "E3"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-11",
+        "from": {
+          "event": "m15.e6",
+          "note": "B3"
+        },
+        "to": {
+          "event": "m15.e8",
+          "note": "B3"
+        }
+      },
+      {
+        "id": "tie-12",
+        "from": {
+          "event": "m15.e7",
+          "note": "C#4"
+        },
+        "to": {
+          "event": "m15.e8",
+          "note": "C#4"
+        }
+      },
+      {
+        "id": "tie-13",
+        "from": {
+          "event": "m17.e7",
+          "note": "C3"
+        },
+        "to": {
+          "event": "m17.e11",
+          "note": "C3"
+        }
+      },
+      {
+        "id": "tie-14",
+        "from": {
+          "event": "m17.e8",
+          "note": "G3"
+        },
+        "to": {
+          "event": "m17.e11",
+          "note": "G3"
+        }
+      },
+      {
+        "id": "tie-15",
+        "from": {
+          "event": "m17.e9",
+          "note": "D4"
+        },
+        "to": {
+          "event": "m17.e11",
+          "note": "D4"
+        }
+      },
+      {
+        "id": "tie-16",
+        "from": {
+          "event": "m17.e10",
+          "note": "E4"
+        },
+        "to": {
+          "event": "m17.e11",
+          "note": "E4"
+        }
+      },
+      {
+        "id": "tie-17",
+        "from": {
+          "event": "m18.e7",
+          "note": "A2"
+        },
+        "to": {
+          "event": "m18.e11",
+          "note": "A2"
+        }
+      },
+      {
+        "id": "tie-18",
+        "from": {
+          "event": "m18.e8",
+          "note": "E3"
+        },
+        "to": {
+          "event": "m18.e11",
+          "note": "E3"
+        }
+      },
+      {
+        "id": "tie-19",
+        "from": {
+          "event": "m18.e9",
+          "note": "B3"
+        },
+        "to": {
+          "event": "m18.e11",
+          "note": "B3"
+        }
+      },
+      {
+        "id": "tie-20",
+        "from": {
+          "event": "m18.e10",
+          "note": "C4"
+        },
+        "to": {
+          "event": "m18.e11",
+          "note": "C4"
+        }
+      },
+      {
+        "id": "tie-21",
+        "from": {
+          "event": "m21.e7",
+          "note": "A2"
+        },
+        "to": {
+          "event": "m21.e11",
+          "note": "A2"
+        }
+      },
+      {
+        "id": "tie-22",
+        "from": {
+          "event": "m21.e8",
+          "note": "E3"
+        },
+        "to": {
+          "event": "m21.e11",
+          "note": "E3"
+        }
+      },
+      {
+        "id": "tie-23",
+        "from": {
+          "event": "m21.e9",
+          "note": "B3"
+        },
+        "to": {
+          "event": "m21.e11",
+          "note": "B3"
+        }
+      },
+      {
+        "id": "tie-24",
+        "from": {
+          "event": "m21.e10",
+          "note": "C4"
+        },
+        "to": {
+          "event": "m21.e11",
+          "note": "C4"
+        }
+      },
+      {
+        "id": "tie-25",
+        "from": {
+          "event": "m21.e11",
+          "note": "A2"
+        },
+        "to": {
+          "event": "m22.e7",
+          "note": "A2"
+        }
+      },
+      {
+        "id": "tie-26",
+        "from": {
+          "event": "m21.e11",
+          "note": "E3"
+        },
+        "to": {
+          "event": "m22.e7",
+          "note": "E3"
+        }
+      },
+      {
+        "id": "tie-27",
+        "from": {
+          "event": "m21.e11",
+          "note": "B3"
+        },
+        "to": {
+          "event": "m22.e7",
+          "note": "B3"
+        }
+      },
+      {
+        "id": "tie-28",
+        "from": {
+          "event": "m21.e11",
+          "note": "C4"
+        },
+        "to": {
+          "event": "m22.e7",
+          "note": "C4"
+        }
+      },
+      {
+        "id": "tie-29",
+        "from": {
+          "event": "m21.e11",
+          "note": "E4"
+        },
+        "to": {
+          "event": "m22.e7",
+          "note": "E4"
+        }
+      },
+      {
+        "id": "tie-30",
+        "from": {
+          "event": "m30.e7",
+          "note": "A3"
+        },
+        "to": {
+          "event": "m30.e8",
+          "note": "A3"
+        }
+      },
+      {
+        "id": "tie-31",
+        "from": {
+          "event": "m30.e7",
+          "note": "B3"
+        },
+        "to": {
+          "event": "m30.e8",
+          "note": "B3"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-32",
+        "from": {
+          "event": "m32.e5",
+          "note": "Bb3"
+        },
+        "to": {
+          "event": "m32.e6",
+          "note": "Bb3"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-33",
+        "from": {
+          "event": "m32.e5",
+          "note": "C#4"
+        },
+        "to": {
+          "event": "m32.e6",
+          "note": "C#4"
+        }
+      },
+      {
+        "id": "tie-34",
+        "from": {
+          "event": "m35.e8",
+          "note": "C4"
+        },
+        "to": {
+          "event": "m36.e7",
+          "note": "C4"
+        }
+      },
+      {
+        "id": "tie-35",
+        "from": {
+          "event": "m35.e8",
+          "note": "G4"
+        },
+        "to": {
+          "event": "m36.e7",
+          "note": "G4"
+        }
+      },
+      {
+        "id": "tie-36",
+        "from": {
+          "event": "m36.e7",
+          "note": "C4"
+        },
+        "to": {
+          "event": "m37.e5",
+          "note": "C4"
+        }
+      },
+      {
+        "id": "tie-37",
+        "from": {
+          "event": "m36.e7",
+          "note": "G4"
+        },
+        "to": {
+          "event": "m37.e5",
+          "note": "G4"
+        }
+      }
+    ],
+    "slurs": [
+      {
+        "id": "slur-1",
+        "from": "m16.e5",
+        "to": "m16.e9"
+      }
+    ],
+    "tuplets": [
+      {
+        "id": "tuplet-1",
+        "events": [
+          "m2.e4",
+          "m2.e5",
+          "m2.e6",
+          "m2.e7",
+          "m2.e8"
+        ],
+        "actual": 5,
+        "normal": 4,
+        "bracket": false
+      }
+    ],
+    "arpeggios": [
+      {
+        "id": "arpeggio-1",
+        "events": [
+          "m11.e5",
+          "m11.e6"
+        ]
+      }
+    ],
+    "hairpins": [
+      {
+        "id": "hairpin-1",
+        "from": {
+          "measure": 7,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 8,
+          "at": "5/8",
+          "staff": 2
+        },
+        "type": "crescendo",
+        "placement": "below"
+      },
+      {
+        "id": "hairpin-2",
+        "from": {
+          "measure": 23,
+          "at": "0",
+          "staff": 1
+        },
+        "to": {
+          "measure": 24,
+          "at": "1/2",
+          "staff": 1
+        },
+        "type": "crescendo",
+        "placement": "below"
+      }
+    ],
+    "pedals": [
+      {
+        "id": "pedal-1",
+        "from": {
+          "measure": 7,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 8,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-2",
+        "from": {
+          "measure": 11,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 11,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-3",
+        "from": {
+          "measure": 12,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 12,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-4",
+        "from": {
+          "measure": 15,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 15,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-5",
+        "from": {
+          "measure": 16,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 16,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-6",
+        "from": {
+          "measure": 17,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 17,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-7",
+        "from": {
+          "measure": 18,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 18,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-8",
+        "from": {
+          "measure": 19,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 19,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-9",
+        "from": {
+          "measure": 21,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 21,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-10",
+        "from": {
+          "measure": 23,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 23,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-11",
+        "from": {
+          "measure": 31,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 31,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-12",
+        "from": {
+          "measure": 32,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 32,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-13",
+        "from": {
+          "measure": 35,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 37,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      }
+    ],
+    "octaveShifts": [
+      {
+        "id": "octaveShift-1",
+        "from": {
+          "measure": 14,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 14,
+          "at": "3/4",
+          "staff": 2
+        },
+        "direction": "up",
+        "size": 8,
+        "placement": "below"
+      },
+      {
+        "id": "octaveShift-2",
+        "from": {
+          "measure": 17,
+          "at": "0",
+          "staff": 1
+        },
+        "to": {
+          "measure": 19,
+          "at": "3/4",
+          "staff": 1
+        },
+        "direction": "down",
+        "size": 8,
+        "placement": "above"
+      }
+    ]
+  }
+}
