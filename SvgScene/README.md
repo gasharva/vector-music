@@ -45,7 +45,37 @@ Then run the PoC:
 dotnet run --project SvgScene -- SvgScene/Fixtures/shape-clustering-noteheads.svg
 ```
 
-A `notation-scene.json` file is written for inspection.
+A compact `notation-scene.json` file is written by default. It keeps prototype summaries and instances, but omits the very large normalized point arrays.
+
+For the full descriptor JSON:
+
+```powershell
+dotnet run --project SvgScene -- score.svg --verbose-json
+```
+
+This additionally writes `notation-scene.verbose.json`.
+
+## Visual cluster debugging
+
+For real scores, JSON is not the most useful way to inspect clusters. Use:
+
+```powershell
+dotnet run --project SvgScene -- score.svg --debug
+```
+
+This writes `score.clusters.svg` next to the source SVG. Every shape instance gets:
+
+- a bounding box;
+- a stable color derived from the prototype number;
+- a label such as `p7`, `p12`, etc.
+
+All instances with the same label belong to the same prototype. The debug overlay is appended as a separate SVG group and does not modify the original file.
+
+Flags can be combined:
+
+```powershell
+dotnet run --project SvgScene -- score.svg result.json --debug --verbose-json
+```
 
 ## Responsibilities
 
