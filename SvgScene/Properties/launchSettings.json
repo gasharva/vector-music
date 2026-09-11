@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SvgScene": {
+      "commandName": "Project",
+      "commandLineArgs": "d:\\musica\\svg\\koldunstvo.svg --debug"
+    }
+  }
+}

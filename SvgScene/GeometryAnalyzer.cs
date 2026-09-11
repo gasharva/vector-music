@@ -37,8 +37,8 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
         {
             var start = shape.Points[0];
             var end = shape.Points[1];
-            var length = Distance(start, end);
-            if (length <= 1e-9)
+            var _length = Distance(start, end);
+            if (_length <= 1e-9)
                 return false;
 
             OrderEndpoints(ref start, ref end);

@@ -2,8 +2,8 @@
   "profiles": {
     "CanonicalNotation.Cli": {
       "commandName": "Project",
-      //"commandLineArgs": "to-json d:\\musica\\svg\\when-almonds-blossomed-giya-kancheli.canonical.musicxml d:\\musica\\svg\\when-almonds-blossomed-giya-kancheli.canonical.roundtrip.json"
-      "commandLineArgs": "to-musicxml d:\\musica\\svg\\when-almonds-blossomed-giya-kancheli.canonical.json"
+      //"commandLineArgs": "to-json d:\\musica\\svg\\koldunstvo.musicxml"
+      "commandLineArgs": "to-musicxml d:\\musica\\svg\\koldunstvo.canonical.json"
     }
   }
 }
