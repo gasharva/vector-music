@@ -3,12 +3,15 @@ using SvgMusic.Scene;
 
 if (args.Length == 0)
 {
-    Console.Error.WriteLine("Usage: dotnet run -- <input.svg> [notation-scene.json]");
+    Console.Error.WriteLine("Usage: dotnet run -- <input.svg> [notation-scene.json] [--debug] [--verbose-json]");
     return 2;
 }
 
 var input = args[0];
-var output = args.Length > 1 ? args[1] : "notation-scene.json";
+var positional = args.Skip(1).Where(x => !x.StartsWith("--", StringComparison.Ordinal)).ToArray();
+var output = positional.Length > 0 ? positional[0] : "notation-scene.json";
+var debug = args.Any(x => x.Equals("--debug", StringComparison.OrdinalIgnoreCase));
+var verboseJson = args.Any(x => x.Equals("--verbose-json", StringComparison.OrdinalIgnoreCase));
 
 var pipeline = new ScenePipeline(
     new SvgNormalizer(),
@@ -26,12 +29,42 @@ foreach (var prototype in notation.Prototypes)
     Console.WriteLine($"  {prototype.Id}: {count} instances; representative={prototype.RepresentativeShapeId}");
 }
 
-var json = JsonSerializer.Serialize(notation, new JsonSerializerOptions
+var compact = new
 {
-    WriteIndented = true
-});
-File.WriteAllText(output, json);
-Console.WriteLine($"Written: {Path.GetFullPath(output)}");
+    prototypes = notation.Prototypes.Select(p => new
+    {
+        id = p.Id,
+        representativeShapeId = p.RepresentativeShapeId,
+        instanceCount = notation.Instances.Count(x => x.PrototypeId == p.Id),
+        aspectRatio = p.Descriptor.AspectRatio,
+        relativeArea = p.Descriptor.RelativeArea
+    }),
+    instances = notation.Instances
+};
+
+var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+File.WriteAllText(output, JsonSerializer.Serialize(compact, jsonOptions));
+Console.WriteLine($"Written compact JSON: {Path.GetFullPath(output)}");
+
+if (verboseJson)
+{
+    var verboseOutput = Path.Combine(
+        Path.GetDirectoryName(Path.GetFullPath(output)) ?? Environment.CurrentDirectory,
+        Path.GetFileNameWithoutExtension(output) + ".verbose.json");
+
+    File.WriteAllText(verboseOutput, JsonSerializer.Serialize(notation, jsonOptions));
+    Console.WriteLine($"Written verbose JSON: {verboseOutput}");
+}
+
+if (debug)
+{
+    var debugOutput = Path.Combine(
+        Path.GetDirectoryName(Path.GetFullPath(input)) ?? Environment.CurrentDirectory,
+        Path.GetFileNameWithoutExtension(input) + ".clusters.svg");
+
+    new DebugSceneRenderer().Render(input, notation, debugOutput);
+    Console.WriteLine($"Written debug SVG: {debugOutput}");
+}
 
 if (Path.GetFileName(input).Equals("shape-clustering-noteheads.svg", StringComparison.OrdinalIgnoreCase))
 {
