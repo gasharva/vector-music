@@ -1,4 +1,4 @@
-# CanonicalNotation v0.2 spike
+# CanonicalNotation v0.3 spike
 
 This spike supports both directions:
 
@@ -42,11 +42,27 @@ This allows one chord to span several staves. Beams, ties and tuplets are relati
 voice/events and are intentionally not split merely because the voice moves between staves.
 Rests and directions still keep `staff` on the event itself.
 
-The writer still accepts old v0.1 JSON during migration: if a note has no `staff`, it falls
-back to the event-level `staff`. Newly generated v0.2 JSON writes staff explicitly on every
-pitched note.
+The writer still accepts old JSON during migration: if a note has no `staff`, it falls back
+to the event-level `staff`. Newly generated JSON writes staff explicitly on every pitched note.
 
-## What the writer reconstructs in v0.2
+## Local notation model
+
+v0.3 reserves explicit locations for the common classes of local engraving symbols so that
+new symbols can be added without reshaping the canonical format:
+
+- event/chord level: `notation.articulations[]`, `notation.ornaments[]`, `notation.fermatas[]`
+- individual notehead level: `notes[].technical[]` (for example fingering)
+- timed multi-event constructs: `relations` (beam, tie, slur, tuplet, arpeggio, hairpin, pedal, ottava)
+- measure/barline level: `leftRepeat` / `rightRepeat`
+- direction level: `navigation` events for coda / segno marks
+
+The mark records are intentionally small and semantic: a mark keeps its type plus optional
+subtype/value/placement rather than exporter-specific coordinates.
+
+The `koldunstvo.musicxml` test case motivated the first v0.3 set: tenuto, strong accent,
+fingering, fermata, inverted turn, trill mark, coda and backward repeat.
+
+## What the writer reconstructs in v0.3
 
 - parts / measures
 - key, time signature, staves, clefs
@@ -60,14 +76,19 @@ pitched note.
 - slurs
 - tuplets
 - arpeggios
+- articulations
+- ornaments
+- fermatas
+- notehead-local technical marks such as fingering
 - text directions
 - dynamics
 - metronome marks
+- coda / segno navigation marks
 - hairpins
 - pedal spans
 - octave shifts
 - system/page breaks
-- barlines
+- barlines and forward/backward repeats
 
 ## Expected losses
 
@@ -78,14 +99,14 @@ These are deliberate for the canonical format:
 - exact x/y placement
 - MusicXML Bézier control points
 - application-specific encoding/support metadata
-- playback-only `sound` duplicates
+- most playback-only `sound` data (navigation target identifiers are preserved)
 
-## Important limitation
+## Still intentionally open
 
-This is still a spike. The canonical model does not yet contain every MusicXML engraving
-construct (for example arbitrary articulations/ornaments and manual beam geometry).
-The Kancheli sample is the first integration fixture. Existing checked-in v0.1 fixtures should
-be regenerated with `to-json` before using them as v0.2 golden files.
+This is still a spike, but the extension points are now explicit. Less common constructs can
+be added inside the same categories instead of changing the object hierarchy. Examples still
+to cover include grace notes, tremolo, glissando/slide, volta endings and more specialized
+technical/ornament marks.
 
 The main round-trip test remains:
 
