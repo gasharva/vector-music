@@ -1,84 +1,13 @@
 using System.Text.Json;
 using SvgMusic.Scene;
 
-if (args.Length == 0)
-{
-    Console.Error.WriteLine("Usage: dotnet run -- <input.svg> [notation-scene.json] [--debug] [--verbose-json]");
-    return 2;
-}
-
-var input = args[0];
-var positional = args.Skip(1).Where(x => !x.StartsWith("--", StringComparison.Ordinal)).ToArray();
-var output = positional.Length > 0 ? positional[0] : "notation-scene.json";
-var debug = args.Any(x => x.Equals("--debug", StringComparison.OrdinalIgnoreCase));
-var verboseJson = args.Any(x => x.Equals("--verbose-json", StringComparison.OrdinalIgnoreCase));
-
-var clusterer = new ShapeClusterer();
-var pipeline = new ScenePipeline(new SvgNormalizer(), clusterer);
-var (geometry, notation) = pipeline.Run(input);
-
-Console.WriteLine($"GeometricScene shapes    : {geometry.Shapes.Count}");
-Console.WriteLine($"NotationScene contours   : {notation.Instances.Count}");
-Console.WriteLine($"NotationScene prototypes : {notation.Prototypes.Count}");
-Console.WriteLine($"NotationScene strokes    : {notation.Strokes.Count}");
-Console.WriteLine($"NotationScene arcs       : {notation.Arcs.Count}");
-
-foreach (var prototype in notation.Prototypes)
-{
-    var count = notation.Instances.Count(x => x.PrototypeId == prototype.Id);
-    Console.WriteLine($"  {prototype.Id}: {count} instances; representative={prototype.RepresentativeShapeId}");
-}
-
-var compact = new
-{
-    prototypes = notation.Prototypes.Select(p => new
-    {
-        id = p.Id, representativeShapeId = p.RepresentativeShapeId,
-        instanceCount = notation.Instances.Count(x => x.PrototypeId == p.Id),
-        aspectRatio = p.Descriptor.AspectRatio, relativeArea = p.Descriptor.RelativeArea
-    }),
-    instances = notation.Instances, strokes = notation.Strokes, arcs = notation.Arcs
-};
-
-var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
-File.WriteAllText(output, JsonSerializer.Serialize(compact, jsonOptions));
-Console.WriteLine($"Written compact JSON: {Path.GetFullPath(output)}");
-
-if (verboseJson)
-{
-    var verboseOutput = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(output)) ?? Environment.CurrentDirectory,
-        Path.GetFileNameWithoutExtension(output) + ".verbose.json");
-    File.WriteAllText(verboseOutput, JsonSerializer.Serialize(notation, jsonOptions));
-    Console.WriteLine($"Written verbose JSON: {verboseOutput}");
-}
-
-if (debug)
-{
-    var directory = Path.GetDirectoryName(Path.GetFullPath(input)) ?? Environment.CurrentDirectory;
-    var baseName = Path.GetFileNameWithoutExtension(input);
-    new DebugSceneRenderer().RenderAll(input, notation, directory, baseName);
-    Console.WriteLine("Written debug SVGs:");
-    Console.WriteLine($"  {Path.Combine(directory, baseName + ".strokes.svg")}");
-    Console.WriteLine($"  {Path.Combine(directory, baseName + ".arcs.svg")}");
-    Console.WriteLine($"  {Path.Combine(directory, baseName + ".contours.svg")}");
-
-    var diagnosticsPath = Path.Combine(directory, baseName + ".arc-diagnostics.txt");
-    var diagnosticLines = clusterer.ArcDiagnostics
-        .Select(d => $"{d.ShapeId,-10} {d.Result,-6} {d.Reason,-36} {d.Metrics}")
-        .ToArray();
-    File.WriteAllLines(diagnosticsPath, diagnosticLines);
-    Console.WriteLine($"  {diagnosticsPath}");
-
-    Console.WriteLine("Arc diagnostics (accepted + promising rejects):");
-    foreach (var d in clusterer.ArcDiagnostics.Where(d => d.Result == "ACCEPT" || !string.IsNullOrWhiteSpace(d.Metrics)))
-        Console.WriteLine($"  {d.ShapeId,-10} {d.Result,-6} {d.Reason,-36} {d.Metrics}");
-}
-
-if (Path.GetFileName(input).Equals("shape-clustering-noteheads.svg", StringComparison.OrdinalIgnoreCase))
-{
-    var ok = geometry.Shapes.Count == 100 && notation.Strokes.Count == 0 && notation.Arcs.Count == 0
-        && notation.Prototypes.Count == 1 && notation.Instances.Count == 100;
-    Console.WriteLine(ok ? "Fixture check: PASS (1 prototype, 100 instances, 0 primitives)" : "Fixture check: FAIL");
-    return ok ? 0 : 1;
-}
-return 0;
+if(args.Length==0){Console.Error.WriteLine("Usage: dotnet run -- <input.svg> [notation-scene.json] [--debug] [--verbose-json]");return 2;}
+var input=args[0];var positional=args.Skip(1).Where(x=>!x.StartsWith("--",StringComparison.Ordinal)).ToArray();var output=positional.Length>0?positional[0]:"notation-scene.json";var debug=args.Any(x=>x.Equals("--debug",StringComparison.OrdinalIgnoreCase));var verbose=args.Any(x=>x.Equals("--verbose-json",StringComparison.OrdinalIgnoreCase));
+var clusterer=new ShapeClusterer();var pipeline=new ScenePipeline(new SvgNormalizer(),clusterer);var(geometry,notation)=pipeline.Run(input);
+Console.WriteLine($"GeometricScene shapes       : {geometry.Shapes.Count}");Console.WriteLine($"NotationScene contours      : {notation.Instances.Count}");Console.WriteLine($"NotationScene prototypes    : {notation.Prototypes.Count}");Console.WriteLine($"NotationScene strokes       : {notation.Strokes.Count}");Console.WriteLine($"NotationScene curved strokes: {notation.CurvedStrokes.Count}");
+foreach(var p in notation.Prototypes){var count=notation.Instances.Count(x=>x.PrototypeId==p.Id);Console.WriteLine($"  {p.Id}: {count} instances; representative={p.RepresentativeShapeId}");}
+var compact=new{prototypes=notation.Prototypes.Select(p=>new{id=p.Id,representativeShapeId=p.RepresentativeShapeId,instanceCount=notation.Instances.Count(x=>x.PrototypeId==p.Id),aspectRatio=p.Descriptor.AspectRatio,relativeArea=p.Descriptor.RelativeArea}),instances=notation.Instances,strokes=notation.Strokes,curvedStrokes=notation.CurvedStrokes};
+var options=new JsonSerializerOptions{WriteIndented=true};File.WriteAllText(output,JsonSerializer.Serialize(compact,options));Console.WriteLine($"Written compact JSON: {Path.GetFullPath(output)}");
+if(verbose){var v=Path.Combine(Path.GetDirectoryName(Path.GetFullPath(output))??Environment.CurrentDirectory,Path.GetFileNameWithoutExtension(output)+".verbose.json");File.WriteAllText(v,JsonSerializer.Serialize(notation,options));Console.WriteLine($"Written verbose JSON: {v}");}
+if(debug){var dir=Path.GetDirectoryName(Path.GetFullPath(input))??Environment.CurrentDirectory;var name=Path.GetFileNameWithoutExtension(input);new DebugSceneRenderer().RenderAll(input,notation,dir,name);Console.WriteLine("Written debug SVGs:");Console.WriteLine($"  {Path.Combine(dir,name+".strokes.svg")}");Console.WriteLine($"  {Path.Combine(dir,name+".arcs.svg")}");Console.WriteLine($"  {Path.Combine(dir,name+".contours.svg")}");var diag=Path.Combine(dir,name+".arc-diagnostics.txt");File.WriteAllLines(diag,clusterer.ArcDiagnostics.Select(d=>$"{d.ShapeId,-10} {d.Result,-6} {d.Reason,-36} {d.Metrics}"));Console.WriteLine($"  {diag}");Console.WriteLine("Curved-stroke diagnostics:");foreach(var d in clusterer.ArcDiagnostics.Where(d=>d.Result=="ACCEPT"||!string.IsNullOrWhiteSpace(d.Metrics)))Console.WriteLine($"  {d.ShapeId,-10} {d.Result,-6} {d.Reason,-36} {d.Metrics}");}
+if(Path.GetFileName(input).Equals("shape-clustering-noteheads.svg",StringComparison.OrdinalIgnoreCase)){var ok=geometry.Shapes.Count==100&&notation.Strokes.Count==0&&notation.CurvedStrokes.Count==0&&notation.Prototypes.Count==1&&notation.Instances.Count==100;Console.WriteLine(ok?"Fixture check: PASS (1 prototype, 100 instances, 0 primitives)":"Fixture check: FAIL");return ok?0:1;}return 0;
