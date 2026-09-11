@@ -27,7 +27,9 @@ public sealed record GeometricShape(
     IReadOnlyList<PointD> Points,
     BoundsD Bounds,
     string? SourceId = null,
-    string? SourceIndex = null);
+    string? SourceIndex = null,
+    bool IsClosed = false,
+    double StrokeWidth = 0);
 
 public sealed record GeometricScene(IReadOnlyList<GeometricShape> Shapes);
 
@@ -46,9 +48,23 @@ public sealed record ShapeInstance(
     string SourceKind,
     string? SourceIndex);
 
+/// <summary>
+/// Source-independent representation of line-like geometry.  A staff line may
+/// arrive as SVG line/polyline, a thin rectangle, polygon or even a closed path;
+/// after normalization they all become the same primitive.
+/// </summary>
+public sealed record Stroke(
+    string ShapeId,
+    PointD Start,
+    PointD End,
+    double Width,
+    string SourceKind,
+    string? SourceIndex);
+
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
-    IReadOnlyList<ShapeInstance> Instances);
+    IReadOnlyList<ShapeInstance> Instances,
+    IReadOnlyList<Stroke> Strokes);
 
 public sealed record ShapeDescriptor(
     double AspectRatio,
