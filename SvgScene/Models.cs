@@ -16,29 +16,27 @@ public readonly record struct BoundsD(double MinX, double MinY, double MaxX, dou
     }
 }
 
+/// <summary>A single SVG subpath/contour. It deliberately does not decide whether it is a hole.</summary>
+public sealed record GeometricContour(IReadOnlyList<PointD> Points, bool IsClosed);
+
 public sealed record GeometricShape(string Id, string SourceKind, IReadOnlyList<PointD> Points, BoundsD Bounds,
-    string? SourceId = null, string? SourceIndex = null, bool IsClosed = false, double StrokeWidth = 0);
+    string? SourceId = null, string? SourceIndex = null, bool IsClosed = false, double StrokeWidth = 0,
+    IReadOnlyList<GeometricContour>? Contours = null)
+{
+    /// <summary>Compatibility view for old extractors; new topology-aware code should use EffectiveContours.</summary>
+    public IReadOnlyList<GeometricContour> EffectiveContours => Contours is { Count: > 0 }
+        ? Contours
+        : [new GeometricContour(Points, IsClosed)];
+}
+
 public sealed record GeometricScene(IReadOnlyList<GeometricShape> Shapes);
 public sealed record ShapePrototype(string Id, string RepresentativeShapeId, ShapeDescriptor Descriptor);
 public sealed record ShapeInstance(string ShapeId, string PrototypeId, double X, double Y, double Width, double Height,
     string SourceKind, string? SourceIndex);
 public sealed record Stroke(string ShapeId, PointD Start, PointD End, double Width, string SourceKind, string? SourceIndex);
 
-/// <summary>
-/// A thin, smooth, one-sided curved mark recovered from a closed contour.
-/// This is the primitive itself; it is not required to be a mathematical arc.
-/// </summary>
-public sealed record CurvedStroke(
-    string ShapeId,
-    IReadOnlyList<PointD> Centerline,
-    IReadOnlyList<double> WidthProfile,
-    double Bend,
-    double SameSideRatio,
-    QuadraticApproximation? Quadratic,
-    string SourceKind,
-    string? SourceIndex);
-
-/// <summary>Optional compact approximation used for rendering/storage, never for deciding whether a shape is curved.</summary>
+public sealed record CurvedStroke(string ShapeId, IReadOnlyList<PointD> Centerline, IReadOnlyList<double> WidthProfile,
+    double Bend, double SameSideRatio, QuadraticApproximation? Quadratic, string SourceKind, string? SourceIndex);
 public sealed record QuadraticApproximation(PointD Start, PointD Control, PointD End, double FitError);
 
 public sealed record NotationScene(IReadOnlyList<ShapePrototype> Prototypes, IReadOnlyList<ShapeInstance> Instances,
