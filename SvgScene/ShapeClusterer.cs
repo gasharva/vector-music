@@ -8,9 +8,13 @@ public interface IShapeClusterer
 public sealed class ShapeClusterer : IShapeClusterer
 {
     private readonly double _distanceThreshold;
+    private readonly IGeometryAnalyzer _geometryAnalyzer;
 
-    public ShapeClusterer(double distanceThreshold = 0.035)
+    public ShapeClusterer(
+        IGeometryAnalyzer? geometryAnalyzer = null,
+        double distanceThreshold = 0.035)
     {
+        _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
         _distanceThreshold = distanceThreshold;
     }
 
@@ -18,9 +22,16 @@ public sealed class ShapeClusterer : IShapeClusterer
     {
         var prototypes = new List<ShapePrototype>();
         var instances = new List<ShapeInstance>();
+        var strokes = new List<Stroke>();
 
         foreach (var shape in scene.Shapes)
         {
+            if (_geometryAnalyzer.TryCreateStroke(shape, out var stroke))
+            {
+                strokes.Add(stroke);
+                continue;
+            }
+
             var descriptor = Describe(shape);
             ShapePrototype? best = null;
             var bestDistance = double.PositiveInfinity;
@@ -55,7 +66,7 @@ public sealed class ShapeClusterer : IShapeClusterer
                 shape.SourceIndex));
         }
 
-        return new NotationScene(prototypes, instances);
+        return new NotationScene(prototypes, instances, strokes);
     }
 
     private static ShapeDescriptor Describe(GeometricShape shape)
