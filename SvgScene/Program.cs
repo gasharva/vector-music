@@ -15,13 +15,14 @@ var verboseJson = args.Any(x => x.Equals("--verbose-json", StringComparison.Ordi
 
 var pipeline = new ScenePipeline(
     new SvgNormalizer(),
-    new ShapeClusterer());
+    new ShapeClusterer(new GeometryAnalyzer()));
 
 var (geometry, notation) = pipeline.Run(input);
 
-Console.WriteLine($"GeometricScene shapes : {geometry.Shapes.Count}");
-Console.WriteLine($"NotationScene prototypes: {notation.Prototypes.Count}");
-Console.WriteLine($"NotationScene instances : {notation.Instances.Count}");
+Console.WriteLine($"GeometricScene shapes    : {geometry.Shapes.Count}");
+Console.WriteLine($"NotationScene contours   : {notation.Instances.Count}");
+Console.WriteLine($"NotationScene prototypes : {notation.Prototypes.Count}");
+Console.WriteLine($"NotationScene strokes    : {notation.Strokes.Count}");
 
 foreach (var prototype in notation.Prototypes)
 {
@@ -39,7 +40,8 @@ var compact = new
         aspectRatio = p.Descriptor.AspectRatio,
         relativeArea = p.Descriptor.RelativeArea
     }),
-    instances = notation.Instances
+    instances = notation.Instances,
+    strokes = notation.Strokes
 };
 
 var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
@@ -69,11 +71,12 @@ if (debug)
 if (Path.GetFileName(input).Equals("shape-clustering-noteheads.svg", StringComparison.OrdinalIgnoreCase))
 {
     var ok = geometry.Shapes.Count == 100
+        && notation.Strokes.Count == 0
         && notation.Prototypes.Count == 1
         && notation.Instances.Count == 100;
 
     Console.WriteLine(ok
-        ? "Fixture check: PASS (1 prototype, 100 instances)"
+        ? "Fixture check: PASS (1 prototype, 100 instances, 0 strokes)"
         : "Fixture check: FAIL");
 
     return ok ? 0 : 1;
