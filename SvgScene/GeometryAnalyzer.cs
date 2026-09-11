@@ -1,189 +1,97 @@
 namespace SvgMusic.Scene;
 
+public sealed record StrokeDiagnostic(string ShapeId,string Result,string Reason,string Metrics);
+
 public interface IGeometryAnalyzer
 {
-    bool TryCreateStroke(GeometricShape shape, out Stroke stroke);
+    bool TryCreateStroke(GeometricShape shape,out Stroke stroke);
+    IReadOnlyList<StrokeDiagnostic> Diagnostics { get; }
+    void ClearDiagnostics();
 }
 
 /// <summary>
-/// Detects line-like geometry independently of how it was represented in SVG.
-/// Direct two-point line/polyline geometry is accepted immediately; closed
-/// contours are reduced with a tiny 2D PCA and accepted when they are strongly
-/// elongated and fill most of their oriented bounding box.
+/// Detects straight line-like geometry independently of SVG representation.
+/// Analysis is contour-aware: only a single geometric contour can currently
+/// collapse into one Stroke. Multi-contour shapes are left intact for later stages.
 /// </summary>
-public sealed class GeometryAnalyzer : IGeometryAnalyzer
+public sealed class GeometryAnalyzer:IGeometryAnalyzer
 {
     private readonly double _minElongation;
     private readonly double _minClosedFillRatio;
+    private readonly List<StrokeDiagnostic> _diagnostics=[];
+    public IReadOnlyList<StrokeDiagnostic> Diagnostics=>_diagnostics;
 
-    public GeometryAnalyzer(
-        double minElongation = 8.0,
-        double minClosedFillRatio = 0.55)
+    public GeometryAnalyzer(double minElongation=8.0,double minClosedFillRatio=0.55)
     {
-        _minElongation = minElongation;
-        _minClosedFillRatio = minClosedFillRatio;
+        _minElongation=minElongation;
+        _minClosedFillRatio=minClosedFillRatio;
     }
 
-    public bool TryCreateStroke(GeometricShape shape, out Stroke stroke)
+    public void ClearDiagnostics()=>_diagnostics.Clear();
+
+    public bool TryCreateStroke(GeometricShape shape,out Stroke stroke)
     {
-        stroke = default!;
+        stroke=default!;
+        var contours=shape.EffectiveContours.Where(c=>c.Points.Count>0).ToList();
+        if(contours.Count!=1)
+            return Reject(shape,"multiple contours",$"kind={shape.SourceKind} contours={contours.Count} points={shape.Points.Count}");
 
-        if (shape.Points.Count < 2)
-            return false;
+        var contour=contours[0];
+        var points=contour.Points;
+        if(points.Count<2)
+            return Reject(shape,"too few points",$"kind={shape.SourceKind} closed={contour.IsClosed} points={points.Count}");
 
-        // SVG <line> and the common two-point <polyline> case already tell us
-        // exactly what the centre line is.  Keep the declared stroke width.
-        if (!shape.IsClosed && shape.Points.Count == 2)
+        // A genuine two-point open contour is already an exact centreline.
+        if(!contour.IsClosed&&points.Count==2)
         {
-            var start = shape.Points[0];
-            var end = shape.Points[1];
-            var _length = Distance(start, end);
-            if (_length <= 1e-9)
-                return false;
-
-            OrderEndpoints(ref start, ref end);
-            stroke = new Stroke(
-                shape.Id,
-                start,
-                end,
-                Math.Max(shape.StrokeWidth, 1.0),
-                shape.SourceKind,
-                shape.SourceIndex);
+            var start=points[0];var end=points[1];var length=Distance(start,end);
+            if(length<=1e-9)return Reject(shape,"zero length",Metrics(shape,contour,length,0,0,null));
+            OrderEndpoints(ref start,ref end);
+            stroke=new Stroke(shape.Id,start,end,Math.Max(shape.StrokeWidth,1.0),shape.SourceKind,shape.SourceIndex);
+            Accept(shape,"two-point open contour",Metrics(shape,contour,length,shape.StrokeWidth,length/Math.Max(shape.StrokeWidth,1e-9),null));
             return true;
         }
 
-        var centroid = new PointD(
-            shape.Points.Average(p => p.X),
-            shape.Points.Average(p => p.Y));
+        var centroid=new PointD(points.Average(p=>p.X),points.Average(p=>p.Y));
+        double xx=0,xy=0,yy=0;
+        foreach(var p in points){var dx=p.X-centroid.X;var dy=p.Y-centroid.Y;xx+=dx*dx;xy+=dx*dy;yy+=dy*dy;}
+        xx/=points.Count;xy/=points.Count;yy/=points.Count;
+        var(axisX,axisY)=PrincipalAxis(xx,xy,yy);var normalX=-axisY;var normalY=axisX;
+        var minAlong=double.PositiveInfinity;var maxAlong=double.NegativeInfinity;var minAcross=double.PositiveInfinity;var maxAcross=double.NegativeInfinity;
+        foreach(var p in points){var dx=p.X-centroid.X;var dy=p.Y-centroid.Y;var along=dx*axisX+dy*axisY;var across=dx*normalX+dy*normalY;minAlong=Math.Min(minAlong,along);maxAlong=Math.Max(maxAlong,along);minAcross=Math.Min(minAcross,across);maxAcross=Math.Max(maxAcross,across);}
+        var length=maxAlong-minAlong;var contourThickness=maxAcross-minAcross;var effectiveThickness=Math.Max(contourThickness,shape.StrokeWidth);
+        if(length<=1e-9||effectiveThickness<=1e-9)return Reject(shape,"degenerate geometry",Metrics(shape,contour,length,effectiveThickness,0,null));
+        var elongation=length/effectiveThickness;
+        if(elongation<_minElongation)return Reject(shape,"elongation too low",Metrics(shape,contour,length,effectiveThickness,elongation,null));
 
-        double xx = 0, xy = 0, yy = 0;
-        foreach (var p in shape.Points)
+        double? fillRatio=null;
+        if(contour.IsClosed)
         {
-            var dx = p.X - centroid.X;
-            var dy = p.Y - centroid.Y;
-            xx += dx * dx;
-            xy += dx * dy;
-            yy += dy * dy;
+            var area=Math.Abs(SignedArea(points));var orientedBoxArea=length*Math.Max(contourThickness,1e-9);fillRatio=area/orientedBoxArea;
+            if(fillRatio<_minClosedFillRatio)return Reject(shape,"closed contour fill too low",Metrics(shape,contour,length,effectiveThickness,elongation,fillRatio));
+        }
+        else if(points.Count>2)
+        {
+            var straightnessTolerance=Math.Max(shape.StrokeWidth*2.0,length*0.04);
+            if(contourThickness>straightnessTolerance)
+                return Reject(shape,"open contour not straight",Metrics(shape,contour,length,effectiveThickness,elongation,null)+$" across={contourThickness:0.###} tolerance={straightnessTolerance:0.###}");
         }
 
-        xx /= shape.Points.Count;
-        xy /= shape.Points.Count;
-        yy /= shape.Points.Count;
-
-        var (axisX, axisY) = PrincipalAxis(xx, xy, yy);
-        var normalX = -axisY;
-        var normalY = axisX;
-
-        var minAlong = double.PositiveInfinity;
-        var maxAlong = double.NegativeInfinity;
-        var minAcross = double.PositiveInfinity;
-        var maxAcross = double.NegativeInfinity;
-
-        foreach (var p in shape.Points)
-        {
-            var dx = p.X - centroid.X;
-            var dy = p.Y - centroid.Y;
-            var along = dx * axisX + dy * axisY;
-            var across = dx * normalX + dy * normalY;
-
-            minAlong = Math.Min(minAlong, along);
-            maxAlong = Math.Max(maxAlong, along);
-            minAcross = Math.Min(minAcross, across);
-            maxAcross = Math.Max(maxAcross, across);
-        }
-
-        var length = maxAlong - minAlong;
-        var contourThickness = maxAcross - minAcross;
-        var effectiveThickness = Math.Max(contourThickness, shape.StrokeWidth);
-
-        if (length <= 1e-9 || effectiveThickness <= 1e-9)
-            return false;
-
-        var elongation = length / effectiveThickness;
-        if (elongation < _minElongation)
-            return false;
-
-        if (shape.IsClosed)
-        {
-            var area = Math.Abs(SignedArea(shape.Points));
-            var orientedBoxArea = length * Math.Max(contourThickness, 1e-9);
-            var fillRatio = area / orientedBoxArea;
-
-            // This rejects long but curved/thin symbols such as slurs while
-            // accepting beams, stems or barlines encoded as filled polygons.
-            if (fillRatio < _minClosedFillRatio)
-                return false;
-        }
-        else if (shape.Points.Count > 2)
-        {
-            // Open paths/polylines must remain close to one straight axis.
-            // A declared SVG stroke width provides a natural tolerance.
-            var straightnessTolerance = Math.Max(shape.StrokeWidth * 2.0, length * 0.04);
-            if (contourThickness > straightnessTolerance)
-                return false;
-        }
-
-        var acrossCenter = (minAcross + maxAcross) / 2.0;
-        var startPoint = new PointD(
-            centroid.X + axisX * minAlong + normalX * acrossCenter,
-            centroid.Y + axisY * minAlong + normalY * acrossCenter);
-        var endPoint = new PointD(
-            centroid.X + axisX * maxAlong + normalX * acrossCenter,
-            centroid.Y + axisY * maxAlong + normalY * acrossCenter);
-
-        OrderEndpoints(ref startPoint, ref endPoint);
-
-        stroke = new Stroke(
-            shape.Id,
-            startPoint,
-            endPoint,
-            effectiveThickness,
-            shape.SourceKind,
-            shape.SourceIndex);
+        var acrossCenter=(minAcross+maxAcross)/2.0;
+        var startPoint=new PointD(centroid.X+axisX*minAlong+normalX*acrossCenter,centroid.Y+axisY*minAlong+normalY*acrossCenter);
+        var endPoint=new PointD(centroid.X+axisX*maxAlong+normalX*acrossCenter,centroid.Y+axisY*maxAlong+normalY*acrossCenter);
+        OrderEndpoints(ref startPoint,ref endPoint);
+        stroke=new Stroke(shape.Id,startPoint,endPoint,effectiveThickness,shape.SourceKind,shape.SourceIndex);
+        Accept(shape,contour.IsClosed?"elongated filled contour":"straight open contour",Metrics(shape,contour,length,effectiveThickness,elongation,fillRatio));
         return true;
     }
 
-    private static (double X, double Y) PrincipalAxis(double a, double b, double d)
-    {
-        var trace = a + d;
-        var delta = Math.Sqrt((a - d) * (a - d) + 4.0 * b * b);
-        var lambda = (trace + delta) / 2.0;
+    private bool Reject(GeometricShape s,string reason,string metrics){_diagnostics.Add(new(s.Id,"REJECT",reason,metrics));return false;}
+    private void Accept(GeometricShape s,string reason,string metrics)=>_diagnostics.Add(new(s.Id,"ACCEPT",reason,metrics));
+    private static string Metrics(GeometricShape s,GeometricContour c,double length,double thickness,double elongation,double? fill)=>$"kind={s.SourceKind} closed={c.IsClosed} points={c.Points.Count} length={length:0.###} thickness={thickness:0.###} elong={elongation:0.###}"+(fill is null?"":$" fill={fill:0.###}");
 
-        var x = b;
-        var y = lambda - a;
-        var norm = Math.Sqrt(x * x + y * y);
-
-        if (norm <= 1e-12)
-            return a >= d ? (1.0, 0.0) : (0.0, 1.0);
-
-        return (x / norm, y / norm);
-    }
-
-    private static double SignedArea(IReadOnlyList<PointD> points)
-    {
-        if (points.Count < 3) return 0;
-
-        var area = 0.0;
-        for (var i = 0; i < points.Count; i++)
-        {
-            var a = points[i];
-            var b = points[(i + 1) % points.Count];
-            area += a.X * b.Y - b.X * a.Y;
-        }
-
-        return area / 2.0;
-    }
-
-    private static double Distance(PointD a, PointD b)
-    {
-        var dx = a.X - b.X;
-        var dy = a.Y - b.Y;
-        return Math.Sqrt(dx * dx + dy * dy);
-    }
-
-    private static void OrderEndpoints(ref PointD a, ref PointD b)
-    {
-        if (a.X > b.X || (Math.Abs(a.X - b.X) < 1e-9 && a.Y > b.Y))
-            (a, b) = (b, a);
-    }
+    private static(double X,double Y) PrincipalAxis(double a,double b,double d){var trace=a+d;var delta=Math.Sqrt((a-d)*(a-d)+4*b*b);var lambda=(trace+delta)/2;var x=b;var y=lambda-a;var norm=Math.Sqrt(x*x+y*y);if(norm<=1e-12)return a>=d?(1,0):(0,1);return(x/norm,y/norm);}
+    private static double SignedArea(IReadOnlyList<PointD> p){if(p.Count<3)return 0;var area=0.0;for(var i=0;i<p.Count;i++){var a=p[i];var b=p[(i+1)%p.Count];area+=a.X*b.Y-b.X*a.Y;}return area/2;}
+    private static double Distance(PointD a,PointD b){var dx=a.X-b.X;var dy=a.Y-b.Y;return Math.Sqrt(dx*dx+dy*dy);}
+    private static void OrderEndpoints(ref PointD a,ref PointD b){if(a.X>b.X||(Math.Abs(a.X-b.X)<1e-9&&a.Y>b.Y))(a,b)=(b,a);}
 }
