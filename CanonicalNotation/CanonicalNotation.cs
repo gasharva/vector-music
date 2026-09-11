@@ -19,7 +19,9 @@ public sealed record Measure(
     MeasureAttributes? Attributes = null,
     string? LeftBarline = null,
     string? RightBarline = null,
-    LayoutHint? Layout = null);
+    LayoutHint? Layout = null,
+    RepeatMark? LeftRepeat = null,
+    RepeatMark? RightRepeat = null);
 
 public sealed record MeasureAttributes(
     TimeSignature? Time = null,
@@ -32,6 +34,7 @@ public sealed record TimeSignature(int Beats, int BeatType);
 public sealed record KeySignature(int Fifths, string? Mode = null);
 public sealed record Clef(int Staff, string Sign, int Line, int? OctaveChange = null);
 public sealed record LayoutHint(string BreakBefore);
+public sealed record RepeatMark(string Direction, int? Times = null);
 
 /// <summary>
 /// One JSON event shape on purpose: test fixtures remain easy to read and diff.
@@ -44,7 +47,7 @@ public sealed record LayoutHint(string BreakBefore);
 public sealed record CanonicalEvent
 {
     public required string Id { get; init; }
-    public required string Type { get; init; } // chord, rest, text, dynamic, tempo
+    public required string Type { get; init; } // chord, rest, text, dynamic, tempo, navigation
     public required string At { get; init; }
     public int? Staff { get; init; }
     public int? Voice { get; init; }
@@ -53,6 +56,7 @@ public sealed record CanonicalEvent
     public EventNotation? Notation { get; init; }
     public string? Text { get; init; }
     public string? Value { get; init; }
+    public string? Target { get; init; }
     public string? Placement { get; init; }
     public string? BeatUnit { get; init; }
     public decimal? Bpm { get; init; }
@@ -60,12 +64,14 @@ public sealed record CanonicalEvent
 
 /// <summary>
 /// A notehead belongs to a staff independently from the chord event. Staff is nullable
-/// only for reading v0.1 JSON; newly canonicalized v0.2 data always writes it explicitly.
+/// only for reading v0.1 JSON; newly canonicalized data writes it explicitly.
+/// Technical marks belong to the individual notehead rather than the whole chord.
 /// </summary>
 public sealed record CanonicalNote(
     string Pitch,
     int? Staff = null,
-    Accidental? Accidental = null);
+    Accidental? Accidental = null,
+    List<TechnicalMark>? Technical = null);
 
 public sealed record Accidental(
     string Type,
@@ -74,11 +80,32 @@ public sealed record Accidental(
     bool? Parentheses = null,
     bool? Bracket = null);
 
+/// <summary>
+/// Generic local notation mark. Type is the MusicXML semantic name (for example
+/// tenuto, strong-accent, trill-mark). Subtype preserves a mark-specific type attribute
+/// when one exists; Placement is kept only when explicitly present.
+/// </summary>
+public sealed record NotationMark(
+    string Type,
+    string? Subtype = null,
+    string? Placement = null);
+
+/// <summary>
+/// A notehead-local technical mark such as fingering or string number.
+/// </summary>
+public sealed record TechnicalMark(
+    string Type,
+    string? Value = null,
+    string? Placement = null);
+
 public sealed record EventNotation(
     string? NoteType = null,
     int? Dots = null,
     string? Stem = null,
-    string? Notehead = null);
+    string? Notehead = null,
+    List<NotationMark>? Articulations = null,
+    List<NotationMark>? Ornaments = null,
+    List<NotationMark>? Fermatas = null);
 
 public sealed record Relations(
     List<BeamRelation> Beams,
