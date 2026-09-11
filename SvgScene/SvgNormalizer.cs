@@ -4,7 +4,10 @@ using System.Xml.Linq;
 
 namespace SvgMusic.Scene;
 
-public interface ISvgNormalizer { GeometricScene Normalize(string fileName); }
+public interface ISvgNormalizer
+{
+    GeometricScene Normalize(string fileName);
+}
 
 public sealed class SvgNormalizer : ISvgNormalizer
 {
@@ -340,13 +343,18 @@ public sealed class SvgNormalizer : ISvgNormalizer
                 : point;
         }
 
+        void ResetCurveControls()
+        {
+            lastCubicControl = null;
+            lastQuadraticControl = null;
+        }
+
         void AddLine(PointD point)
         {
             points ??= [];
             current = point;
             points.Add(current);
-            lastCubicControl = null;
-            lastQuadraticControl = null;
+            ResetCurveControls();
         }
 
         void AddCubic(PointD control1, PointD control2, PointD end)
@@ -381,6 +389,132 @@ public sealed class SvgNormalizer : ISvgNormalizer
             lastCubicControl = null;
         }
 
+        void AddArc(
+            double radiusX,
+            double radiusY,
+            double rotationDegrees,
+            bool largeArc,
+            bool sweep,
+            PointD end)
+        {
+            points ??= [];
+
+            var begin = current;
+            radiusX = Math.Abs(radiusX);
+            radiusY = Math.Abs(radiusY);
+
+            if (DistanceSquared(begin, end) <= 1e-24)
+            {
+                current = end;
+                ResetCurveControls();
+                return;
+            }
+
+            if (radiusX <= 1e-12 || radiusY <= 1e-12)
+            {
+                AddLine(end);
+                return;
+            }
+
+            var phi = rotationDegrees * Math.PI / 180.0;
+            var cosPhi = Math.Cos(phi);
+            var sinPhi = Math.Sin(phi);
+
+            var halfDx = (begin.X - end.X) / 2.0;
+            var halfDy = (begin.Y - end.Y) / 2.0;
+
+            var xPrime = cosPhi * halfDx + sinPhi * halfDy;
+            var yPrime = -sinPhi * halfDx + cosPhi * halfDy;
+
+            var radiusXSquared = radiusX * radiusX;
+            var radiusYSquared = radiusY * radiusY;
+            var xPrimeSquared = xPrime * xPrime;
+            var yPrimeSquared = yPrime * yPrime;
+
+            // SVG requires radii that are too small to reach the end point to be
+            // scaled up uniformly until a valid ellipse exists.
+            var radiiScale = xPrimeSquared / radiusXSquared
+                + yPrimeSquared / radiusYSquared;
+
+            if (radiiScale > 1.0)
+            {
+                var scale = Math.Sqrt(radiiScale);
+                radiusX *= scale;
+                radiusY *= scale;
+                radiusXSquared = radiusX * radiusX;
+                radiusYSquared = radiusY * radiusY;
+            }
+
+            var numerator = radiusXSquared * radiusYSquared
+                - radiusXSquared * yPrimeSquared
+                - radiusYSquared * xPrimeSquared;
+
+            var denominator = radiusXSquared * yPrimeSquared
+                + radiusYSquared * xPrimeSquared;
+
+            var sign = largeArc == sweep ? -1.0 : 1.0;
+            var centerFactor = denominator <= 1e-24
+                ? 0.0
+                : sign * Math.Sqrt(Math.Max(0.0, numerator / denominator));
+
+            var centerPrimeX = centerFactor * radiusX * yPrime / radiusY;
+            var centerPrimeY = centerFactor * -radiusY * xPrime / radiusX;
+
+            var center = new PointD(
+                cosPhi * centerPrimeX
+                - sinPhi * centerPrimeY
+                + (begin.X + end.X) / 2.0,
+                sinPhi * centerPrimeX
+                + cosPhi * centerPrimeY
+                + (begin.Y + end.Y) / 2.0);
+
+            var startUnitX = (xPrime - centerPrimeX) / radiusX;
+            var startUnitY = (yPrime - centerPrimeY) / radiusY;
+            var endUnitX = (-xPrime - centerPrimeX) / radiusX;
+            var endUnitY = (-yPrime - centerPrimeY) / radiusY;
+
+            var startAngle = Math.Atan2(startUnitY, startUnitX);
+            var deltaAngle = VectorAngle(
+                startUnitX,
+                startUnitY,
+                endUnitX,
+                endUnitY);
+
+            if (!sweep && deltaAngle > 0)
+                deltaAngle -= 2 * Math.PI;
+            else if (sweep && deltaAngle < 0)
+                deltaAngle += 2 * Math.PI;
+
+            // Keep roughly the same sampling density as the Bezier samplers,
+            // but scale it with arc length: _samplesPerCurve points per quadrant.
+            var sampleCount = Math.Max(
+                1,
+                (int)Math.Ceiling(
+                    _samplesPerCurve * Math.Abs(deltaAngle) / (Math.PI / 2.0)));
+
+            for (var sample = 1; sample <= sampleCount; sample++)
+            {
+                var t = sample / (double)sampleCount;
+                var angle = startAngle + deltaAngle * t;
+                var cosAngle = Math.Cos(angle);
+                var sinAngle = Math.Sin(angle);
+
+                points.Add(new PointD(
+                    center.X
+                    + cosPhi * radiusX * cosAngle
+                    - sinPhi * radiusY * sinAngle,
+                    center.Y
+                    + sinPhi * radiusX * cosAngle
+                    + cosPhi * radiusY * sinAngle));
+            }
+
+            // Use the exact parsed endpoint rather than the numerically reconstructed
+            // one, so adjacent path segments join without tiny floating-point gaps.
+            points[^1] = end;
+            current = end;
+            ResetCurveControls();
+        }
+
         while (i < tokens.Count)
         {
             if (IsCommand(tokens[i]))
@@ -400,8 +534,7 @@ public sealed class SvgNormalizer : ISvgNormalizer
                     current = ReadPoint(relative);
                     start = current;
                     points = [current];
-                    lastCubicControl = null;
-                    lastQuadraticControl = null;
+                    ResetCurveControls();
                     previousCommand = command;
 
                     // Additional coordinate pairs after moveto are implicit lineto.
@@ -496,13 +629,34 @@ public sealed class SvgNormalizer : ISvgNormalizer
                     break;
                 }
 
+                case 'A':
+                case 'a':
+                {
+                    var radiusX = Number(tokens[i++]);
+                    var radiusY = Number(tokens[i++]);
+                    var rotation = Number(tokens[i++]);
+                    var largeArc = ReadArcFlag(tokens[i++]);
+                    var sweep = ReadArcFlag(tokens[i++]);
+                    var end = ReadPoint(command == 'a');
+
+                    AddArc(
+                        radiusX,
+                        radiusY,
+                        rotation,
+                        largeArc,
+                        sweep,
+                        end);
+
+                    previousCommand = command;
+                    break;
+                }
+
                 case 'Z':
                 case 'z':
                 {
                     Finish(true);
                     current = start;
-                    lastCubicControl = null;
-                    lastQuadraticControl = null;
+                    ResetCurveControls();
                     previousCommand = command;
                     command = '\0';
                     break;
@@ -634,6 +788,38 @@ public sealed class SvgNormalizer : ISvgNormalizer
         new(
             2 * around.X - point.X,
             2 * around.Y - point.Y);
+
+    private static bool ReadArcFlag(string token)
+    {
+        var value = Number(token);
+
+        if (value == 0)
+            return false;
+
+        if (value == 1)
+            return true;
+
+        throw new InvalidDataException(
+            $"SVG arc flag must be 0 or 1, but was '{token}'.");
+    }
+
+    private static double VectorAngle(
+        double fromX,
+        double fromY,
+        double toX,
+        double toY)
+    {
+        var dot = fromX * toX + fromY * toY;
+        var cross = fromX * toY - fromY * toX;
+        return Math.Atan2(cross, dot);
+    }
+
+    private static double DistanceSquared(PointD a, PointD b)
+    {
+        var dx = a.X - b.X;
+        var dy = a.Y - b.Y;
+        return dx * dx + dy * dy;
+    }
 
     private static AffineTransform ParseTransform(string? text)
     {
