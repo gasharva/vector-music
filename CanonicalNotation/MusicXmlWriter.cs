@@ -91,7 +91,7 @@ public sealed class MusicXmlWriter
             long cursor = 0;
             foreach (var ev in streams[streamIndex]
                          .OrderBy(e => Fraction.Parse(e.At).Numerator / (double)Fraction.Parse(e.At).Denominator)
-                         .ThenBy(e => e.Staff)
+                         .ThenBy(EventStaff)
                          .ThenBy(e => e.Id, StringComparer.Ordinal))
             {
                 var at = Units(ev.At);
@@ -267,7 +267,9 @@ public sealed class MusicXmlWriter
         if (!string.IsNullOrWhiteSpace(ev.Notation?.Notehead))
             nx.Add(new XElement("notehead", ev.Notation.Notehead));
 
-        nx.Add(new XElement("staff", ev.Staff));
+        // v0.2: chord noteheads carry their own staff. The event-level fallback keeps
+        // old v0.1 fixtures readable while they are being regenerated.
+        nx.Add(new XElement("staff", note?.Staff ?? ev.Staff ?? 1));
 
         if (noteIndex == 0)
         {
@@ -350,7 +352,7 @@ public sealed class MusicXmlWriter
             };
 
             if (type is null) continue;
-            yield return (Units(ev.At), order++, Direction(ev.Staff, ev.Placement, type));
+            yield return (Units(ev.At), order++, Direction(ev.Staff ?? 1, ev.Placement, type));
         }
 
         foreach (var span in SpansStartingAt(measure.Number))
@@ -534,6 +536,9 @@ public sealed class MusicXmlWriter
             int.Parse(m.Groups[3].Value, CultureInfo.InvariantCulture));
     }
 
+    private static int EventStaff(CanonicalEvent ev) =>
+        ev.Staff ?? ev.Notes?.FirstOrDefault()?.Staff ?? 1;
+
     private static XElement WriteBarline(string location, string value) =>
         new("barline",
             new XAttribute("location", location),
@@ -571,4 +576,3 @@ public sealed class MusicXmlWriter
         bool IsFirst,
         bool IsLast);
 }
-
