@@ -46,7 +46,7 @@ public sealed class MusicXmlCanonicalizer
 
         return new CanonicalNotation(
             "CanonicalNotation",
-            "0.1",
+            "0.2",
             new Metadata(title, composer),
             parts,
             BuildRelations());
@@ -91,7 +91,7 @@ public sealed class MusicXmlCanonicalizer
                     CanonicalEvent ev;
                     if (isChordContinuation && lastChordEvent is { Type: "chord", Notes: not null })
                     {
-                        var note = ReadPitch(node);
+                        var note = ReadPitch(node, staff);
                         if (note is not null) lastChordEvent.Notes.Add(note);
                         ev = lastChordEvent;
                     }
@@ -117,8 +117,8 @@ public sealed class MusicXmlCanonicalizer
                             ev = new CanonicalEvent
                             {
                                 Id = id, Type = "chord", At = at,
-                                Duration = duration, Staff = staff, Voice = voice,
-                                Notes = [ReadPitch(node)!], Notation = notation
+                                Duration = duration, Voice = voice,
+                                Notes = [ReadPitch(node, staff)!], Notation = notation
                             };
                         }
 
@@ -194,7 +194,7 @@ public sealed class MusicXmlCanonicalizer
             b.Clefs ?? a.Clefs,
             b.At ?? a.At);
 
-    private CanonicalNote? ReadPitch(XElement note)
+    private CanonicalNote? ReadPitch(XElement note, int staff)
     {
         var p = note.Element("pitch");
         if (p is null) return null;
@@ -214,7 +214,7 @@ public sealed class MusicXmlCanonicalizer
                 YesNoAttr(ax, "parentheses"),
                 YesNoAttr(ax, "bracket"));
         }
-        return new CanonicalNote(pitch, accidental);
+        return new CanonicalNote(pitch, staff, accidental);
     }
 
     private static EventNotation? ReadNotation(XElement note)
@@ -233,7 +233,7 @@ public sealed class MusicXmlCanonicalizer
             _beamMarkers.Add(new BeamMarker(part, eventId, staff, voice,
                 IntAttr(b, "number", 1), b.Value.Trim()));
 
-        var pitch = ReadPitch(note)?.Pitch;
+        var pitch = ReadPitch(note, staff)?.Pitch;
         foreach (var t in note.Element("notations")?.Elements("tied") ?? [])
             _tieMarkers.Add(new TieMarker(part, eventId, pitch, staff, voice,
                 IntAttr(t, "number", 1), (string?)t.Attribute("type") ?? "",
@@ -323,11 +323,12 @@ public sealed class MusicXmlCanonicalizer
     private List<BeamRelation> BuildBeams()
     {
         var result = new List<BeamRelation>();
-        var open = new Dictionary<(string Part, int Staff, int Voice, int Level), List<string>>();
+        // Staff is deliberately NOT part of the key: one beam group may cross staves.
+        var open = new Dictionary<(string Part, int Voice, int Level), List<string>>();
         var id = 0;
         foreach (var m in _beamMarkers)
         {
-            var key = (m.Part, m.Staff, m.Voice, m.Level);
+            var key = (m.Part, m.Voice, m.Level);
             switch (m.Value)
             {
                 case "begin": open[key] = [m.Event]; break;
@@ -351,11 +352,12 @@ public sealed class MusicXmlCanonicalizer
     private List<TieRelation> BuildTies()
     {
         var result = new List<TieRelation>();
-        var open = new Dictionary<(string Part, int Staff, int Voice, string? Pitch, int Number), TieMarker>();
+        // A tied voice may move between staves, so staff must not break the chain.
+        var open = new Dictionary<(string Part, int Voice, string? Pitch, int Number), TieMarker>();
         var id = 0;
         foreach (var m in _tieMarkers)
         {
-            var key = (m.Part, m.Staff, m.Voice, m.Pitch, m.Number);
+            var key = (m.Part, m.Voice, m.Pitch, m.Number);
             if (m.Type == "start") open[key] = m;
             else if (m.Type == "stop" && open.Remove(key, out var start) && m.Pitch is not null)
                 result.Add(new TieRelation($"tie-{++id}",
@@ -385,18 +387,19 @@ public sealed class MusicXmlCanonicalizer
     private List<TupletRelation> BuildTuplets()
     {
         var result = new List<TupletRelation>();
-        var open = new Dictionary<(string Part, int Staff, int Voice, int Number), int>();
+        // Tuplet membership is a voice relation and can also cross staves.
+        var open = new Dictionary<(string Part, int Voice, int Number), int>();
         var id = 0;
 
         for (var i = 0; i < _tupletMarkers.Count; i++)
         {
             var m = _tupletMarkers[i];
-            var key = (m.Part, m.Staff, m.Voice, m.Number);
+            var key = (m.Part, m.Voice, m.Number);
             if (m.Type == "start") open[key] = i;
             else if (m.Type == "stop" && open.Remove(key, out var startIndex))
             {
                 var segment = _tupletMarkers.Skip(startIndex).Take(i - startIndex + 1)
-                    .Where(x => x.Part == m.Part && x.Staff == m.Staff && x.Voice == m.Voice)
+                    .Where(x => x.Part == m.Part && x.Voice == m.Voice)
                     .ToList();
                 var events = segment.Select(x => x.Event).Distinct().ToList();
                 var actual = segment.Select(x => x.Actual).FirstOrDefault(x => x.HasValue) ?? 0;
