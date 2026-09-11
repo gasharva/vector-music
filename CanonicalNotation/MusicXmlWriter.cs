@@ -104,6 +104,7 @@ public sealed class MusicXmlWriter
                         directionIndex++;
                     }
                 }
+
                 if (at > cursor)
                 {
                     mx.Add(new XElement("forward", new XElement("duration", at - cursor)));
@@ -140,10 +141,10 @@ public sealed class MusicXmlWriter
                 mx.Add(WithOffset(d.Element, d.At));
         }
 
-        if (measure.LeftBarline is not null)
-            mx.Add(WriteBarline("left", measure.LeftBarline));
-        if (measure.RightBarline is not null)
-            mx.Add(WriteBarline("right", measure.RightBarline));
+        if (measure.LeftBarline is not null || measure.LeftRepeat is not null)
+            mx.Add(WriteBarline("left", measure.LeftBarline, measure.LeftRepeat));
+        if (measure.RightBarline is not null || measure.RightRepeat is not null)
+            mx.Add(WriteBarline("right", measure.RightBarline, measure.RightRepeat));
 
         return mx;
     }
@@ -228,8 +229,6 @@ public sealed class MusicXmlWriter
 
         if (note is not null)
         {
-            // Important for tie chains: on an intermediate note MusicXML must emit
-            // stop before start. Our canonicalizer consumes markers in document order.
             foreach (var tie in TieMarkers(ev.Id, note.Pitch, start: false))
                 nx.Add(new XElement("tie", new XAttribute("type", "stop")));
             foreach (var tie in TieMarkers(ev.Id, note.Pitch, start: true))
@@ -267,8 +266,6 @@ public sealed class MusicXmlWriter
         if (!string.IsNullOrWhiteSpace(ev.Notation?.Notehead))
             nx.Add(new XElement("notehead", ev.Notation.Notehead));
 
-        // v0.2: chord noteheads carry their own staff. The event-level fallback keeps
-        // old v0.1 fixtures readable while they are being regenerated.
         nx.Add(new XElement("staff", note?.Staff ?? ev.Staff ?? 1));
 
         if (noteIndex == 0)
@@ -321,6 +318,25 @@ public sealed class MusicXmlWriter
                         new XAttribute("type", "stop"),
                         new XAttribute("number", tuplet.Number)));
             }
+
+            AddMarkGroup(notations, "ornaments", ev.Notation?.Ornaments);
+            AddMarkGroup(notations, "articulations", ev.Notation?.Articulations);
+
+            foreach (var fermata in ev.Notation?.Fermatas ?? [])
+                notations.Add(NotationMarkElement(fermata));
+        }
+
+        if (note?.Technical is { Count: > 0 })
+        {
+            var tx = new XElement("technical");
+            foreach (var mark in note.Technical)
+            {
+                var mx = new XElement(mark.Type);
+                if (!string.IsNullOrWhiteSpace(mark.Value)) mx.Value = mark.Value;
+                if (!string.IsNullOrWhiteSpace(mark.Placement)) mx.SetAttributeValue("placement", mark.Placement);
+                tx.Add(mx);
+            }
+            notations.Add(tx);
         }
 
         foreach (var arp in ArpeggioMarkers(ev.Id))
@@ -336,11 +352,34 @@ public sealed class MusicXmlWriter
         return nx;
     }
 
+    private static void AddMarkGroup(XElement notations, string groupName, List<NotationMark>? marks)
+    {
+        if (marks is not { Count: > 0 }) return;
+        var group = new XElement(groupName);
+        foreach (var mark in marks)
+            group.Add(NotationMarkElement(mark));
+        notations.Add(group);
+    }
+
+    private static XElement NotationMarkElement(NotationMark mark)
+    {
+        var x = new XElement(mark.Type);
+        if (!string.IsNullOrWhiteSpace(mark.Subtype)) x.SetAttributeValue("type", mark.Subtype);
+        if (!string.IsNullOrWhiteSpace(mark.Placement)) x.SetAttributeValue("placement", mark.Placement);
+        return x;
+    }
+
     private IEnumerable<(long At, int Order, XElement Element)> BuildDirections(Measure measure)
     {
         var order = 0;
-        foreach (var ev in measure.Events.Where(e => e.Type is "text" or "dynamic" or "tempo"))
+        foreach (var ev in measure.Events.Where(e => e.Type is "text" or "dynamic" or "tempo" or "navigation"))
         {
+            if (ev.Type == "navigation")
+            {
+                yield return (Units(ev.At), order++, NavigationDirection(ev));
+                continue;
+            }
+
             XElement? type = ev.Type switch
             {
                 "text" => new XElement("words", ev.Text ?? ""),
@@ -362,6 +401,15 @@ public sealed class MusicXmlWriter
             yield return (Units(span.To.At), order++, Direction(span.To.Staff, span.Placement, SpanStop(span)));
     }
 
+    private static XElement NavigationDirection(CanonicalEvent ev)
+    {
+        var kind = ev.Value is "segno" ? "segno" : "coda";
+        var dx = Direction(ev.Staff ?? 1, ev.Placement, new XElement(kind));
+        if (!string.IsNullOrWhiteSpace(ev.Target))
+            dx.Add(new XElement("sound", new XAttribute(kind, ev.Target)));
+        return dx;
+    }
+
     private static XElement Direction(int staff, string? placement, XElement content)
     {
         var dx = new XElement("direction");
@@ -377,7 +425,8 @@ public sealed class MusicXmlWriter
         if (offset != 0)
         {
             var staff = copy.Element("staff");
-            staff?.AddBeforeSelf(new XElement("offset", offset));
+            if (staff is not null) staff.AddBeforeSelf(new XElement("offset", offset));
+            else copy.Add(new XElement("offset", offset));
         }
         return copy;
     }
@@ -389,14 +438,11 @@ public sealed class MusicXmlWriter
             "hairpin" => new XElement("wedge",
                 new XAttribute("type", span.Type ?? "crescendo"),
                 new XAttribute("number", SpanNumber(span))),
-
             "pedal" => Pedal("start", span),
-
             "octaveShift" => new XElement("octave-shift",
                 new XAttribute("type", span.Direction ?? "up"),
                 new XAttribute("number", SpanNumber(span)),
                 new XAttribute("size", span.Size ?? 8)),
-
             _ => throw new InvalidDataException($"Unknown span kind: {span.Kind}")
         };
     }
@@ -408,14 +454,11 @@ public sealed class MusicXmlWriter
             "hairpin" => new XElement("wedge",
                 new XAttribute("type", "stop"),
                 new XAttribute("number", SpanNumber(span))),
-
             "pedal" => Pedal("stop", span),
-
             "octaveShift" => new XElement("octave-shift",
                 new XAttribute("type", "stop"),
                 new XAttribute("number", SpanNumber(span)),
                 new XAttribute("size", span.Size ?? 8)),
-
             _ => throw new InvalidDataException($"Unknown span kind: {span.Kind}")
         };
     }
@@ -539,10 +582,12 @@ public sealed class MusicXmlWriter
     private static int EventStaff(CanonicalEvent ev) =>
         ev.Staff ?? ev.Notes?.FirstOrDefault()?.Staff ?? 1;
 
-    private static XElement WriteBarline(string location, string value) =>
-        new("barline",
-            new XAttribute("location", location),
-            new XElement("bar-style", value switch
+    private static XElement WriteBarline(string location, string? value, RepeatMark? repeat)
+    {
+        var x = new XElement("barline", new XAttribute("location", location));
+        if (value is not null)
+        {
+            x.Add(new XElement("bar-style", value switch
             {
                 "final" => "light-heavy",
                 "double" => "light-light",
@@ -550,6 +595,17 @@ public sealed class MusicXmlWriter
                 "reverse-final" => "heavy-light",
                 _ => value
             }));
+        }
+
+        if (repeat is not null)
+        {
+            var rx = new XElement("repeat", new XAttribute("direction", repeat.Direction));
+            if (repeat.Times is not null) rx.SetAttributeValue("times", repeat.Times.Value);
+            x.Add(rx);
+        }
+
+        return x;
+    }
 
     private static void SetYesNo(XElement x, string name, bool? value)
     {
