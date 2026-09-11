@@ -48,11 +48,6 @@ public sealed record ShapeInstance(
     string SourceKind,
     string? SourceIndex);
 
-/// <summary>
-/// Source-independent representation of line-like geometry.  A staff line may
-/// arrive as SVG line/polyline, a thin rectangle, polygon or even a closed path;
-/// after normalization they all become the same primitive.
-/// </summary>
 public sealed record Stroke(
     string ShapeId,
     PointD Start,
@@ -61,10 +56,27 @@ public sealed record Stroke(
     string SourceKind,
     string? SourceIndex);
 
+/// <summary>
+/// Source-independent curved primitive.  For now this is a quadratic centreline
+/// approximation (start/control/end) extracted from an open curved shape.  It is
+/// intentionally geometric: a later interpreter decides whether it is a slur,
+/// tie, brace fragment, etc.
+/// </summary>
+public sealed record Arc(
+    string ShapeId,
+    PointD Start,
+    PointD Control,
+    PointD End,
+    double Width,
+    double FitError,
+    string SourceKind,
+    string? SourceIndex);
+
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
     IReadOnlyList<ShapeInstance> Instances,
-    IReadOnlyList<Stroke> Strokes);
+    IReadOnlyList<Stroke> Strokes,
+    IReadOnlyList<Arc> Arcs);
 
 public sealed record ShapeDescriptor(
     double AspectRatio,
