@@ -4,7 +4,7 @@ public sealed record ArcDiagnostic(string ShapeId, string Result, string Reason,
 
 public interface IArcExtractor
 {
-    bool TryCreateArc(GeometricShape shape, out Arc arc);
+    bool TryCreateArc(GeometricShape shape, out CurvedStroke curvedStroke);
     IReadOnlyList<ArcDiagnostic> Diagnostics { get; }
     void ClearDiagnostics();
 }
@@ -14,35 +14,30 @@ public sealed class ArcExtractor : IArcExtractor
     private readonly double _minBend;
     private readonly double _maxBend;
     private readonly double _minSameSideRatio;
-    private readonly double _maxRelativeFitError;
     private readonly double _maxRelativeThickness;
     private readonly List<ArcDiagnostic> _diagnostics = [];
-
     public IReadOnlyList<ArcDiagnostic> Diagnostics => _diagnostics;
 
     public ArcExtractor(double minBend = 0.025, double maxBend = 1.25,
-        double minSameSideRatio = 0.82, double maxRelativeFitError = 0.06,
-        double maxRelativeThickness = 0.35)
+        double minSameSideRatio = 0.82, double maxRelativeThickness = 0.35)
     {
         _minBend = minBend; _maxBend = maxBend; _minSameSideRatio = minSameSideRatio;
-        _maxRelativeFitError = maxRelativeFitError; _maxRelativeThickness = maxRelativeThickness;
+        _maxRelativeThickness = maxRelativeThickness;
     }
 
     public void ClearDiagnostics() => _diagnostics.Clear();
 
-    public bool TryCreateArc(GeometricShape shape, out Arc arc)
+    public bool TryCreateArc(GeometricShape shape, out CurvedStroke curvedStroke)
     {
-        arc = default!;
-        if (!shape.IsClosed || shape.Points.Count < 8)
-            return Reject(shape, "not a sufficiently sampled closed contour", "");
-
+        curvedStroke = default!;
+        if (!shape.IsClosed || shape.Points.Count < 8) return Reject(shape, "not a sufficiently sampled closed contour", "");
         var contour = shape.Points.ToList();
         if (Distance(contour[0], contour[^1]) < 1e-6) contour.RemoveAt(contour.Count - 1);
         if (contour.Count < 7) return Reject(shape, "too few contour points", $"points={contour.Count}");
 
-        var (aIndex, bIndex) = FarthestPair(contour);
-        var sideA = SliceCircular(contour, aIndex, bIndex);
-        var sideB = SliceCircular(contour, bIndex, aIndex); sideB.Reverse();
+        var (ai, bi) = FarthestPair(contour);
+        var sideA = SliceCircular(contour, ai, bi);
+        var sideB = SliceCircular(contour, bi, ai); sideB.Reverse();
         const int n = 33;
         var a = ResampleByArcLength(sideA, n); var b = ResampleByArcLength(sideB, n);
         if (a.Count != n || b.Count != n) return Reject(shape, "could not resample both sides", "");
@@ -55,8 +50,7 @@ public sealed class ArcExtractor : IArcExtractor
         var body = widths.Skip(3).Take(widths.Length - 6).OrderBy(x => x).ToArray();
         var width = body.Length == 0 ? widths.Average() : body[body.Length / 2];
         var thickness = width / chord;
-        if (thickness > _maxRelativeThickness)
-            return Reject(shape, "too thick", Metrics(chord, thickness, null, null, null));
+        if (thickness > _maxRelativeThickness) return Reject(shape, "too thick", Metrics(chord, thickness, null, null, null));
 
         var signed = center.Select(p => SignedDistanceToLine(p, start, end)).ToArray();
         var peak = signed.Skip(1).Take(signed.Length - 2).Max(x => Math.Abs(x));
@@ -68,8 +62,7 @@ public sealed class ArcExtractor : IArcExtractor
         var meaningful = signed.Skip(2).Take(signed.Length - 4).Where(x => Math.Abs(x) > chord * 0.005).ToArray();
         if (meaningful.Length == 0) return Reject(shape, "no meaningful bend samples", Metrics(chord, thickness, bend, null, null));
         var sideRatio = meaningful.Count(x => x * dominantSign > 0) / (double)meaningful.Length;
-        if (sideRatio < _minSameSideRatio)
-            return Reject(shape, "centreline changes side", Metrics(chord, thickness, bend, sideRatio, null));
+        if (sideRatio < _minSameSideRatio) return Reject(shape, "centreline changes side", Metrics(chord, thickness, bend, sideRatio, null));
 
         var profile = signed.Select(Math.Abs).ToArray();
         var peakIndex = Array.IndexOf(profile, profile.Max());
@@ -80,21 +73,21 @@ public sealed class ArcExtractor : IArcExtractor
         if (rise < 0.70 || fall < 0.70)
             return Reject(shape, "bend profile is not a single arch", Metrics(chord, thickness, bend, sideRatio, null) + $" rise={rise:F3} fall={fall:F3}");
 
+        // Bezier fit is descriptive only. A real curved stroke is allowed to be
+        // more complex than one quadratic curve.
         var control = FitQuadratic(center, start, end);
         var fit = QuadraticFitError(center, start, control, end) / chord;
-        if (fit > _maxRelativeFitError)
-            return Reject(shape, "quadratic fit error", Metrics(chord, thickness, bend, sideRatio, fit));
+        var approximation = new QuadraticApproximation(start, control, end, fit);
 
-        arc = new Arc(shape.Id, start, control, end, Math.Max(width, 1.0), fit, shape.SourceKind, shape.SourceIndex);
-        _diagnostics.Add(new ArcDiagnostic(shape.Id, "ACCEPT", "arc", Metrics(chord, thickness, bend, sideRatio, fit)));
+        curvedStroke = new CurvedStroke(shape.Id, center, widths, bend, sideRatio, approximation,
+            shape.SourceKind, shape.SourceIndex);
+        _diagnostics.Add(new ArcDiagnostic(shape.Id, "ACCEPT", "curved stroke", Metrics(chord, thickness, bend, sideRatio, fit)));
         return true;
     }
 
-    private bool Reject(GeometricShape s, string reason, string metrics) { _diagnostics.Add(new(s.Id, "REJECT", reason, metrics)); return false; }
-    private static string Metrics(double chord, double thickness, double? bend, double? side, double? fit) =>
-        $"chord={chord:F2} thickness={thickness:F3}" + (bend is null ? "" : $" bend={bend:F3}") + (side is null ? "" : $" side={side:F3}") + (fit is null ? "" : $" fit={fit:F3}");
-
-    private static (int A, int B) FarthestPair(IReadOnlyList<PointD> p) { var best=-1.0; var ai=0; var bi=1; for(var i=0;i<p.Count-1;i++) for(var j=i+1;j<p.Count;j++){var dx=p[i].X-p[j].X;var dy=p[i].Y-p[j].Y;var d=dx*dx+dy*dy;if(d>best){best=d;ai=i;bi=j;}} return(ai,bi); }
+    private bool Reject(GeometricShape s,string reason,string metrics){_diagnostics.Add(new(s.Id,"REJECT",reason,metrics));return false;}
+    private static string Metrics(double chord,double thickness,double? bend,double? side,double? fit)=>$"chord={chord:F2} thickness={thickness:F3}"+(bend is null?"":$" bend={bend:F3}")+(side is null?"":$" side={side:F3}")+(fit is null?"":$" fit={fit:F3}");
+    private static (int A,int B) FarthestPair(IReadOnlyList<PointD> p){var best=-1.0;var ai=0;var bi=1;for(var i=0;i<p.Count-1;i++)for(var j=i+1;j<p.Count;j++){var dx=p[i].X-p[j].X;var dy=p[i].Y-p[j].Y;var d=dx*dx+dy*dy;if(d>best){best=d;ai=i;bi=j;}}return(ai,bi);}
     private static List<PointD> SliceCircular(IReadOnlyList<PointD> p,int start,int end){var r=new List<PointD>();var i=start;while(true){r.Add(p[i]);if(i==end)break;i=(i+1)%p.Count;}return r;}
     private static List<PointD> ResampleByArcLength(IReadOnlyList<PointD> input,int count){if(input.Count<2)return[];var c=new double[input.Count];for(var i=1;i<input.Count;i++)c[i]=c[i-1]+Distance(input[i-1],input[i]);var total=c[^1];if(total<=1e-9)return[];var r=new List<PointD>(count);var seg=1;for(var s=0;s<count;s++){var target=total*s/(count-1.0);while(seg<c.Length-1&&c[seg]<target)seg++;var from=seg-1;var span=c[seg]-c[from];var t=span<=1e-12?0:(target-c[from])/span;r.Add(new(input[from].X+(input[seg].X-input[from].X)*t,input[from].Y+(input[seg].Y-input[from].Y)*t));}return r;}
     private static PointD FitQuadratic(IReadOnlyList<PointD> p,PointD start,PointD end){double den=0,cx=0,cy=0;for(var i=1;i<p.Count-1;i++){var t=i/(double)(p.Count-1);var k=2*(1-t)*t;var bx=(1-t)*(1-t)*start.X+t*t*end.X;var by=(1-t)*(1-t)*start.Y+t*t*end.Y;den+=k*k;cx+=k*(p[i].X-bx);cy+=k*(p[i].Y-by);}return den<=1e-12?Midpoint(start,end):new(cx/den,cy/den);}
