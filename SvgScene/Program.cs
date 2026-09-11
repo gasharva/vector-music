@@ -13,16 +13,14 @@ var output = positional.Length > 0 ? positional[0] : "notation-scene.json";
 var debug = args.Any(x => x.Equals("--debug", StringComparison.OrdinalIgnoreCase));
 var verboseJson = args.Any(x => x.Equals("--verbose-json", StringComparison.OrdinalIgnoreCase));
 
-var pipeline = new ScenePipeline(
-    new SvgNormalizer(),
-    new ShapeClusterer(new GeometryAnalyzer()));
-
+var pipeline = new ScenePipeline(new SvgNormalizer(), new ShapeClusterer());
 var (geometry, notation) = pipeline.Run(input);
 
 Console.WriteLine($"GeometricScene shapes    : {geometry.Shapes.Count}");
 Console.WriteLine($"NotationScene contours   : {notation.Instances.Count}");
 Console.WriteLine($"NotationScene prototypes : {notation.Prototypes.Count}");
 Console.WriteLine($"NotationScene strokes    : {notation.Strokes.Count}");
+Console.WriteLine($"NotationScene arcs       : {notation.Arcs.Count}");
 
 foreach (var prototype in notation.Prototypes)
 {
@@ -41,7 +39,8 @@ var compact = new
         relativeArea = p.Descriptor.RelativeArea
     }),
     instances = notation.Instances,
-    strokes = notation.Strokes
+    strokes = notation.Strokes,
+    arcs = notation.Arcs
 };
 
 var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
@@ -53,32 +52,32 @@ if (verboseJson)
     var verboseOutput = Path.Combine(
         Path.GetDirectoryName(Path.GetFullPath(output)) ?? Environment.CurrentDirectory,
         Path.GetFileNameWithoutExtension(output) + ".verbose.json");
-
     File.WriteAllText(verboseOutput, JsonSerializer.Serialize(notation, jsonOptions));
     Console.WriteLine($"Written verbose JSON: {verboseOutput}");
 }
 
 if (debug)
 {
-    var debugOutput = Path.Combine(
-        Path.GetDirectoryName(Path.GetFullPath(input)) ?? Environment.CurrentDirectory,
-        Path.GetFileNameWithoutExtension(input) + ".clusters.svg");
-
-    new DebugSceneRenderer().Render(input, notation, debugOutput);
-    Console.WriteLine($"Written debug SVG: {debugOutput}");
+    var directory = Path.GetDirectoryName(Path.GetFullPath(input)) ?? Environment.CurrentDirectory;
+    var baseName = Path.GetFileNameWithoutExtension(input);
+    new DebugSceneRenderer().RenderAll(input, notation, directory, baseName);
+    Console.WriteLine($"Written debug SVGs:");
+    Console.WriteLine($"  {Path.Combine(directory, baseName + ".strokes.svg")}");
+    Console.WriteLine($"  {Path.Combine(directory, baseName + ".arcs.svg")}");
+    Console.WriteLine($"  {Path.Combine(directory, baseName + ".contours.svg")}");
 }
 
 if (Path.GetFileName(input).Equals("shape-clustering-noteheads.svg", StringComparison.OrdinalIgnoreCase))
 {
     var ok = geometry.Shapes.Count == 100
         && notation.Strokes.Count == 0
+        && notation.Arcs.Count == 0
         && notation.Prototypes.Count == 1
         && notation.Instances.Count == 100;
 
     Console.WriteLine(ok
-        ? "Fixture check: PASS (1 prototype, 100 instances, 0 strokes)"
+        ? "Fixture check: PASS (1 prototype, 100 instances, 0 primitives)"
         : "Fixture check: FAIL");
-
     return ok ? 0 : 1;
 }
 
