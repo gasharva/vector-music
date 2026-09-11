@@ -27,7 +27,7 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
     public IReadOnlyList<StrokeDiagnostic> Diagnostics => _diagnostics;
 
     public GeometryAnalyzer(
-        double minElongation = 8.0,
+        double minElongation = 5.0,
         double minClosedFillRatio = 0.55)
     {
         _minElongation = minElongation;
@@ -71,14 +71,14 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
         {
             var start = points[0];
             var end = points[1];
-            var length = Distance(start, end);
+            var _length = Distance(start, end);
 
-            if (length <= 1e-9)
+            if (_length <= 1e-9)
             {
                 return Reject(
                     shape,
                     "zero length",
-                    Metrics(shape, contour, length, 0, 0, null));
+                    Metrics(shape, contour, _length, 0, 0, null));
             }
 
             OrderEndpoints(ref start, ref end);
@@ -97,9 +97,9 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
                 Metrics(
                     shape,
                     contour,
-                    length,
+                    _length,
                     shape.StrokeWidth,
-                    length / Math.Max(shape.StrokeWidth, 1e-9),
+                    _length / Math.Max(shape.StrokeWidth, 1e-9),
                     null));
 
             return true;
