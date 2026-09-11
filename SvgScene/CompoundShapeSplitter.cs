@@ -6,12 +6,15 @@ public interface ICompoundShapeSplitter
 }
 
 /// <summary>
-/// Splits SVG compound paths into independent geometric components while
-/// preserving contours that are connected or contained inside one another.
+/// Splits SVG compound paths into independent geometric components.
 ///
-/// This is deliberately a geometric operation. It does not try to decide
-/// whether two disconnected components belong to the same musical symbol.
-/// Later recognition stages may group nearby primitives again if needed.
+/// A new SVG subpath starts with its own moveto command and should normally
+/// remain independent even when it crosses another subpath. This matters for
+/// notation such as staff lines and barlines, which are often packed into one
+/// path and intersect geometrically without being one primitive.
+///
+/// The important exception is nested closed contours. They may describe one
+/// filled shape with a hole, so containment keeps those contours together.
 /// </summary>
 public sealed class CompoundShapeSplitter : ICompoundShapeSplitter
 {
@@ -124,6 +127,13 @@ public sealed class CompoundShapeSplitter : ICompoundShapeSplitter
         GeometricContour left,
         GeometricContour right)
     {
+        // Separate moveto-created subpaths are independent primitives by default.
+        // In particular, intersecting open staff/bar lines must not be merged.
+        if (!left.IsClosed || !right.IsClosed)
+        {
+            return false;
+        }
+
         var leftBounds = BoundsD.FromPoints(left.Points);
         var rightBounds = BoundsD.FromPoints(right.Points);
 
@@ -132,22 +142,10 @@ public sealed class CompoundShapeSplitter : ICompoundShapeSplitter
             return false;
         }
 
-        if (ContoursIntersect(left, right))
-        {
-            return true;
-        }
-
-        if (left.IsClosed && ContainsAnyPoint(left, right))
-        {
-            return true;
-        }
-
-        if (right.IsClosed && ContainsAnyPoint(right, left))
-        {
-            return true;
-        }
-
-        return false;
+        // Nested closed contours are the one case where separate subpaths often
+        // belong to the same filled shape: outer boundary + hole(s).
+        return ContainsAnyPoint(left, right)
+            || ContainsAnyPoint(right, left);
     }
 
     private static bool BoundsOverlap(BoundsD left, BoundsD right) =>
@@ -155,28 +153,6 @@ public sealed class CompoundShapeSplitter : ICompoundShapeSplitter
         && right.MaxX + Epsilon >= left.MinX
         && left.MaxY + Epsilon >= right.MinY
         && right.MaxY + Epsilon >= left.MinY;
-
-    private static bool ContoursIntersect(
-        GeometricContour left,
-        GeometricContour right)
-    {
-        foreach (var leftSegment in Segments(left))
-        {
-            foreach (var rightSegment in Segments(right))
-            {
-                if (SegmentsIntersect(
-                    leftSegment.Start,
-                    leftSegment.End,
-                    rightSegment.Start,
-                    rightSegment.End))
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
 
     private static bool ContainsAnyPoint(
         GeometricContour container,
@@ -192,52 +168,6 @@ public sealed class CompoundShapeSplitter : ICompoundShapeSplitter
 
         return false;
     }
-
-    private static IEnumerable<(PointD Start, PointD End)> Segments(
-        GeometricContour contour)
-    {
-        for (var index = 0; index + 1 < contour.Points.Count; index++)
-        {
-            yield return (
-                contour.Points[index],
-                contour.Points[index + 1]);
-        }
-
-        if (contour.IsClosed
-            && contour.Points.Count > 2
-            && contour.Points[^1] != contour.Points[0])
-        {
-            yield return (
-                contour.Points[^1],
-                contour.Points[0]);
-        }
-    }
-
-    private static bool SegmentsIntersect(
-        PointD a,
-        PointD b,
-        PointD c,
-        PointD d)
-    {
-        var abC = Cross(a, b, c);
-        var abD = Cross(a, b, d);
-        var cdA = Cross(c, d, a);
-        var cdB = Cross(c, d, b);
-
-        if (OppositeSigns(abC, abD) && OppositeSigns(cdA, cdB))
-        {
-            return true;
-        }
-
-        return Math.Abs(abC) <= Epsilon && PointOnSegment(c, a, b)
-            || Math.Abs(abD) <= Epsilon && PointOnSegment(d, a, b)
-            || Math.Abs(cdA) <= Epsilon && PointOnSegment(a, c, d)
-            || Math.Abs(cdB) <= Epsilon && PointOnSegment(b, c, d);
-    }
-
-    private static bool OppositeSigns(double left, double right) =>
-        left > Epsilon && right < -Epsilon
-        || left < -Epsilon && right > Epsilon;
 
     private static double Cross(PointD a, PointD b, PointD point) =>
         (b.X - a.X) * (point.Y - a.Y)
