@@ -36,13 +36,17 @@ public sealed record LayoutHint(string BreakBefore);
 /// <summary>
 /// One JSON event shape on purpose: test fixtures remain easy to read and diff.
 /// Fields irrelevant to a particular Type stay null and are omitted from JSON.
+///
+/// For chord events Staff is intentionally null: each notehead carries its own Staff,
+/// which allows one chord to span multiple staves. Staff remains event-level for rests
+/// and directions because those objects are attached to one staff as a whole.
 /// </summary>
 public sealed record CanonicalEvent
 {
     public required string Id { get; init; }
     public required string Type { get; init; } // chord, rest, text, dynamic, tempo
     public required string At { get; init; }
-    public int Staff { get; init; } = 1;
+    public int? Staff { get; init; }
     public int? Voice { get; init; }
     public string? Duration { get; init; }
     public List<CanonicalNote>? Notes { get; init; }
@@ -54,7 +58,14 @@ public sealed record CanonicalEvent
     public decimal? Bpm { get; init; }
 }
 
-public sealed record CanonicalNote(string Pitch, Accidental? Accidental = null);
+/// <summary>
+/// A notehead belongs to a staff independently from the chord event. Staff is nullable
+/// only for reading v0.1 JSON; newly canonicalized v0.2 data always writes it explicitly.
+/// </summary>
+public sealed record CanonicalNote(
+    string Pitch,
+    int? Staff = null,
+    Accidental? Accidental = null);
 
 public sealed record Accidental(
     string Type,
