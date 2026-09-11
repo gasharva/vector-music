@@ -47,16 +47,21 @@ public sealed class SvgNormalizer : ISvgNormalizer
             if (IsInsideDefs(element)) continue;
 
             var localName = element.Name.LocalName;
+            var transform = ParseTransform((string?)element.Attribute("transform"));
+
             if (localName == "path")
             {
                 var d = (string?)element.Attribute("d");
                 if (string.IsNullOrWhiteSpace(d)) continue;
 
-                var points = ParseAndSamplePath(d);
-                var transform = ParseTransform((string?)element.Attribute("transform"));
-                points = points.Select(transform.Apply).ToList();
-
-                shapes.Add(BuildShape(++shapeNo, "path", element, points));
+                var points = ParseAndSamplePath(d).Select(transform.Apply).ToList();
+                shapes.Add(BuildShape(
+                    ++shapeNo,
+                    "path",
+                    element,
+                    points,
+                    isClosed: PathIsClosed(d),
+                    strokeWidth: StrokeWidth(element)));
             }
             else if (localName == "use")
             {
@@ -66,16 +71,78 @@ public sealed class SvgNormalizer : ISvgNormalizer
                 if (string.IsNullOrWhiteSpace(href) || !href.StartsWith('#')) continue;
                 if (!definitions.TryGetValue(href[1..], out var d) || string.IsNullOrWhiteSpace(d)) continue;
 
-                var points = ParseAndSamplePath(d);
-
                 var x = DoubleAttr(element, "x");
                 var y = DoubleAttr(element, "y");
-                var transform = AffineTransform.Translation(x, y)
-                    .Then(ParseTransform((string?)element.Attribute("transform")));
+                var useTransform = AffineTransform.Translation(x, y).Then(transform);
+                var points = ParseAndSamplePath(d).Select(useTransform.Apply).ToList();
+
+                shapes.Add(BuildShape(
+                    ++shapeNo,
+                    "use",
+                    element,
+                    points,
+                    href[1..],
+                    PathIsClosed(d),
+                    StrokeWidth(element)));
+            }
+            else if (localName == "line")
+            {
+                var points = new List<PointD>
+                {
+                    new(DoubleAttr(element, "x1"), DoubleAttr(element, "y1")),
+                    new(DoubleAttr(element, "x2"), DoubleAttr(element, "y2"))
+                }.Select(transform.Apply).ToList();
+
+                shapes.Add(BuildShape(
+                    ++shapeNo,
+                    "line",
+                    element,
+                    points,
+                    isClosed: false,
+                    strokeWidth: StrokeWidth(element)));
+            }
+            else if (localName is "polyline" or "polygon")
+            {
+                var points = ParsePoints((string?)element.Attribute("points"));
+                if (points.Count < 2) continue;
+
+                var closed = localName == "polygon";
+                if (closed && points[^1] != points[0])
+                    points.Add(points[0]);
 
                 points = points.Select(transform.Apply).ToList();
+                shapes.Add(BuildShape(
+                    ++shapeNo,
+                    localName,
+                    element,
+                    points,
+                    isClosed: closed,
+                    strokeWidth: StrokeWidth(element)));
+            }
+            else if (localName == "rect")
+            {
+                var x = DoubleAttr(element, "x");
+                var y = DoubleAttr(element, "y");
+                var width = DoubleAttr(element, "width");
+                var height = DoubleAttr(element, "height");
+                if (width <= 0 || height <= 0) continue;
 
-                shapes.Add(BuildShape(++shapeNo, "use", element, points, href[1..]));
+                var points = new List<PointD>
+                {
+                    new(x, y),
+                    new(x + width, y),
+                    new(x + width, y + height),
+                    new(x, y + height),
+                    new(x, y)
+                }.Select(transform.Apply).ToList();
+
+                shapes.Add(BuildShape(
+                    ++shapeNo,
+                    "rect",
+                    element,
+                    points,
+                    isClosed: true,
+                    strokeWidth: StrokeWidth(element)));
             }
         }
 
@@ -87,7 +154,9 @@ public sealed class SvgNormalizer : ISvgNormalizer
         string sourceKind,
         XElement element,
         IReadOnlyList<PointD> points,
-        string? sourceId = null)
+        string? sourceId = null,
+        bool isClosed = false,
+        double strokeWidth = 0)
     {
         return new GeometricShape(
             $"shape-{number}",
@@ -95,7 +164,9 @@ public sealed class SvgNormalizer : ISvgNormalizer
             points,
             BoundsD.FromPoints(points),
             sourceId,
-            (string?)element.Attribute("data-index"));
+            (string?)element.Attribute("data-index"),
+            isClosed,
+            strokeWidth);
     }
 
     private IReadOnlyList<PointD> ParseAndSamplePath(string d)
@@ -164,6 +235,51 @@ public sealed class SvgNormalizer : ISvgNormalizer
         }
 
         return points;
+    }
+
+    private static List<PointD> ParsePoints(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return [];
+
+        var numbers = Regex.Matches(
+                text,
+                @"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?",
+                RegexOptions.CultureInvariant)
+            .Select(m => Number(m.Value))
+            .ToArray();
+
+        var points = new List<PointD>(numbers.Length / 2);
+        for (var i = 0; i + 1 < numbers.Length; i += 2)
+            points.Add(new PointD(numbers[i], numbers[i + 1]));
+
+        return points;
+    }
+
+    private static bool PathIsClosed(string d) =>
+        PathTokenRegex.Matches(d)
+            .Select(m => m.Value)
+            .Any(t => t is "Z" or "z");
+
+    private static double StrokeWidth(XElement element)
+    {
+        var direct = (string?)element.Attribute("stroke-width");
+        if (double.TryParse(direct, NumberStyles.Float, CultureInfo.InvariantCulture, out var value))
+            return Math.Max(0, value);
+
+        var style = (string?)element.Attribute("style");
+        if (!string.IsNullOrWhiteSpace(style))
+        {
+            foreach (var declaration in style.Split(';', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var pair = declaration.Split(':', 2, StringSplitOptions.TrimEntries);
+                if (pair.Length == 2
+                    && pair[0].Equals("stroke-width", StringComparison.OrdinalIgnoreCase)
+                    && double.TryParse(pair[1], NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+                    return Math.Max(0, value);
+            }
+        }
+
+        return 0;
     }
 
     private static PointD Cubic(PointD p0, PointD p1, PointD p2, PointD p3, double t)
