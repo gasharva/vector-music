@@ -46,7 +46,7 @@ public sealed class MusicXmlCanonicalizer
 
         return new CanonicalNotation(
             "CanonicalNotation",
-            "0.2",
+            "0.3",
             new Metadata(title, composer),
             parts,
             BuildRelations());
@@ -55,7 +55,7 @@ public sealed class MusicXmlCanonicalizer
     private Measure ReadMeasure(string partId, XElement measureXml)
     {
         var measureNo = IntAttr(measureXml, "number", 0);
-        long cursor = 0; // MusicXML division units, local to measure
+        long cursor = 0;
         var events = new List<CanonicalEvent>();
         CanonicalEvent? lastChordEvent = null;
         var eventNo = 0;
@@ -63,6 +63,8 @@ public sealed class MusicXmlCanonicalizer
         MeasureAttributes? attributes = null;
         string? leftBarline = null;
         string? rightBarline = null;
+        RepeatMark? leftRepeat = null;
+        RepeatMark? rightRepeat = null;
         LayoutHint? layout = null;
 
         foreach (var node in measureXml.Elements())
@@ -93,6 +95,17 @@ public sealed class MusicXmlCanonicalizer
                     {
                         var note = ReadPitch(node, staff);
                         if (note is not null) lastChordEvent.Notes.Add(note);
+
+                        var extraNotation = ReadNotation(node);
+                        if (extraNotation is not null)
+                        {
+                            lastChordEvent = lastChordEvent with
+                            {
+                                Notation = MergeNotation(lastChordEvent.Notation, extraNotation)
+                            };
+                            events[^1] = lastChordEvent;
+                        }
+
                         ev = lastChordEvent;
                     }
                     else
@@ -140,8 +153,17 @@ public sealed class MusicXmlCanonicalizer
                 {
                     var location = (string?)node.Attribute("location") ?? "right";
                     var style = NormalizeBarline(node.Element("bar-style")?.Value.Trim());
-                    if (location == "left") leftBarline = style;
-                    else rightBarline = style;
+                    var repeat = ReadRepeat(node.Element("repeat"));
+                    if (location == "left")
+                    {
+                        leftBarline = style;
+                        leftRepeat = repeat;
+                    }
+                    else
+                    {
+                        rightBarline = style;
+                        rightRepeat = repeat;
+                    }
                     break;
                 }
 
@@ -152,7 +174,9 @@ public sealed class MusicXmlCanonicalizer
             }
         }
 
-        return new Measure(measureNo, events, attributes, leftBarline, rightBarline, layout);
+        return new Measure(
+            measureNo, events, attributes, leftBarline, rightBarline, layout,
+            leftRepeat, rightRepeat);
     }
 
     private MeasureAttributes ReadAttributes(XElement xml, long cursor)
@@ -214,7 +238,16 @@ public sealed class MusicXmlCanonicalizer
                 YesNoAttr(ax, "parentheses"),
                 YesNoAttr(ax, "bracket"));
         }
-        return new CanonicalNote(pitch, staff, accidental);
+
+        var technical = note.Element("notations")?.Element("technical")?.Elements()
+            .Select(ReadTechnicalMark)
+            .ToList();
+
+        return new CanonicalNote(
+            pitch,
+            staff,
+            accidental,
+            technical is { Count: > 0 } ? technical : null);
     }
 
     private static EventNotation? ReadNotation(XElement note)
@@ -223,9 +256,62 @@ public sealed class MusicXmlCanonicalizer
         var dots = note.Elements("dot").Count();
         var stem = note.Element("stem")?.Value.Trim();
         var notehead = note.Element("notehead")?.Value.Trim();
-        if (type is null && dots == 0 && stem is null && notehead is null) return null;
-        return new EventNotation(type, dots == 0 ? null : dots, stem, notehead);
+        var notations = note.Element("notations");
+
+        var articulations = ReadMarks(notations?.Element("articulations")?.Elements());
+        var ornaments = ReadMarks(notations?.Element("ornaments")?.Elements());
+        var fermatas = ReadMarks(notations?.Elements("fermata"));
+
+        if (type is null && dots == 0 && stem is null && notehead is null &&
+            articulations is null && ornaments is null && fermatas is null)
+            return null;
+
+        return new EventNotation(
+            type,
+            dots == 0 ? null : dots,
+            stem,
+            notehead,
+            articulations,
+            ornaments,
+            fermatas);
     }
+
+    private static EventNotation MergeNotation(EventNotation? a, EventNotation b)
+    {
+        if (a is null) return b;
+        return new EventNotation(
+            a.NoteType ?? b.NoteType,
+            a.Dots ?? b.Dots,
+            a.Stem ?? b.Stem,
+            a.Notehead ?? b.Notehead,
+            MergeMarks(a.Articulations, b.Articulations),
+            MergeMarks(a.Ornaments, b.Ornaments),
+            MergeMarks(a.Fermatas, b.Fermatas));
+    }
+
+    private static List<NotationMark>? MergeMarks(List<NotationMark>? a, List<NotationMark>? b)
+    {
+        if (a is null) return b;
+        if (b is null) return a;
+        return a.Concat(b).Distinct().ToList();
+    }
+
+    private static List<NotationMark>? ReadMarks(IEnumerable<XElement>? elements)
+    {
+        if (elements is null) return null;
+        var result = elements.Select(ReadNotationMark).ToList();
+        return result.Count == 0 ? null : result;
+    }
+
+    private static NotationMark ReadNotationMark(XElement x) => new(
+        x.Name.LocalName,
+        (string?)x.Attribute("type"),
+        (string?)x.Attribute("placement"));
+
+    private static TechnicalMark ReadTechnicalMark(XElement x) => new(
+        x.Name.LocalName,
+        string.IsNullOrWhiteSpace(x.Value) ? null : x.Value.Trim(),
+        (string?)x.Attribute("placement"));
 
     private void CollectNoteRelations(string part, int measure, string eventId, int staff, int voice, XElement note)
     {
@@ -270,6 +356,7 @@ public sealed class MusicXmlCanonicalizer
         var placement = (string?)direction.Attribute("placement");
         var offset = Long(direction, "offset", 0);
         var at = Duration(cursor + offset).ToString();
+        var sound = direction.Element("sound");
 
         foreach (var type in direction.Elements("direction-type").Elements())
         {
@@ -305,6 +392,20 @@ public sealed class MusicXmlCanonicalizer
                     });
                     break;
 
+                case "coda":
+                case "segno":
+                    events.Add(new CanonicalEvent
+                    {
+                        Id = id,
+                        Type = "navigation",
+                        At = at,
+                        Staff = staff,
+                        Value = type.Name.LocalName,
+                        Target = (string?)sound?.Attribute(type.Name.LocalName),
+                        Placement = placement
+                    });
+                    break;
+
                 case "wedge":
                 case "pedal":
                 case "octave-shift":
@@ -323,7 +424,6 @@ public sealed class MusicXmlCanonicalizer
     private List<BeamRelation> BuildBeams()
     {
         var result = new List<BeamRelation>();
-        // Staff is deliberately NOT part of the key: one beam group may cross staves.
         var open = new Dictionary<(string Part, int Voice, int Level), List<string>>();
         var id = 0;
         foreach (var m in _beamMarkers)
@@ -352,7 +452,6 @@ public sealed class MusicXmlCanonicalizer
     private List<TieRelation> BuildTies()
     {
         var result = new List<TieRelation>();
-        // A tied voice may move between staves, so staff must not break the chain.
         var open = new Dictionary<(string Part, int Voice, string? Pitch, int Number), TieMarker>();
         var id = 0;
         foreach (var m in _tieMarkers)
@@ -387,7 +486,6 @@ public sealed class MusicXmlCanonicalizer
     private List<TupletRelation> BuildTuplets()
     {
         var result = new List<TupletRelation>();
-        // Tuplet membership is a voice relation and can also cross staves.
         var open = new Dictionary<(string Part, int Voice, int Number), int>();
         var id = 0;
 
@@ -470,6 +568,15 @@ public sealed class MusicXmlCanonicalizer
         _beamMarkers.Clear(); _tieMarkers.Clear(); _slurMarkers.Clear();
         _tupletMarkers.Clear(); _arpeggioMarkers.Clear(); _directionMarkers.Clear();
         _divisions = 1;
+    }
+
+    private static RepeatMark? ReadRepeat(XElement? repeat)
+    {
+        if (repeat is null) return null;
+        var direction = (string?)repeat.Attribute("direction");
+        if (string.IsNullOrWhiteSpace(direction)) return null;
+        int? times = int.TryParse((string?)repeat.Attribute("times"), out var n) ? n : null;
+        return new RepeatMark(direction, times);
     }
 
     private static string AlterText(int alter) => alter switch
