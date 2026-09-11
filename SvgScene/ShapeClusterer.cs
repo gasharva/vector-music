@@ -9,12 +9,15 @@ public sealed class ShapeClusterer : IShapeClusterer
 {
     private readonly double _distanceThreshold;
     private readonly IGeometryAnalyzer _geometryAnalyzer;
+    private readonly IArcExtractor _arcExtractor;
 
     public ShapeClusterer(
         IGeometryAnalyzer? geometryAnalyzer = null,
+        IArcExtractor? arcExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
+        _arcExtractor = arcExtractor ?? new ArcExtractor();
         _distanceThreshold = distanceThreshold;
     }
 
@@ -23,12 +26,19 @@ public sealed class ShapeClusterer : IShapeClusterer
         var prototypes = new List<ShapePrototype>();
         var instances = new List<ShapeInstance>();
         var strokes = new List<Stroke>();
+        var arcs = new List<Arc>();
 
         foreach (var shape in scene.Shapes)
         {
             if (_geometryAnalyzer.TryCreateStroke(shape, out var stroke))
             {
                 strokes.Add(stroke);
+                continue;
+            }
+
+            if (_arcExtractor.TryCreateArc(shape, out var arc))
+            {
+                arcs.Add(arc);
                 continue;
             }
 
@@ -66,7 +76,7 @@ public sealed class ShapeClusterer : IShapeClusterer
                 shape.SourceIndex));
         }
 
-        return new NotationScene(prototypes, instances, strokes);
+        return new NotationScene(prototypes, instances, strokes, arcs);
     }
 
     private static ShapeDescriptor Describe(GeometricShape shape)
@@ -84,17 +94,13 @@ public sealed class ShapeClusterer : IShapeClusterer
         var polygonArea = Math.Abs(SignedArea(normalized));
         var aspectRatio = width / height;
 
-        return new ShapeDescriptor(
-            aspectRatio,
-            polygonArea,
-            normalized);
+        return new ShapeDescriptor(aspectRatio, polygonArea, normalized);
     }
 
     private static double Distance(ShapeDescriptor a, ShapeDescriptor b)
     {
         var aspectPenalty = Math.Abs(Math.Log(Math.Max(a.AspectRatio, 1e-9) / Math.Max(b.AspectRatio, 1e-9)));
         var areaPenalty = Math.Abs(a.RelativeArea - b.RelativeArea);
-
         var count = Math.Min(a.NormalizedPoints.Count, b.NormalizedPoints.Count);
         if (count == 0) return double.PositiveInfinity;
 
@@ -108,19 +114,16 @@ public sealed class ShapeClusterer : IShapeClusterer
             squared += dx * dx + dy * dy;
         }
 
-        var pointRms = Math.Sqrt(squared / count);
-        return pointRms + 0.25 * aspectPenalty + 0.15 * areaPenalty;
+        return Math.Sqrt(squared / count) + 0.25 * aspectPenalty + 0.15 * areaPenalty;
     }
 
     private static PointD SampleAt(IReadOnlyList<PointD> points, int index, int targetCount)
     {
         if (targetCount <= 1 || points.Count == 1) return points[0];
-
         var position = index * (points.Count - 1.0) / (targetCount - 1.0);
         var left = (int)Math.Floor(position);
         var right = Math.Min(left + 1, points.Count - 1);
         var t = position - left;
-
         return new PointD(
             points[left].X + (points[right].X - points[left].X) * t,
             points[left].Y + (points[right].Y - points[left].Y) * t);
@@ -129,7 +132,6 @@ public sealed class ShapeClusterer : IShapeClusterer
     private static double SignedArea(IReadOnlyList<PointD> points)
     {
         if (points.Count < 3) return 0;
-
         var area = 0.0;
         for (var i = 0; i < points.Count; i++)
         {
@@ -137,7 +139,6 @@ public sealed class ShapeClusterer : IShapeClusterer
             var b = points[(i + 1) % points.Count];
             area += a.X * b.Y - b.X * a.Y;
         }
-
         return area / 2.0;
     }
 }
