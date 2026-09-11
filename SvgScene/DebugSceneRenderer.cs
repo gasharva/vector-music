@@ -1,15 +1,235 @@
 using System.Globalization;
 using System.Xml.Linq;
+
 namespace SvgMusic.Scene;
+
 public sealed class DebugSceneRenderer
 {
- private static readonly string[] Palette=["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4","#008b8b","#f032e6","#6b8e23","#c71585","#008080","#7b68ee","#9a6324","#b8860b","#800000","#2e8b57","#808000","#d2691e","#000075"];
- public void RenderAll(string input,NotationScene scene,string dir,string name){Render(input,Path.Combine(dir,name+".strokes.svg"),(r,n,u)=>AddStrokes(r,n,scene,u));Render(input,Path.Combine(dir,name+".arcs.svg"),(r,n,u)=>AddCurves(r,n,scene,u));Render(input,Path.Combine(dir,name+".ellipses.svg"),(r,n,u)=>AddEllipses(r,n,scene,u));Render(input,Path.Combine(dir,name+".contours.svg"),(r,n,u)=>AddContours(r,n,scene,u));}
- private static void Render(string input,string output,Action<XElement,XNamespace,double> add){var d=XDocument.Load(input,LoadOptions.PreserveWhitespace);var r=d.Root??throw new InvalidOperationException("SVG has no root element.");add(r,r.Name.Namespace,DebugUnit(r));d.Save(output,SaveOptions.DisableFormatting);}
- private static double DebugUnit(XElement root){var vb=((string?)root.Attribute("viewBox"))?.Split(new[]{' ',',','\t','\r','\n'},StringSplitOptions.RemoveEmptyEntries);if(vb is {Length:4}&&double.TryParse(vb[2],NumberStyles.Float,CultureInfo.InvariantCulture,out var w)&&double.TryParse(vb[3],NumberStyles.Float,CultureInfo.InvariantCulture,out var h)&&w>0&&h>0)return Math.Max(Math.Min(w,h)/1000.0,0.05);return 1.0;}
- private static void AddStrokes(XElement r,XNamespace n,NotationScene s,double u){var g=Group(n,"debug-strokes");foreach(var x in s.Strokes)g.Add(new XElement(n+"line",new XAttribute("x1",F(x.Start.X)),new XAttribute("y1",F(x.Start.Y)),new XAttribute("x2",F(x.End.X)),new XAttribute("y2",F(x.End.Y)),new XAttribute("stroke","#00a7d6"),new XAttribute("stroke-width",F(Math.Clamp(x.Width+u,1.35*u,4*u))),new XAttribute("stroke-linecap","round"),new XAttribute("opacity","0.68")));r.Add(g);}
- private static void AddCurves(XElement r,XNamespace n,NotationScene s,double u){var g=Group(n,"debug-curved-strokes");foreach(var c in s.CurvedStrokes){if(c.Centerline.Count<2)continue;var d="M "+F(c.Centerline[0].X)+" "+F(c.Centerline[0].Y)+string.Concat(c.Centerline.Skip(1).Select(p=>$" L {F(p.X)} {F(p.Y)}"));g.Add(new XElement(n+"path",new XAttribute("d",d),new XAttribute("fill","none"),new XAttribute("stroke","#d81b60"),new XAttribute("stroke-width",F(1.7*u)),new XAttribute("stroke-linecap","round"),new XAttribute("stroke-linejoin","round"),new XAttribute("opacity","0.78")));}r.Add(g);}
- private static void AddEllipses(XElement r,XNamespace n,NotationScene s,double u){var g=Group(n,"debug-ellipses");foreach(var e in s.Ellipses){var degrees=e.Rotation*180/Math.PI;g.Add(new XElement(n+"ellipse",new XAttribute("cx",F(e.Center.X)),new XAttribute("cy",F(e.Center.Y)),new XAttribute("rx",F(e.MajorRadius)),new XAttribute("ry",F(e.MinorRadius)),new XAttribute("transform",$"rotate({F(degrees)} {F(e.Center.X)} {F(e.Center.Y)})"),new XAttribute("fill",e.IsHollow?"none":"#20a050"),new XAttribute("fill-opacity",e.IsHollow?"0":"0.20"),new XAttribute("stroke",e.IsHollow?"#7b1fa2":"#20a050"),new XAttribute("stroke-width",F(1.35*u)),new XAttribute("opacity","0.86")));}r.Add(g);}
- private static void AddContours(XElement r,XNamespace n,NotationScene s,double u){var g=Group(n,"debug-contours");foreach(var i in s.Instances){var x=ParsePrototypeIndex(i.PrototypeId);var c=Palette[(x-1)%Palette.Length];var fs=Math.Clamp(Math.Max(i.Width,i.Height)*.28,4.7*u,9.4*u);g.Add(new XElement(n+"rect",new XAttribute("x",F(i.X)),new XAttribute("y",F(i.Y)),new XAttribute("width",F(i.Width)),new XAttribute("height",F(i.Height)),new XAttribute("fill","none"),new XAttribute("stroke",c),new XAttribute("stroke-width",F(u))),new XElement(n+"text",new XAttribute("x",F(i.X)),new XAttribute("y",F(Math.Max(fs,i.Y-1.35*u))),new XAttribute("font-family","Arial, sans-serif"),new XAttribute("font-size",F(fs)),new XAttribute("font-weight","700"),new XAttribute("fill",c),new XAttribute("stroke","white"),new XAttribute("stroke-width",F(.67*u)),new XAttribute("paint-order","stroke fill"),$"p{x}"));}r.Add(g);}
- private static XElement Group(XNamespace n,string id)=>new(n+"g",new XAttribute("id",id),new XAttribute("pointer-events","none"));private static int ParsePrototypeIndex(string id){var d=id.LastIndexOf('-');return d>=0&&int.TryParse(id[(d+1)..],out var v)?Math.Max(1,v):1;}private static string F(double v)=>v.ToString("0.###",CultureInfo.InvariantCulture);
+    private static readonly string[] Palette =
+    [
+        "#e6194b", "#3cb44b", "#4363d8", "#f58231", "#911eb4", "#008b8b",
+        "#f032e6", "#6b8e23", "#c71585", "#008080", "#7b68ee", "#9a6324",
+        "#b8860b", "#800000", "#2e8b57", "#808000", "#d2691e", "#000075"
+    ];
+
+    public void RenderAll(
+        string input,
+        NotationScene scene,
+        string dir,
+        string name)
+    {
+        Render(
+            input,
+            Path.Combine(dir, name + ".strokes.svg"),
+            (root, ns, unit) => AddStrokes(root, ns, scene, unit));
+
+        Render(
+            input,
+            Path.Combine(dir, name + ".arcs.svg"),
+            (root, ns, unit) => AddCurves(root, ns, scene, unit));
+
+        Render(
+            input,
+            Path.Combine(dir, name + ".ellipses.svg"),
+            (root, ns, unit) => AddEllipses(root, ns, scene, unit));
+
+        Render(
+            input,
+            Path.Combine(dir, name + ".contours.svg"),
+            (root, ns, unit) => AddContours(root, ns, scene, unit));
+    }
+
+    private static void Render(
+        string input,
+        string output,
+        Action<XElement, XNamespace, double> add)
+    {
+        var document = XDocument.Load(input, LoadOptions.PreserveWhitespace);
+        var root = document.Root
+            ?? throw new InvalidOperationException("SVG has no root element.");
+
+        add(root, root.Name.Namespace, DebugUnit(root));
+        document.Save(output, SaveOptions.DisableFormatting);
+    }
+
+    private static double DebugUnit(XElement root)
+    {
+        var viewBox = ((string?)root.Attribute("viewBox"))?.Split(
+            [' ', ',', '\t', '\r', '\n'],
+            StringSplitOptions.RemoveEmptyEntries);
+
+        if (viewBox is { Length: 4 }
+            && double.TryParse(viewBox[2], NumberStyles.Float, CultureInfo.InvariantCulture, out var width)
+            && double.TryParse(viewBox[3], NumberStyles.Float, CultureInfo.InvariantCulture, out var height)
+            && width > 0
+            && height > 0)
+        {
+            return Math.Max(Math.Min(width, height) / 1000.0, 0.05);
+        }
+
+        return 1.0;
+    }
+
+    private static void AddStrokes(
+        XElement root,
+        XNamespace ns,
+        NotationScene scene,
+        double unit)
+    {
+        var group = Group(ns, "debug-strokes");
+
+        foreach (var stroke in scene.Strokes)
+        {
+            group.Add(new XElement(
+                ns + "line",
+                new XAttribute("x1", F(stroke.Start.X)),
+                new XAttribute("y1", F(stroke.Start.Y)),
+                new XAttribute("x2", F(stroke.End.X)),
+                new XAttribute("y2", F(stroke.End.Y)),
+                new XAttribute("stroke", "#00a7d6"),
+                new XAttribute(
+                    "stroke-width",
+                    F(Math.Clamp(stroke.Width + unit, 1.35 * unit, 4 * unit))),
+                new XAttribute("stroke-linecap", "round"),
+                new XAttribute("opacity", "0.68")));
+        }
+
+        root.Add(group);
+    }
+
+    private static void AddCurves(
+        XElement root,
+        XNamespace ns,
+        NotationScene scene,
+        double unit)
+    {
+        var group = Group(ns, "debug-curved-strokes");
+
+        foreach (var curve in scene.CurvedStrokes)
+        {
+            if (curve.Centerline.Count < 2)
+            {
+                continue;
+            }
+
+            var pathData = "M "
+                + F(curve.Centerline[0].X)
+                + " "
+                + F(curve.Centerline[0].Y)
+                + string.Concat(
+                    curve.Centerline
+                        .Skip(1)
+                        .Select(point => $" L {F(point.X)} {F(point.Y)}"));
+
+            group.Add(new XElement(
+                ns + "path",
+                new XAttribute("d", pathData),
+                new XAttribute("fill", "none"),
+                new XAttribute("stroke", "#d81b60"),
+                new XAttribute("stroke-width", F(1.7 * unit)),
+                new XAttribute("stroke-linecap", "round"),
+                new XAttribute("stroke-linejoin", "round"),
+                new XAttribute("opacity", "0.78")));
+        }
+
+        root.Add(group);
+    }
+
+    private static void AddEllipses(
+        XElement root,
+        XNamespace ns,
+        NotationScene scene,
+        double unit)
+    {
+        var group = Group(ns, "debug-ellipses");
+
+        foreach (var ellipse in scene.Ellipses)
+        {
+            var degrees = ellipse.Rotation * 180 / Math.PI;
+
+            group.Add(new XElement(
+                ns + "ellipse",
+                new XAttribute("cx", F(ellipse.Center.X)),
+                new XAttribute("cy", F(ellipse.Center.Y)),
+                new XAttribute("rx", F(ellipse.MajorRadius)),
+                new XAttribute("ry", F(ellipse.MinorRadius)),
+                new XAttribute(
+                    "transform",
+                    $"rotate({F(degrees)} {F(ellipse.Center.X)} {F(ellipse.Center.Y)})"),
+                new XAttribute("fill", ellipse.IsHollow ? "none" : "#20a050"),
+                new XAttribute("fill-opacity", ellipse.IsHollow ? "0" : "0.20"),
+                new XAttribute("stroke", ellipse.IsHollow ? "#7b1fa2" : "#20a050"),
+                new XAttribute("stroke-width", F(1.35 * unit)),
+                new XAttribute("opacity", "0.86")));
+        }
+
+        root.Add(group);
+    }
+
+    private static void AddContours(
+        XElement root,
+        XNamespace ns,
+        NotationScene scene,
+        double unit)
+    {
+        var group = Group(ns, "debug-contours");
+
+        foreach (var instance in scene.Instances)
+        {
+            var prototypeIndex = ParsePrototypeIndex(instance.PrototypeId);
+            var color = Palette[(prototypeIndex - 1) % Palette.Length];
+            var fontSize = Math.Clamp(
+                Math.Max(instance.Width, instance.Height) * 0.28,
+                4.7 * unit,
+                9.4 * unit);
+
+            var label = $"{instance.ShapeId} / p{prototypeIndex}";
+
+            group.Add(
+                new XElement(
+                    ns + "rect",
+                    new XAttribute("x", F(instance.X)),
+                    new XAttribute("y", F(instance.Y)),
+                    new XAttribute("width", F(instance.Width)),
+                    new XAttribute("height", F(instance.Height)),
+                    new XAttribute("fill", "none"),
+                    new XAttribute("stroke", color),
+                    new XAttribute("stroke-width", F(unit))),
+                new XElement(
+                    ns + "text",
+                    new XAttribute("x", F(instance.X)),
+                    new XAttribute(
+                        "y",
+                        F(Math.Max(fontSize, instance.Y - 1.35 * unit))),
+                    new XAttribute("font-family", "Arial, sans-serif"),
+                    new XAttribute("font-size", F(fontSize)),
+                    new XAttribute("font-weight", "700"),
+                    new XAttribute("fill", color),
+                    new XAttribute("stroke", "white"),
+                    new XAttribute("stroke-width", F(0.67 * unit)),
+                    new XAttribute("paint-order", "stroke fill"),
+                    label));
+        }
+
+        root.Add(group);
+    }
+
+    private static XElement Group(XNamespace ns, string id) =>
+        new(
+            ns + "g",
+            new XAttribute("id", id),
+            new XAttribute("pointer-events", "none"));
+
+    private static int ParsePrototypeIndex(string id)
+    {
+        var dash = id.LastIndexOf('-');
+
+        return dash >= 0
+            && int.TryParse(id[(dash + 1)..], out var value)
+                ? Math.Max(1, value)
+                : 1;
+    }
+
+    private static string F(double value) =>
+        value.ToString("0.###", CultureInfo.InvariantCulture);
 }
