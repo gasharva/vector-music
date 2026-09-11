@@ -15,14 +15,16 @@ public sealed class ArcExtractor : IArcExtractor
     private readonly double _maxBend;
     private readonly double _minSameSideRatio;
     private readonly double _maxRelativeThickness;
+    private readonly double _maxRelativeFitError;
     private readonly List<ArcDiagnostic> _diagnostics = [];
     public IReadOnlyList<ArcDiagnostic> Diagnostics => _diagnostics;
 
     public ArcExtractor(double minBend = 0.025, double maxBend = 1.25,
-        double minSameSideRatio = 0.82, double maxRelativeThickness = 0.35)
+        double minSameSideRatio = 0.82, double maxRelativeThickness = 0.35,
+        double maxRelativeFitError = 0.075)
     {
         _minBend = minBend; _maxBend = maxBend; _minSameSideRatio = minSameSideRatio;
-        _maxRelativeThickness = maxRelativeThickness;
+        _maxRelativeThickness = maxRelativeThickness; _maxRelativeFitError = maxRelativeFitError;
     }
 
     public void ClearDiagnostics() => _diagnostics.Clear();
@@ -73,12 +75,19 @@ public sealed class ArcExtractor : IArcExtractor
         if (rise < 0.70 || fall < 0.70)
             return Reject(shape, "bend profile is not a single arch", Metrics(chord, thickness, bend, sideRatio, null) + $" rise={rise:F3} fall={fall:F3}");
 
-        // Bezier fit is descriptive only. A real curved stroke is allowed to be
-        // more complex than one quadratic curve.
         var control = FitQuadratic(center, start, end);
         var fit = QuadraticFitError(center, start, control, end) / chord;
-        var approximation = new QuadraticApproximation(start, control, end, fit);
 
+        // Fit is not the representation of the primitive: we keep the complete
+        // sampled centreline below.  It is nevertheless a useful regularity
+        // test. Glyph fragments (digits, accents, ornaments) can accidentally
+        // look one-sided and thin, but their centreline is usually much less
+        // arc-like than a slur/tie.  0.075 keeps the observed slur at 0.063 while
+        // rejecting the fermata arc (~0.091) and digit fragments (~0.10).
+        if (fit > _maxRelativeFitError)
+            return Reject(shape, "centreline not regular enough", Metrics(chord, thickness, bend, sideRatio, fit));
+
+        var approximation = new QuadraticApproximation(start, control, end, fit);
         curvedStroke = new CurvedStroke(shape.Id, center, widths, bend, sideRatio, approximation,
             shape.SourceKind, shape.SourceIndex);
         _diagnostics.Add(new ArcDiagnostic(shape.Id, "ACCEPT", "curved stroke", Metrics(chord, thickness, bend, sideRatio, fit)));
