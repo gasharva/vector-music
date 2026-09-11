@@ -54,13 +54,14 @@ public sealed class SvgNormalizer : ISvgNormalizer
                 var d = (string?)element.Attribute("d");
                 if (string.IsNullOrWhiteSpace(d)) continue;
 
-                var points = ParseAndSamplePath(d).Select(transform.Apply).ToList();
+                var localPoints = ParseAndSamplePath(d);
+                var points = localPoints.Select(transform.Apply).ToList();
                 shapes.Add(BuildShape(
                     ++shapeNo,
                     "path",
                     element,
                     points,
-                    isClosed: PathIsClosed(d),
+                    isClosed: PathIsClosed(d) || PointsAreClosed(localPoints),
                     strokeWidth: StrokeWidth(element)));
             }
             else if (localName == "use")
@@ -74,7 +75,8 @@ public sealed class SvgNormalizer : ISvgNormalizer
                 var x = DoubleAttr(element, "x");
                 var y = DoubleAttr(element, "y");
                 var useTransform = AffineTransform.Translation(x, y).Then(transform);
-                var points = ParseAndSamplePath(d).Select(useTransform.Apply).ToList();
+                var localPoints = ParseAndSamplePath(d);
+                var points = localPoints.Select(useTransform.Apply).ToList();
 
                 shapes.Add(BuildShape(
                     ++shapeNo,
@@ -82,7 +84,7 @@ public sealed class SvgNormalizer : ISvgNormalizer
                     element,
                     points,
                     href[1..],
-                    PathIsClosed(d),
+                    PathIsClosed(d) || PointsAreClosed(localPoints),
                     StrokeWidth(element)));
             }
             else if (localName == "line")
@@ -259,6 +261,17 @@ public sealed class SvgNormalizer : ISvgNormalizer
         PathTokenRegex.Matches(d)
             .Select(m => m.Value)
             .Any(t => t is "Z" or "z");
+
+    private static bool PointsAreClosed(IReadOnlyList<PointD> points)
+    {
+        if (points.Count < 3) return false;
+
+        var first = points[0];
+        var last = points[^1];
+        var dx = first.X - last.X;
+        var dy = first.Y - last.Y;
+        return dx * dx + dy * dy <= 1e-12;
+    }
 
     private static double StrokeWidth(XElement element)
     {
