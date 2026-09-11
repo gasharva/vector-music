@@ -1,14 +1,21 @@
 namespace SvgMusic.Scene;
 
-public interface IShapeClusterer { NotationScene Cluster(GeometricScene scene); IReadOnlyList<ArcDiagnostic> ArcDiagnostics { get; } }
+public interface IShapeClusterer
+{
+    NotationScene Cluster(GeometricScene scene);
+    IReadOnlyList<ArcDiagnostic> ArcDiagnostics { get; }
+    IReadOnlyList<StrokeDiagnostic> StrokeDiagnostics { get; }
+}
+
 public sealed class ShapeClusterer:IShapeClusterer
 {
     private readonly double _distanceThreshold;private readonly IGeometryAnalyzer _geometryAnalyzer;private readonly IArcExtractor _arcExtractor;private readonly IEllipseLikeExtractor _ellipseExtractor;
     public IReadOnlyList<ArcDiagnostic> ArcDiagnostics=>_arcExtractor.Diagnostics;
+    public IReadOnlyList<StrokeDiagnostic> StrokeDiagnostics=>_geometryAnalyzer.Diagnostics;
     public ShapeClusterer(IGeometryAnalyzer? geometryAnalyzer=null,IArcExtractor? arcExtractor=null,IEllipseLikeExtractor? ellipseExtractor=null,double distanceThreshold=0.035){_geometryAnalyzer=geometryAnalyzer??new GeometryAnalyzer();_arcExtractor=arcExtractor??new ArcExtractor();_ellipseExtractor=ellipseExtractor??new EllipseLikeExtractor();_distanceThreshold=distanceThreshold;}
     public NotationScene Cluster(GeometricScene scene)
     {
-        _arcExtractor.ClearDiagnostics();var prototypes=new List<ShapePrototype>();var instances=new List<ShapeInstance>();var strokes=new List<Stroke>();var curved=new List<CurvedStroke>();var ellipses=new List<EllipseLike>();
+        _geometryAnalyzer.ClearDiagnostics();_arcExtractor.ClearDiagnostics();var prototypes=new List<ShapePrototype>();var instances=new List<ShapeInstance>();var strokes=new List<Stroke>();var curved=new List<CurvedStroke>();var ellipses=new List<EllipseLike>();
         foreach(var shape in scene.Shapes)
         {
             if(_geometryAnalyzer.TryCreateStroke(shape,out var stroke)){strokes.Add(stroke);continue;}
