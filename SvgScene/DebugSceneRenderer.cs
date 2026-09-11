@@ -23,6 +23,29 @@ public sealed class DebugSceneRenderer
             new XAttribute("id", "shape-cluster-debug-overlay"),
             new XAttribute("pointer-events", "none"));
 
+        // Strokes are deliberately not clustered.  Draw their normalized centre
+        // lines in one diagnostic color so it is immediately obvious which
+        // geometry was removed from contour clustering.
+        var strokeOverlay = new XElement(ns + "g",
+            new XAttribute("id", "normalized-strokes"));
+
+        foreach (var stroke in scene.Strokes)
+        {
+            var debugWidth = Math.Clamp(stroke.Width + 3.0, 4.0, 12.0);
+            strokeOverlay.Add(
+                new XElement(ns + "line",
+                    new XAttribute("x1", F(stroke.Start.X)),
+                    new XAttribute("y1", F(stroke.Start.Y)),
+                    new XAttribute("x2", F(stroke.End.X)),
+                    new XAttribute("y2", F(stroke.End.Y)),
+                    new XAttribute("stroke", "#00b7ff"),
+                    new XAttribute("stroke-width", F(debugWidth)),
+                    new XAttribute("stroke-linecap", "round"),
+                    new XAttribute("opacity", "0.62")));
+        }
+
+        overlay.Add(strokeOverlay);
+
         foreach (var instance in scene.Instances)
         {
             var prototypeIndex = ParsePrototypeIndex(instance.PrototypeId);
@@ -30,9 +53,6 @@ public sealed class DebugSceneRenderer
             var label = $"p{prototypeIndex}";
             var maxDimension = Math.Max(instance.Width, instance.Height);
 
-            // Keep debug annotations readable in score coordinates.  The earlier
-            // non-scaling-stroke variant depended too much on the SVG viewer/zoom
-            // implementation and made labels tiny on real score exports.
             var fontSize = Math.Clamp(maxDimension * 0.28, 14.0, 28.0);
 
             overlay.Add(
