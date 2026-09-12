@@ -1,108 +1,539 @@
 namespace SvgMusic.Scene;
 
-public sealed record ArcDiagnostic(string ShapeId, string Result, string Reason, string Metrics);
+public sealed record ArcDiagnostic(
+    string ShapeId,
+    string Result,
+    string Reason,
+    string Metrics);
 
 public interface IArcExtractor
 {
-    bool TryCreateArc(GeometricShape shape, out CurvedStroke curvedStroke);
+    bool TryCreateArc(
+        GeometricShape shape,
+        out CurvedStroke curvedStroke);
+
     IReadOnlyList<ArcDiagnostic> Diagnostics { get; }
+
     void ClearDiagnostics();
 }
 
+/// <summary>
+/// Recognizes curved strokes in two source representations:
+///
+/// 1. a filled closed ribbon around a slur/tie;
+/// 2. a stroked open curved path whose geometry is already the centreline.
+///
+/// The closed-ribbon algorithm remains the primary path. Open curves are handled
+/// by a separate fallback extractor so the two representations do not blur into
+/// one large method.
+/// </summary>
 public sealed class ArcExtractor : IArcExtractor
 {
+    private const int SampleCount = 33;
+
     private readonly double _minBend;
     private readonly double _maxBend;
     private readonly double _minSameSideRatio;
     private readonly double _maxRelativeThickness;
     private readonly double _maxRelativeFitError;
+    private readonly OpenCurveArcExtractor _openCurveExtractor;
     private readonly List<ArcDiagnostic> _diagnostics = [];
+
     public IReadOnlyList<ArcDiagnostic> Diagnostics => _diagnostics;
 
-    public ArcExtractor(double minBend = 0.025, double maxBend = 1.25,
-        double minSameSideRatio = 0.82, double maxRelativeThickness = 0.35,
+    public ArcExtractor(
+        double minBend = 0.025,
+        double maxBend = 1.25,
+        double minSameSideRatio = 0.82,
+        double maxRelativeThickness = 0.35,
         double maxRelativeFitError = 0.075)
     {
-        _minBend = minBend; _maxBend = maxBend; _minSameSideRatio = minSameSideRatio;
-        _maxRelativeThickness = maxRelativeThickness; _maxRelativeFitError = maxRelativeFitError;
+        _minBend = minBend;
+        _maxBend = maxBend;
+        _minSameSideRatio = minSameSideRatio;
+        _maxRelativeThickness = maxRelativeThickness;
+        _maxRelativeFitError = maxRelativeFitError;
+
+        _openCurveExtractor = new OpenCurveArcExtractor(
+            minBend,
+            maxBend,
+            minSameSideRatio,
+            maxRelativeFitError);
     }
 
-    public void ClearDiagnostics() => _diagnostics.Clear();
+    public void ClearDiagnostics()
+    {
+        _diagnostics.Clear();
+    }
 
-    public bool TryCreateArc(GeometricShape shape, out CurvedStroke curvedStroke)
+    public bool TryCreateArc(
+        GeometricShape shape,
+        out CurvedStroke curvedStroke)
     {
         curvedStroke = default!;
-        if (!shape.IsClosed || shape.Points.Count < 8) return Reject(shape, "not a sufficiently sampled closed contour", "");
-        var contour = shape.Points.ToList();
-        if (Distance(contour[0], contour[^1]) < 1e-6) contour.RemoveAt(contour.Count - 1);
-        if (contour.Count < 7) return Reject(shape, "too few contour points", $"points={contour.Count}");
 
-        var (ai, bi) = FarthestPair(contour);
-        var sideA = SliceCircular(contour, ai, bi);
-        var sideB = SliceCircular(contour, bi, ai); sideB.Reverse();
-        const int n = 33;
-        var a = ResampleByArcLength(sideA, n); var b = ResampleByArcLength(sideB, n);
-        if (a.Count != n || b.Count != n) return Reject(shape, "could not resample both sides", "");
+        var contours = shape.EffectiveContours
+            .Where(contour => contour.Points.Count > 0)
+            .ToList();
 
-        var center = new List<PointD>(n); var widths = new double[n];
-        for (var i = 0; i < n; i++) { center.Add(Midpoint(a[i], b[i])); widths[i] = Distance(a[i], b[i]); }
-        var start = center[0]; var end = center[^1]; var chord = Distance(start, end);
-        if (chord <= 1e-6) return Reject(shape, "degenerate chord", $"chord={chord:F4}");
+        if (contours.Count != 1)
+        {
+            return Reject(
+                shape,
+                "not a single contour",
+                $"contours={contours.Count}");
+        }
 
-        var body = widths.Skip(3).Take(widths.Length - 6).OrderBy(x => x).ToArray();
-        var width = body.Length == 0 ? widths.Average() : body[body.Length / 2];
-        var thickness = width / chord;
-        if (thickness > _maxRelativeThickness) return Reject(shape, "too thick", Metrics(chord, thickness, null, null, null));
+        var contour = contours[0];
 
-        var signed = center.Select(p => SignedDistanceToLine(p, start, end)).ToArray();
-        var peak = signed.Skip(1).Take(signed.Length - 2).Max(x => Math.Abs(x));
-        var bend = peak / chord;
-        if (bend < _minBend) return Reject(shape, "bend below minimum", Metrics(chord, thickness, bend, null, null));
-        if (bend > _maxBend) return Reject(shape, "bend above maximum", Metrics(chord, thickness, bend, null, null));
+        if (!contour.IsClosed)
+        {
+            return TryCreateOpenCurve(
+                shape,
+                out curvedStroke);
+        }
 
-        var dominantSign = signed.OrderByDescending(x => Math.Abs(x)).First() >= 0 ? 1.0 : -1.0;
-        var meaningful = signed.Skip(2).Take(signed.Length - 4).Where(x => Math.Abs(x) > chord * 0.005).ToArray();
-        if (meaningful.Length == 0) return Reject(shape, "no meaningful bend samples", Metrics(chord, thickness, bend, null, null));
-        var sideRatio = meaningful.Count(x => x * dominantSign > 0) / (double)meaningful.Length;
-        if (sideRatio < _minSameSideRatio) return Reject(shape, "centreline changes side", Metrics(chord, thickness, bend, sideRatio, null));
+        return TryCreateClosedRibbon(
+            shape,
+            contour,
+            out curvedStroke);
+    }
 
-        var profile = signed.Select(Math.Abs).ToArray();
-        var peakIndex = Array.IndexOf(profile, profile.Max());
-        if (peakIndex < 3 || peakIndex > profile.Length - 4)
-            return Reject(shape, "bend peak too close to endpoint", Metrics(chord, thickness, bend, sideRatio, null) + $" peak={peakIndex}/{n}");
-        var rise = MonotonicAgreement(profile, 0, peakIndex, true);
-        var fall = MonotonicAgreement(profile, peakIndex, profile.Length - 1, false);
-        if (rise < 0.70 || fall < 0.70)
-            return Reject(shape, "bend profile is not a single arch", Metrics(chord, thickness, bend, sideRatio, null) + $" rise={rise:F3} fall={fall:F3}");
+    private bool TryCreateOpenCurve(
+        GeometricShape shape,
+        out CurvedStroke curvedStroke)
+    {
+        curvedStroke = default!;
 
-        var control = FitQuadratic(center, start, end);
-        var fit = QuadraticFitError(center, start, control, end) / chord;
+        var result = _openCurveExtractor.TryExtract(shape);
 
-        // Fit is not the representation of the primitive: we keep the complete
-        // sampled centreline below.  It is nevertheless a useful regularity
-        // test. Glyph fragments (digits, accents, ornaments) can accidentally
-        // look one-sided and thin, but their centreline is usually much less
-        // arc-like than a slur/tie.  0.075 keeps the observed slur at 0.063 while
-        // rejecting the fermata arc (~0.091) and digit fragments (~0.10).
-        if (fit > _maxRelativeFitError)
-            return Reject(shape, "centreline not regular enough", Metrics(chord, thickness, bend, sideRatio, fit));
+        if (!result.Accepted || result.CurvedStroke is null)
+        {
+            return Reject(
+                shape,
+                result.Reason,
+                result.Metrics);
+        }
 
-        var approximation = new QuadraticApproximation(start, control, end, fit);
-        curvedStroke = new CurvedStroke(shape.Id, center, widths, bend, sideRatio, approximation,
-            shape.SourceKind, shape.SourceIndex);
-        _diagnostics.Add(new ArcDiagnostic(shape.Id, "ACCEPT", "curved stroke", Metrics(chord, thickness, bend, sideRatio, fit)));
+        curvedStroke = result.CurvedStroke;
+
+        Accept(
+            shape,
+            result.Reason,
+            result.Metrics);
+
         return true;
     }
 
-    private bool Reject(GeometricShape s,string reason,string metrics){_diagnostics.Add(new(s.Id,"REJECT",reason,metrics));return false;}
-    private static string Metrics(double chord,double thickness,double? bend,double? side,double? fit)=>$"chord={chord:F2} thickness={thickness:F3}"+(bend is null?"":$" bend={bend:F3}")+(side is null?"":$" side={side:F3}")+(fit is null?"":$" fit={fit:F3}");
-    private static (int A,int B) FarthestPair(IReadOnlyList<PointD> p){var best=-1.0;var ai=0;var bi=1;for(var i=0;i<p.Count-1;i++)for(var j=i+1;j<p.Count;j++){var dx=p[i].X-p[j].X;var dy=p[i].Y-p[j].Y;var d=dx*dx+dy*dy;if(d>best){best=d;ai=i;bi=j;}}return(ai,bi);}
-    private static List<PointD> SliceCircular(IReadOnlyList<PointD> p,int start,int end){var r=new List<PointD>();var i=start;while(true){r.Add(p[i]);if(i==end)break;i=(i+1)%p.Count;}return r;}
-    private static List<PointD> ResampleByArcLength(IReadOnlyList<PointD> input,int count){if(input.Count<2)return[];var c=new double[input.Count];for(var i=1;i<input.Count;i++)c[i]=c[i-1]+Distance(input[i-1],input[i]);var total=c[^1];if(total<=1e-9)return[];var r=new List<PointD>(count);var seg=1;for(var s=0;s<count;s++){var target=total*s/(count-1.0);while(seg<c.Length-1&&c[seg]<target)seg++;var from=seg-1;var span=c[seg]-c[from];var t=span<=1e-12?0:(target-c[from])/span;r.Add(new(input[from].X+(input[seg].X-input[from].X)*t,input[from].Y+(input[seg].Y-input[from].Y)*t));}return r;}
-    private static PointD FitQuadratic(IReadOnlyList<PointD> p,PointD start,PointD end){double den=0,cx=0,cy=0;for(var i=1;i<p.Count-1;i++){var t=i/(double)(p.Count-1);var k=2*(1-t)*t;var bx=(1-t)*(1-t)*start.X+t*t*end.X;var by=(1-t)*(1-t)*start.Y+t*t*end.Y;den+=k*k;cx+=k*(p[i].X-bx);cy+=k*(p[i].Y-by);}return den<=1e-12?Midpoint(start,end):new(cx/den,cy/den);}
-    private static double QuadraticFitError(IReadOnlyList<PointD> p,PointD p0,PointD c,PointD p2){double sum=0;for(var i=0;i<p.Count;i++){var t=i/(double)(p.Count-1);var mt=1-t;var q=new PointD(mt*mt*p0.X+2*mt*t*c.X+t*t*p2.X,mt*mt*p0.Y+2*mt*t*c.Y+t*t*p2.Y);var d=Distance(p[i],q);sum+=d*d;}return Math.Sqrt(sum/p.Count);}
-    private static double MonotonicAgreement(double[] v,int from,int to,bool increasing){var good=0;var total=0;var tolerance=v.Max()*0.04;for(var i=from+1;i<=to;i++){var d=v[i]-v[i-1];if(Math.Abs(d)<=tolerance||(increasing?d>0:d<0))good++;total++;}return total==0?1:good/(double)total;}
-    private static double SignedDistanceToLine(PointD p,PointD a,PointD b){var dx=b.X-a.X;var dy=b.Y-a.Y;var len=Math.Sqrt(dx*dx+dy*dy);return len<=1e-12?0:(dx*(p.Y-a.Y)-dy*(p.X-a.X))/len;}
-    private static PointD Midpoint(PointD a,PointD b)=>new((a.X+b.X)/2,(a.Y+b.Y)/2);
-    private static double Distance(PointD a,PointD b){var dx=a.X-b.X;var dy=a.Y-b.Y;return Math.Sqrt(dx*dx+dy*dy);}
+    private bool TryCreateClosedRibbon(
+        GeometricShape shape,
+        GeometricContour geometricContour,
+        out CurvedStroke curvedStroke)
+    {
+        curvedStroke = default!;
+
+        if (geometricContour.Points.Count < 8)
+        {
+            return Reject(
+                shape,
+                "not a sufficiently sampled closed contour",
+                $"points={geometricContour.Points.Count}");
+        }
+
+        var contour = geometricContour.Points.ToList();
+
+        if (GeometryAlgorithms.Distance(
+            contour[0],
+            contour[^1]) < 1e-6)
+        {
+            contour.RemoveAt(contour.Count - 1);
+        }
+
+        if (contour.Count < 7)
+        {
+            return Reject(
+                shape,
+                "too few contour points",
+                $"points={contour.Count}");
+        }
+
+        var (firstEndpointIndex, secondEndpointIndex) =
+            FarthestPair(contour);
+
+        var sideA = SliceCircular(
+            contour,
+            firstEndpointIndex,
+            secondEndpointIndex);
+
+        var sideB = SliceCircular(
+            contour,
+            secondEndpointIndex,
+            firstEndpointIndex);
+
+        sideB.Reverse();
+
+        var resampledA = GeometryAlgorithms.ResampleByArcLength(
+            sideA,
+            SampleCount);
+
+        var resampledB = GeometryAlgorithms.ResampleByArcLength(
+            sideB,
+            SampleCount);
+
+        if (resampledA.Count != SampleCount ||
+            resampledB.Count != SampleCount)
+        {
+            return Reject(
+                shape,
+                "could not resample both sides",
+                string.Empty);
+        }
+
+        var centerline = new List<PointD>(SampleCount);
+        var widths = new double[SampleCount];
+
+        for (var i = 0; i < SampleCount; i++)
+        {
+            centerline.Add(
+                GeometryAlgorithms.Midpoint(
+                    resampledA[i],
+                    resampledB[i]));
+
+            widths[i] = GeometryAlgorithms.Distance(
+                resampledA[i],
+                resampledB[i]);
+        }
+
+        var start = centerline[0];
+        var end = centerline[^1];
+        var chord = GeometryAlgorithms.Distance(start, end);
+
+        if (chord <= 1e-6)
+        {
+            return Reject(
+                shape,
+                "degenerate chord",
+                $"chord={chord:0.####}");
+        }
+
+        var bodyWidths = widths
+            .Skip(3)
+            .Take(widths.Length - 6)
+            .OrderBy(width => width)
+            .ToArray();
+
+        var representativeWidth = bodyWidths.Length == 0
+            ? widths.Average()
+            : bodyWidths[bodyWidths.Length / 2];
+
+        var relativeThickness =
+            representativeWidth / chord;
+
+        if (relativeThickness > _maxRelativeThickness)
+        {
+            return Reject(
+                shape,
+                "too thick",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    null,
+                    null,
+                    null));
+        }
+
+        var signedDistances = centerline
+            .Select(point => GeometryAlgorithms.SignedDistanceToLine(
+                point,
+                start,
+                end))
+            .ToArray();
+
+        var peak = signedDistances
+            .Skip(1)
+            .Take(signedDistances.Length - 2)
+            .Max(value => Math.Abs(value));
+
+        var bend = peak / chord;
+
+        if (bend < _minBend)
+        {
+            return Reject(
+                shape,
+                "bend below minimum",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    null,
+                    null));
+        }
+
+        if (bend > _maxBend)
+        {
+            return Reject(
+                shape,
+                "bend above maximum",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    null,
+                    null));
+        }
+
+        var dominantSign = signedDistances
+            .OrderByDescending(value => Math.Abs(value))
+            .First() >= 0
+                ? 1.0
+                : -1.0;
+
+        var meaningfulDistances = signedDistances
+            .Skip(2)
+            .Take(signedDistances.Length - 4)
+            .Where(value => Math.Abs(value) > chord * 0.005)
+            .ToArray();
+
+        if (meaningfulDistances.Length == 0)
+        {
+            return Reject(
+                shape,
+                "no meaningful bend samples",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    null,
+                    null));
+        }
+
+        var sameSideRatio = meaningfulDistances.Count(
+            value => value * dominantSign > 0) /
+            (double)meaningfulDistances.Length;
+
+        if (sameSideRatio < _minSameSideRatio)
+        {
+            return Reject(
+                shape,
+                "centreline changes side",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    sameSideRatio,
+                    null));
+        }
+
+        var profile = signedDistances
+            .Select(Math.Abs)
+            .ToArray();
+
+        var peakIndex = Array.IndexOf(
+            profile,
+            profile.Max());
+
+        if (peakIndex < 3 ||
+            peakIndex > profile.Length - 4)
+        {
+            return Reject(
+                shape,
+                "bend peak too close to endpoint",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    sameSideRatio,
+                    null) +
+                $" peak={peakIndex}/{SampleCount}");
+        }
+
+        var riseAgreement = GeometryAlgorithms.MonotonicAgreement(
+            profile,
+            0,
+            peakIndex,
+            true);
+
+        var fallAgreement = GeometryAlgorithms.MonotonicAgreement(
+            profile,
+            peakIndex,
+            profile.Length - 1,
+            false);
+
+        if (riseAgreement < 0.70 ||
+            fallAgreement < 0.70)
+        {
+            return Reject(
+                shape,
+                "bend profile is not a single arch",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    sameSideRatio,
+                    null) +
+                $" rise={riseAgreement:0.###}" +
+                $" fall={fallAgreement:0.###}");
+        }
+
+        var control = GeometryAlgorithms.FitQuadratic(
+            centerline,
+            start,
+            end);
+
+        var fitError = GeometryAlgorithms.QuadraticFitError(
+            centerline,
+            start,
+            control,
+            end) / chord;
+
+        if (fitError > _maxRelativeFitError)
+        {
+            return Reject(
+                shape,
+                "centreline not regular enough",
+                Metrics(
+                    chord,
+                    relativeThickness,
+                    bend,
+                    sameSideRatio,
+                    fitError));
+        }
+
+        var approximation = new QuadraticApproximation(
+            start,
+            control,
+            end,
+            fitError);
+
+        curvedStroke = new CurvedStroke(
+            shape.Id,
+            centerline,
+            widths,
+            bend,
+            sameSideRatio,
+            approximation,
+            shape.SourceKind,
+            shape.SourceIndex);
+
+        Accept(
+            shape,
+            "curved stroke",
+            Metrics(
+                chord,
+                relativeThickness,
+                bend,
+                sameSideRatio,
+                fitError));
+
+        return true;
+    }
+
+    private bool Reject(
+        GeometricShape shape,
+        string reason,
+        string metrics)
+    {
+        _diagnostics.Add(new ArcDiagnostic(
+            shape.Id,
+            "REJECT",
+            reason,
+            metrics));
+
+        return false;
+    }
+
+    private void Accept(
+        GeometricShape shape,
+        string reason,
+        string metrics)
+    {
+        _diagnostics.Add(new ArcDiagnostic(
+            shape.Id,
+            "ACCEPT",
+            reason,
+            metrics));
+    }
+
+    private static string Metrics(
+        double chord,
+        double thickness,
+        double? bend,
+        double? sideRatio,
+        double? fitError)
+    {
+        var result =
+            $"chord={chord:0.##} " +
+            $"thickness={thickness:0.###}";
+
+        if (bend is not null)
+        {
+            result += $" bend={bend:0.###}";
+        }
+
+        if (sideRatio is not null)
+        {
+            result += $" side={sideRatio:0.###}";
+        }
+
+        if (fitError is not null)
+        {
+            result += $" fit={fitError:0.###}";
+        }
+
+        return result;
+    }
+
+    private static (int A, int B) FarthestPair(
+        IReadOnlyList<PointD> points)
+    {
+        var bestDistanceSquared = -1.0;
+        var firstIndex = 0;
+        var secondIndex = 1;
+
+        for (var i = 0; i < points.Count - 1; i++)
+        {
+            for (var j = i + 1; j < points.Count; j++)
+            {
+                var dx = points[i].X - points[j].X;
+                var dy = points[i].Y - points[j].Y;
+                var distanceSquared = dx * dx + dy * dy;
+
+                if (distanceSquared <= bestDistanceSquared)
+                {
+                    continue;
+                }
+
+                bestDistanceSquared = distanceSquared;
+                firstIndex = i;
+                secondIndex = j;
+            }
+        }
+
+        return (
+            firstIndex,
+            secondIndex);
+    }
+
+    private static List<PointD> SliceCircular(
+        IReadOnlyList<PointD> points,
+        int start,
+        int end)
+    {
+        var result = new List<PointD>();
+        var index = start;
+
+        while (true)
+        {
+            result.Add(points[index]);
+
+            if (index == end)
+            {
+                break;
+            }
+
+            index = (index + 1) % points.Count;
+        }
+
+        return result;
+    }
 }
