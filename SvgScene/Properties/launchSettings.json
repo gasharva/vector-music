@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "SvgScene": {
+      "commandName": "Project",
+      "commandLineArgs": "d:\\musica\\svg\\when-almonds-blossomed-giya-kancheli.svg --debug"
+      //"commandLineArgs": "d:\\musica\\svg\\when-almonds-blossomed-giya-kancheli.svg --debug"
+    }
+  }
+}
