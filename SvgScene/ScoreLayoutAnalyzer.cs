@@ -1,0 +1,468 @@
+namespace SvgMusic.Scene;
+
+public sealed class ScoreLayoutAnalyzer
+{
+    public ScoreLayout Analyze(NotationScene notation)
+    {
+        var horizontal = notation.Strokes
+            .Select(NormalizeStroke)
+            .Where(IsHorizontal)
+            .ToList();
+
+        var vertical = notation.Strokes
+            .Select(NormalizeStroke)
+            .Where(IsVertical)
+            .ToList();
+
+        var staffs = DetectStaffs(horizontal);
+        var systems = BuildSystemsAndPairs(staffs, vertical, horizontal);
+
+        return new ScoreLayout(
+            systems,
+            staffs);
+    }
+
+    private static List<StaffLayout> DetectStaffs(
+        IReadOnlyList<NormalizedStroke> horizontal)
+    {
+        if (horizontal.Count < 5)
+        {
+            return [];
+        }
+
+        var maximumLength = horizontal.Max(stroke => stroke.Length);
+        var longThreshold = maximumLength * 0.45;
+
+        var candidates = horizontal
+            .Where(stroke => stroke.Length >= longThreshold)
+            .OrderBy(stroke => stroke.CenterY)
+            .ToList();
+
+        var result = new List<StaffLayout>();
+        var staffNumber = 0;
+
+        for (var index = 0; index <= candidates.Count - 5;)
+        {
+            var group = candidates
+                .Skip(index)
+                .Take(5)
+                .ToArray();
+
+            if (!LooksLikeStaff(group))
+            {
+                index++;
+                continue;
+            }
+
+            staffNumber++;
+            result.Add(CreateStaff(
+                $"staff-{staffNumber}",
+                string.Empty,
+                group,
+                []));
+
+            index += 5;
+        }
+
+        return result;
+    }
+
+    private static bool LooksLikeStaff(IReadOnlyList<NormalizedStroke> lines)
+    {
+        var gaps = new double[4];
+
+        for (var index = 0; index < gaps.Length; index++)
+        {
+            gaps[index] = lines[index + 1].CenterY - lines[index].CenterY;
+        }
+
+        if (gaps.Any(gap => gap <= 0))
+        {
+            return false;
+        }
+
+        var averageSpacing = gaps.Average();
+        var maximumSpacingDeviation = gaps
+            .Max(gap => Math.Abs(gap - averageSpacing));
+
+        if (maximumSpacingDeviation > averageSpacing * 0.22)
+        {
+            return false;
+        }
+
+        var commonXStart = lines.Max(line => line.XStart);
+        var commonXEnd = lines.Min(line => line.XEnd);
+        var averageLength = lines.Average(line => line.Length);
+
+        if (commonXEnd - commonXStart < averageLength * 0.72)
+        {
+            return false;
+        }
+
+        var shortest = lines.Min(line => line.Length);
+        var longest = lines.Max(line => line.Length);
+
+        return shortest >= longest * 0.75;
+    }
+
+    private static StaffLayout CreateStaff(
+        string id,
+        string systemId,
+        IReadOnlyList<NormalizedStroke> lines,
+        IReadOnlyList<LedgerLevelLayout> ledgerLevels)
+    {
+        var spacing = Enumerable.Range(0, 4)
+            .Select(index => lines[index + 1].CenterY - lines[index].CenterY)
+            .Average();
+
+        var staffLines = lines
+            .Select((line, index) => new StaffLineLayout(
+                index,
+                line.CenterY,
+                line.XStart,
+                line.XEnd,
+                line.Stroke.ShapeId))
+            .ToArray();
+
+        var bounds = new BoundsD(
+            lines.Min(line => line.XStart),
+            lines.First().CenterY,
+            lines.Max(line => line.XEnd),
+            lines.Last().CenterY);
+
+        return new StaffLayout(
+            id,
+            systemId,
+            bounds,
+            staffLines,
+            spacing,
+            ledgerLevels);
+    }
+
+    private static List<ScoreSystem> BuildSystemsAndPairs(
+        List<StaffLayout> staffs,
+        IReadOnlyList<NormalizedStroke> vertical,
+        IReadOnlyList<NormalizedStroke> horizontal)
+    {
+        var systems = new List<ScoreSystem>();
+
+        for (var index = 0; index + 1 < staffs.Count; index += 2)
+        {
+            var upper = staffs[index];
+            var lower = staffs[index + 1];
+
+            if (!CanPair(upper, lower))
+            {
+                continue;
+            }
+
+            var systemId = $"system-{systems.Count + 1}";
+            var pairId = $"staff-pair-{systems.Count + 1}";
+
+            var upperWithLedgers = upper with
+            {
+                SystemId = systemId,
+                LedgerLevels = DetectLedgerLevels(upper, horizontal)
+            };
+
+            var lowerWithLedgers = lower with
+            {
+                SystemId = systemId,
+                LedgerLevels = DetectLedgerLevels(lower, horizontal)
+            };
+
+            staffs[index] = upperWithLedgers;
+            staffs[index + 1] = lowerWithLedgers;
+
+            var boundaries = DetectMeasureBoundaries(
+                upperWithLedgers,
+                lowerWithLedgers,
+                vertical);
+
+            var measures = BuildMeasures(pairId, boundaries);
+            var bounds = new BoundsD(
+                Math.Min(upper.Bounds.MinX, lower.Bounds.MinX),
+                upper.Bounds.MinY,
+                Math.Max(upper.Bounds.MaxX, lower.Bounds.MaxX),
+                lower.Bounds.MaxY);
+
+            var pair = new StaffPairLayout(
+                pairId,
+                upper.Id,
+                lower.Id,
+                bounds,
+                measures,
+                boundaries);
+
+            systems.Add(new ScoreSystem(
+                systemId,
+                bounds,
+                [pair]));
+        }
+
+        return systems;
+    }
+
+    private static bool CanPair(StaffLayout upper, StaffLayout lower)
+    {
+        if (lower.Bounds.MinY <= upper.Bounds.MaxY)
+        {
+            return false;
+        }
+
+        var overlap = HorizontalOverlap(
+            upper.Bounds.MinX,
+            upper.Bounds.MaxX,
+            lower.Bounds.MinX,
+            lower.Bounds.MaxX);
+
+        var shorterWidth = Math.Min(
+            upper.Bounds.Width,
+            lower.Bounds.Width);
+
+        if (overlap < shorterWidth * 0.75)
+        {
+            return false;
+        }
+
+        var spacingRatio = upper.AverageLineSpacing / lower.AverageLineSpacing;
+        return spacingRatio is >= 0.8 and <= 1.25;
+    }
+
+    private static IReadOnlyList<LedgerLevelLayout> DetectLedgerLevels(
+        StaffLayout staff,
+        IReadOnlyList<NormalizedStroke> horizontal)
+    {
+        var staffStrokeIds = staff.Lines
+            .Select(line => line.StrokeId)
+            .ToHashSet(StringComparer.Ordinal);
+
+        var maximumLedgerLength = staff.AverageLineSpacing * 4.5;
+        var minimumLedgerLength = staff.AverageLineSpacing * 0.55;
+        var yTolerance = staff.AverageLineSpacing * 0.28;
+
+        var candidates = horizontal
+            .Where(stroke => !staffStrokeIds.Contains(stroke.Stroke.ShapeId))
+            .Where(stroke => stroke.Length >= minimumLedgerLength)
+            .Where(stroke => stroke.Length <= maximumLedgerLength)
+            .Where(stroke => HorizontalOverlap(
+                stroke.XStart,
+                stroke.XEnd,
+                staff.Bounds.MinX,
+                staff.Bounds.MaxX) > 0)
+            .ToList();
+
+        var result = new List<LedgerLevelLayout>();
+
+        AddLedgerDirection(
+            result,
+            "above",
+            staff.Bounds.MinY,
+            -staff.AverageLineSpacing,
+            candidates,
+            yTolerance);
+
+        AddLedgerDirection(
+            result,
+            "below",
+            staff.Bounds.MaxY,
+            staff.AverageLineSpacing,
+            candidates,
+            yTolerance);
+
+        return result;
+    }
+
+    private static void AddLedgerDirection(
+        List<LedgerLevelLayout> result,
+        string direction,
+        double staffEdgeY,
+        double signedSpacing,
+        IReadOnlyList<NormalizedStroke> candidates,
+        double yTolerance)
+    {
+        IReadOnlyList<LedgerSegmentLayout>? previousLevel = null;
+
+        for (var step = 1; step <= 12; step++)
+        {
+            var targetY = staffEdgeY + signedSpacing * step;
+
+            var levelCandidates = candidates
+                .Where(stroke => Math.Abs(stroke.CenterY - targetY) <= yTolerance)
+                .Select(stroke => new LedgerSegmentLayout(
+                    stroke.XStart,
+                    stroke.XEnd,
+                    stroke.Stroke.ShapeId))
+                .ToList();
+
+            if (step > 1)
+            {
+                levelCandidates = levelCandidates
+                    .Where(candidate => previousLevel!.Any(previous =>
+                        LedgerSegmentsOverlap(candidate, previous)))
+                    .ToList();
+            }
+
+            if (levelCandidates.Count == 0)
+            {
+                break;
+            }
+
+            result.Add(new LedgerLevelLayout(
+                direction,
+                step,
+                levelCandidates.Average(segment =>
+                {
+                    var source = candidates.First(stroke =>
+                        stroke.Stroke.ShapeId == segment.StrokeId);
+                    return source.CenterY;
+                }),
+                levelCandidates));
+
+            previousLevel = levelCandidates;
+        }
+    }
+
+    private static bool LedgerSegmentsOverlap(
+        LedgerSegmentLayout current,
+        LedgerSegmentLayout previous)
+    {
+        var currentLength = current.XEnd - current.XStart;
+        var previousLength = previous.XEnd - previous.XStart;
+        var allowance = Math.Min(currentLength, previousLength) * 0.2;
+
+        return current.XEnd + allowance >= previous.XStart
+            && previous.XEnd + allowance >= current.XStart;
+    }
+
+    private static IReadOnlyList<MeasureBoundary> DetectMeasureBoundaries(
+        StaffLayout upper,
+        StaffLayout lower,
+        IReadOnlyList<NormalizedStroke> vertical)
+    {
+        var upperBars = vertical
+            .Where(stroke => SpansStaff(stroke, upper))
+            .ToList();
+
+        var lowerBars = vertical
+            .Where(stroke => SpansStaff(stroke, lower))
+            .ToList();
+
+        var xTolerance = Math.Min(
+            upper.AverageLineSpacing,
+            lower.AverageLineSpacing) * 0.4;
+
+        var boundaries = new List<MeasureBoundary>();
+        var usedLower = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var upperBar in upperBars.OrderBy(bar => bar.CenterX))
+        {
+            var lowerBar = lowerBars
+                .Where(bar => !usedLower.Contains(bar.Stroke.ShapeId))
+                .OrderBy(bar => Math.Abs(bar.CenterX - upperBar.CenterX))
+                .FirstOrDefault();
+
+            if (lowerBar is null
+                || Math.Abs(lowerBar.CenterX - upperBar.CenterX) > xTolerance)
+            {
+                continue;
+            }
+
+            usedLower.Add(lowerBar.Stroke.ShapeId);
+
+            boundaries.Add(new MeasureBoundary(
+                (upperBar.CenterX + lowerBar.CenterX) / 2.0,
+                upper.Bounds.MinY,
+                lower.Bounds.MaxY,
+                [upperBar.Stroke.ShapeId, lowerBar.Stroke.ShapeId]));
+        }
+
+        return boundaries
+            .OrderBy(boundary => boundary.X)
+            .ToArray();
+    }
+
+    private static bool SpansStaff(
+        NormalizedStroke stroke,
+        StaffLayout staff)
+    {
+        var tolerance = staff.AverageLineSpacing * 0.45;
+
+        return stroke.YStart <= staff.Bounds.MinY + tolerance
+            && stroke.YEnd >= staff.Bounds.MaxY - tolerance
+            && stroke.CenterX >= staff.Bounds.MinX - tolerance
+            && stroke.CenterX <= staff.Bounds.MaxX + tolerance;
+    }
+
+    private static IReadOnlyList<MeasureLayout> BuildMeasures(
+        string pairId,
+        IReadOnlyList<MeasureBoundary> boundaries)
+    {
+        var measures = new List<MeasureLayout>();
+
+        for (var index = 0; index + 1 < boundaries.Count; index++)
+        {
+            measures.Add(new MeasureLayout(
+                $"{pairId}-measure-{index + 1}",
+                boundaries[index].X,
+                boundaries[index + 1].X,
+                boundaries[index],
+                boundaries[index + 1]));
+        }
+
+        return measures;
+    }
+
+    private static NormalizedStroke NormalizeStroke(Stroke stroke)
+    {
+        var start = stroke.Start;
+        var end = stroke.End;
+
+        if (start.X > end.X)
+        {
+            (start, end) = (end, start);
+        }
+
+        var dx = end.X - start.X;
+        var dy = end.Y - start.Y;
+
+        return new NormalizedStroke(
+            stroke,
+            start.X,
+            end.X,
+            Math.Min(start.Y, end.Y),
+            Math.Max(start.Y, end.Y),
+            (start.X + end.X) / 2.0,
+            (start.Y + end.Y) / 2.0,
+            Math.Sqrt(dx * dx + dy * dy),
+            Math.Abs(dx),
+            Math.Abs(dy));
+    }
+
+    private static bool IsHorizontal(NormalizedStroke stroke) =>
+        stroke.DeltaX >= stroke.DeltaY * 8.0;
+
+    private static bool IsVertical(NormalizedStroke stroke) =>
+        stroke.DeltaY >= stroke.DeltaX * 8.0;
+
+    private static double HorizontalOverlap(
+        double firstStart,
+        double firstEnd,
+        double secondStart,
+        double secondEnd) =>
+        Math.Max(
+            0,
+            Math.Min(firstEnd, secondEnd) - Math.Max(firstStart, secondStart));
+
+    private sealed record NormalizedStroke(
+        Stroke Stroke,
+        double XStart,
+        double XEnd,
+        double YStart,
+        double YEnd,
+        double CenterX,
+        double CenterY,
+        double Length,
+        double DeltaX,
+        double DeltaY);
+}
