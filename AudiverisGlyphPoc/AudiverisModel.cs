@@ -146,17 +146,10 @@ public sealed class AudiverisModel
         var wrapper = root.Element(wrapperName)
             ?? throw new InvalidDataException($"Missing '{wrapperName}' element.");
 
-        var rows = wrapper.Elements("row").ToArray();
-        var matrix = rows.Select(ReadNumericElement).ToArray();
-
-        if (matrix.Length > 0 && matrix[0].Length == 0)
-        {
-            throw new InvalidDataException(
-                $"Could not parse '{wrapperName}' row XML: "
-                + rows[0].ToString(SaveOptions.DisableFormatting));
-        }
-
-        return matrix;
+        return wrapper
+            .Elements("row")
+            .Select(ReadNumericElement)
+            .ToArray();
     }
 
     private static double[] ReadVector(XDocument document)
@@ -178,8 +171,22 @@ public sealed class AudiverisModel
         return leafValues;
     }
 
-    private static double[] ReadNumericElement(XElement element) =>
-        SplitNumbers(element.Value).ToArray();
+    private static double[] ReadNumericElement(XElement element)
+    {
+        var items = element.Elements("item").ToArray();
+
+        if (items.Length > 0)
+        {
+            return items
+                .Select(item => double.Parse(
+                    item.Value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture))
+                .ToArray();
+        }
+
+        return SplitNumbers(element.Value).ToArray();
+    }
 
     private static IEnumerable<double> SplitNumbers(string text)
     {
