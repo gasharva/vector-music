@@ -1,0 +1,189 @@
+using AudiverisGlyphPoc;
+
+namespace SvgMusic.Scene;
+
+public interface ISymbolClassifier
+{
+    IReadOnlyList<SymbolPrediction> Classify(
+        RasterGlyphData glyph,
+        int top = 8);
+}
+
+public sealed record SymbolPrediction(
+    string Label,
+    double Confidence,
+    int Interline);
+
+public sealed record SymbolScaleResult(
+    int Interline,
+    string Label,
+    double Confidence,
+    IReadOnlyList<SymbolPrediction> Predictions);
+
+public sealed record SymbolClassification(
+    string Label,
+    double Confidence,
+    int Interline,
+    IReadOnlyList<SymbolScaleResult> Scales);
+
+public sealed class AudiverisSymbolClassifier : ISymbolClassifier
+{
+    private readonly AudiverisModel _model;
+
+    private AudiverisSymbolClassifier(AudiverisModel model)
+    {
+        _model = model;
+        MixGlyphDescriptor.ValidateAgainst(_model);
+    }
+
+    public static async Task<AudiverisSymbolClassifier> CreateAsync(
+        string? modelPath = null,
+        CancellationToken cancellationToken = default)
+    {
+        var archivePath = await ModelCache.EnsureAsync(
+            modelPath,
+            cancellationToken);
+
+        return new AudiverisSymbolClassifier(
+            AudiverisModel.Load(archivePath));
+    }
+
+    public IReadOnlyList<SymbolPrediction> Classify(
+        RasterGlyphData glyph,
+        int top = 8)
+    {
+        var x = new List<int>();
+        var y = new List<int>();
+
+        for (var row = 0; row < glyph.Height; row++)
+        {
+            for (var column = 0; column < glyph.Width; column++)
+            {
+                if (glyph.Pixels[row * glyph.Width + column] >= 128)
+                {
+                    continue;
+                }
+
+                x.Add(column);
+                y.Add(row);
+            }
+        }
+
+        if (x.Count == 0)
+        {
+            return Array.Empty<SymbolPrediction>();
+        }
+
+        var binaryGlyph = new BinaryGlyph(x, y);
+        var features = MixGlyphDescriptor.Extract(
+            binaryGlyph,
+            glyph.Interline);
+
+        return _model
+            .Evaluate(features, top)
+            .Select(prediction => new SymbolPrediction(
+                prediction.Label,
+                prediction.Score,
+                glyph.Interline))
+            .ToArray();
+    }
+}
+
+public sealed class PrototypeSymbolClassifier
+{
+    private static readonly int[] Interlines = [20, 30, 40];
+
+    private readonly ISymbolClassifier _classifier;
+    private readonly GlyphRasterizer _rasterizer;
+
+    public PrototypeSymbolClassifier(
+        ISymbolClassifier classifier,
+        GlyphRasterizer? rasterizer = null)
+    {
+        _classifier = classifier;
+        _rasterizer = rasterizer ?? new GlyphRasterizer();
+    }
+
+    public NotationScene Classify(
+        GeometricScene geometry,
+        NotationScene notation,
+        ScoreLayout layout)
+    {
+        var shapesById = geometry.Shapes.ToDictionary(
+            shape => shape.Id,
+            StringComparer.Ordinal);
+
+        var sourceInterline = GlyphRasterizer.ResolveSourceInterline(layout);
+        var classifications = new Dictionary<string, SymbolClassification>(
+            StringComparer.Ordinal);
+
+        foreach (var prototype in notation.Prototypes)
+        {
+            if (!shapesById.TryGetValue(
+                    prototype.RepresentativeShapeId,
+                    out var shape))
+            {
+                continue;
+            }
+
+            var scales = new List<SymbolScaleResult>();
+
+            foreach (var interline in Interlines)
+            {
+                var glyph = _rasterizer.Rasterize(
+                    shape,
+                    sourceInterline,
+                    interline);
+
+                var predictions = _classifier.Classify(glyph);
+                var winner = predictions.FirstOrDefault();
+
+                if (winner is null)
+                {
+                    continue;
+                }
+
+                scales.Add(new SymbolScaleResult(
+                    interline,
+                    winner.Label,
+                    winner.Confidence,
+                    predictions));
+            }
+
+            if (scales.Count == 0)
+            {
+                continue;
+            }
+
+            var best = scales
+                .OrderByDescending(scale => scale.Confidence)
+                .First();
+
+            classifications[prototype.Id] = new SymbolClassification(
+                best.Label,
+                best.Confidence,
+                best.Interline,
+                scales);
+        }
+
+        var prototypes = notation.Prototypes
+            .Select(prototype => prototype with
+            {
+                Classification = classifications.GetValueOrDefault(prototype.Id)
+            })
+            .ToArray();
+
+        var instances = notation.Instances
+            .Select(instance => instance with
+            {
+                Classification = classifications.GetValueOrDefault(instance.PrototypeId)
+            })
+            .ToArray();
+
+        return notation with
+        {
+            Prototypes = prototypes,
+            Instances = instances
+        };
+    }
+}
