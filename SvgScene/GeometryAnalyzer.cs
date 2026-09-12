@@ -40,13 +40,11 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
 
     public GeometryAnalyzer(
         double minElongation = 5.0,
-        double minClosedFillRatio = 0.55,
-        OpenPolylineStrokeExtractor? openPolylineExtractor = null)
+        double minClosedFillRatio = 0.55)
     {
         _minElongation = minElongation;
         _minClosedFillRatio = minClosedFillRatio;
-        _openPolylineExtractor =
-            openPolylineExtractor ?? new OpenPolylineStrokeExtractor();
+        _openPolylineExtractor = new OpenPolylineStrokeExtractor();
     }
 
     public void ClearDiagnostics()
