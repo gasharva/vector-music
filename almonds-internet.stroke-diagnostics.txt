@@ -1,0 +1,1008 @@
+shape-1    REJECT elongation too low               kind=use closed=True points=151 length=6.216 thickness=4.215 elong=1.475
+shape-2    REJECT elongation too low               kind=path closed=True points=5 length=797.58 thickness=710.758 elong=1.122
+shape-3    ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-4    REJECT multiple contours                kind=use contours=4 points=725
+shape-5.1  REJECT elongation too low               kind=use closed=True points=300 length=15.152 thickness=10.295 elong=1.472
+shape-5.2  REJECT elongation too low               kind=use closed=True points=88 length=1.997 thickness=1.916 elong=1.042
+shape-5.3  REJECT elongation too low               kind=use closed=True points=78 length=1.938 thickness=1.953 elong=0.992
+shape-6    REJECT elongation too low               kind=use closed=True points=88 length=9.631 thickness=7.232 elong=1.332
+shape-7    REJECT elongation too low               kind=use closed=True points=428 length=8.978 thickness=6.809 elong=1.319
+shape-8    REJECT elongation too low               kind=use closed=True points=88 length=9.631 thickness=7.232 elong=1.332
+shape-9    REJECT elongation too low               kind=use closed=True points=428 length=8.978 thickness=6.809 elong=1.319
+shape-10.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-10.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-10.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-10.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-10.5 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.6 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.7 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.8 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.9 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.10 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.11 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.12 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.13 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-10.14 ACCEPT two-point open contour           kind=path closed=False points=2 length=445.62 thickness=6.68 elong=66.71
+shape-11   REJECT multiple contours                kind=path contours=2 points=54
+shape-12   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-13   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-14   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-15   REJECT multiple contours                kind=use contours=2 points=170
+shape-16   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-17   ACCEPT elongated filled contour         kind=path closed=True points=5 length=17.659 thickness=2.621 elong=6.739 fill=0.853
+shape-18   ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-19   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-20   ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-21   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-22   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-23   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-24   REJECT multiple contours                kind=use contours=2 points=256
+shape-25   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-26   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-27.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=22.879 thickness=6.68 elong=3.425
+shape-27.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-28   REJECT multiple contours                kind=use contours=2 points=256
+shape-29   REJECT multiple contours                kind=use contours=2 points=256
+shape-30   REJECT multiple contours                kind=use contours=2 points=210
+shape-31   REJECT multiple contours                kind=use contours=2 points=359
+shape-32   REJECT elongation too low               kind=use closed=True points=290 length=5.13 thickness=3.272 elong=1.568
+shape-33   REJECT elongation too low               kind=use closed=True points=114 length=6.623 thickness=3.305 elong=2.004
+shape-34   REJECT multiple contours                kind=use contours=2 points=242
+shape-35   REJECT elongation too low               kind=use closed=True points=290 length=5.13 thickness=3.272 elong=1.568
+shape-36   REJECT multiple contours                kind=use contours=2 points=242
+shape-37   REJECT elongation too low               kind=use closed=True points=229 length=13.603 thickness=7.34 elong=1.853
+shape-38.1 ACCEPT elongated filled contour         kind=use closed=True points=5 length=5.898 thickness=0.639 elong=9.232 fill=0.855
+shape-38.2 ACCEPT elongated filled contour         kind=use closed=True points=5 length=5.898 thickness=0.638 elong=9.249 fill=0.855
+shape-39   REJECT elongation too low               kind=use closed=True points=32 length=7.281 thickness=4.796 elong=1.518
+shape-40   REJECT multiple contours                kind=use contours=2 points=290
+shape-41   REJECT multiple contours                kind=use contours=3 points=520
+shape-42   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-43   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-44   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-45   REJECT multiple contours                kind=use contours=2 points=170
+shape-46   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-47   ACCEPT elongated filled contour         kind=path closed=True points=5 length=24.22 thickness=2.644 elong=9.159 fill=0.855
+shape-48   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-49   ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-50   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-51   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-52   ACCEPT two-point open contour           kind=path closed=False points=2 length=18.309 thickness=6.68 elong=2.741
+shape-53   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-54   ACCEPT two-point open contour           kind=path closed=False points=2 length=16.016 thickness=6.68 elong=2.398
+shape-55   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-56   ACCEPT two-point open contour           kind=path closed=False points=2 length=18.309 thickness=6.68 elong=2.741
+shape-57   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-58   ACCEPT two-point open contour           kind=path closed=False points=2 length=20.598 thickness=6.68 elong=3.084
+shape-59   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-60   ACCEPT two-point open contour           kind=path closed=False points=2 length=18.309 thickness=6.68 elong=2.741
+shape-61.1 ACCEPT elongated filled contour         kind=path closed=True points=5 length=33.489 thickness=2.673 elong=12.528 fill=0.856
+shape-61.2 ACCEPT elongated filled contour         kind=path closed=True points=5 length=33.489 thickness=2.672 elong=12.533 fill=0.856
+shape-61.3 ACCEPT elongated filled contour         kind=path closed=True points=5 length=33.489 thickness=2.673 elong=12.528 fill=0.856
+shape-62   REJECT elongation too low               kind=use closed=True points=183 length=6.023 thickness=3.054 elong=1.972
+shape-63   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-64   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-65   ACCEPT two-point open contour           kind=path closed=False points=2 length=14.297 thickness=6.68 elong=2.14
+shape-66   REJECT multiple contours                kind=use contours=2 points=256
+shape-67   REJECT multiple contours                kind=use contours=2 points=256
+shape-68   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-69   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-70   ACCEPT two-point open contour           kind=path closed=False points=2 length=25.743 thickness=6.68 elong=3.854
+shape-71   REJECT multiple contours                kind=use contours=2 points=256
+shape-72   REJECT multiple contours                kind=use contours=2 points=256
+shape-73   REJECT multiple contours                kind=use contours=2 points=170
+shape-74   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-75   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-76   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-77   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-78   ACCEPT elongated filled contour         kind=path closed=True points=5 length=16.733 thickness=2.616 elong=6.397 fill=0.853
+shape-79   ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-80   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-81   ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-82   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-83   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-84   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-85   ACCEPT two-point open contour           kind=path closed=False points=2 length=16.586 thickness=6.68 elong=2.483
+shape-86   REJECT multiple contours                kind=use contours=2 points=256
+shape-87   ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-88   REJECT multiple contours                kind=use contours=2 points=256
+shape-89   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-90   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-91   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-92   REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-93   ACCEPT two-point open contour           kind=path closed=False points=2 length=32.606 thickness=6.68 elong=4.881
+shape-94   REJECT multiple contours                kind=use contours=2 points=256
+shape-95   REJECT multiple contours                kind=use contours=2 points=256
+shape-96   REJECT multiple contours                kind=use contours=2 points=256
+shape-97   REJECT multiple contours                kind=use contours=2 points=256
+shape-98   REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-99   ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-100  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-101  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-102  ACCEPT elongated filled contour         kind=path closed=True points=5 length=17.101 thickness=2.618 elong=6.531 fill=0.853
+shape-103  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-104  REJECT multiple contours                kind=use contours=2 points=256
+shape-105  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-106  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-107  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.586 thickness=6.68 elong=2.483
+shape-108  REJECT multiple contours                kind=use contours=2 points=256
+shape-109  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-110  REJECT multiple contours                kind=use contours=2 points=256
+shape-111  REJECT multiple contours                kind=use contours=2 points=170
+shape-112  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-113  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-114  ACCEPT two-point open contour           kind=path closed=False points=2 length=25.743 thickness=6.68 elong=3.854
+shape-115  REJECT multiple contours                kind=use contours=2 points=256
+shape-116  REJECT multiple contours                kind=use contours=2 points=256
+shape-117  REJECT multiple contours                kind=use contours=2 points=14
+shape-118.1 REJECT elongation too low               kind=path closed=True points=26 length=16.187 thickness=4.006 elong=4.041
+shape-118.2 REJECT elongation too low               kind=path closed=True points=25 length=21.738 thickness=4.531 elong=4.798
+shape-118.3 REJECT elongation too low               kind=path closed=True points=26 length=22.427 thickness=4.707 elong=4.765
+shape-118.4 REJECT elongation too low               kind=path closed=True points=25 length=32.198 thickness=9.925 elong=3.244
+shape-118.5 REJECT elongation too low               kind=path closed=True points=25 length=15.231 thickness=3.601 elong=4.23
+shape-118.6 REJECT elongation too low               kind=path closed=True points=25 length=20.53 thickness=4.198 elong=4.89
+shape-118.7 REJECT elongation too low               kind=path closed=True points=25 length=15.609 thickness=3.604 elong=4.332
+shape-119  ACCEPT two-point open contour           kind=path closed=False points=2 length=72.263 thickness=6.68 elong=10.818
+shape-120  REJECT multiple contours                kind=use contours=4 points=725
+shape-121.1 REJECT elongation too low               kind=use closed=True points=300 length=15.152 thickness=10.295 elong=1.472
+shape-121.2 REJECT elongation too low               kind=use closed=True points=88 length=1.997 thickness=1.916 elong=1.042
+shape-121.3 REJECT elongation too low               kind=use closed=True points=78 length=1.938 thickness=1.953 elong=0.992
+shape-122.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.263 thickness=6.68 elong=10.818
+shape-122.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.263 thickness=6.68 elong=10.818
+shape-122.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.263 thickness=6.68 elong=10.818
+shape-122.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.263 thickness=6.68 elong=10.818
+shape-122.5 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.6 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.7 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.8 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.9 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.10 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.11 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.12 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.13 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-122.14 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-123  REJECT closed contour fill too low      kind=path closed=True points=27 length=36.325 thickness=4.198 elong=8.653 fill=0.311
+shape-124  REJECT closed contour fill too low      kind=path closed=True points=27 length=36.139 thickness=4.199 elong=8.606 fill=0.31
+shape-125.1 ACCEPT straight open contour            kind=path closed=False points=3 length=199.835 thickness=6.863 elong=29.116
+shape-125.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=249.027 thickness=6.68 elong=37.28
+shape-125.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.192 thickness=6.68 elong=0.627
+shape-126.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-126.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-127  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-128  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-129  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-130  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-131  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-132  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-133  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-134  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-135  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-136  REJECT multiple contours                kind=use contours=2 points=170
+shape-137  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-138  ACCEPT elongated filled contour         kind=path closed=True points=5 length=15.246 thickness=2.601 elong=5.861 fill=0.852
+shape-139  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-140  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-141  REJECT multiple contours                kind=use contours=2 points=256
+shape-142  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-143  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-144  ACCEPT two-point open contour           kind=path closed=False points=2 length=22.883 thickness=6.68 elong=3.426
+shape-145  REJECT multiple contours                kind=use contours=2 points=256
+shape-146  REJECT multiple contours                kind=use contours=2 points=256
+shape-147  REJECT multiple contours                kind=use contours=2 points=170
+shape-148  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-149  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-150  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-151  REJECT multiple contours                kind=use contours=2 points=170
+shape-152  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-153  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-154  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-155  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-156  ACCEPT two-point open contour           kind=path closed=False points=2 length=11.82 thickness=6.68 elong=1.77
+shape-157  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-158  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.969 thickness=6.68 elong=1.941
+shape-159  ACCEPT elongated filled contour         kind=path closed=True points=5 length=14.684 thickness=2.691 elong=5.456 fill=0.833
+shape-160  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-161  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-162  ACCEPT two-point open contour           kind=path closed=False points=2 length=18.879 thickness=6.68 elong=2.826
+shape-163  REJECT multiple contours                kind=use contours=2 points=256
+shape-164  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-165  REJECT multiple contours                kind=use contours=2 points=256
+shape-166  REJECT multiple contours                kind=use contours=2 points=34
+shape-167  REJECT multiple contours                kind=use contours=2 points=34
+shape-168  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-169  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-170  ACCEPT two-point open contour           kind=path closed=False points=2 length=25.739 thickness=6.68 elong=3.853
+shape-171  REJECT multiple contours                kind=use contours=2 points=256
+shape-172  REJECT multiple contours                kind=use contours=2 points=256
+shape-173  REJECT elongation too low               kind=use closed=True points=144 length=8.546 thickness=4.905 elong=1.742
+shape-174  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-175  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-176.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-176.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-177  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-178  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-179  REJECT multiple contours                kind=use contours=2 points=34
+shape-180  REJECT multiple contours                kind=use contours=2 points=34
+shape-181.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=52.055 thickness=6.68 elong=7.793
+shape-181.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-182  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-183.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-183.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-184  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-185  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-186  ACCEPT two-point open contour           kind=path closed=False points=2 length=52.313 thickness=6.68 elong=7.831
+shape-187  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-188  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-189  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-190  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-191  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-192  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-193  REJECT multiple contours                kind=use contours=2 points=34
+shape-194  REJECT multiple contours                kind=use contours=2 points=34
+shape-195  ACCEPT two-point open contour           kind=path closed=False points=2 length=52.626 thickness=6.68 elong=7.878
+shape-196  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-197  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-198  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-199  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-200  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-201  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-202  ACCEPT two-point open contour           kind=path closed=False points=2 length=52.903 thickness=6.68 elong=7.92
+shape-203  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-204  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-205  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-206  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-207  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-208  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-209  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-210  REJECT multiple contours                kind=use contours=2 points=34
+shape-211  ACCEPT two-point open contour           kind=path closed=False points=2 length=53.2 thickness=6.68 elong=7.964
+shape-212  ACCEPT elongated filled contour         kind=path closed=True points=5 length=81.732 thickness=2.671 elong=30.6 fill=0.857
+shape-213  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-214  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-215  ACCEPT two-point open contour           kind=path closed=False points=2 length=75.13 thickness=6.68 elong=11.247
+shape-216  REJECT multiple contours                kind=use contours=2 points=256
+shape-217  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-218  REJECT multiple contours                kind=use contours=2 points=256
+shape-219  REJECT multiple contours                kind=use contours=2 points=34
+shape-220  REJECT multiple contours                kind=use contours=3 points=520
+shape-221  REJECT multiple contours                kind=use contours=2 points=273
+shape-222  REJECT multiple contours                kind=use contours=2 points=214
+shape-223  REJECT elongation too low               kind=use closed=True points=227 length=4.414 thickness=3.449 elong=1.28
+shape-224  REJECT multiple contours                kind=use contours=2 points=214
+shape-225  REJECT multiple contours                kind=use contours=2 points=371
+shape-226  REJECT elongation too low               kind=use closed=True points=227 length=4.414 thickness=3.449 elong=1.28
+shape-227  REJECT elongation too low               kind=use closed=True points=227 length=4.414 thickness=3.449 elong=1.28
+shape-228  REJECT multiple contours                kind=use contours=2 points=184
+shape-229  REJECT elongation too low               kind=use closed=True points=75 length=6.313 thickness=2.683 elong=2.353
+shape-230  REJECT multiple contours                kind=use contours=2 points=184
+shape-231  REJECT elongation too low               kind=use closed=True points=214 length=5.207 thickness=3.769 elong=1.382
+shape-232  REJECT multiple contours                kind=use contours=2 points=371
+shape-233  REJECT elongation too low               kind=use closed=True points=226 length=4.463 thickness=4.748 elong=0.94
+shape-234  REJECT multiple contours                kind=use contours=2 points=253
+shape-235  REJECT multiple contours                kind=use contours=2 points=214
+shape-236  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-237  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.195 thickness=6.68 elong=1.227
+shape-238  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-239  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-240  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-241  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-242  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-243  REJECT multiple contours                kind=use contours=2 points=34
+shape-244  REJECT multiple contours                kind=use contours=2 points=34
+shape-245  REJECT multiple contours                kind=use contours=2 points=34
+shape-246  ACCEPT two-point open contour           kind=path closed=False points=2 length=57.395 thickness=6.68 elong=8.592
+shape-247  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-248  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-249  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-250  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-251  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-252  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-253  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-254  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-255  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-256  REJECT multiple contours                kind=use contours=2 points=34
+shape-257  ACCEPT two-point open contour           kind=path closed=False points=2 length=57.852 thickness=6.68 elong=8.661
+shape-258  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-259  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-260  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-261  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-262  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-263  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-264  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-265  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-266  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-267  ACCEPT two-point open contour           kind=path closed=False points=2 length=58.313 thickness=6.68 elong=8.73
+shape-268  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-269  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-270  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-271  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-272  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-273  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-274  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-275  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-276  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-277  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-278  REJECT multiple contours                kind=use contours=2 points=34
+shape-279  ACCEPT two-point open contour           kind=path closed=False points=2 length=58.77 thickness=6.68 elong=8.798
+shape-280  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-281  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-282  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-283  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-284  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-285  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-286  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-287  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-288  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-289  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-290  ACCEPT two-point open contour           kind=path closed=False points=2 length=59.224 thickness=6.68 elong=8.866
+shape-291  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-292  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-293  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-294  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-295  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-296  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.195 thickness=6.68 elong=1.227
+shape-297  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-298  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-299  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-300  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-301  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-302  REJECT multiple contours                kind=use contours=2 points=34
+shape-303  ACCEPT two-point open contour           kind=path closed=False points=2 length=59.684 thickness=6.68 elong=8.935
+shape-304  ACCEPT elongated filled contour         kind=path closed=True points=5 length=109.227 thickness=2.669 elong=40.928 fill=0.857
+shape-305.1 REJECT elongation too low               kind=use closed=True points=287 length=14.247 thickness=4.951 elong=2.878
+shape-305.2 REJECT elongation too low               kind=use closed=True points=301 length=7.903 thickness=7.291 elong=1.084
+shape-306.1 REJECT elongation too low               kind=path closed=True points=26 length=25.374 thickness=5.241 elong=4.841
+shape-306.2 REJECT elongation too low               kind=path closed=True points=26 length=13.746 thickness=3.474 elong=3.957
+shape-306.3 REJECT elongation too low               kind=path closed=True points=25 length=24.025 thickness=4.837 elong=4.967
+shape-306.4 REJECT elongation too low               kind=path closed=True points=26 length=12.811 thickness=3.347 elong=3.827
+shape-306.5 REJECT elongation too low               kind=path closed=True points=25 length=22.303 thickness=4.555 elong=4.896
+shape-306.6 REJECT elongation too low               kind=path closed=True points=25 length=20.967 thickness=4.398 elong=4.768
+shape-306.7 REJECT elongation too low               kind=path closed=True points=25 length=21.923 thickness=4.556 elong=4.812
+shape-306.8 REJECT elongation too low               kind=path closed=True points=25 length=21.732 thickness=4.555 elong=4.771
+shape-306.9 REJECT elongation too low               kind=path closed=True points=26 length=21.528 thickness=4.593 elong=4.687
+shape-307  ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-308  REJECT multiple contours                kind=use contours=4 points=725
+shape-309.1 REJECT elongation too low               kind=use closed=True points=300 length=15.152 thickness=10.295 elong=1.472
+shape-309.2 REJECT elongation too low               kind=use closed=True points=88 length=1.997 thickness=1.916 elong=1.042
+shape-309.3 REJECT elongation too low               kind=use closed=True points=78 length=1.938 thickness=1.953 elong=0.992
+shape-310.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-310.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-310.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-310.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-310.5 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.6 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.7 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.8 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.9 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.10 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.11 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.12 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.13 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-310.14 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-311  REJECT multiple contours                kind=path contours=2 points=54
+shape-312.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=75.126 thickness=6.68 elong=11.246
+shape-312.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-313.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-313.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-314.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=74.556 thickness=6.68 elong=11.161
+shape-314.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-315.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-315.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-316  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-317  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-318  REJECT multiple contours                kind=use contours=2 points=170
+shape-319  ACCEPT two-point open contour           kind=path closed=False points=2 length=17.16 thickness=6.68 elong=2.569
+shape-320  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-321  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-322  ACCEPT two-point open contour           kind=path closed=False points=2 length=17.16 thickness=6.68 elong=2.569
+shape-323  ACCEPT elongated filled contour         kind=path closed=True points=5 length=18.218 thickness=2.624 elong=6.943 fill=0.854
+shape-324  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.586 thickness=6.68 elong=2.483
+shape-325  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-326  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-327  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.59 thickness=6.68 elong=2.484
+shape-328  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-329  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-330  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-331  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-332  REJECT multiple contours                kind=use contours=2 points=256
+shape-333  REJECT multiple contours                kind=use contours=2 points=14
+shape-334  REJECT elongation too low               kind=use closed=True points=192 length=13.514 thickness=4.573 elong=2.955
+shape-335  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.301 thickness=6.68 elong=2.141
+shape-336  REJECT multiple contours                kind=use contours=2 points=256
+shape-337  REJECT multiple contours                kind=use contours=2 points=256
+shape-338  REJECT multiple contours                kind=use contours=2 points=170
+shape-339  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-340  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-341  ACCEPT two-point open contour           kind=path closed=False points=2 length=25.743 thickness=6.68 elong=3.854
+shape-342  REJECT multiple contours                kind=use contours=2 points=256
+shape-343  REJECT multiple contours                kind=use contours=2 points=256
+shape-344  REJECT multiple contours                kind=use contours=2 points=14
+shape-345  REJECT multiple contours                kind=use contours=2 points=14
+shape-346  REJECT multiple contours                kind=use contours=3 points=520
+shape-347  REJECT multiple contours                kind=use contours=2 points=371
+shape-348  REJECT elongation too low               kind=use closed=True points=115 length=5.645 thickness=2.847 elong=1.983
+shape-349  REJECT multiple contours                kind=use contours=2 points=184
+shape-350  REJECT elongation too low               kind=use closed=True points=383 length=6.998 thickness=4.857 elong=1.441
+shape-351  REJECT multiple contours                kind=use contours=2 points=273
+shape-352  REJECT multiple contours                kind=use contours=2 points=214
+shape-353  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-354  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-355  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-356  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-357  ACCEPT two-point open contour           kind=path closed=False points=2 length=17.16 thickness=6.68 elong=2.569
+shape-358  ACCEPT elongated filled contour         kind=path closed=True points=5 length=17.844 thickness=2.622 elong=6.806 fill=0.853
+shape-359  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.586 thickness=6.68 elong=2.483
+shape-360  REJECT multiple contours                kind=use contours=2 points=256
+shape-361  REJECT multiple contours                kind=use contours=2 points=256
+shape-362  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-363  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-364  ACCEPT two-point open contour           kind=path closed=False points=2 length=21.168 thickness=6.68 elong=3.169
+shape-365  REJECT multiple contours                kind=use contours=2 points=256
+shape-366  REJECT multiple contours                kind=use contours=2 points=256
+shape-367  REJECT multiple contours                kind=use contours=2 points=170
+shape-368  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-369  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-370  ACCEPT two-point open contour           kind=path closed=False points=2 length=25.743 thickness=6.68 elong=3.854
+shape-371  REJECT multiple contours                kind=use contours=2 points=256
+shape-372  REJECT multiple contours                kind=use contours=2 points=256
+shape-373  REJECT multiple contours                kind=use contours=2 points=170
+shape-374  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-375  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-376  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-377  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-378  ACCEPT elongated filled contour         kind=path closed=True points=5 length=18.219 thickness=2.624 elong=6.944 fill=0.854
+shape-379  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-380  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-381  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-382  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-383  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-384  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-385  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-386  ACCEPT two-point open contour           kind=path closed=False points=2 length=21.168 thickness=6.68 elong=3.169
+shape-387  REJECT multiple contours                kind=use contours=2 points=256
+shape-388  REJECT multiple contours                kind=use contours=2 points=256
+shape-389  REJECT multiple contours                kind=use contours=2 points=256
+shape-390  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-391  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-392  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-393  ACCEPT two-point open contour           kind=path closed=False points=2 length=25.743 thickness=6.68 elong=3.854
+shape-394  REJECT multiple contours                kind=use contours=2 points=256
+shape-395  REJECT multiple contours                kind=use contours=2 points=256
+shape-396  REJECT multiple contours                kind=use contours=2 points=256
+shape-397  REJECT multiple contours                kind=use contours=2 points=14
+shape-398  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-399  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-400  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-401  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-402  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-403  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-404  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-405  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-406  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-407  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-408  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-409  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-410  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-411  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-412  REJECT elongation too low               kind=use closed=True points=232 length=11.086 thickness=2.54 elong=4.364
+shape-413  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-414  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-415  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-416  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-417  ACCEPT elongated filled contour         kind=path closed=True points=5 length=22.901 thickness=2.641 elong=8.67 fill=0.855
+shape-418  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-419  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-420  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-421  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-422  REJECT multiple contours                kind=use contours=2 points=230
+shape-423  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-424  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-425  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-426  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-427  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-428  REJECT multiple contours                kind=use contours=2 points=34
+shape-429  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.106 thickness=6.68 elong=2.112
+shape-430  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-431  REJECT multiple contours                kind=use contours=2 points=14
+shape-432  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.332 thickness=6.68 elong=1.996
+shape-433  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-434  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.875 thickness=6.68 elong=2.227
+shape-435.1 ACCEPT elongated filled contour         kind=path closed=True points=5 length=42.82 thickness=2.671 elong=16.034 fill=0.853
+shape-435.2 ACCEPT elongated filled contour         kind=path closed=True points=5 length=42.82 thickness=2.673 elong=16.017 fill=0.852
+shape-436  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-437  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-438  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-439  ACCEPT two-point open contour           kind=path closed=False points=2 length=21.168 thickness=6.68 elong=3.169
+shape-440  REJECT multiple contours                kind=use contours=2 points=256
+shape-441  REJECT multiple contours                kind=use contours=2 points=256
+shape-442  REJECT multiple contours                kind=use contours=2 points=256
+shape-443  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-444  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-445  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-446  ACCEPT two-point open contour           kind=path closed=False points=2 length=25.743 thickness=6.68 elong=3.854
+shape-447  REJECT multiple contours                kind=use contours=2 points=256
+shape-448  REJECT multiple contours                kind=use contours=2 points=256
+shape-449  REJECT multiple contours                kind=use contours=2 points=256
+shape-450  REJECT closed contour fill too low      kind=path closed=True points=27 length=82.566 thickness=4.949 elong=16.683 fill=0.141
+shape-451  REJECT closed contour fill too low      kind=path closed=True points=27 length=82.565 thickness=6.587 elong=12.534 fill=0.106
+shape-452.1 REJECT closed contour fill too low      kind=path closed=True points=27 length=88.088 thickness=6.74 elong=13.069 fill=0.104
+shape-452.2 REJECT closed contour fill too low      kind=path closed=True points=27 length=92.666 thickness=7.039 elong=13.164 fill=0.099
+shape-453.1 REJECT closed contour fill too low      kind=path closed=True points=27 length=82.565 thickness=6.59 elong=12.528 fill=0.106
+shape-453.2 REJECT closed contour fill too low      kind=path closed=True points=27 length=88.088 thickness=6.738 elong=13.073 fill=0.103
+shape-453.3 REJECT elongation too low               kind=path closed=True points=25 length=16.525 thickness=3.832 elong=4.313
+shape-453.4 REJECT elongation too low               kind=path closed=True points=26 length=22.578 thickness=4.775 elong=4.728
+shape-453.5 REJECT elongation too low               kind=path closed=True points=25 length=16.335 thickness=3.835 elong=4.259
+shape-453.6 REJECT elongation too low               kind=path closed=True points=25 length=16.526 thickness=3.832 elong=4.313
+shape-453.7 REJECT elongation too low               kind=path closed=True points=26 length=22.769 thickness=4.775 elong=4.768
+shape-453.8 REJECT elongation too low               kind=path closed=True points=25 length=21.261 thickness=4.434 elong=4.795
+shape-453.9 REJECT closed contour fill too low      kind=path closed=True points=26 length=55.842 thickness=9.963 elong=5.605 fill=0.06
+shape-454  ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-455  REJECT multiple contours                kind=use contours=4 points=725
+shape-456.1 REJECT elongation too low               kind=use closed=True points=300 length=15.152 thickness=10.295 elong=1.472
+shape-456.2 REJECT elongation too low               kind=use closed=True points=88 length=1.997 thickness=1.916 elong=1.042
+shape-456.3 REJECT elongation too low               kind=use closed=True points=78 length=1.938 thickness=1.953 elong=0.992
+shape-457.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-457.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-457.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-457.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.271 thickness=6.68 elong=10.819
+shape-457.5 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.6 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.7 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.8 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.9 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.10 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.11 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.12 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.13 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-457.14 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.167 thickness=6.68 elong=69.935
+shape-458  REJECT multiple contours                kind=path contours=2 points=54
+shape-459  REJECT multiple contours                kind=use contours=3 points=318
+shape-460  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.539 thickness=6.68 elong=2.027
+shape-461.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=3.242 thickness=6.68 elong=0.485
+shape-461.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=115.552 thickness=6.68 elong=17.298
+shape-461.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-462.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-462.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-463.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=68.833 thickness=6.68 elong=10.304
+shape-463.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-464.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-464.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-465  REJECT elongation too low               kind=use closed=True points=192 length=13.514 thickness=4.573 elong=2.955
+shape-466  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-467  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-468  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-469  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-470  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-471  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-472  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-473  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-474  ACCEPT elongated filled contour         kind=path closed=True points=5 length=15.62 thickness=2.607 elong=5.991 fill=0.852
+shape-475  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-476  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-477  ACCEPT two-point open contour           kind=path closed=False points=2 length=18.879 thickness=6.68 elong=2.826
+shape-478  REJECT multiple contours                kind=use contours=2 points=256
+shape-479  REJECT multiple contours                kind=use contours=2 points=256
+shape-480  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-481  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-482.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=22.883 thickness=6.68 elong=3.426
+shape-482.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-482.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-483  REJECT multiple contours                kind=use contours=2 points=256
+shape-484  REJECT multiple contours                kind=use contours=2 points=256
+shape-485  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-486  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-487  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-488  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.59 thickness=6.68 elong=2.484
+shape-489  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-490  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-491  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-492  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-493  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-494  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-495  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-496  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-497  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-498  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-499  ACCEPT elongated filled contour         kind=path closed=True points=5 length=19.99 thickness=2.681 elong=7.456 fill=0.835
+shape-500  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-501  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-502  REJECT multiple contours                kind=use contours=2 points=256
+shape-503  REJECT multiple contours                kind=use contours=2 points=34
+shape-504  REJECT elongation too low               kind=use closed=True points=144 length=8.546 thickness=4.905 elong=1.742
+shape-505  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-506  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.016 thickness=6.68 elong=2.398
+shape-507  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-508  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-509  REJECT multiple contours                kind=use contours=2 points=34
+shape-510  REJECT multiple contours                kind=use contours=2 points=34
+shape-511  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.301 thickness=6.68 elong=2.141
+shape-512  REJECT multiple contours                kind=use contours=2 points=256
+shape-513  REJECT multiple contours                kind=use contours=2 points=256
+shape-514  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-515.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-515.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-516  REJECT multiple contours                kind=use contours=2 points=256
+shape-517  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-518  REJECT multiple contours                kind=use contours=2 points=256
+shape-519  REJECT multiple contours                kind=use contours=2 points=34
+shape-520  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-521  REJECT multiple contours                kind=use contours=2 points=34
+shape-522  ACCEPT two-point open contour           kind=path closed=False points=2 length=17.164 thickness=6.68 elong=2.57
+shape-523  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-524  REJECT multiple contours                kind=use contours=2 points=34
+shape-525  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-526  ACCEPT elongated filled contour         kind=path closed=True points=5 length=23.655 thickness=2.641 elong=8.958 fill=0.855
+shape-527  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-528  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-529  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-530  ACCEPT two-point open contour           kind=path closed=False points=2 length=20.977 thickness=6.68 elong=3.14
+shape-531  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-532.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=29.364 thickness=6.68 elong=4.396
+shape-532.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-533  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-534  REJECT multiple contours                kind=use contours=2 points=34
+shape-535  ACCEPT two-point open contour           kind=path closed=False points=2 length=30.891 thickness=6.68 elong=4.624
+shape-536  ACCEPT elongated filled contour         kind=path closed=True points=5 length=68.84 thickness=2.667 elong=25.812 fill=0.857
+shape-537.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=32.606 thickness=6.68 elong=4.881
+shape-537.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-538  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-539  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-540  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-541  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-542  REJECT elongation too low               kind=use closed=True points=144 length=8.546 thickness=4.905 elong=1.742
+shape-543  REJECT elongation too low               kind=use closed=True points=118 length=14.872 thickness=3.03 elong=4.908
+shape-544  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-545  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-546  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-547  REJECT multiple contours                kind=use contours=2 points=256
+shape-548  REJECT multiple contours                kind=use contours=2 points=14
+shape-549  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.301 thickness=6.68 elong=2.141
+shape-550  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-551  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-552  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-553  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-554  ACCEPT two-point open contour           kind=path closed=False points=2 length=30.891 thickness=6.68 elong=4.624
+shape-555  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-556  ACCEPT two-point open contour           kind=path closed=False points=2 length=22.504 thickness=6.68 elong=3.369
+shape-557  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-558  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.11 thickness=6.68 elong=2.112
+shape-559  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-560  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.586 thickness=6.68 elong=1.884
+shape-561  ACCEPT elongated filled contour         kind=path closed=True points=5 length=44.68 thickness=2.664 elong=16.773 fill=0.856
+shape-562.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=27.457 thickness=6.68 elong=4.11
+shape-562.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-562.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-563  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-564  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-565.1 REJECT elongation too low               kind=path closed=True points=27 length=13.916 thickness=2.798 elong=4.973
+shape-565.2 REJECT elongation too low               kind=path closed=True points=27 length=4.379 thickness=2.46 elong=1.78
+shape-565.3 REJECT closed contour fill too low      kind=path closed=True points=27 length=82.944 thickness=6.591 elong=12.584 fill=0.106
+shape-565.4 REJECT closed contour fill too low      kind=path closed=True points=27 length=59.868 thickness=5.834 elong=10.262 fill=0.12
+shape-565.5 REJECT closed contour fill too low      kind=path closed=True points=27 length=35.272 thickness=2.399 elong=14.702 fill=0.29
+shape-565.6 REJECT closed contour fill too low      kind=path closed=True points=27 length=19.828 thickness=2.82 elong=7.032 fill=0.245
+shape-565.7 REJECT elongation too low               kind=path closed=True points=25 length=14.1 thickness=3.307 elong=4.263
+shape-565.8 REJECT closed contour fill too low      kind=path closed=True points=25 length=47.279 thickness=8.069 elong=5.86 fill=0.073
+shape-565.9 REJECT elongation too low               kind=path closed=True points=25 length=18.419 thickness=3.964 elong=4.646
+shape-565.10 REJECT elongation too low               kind=path closed=True points=26 length=23.928 thickness=5.052 elong=4.736
+shape-566  ACCEPT two-point open contour           kind=path closed=False points=2 length=72.267 thickness=6.68 elong=10.818
+shape-567  REJECT multiple contours                kind=use contours=4 points=725
+shape-568.1 REJECT elongation too low               kind=use closed=True points=300 length=15.152 thickness=10.295 elong=1.472
+shape-568.2 REJECT elongation too low               kind=use closed=True points=88 length=1.997 thickness=1.916 elong=1.042
+shape-568.3 REJECT elongation too low               kind=use closed=True points=78 length=1.938 thickness=1.953 elong=0.992
+shape-569.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.267 thickness=6.68 elong=10.818
+shape-569.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.267 thickness=6.68 elong=10.818
+shape-569.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.267 thickness=6.68 elong=10.818
+shape-569.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=72.267 thickness=6.68 elong=10.818
+shape-569.5 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.6 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.7 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.8 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.9 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.10 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.11 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.12 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.13 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-569.14 ACCEPT two-point open contour           kind=path closed=False points=2 length=467.163 thickness=6.68 elong=69.935
+shape-570  REJECT multiple contours                kind=path contours=2 points=54
+shape-571  REJECT multiple contours                kind=use contours=3 points=318
+shape-572  ACCEPT two-point open contour           kind=path closed=False points=2 length=288.496 thickness=6.68 elong=43.188
+shape-573.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=3.242 thickness=6.68 elong=0.485
+shape-573.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=117.459 thickness=6.68 elong=17.584
+shape-573.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-574.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-574.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-575.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=113.834 thickness=6.68 elong=17.041
+shape-575.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-576.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-576.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-577.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=59.11 thickness=6.68 elong=8.849
+shape-577.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=4.195 thickness=6.68 elong=0.628
+shape-578.1 REJECT elongation too low               kind=use closed=True points=50 length=0.984 thickness=0.922 elong=1.067
+shape-578.2 REJECT multiple contours                kind=use contours=2 points=1004
+shape-579  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-580.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=15.254 thickness=6.68 elong=2.284
+shape-580.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-581  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-582.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=17.868 thickness=6.68 elong=2.675
+shape-582.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-583  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-584  ACCEPT two-point open contour           kind=path closed=False points=2 length=18.266 thickness=6.68 elong=2.734
+shape-585  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-586  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.117 thickness=6.68 elong=2.413
+shape-587  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-588  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.258 thickness=6.68 elong=2.434
+shape-589  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-590  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.11 thickness=6.68 elong=2.112
+shape-591  ACCEPT elongated filled contour         kind=path closed=True points=5 length=122.927 thickness=2.671 elong=46.015 fill=0.857
+shape-592.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=12.012 thickness=6.68 elong=1.798
+shape-592.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-592.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-592.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-593  REJECT multiple contours                kind=use contours=2 points=256
+shape-594  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-595  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.399 thickness=6.68 elong=2.455
+shape-596  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-597.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=24.828 thickness=6.68 elong=3.717
+shape-597.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-598  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-599.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=33.227 thickness=6.68 elong=4.974
+shape-599.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-599.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-600  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-601  ACCEPT two-point open contour           kind=path closed=False points=2 length=34.704 thickness=6.68 elong=5.195
+shape-602.1 ACCEPT elongated filled contour         kind=path closed=True points=5 length=54.567 thickness=2.665 elong=20.476 fill=0.857
+shape-602.2 ACCEPT elongated filled contour         kind=path closed=True points=5 length=54.567 thickness=2.665 elong=20.475 fill=0.857
+shape-603.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=32.606 thickness=6.68 elong=4.881
+shape-603.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-603.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-604  REJECT multiple contours                kind=use contours=2 points=256
+shape-605  ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-606  REJECT multiple contours                kind=use contours=2 points=256
+shape-607  REJECT multiple contours                kind=use contours=2 points=256
+shape-608  REJECT multiple contours                kind=use contours=2 points=256
+shape-609  REJECT multiple contours                kind=use contours=2 points=273
+shape-610  REJECT multiple contours                kind=use contours=2 points=214
+shape-611  REJECT elongation too low               kind=use closed=True points=227 length=4.414 thickness=3.449 elong=1.28
+shape-612  REJECT multiple contours                kind=use contours=2 points=214
+shape-613  REJECT multiple contours                kind=use contours=2 points=371
+shape-614  REJECT multiple contours                kind=use contours=2 points=273
+shape-615  REJECT multiple contours                kind=use contours=2 points=214
+shape-616  REJECT elongation too low               kind=use closed=True points=227 length=4.414 thickness=3.449 elong=1.28
+shape-617  REJECT multiple contours                kind=use contours=2 points=214
+shape-618  REJECT multiple contours                kind=use contours=2 points=371
+shape-619  REJECT elongation too low               kind=use closed=True points=226 length=4.463 thickness=4.748 elong=0.94
+shape-620.1 REJECT elongation too low               kind=use closed=True points=73 length=1.367 thickness=1.367 elong=1
+shape-620.2 REJECT elongation too low               kind=use closed=True points=75 length=4.603 thickness=2.778 elong=1.657
+shape-621  REJECT elongation too low               kind=use closed=True points=383 length=6.998 thickness=4.857 elong=1.441
+shape-622  REJECT multiple contours                kind=use contours=2 points=371
+shape-623  REJECT elongation too low               kind=use closed=True points=115 length=5.645 thickness=2.847 elong=1.983
+shape-624  REJECT multiple contours                kind=use contours=2 points=214
+shape-625  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-626  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.399 thickness=6.68 elong=2.455
+shape-627  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-628  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.434 thickness=6.68 elong=2.161
+shape-629  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-630  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.817 thickness=6.68 elong=2.218
+shape-631  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-632  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.68 thickness=6.68 elong=1.898
+shape-633  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-634  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.824 thickness=6.68 elong=1.92
+shape-635  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-636  ACCEPT two-point open contour           kind=path closed=False points=2 length=10.68 thickness=6.68 elong=1.599
+shape-637  ACCEPT elongated filled contour         kind=path closed=True points=5 length=117.968 thickness=2.67 elong=44.191 fill=0.857
+shape-638.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=12.016 thickness=6.68 elong=1.799
+shape-638.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-638.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-639  REJECT multiple contours                kind=use contours=2 points=256
+shape-640  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-641  ACCEPT two-point open contour           kind=path closed=False points=2 length=16.399 thickness=6.68 elong=2.455
+shape-642  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-643  ACCEPT two-point open contour           kind=path closed=False points=2 length=24.805 thickness=6.68 elong=3.713
+shape-644  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-645.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=33.208 thickness=6.68 elong=4.971
+shape-645.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-646  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-647  ACCEPT two-point open contour           kind=path closed=False points=2 length=34.7 thickness=6.68 elong=5.195
+shape-648.1 ACCEPT elongated filled contour         kind=path closed=True points=5 length=51.712 thickness=2.663 elong=19.42 fill=0.857
+shape-648.2 ACCEPT elongated filled contour         kind=path closed=True points=5 length=51.712 thickness=2.665 elong=19.408 fill=0.857
+shape-649.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=32.602 thickness=6.68 elong=4.881
+shape-649.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-650  REJECT multiple contours                kind=use contours=2 points=256
+shape-651  REJECT multiple contours                kind=use contours=2 points=256
+shape-652  REJECT multiple contours                kind=use contours=2 points=256
+shape-653  REJECT multiple contours                kind=use contours=2 points=256
+shape-654  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-655  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.731 thickness=6.68 elong=2.055
+shape-656  REJECT multiple contours                kind=use contours=2 points=256
+shape-657  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-658  ACCEPT two-point open contour           kind=path closed=False points=2 length=12.582 thickness=6.68 elong=1.884
+shape-659  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-660.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=25.852 thickness=6.68 elong=3.87
+shape-660.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-661  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-662.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=32.262 thickness=6.68 elong=4.83
+shape-662.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-662.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-663  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-664.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=34.094 thickness=6.68 elong=5.104
+shape-664.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-664.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-665  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-666.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=35.922 thickness=6.68 elong=5.378
+shape-666.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.203 thickness=6.68 elong=1.228
+shape-666.3 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.203 thickness=6.68 elong=1.228
+shape-666.4 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.203 thickness=6.68 elong=1.228
+shape-667  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-668  ACCEPT two-point open contour           kind=path closed=False points=2 length=40.043 thickness=6.68 elong=5.995
+shape-669  ACCEPT elongated filled contour         kind=path closed=True points=5 length=65.22 thickness=2.665 elong=24.474 fill=0.857
+shape-670  REJECT elongation too low               kind=use closed=True points=192 length=13.514 thickness=4.573 elong=2.955
+shape-671  REJECT elongation too low               kind=use closed=True points=192 length=13.514 thickness=4.573 elong=2.955
+shape-672  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-673  REJECT elongation too low               kind=use closed=True points=117 length=6.068 thickness=4.215 elong=1.439
+shape-674  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-675  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-676  ACCEPT two-point open contour           kind=path closed=False points=2 length=14.301 thickness=6.68 elong=2.141
+shape-677  REJECT multiple contours                kind=use contours=2 points=256
+shape-678  REJECT multiple contours                kind=use contours=2 points=256
+shape-679  REJECT multiple contours                kind=use contours=2 points=34
+shape-680  REJECT multiple contours                kind=use contours=2 points=34
+shape-681  REJECT elongation too low               kind=use closed=True points=192 length=13.514 thickness=4.573 elong=2.955
+shape-682  ACCEPT two-point open contour           kind=path closed=False points=2 length=13.727 thickness=6.68 elong=2.055
+shape-683  REJECT multiple contours                kind=use contours=2 points=256
+shape-684  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-685  REJECT elongation too low               kind=use closed=True points=72 length=1.858 thickness=1.805 elong=1.029
+shape-686.1 ACCEPT two-point open contour           kind=path closed=False points=2 length=27.458 thickness=6.68 elong=4.11
+shape-686.2 ACCEPT two-point open contour           kind=path closed=False points=2 length=8.199 thickness=6.68 elong=1.227
+shape-687  REJECT multiple contours                kind=use contours=2 points=256
+shape-688  REJECT multiple contours                kind=use contours=2 points=256
+shape-689  REJECT elongation too low               kind=use closed=True points=148 length=6.656 thickness=1.59 elong=4.187
+shape-690  REJECT multiple contours                kind=use contours=2 points=205
+shape-691  REJECT elongation too low               kind=use closed=True points=292 length=4.682 thickness=3.275 elong=1.43
+shape-692  REJECT multiple contours                kind=use contours=2 points=205
+shape-693.1 REJECT closed contour fill too low      kind=path closed=True points=27 length=69.213 thickness=6.132 elong=11.288 fill=0.113
+shape-693.2 REJECT closed contour fill too low      kind=path closed=True points=27 length=51.865 thickness=5.827 elong=8.901 fill=0.12
+shape-693.3 REJECT closed contour fill too low      kind=path closed=True points=27 length=33.75 thickness=2.544 elong=13.265 fill=0.274
+shape-693.4 REJECT elongation too low               kind=path closed=True points=27 length=9.15 thickness=2.774 elong=3.299
+shape-693.5 REJECT closed contour fill too low      kind=path closed=True points=27 length=65.021 thickness=5.985 elong=10.864 fill=0.117
+shape-693.6 REJECT closed contour fill too low      kind=path closed=True points=27 length=48.048 thickness=5.824 elong=8.251 fill=0.12
+shape-693.7 REJECT closed contour fill too low      kind=path closed=True points=27 length=32.223 thickness=2.398 elong=13.435 fill=0.29
+shape-693.8 REJECT elongation too low               kind=path closed=True points=27 length=7.818 thickness=2.465 elong=3.171
+shape-693.9 REJECT closed contour fill too low      kind=path closed=True points=26 length=34.743 thickness=6.513 elong=5.334 fill=0.091
+shape-693.10 REJECT elongation too low               kind=path closed=True points=26 length=15.381 thickness=3.819 elong=4.028
+shape-693.11 REJECT elongation too low               kind=path closed=True points=25 length=15.044 thickness=3.456 elong=4.353
+shape-693.12 REJECT closed contour fill too low      kind=path closed=True points=26 length=33.437 thickness=6.283 elong=5.321 fill=0.094
+shape-693.13 REJECT elongation too low               kind=path closed=True points=25 length=15.017 thickness=3.506 elong=4.283
+shape-693.14 REJECT elongation too low               kind=path closed=True points=25 length=14.884 thickness=3.552 elong=4.191
+shape-694  REJECT multiple contours                kind=use contours=3 points=214
+shape-695  REJECT elongation too low               kind=use closed=True points=46 length=4.899 thickness=2.102 elong=2.33
+shape-696  REJECT multiple contours                kind=use contours=2 points=143
+shape-697  REJECT elongation too low               kind=use closed=True points=45 length=4.844 thickness=3.237 elong=1.497
+shape-698  REJECT elongation too low               kind=use closed=True points=116 length=5.03 thickness=3.482 elong=1.445
+shape-699  ACCEPT elongated filled contour         kind=use closed=True points=5 length=5.782 thickness=0.485 elong=11.916 fill=0.828
+shape-700  REJECT elongation too low               kind=use closed=True points=116 length=5.03 thickness=3.482 elong=1.445
+shape-701  REJECT multiple contours                kind=use contours=2 points=100
+shape-702  REJECT multiple contours                kind=use contours=2 points=100
+shape-703  REJECT multiple contours                kind=use contours=2 points=143
+shape-704  REJECT elongation too low               kind=use closed=True points=175 length=5.995 thickness=4.3 elong=1.394
+shape-705  REJECT multiple contours                kind=use contours=2 points=242
+shape-706  REJECT elongation too low               kind=use closed=True points=145 length=4.118 thickness=3.905 elong=1.055
+shape-707  REJECT elongation too low               kind=use closed=True points=146 length=3.604 thickness=2.997 elong=1.203
+shape-708  REJECT elongation too low               kind=use closed=True points=133 length=6.062 thickness=3.865 elong=1.569
+shape-709  REJECT multiple contours                kind=use contours=2 points=149
+shape-710  REJECT elongation too low               kind=use closed=True points=55 length=5.448 thickness=1.716 elong=3.176
+shape-711.1 REJECT elongation too low               kind=use closed=True points=51 length=0.779 thickness=0.78 elong=1
+shape-711.2 REJECT elongation too low               kind=use closed=True points=45 length=3.479 thickness=1.761 elong=1.976
+shape-712  REJECT elongation too low               kind=use closed=True points=237 length=6.111 thickness=3.978 elong=1.536
+shape-713  REJECT elongation too low               kind=use closed=True points=135 length=4.518 thickness=3.729 elong=1.212
+shape-714  REJECT elongation too low               kind=use closed=True points=153 length=3.532 thickness=2.253 elong=1.568
+shape-715.1 REJECT elongation too low               kind=use closed=True points=51 length=0.779 thickness=0.78 elong=1
+shape-715.2 REJECT elongation too low               kind=use closed=True points=45 length=3.479 thickness=1.761 elong=1.976
+shape-716  REJECT elongation too low               kind=use closed=True points=146 length=3.604 thickness=2.997 elong=1.203
+shape-717  REJECT elongation too low               kind=use closed=True points=118 length=16.641 thickness=13.924 elong=1.195
+shape-718.1 REJECT elongation too low               kind=use closed=True points=50 length=2.512 thickness=2.543 elong=0.988
+shape-718.2 REJECT elongation too low               kind=use closed=True points=55 length=8.251 thickness=4.815 elong=1.714
+shape-719  REJECT elongation too low               kind=use closed=True points=135 length=9.08 thickness=9.37 elong=0.969
+shape-720.1 REJECT elongation too low               kind=use closed=True points=50 length=2.512 thickness=2.543 elong=0.988
+shape-720.2 REJECT elongation too low               kind=use closed=True points=55 length=8.251 thickness=4.815 elong=1.714
+shape-721  REJECT multiple contours                kind=use contours=2 points=259
+shape-722  REJECT elongation too low               kind=use closed=True points=75 length=10.89 thickness=5.676 elong=1.919
+shape-723  REJECT elongation too low               kind=use closed=True points=144 length=10.193 thickness=8.95 elong=1.139
+shape-724  REJECT elongation too low               kind=use closed=True points=129 length=9.979 thickness=7.758 elong=1.286
+shape-725  REJECT multiple contours                kind=use contours=2 points=160
+shape-726  REJECT elongation too low               kind=use closed=True points=168 length=13.631 thickness=6.9 elong=1.975
+shape-727  REJECT multiple contours                kind=use contours=2 points=100
+shape-728  REJECT elongation too low               kind=use closed=True points=129 length=9.979 thickness=7.758 elong=1.286
+shape-729  REJECT multiple contours                kind=use contours=2 points=155
+shape-730.1 REJECT elongation too low               kind=use closed=True points=50 length=2.512 thickness=2.543 elong=0.988
+shape-730.2 REJECT elongation too low               kind=use closed=True points=55 length=8.251 thickness=4.815 elong=1.714
+shape-731  REJECT multiple contours                kind=use contours=2 points=259
+shape-732  REJECT elongation too low               kind=use closed=True points=135 length=9.08 thickness=9.37 elong=0.969
+shape-733  REJECT multiple contours                kind=use contours=2 points=100
+shape-734  REJECT multiple contours                kind=use contours=2 points=34
+shape-735  REJECT elongation too low               kind=use closed=True points=194 length=11.885 thickness=8.578 elong=1.386
+shape-736  REJECT elongation too low               kind=use closed=True points=133 length=10.163 thickness=7.038 elong=1.444
+shape-737  REJECT elongation too low               kind=use closed=True points=189 length=8.724 thickness=5.376 elong=1.623
+shape-738  REJECT multiple contours                kind=use contours=2 points=160
+shape-739  REJECT elongation too low               kind=use closed=True points=288 length=8.607 thickness=6.377 elong=1.35
+shape-740  REJECT multiple contours                kind=use contours=2 points=160
+shape-741  REJECT elongation too low               kind=use closed=True points=207 length=12.971 thickness=3.14 elong=4.131
+shape-742  REJECT elongation too low               kind=use closed=True points=162 length=6.439 thickness=3.552 elong=1.813
+shape-743  REJECT multiple contours                kind=use contours=2 points=140
+shape-744  REJECT elongation too low               kind=use closed=True points=288 length=8.607 thickness=6.377 elong=1.35
+shape-745.1 REJECT elongation too low               kind=use closed=True points=74 length=2.796 thickness=1.697 elong=1.647
+shape-745.2 REJECT elongation too low               kind=use closed=True points=74 length=2.823 thickness=1.704 elong=1.657
+shape-746  REJECT elongation too low               kind=use closed=True points=93 length=10.765 thickness=8.205 elong=1.312
+shape-747  REJECT elongation too low               kind=use closed=True points=189 length=8.724 thickness=5.376 elong=1.623
+shape-748  REJECT multiple contours                kind=use contours=2 points=160
+shape-749  REJECT elongation too low               kind=use closed=True points=222 length=5.67 thickness=5.447 elong=1.041
+shape-750  REJECT multiple contours                kind=use contours=2 points=100
+shape-751  REJECT elongation too low               kind=use closed=True points=112 length=8.867 thickness=2.425 elong=3.657
+shape-752  REJECT elongation too low               kind=use closed=True points=288 length=8.607 thickness=6.377 elong=1.35
+shape-753  REJECT multiple contours                kind=use contours=2 points=140
+shape-754  REJECT elongation too low               kind=use closed=True points=222 length=5.67 thickness=5.447 elong=1.041
+shape-755  REJECT multiple contours                kind=use contours=2 points=228
+shape-756  REJECT elongation too low               kind=use closed=True points=206 length=5.882 thickness=3.241 elong=1.815
+shape-757  REJECT multiple contours                kind=use contours=3 points=181
+shape-758  REJECT elongation too low               kind=use closed=True points=112 length=8.867 thickness=2.425 elong=3.657
+shape-759  REJECT multiple contours                kind=use contours=2 points=140
+shape-760  REJECT elongation too low               kind=use closed=True points=206 length=5.882 thickness=3.241 elong=1.815
+shape-761  REJECT elongation too low               kind=use closed=True points=206 length=5.882 thickness=3.241 elong=1.815
+shape-762  REJECT multiple contours                kind=use contours=2 points=140
+shape-763  REJECT elongation too low               kind=use closed=True points=288 length=8.607 thickness=6.377 elong=1.35
+shape-764  REJECT multiple contours                kind=use contours=2 points=160
+shape-765  REJECT multiple contours                kind=use contours=2 points=228
+shape-766.1 REJECT elongation too low               kind=use closed=True points=74 length=2.794 thickness=1.69 elong=1.653
+shape-766.2 REJECT elongation too low               kind=use closed=True points=74 length=2.795 thickness=1.7 elong=1.645
+shape-767  REJECT elongation too low               kind=use closed=True points=124 length=10.001 thickness=5.809 elong=1.722
+shape-768.1 REJECT elongation too low               kind=use closed=True points=49 length=1.282 thickness=1.1 elong=1.165
+shape-768.2 REJECT elongation too low               kind=use closed=True points=101 length=5.602 thickness=2.357 elong=2.376
+shape-769  REJECT elongation too low               kind=use closed=True points=112 length=8.867 thickness=2.425 elong=3.657
+shape-770  REJECT elongation too low               kind=use closed=True points=288 length=8.607 thickness=6.377 elong=1.35
+shape-771  REJECT multiple contours                kind=use contours=2 points=202
+shape-772  REJECT elongation too low               kind=use closed=True points=164 length=10.038 thickness=4.251 elong=2.361
+shape-773  REJECT elongation too low               kind=use closed=True points=105 length=8.12 thickness=6.218 elong=1.306
+shape-774  REJECT multiple contours                kind=use contours=2 points=202
+shape-775  REJECT elongation too low               kind=use closed=True points=222 length=5.67 thickness=5.447 elong=1.041
+shape-776  REJECT multiple contours                kind=use contours=2 points=202
+shape-777  REJECT elongation too low               kind=use closed=True points=133 length=8.866 thickness=7.085 elong=1.251
+shape-778  REJECT multiple contours                kind=use contours=2 points=140
+shape-779  REJECT multiple contours                kind=use contours=3 points=334
+shape-780  REJECT multiple contours                kind=use contours=2 points=140
+shape-781  REJECT multiple contours                kind=use contours=2 points=202
+shape-782  REJECT multiple contours                kind=use contours=2 points=160
+shape-783  REJECT elongation too low               kind=use closed=True points=162 length=6.439 thickness=3.552 elong=1.813
+shape-784.1 REJECT elongation too low               kind=use closed=True points=49 length=1.282 thickness=1.1 elong=1.165
+shape-784.2 REJECT elongation too low               kind=use closed=True points=101 length=5.602 thickness=2.357 elong=2.376
+shape-785  REJECT multiple contours                kind=use contours=2 points=228
+shape-786  REJECT elongation too low               kind=use closed=True points=244 length=7.111 thickness=4.689 elong=1.516
+shape-787  REJECT multiple contours                kind=use contours=2 points=160
+shape-788  REJECT elongation too low               kind=use closed=True points=51 length=10.729 thickness=2.684 elong=3.998
+shape-789  REJECT elongation too low               kind=use closed=True points=46 length=7.908 thickness=3.331 elong=2.374
+shape-790  REJECT multiple contours                kind=use contours=2 points=146
+shape-791  REJECT elongation too low               kind=use closed=True points=55 length=8.762 thickness=4.518 elong=1.94
+shape-792  REJECT elongation too low               kind=use closed=True points=116 length=7.802 thickness=5.169 elong=1.509
+shape-793  REJECT elongation too low               kind=use closed=True points=51 length=10.729 thickness=2.782 elong=3.857
+shape-794  REJECT elongation too low               kind=use closed=True points=163 length=8.146 thickness=7.878 elong=1.034
+shape-795.1 REJECT elongation too low               kind=use closed=True points=52 length=1.681 thickness=1.7 elong=0.989
+shape-795.2 REJECT elongation too low               kind=use closed=True points=45 length=5.635 thickness=3.69 elong=1.527
+shape-796  REJECT elongation too low               kind=use closed=True points=166 length=9.019 thickness=5.758 elong=1.566
+shape-797  REJECT multiple contours                kind=use contours=2 points=246
+shape-798  REJECT elongation too low               kind=use closed=True points=150 length=8.861 thickness=9.009 elong=0.984
+shape-799  REJECT multiple contours                kind=use contours=2 points=246
+shape-800  REJECT elongation too low               kind=use closed=True points=145 length=6.661 thickness=6.538 elong=1.019
+shape-801  REJECT elongation too low               kind=use closed=True points=142 length=5.706 thickness=4.892 elong=1.166
+shape-802  REJECT elongation too low               kind=use closed=True points=133 length=9.538 thickness=6.525 elong=1.462
+shape-803  REJECT multiple contours                kind=use contours=2 points=159
+shape-804  REJECT elongation too low               kind=use closed=True points=55 length=8.459 thickness=3.137 elong=2.697
+shape-805.1 REJECT elongation too low               kind=use closed=True points=52 length=1.681 thickness=1.7 elong=0.989
+shape-805.2 REJECT elongation too low               kind=use closed=True points=45 length=5.635 thickness=3.69 elong=1.527
+shape-806  REJECT elongation too low               kind=use closed=True points=51 length=10.53 thickness=2.822 elong=3.732
+shape-807  REJECT elongation too low               kind=use closed=True points=56 length=7.695 thickness=3.314 elong=2.322
+shape-808  REJECT multiple contours                kind=use contours=2 points=149
+shape-809  REJECT elongation too low               kind=use closed=True points=204 length=7.849 thickness=5.24 elong=1.498
+shape-810  REJECT elongation too low               kind=use closed=True points=142 length=8.295 thickness=5.827 elong=1.423
+shape-811  REJECT elongation too low               kind=use closed=True points=5 length=2.938 thickness=0.799 elong=3.677
+shape-812  REJECT elongation too low               kind=use closed=True points=105 length=7.981 thickness=6.048 elong=1.32
+shape-813  REJECT multiple contours                kind=use contours=2 points=100
+shape-814  REJECT elongation too low               kind=use closed=True points=56 length=7.695 thickness=3.314 elong=2.322
+shape-815  REJECT multiple contours                kind=use contours=2 points=149
+shape-816  REJECT elongation too low               kind=use closed=True points=51 length=10.53 thickness=2.821 elong=3.733

@@ -1,0 +1,125 @@
+Using launch settings from SvgScene/Properties/launchSettings.json...
+GeometricScene shapes       : 1008
+NotationScene contours      : 244
+NotationScene prototypes    : 105
+NotationScene strokes       : 323
+NotationScene curved strokes: 67
+NotationScene ellipses      : 374 (hollow: 101)
+ScoreLayout staffs          : 10
+ScoreLayout systems         : 5
+ScoreLayout measures        : 20
+  prototype-1: 1 instances; representative=shape-1
+  prototype-2: 1 instances; representative=shape-2
+  prototype-3: 5 instances; representative=shape-4
+  prototype-4: 5 instances; representative=shape-5.1
+  prototype-5: 2 instances; representative=shape-6
+  prototype-6: 2 instances; representative=shape-7
+  prototype-7: 4 instances; representative=shape-11
+  prototype-8: 11 instances; representative=shape-15
+  prototype-9: 1 instances; representative=shape-30
+  prototype-10: 1 instances; representative=shape-31
+  prototype-11: 2 instances; representative=shape-32
+  prototype-12: 1 instances; representative=shape-37
+  prototype-13: 1 instances; representative=shape-39
+  prototype-14: 1 instances; representative=shape-40
+  prototype-15: 3 instances; representative=shape-41
+  prototype-16: 1 instances; representative=shape-62
+  prototype-17: 7 instances; representative=shape-117
+  prototype-18: 1 instances; representative=shape-123
+  prototype-19: 1 instances; representative=shape-124
+  prototype-20: 8 instances; representative=shape-126.2
+  prototype-21: 7 instances; representative=shape-130
+  prototype-22: 24 instances; representative=shape-166
+  prototype-23: 3 instances; representative=shape-173
+  prototype-24: 4 instances; representative=shape-221
+  prototype-25: 5 instances; representative=shape-223
+  prototype-26: 6 instances; representative=shape-225
+  prototype-27: 3 instances; representative=shape-228
+  prototype-28: 1 instances; representative=shape-229
+  prototype-29: 1 instances; representative=shape-231
+  prototype-30: 2 instances; representative=shape-233
+  prototype-31: 1 instances; representative=shape-234
+  prototype-32: 1 instances; representative=shape-305.1
+  prototype-33: 1 instances; representative=shape-305.2
+  prototype-34: 5 instances; representative=shape-334
+  prototype-35: 2 instances; representative=shape-350
+  prototype-36: 15 instances; representative=shape-398
+  prototype-37: 1 instances; representative=shape-422
+  prototype-38: 2 instances; representative=shape-459
+  prototype-39: 1 instances; representative=shape-620.2
+  prototype-40: 1 instances; representative=shape-689
+  prototype-41: 1 instances; representative=shape-691
+  prototype-42: 1 instances; representative=shape-695
+  prototype-43: 2 instances; representative=shape-696
+  prototype-44: 1 instances; representative=shape-697
+  prototype-45: 2 instances; representative=shape-698
+  prototype-46: 1 instances; representative=shape-704
+  prototype-47: 1 instances; representative=shape-705
+  prototype-48: 1 instances; representative=shape-706
+  prototype-49: 2 instances; representative=shape-707
+  prototype-50: 1 instances; representative=shape-708
+  prototype-51: 2 instances; representative=shape-711.2
+  prototype-52: 1 instances; representative=shape-712
+  prototype-53: 1 instances; representative=shape-713
+  prototype-54: 1 instances; representative=shape-714
+  prototype-55: 1 instances; representative=shape-717
+  prototype-56: 3 instances; representative=shape-718.2
+  prototype-57: 2 instances; representative=shape-719
+  prototype-58: 2 instances; representative=shape-721
+  prototype-59: 1 instances; representative=shape-723
+  prototype-60: 2 instances; representative=shape-724
+  prototype-61: 1 instances; representative=shape-725
+  prototype-62: 1 instances; representative=shape-726
+  prototype-63: 1 instances; representative=shape-729
+  prototype-64: 1 instances; representative=shape-734
+  prototype-65: 1 instances; representative=shape-735
+  prototype-66: 1 instances; representative=shape-736
+  prototype-67: 2 instances; representative=shape-737
+  prototype-68: 6 instances; representative=shape-738
+  prototype-69: 5 instances; representative=shape-739
+  prototype-70: 1 instances; representative=shape-741
+  prototype-71: 1 instances; representative=shape-746
+  prototype-72: 3 instances; representative=shape-749
+  prototype-73: 1 instances; representative=shape-750
+  prototype-74: 3 instances; representative=shape-751
+  prototype-75: 3 instances; representative=shape-755
+  prototype-76: 3 instances; representative=shape-756
+  prototype-77: 1 instances; representative=shape-757
+  prototype-78: 1 instances; representative=shape-767
+  prototype-79: 2 instances; representative=shape-768.2
+  prototype-80: 2 instances; representative=shape-771
+  prototype-81: 1 instances; representative=shape-772
+  prototype-82: 1 instances; representative=shape-773
+  prototype-83: 2 instances; representative=shape-774
+  prototype-84: 1 instances; representative=shape-777
+  prototype-85: 1 instances; representative=shape-779
+  prototype-86: 1 instances; representative=shape-786
+  prototype-87: 1 instances; representative=shape-789
+  prototype-88: 1 instances; representative=shape-790
+  prototype-89: 1 instances; representative=shape-791
+  prototype-90: 1 instances; representative=shape-792
+  prototype-91: 1 instances; representative=shape-794
+  prototype-92: 2 instances; representative=shape-795.2
+  prototype-93: 1 instances; representative=shape-796
+  prototype-94: 2 instances; representative=shape-797
+  prototype-95: 1 instances; representative=shape-798
+  prototype-96: 1 instances; representative=shape-800
+  prototype-97: 1 instances; representative=shape-801
+  prototype-98: 1 instances; representative=shape-802
+  prototype-99: 1 instances; representative=shape-803
+  prototype-100: 2 instances; representative=shape-807
+  prototype-101: 2 instances; representative=shape-808
+  prototype-102: 1 instances; representative=shape-809
+  prototype-103: 1 instances; representative=shape-810
+  prototype-104: 1 instances; representative=shape-811
+  prototype-105: 1 instances; representative=shape-812
+Written compact JSON: /home/runner/work/vector-music/vector-music/artifacts/notation-scene.json
+Written score layout JSON: /home/runner/work/vector-music/vector-music/artifacts/score-layout.json
+Written debug SVGs:
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.strokes.svg
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.arcs.svg
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.ellipses.svg
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.contours.svg
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.layout.svg
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.arc-diagnostics.txt
+  /home/runner/work/vector-music/vector-music/ci-input/almonds-internet.stroke-diagnostics.txt

@@ -1,0 +1,685 @@
+shape-1    REJECT centreline changes side              chord=6.22 thickness=0.144 bend=0.306 side=0.517
+shape-2    REJECT not a sufficiently sampled closed contour points=5
+shape-4    REJECT not a single contour                 contours=4
+shape-5.1  REJECT too thick                            chord=16.43 thickness=0.469
+shape-5.2  REJECT too thick                            chord=2 thickness=0.74
+shape-5.3  REJECT too thick                            chord=1.97 thickness=0.769
+shape-6    REJECT centreline not regular enough        chord=9.79 thickness=0.329 bend=0.45 side=0.893 fit=0.137
+shape-7    REJECT too thick                            chord=9.09 thickness=0.408
+shape-8    REJECT centreline not regular enough        chord=9.79 thickness=0.329 bend=0.45 side=0.893 fit=0.137
+shape-9    REJECT too thick                            chord=9.09 thickness=0.408
+shape-11   REJECT not a single contour                 contours=2
+shape-12   REJECT too thick                            chord=6.08 thickness=0.57
+shape-14   REJECT too thick                            chord=6.08 thickness=0.57
+shape-15   REJECT not a single contour                 contours=2
+shape-19   REJECT too thick                            chord=6.08 thickness=0.57
+shape-21   REJECT too thick                            chord=6.08 thickness=0.57
+shape-22   REJECT too thick                            chord=1.88 thickness=0.754
+shape-24   REJECT not a single contour                 contours=2
+shape-25   REJECT too thick                            chord=1.88 thickness=0.754
+shape-26   REJECT too thick                            chord=1.88 thickness=0.754
+shape-28   REJECT not a single contour                 contours=2
+shape-29   REJECT not a single contour                 contours=2
+shape-30   REJECT not a single contour                 contours=2
+shape-31   REJECT not a single contour                 contours=2
+shape-32   REJECT centreline changes side              chord=5.84 thickness=0.307 bend=0.288 side=0.5
+shape-33   ACCEPT curved stroke                        chord=6.71 thickness=0.262 bend=0.113 side=0.857 fit=0.046
+shape-34   REJECT not a single contour                 contours=2
+shape-35   REJECT centreline changes side              chord=5.84 thickness=0.307 bend=0.288 side=0.5
+shape-36   REJECT not a single contour                 contours=2
+shape-37   REJECT centreline not regular enough        chord=13.95 thickness=0.287 bend=0.223 side=1 fit=0.102
+shape-39   REJECT too thick                            chord=7.9 thickness=0.408
+shape-40   REJECT not a single contour                 contours=2
+shape-41   REJECT not a single contour                 contours=3
+shape-42   REJECT too thick                            chord=6.08 thickness=0.57
+shape-44   REJECT too thick                            chord=6.08 thickness=0.57
+shape-45   REJECT not a single contour                 contours=2
+shape-48   REJECT too thick                            chord=1.88 thickness=0.754
+shape-50   REJECT too thick                            chord=6.08 thickness=0.57
+shape-51   REJECT too thick                            chord=6.08 thickness=0.57
+shape-53   REJECT too thick                            chord=6.08 thickness=0.57
+shape-55   REJECT too thick                            chord=6.08 thickness=0.57
+shape-57   REJECT too thick                            chord=6.08 thickness=0.57
+shape-59   REJECT too thick                            chord=6.08 thickness=0.57
+shape-62   REJECT centreline changes side              chord=6.02 thickness=0.156 bend=0.221 side=0.517
+shape-63   REJECT too thick                            chord=1.88 thickness=0.754
+shape-64   REJECT too thick                            chord=1.88 thickness=0.754
+shape-66   REJECT not a single contour                 contours=2
+shape-67   REJECT not a single contour                 contours=2
+shape-68   REJECT too thick                            chord=1.88 thickness=0.754
+shape-69   REJECT too thick                            chord=1.88 thickness=0.754
+shape-71   REJECT not a single contour                 contours=2
+shape-72   REJECT not a single contour                 contours=2
+shape-73   REJECT not a single contour                 contours=2
+shape-74   REJECT too thick                            chord=6.08 thickness=0.57
+shape-76   REJECT too thick                            chord=6.08 thickness=0.57
+shape-80   REJECT too thick                            chord=6.08 thickness=0.57
+shape-82   REJECT too thick                            chord=6.08 thickness=0.57
+shape-83   REJECT too thick                            chord=1.88 thickness=0.754
+shape-84   REJECT too thick                            chord=1.88 thickness=0.754
+shape-86   REJECT not a single contour                 contours=2
+shape-88   REJECT not a single contour                 contours=2
+shape-89   REJECT too thick                            chord=1.88 thickness=0.754
+shape-90   REJECT too thick                            chord=1.88 thickness=0.754
+shape-91   REJECT too thick                            chord=1.88 thickness=0.754
+shape-92   REJECT too thick                            chord=1.88 thickness=0.754
+shape-94   REJECT not a single contour                 contours=2
+shape-95   REJECT not a single contour                 contours=2
+shape-96   REJECT not a single contour                 contours=2
+shape-97   REJECT not a single contour                 contours=2
+shape-98   REJECT too thick                            chord=6.08 thickness=0.57
+shape-100  REJECT too thick                            chord=6.08 thickness=0.57
+shape-104  REJECT not a single contour                 contours=2
+shape-105  REJECT too thick                            chord=1.88 thickness=0.754
+shape-106  REJECT too thick                            chord=1.88 thickness=0.754
+shape-108  REJECT not a single contour                 contours=2
+shape-110  REJECT not a single contour                 contours=2
+shape-111  REJECT not a single contour                 contours=2
+shape-112  REJECT too thick                            chord=1.88 thickness=0.754
+shape-113  REJECT too thick                            chord=1.88 thickness=0.754
+shape-115  REJECT not a single contour                 contours=2
+shape-116  REJECT not a single contour                 contours=2
+shape-117  REJECT not a single contour                 contours=2
+shape-118.1 ACCEPT curved stroke                        chord=16.21 thickness=0.04 bend=0.197 side=1 fit=0.013
+shape-118.2 ACCEPT curved stroke                        chord=21.74 thickness=0.031 bend=0.178 side=1 fit=0.011
+shape-118.3 ACCEPT curved stroke                        chord=22.45 thickness=0.03 bend=0.17 side=1 fit=0.011
+shape-118.4 ACCEPT curved stroke                        chord=32.22 thickness=0.019 bend=0.275 side=1 fit=0.023
+shape-118.5 ACCEPT curved stroke                        chord=15.24 thickness=0.043 bend=0.195 side=1 fit=0.013
+shape-118.6 ACCEPT curved stroke                        chord=20.54 thickness=0.032 bend=0.172 side=1 fit=0.01
+shape-118.7 ACCEPT curved stroke                        chord=15.61 thickness=0.042 bend=0.19 side=1 fit=0.012
+shape-120  REJECT not a single contour                 contours=4
+shape-121.1 REJECT too thick                            chord=16.43 thickness=0.469
+shape-121.2 REJECT too thick                            chord=2 thickness=0.74
+shape-121.3 REJECT too thick                            chord=1.97 thickness=0.769
+shape-123  REJECT centreline changes side              chord=36.52 thickness=0.042 bend=0.08 side=0.5
+shape-124  REJECT centreline changes side              chord=36.33 thickness=0.042 bend=0.081 side=0.5
+shape-126.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-126.2 REJECT not a single contour                 contours=2
+shape-127  REJECT too thick                            chord=1.88 thickness=0.754
+shape-129  REJECT too thick                            chord=6.08 thickness=0.57
+shape-130  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-132  REJECT too thick                            chord=6.08 thickness=0.57
+shape-133  REJECT too thick                            chord=6.08 thickness=0.57
+shape-135  REJECT too thick                            chord=6.08 thickness=0.57
+shape-136  REJECT not a single contour                 contours=2
+shape-139  REJECT too thick                            chord=1.88 thickness=0.754
+shape-141  REJECT not a single contour                 contours=2
+shape-142  REJECT too thick                            chord=1.88 thickness=0.754
+shape-143  REJECT too thick                            chord=1.88 thickness=0.754
+shape-145  REJECT not a single contour                 contours=2
+shape-146  REJECT not a single contour                 contours=2
+shape-147  REJECT not a single contour                 contours=2
+shape-148  REJECT too thick                            chord=1.88 thickness=0.754
+shape-150  REJECT too thick                            chord=6.08 thickness=0.57
+shape-151  REJECT not a single contour                 contours=2
+shape-152  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-154  REJECT too thick                            chord=6.08 thickness=0.57
+shape-155  REJECT too thick                            chord=6.08 thickness=0.57
+shape-157  REJECT too thick                            chord=6.08 thickness=0.57
+shape-160  REJECT too thick                            chord=1.88 thickness=0.754
+shape-161  REJECT too thick                            chord=1.88 thickness=0.754
+shape-163  REJECT not a single contour                 contours=2
+shape-165  REJECT not a single contour                 contours=2
+shape-166  REJECT not a single contour                 contours=2
+shape-167  REJECT not a single contour                 contours=2
+shape-168  REJECT too thick                            chord=1.88 thickness=0.754
+shape-169  REJECT too thick                            chord=1.88 thickness=0.754
+shape-171  REJECT not a single contour                 contours=2
+shape-172  REJECT not a single contour                 contours=2
+shape-173  REJECT centreline changes side              chord=8.57 thickness=0.12 bend=0.291 side=0.759
+shape-175  REJECT too thick                            chord=6.08 thickness=0.57
+shape-177  REJECT too thick                            chord=6.08 thickness=0.57
+shape-178  REJECT too thick                            chord=6.08 thickness=0.57
+shape-179  REJECT not a single contour                 contours=2
+shape-180  REJECT not a single contour                 contours=2
+shape-182  REJECT too thick                            chord=6.08 thickness=0.57
+shape-184  REJECT too thick                            chord=6.08 thickness=0.57
+shape-185  REJECT too thick                            chord=6.08 thickness=0.57
+shape-187  REJECT too thick                            chord=6.08 thickness=0.57
+shape-189  REJECT too thick                            chord=6.08 thickness=0.57
+shape-190  REJECT too thick                            chord=6.08 thickness=0.57
+shape-191  REJECT too thick                            chord=6.08 thickness=0.57
+shape-192  REJECT too thick                            chord=6.08 thickness=0.57
+shape-193  REJECT not a single contour                 contours=2
+shape-194  REJECT not a single contour                 contours=2
+shape-196  REJECT too thick                            chord=6.08 thickness=0.57
+shape-198  REJECT too thick                            chord=6.08 thickness=0.57
+shape-199  REJECT too thick                            chord=6.08 thickness=0.57
+shape-200  REJECT too thick                            chord=6.08 thickness=0.57
+shape-201  REJECT too thick                            chord=6.08 thickness=0.57
+shape-203  REJECT too thick                            chord=6.08 thickness=0.57
+shape-205  REJECT too thick                            chord=6.08 thickness=0.57
+shape-206  REJECT too thick                            chord=6.08 thickness=0.57
+shape-207  REJECT too thick                            chord=6.08 thickness=0.57
+shape-208  REJECT too thick                            chord=6.08 thickness=0.57
+shape-209  REJECT too thick                            chord=6.08 thickness=0.57
+shape-210  REJECT not a single contour                 contours=2
+shape-213  REJECT too thick                            chord=1.88 thickness=0.754
+shape-214  REJECT too thick                            chord=1.88 thickness=0.754
+shape-216  REJECT not a single contour                 contours=2
+shape-218  REJECT not a single contour                 contours=2
+shape-219  REJECT not a single contour                 contours=2
+shape-220  REJECT not a single contour                 contours=3
+shape-221  REJECT not a single contour                 contours=2
+shape-222  REJECT not a single contour                 contours=2
+shape-223  REJECT too thick                            chord=4.45 thickness=0.408
+shape-224  REJECT not a single contour                 contours=2
+shape-225  REJECT not a single contour                 contours=2
+shape-226  REJECT too thick                            chord=4.45 thickness=0.408
+shape-227  REJECT too thick                            chord=4.45 thickness=0.408
+shape-228  REJECT not a single contour                 contours=2
+shape-229  REJECT centreline changes side              chord=6.44 thickness=0.332 bend=0.151 side=0.536
+shape-230  REJECT not a single contour                 contours=2
+shape-231  REJECT too thick                            chord=5.36 thickness=0.351
+shape-232  REJECT not a single contour                 contours=2
+shape-233  REJECT too thick                            chord=6.14 thickness=0.396
+shape-234  REJECT not a single contour                 contours=2
+shape-235  REJECT not a single contour                 contours=2
+shape-236  REJECT too thick                            chord=6.08 thickness=0.57
+shape-238  REJECT too thick                            chord=6.08 thickness=0.57
+shape-239  REJECT too thick                            chord=6.08 thickness=0.57
+shape-240  REJECT too thick                            chord=6.08 thickness=0.57
+shape-241  REJECT too thick                            chord=6.08 thickness=0.57
+shape-242  REJECT too thick                            chord=6.08 thickness=0.57
+shape-243  REJECT not a single contour                 contours=2
+shape-244  REJECT not a single contour                 contours=2
+shape-245  REJECT not a single contour                 contours=2
+shape-247  REJECT too thick                            chord=6.08 thickness=0.57
+shape-248  REJECT too thick                            chord=6.08 thickness=0.57
+shape-249  REJECT too thick                            chord=6.08 thickness=0.57
+shape-251  REJECT too thick                            chord=6.08 thickness=0.57
+shape-252  REJECT too thick                            chord=6.08 thickness=0.57
+shape-253  REJECT too thick                            chord=6.08 thickness=0.57
+shape-254  REJECT too thick                            chord=6.08 thickness=0.57
+shape-255  REJECT too thick                            chord=6.08 thickness=0.57
+shape-256  REJECT not a single contour                 contours=2
+shape-258  REJECT too thick                            chord=6.08 thickness=0.57
+shape-259  REJECT too thick                            chord=6.08 thickness=0.57
+shape-260  REJECT too thick                            chord=6.08 thickness=0.57
+shape-262  REJECT too thick                            chord=6.08 thickness=0.57
+shape-263  REJECT too thick                            chord=6.08 thickness=0.57
+shape-264  REJECT too thick                            chord=6.08 thickness=0.57
+shape-265  REJECT too thick                            chord=6.08 thickness=0.57
+shape-266  REJECT too thick                            chord=6.08 thickness=0.57
+shape-268  REJECT too thick                            chord=6.08 thickness=0.57
+shape-269  REJECT too thick                            chord=6.08 thickness=0.57
+shape-270  REJECT too thick                            chord=6.08 thickness=0.57
+shape-271  REJECT too thick                            chord=6.08 thickness=0.57
+shape-273  REJECT too thick                            chord=6.08 thickness=0.57
+shape-274  REJECT too thick                            chord=6.08 thickness=0.57
+shape-275  REJECT too thick                            chord=6.08 thickness=0.57
+shape-276  REJECT too thick                            chord=6.08 thickness=0.57
+shape-277  REJECT too thick                            chord=6.08 thickness=0.57
+shape-278  REJECT not a single contour                 contours=2
+shape-280  REJECT too thick                            chord=6.08 thickness=0.57
+shape-281  REJECT too thick                            chord=6.08 thickness=0.57
+shape-282  REJECT too thick                            chord=6.08 thickness=0.57
+shape-283  REJECT too thick                            chord=6.08 thickness=0.57
+shape-285  REJECT too thick                            chord=6.08 thickness=0.57
+shape-286  REJECT too thick                            chord=6.08 thickness=0.57
+shape-287  REJECT too thick                            chord=6.08 thickness=0.57
+shape-288  REJECT too thick                            chord=6.08 thickness=0.57
+shape-289  REJECT too thick                            chord=6.08 thickness=0.57
+shape-291  REJECT too thick                            chord=6.08 thickness=0.57
+shape-292  REJECT too thick                            chord=6.08 thickness=0.57
+shape-293  REJECT too thick                            chord=6.08 thickness=0.57
+shape-294  REJECT too thick                            chord=6.08 thickness=0.57
+shape-295  REJECT too thick                            chord=6.08 thickness=0.57
+shape-297  REJECT too thick                            chord=6.08 thickness=0.57
+shape-298  REJECT too thick                            chord=6.08 thickness=0.57
+shape-299  REJECT too thick                            chord=6.08 thickness=0.57
+shape-300  REJECT too thick                            chord=6.08 thickness=0.57
+shape-301  REJECT too thick                            chord=6.08 thickness=0.57
+shape-302  REJECT not a single contour                 contours=2
+shape-305.1 REJECT centreline changes side              chord=14.25 thickness=0.306 bend=0.138 side=0.6
+shape-305.2 REJECT bend profile is not a single arch    chord=8.41 thickness=0.296 bend=0.291 side=0.862 rise=0.692 fall=0.632
+shape-306.1 ACCEPT curved stroke                        chord=25.4 thickness=0.026 bend=0.169 side=1 fit=0.011
+shape-306.2 ACCEPT curved stroke                        chord=13.76 thickness=0.047 bend=0.196 side=1 fit=0.013
+shape-306.3 ACCEPT curved stroke                        chord=24.03 thickness=0.028 bend=0.173 side=1 fit=0.011
+shape-306.4 ACCEPT curved stroke                        chord=12.83 thickness=0.05 bend=0.202 side=1 fit=0.013
+shape-306.5 ACCEPT curved stroke                        chord=22.31 thickness=0.03 bend=0.173 side=1 fit=0.011
+shape-306.6 ACCEPT curved stroke                        chord=20.97 thickness=0.031 bend=0.177 side=1 fit=0.011
+shape-306.7 ACCEPT curved stroke                        chord=21.93 thickness=0.03 bend=0.176 side=1 fit=0.011
+shape-306.8 ACCEPT curved stroke                        chord=21.74 thickness=0.031 bend=0.178 side=1 fit=0.011
+shape-306.9 ACCEPT curved stroke                        chord=21.55 thickness=0.031 bend=0.172 side=1 fit=0.011
+shape-308  REJECT not a single contour                 contours=4
+shape-309.1 REJECT too thick                            chord=16.43 thickness=0.469
+shape-309.2 REJECT too thick                            chord=2 thickness=0.74
+shape-309.3 REJECT too thick                            chord=1.97 thickness=0.769
+shape-311  REJECT not a single contour                 contours=2
+shape-313.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-313.2 REJECT not a single contour                 contours=2
+shape-315.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-315.2 REJECT not a single contour                 contours=2
+shape-316  REJECT too thick                            chord=6.08 thickness=0.57
+shape-317  REJECT too thick                            chord=6.08 thickness=0.57
+shape-318  REJECT not a single contour                 contours=2
+shape-320  REJECT too thick                            chord=6.08 thickness=0.57
+shape-321  REJECT too thick                            chord=6.08 thickness=0.57
+shape-325  REJECT too thick                            chord=6.08 thickness=0.57
+shape-326  REJECT too thick                            chord=6.08 thickness=0.57
+shape-328  REJECT too thick                            chord=6.08 thickness=0.57
+shape-329  REJECT too thick                            chord=6.08 thickness=0.57
+shape-330  REJECT too thick                            chord=1.88 thickness=0.754
+shape-332  REJECT not a single contour                 contours=2
+shape-333  REJECT not a single contour                 contours=2
+shape-334  REJECT centreline changes side              chord=13.53 thickness=0.128 bend=0.103 side=0.759
+shape-336  REJECT not a single contour                 contours=2
+shape-337  REJECT not a single contour                 contours=2
+shape-338  REJECT not a single contour                 contours=2
+shape-339  REJECT too thick                            chord=1.88 thickness=0.754
+shape-340  REJECT too thick                            chord=1.88 thickness=0.754
+shape-342  REJECT not a single contour                 contours=2
+shape-343  REJECT not a single contour                 contours=2
+shape-344  REJECT not a single contour                 contours=2
+shape-345  REJECT not a single contour                 contours=2
+shape-346  REJECT not a single contour                 contours=3
+shape-347  REJECT not a single contour                 contours=2
+shape-348  ACCEPT curved stroke                        chord=5.74 thickness=0.265 bend=0.112 side=0.857 fit=0.046
+shape-349  REJECT not a single contour                 contours=2
+shape-350  REJECT centreline changes side              chord=8.15 thickness=0.348 bend=0.244 side=0.655
+shape-351  REJECT not a single contour                 contours=2
+shape-352  REJECT not a single contour                 contours=2
+shape-353  REJECT too thick                            chord=6.08 thickness=0.57
+shape-355  REJECT too thick                            chord=6.08 thickness=0.57
+shape-356  REJECT too thick                            chord=6.08 thickness=0.57
+shape-360  REJECT not a single contour                 contours=2
+shape-361  REJECT not a single contour                 contours=2
+shape-362  REJECT too thick                            chord=1.88 thickness=0.754
+shape-363  REJECT too thick                            chord=1.88 thickness=0.754
+shape-365  REJECT not a single contour                 contours=2
+shape-366  REJECT not a single contour                 contours=2
+shape-367  REJECT not a single contour                 contours=2
+shape-368  REJECT too thick                            chord=1.88 thickness=0.754
+shape-369  REJECT too thick                            chord=1.88 thickness=0.754
+shape-371  REJECT not a single contour                 contours=2
+shape-372  REJECT not a single contour                 contours=2
+shape-373  REJECT not a single contour                 contours=2
+shape-374  REJECT too thick                            chord=6.08 thickness=0.57
+shape-376  REJECT too thick                            chord=6.08 thickness=0.57
+shape-380  REJECT too thick                            chord=6.08 thickness=0.57
+shape-382  REJECT too thick                            chord=6.08 thickness=0.57
+shape-383  REJECT too thick                            chord=1.88 thickness=0.754
+shape-384  REJECT too thick                            chord=1.88 thickness=0.754
+shape-385  REJECT too thick                            chord=1.88 thickness=0.754
+shape-387  REJECT not a single contour                 contours=2
+shape-388  REJECT not a single contour                 contours=2
+shape-389  REJECT not a single contour                 contours=2
+shape-390  REJECT too thick                            chord=1.88 thickness=0.754
+shape-391  REJECT too thick                            chord=1.88 thickness=0.754
+shape-392  REJECT too thick                            chord=1.88 thickness=0.754
+shape-394  REJECT not a single contour                 contours=2
+shape-395  REJECT not a single contour                 contours=2
+shape-396  REJECT not a single contour                 contours=2
+shape-397  REJECT not a single contour                 contours=2
+shape-398  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-399  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-400  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-401  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-402  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-403  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-404  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-405  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-406  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-407  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-408  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-409  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-410  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-411  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-412  REJECT centreline changes side              chord=11.13 thickness=0.121 bend=0.073 side=0.536
+shape-413  REJECT too thick                            chord=6.08 thickness=0.57
+shape-415  REJECT too thick                            chord=6.08 thickness=0.57
+shape-418  REJECT too thick                            chord=1.88 thickness=0.754
+shape-419  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-421  REJECT too thick                            chord=6.08 thickness=0.57
+shape-422  REJECT not a single contour                 contours=2
+shape-424  REJECT too thick                            chord=6.08 thickness=0.57
+shape-425  REJECT too thick                            chord=6.08 thickness=0.57
+shape-427  REJECT too thick                            chord=6.08 thickness=0.57
+shape-428  REJECT not a single contour                 contours=2
+shape-430  REJECT too thick                            chord=6.08 thickness=0.57
+shape-431  REJECT not a single contour                 contours=2
+shape-433  REJECT too thick                            chord=6.08 thickness=0.57
+shape-436  REJECT too thick                            chord=1.88 thickness=0.754
+shape-437  REJECT too thick                            chord=1.88 thickness=0.754
+shape-438  REJECT too thick                            chord=1.88 thickness=0.754
+shape-440  REJECT not a single contour                 contours=2
+shape-441  REJECT not a single contour                 contours=2
+shape-442  REJECT not a single contour                 contours=2
+shape-443  REJECT too thick                            chord=1.88 thickness=0.754
+shape-444  REJECT too thick                            chord=1.88 thickness=0.754
+shape-445  REJECT too thick                            chord=1.88 thickness=0.754
+shape-447  REJECT not a single contour                 contours=2
+shape-448  REJECT not a single contour                 contours=2
+shape-449  REJECT not a single contour                 contours=2
+shape-450  ACCEPT curved stroke                        chord=82.57 thickness=0.01 bend=0.05 side=1 fit=0.003
+shape-451  ACCEPT curved stroke                        chord=82.57 thickness=0.01 bend=0.069 side=1 fit=0.004
+shape-452.1 ACCEPT curved stroke                        chord=88.09 thickness=0.009 bend=0.066 side=1 fit=0.004
+shape-452.2 ACCEPT curved stroke                        chord=92.67 thickness=0.009 bend=0.066 side=1 fit=0.004
+shape-453.1 ACCEPT curved stroke                        chord=82.57 thickness=0.01 bend=0.069 side=1 fit=0.004
+shape-453.2 ACCEPT curved stroke                        chord=88.09 thickness=0.009 bend=0.066 side=1 fit=0.004
+shape-453.3 ACCEPT curved stroke                        chord=16.53 thickness=0.04 bend=0.192 side=1 fit=0.013
+shape-453.4 ACCEPT curved stroke                        chord=22.6 thickness=0.029 bend=0.172 side=1 fit=0.01
+shape-453.5 ACCEPT curved stroke                        chord=16.34 thickness=0.04 bend=0.194 side=1 fit=0.013
+shape-453.6 ACCEPT curved stroke                        chord=16.53 thickness=0.04 bend=0.192 side=1 fit=0.013
+shape-453.7 ACCEPT curved stroke                        chord=22.79 thickness=0.029 bend=0.17 side=1 fit=0.01
+shape-453.8 ACCEPT curved stroke                        chord=21.27 thickness=0.031 bend=0.176 side=1 fit=0.011
+shape-453.9 ACCEPT curved stroke                        chord=55.89 thickness=0.013 bend=0.15 side=1 fit=0.012
+shape-455  REJECT not a single contour                 contours=4
+shape-456.1 REJECT too thick                            chord=16.43 thickness=0.469
+shape-456.2 REJECT too thick                            chord=2 thickness=0.74
+shape-456.3 REJECT too thick                            chord=1.97 thickness=0.769
+shape-458  REJECT not a single contour                 contours=2
+shape-459  REJECT not a single contour                 contours=3
+shape-462.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-462.2 REJECT not a single contour                 contours=2
+shape-464.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-464.2 REJECT not a single contour                 contours=2
+shape-465  REJECT centreline changes side              chord=13.53 thickness=0.128 bend=0.103 side=0.759
+shape-466  REJECT too thick                            chord=1.88 thickness=0.754
+shape-467  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-469  REJECT too thick                            chord=6.08 thickness=0.57
+shape-470  REJECT too thick                            chord=6.08 thickness=0.57
+shape-472  REJECT too thick                            chord=6.08 thickness=0.57
+shape-475  REJECT too thick                            chord=1.88 thickness=0.754
+shape-476  REJECT too thick                            chord=1.88 thickness=0.754
+shape-478  REJECT not a single contour                 contours=2
+shape-479  REJECT not a single contour                 contours=2
+shape-480  REJECT too thick                            chord=1.88 thickness=0.754
+shape-481  REJECT too thick                            chord=1.88 thickness=0.754
+shape-483  REJECT not a single contour                 contours=2
+shape-484  REJECT not a single contour                 contours=2
+shape-485  REJECT too thick                            chord=1.88 thickness=0.754
+shape-486  REJECT too thick                            chord=1.88 thickness=0.754
+shape-487  REJECT too thick                            chord=1.88 thickness=0.754
+shape-489  REJECT too thick                            chord=6.08 thickness=0.57
+shape-490  REJECT too thick                            chord=6.08 thickness=0.57
+shape-491  REJECT too thick                            chord=6.08 thickness=0.57
+shape-492  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-494  REJECT too thick                            chord=6.08 thickness=0.57
+shape-495  REJECT too thick                            chord=6.08 thickness=0.57
+shape-497  REJECT too thick                            chord=6.08 thickness=0.57
+shape-500  REJECT too thick                            chord=1.88 thickness=0.754
+shape-502  REJECT not a single contour                 contours=2
+shape-503  REJECT not a single contour                 contours=2
+shape-504  REJECT centreline changes side              chord=8.57 thickness=0.12 bend=0.291 side=0.759
+shape-505  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-507  REJECT too thick                            chord=6.08 thickness=0.57
+shape-508  REJECT too thick                            chord=6.08 thickness=0.57
+shape-509  REJECT not a single contour                 contours=2
+shape-510  REJECT not a single contour                 contours=2
+shape-512  REJECT not a single contour                 contours=2
+shape-513  REJECT not a single contour                 contours=2
+shape-514  REJECT too thick                            chord=1.88 thickness=0.754
+shape-516  REJECT not a single contour                 contours=2
+shape-518  REJECT not a single contour                 contours=2
+shape-519  REJECT not a single contour                 contours=2
+shape-520  REJECT too thick                            chord=6.08 thickness=0.57
+shape-521  REJECT not a single contour                 contours=2
+shape-523  REJECT too thick                            chord=6.08 thickness=0.57
+shape-524  REJECT not a single contour                 contours=2
+shape-527  REJECT too thick                            chord=6.08 thickness=0.57
+shape-529  REJECT too thick                            chord=6.08 thickness=0.57
+shape-531  REJECT too thick                            chord=6.08 thickness=0.57
+shape-533  REJECT too thick                            chord=6.08 thickness=0.57
+shape-534  REJECT not a single contour                 contours=2
+shape-538  REJECT too thick                            chord=6.08 thickness=0.57
+shape-539  REJECT too thick                            chord=6.08 thickness=0.57
+shape-540  REJECT too thick                            chord=6.08 thickness=0.57
+shape-541  REJECT too thick                            chord=6.08 thickness=0.57
+shape-542  REJECT centreline changes side              chord=8.57 thickness=0.12 bend=0.291 side=0.759
+shape-543  REJECT centreline changes side              chord=14.89 thickness=0.047 bend=0.114 side=0.714
+shape-545  REJECT too thick                            chord=6.08 thickness=0.57
+shape-547  REJECT not a single contour                 contours=2
+shape-548  REJECT not a single contour                 contours=2
+shape-550  REJECT too thick                            chord=6.08 thickness=0.57
+shape-551  REJECT too thick                            chord=6.08 thickness=0.57
+shape-553  REJECT too thick                            chord=6.08 thickness=0.57
+shape-555  REJECT too thick                            chord=6.08 thickness=0.57
+shape-557  REJECT too thick                            chord=6.08 thickness=0.57
+shape-559  REJECT too thick                            chord=6.08 thickness=0.57
+shape-563  REJECT too thick                            chord=6.08 thickness=0.57
+shape-564  REJECT too thick                            chord=6.08 thickness=0.57
+shape-565.1 ACCEPT curved stroke                        chord=13.92 thickness=0.054 bend=0.153 side=1 fit=0.012
+shape-565.2 ACCEPT curved stroke                        chord=4.39 thickness=0.142 bend=0.422 side=1 fit=0.049
+shape-565.3 ACCEPT curved stroke                        chord=82.95 thickness=0.01 bend=0.069 side=1 fit=0.004
+shape-565.4 ACCEPT curved stroke                        chord=59.87 thickness=0.013 bend=0.083 side=1 fit=0.005
+shape-565.5 ACCEPT curved stroke                        chord=35.27 thickness=0.023 bend=0.048 side=1 fit=0.003
+shape-565.6 ACCEPT curved stroke                        chord=19.83 thickness=0.039 bend=0.107 side=1 fit=0.008
+shape-565.7 ACCEPT curved stroke                        chord=14.11 thickness=0.046 bend=0.191 side=1 fit=0.012
+shape-565.8 ACCEPT curved stroke                        chord=47.29 thickness=0.014 bend=0.151 side=1 fit=0.009
+shape-565.9 ACCEPT curved stroke                        chord=18.42 thickness=0.036 bend=0.18 side=1 fit=0.011
+shape-565.10 ACCEPT curved stroke                        chord=23.95 thickness=0.028 bend=0.173 side=1 fit=0.011
+shape-567  REJECT not a single contour                 contours=4
+shape-568.1 REJECT too thick                            chord=16.43 thickness=0.469
+shape-568.2 REJECT too thick                            chord=2 thickness=0.74
+shape-568.3 REJECT too thick                            chord=1.97 thickness=0.769
+shape-570  REJECT not a single contour                 contours=2
+shape-571  REJECT not a single contour                 contours=3
+shape-574.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-574.2 REJECT not a single contour                 contours=2
+shape-576.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-576.2 REJECT not a single contour                 contours=2
+shape-578.1 REJECT too thick                            chord=1.02 thickness=0.732
+shape-578.2 REJECT not a single contour                 contours=2
+shape-579  REJECT too thick                            chord=6.08 thickness=0.57
+shape-581  REJECT too thick                            chord=6.08 thickness=0.57
+shape-583  REJECT too thick                            chord=6.08 thickness=0.57
+shape-585  REJECT too thick                            chord=6.08 thickness=0.57
+shape-587  REJECT too thick                            chord=6.08 thickness=0.57
+shape-589  REJECT too thick                            chord=6.08 thickness=0.57
+shape-593  REJECT not a single contour                 contours=2
+shape-594  REJECT too thick                            chord=6.08 thickness=0.57
+shape-596  REJECT too thick                            chord=6.08 thickness=0.57
+shape-598  REJECT too thick                            chord=6.08 thickness=0.57
+shape-600  REJECT too thick                            chord=6.08 thickness=0.57
+shape-604  REJECT not a single contour                 contours=2
+shape-606  REJECT not a single contour                 contours=2
+shape-607  REJECT not a single contour                 contours=2
+shape-608  REJECT not a single contour                 contours=2
+shape-609  REJECT not a single contour                 contours=2
+shape-610  REJECT not a single contour                 contours=2
+shape-611  REJECT too thick                            chord=4.45 thickness=0.408
+shape-612  REJECT not a single contour                 contours=2
+shape-613  REJECT not a single contour                 contours=2
+shape-614  REJECT not a single contour                 contours=2
+shape-615  REJECT not a single contour                 contours=2
+shape-616  REJECT too thick                            chord=4.45 thickness=0.408
+shape-617  REJECT not a single contour                 contours=2
+shape-618  REJECT not a single contour                 contours=2
+shape-619  REJECT too thick                            chord=6.14 thickness=0.396
+shape-620.1 REJECT too thick                            chord=1.37 thickness=0.771
+shape-620.2 REJECT too thick                            chord=4.73 thickness=0.441
+shape-621  REJECT centreline changes side              chord=8.15 thickness=0.348 bend=0.244 side=0.655
+shape-622  REJECT not a single contour                 contours=2
+shape-623  ACCEPT curved stroke                        chord=5.74 thickness=0.265 bend=0.112 side=0.857 fit=0.046
+shape-624  REJECT not a single contour                 contours=2
+shape-625  REJECT too thick                            chord=6.08 thickness=0.57
+shape-627  REJECT too thick                            chord=6.08 thickness=0.57
+shape-629  REJECT too thick                            chord=6.08 thickness=0.57
+shape-631  REJECT too thick                            chord=6.08 thickness=0.57
+shape-633  REJECT too thick                            chord=6.08 thickness=0.57
+shape-635  REJECT too thick                            chord=6.08 thickness=0.57
+shape-639  REJECT not a single contour                 contours=2
+shape-640  REJECT too thick                            chord=6.08 thickness=0.57
+shape-642  REJECT too thick                            chord=6.08 thickness=0.57
+shape-644  REJECT too thick                            chord=6.08 thickness=0.57
+shape-646  REJECT too thick                            chord=6.08 thickness=0.57
+shape-650  REJECT not a single contour                 contours=2
+shape-651  REJECT not a single contour                 contours=2
+shape-652  REJECT not a single contour                 contours=2
+shape-653  REJECT not a single contour                 contours=2
+shape-654  REJECT too thick                            chord=1.88 thickness=0.754
+shape-656  REJECT not a single contour                 contours=2
+shape-657  REJECT too thick                            chord=6.08 thickness=0.57
+shape-659  REJECT too thick                            chord=6.08 thickness=0.57
+shape-661  REJECT too thick                            chord=6.08 thickness=0.57
+shape-663  REJECT too thick                            chord=6.08 thickness=0.57
+shape-665  REJECT too thick                            chord=6.08 thickness=0.57
+shape-667  REJECT too thick                            chord=6.08 thickness=0.57
+shape-670  REJECT centreline changes side              chord=13.53 thickness=0.128 bend=0.103 side=0.759
+shape-671  REJECT centreline changes side              chord=13.53 thickness=0.128 bend=0.103 side=0.759
+shape-673  REJECT too thick                            chord=6.08 thickness=0.57
+shape-674  REJECT too thick                            chord=1.88 thickness=0.754
+shape-675  REJECT too thick                            chord=1.88 thickness=0.754
+shape-677  REJECT not a single contour                 contours=2
+shape-678  REJECT not a single contour                 contours=2
+shape-679  REJECT not a single contour                 contours=2
+shape-680  REJECT not a single contour                 contours=2
+shape-681  REJECT centreline changes side              chord=13.53 thickness=0.128 bend=0.103 side=0.759
+shape-683  REJECT not a single contour                 contours=2
+shape-684  REJECT too thick                            chord=1.88 thickness=0.754
+shape-685  REJECT too thick                            chord=1.88 thickness=0.754
+shape-687  REJECT not a single contour                 contours=2
+shape-688  REJECT not a single contour                 contours=2
+shape-689  REJECT centreline changes side              chord=6.77 thickness=0.284 bend=0.094 side=0.714
+shape-690  REJECT not a single contour                 contours=2
+shape-691  REJECT too thick                            chord=4.69 thickness=0.357
+shape-692  REJECT not a single contour                 contours=2
+shape-693.1 ACCEPT curved stroke                        chord=69.22 thickness=0.011 bend=0.076 side=1 fit=0.005
+shape-693.2 ACCEPT curved stroke                        chord=51.87 thickness=0.015 bend=0.096 side=1 fit=0.006
+shape-693.3 ACCEPT curved stroke                        chord=33.75 thickness=0.024 bend=0.054 side=1 fit=0.003
+shape-693.4 ACCEPT curved stroke                        chord=9.15 thickness=0.078 bend=0.233 side=1 fit=0.023
+shape-693.5 ACCEPT curved stroke                        chord=65.02 thickness=0.012 bend=0.079 side=1 fit=0.005
+shape-693.6 ACCEPT curved stroke                        chord=48.05 thickness=0.016 bend=0.104 side=1 fit=0.007
+shape-693.7 ACCEPT curved stroke                        chord=32.22 thickness=0.025 bend=0.053 side=1 fit=0.003
+shape-693.8 ACCEPT curved stroke                        chord=7.82 thickness=0.091 bend=0.236 side=1 fit=0.024
+shape-693.9 ACCEPT curved stroke                        chord=34.77 thickness=0.019 bend=0.157 side=1 fit=0.009
+shape-693.10 ACCEPT curved stroke                        chord=15.4 thickness=0.042 bend=0.197 side=1 fit=0.013
+shape-693.11 ACCEPT curved stroke                        chord=15.05 thickness=0.044 bend=0.188 side=1 fit=0.012
+shape-693.12 ACCEPT curved stroke                        chord=33.46 thickness=0.02 bend=0.156 side=1 fit=0.009
+shape-693.13 ACCEPT curved stroke                        chord=15.02 thickness=0.044 bend=0.192 side=1 fit=0.012
+shape-693.14 ACCEPT curved stroke                        chord=14.89 thickness=0.044 bend=0.195 side=1 fit=0.013
+shape-694  REJECT not a single contour                 contours=3
+shape-695  REJECT too thick                            chord=5.03 thickness=0.374
+shape-696  REJECT not a single contour                 contours=2
+shape-697  REJECT too thick                            chord=5.52 thickness=0.382
+shape-698  REJECT too thick                            chord=5.17 thickness=0.485
+shape-700  REJECT too thick                            chord=5.17 thickness=0.485
+shape-701  REJECT not a single contour                 contours=2
+shape-702  REJECT not a single contour                 contours=2
+shape-703  REJECT not a single contour                 contours=2
+shape-704  REJECT centreline not regular enough        chord=6.38 thickness=0.181 bend=0.24 side=0.897 fit=0.127
+shape-705  REJECT not a single contour                 contours=2
+shape-706  REJECT too thick                            chord=4.83 thickness=0.428
+shape-707  REJECT too thick                            chord=3.63 thickness=0.369
+shape-708  REJECT too thick                            chord=6.38 thickness=0.355
+shape-709  REJECT not a single contour                 contours=2
+shape-710  REJECT centreline changes side              chord=5.54 thickness=0.28 bend=0.171 side=0.75
+shape-711.1 REJECT too thick                            chord=0.78 thickness=0.773
+shape-711.2 REJECT too thick                            chord=3.62 thickness=0.399
+shape-712  REJECT centreline changes side              chord=6.55 thickness=0.337 bend=0.243 side=0.679
+shape-713  REJECT too thick                            chord=4.83 thickness=0.413
+shape-714  REJECT centreline changes side              chord=3.63 thickness=0.347 bend=0.291 side=0.536
+shape-715.1 REJECT too thick                            chord=0.78 thickness=0.773
+shape-715.2 REJECT too thick                            chord=3.62 thickness=0.399
+shape-716  REJECT too thick                            chord=3.63 thickness=0.369
+shape-717  REJECT centreline changes side              chord=18.95 thickness=0.291 bend=0.257 side=0.536
+shape-718.1 REJECT too thick                            chord=2.55 thickness=0.766
+shape-718.2 REJECT too thick                            chord=8.87 thickness=0.489
+shape-719  REJECT too thick                            chord=11.86 thickness=0.411
+shape-720.1 REJECT too thick                            chord=2.55 thickness=0.766
+shape-720.2 REJECT too thick                            chord=8.87 thickness=0.489
+shape-721  REJECT not a single contour                 contours=2
+shape-722  ACCEPT curved stroke                        chord=10.89 thickness=0.258 bend=0.105 side=0.862 fit=0.048
+shape-723  REJECT too thick                            chord=11.79 thickness=0.408
+shape-724  REJECT centreline changes side              chord=10.11 thickness=0.344 bend=0.163 side=0.6
+shape-725  REJECT not a single contour                 contours=2
+shape-726  REJECT centreline changes side              chord=13.79 thickness=0.229 bend=0.16 side=0.643
+shape-727  REJECT not a single contour                 contours=2
+shape-728  REJECT centreline changes side              chord=10.11 thickness=0.344 bend=0.163 side=0.6
+shape-729  REJECT not a single contour                 contours=2
+shape-730.1 REJECT too thick                            chord=2.55 thickness=0.766
+shape-730.2 REJECT too thick                            chord=8.87 thickness=0.489
+shape-731  REJECT not a single contour                 contours=2
+shape-732  REJECT too thick                            chord=11.86 thickness=0.411
+shape-733  REJECT not a single contour                 contours=2
+shape-734  REJECT not a single contour                 contours=2
+shape-735  REJECT centreline changes side              chord=11.89 thickness=0.283 bend=0.302 side=0.679
+shape-736  REJECT too thick                            chord=10.21 thickness=0.353
+shape-737  REJECT too thick                            chord=9.02 thickness=0.45
+shape-738  REJECT not a single contour                 contours=2
+shape-739  REJECT too thick                            chord=9.54 thickness=0.411
+shape-740  REJECT not a single contour                 contours=2
+shape-741  REJECT centreline changes side              chord=12.99 thickness=0.089 bend=0.093 side=0.571
+shape-742  ACCEPT curved stroke                        chord=6.49 thickness=0.265 bend=0.23 side=1 fit=0.065
+shape-743  REJECT not a single contour                 contours=2
+shape-744  REJECT too thick                            chord=9.54 thickness=0.411
+shape-745.1 ACCEPT curved stroke                        chord=2.88 thickness=0.253 bend=0.253 side=1 fit=0.061
+shape-745.2 ACCEPT curved stroke                        chord=2.91 thickness=0.252 bend=0.257 side=1 fit=0.061
+shape-746  REJECT centreline changes side              chord=12.05 thickness=0.258 bend=0.346 side=0.714
+shape-747  REJECT too thick                            chord=9.02 thickness=0.45
+shape-748  REJECT not a single contour                 contours=2
+shape-749  REJECT too thick                            chord=7.23 thickness=0.473
+shape-750  REJECT not a single contour                 contours=2
+shape-751  REJECT centreline changes side              chord=8.93 thickness=0.262 bend=0.08 side=0.69
+shape-752  REJECT too thick                            chord=9.54 thickness=0.411
+shape-753  REJECT not a single contour                 contours=2
+shape-754  REJECT too thick                            chord=7.23 thickness=0.473
+shape-755  REJECT not a single contour                 contours=2
+shape-756  REJECT centreline changes side              chord=5.9 thickness=0.23 bend=0.257 side=0.536
+shape-757  REJECT not a single contour                 contours=3
+shape-758  REJECT centreline changes side              chord=8.93 thickness=0.262 bend=0.08 side=0.69
+shape-759  REJECT not a single contour                 contours=2
+shape-760  REJECT centreline changes side              chord=5.9 thickness=0.23 bend=0.257 side=0.536
+shape-761  REJECT centreline changes side              chord=5.9 thickness=0.23 bend=0.257 side=0.536
+shape-762  REJECT not a single contour                 contours=2
+shape-763  REJECT too thick                            chord=9.54 thickness=0.411
+shape-764  REJECT not a single contour                 contours=2
+shape-765  REJECT not a single contour                 contours=2
+shape-766.1 ACCEPT curved stroke                        chord=2.88 thickness=0.263 bend=0.234 side=0.852 fit=0.064
+shape-766.2 ACCEPT curved stroke                        chord=2.88 thickness=0.254 bend=0.259 side=1 fit=0.062
+shape-767  REJECT centreline changes side              chord=10.22 thickness=0.187 bend=0.228 side=0.741
+shape-768.1 REJECT too thick                            chord=1.28 thickness=0.684
+shape-768.2 REJECT centreline changes side              chord=5.72 thickness=0.325 bend=0.092 side=0.538
+shape-769  REJECT centreline changes side              chord=8.93 thickness=0.262 bend=0.08 side=0.69
+shape-770  REJECT too thick                            chord=9.54 thickness=0.411
+shape-771  REJECT not a single contour                 contours=2
+shape-772  REJECT centreline changes side              chord=10.17 thickness=0.246 bend=0.101 side=0.379
+shape-773  REJECT too thick                            chord=8.97 thickness=0.507
+shape-774  REJECT not a single contour                 contours=2
+shape-775  REJECT too thick                            chord=7.23 thickness=0.473
+shape-776  REJECT not a single contour                 contours=2
+shape-777  REJECT too thick                            chord=9.26 thickness=0.562
+shape-778  REJECT not a single contour                 contours=2
+shape-779  REJECT not a single contour                 contours=3
+shape-780  REJECT not a single contour                 contours=2
+shape-781  REJECT not a single contour                 contours=2
+shape-782  REJECT not a single contour                 contours=2
+shape-783  ACCEPT curved stroke                        chord=6.49 thickness=0.265 bend=0.23 side=1 fit=0.065
+shape-784.1 REJECT too thick                            chord=1.28 thickness=0.684
+shape-784.2 REJECT centreline changes side              chord=5.72 thickness=0.325 bend=0.092 side=0.538
+shape-785  REJECT not a single contour                 contours=2
+shape-786  REJECT too thick                            chord=7.39 thickness=0.373
+shape-787  REJECT not a single contour                 contours=2
+shape-788  ACCEPT curved stroke                        chord=10.73 thickness=0.072 bend=0.19 side=1 fit=0.02
+shape-789  REJECT centreline changes side              chord=8.4 thickness=0.331 bend=0.205 side=0.714
+shape-790  REJECT not a single contour                 contours=2
+shape-791  REJECT centreline changes side              chord=9.36 thickness=0.341 bend=0.172 side=0.552
+shape-792  REJECT too thick                            chord=8.71 thickness=0.438
+shape-793  ACCEPT curved stroke                        chord=10.73 thickness=0.072 bend=0.187 side=1 fit=0.02
+shape-794  REJECT too thick                            chord=8.91 thickness=0.619
+shape-795.1 REJECT too thick                            chord=1.7 thickness=0.763
+shape-795.2 REJECT too thick                            chord=5.9 thickness=0.491
+shape-796  REJECT centreline not regular enough        chord=9.25 thickness=0.261 bend=0.26 side=0.897 fit=0.08
+shape-797  REJECT not a single contour                 contours=2
+shape-798  REJECT centreline changes side              chord=11.13 thickness=0.308 bend=0.201 side=0.552
+shape-799  REJECT not a single contour                 contours=2
+shape-800  REJECT too thick                            chord=7.9 thickness=0.41
+shape-801  REJECT too thick                            chord=5.8 thickness=0.428
+shape-802  REJECT too thick                            chord=10.09 thickness=0.373
+shape-803  REJECT not a single contour                 contours=2
+shape-804  REJECT centreline changes side              chord=8.73 thickness=0.347 bend=0.175 side=0.679
+shape-805.1 REJECT too thick                            chord=1.7 thickness=0.763
+shape-805.2 REJECT too thick                            chord=5.9 thickness=0.491
+shape-806  ACCEPT curved stroke                        chord=10.53 thickness=0.076 bend=0.199 side=1 fit=0.021
+shape-807  REJECT too thick                            chord=7.9 thickness=0.373
+shape-808  REJECT not a single contour                 contours=2
+shape-809  REJECT centreline changes side              chord=7.86 thickness=0.235 bend=0.298 side=0.793
+shape-810  REJECT centreline changes side              chord=8.3 thickness=0.141 bend=0.307 side=0.517
+shape-811  REJECT not a sufficiently sampled closed contour points=5
+shape-812  REJECT too thick                            chord=8.12 thickness=0.486
+shape-813  REJECT not a single contour                 contours=2
+shape-814  REJECT too thick                            chord=7.9 thickness=0.373
+shape-815  REJECT not a single contour                 contours=2
+shape-816  ACCEPT curved stroke                        chord=10.53 thickness=0.075 bend=0.199 side=1 fit=0.021
