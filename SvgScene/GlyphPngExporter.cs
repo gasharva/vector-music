@@ -35,7 +35,15 @@ public sealed class GlyphPngExporter
         var scale = TargetInterline / sourceInterline;
         var entries = new List<GlyphExportEntry>();
 
-        foreach (var instance in notation.Instances)
+        // ShapePrototype is already our equivalence class for contours.
+        // Export only one representative image per prototype; the classifier
+        // should not spend time rasterizing and evaluating duplicate instances.
+        var representatives = notation.Instances
+            .GroupBy(instance => instance.PrototypeId, StringComparer.Ordinal)
+            .Select(group => group.First())
+            .ToArray();
+
+        foreach (var instance in representatives)
         {
             if (!shapesById.TryGetValue(instance.ShapeId, out var shape))
             {
