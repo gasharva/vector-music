@@ -1,0 +1,135 @@
+name: SVG scene preview
+
+on:
+  push:
+    branches:
+      - svg-scene-poc
+    paths:
+      - "SvgScene/**"
+      - ".github/workflows/svg-scene-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    name: Build and render Kancheli fixture
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Reconstruct Kancheli fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p ci-input
+
+          cat SvgScene/Fixtures/almonds-internet.svg.gz.b64.parts/part-* \
+            | base64 --decode \
+            | gzip --decompress \
+            > ci-input/almonds-internet.svg
+
+          echo "50ebc277329e20ca2cc1f7efc055eb7d9f04b8765cca34b5a90509e0f7fdd2fe  ci-input/almonds-internet.svg" \
+            | sha256sum --check -
+
+      - name: Build SvgScene
+        run: |
+          dotnet build SvgScene/SvgScene.csproj \
+            --configuration Release
+
+      - name: Run scene pipeline
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p artifacts
+
+          dotnet run \
+            --project SvgScene/SvgScene.csproj \
+            --configuration Release \
+            --no-build \
+            -- \
+            ci-input/almonds-internet.svg \
+            artifacts/notation-scene.json \
+            --debug \
+            | tee artifacts/run.log
+
+          cp ci-input/almonds-internet.strokes.svg artifacts/
+          cp ci-input/almonds-internet.arcs.svg artifacts/
+          cp ci-input/almonds-internet.ellipses.svg artifacts/
+          cp ci-input/almonds-internet.contours.svg artifacts/
+          cp ci-input/almonds-internet.stroke-diagnostics.txt artifacts/
+          cp ci-input/almonds-internet.arc-diagnostics.txt artifacts/
+
+      - name: Create preview index
+        shell: bash
+        run: |
+          cat > artifacts/README.md <<'EOF'
+          # SVG Scene Preview
+
+          Generated automatically from the Kancheli internet SVG fixture.
+
+          - [Strokes](almonds-internet.strokes.svg)
+          - [Curved strokes](almonds-internet.arcs.svg)
+          - [Ellipses](almonds-internet.ellipses.svg)
+          - [Remaining contours](almonds-internet.contours.svg)
+          - [Stroke diagnostics](almonds-internet.stroke-diagnostics.txt)
+          - [Arc diagnostics](almonds-internet.arc-diagnostics.txt)
+          - [Notation scene JSON](notation-scene.json)
+          - [Run log](run.log)
+          EOF
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: svg-scene-preview
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish online preview branch
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          preview_dir="$(mktemp -d)"
+          cp -R artifacts/. "$preview_dir/"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git switch --orphan svg-scene-preview
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -R "$preview_dir"/. .
+
+          git add .
+          git commit -m "SVG scene preview ${GITHUB_SHA}"
+          git push --force origin HEAD:svg-scene-preview
+
+      - name: Add links to job summary
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          {
+            echo "## SVG scene preview"
+            echo
+            echo "Generated from commit \`${GITHUB_SHA}\`."
+            echo
+            echo "- [Strokes](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.strokes.svg)"
+            echo "- [Curved strokes](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.arcs.svg)"
+            echo "- [Ellipses](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.ellipses.svg)"
+            echo "- [Remaining contours](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.contours.svg)"
+            echo "- [Stroke diagnostics](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.stroke-diagnostics.txt)"
+            echo "- [Arc diagnostics](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.arc-diagnostics.txt)"
+            echo "- [Run log](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/run.log)"
+          } >> "$GITHUB_STEP_SUMMARY"
