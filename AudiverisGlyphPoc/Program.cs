@@ -25,27 +25,29 @@ try
             glyphDirectory,
             top: 8);
 
-        Console.WriteLine($"Glyph directory: {Path.GetFullPath(glyphDirectory)}");
-        Console.WriteLine($"Glyphs classified: {result.Glyphs.Count}");
-        Console.WriteLine($"Prototype groups : {result.Prototypes.Count}");
-        Console.WriteLine($"Errors           : {result.Glyphs.Count(item => item.Error is not null)}");
-        Console.WriteLine();
-        Console.WriteLine("Prototype winners:");
+        var fullDirectory = Path.GetFullPath(glyphDirectory);
 
-        foreach (var summary in result.Prototypes)
+        Console.WriteLine($"Glyph directory      : {fullDirectory}");
+        Console.WriteLine($"Prototypes classified: {result.Glyphs.Count}");
+        Console.WriteLine($"Errors               : {result.Glyphs.Count(item => item.Error is not null)}");
+        Console.WriteLine();
+        Console.WriteLine("Prototype representatives:");
+
+        foreach (var item in result.Glyphs)
         {
+            var top = item.Predictions.FirstOrDefault();
+
             Console.WriteLine(
-                $"  {summary.PrototypeId,-8} "
-                + $"{summary.WinningLabel,-28} "
-                + $"votes={summary.WinningVotes}/{summary.InstanceCount} "
-                + $"score={summary.AverageWinningScore:F4}");
+                $"  {item.PrototypeId,-14} "
+                + $"instances={item.PrototypeInstanceCount,-3} "
+                + $"{top?.Label ?? "ERROR",-28} "
+                + $"score={(top?.Score ?? 0):F4}");
         }
 
         Console.WriteLine();
-        Console.WriteLine(
-            $"Written: {Path.Combine(Path.GetFullPath(glyphDirectory), "predictions.json")}");
-        Console.WriteLine(
-            $"Written: {Path.Combine(Path.GetFullPath(glyphDirectory), "predictions.csv")}");
+        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "predictions.json")}");
+        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "predictions.csv")}");
+        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "report.html")}");
 
         return 0;
     }
