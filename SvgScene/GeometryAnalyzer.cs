@@ -8,30 +8,45 @@ public sealed record StrokeDiagnostic(
 
 public interface IGeometryAnalyzer
 {
-    bool TryCreateStroke(GeometricShape shape, out Stroke stroke);
+    bool TryCreateStroke(
+        GeometricShape shape,
+        out Stroke stroke);
+
     IReadOnlyList<StrokeDiagnostic> Diagnostics { get; }
+
     void ClearDiagnostics();
 }
 
 /// <summary>
 /// Detects straight line-like geometry independently of SVG representation.
-/// Analysis is contour-aware: only a single geometric contour can currently
-/// collapse into one Stroke. Multi-contour shapes are left intact for later stages.
+///
+/// The analyzer keeps the strict cases first:
+/// 1. exact two-point open line;
+/// 2. elongated filled closed contour;
+/// 3. sampled open contour that is straight under PCA;
+/// 4. tolerant fallback for a nearly straight open polyline.
+///
+/// The fallback lives in its own extractor so its rules can evolve without
+/// making the main analysis method unreadable.
 /// </summary>
 public sealed class GeometryAnalyzer : IGeometryAnalyzer
 {
     private readonly double _minElongation;
     private readonly double _minClosedFillRatio;
+    private readonly OpenPolylineStrokeExtractor _openPolylineExtractor;
     private readonly List<StrokeDiagnostic> _diagnostics = [];
 
     public IReadOnlyList<StrokeDiagnostic> Diagnostics => _diagnostics;
 
     public GeometryAnalyzer(
         double minElongation = 5.0,
-        double minClosedFillRatio = 0.55)
+        double minClosedFillRatio = 0.55,
+        OpenPolylineStrokeExtractor? openPolylineExtractor = null)
     {
         _minElongation = minElongation;
         _minClosedFillRatio = minClosedFillRatio;
+        _openPolylineExtractor =
+            openPolylineExtractor ?? new OpenPolylineStrokeExtractor();
     }
 
     public void ClearDiagnostics()
@@ -39,12 +54,14 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
         _diagnostics.Clear();
     }
 
-    public bool TryCreateStroke(GeometricShape shape, out Stroke stroke)
+    public bool TryCreateStroke(
+        GeometricShape shape,
+        out Stroke stroke)
     {
         stroke = default!;
 
         var contours = shape.EffectiveContours
-            .Where(c => c.Points.Count > 0)
+            .Where(contour => contour.Points.Count > 0)
             .ToList();
 
         if (contours.Count != 1)
@@ -52,7 +69,9 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
             return Reject(
                 shape,
                 "multiple contours",
-                $"kind={shape.SourceKind} contours={contours.Count} points={shape.Points.Count}");
+                $"kind={shape.SourceKind} " +
+                $"contours={contours.Count} " +
+                $"points={shape.Points.Count}");
         }
 
         var contour = contours[0];
@@ -63,51 +82,294 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
             return Reject(
                 shape,
                 "too few points",
-                $"kind={shape.SourceKind} closed={contour.IsClosed} points={points.Count}");
+                $"kind={shape.SourceKind} " +
+                $"closed={contour.IsClosed} " +
+                $"points={points.Count}");
         }
 
-        // A genuine two-point open contour is already an exact centreline.
-        if (!contour.IsClosed && points.Count == 2)
+        if (TryCreateExactOpenStroke(
+            shape,
+            contour,
+            out stroke))
         {
-            var start = points[0];
-            var end = points[1];
-            var _length = Distance(start, end);
+            return true;
+        }
 
-            if (_length <= 1e-9)
-            {
-                return Reject(
-                    shape,
-                    "zero length",
-                    Metrics(shape, contour, _length, 0, 0, null));
-            }
+        var axisAnalysis = AnalyzeAlongPrincipalAxis(points);
 
-            OrderEndpoints(ref start, ref end);
-
-            stroke = new Stroke(
-                shape.Id,
-                start,
-                end,
-                Math.Max(shape.StrokeWidth, 1.0),
-                shape.SourceKind,
-                shape.SourceIndex);
-
-            Accept(
+        if (axisAnalysis.Length <= 1e-9 ||
+            axisAnalysis.EffectiveThickness(shape.StrokeWidth) <= 1e-9)
+        {
+            return Reject(
                 shape,
-                "two-point open contour",
+                "degenerate geometry",
                 Metrics(
                     shape,
                     contour,
-                    _length,
-                    shape.StrokeWidth,
-                    _length / Math.Max(shape.StrokeWidth, 1e-9),
+                    axisAnalysis.Length,
+                    axisAnalysis.EffectiveThickness(shape.StrokeWidth),
+                    0,
                     null));
+        }
+
+        var effectiveThickness =
+            axisAnalysis.EffectiveThickness(shape.StrokeWidth);
+
+        var elongation =
+            axisAnalysis.Length / effectiveThickness;
+
+        if (contour.IsClosed)
+        {
+            return TryCreateClosedStroke(
+                shape,
+                contour,
+                axisAnalysis,
+                effectiveThickness,
+                elongation,
+                out stroke);
+        }
+
+        if (TryCreateStrictOpenStroke(
+            shape,
+            contour,
+            axisAnalysis,
+            effectiveThickness,
+            elongation,
+            out stroke))
+        {
+            return true;
+        }
+
+        var fallback = _openPolylineExtractor.TryExtract(shape);
+
+        if (fallback.Accepted && fallback.Stroke is not null)
+        {
+            stroke = fallback.Stroke;
+
+            Accept(
+                shape,
+                fallback.Reason,
+                $"kind={shape.SourceKind} " + fallback.Metrics);
 
             return true;
         }
 
+        return Reject(
+            shape,
+            fallback.Reason,
+            $"kind={shape.SourceKind} " + fallback.Metrics);
+    }
+
+    private bool TryCreateExactOpenStroke(
+        GeometricShape shape,
+        GeometricContour contour,
+        out Stroke stroke)
+    {
+        stroke = default!;
+
+        if (contour.IsClosed || contour.Points.Count != 2)
+        {
+            return false;
+        }
+
+        var start = contour.Points[0];
+        var end = contour.Points[1];
+        var length = GeometryAlgorithms.Distance(start, end);
+
+        if (length <= 1e-9)
+        {
+            Reject(
+                shape,
+                "zero length",
+                Metrics(
+                    shape,
+                    contour,
+                    length,
+                    0,
+                    0,
+                    null));
+
+            return false;
+        }
+
+        GeometryAlgorithms.OrderEndpoints(
+            ref start,
+            ref end);
+
+        stroke = new Stroke(
+            shape.Id,
+            start,
+            end,
+            Math.Max(shape.StrokeWidth, 1.0),
+            shape.SourceKind,
+            shape.SourceIndex);
+
+        Accept(
+            shape,
+            "two-point open contour",
+            Metrics(
+                shape,
+                contour,
+                length,
+                shape.StrokeWidth,
+                length / Math.Max(shape.StrokeWidth, 1e-9),
+                null));
+
+        return true;
+    }
+
+    private bool TryCreateClosedStroke(
+        GeometricShape shape,
+        GeometricContour contour,
+        PrincipalAxisAnalysis analysis,
+        double effectiveThickness,
+        double elongation,
+        out Stroke stroke)
+    {
+        stroke = default!;
+
+        if (elongation < _minElongation)
+        {
+            return Reject(
+                shape,
+                "elongation too low",
+                Metrics(
+                    shape,
+                    contour,
+                    analysis.Length,
+                    effectiveThickness,
+                    elongation,
+                    null));
+        }
+
+        var area = Math.Abs(
+            GeometryAlgorithms.SignedArea(contour.Points));
+
+        var orientedBoxArea =
+            analysis.Length *
+            Math.Max(analysis.ContourThickness, 1e-9);
+
+        var fillRatio = area / orientedBoxArea;
+
+        if (fillRatio < _minClosedFillRatio)
+        {
+            return Reject(
+                shape,
+                "closed contour fill too low",
+                Metrics(
+                    shape,
+                    contour,
+                    analysis.Length,
+                    effectiveThickness,
+                    elongation,
+                    fillRatio));
+        }
+
+        stroke = CreateStrokeFromAxis(
+            shape,
+            analysis,
+            effectiveThickness);
+
+        Accept(
+            shape,
+            "elongated filled contour",
+            Metrics(
+                shape,
+                contour,
+                analysis.Length,
+                effectiveThickness,
+                elongation,
+                fillRatio));
+
+        return true;
+    }
+
+    private bool TryCreateStrictOpenStroke(
+        GeometricShape shape,
+        GeometricContour contour,
+        PrincipalAxisAnalysis analysis,
+        double effectiveThickness,
+        double elongation,
+        out Stroke stroke)
+    {
+        stroke = default!;
+
+        if (elongation < _minElongation)
+        {
+            return false;
+        }
+
+        var straightnessTolerance = Math.Max(
+            shape.StrokeWidth * 2.0,
+            analysis.Length * 0.04);
+
+        if (analysis.ContourThickness > straightnessTolerance)
+        {
+            return false;
+        }
+
+        stroke = CreateStrokeFromAxis(
+            shape,
+            analysis,
+            effectiveThickness);
+
+        Accept(
+            shape,
+            "straight open contour",
+            Metrics(
+                shape,
+                contour,
+                analysis.Length,
+                effectiveThickness,
+                elongation,
+                null));
+
+        return true;
+    }
+
+    private static Stroke CreateStrokeFromAxis(
+        GeometricShape shape,
+        PrincipalAxisAnalysis analysis,
+        double effectiveThickness)
+    {
+        var acrossCenter =
+            (analysis.MinAcross + analysis.MaxAcross) / 2.0;
+
+        var start = new PointD(
+            analysis.Centroid.X +
+            analysis.AxisX * analysis.MinAlong +
+            analysis.NormalX * acrossCenter,
+            analysis.Centroid.Y +
+            analysis.AxisY * analysis.MinAlong +
+            analysis.NormalY * acrossCenter);
+
+        var end = new PointD(
+            analysis.Centroid.X +
+            analysis.AxisX * analysis.MaxAlong +
+            analysis.NormalX * acrossCenter,
+            analysis.Centroid.Y +
+            analysis.AxisY * analysis.MaxAlong +
+            analysis.NormalY * acrossCenter);
+
+        GeometryAlgorithms.OrderEndpoints(
+            ref start,
+            ref end);
+
+        return new Stroke(
+            shape.Id,
+            start,
+            end,
+            effectiveThickness,
+            shape.SourceKind,
+            shape.SourceIndex);
+    }
+
+    private static PrincipalAxisAnalysis AnalyzeAlongPrincipalAxis(
+        IReadOnlyList<PointD> points)
+    {
         var centroid = new PointD(
-            points.Average(p => p.X),
-            points.Average(p => p.Y));
+            points.Average(point => point.X),
+            points.Average(point => point.Y));
 
         double xx = 0;
         double xy = 0;
@@ -127,7 +389,9 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
         xy /= points.Count;
         yy /= points.Count;
 
-        var (axisX, axisY) = PrincipalAxis(xx, xy, yy);
+        var (axisX, axisY) =
+            GeometryAlgorithms.PrincipalAxis(xx, xy, yy);
+
         var normalX = -axisY;
         var normalY = axisX;
 
@@ -141,8 +405,13 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
             var dx = point.X - centroid.X;
             var dy = point.Y - centroid.Y;
 
-            var along = dx * axisX + dy * axisY;
-            var across = dx * normalX + dy * normalY;
+            var along =
+                dx * axisX +
+                dy * axisY;
+
+            var across =
+                dx * normalX +
+                dy * normalY;
 
             minAlong = Math.Min(minAlong, along);
             maxAlong = Math.Max(maxAlong, along);
@@ -150,104 +419,16 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
             maxAcross = Math.Max(maxAcross, across);
         }
 
-        var length = maxAlong - minAlong;
-        var contourThickness = maxAcross - minAcross;
-        var effectiveThickness = Math.Max(contourThickness, shape.StrokeWidth);
-
-        if (length <= 1e-9 || effectiveThickness <= 1e-9)
-        {
-            return Reject(
-                shape,
-                "degenerate geometry",
-                Metrics(shape, contour, length, effectiveThickness, 0, null));
-        }
-
-        var elongation = length / effectiveThickness;
-
-        if (elongation < _minElongation)
-        {
-            return Reject(
-                shape,
-                "elongation too low",
-                Metrics(shape, contour, length, effectiveThickness, elongation, null));
-        }
-
-        double? fillRatio = null;
-
-        if (contour.IsClosed)
-        {
-            var area = Math.Abs(SignedArea(points));
-            var orientedBoxArea = length * Math.Max(contourThickness, 1e-9);
-            fillRatio = area / orientedBoxArea;
-
-            if (fillRatio < _minClosedFillRatio)
-            {
-                return Reject(
-                    shape,
-                    "closed contour fill too low",
-                    Metrics(shape, contour, length, effectiveThickness, elongation, fillRatio));
-            }
-        }
-        else if (points.Count > 2)
-        {
-            var straightnessTolerance = Math.Max(
-                shape.StrokeWidth * 2.0,
-                length * 0.04);
-
-            if (contourThickness > straightnessTolerance)
-            {
-                var metrics = Metrics(
-                    shape,
-                    contour,
-                    length,
-                    effectiveThickness,
-                    elongation,
-                    null);
-
-                metrics += $" across={contourThickness:0.###}";
-                metrics += $" tolerance={straightnessTolerance:0.###}";
-
-                return Reject(
-                    shape,
-                    "open contour not straight",
-                    metrics);
-            }
-        }
-
-        var acrossCenter = (minAcross + maxAcross) / 2.0;
-
-        var startPoint = new PointD(
-            centroid.X + axisX * minAlong + normalX * acrossCenter,
-            centroid.Y + axisY * minAlong + normalY * acrossCenter);
-
-        var endPoint = new PointD(
-            centroid.X + axisX * maxAlong + normalX * acrossCenter,
-            centroid.Y + axisY * maxAlong + normalY * acrossCenter);
-
-        OrderEndpoints(ref startPoint, ref endPoint);
-
-        stroke = new Stroke(
-            shape.Id,
-            startPoint,
-            endPoint,
-            effectiveThickness,
-            shape.SourceKind,
-            shape.SourceIndex);
-
-        Accept(
-            shape,
-            contour.IsClosed
-                ? "elongated filled contour"
-                : "straight open contour",
-            Metrics(
-                shape,
-                contour,
-                length,
-                effectiveThickness,
-                elongation,
-                fillRatio));
-
-        return true;
+        return new PrincipalAxisAnalysis(
+            centroid,
+            axisX,
+            axisY,
+            normalX,
+            normalY,
+            minAlong,
+            maxAlong,
+            minAcross,
+            maxAcross);
     }
 
     private bool Reject(
@@ -300,63 +481,28 @@ public sealed class GeometryAnalyzer : IGeometryAnalyzer
         return result;
     }
 
-    private static (double X, double Y) PrincipalAxis(
-        double a,
-        double b,
-        double d)
+    private sealed record PrincipalAxisAnalysis(
+        PointD Centroid,
+        double AxisX,
+        double AxisY,
+        double NormalX,
+        double NormalY,
+        double MinAlong,
+        double MaxAlong,
+        double MinAcross,
+        double MaxAcross)
     {
-        var trace = a + d;
-        var delta = Math.Sqrt((a - d) * (a - d) + 4 * b * b);
-        var lambda = (trace + delta) / 2;
+        public double Length =>
+            MaxAlong - MinAlong;
 
-        var x = b;
-        var y = lambda - a;
-        var norm = Math.Sqrt(x * x + y * y);
+        public double ContourThickness =>
+            MaxAcross - MinAcross;
 
-        if (norm <= 1e-12)
+        public double EffectiveThickness(double strokeWidth)
         {
-            return a >= d
-                ? (1, 0)
-                : (0, 1);
-        }
-
-        return (x / norm, y / norm);
-    }
-
-    private static double SignedArea(IReadOnlyList<PointD> points)
-    {
-        if (points.Count < 3)
-        {
-            return 0;
-        }
-
-        var area = 0.0;
-
-        for (var i = 0; i < points.Count; i++)
-        {
-            var a = points[i];
-            var b = points[(i + 1) % points.Count];
-
-            area += a.X * b.Y - b.X * a.Y;
-        }
-
-        return area / 2;
-    }
-
-    private static double Distance(PointD a, PointD b)
-    {
-        var dx = a.X - b.X;
-        var dy = a.Y - b.Y;
-
-        return Math.Sqrt(dx * dx + dy * dy);
-    }
-
-    private static void OrderEndpoints(ref PointD a, ref PointD b)
-    {
-        if (a.X > b.X ||
-            (Math.Abs(a.X - b.X) < 1e-9 && a.Y > b.Y))
-        {
-            (a, b) = (b, a);
+            return Math.Max(
+                ContourThickness,
+                strokeWidth);
         }
     }
 }
