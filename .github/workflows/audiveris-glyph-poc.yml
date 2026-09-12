@@ -6,11 +6,12 @@ on:
       - audiveris-glyph-poc
     paths:
       - "AudiverisGlyphPoc/**"
+      - "SvgScene/**"
       - ".github/workflows/audiveris-glyph-poc.yml"
   workflow_dispatch:
 
 jobs:
-  build-and-inspect:
+  build-and-classify:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +23,60 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Build
-        run: dotnet build AudiverisGlyphPoc/AudiverisGlyphPoc.csproj --configuration Release
-
-      - name: Load official Audiveris model
+      - name: Reconstruct Kancheli fixture
+        shell: bash
         run: |
+          set -euo pipefail
+
+          mkdir -p ci-input
+
+          cat SvgScene/Fixtures/almonds-internet.svg.gz.b64.parts/part-* \
+            | base64 --decode \
+            | gzip --decompress \
+            > ci-input/almonds-internet.svg
+
+          echo "50ebc277329e20ca2cc1f7efc055eb7d9f04b8765cca34b5a90509e0f7fdd2fe  ci-input/almonds-internet.svg" \
+            | sha256sum --check -
+
+      - name: Build projects
+        run: |
+          dotnet build SvgScene/SvgScene.csproj --configuration Release
+          dotnet build AudiverisGlyphPoc/AudiverisGlyphPoc.csproj --configuration Release
+
+      - name: Export remaining contours as PNG glyphs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mkdir -p artifacts/glyphs
+
+          dotnet run \
+            --project SvgScene/SvgScene.csproj \
+            --configuration Release \
+            --no-build \
+            -- \
+            ci-input/almonds-internet.svg \
+            artifacts/notation-scene.json \
+            --export-glyphs artifacts/glyphs \
+            | tee artifacts/export.log
+
+      - name: Classify all exported glyphs with Audiveris port
+        shell: bash
+        run: |
+          set -euo pipefail
+
           dotnet run \
             --project AudiverisGlyphPoc/AudiverisGlyphPoc.csproj \
             --configuration Release \
-            --no-build
+            --no-build \
+            -- \
+            --glyph-dir artifacts/glyphs \
+            | tee artifacts/classifier.log
+
+      - name: Upload classification artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audiveris-kanneli-glyphs
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
