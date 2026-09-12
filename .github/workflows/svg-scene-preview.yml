@@ -67,6 +67,7 @@ jobs:
           cp ci-input/almonds-internet.arcs.svg artifacts/
           cp ci-input/almonds-internet.ellipses.svg artifacts/
           cp ci-input/almonds-internet.contours.svg artifacts/
+          cp ci-input/almonds-internet.layout.svg artifacts/
           cp ci-input/almonds-internet.stroke-diagnostics.txt artifacts/
           cp ci-input/almonds-internet.arc-diagnostics.txt artifacts/
 
@@ -78,6 +79,8 @@ jobs:
 
           Generated automatically from the Kancheli internet SVG fixture.
 
+          - [Score layout](almonds-internet.layout.svg)
+          - [Score layout JSON](score-layout.json)
           - [Strokes](almonds-internet.strokes.svg)
           - [Curved strokes](almonds-internet.arcs.svg)
           - [Ellipses](almonds-internet.ellipses.svg)
@@ -125,6 +128,8 @@ jobs:
             echo
             echo "Generated from commit \`${GITHUB_SHA}\`."
             echo
+            echo "- [Score layout](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.layout.svg)"
+            echo "- [Score layout JSON](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/score-layout.json)"
             echo "- [Strokes](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.strokes.svg)"
             echo "- [Curved strokes](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.arcs.svg)"
             echo "- [Ellipses](https://github.com/${GITHUB_REPOSITORY}/blob/svg-scene-preview/almonds-internet.ellipses.svg)"
