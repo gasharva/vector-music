@@ -36,7 +36,7 @@ public static class ArtMomentExtractor
             dyMax = Math.Max(dyMax, Math.Abs(yy[i] - centerY));
         }
 
-        var radius = Math.Hypot(dxMax, dyMax);
+        var radius = Distance(dxMax, dyMax);
 
         if (radius <= 0)
         {
@@ -89,7 +89,7 @@ public static class ArtMomentExtractor
                 var real = coefficientReal[angular, radial] / mass;
                 var imaginary = coefficientImaginary[angular, radial] / mass;
 
-                features[featureIndex++] = Math.Hypot(imaginary, real);
+                features[featureIndex++] = Distance(imaginary, real);
             }
         }
 
@@ -138,7 +138,7 @@ public static class ArtMomentExtractor
             for (var y = 0; y < LutSize; y++)
             {
                 var normalizedY = (y - LutRadius) / (double)LutRadius;
-                var radius = Math.Hypot(normalizedX, normalizedY);
+                var radius = Distance(normalizedX, normalizedY);
 
                 if (radius >= 1)
                 {
@@ -209,6 +209,9 @@ public static class ArtMomentExtractor
         return valuePreciseXY
             + incrementY * (valuePreciseXY1 - valuePreciseXY);
     }
+
+    private static double Distance(double x, double y) =>
+        Math.Sqrt(x * x + y * y);
 
     private static int Offset(int x, int y) => x * LutSize + y;
 }
