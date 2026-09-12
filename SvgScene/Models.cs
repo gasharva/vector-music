@@ -19,7 +19,9 @@ public readonly record struct BoundsD(
         IReadOnlyList<PointD> points)
     {
         if (points.Count == 0)
+        {
             return new BoundsD(0, 0, 0, 0);
+        }
 
         return new BoundsD(
             points.Min(point => point.X),
@@ -58,7 +60,8 @@ public sealed record GeometricScene(
 public sealed record ShapePrototype(
     string Id,
     string RepresentativeShapeId,
-    ShapeDescriptor Descriptor);
+    ShapeDescriptor Descriptor,
+    SymbolClassification? Classification = null);
 
 public sealed record ShapeInstance(
     string ShapeId,
@@ -68,7 +71,8 @@ public sealed record ShapeInstance(
     double Width,
     double Height,
     string SourceKind,
-    string? SourceIndex);
+    string? SourceIndex,
+    SymbolClassification? Classification = null);
 
 public sealed record Stroke(
     string ShapeId,
