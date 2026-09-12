@@ -4,7 +4,9 @@ using SvgMusic.Scene;
 if (args.Length == 0)
 {
     Console.Error.WriteLine(
-        "Usage: dotnet run -- <input.svg> [notation-scene.json] [--debug] [--verbose-json] [--export-glyphs <directory>]");
+        "Usage: dotnet run -- <input.svg> [notation-scene.json] "
+        + "[--debug] [--verbose-json] [--export-glyphs <directory>] "
+        + "[--classify-symbols] [--model <basic-classifier.zip>]");
     return 2;
 }
 
@@ -28,13 +30,33 @@ if (exportGlyphsIndex >= 0)
     exportGlyphsDirectory = args[exportGlyphsIndex + 1];
 }
 
+var modelIndex = Array.FindIndex(
+    args,
+    argument => argument.Equals(
+        "--model",
+        StringComparison.OrdinalIgnoreCase));
+
+string? modelPath = null;
+
+if (modelIndex >= 0)
+{
+    if (modelIndex + 1 >= args.Length)
+    {
+        Console.Error.WriteLine("--model requires a classifier archive path.");
+        return 2;
+    }
+
+    modelPath = args[modelIndex + 1];
+}
+
 var positional = args
     .Skip(1)
     .Where((argument, index) =>
     {
         var actualIndex = index + 1;
 
-        if (actualIndex == exportGlyphsIndex + 1)
+        if (actualIndex == exportGlyphsIndex + 1
+            || actualIndex == modelIndex + 1)
         {
             return false;
         }
@@ -53,6 +75,9 @@ var debug = args.Any(argument =>
 var verbose = args.Any(argument =>
     argument.Equals("--verbose-json", StringComparison.OrdinalIgnoreCase));
 
+var classifySymbols = args.Any(argument =>
+    argument.Equals("--classify-symbols", StringComparison.OrdinalIgnoreCase));
+
 var clusterer = new ShapeClusterer();
 var pipeline = new ScenePipeline(
     new SvgNormalizer(),
@@ -60,6 +85,27 @@ var pipeline = new ScenePipeline(
 
 var (geometry, notation) = pipeline.Run(input);
 var layout = new ScoreLayoutAnalyzer().Analyze(notation);
+
+if (classifySymbols)
+{
+    Console.WriteLine("Classifying contour prototypes with Audiveris BasicClassifier...");
+
+    var classifier = await AudiverisSymbolClassifier.CreateAsync(modelPath);
+    notation = new PrototypeSymbolClassifier(classifier).Classify(
+        geometry,
+        notation,
+        layout);
+
+    var classifiedPrototypes = notation.Prototypes.Count(prototype =>
+        prototype.Classification is not null);
+    var confidentPrototypes = notation.Prototypes.Count(prototype =>
+        prototype.Classification is { Confidence: >= 0.75 });
+
+    Console.WriteLine(
+        $"Classified prototypes        : {classifiedPrototypes}");
+    Console.WriteLine(
+        $"Confident prototypes >= 0.75: {confidentPrototypes}");
+}
 
 Console.WriteLine($"GeometricScene shapes       : {geometry.Shapes.Count}");
 Console.WriteLine($"NotationScene contours      : {notation.Instances.Count}");
@@ -79,10 +125,16 @@ foreach (var prototype in notation.Prototypes)
 {
     var count = notation.Instances.Count(instance =>
         instance.PrototypeId == prototype.Id);
+    var classification = prototype.Classification is null
+        ? string.Empty
+        : $"; class={prototype.Classification.Label} "
+          + $"{prototype.Classification.Confidence:P1} "
+          + $"@{prototype.Classification.Interline}px";
 
     Console.WriteLine(
         $"  {prototype.Id}: {count} instances; "
-        + $"representative={prototype.RepresentativeShapeId}");
+        + $"representative={prototype.RepresentativeShapeId}"
+        + classification);
 }
 
 var compact = new
@@ -94,7 +146,8 @@ var compact = new
         instanceCount = notation.Instances.Count(instance =>
             instance.PrototypeId == prototype.Id),
         aspectRatio = prototype.Descriptor.AspectRatio,
-        relativeArea = prototype.Descriptor.RelativeArea
+        relativeArea = prototype.Descriptor.RelativeArea,
+        classification = prototype.Classification
     }),
     instances = notation.Instances,
     strokes = notation.Strokes,
@@ -126,6 +179,21 @@ File.WriteAllText(
 
 Console.WriteLine($"Written score layout JSON: {layoutOutput}");
 
+if (classifySymbols)
+{
+    var classifiedSvg = Path.Combine(
+        outputDirectory,
+        Path.GetFileNameWithoutExtension(input) + ".classified-symbols.svg");
+
+    new SymbolClassificationDebugRenderer().Render(
+        input,
+        geometry,
+        notation,
+        classifiedSvg);
+
+    Console.WriteLine($"Written classified symbols SVG: {classifiedSvg}");
+}
+
 if (exportGlyphsDirectory is not null)
 {
     var manifest = new MultiScaleGlyphExporter().Export(
@@ -138,9 +206,8 @@ if (exportGlyphsDirectory is not null)
         $"Exported classifier glyph prototypes: {manifest.Glyphs.Count} "
         + $"to {Path.GetFullPath(exportGlyphsDirectory)}");
     Console.WriteLine(
-        $"Raster interlines: 20, 30, 40 px; "
-        + $"preview={manifest.PreviewInterline}px; "
-        + $"source={manifest.SourceInterline:F3}");
+        $"Raster interline: source={manifest.SourceInterline:F3}; "
+        + "targets=20/30/40px");
 }
 
 if (verbose)
