@@ -2,78 +2,307 @@ namespace SvgMusic.Scene;
 
 public interface IEllipseLikeExtractor
 {
-    bool TryCreateEllipse(GeometricShape shape, out EllipseLike ellipse);
+    bool TryCreateEllipse(
+        GeometricShape shape,
+        out EllipseLike ellipse);
 }
 
 /// <summary>
-/// Recognises closed, approximately elliptical contours independently of axis
-/// alignment. PCA supplies the orientation; points are then tested against the
-/// fitted ellipse in local coordinates. Multiple nested ellipse-like subpaths
-/// are represented as one hollow primitive.
+/// Recognizes closed, approximately elliptical contours independently of axis
+/// alignment. PCA-like covariance supplies the orientation; points are then
+/// tested against the fitted ellipse in local coordinates.
+///
+/// Multiple nested ellipse-like subpaths are represented as one hollow
+/// primitive rather than as unrelated contours.
 /// </summary>
 public sealed class EllipseLikeExtractor : IEllipseLikeExtractor
 {
     private readonly double _maxFitError;
     private readonly double _maxAxisRatio;
 
-    public EllipseLikeExtractor(double maxFitError = 0.18, double maxAxisRatio = 4.0)
+    public EllipseLikeExtractor(
+        double maxFitError = 0.18,
+        double maxAxisRatio = 4.0)
     {
         _maxFitError = maxFitError;
         _maxAxisRatio = maxAxisRatio;
     }
 
-    public bool TryCreateEllipse(GeometricShape shape, out EllipseLike ellipse)
+    public bool TryCreateEllipse(
+        GeometricShape shape,
+        out EllipseLike ellipse)
     {
         ellipse = default!;
-        var closed = shape.EffectiveContours.Where(c => c.IsClosed && c.Points.Count >= 8).ToList();
-        if (closed.Count == 0) return false;
 
-        var fits = closed.Select(Fit).Where(x => x is not null).Cast<EllipseFit>().OrderByDescending(x => x.Area).ToList();
-        if (fits.Count == 0) return false;
+        var closedContours = shape.EffectiveContours
+            .Where(contour =>
+                contour.IsClosed &&
+                contour.Points.Count >= 8)
+            .ToList();
 
-        var outer = fits[0];
-        if (outer.Error > _maxFitError || outer.MajorRadius / Math.Max(outer.MinorRadius, 1e-9) > _maxAxisRatio)
-            return false;
-
-        EllipseFit? inner = null;
-        foreach (var candidate in fits.Skip(1))
+        if (closedContours.Count == 0)
         {
-            if (candidate.Error > _maxFitError) continue;
-            if (!Contains(outer, candidate.Center)) continue;
-            var centerDistance = Distance(outer.Center, candidate.Center) / Math.Max(outer.MajorRadius, 1e-9);
-            if (centerDistance > 0.30) continue;
-            if (candidate.MajorRadius >= outer.MajorRadius * 0.92 || candidate.MinorRadius >= outer.MinorRadius * 0.92) continue;
-            inner = candidate; break;
+            return false;
         }
 
-        ellipse = new EllipseLike(shape.Id, outer.Center, outer.MajorRadius, outer.MinorRadius, outer.Rotation,
-            inner is not null, inner is null ? null : inner.Area / outer.Area, outer.Error,
-            shape.SourceKind, shape.SourceIndex);
+        var fits = closedContours
+            .Select(Fit)
+            .Where(fit => fit is not null)
+            .Cast<EllipseFit>()
+            .OrderByDescending(fit => fit.Area)
+            .ToList();
+
+        if (fits.Count == 0)
+        {
+            return false;
+        }
+
+        var outer = fits[0];
+
+        if (!IsAcceptableEllipse(outer))
+        {
+            return false;
+        }
+
+        var inner = FindInnerEllipse(
+            outer,
+            fits.Skip(1));
+
+        ellipse = new EllipseLike(
+            shape.Id,
+            outer.Center,
+            outer.MajorRadius,
+            outer.MinorRadius,
+            outer.Rotation,
+            inner is not null,
+            inner is null
+                ? null
+                : inner.Area / outer.Area,
+            outer.Error,
+            shape.SourceKind,
+            shape.SourceIndex);
+
         return true;
     }
 
-    private static EllipseFit? Fit(GeometricContour contour)
+    private bool IsAcceptableEllipse(EllipseFit fit)
     {
-        var points = contour.Points;
-        if (points.Count > 1 && Distance(points[0], points[^1]) < 1e-7) points = points.Take(points.Count - 1).ToArray();
-        if (points.Count < 6) return null;
+        if (fit.Error > _maxFitError)
+        {
+            return false;
+        }
 
-        var center = new PointD(points.Average(p => p.X), points.Average(p => p.Y));
-        double xx=0,xy=0,yy=0;
-        foreach(var p in points){var dx=p.X-center.X;var dy=p.Y-center.Y;xx+=dx*dx;xy+=dx*dy;yy+=dy*dy;}
-        xx/=points.Count;xy/=points.Count;yy/=points.Count;
-        var angle=0.5*Math.Atan2(2*xy,xx-yy);var ca=Math.Cos(angle);var sa=Math.Sin(angle);
-        var local=points.Select(p=>{var dx=p.X-center.X;var dy=p.Y-center.Y;return new PointD(dx*ca+dy*sa,-dx*sa+dy*ca);}).ToArray();
-        var rx=(local.Max(p=>p.X)-local.Min(p=>p.X))/2.0;var ry=(local.Max(p=>p.Y)-local.Min(p=>p.Y))/2.0;
-        if(rx<=1e-6||ry<=1e-6)return null;
-        // Keep MajorRadius associated with Rotation.
-        if(ry>rx){(rx,ry)=(ry,rx);angle+=Math.PI/2;ca=Math.Cos(angle);sa=Math.Sin(angle);local=points.Select(p=>{var dx=p.X-center.X;var dy=p.Y-center.Y;return new PointD(dx*ca+dy*sa,-dx*sa+dy*ca);}).ToArray();}
-        var radial=local.Select(p=>Math.Sqrt((p.X*p.X)/(rx*rx)+(p.Y*p.Y)/(ry*ry))).ToArray();
-        var error=Math.Sqrt(radial.Select(r=>(r-1)*(r-1)).Average());
-        return new EllipseFit(center,rx,ry,angle,error,Math.PI*rx*ry);
+        var axisRatio =
+            fit.MajorRadius /
+            Math.Max(fit.MinorRadius, 1e-9);
+
+        return axisRatio <= _maxAxisRatio;
     }
 
-    private static bool Contains(EllipseFit e, PointD p){var dx=p.X-e.Center.X;var dy=p.Y-e.Center.Y;var c=Math.Cos(e.Rotation);var s=Math.Sin(e.Rotation);var x=dx*c+dy*s;var y=-dx*s+dy*c;return x*x/(e.MajorRadius*e.MajorRadius)+y*y/(e.MinorRadius*e.MinorRadius)<1.0;}
-    private static double Distance(PointD a,PointD b){var dx=a.X-b.X;var dy=a.Y-b.Y;return Math.Sqrt(dx*dx+dy*dy);}
-    private sealed record EllipseFit(PointD Center,double MajorRadius,double MinorRadius,double Rotation,double Error,double Area);
+    private EllipseFit? FindInnerEllipse(
+        EllipseFit outer,
+        IEnumerable<EllipseFit> candidates)
+    {
+        foreach (var candidate in candidates)
+        {
+            if (!IsAcceptableEllipse(candidate))
+            {
+                continue;
+            }
+
+            if (!Contains(
+                outer,
+                candidate.Center))
+            {
+                continue;
+            }
+
+            var centerDistance =
+                GeometryAlgorithms.Distance(
+                    outer.Center,
+                    candidate.Center) /
+                Math.Max(outer.MajorRadius, 1e-9);
+
+            if (centerDistance > 0.30)
+            {
+                continue;
+            }
+
+            var majorTooLarge =
+                candidate.MajorRadius >=
+                outer.MajorRadius * 0.92;
+
+            var minorTooLarge =
+                candidate.MinorRadius >=
+                outer.MinorRadius * 0.92;
+
+            if (majorTooLarge || minorTooLarge)
+            {
+                continue;
+            }
+
+            return candidate;
+        }
+
+        return null;
+    }
+
+    private static EllipseFit? Fit(
+        GeometricContour contour)
+    {
+        IReadOnlyList<PointD> points = contour.Points;
+
+        if (points.Count > 1 &&
+            GeometryAlgorithms.Distance(
+                points[0],
+                points[^1]) < 1e-7)
+        {
+            points = points
+                .Take(points.Count - 1)
+                .ToArray();
+        }
+
+        if (points.Count < 6)
+        {
+            return null;
+        }
+
+        var center = new PointD(
+            points.Average(point => point.X),
+            points.Average(point => point.Y));
+
+        double xx = 0;
+        double xy = 0;
+        double yy = 0;
+
+        foreach (var point in points)
+        {
+            var dx = point.X - center.X;
+            var dy = point.Y - center.Y;
+
+            xx += dx * dx;
+            xy += dx * dy;
+            yy += dy * dy;
+        }
+
+        xx /= points.Count;
+        xy /= points.Count;
+        yy /= points.Count;
+
+        var angle = 0.5 * Math.Atan2(
+            2.0 * xy,
+            xx - yy);
+
+        var localPoints = RotateIntoLocalCoordinates(
+            points,
+            center,
+            angle);
+
+        var radiusX =
+            (localPoints.Max(point => point.X) -
+             localPoints.Min(point => point.X)) / 2.0;
+
+        var radiusY =
+            (localPoints.Max(point => point.Y) -
+             localPoints.Min(point => point.Y)) / 2.0;
+
+        if (radiusX <= 1e-6 ||
+            radiusY <= 1e-6)
+        {
+            return null;
+        }
+
+        if (radiusY > radiusX)
+        {
+            (radiusX, radiusY) =
+                (radiusY, radiusX);
+
+            angle += Math.PI / 2.0;
+
+            localPoints = RotateIntoLocalCoordinates(
+                points,
+                center,
+                angle);
+        }
+
+        var normalizedRadii = localPoints
+            .Select(point => Math.Sqrt(
+                point.X * point.X /
+                (radiusX * radiusX) +
+                point.Y * point.Y /
+                (radiusY * radiusY)))
+            .ToArray();
+
+        var error = Math.Sqrt(
+            normalizedRadii
+                .Select(radius =>
+                    (radius - 1.0) *
+                    (radius - 1.0))
+                .Average());
+
+        var area =
+            Math.PI * radiusX * radiusY;
+
+        return new EllipseFit(
+            center,
+            radiusX,
+            radiusY,
+            angle,
+            error,
+            area);
+    }
+
+    private static PointD[] RotateIntoLocalCoordinates(
+        IReadOnlyList<PointD> points,
+        PointD center,
+        double angle)
+    {
+        var cosine = Math.Cos(angle);
+        var sine = Math.Sin(angle);
+
+        return points
+            .Select(point =>
+            {
+                var dx = point.X - center.X;
+                var dy = point.Y - center.Y;
+
+                return new PointD(
+                    dx * cosine + dy * sine,
+                    -dx * sine + dy * cosine);
+            })
+            .ToArray();
+    }
+
+    private static bool Contains(
+        EllipseFit ellipse,
+        PointD point)
+    {
+        var dx = point.X - ellipse.Center.X;
+        var dy = point.Y - ellipse.Center.Y;
+
+        var cosine = Math.Cos(ellipse.Rotation);
+        var sine = Math.Sin(ellipse.Rotation);
+
+        var localX =
+            dx * cosine + dy * sine;
+
+        var localY =
+            -dx * sine + dy * cosine;
+
+        var normalized =
+            localX * localX /
+            (ellipse.MajorRadius * ellipse.MajorRadius) +
+            localY * localY /
+            (ellipse.MinorRadius * ellipse.MinorRadius);
+
+        return normalized < 1.0;
+    }
+
+    private sealed record EllipseFit(
+        PointD Center,
+        double MajorRadius,
+        double MinorRadius,
+        double Rotation,
+        double Error,
+        double Area);
 }
