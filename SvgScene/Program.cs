@@ -128,18 +128,19 @@ Console.WriteLine($"Written score layout JSON: {layoutOutput}");
 
 if (exportGlyphsDirectory is not null)
 {
-    var manifest = new GlyphPngExporter().Export(
+    var manifest = new MultiScaleGlyphExporter().Export(
         geometry,
         notation,
         layout,
         exportGlyphsDirectory);
 
     Console.WriteLine(
-        $"Exported classifier glyph PNGs: {manifest.Glyphs.Count} "
+        $"Exported classifier glyph prototypes: {manifest.Glyphs.Count} "
         + $"to {Path.GetFullPath(exportGlyphsDirectory)}");
     Console.WriteLine(
-        $"Raster interline: source={manifest.SourceInterline:F3}, "
-        + $"target={manifest.TargetInterline}px");
+        $"Raster interlines: 20, 30, 40 px; "
+        + $"preview={manifest.PreviewInterline}px; "
+        + $"source={manifest.SourceInterline:F3}");
 }
 
 if (verbose)
