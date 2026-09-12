@@ -20,33 +20,43 @@ try
 
     if (glyphDirectory is not null)
     {
-        var result = new GlyphBatchClassifier().ClassifyDirectory(
+        var result = new MultiScaleGlyphBatchClassifier().ClassifyDirectory(
             model,
             glyphDirectory,
             top: 8);
 
         var fullDirectory = Path.GetFullPath(glyphDirectory);
 
-        Console.WriteLine($"Glyph directory      : {fullDirectory}");
-        Console.WriteLine($"Prototypes classified: {result.Glyphs.Count}");
-        Console.WriteLine($"Errors               : {result.Glyphs.Count(item => item.Error is not null)}");
+        Console.WriteLine($"Glyph directory       : {fullDirectory}");
+        Console.WriteLine($"Prototypes classified : {result.Glyphs.Count}");
+        Console.WriteLine($"Raster interlines      : 20, 30, 40 px");
+        Console.WriteLine($"Preview interline      : {result.PreviewInterline} px");
         Console.WriteLine();
-        Console.WriteLine("Prototype representatives:");
+        Console.WriteLine("Best result per prototype:");
 
         foreach (var item in result.Glyphs)
         {
-            var top = item.Predictions.FirstOrDefault();
+            var best = item.Scales
+                .Select(scale => new
+                {
+                    scale.Interline,
+                    Prediction = scale.Predictions.FirstOrDefault()
+                })
+                .Where(value => value.Prediction is not null)
+                .OrderByDescending(value => value.Prediction!.Score)
+                .FirstOrDefault();
 
             Console.WriteLine(
                 $"  {item.PrototypeId,-14} "
                 + $"instances={item.PrototypeInstanceCount,-3} "
-                + $"{top?.Label ?? "ERROR",-28} "
-                + $"score={(top?.Score ?? 0):F4}");
+                + $"{best?.Prediction?.Label ?? "ERROR",-28} "
+                + $"score={(best?.Prediction?.Score ?? 0):F4} "
+                + $"at={best?.Interline ?? 0}px");
         }
 
         Console.WriteLine();
-        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "predictions.json")}");
-        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "predictions.csv")}");
+        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "multiscale-predictions.json")}");
+        Console.WriteLine($"Written: {Path.Combine(fullDirectory, "multiscale-predictions.csv")}");
         Console.WriteLine($"Written: {Path.Combine(fullDirectory, "report.html")}");
 
         return 0;
