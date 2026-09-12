@@ -136,12 +136,11 @@ public sealed class AudiverisModel
         var container = root.Element(elementName)
             ?? throw new InvalidDataException($"Missing '{elementName}' element.");
 
-        return container
-            .Descendants()
-            .Where(node => !node.HasElements)
-            .Select(node => node.Value.Trim())
-            .Where(value => value.Length > 0)
-            .ToArray();
+        // Audiveris NeuralNetwork.StringArray uses JAXB @XmlValue String[],
+        // so labels are whitespace-separated text directly inside the element.
+        return container.Value.Split(
+            [' ', '\t', '\r', '\n'],
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     }
 
     private static double[][] ReadMatrix(XElement root, string wrapperName)
