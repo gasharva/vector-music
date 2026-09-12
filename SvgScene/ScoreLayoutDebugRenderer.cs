@@ -37,12 +37,14 @@ public sealed class ScoreLayoutDebugRenderer
             new XAttribute("id", "debug-score-layout"),
             new XAttribute("pointer-events", "none"));
 
+        var staffNumbers = layout.Staffs
+            .Select((staff, index) => new { staff.Id, Number = index + 1 })
+            .ToDictionary(x => x.Id, x => x.Number, StringComparer.Ordinal);
+
         var regionIndex = 0;
 
-        for (var systemIndex = 0; systemIndex < layout.Systems.Count; systemIndex++)
+        foreach (var system in layout.Systems)
         {
-            var system = layout.Systems[systemIndex];
-
             foreach (var pair in system.StaffPairs)
             {
                 var upper = layout.Staffs.First(staff => staff.Id == pair.UpperStaffId);
@@ -51,25 +53,28 @@ public sealed class ScoreLayoutDebugRenderer
                 for (var measureIndex = 0; measureIndex < pair.Measures.Count; measureIndex++)
                 {
                     var measure = pair.Measures[measureIndex];
-                    var color = Palette[regionIndex % Palette.Length];
-                    regionIndex++;
 
-                    AddMeasureRegion(
+                    AddStaffMeasureRegion(
                         group,
                         ns,
-                        systemIndex + 1,
+                        upper,
+                        staffNumbers[upper.Id],
                         measureIndex + 1,
                         measure.XStart,
                         measure.XEnd,
-                        pair.Bounds.MinY,
-                        pair.Bounds.MaxY,
-                        color,
+                        Palette[regionIndex++ % Palette.Length],
                         unit);
 
-                    AddStaffSlice(group, ns, upper, measure.XStart, measure.XEnd, color, unit);
-                    AddStaffSlice(group, ns, lower, measure.XStart, measure.XEnd, color, unit);
-                    AddLedgerSlice(group, ns, upper, measure.XStart, measure.XEnd, color, unit);
-                    AddLedgerSlice(group, ns, lower, measure.XStart, measure.XEnd, color, unit);
+                    AddStaffMeasureRegion(
+                        group,
+                        ns,
+                        lower,
+                        staffNumbers[lower.Id],
+                        measureIndex + 1,
+                        measure.XStart,
+                        measure.XEnd,
+                        Palette[regionIndex++ % Palette.Length],
+                        unit);
                 }
 
                 AddMeasureBoundaries(group, ns, pair, unit);
@@ -80,34 +85,91 @@ public sealed class ScoreLayoutDebugRenderer
         document.Save(output, SaveOptions.DisableFormatting);
     }
 
-    private static void AddMeasureRegion(
+    private static void AddStaffMeasureRegion(
         XElement group,
         XNamespace ns,
-        int systemNumber,
+        StaffLayout staff,
+        int staffNumber,
         int measureNumber,
         double xStart,
         double xEnd,
-        double yStart,
-        double yEnd,
+        string color,
+        double unit)
+    {
+        AddStaffRegionBounds(
+            group,
+            ns,
+            staff,
+            xStart,
+            xEnd,
+            color,
+            unit);
+
+        AddStaffSlice(
+            group,
+            ns,
+            staff,
+            xStart,
+            xEnd,
+            color,
+            unit);
+
+        AddLedgerSlice(
+            group,
+            ns,
+            staff,
+            xStart,
+            xEnd,
+            color,
+            unit);
+
+        AddLabel(
+            group,
+            ns,
+            staffNumber,
+            measureNumber,
+            xStart,
+            staff.Bounds.MinY,
+            color,
+            unit);
+    }
+
+    private static void AddStaffRegionBounds(
+        XElement group,
+        XNamespace ns,
+        StaffLayout staff,
+        double xStart,
+        double xEnd,
         string color,
         double unit)
     {
         group.Add(new XElement(
             ns + "rect",
             new XAttribute("x", F(xStart)),
-            new XAttribute("y", F(yStart)),
+            new XAttribute("y", F(staff.Bounds.MinY)),
             new XAttribute("width", F(Math.Max(0, xEnd - xStart))),
-            new XAttribute("height", F(Math.Max(0, yEnd - yStart))),
+            new XAttribute("height", F(staff.Bounds.Height)),
             new XAttribute("fill", color),
-            new XAttribute("fill-opacity", "0.055"),
+            new XAttribute("fill-opacity", "0.045"),
             new XAttribute("stroke", color),
-            new XAttribute("stroke-width", F(0.9 * unit)),
+            new XAttribute("stroke-width", F(0.8 * unit)),
             new XAttribute("stroke-dasharray", $"{F(4 * unit)} {F(3 * unit)}"),
-            new XAttribute("opacity", "0.9")));
+            new XAttribute("opacity", "0.88")));
+    }
 
-        var label = $"s{systemNumber}+m{measureNumber}";
+    private static void AddLabel(
+        XElement group,
+        XNamespace ns,
+        int staffNumber,
+        int measureNumber,
+        double xStart,
+        double staffTopY,
+        string color,
+        double unit)
+    {
+        var label = $"s{staffNumber}+m{measureNumber}";
         var labelX = xStart + 2.5 * unit;
-        var labelY = yStart + 8.5 * unit;
+        var labelY = staffTopY - 3.0 * unit;
 
         group.Add(new XElement(
             ns + "text",
@@ -118,7 +180,7 @@ public sealed class ScoreLayoutDebugRenderer
             new XAttribute("font-weight", "700"),
             new XAttribute("fill", color),
             new XAttribute("stroke", "white"),
-            new XAttribute("stroke-width", F(1.1 * unit)),
+            new XAttribute("stroke-width", F(1.2 * unit)),
             new XAttribute("paint-order", "stroke fill"),
             label));
     }
@@ -148,7 +210,7 @@ public sealed class ScoreLayoutDebugRenderer
                 new XAttribute("y2", F(line.Y)),
                 new XAttribute("stroke", color),
                 new XAttribute("stroke-width", F(1.8 * unit)),
-                new XAttribute("opacity", "0.78")));
+                new XAttribute("opacity", "0.82")));
         }
     }
 
@@ -180,7 +242,7 @@ public sealed class ScoreLayoutDebugRenderer
                     new XAttribute("stroke", color),
                     new XAttribute("stroke-width", F(2.6 * unit)),
                     new XAttribute("stroke-linecap", "round"),
-                    new XAttribute("opacity", "0.9")));
+                    new XAttribute("opacity", "0.92")));
             }
         }
     }
