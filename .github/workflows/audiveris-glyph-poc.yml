@@ -43,7 +43,7 @@ jobs:
           dotnet build SvgScene/SvgScene.csproj --configuration Release
           dotnet build AudiverisGlyphPoc/AudiverisGlyphPoc.csproj --configuration Release
 
-      - name: Export remaining contours as PNG glyphs
+      - name: Export and classify SvgScene contours
         shell: bash
         run: |
           set -euo pipefail
@@ -57,10 +57,11 @@ jobs:
             -- \
             ci-input/almonds-internet.svg \
             artifacts/notation-scene.json \
+            --classify-symbols \
             --export-glyphs artifacts/glyphs \
             | tee artifacts/export.log
 
-      - name: Classify all exported glyphs with Audiveris port
+      - name: Build multiscale classifier report
         shell: bash
         run: |
           set -euo pipefail
