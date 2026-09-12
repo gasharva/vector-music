@@ -29,22 +29,10 @@ public sealed class GlyphBatchClassifier
             })
             ?? throw new InvalidDataException("Could not deserialize glyph manifest.");
 
-        var prototypeGroups = manifest.Glyphs
-            .GroupBy(item => item.PrototypeId, StringComparer.Ordinal)
-            .OrderBy(group => PrototypeSortKey(group.Key))
-            .ThenBy(group => group.Key, StringComparer.Ordinal)
-            .ToArray();
-
         var results = new List<GlyphClassification>();
 
-        // Classification is intentionally performed once per ShapePrototype.
-        // The SVG pipeline has already clustered equivalent contour instances,
-        // so running the same classifier over every instance is wasted CPU for
-        // the exploratory PoC. The first exported instance is used as the
-        // representative sample and the prototype size is retained for review.
-        foreach (var prototypeGroup in prototypeGroups)
+        foreach (var item in manifest.Glyphs)
         {
-            var item = prototypeGroup.First();
             var pngPath = Path.Combine(directory, item.FileName);
 
             try
@@ -59,7 +47,7 @@ public sealed class GlyphBatchClassifier
                 results.Add(new GlyphClassification(
                     item.ShapeId,
                     item.PrototypeId,
-                    prototypeGroup.Count(),
+                    1,
                     item.FileName,
                     item.Interline,
                     glyph.Mass,
@@ -71,7 +59,7 @@ public sealed class GlyphBatchClassifier
                 results.Add(new GlyphClassification(
                     item.ShapeId,
                     item.PrototypeId,
-                    prototypeGroup.Count(),
+                    1,
                     item.FileName,
                     item.Interline,
                     0,
@@ -88,7 +76,8 @@ public sealed class GlyphBatchClassifier
                 result.Predictions[0].Label,
                 1,
                 result.Predictions[0].Score))
-            .OrderBy(summary => PrototypeSortKey(summary.PrototypeId))
+            .OrderByDescending(summary => summary.AverageWinningScore)
+            .ThenBy(summary => PrototypeSortKey(summary.PrototypeId))
             .ThenBy(summary => summary.PrototypeId, StringComparer.Ordinal)
             .ToArray();
 
@@ -120,7 +109,7 @@ public sealed class GlyphBatchClassifier
             "shapeId,prototypeId,prototypeInstanceCount,fileName,topLabel,topScore,error"
         };
 
-        foreach (var item in result.Glyphs)
+        foreach (var item in OrderByConfidence(result.Glyphs))
         {
             var top = item.Predictions.FirstOrDefault();
 
@@ -175,14 +164,12 @@ public sealed class GlyphBatchClassifier
         html.AppendLine("</head>");
         html.AppendLine("<body>");
         html.AppendLine("<h1>Audiveris glyph classifier report</h1>");
-        html.AppendLine($"<p class=\"meta\">One representative contour per ShapePrototype. Classified prototypes: {result.Glyphs.Count}. Raster interline: {result.Interline}px.</p>");
+        html.AppendLine($"<p class=\"meta\">One representative contour per ShapePrototype. Classified prototypes: {result.Glyphs.Count}. Raster interline: {result.Interline}px. Sorted by classifier confidence, highest first.</p>");
         html.AppendLine("<table>");
-        html.AppendLine("<thead><tr><th>Prototype</th><th>Instances</th><th>Contour</th><th>Winner</th><th>Confidence</th><th>Other candidates</th><th>Shape</th></tr></thead>");
+        html.AppendLine("<thead><tr><th>Prototype</th><th>Contour</th><th>Winner</th><th>Confidence</th><th>Other candidates</th><th>Shape</th></tr></thead>");
         html.AppendLine("<tbody>");
 
-        foreach (var item in result.Glyphs
-                     .OrderBy(item => PrototypeSortKey(item.PrototypeId))
-                     .ThenBy(item => item.PrototypeId, StringComparer.Ordinal))
+        foreach (var item in OrderByConfidence(result.Glyphs))
         {
             var top = item.Predictions.FirstOrDefault();
             var score = top?.Score ?? 0;
@@ -194,7 +181,6 @@ public sealed class GlyphBatchClassifier
 
             html.AppendLine("<tr>");
             html.AppendLine($"<td><code>{H(item.PrototypeId)}</code></td>");
-            html.AppendLine($"<td>{item.PrototypeInstanceCount}</td>");
             html.AppendLine($"<td><img class=\"glyph\" src=\"{H(item.FileName)}\" alt=\"{H(item.ShapeId)}\"></td>");
 
             if (item.Error is not null)
@@ -225,6 +211,16 @@ public sealed class GlyphBatchClassifier
         html.AppendLine("</html>");
 
         return html.ToString();
+    }
+
+    private static IEnumerable<GlyphClassification> OrderByConfidence(
+        IEnumerable<GlyphClassification> glyphs)
+    {
+        return glyphs
+            .OrderBy(item => item.Error is not null)
+            .ThenByDescending(item => item.Predictions.FirstOrDefault()?.Score ?? double.MinValue)
+            .ThenBy(item => PrototypeSortKey(item.PrototypeId))
+            .ThenBy(item => item.PrototypeId, StringComparer.Ordinal);
     }
 
     private static int PrototypeSortKey(string prototypeId)
