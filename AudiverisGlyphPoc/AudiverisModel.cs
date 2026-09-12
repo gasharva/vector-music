@@ -136,8 +136,6 @@ public sealed class AudiverisModel
         var container = root.Element(elementName)
             ?? throw new InvalidDataException($"Missing '{elementName}' element.");
 
-        // Audiveris NeuralNetwork.StringArray uses JAXB @XmlValue String[],
-        // so labels are whitespace-separated text directly inside the element.
         return container.Value.Split(
             [' ', '\t', '\r', '\n'],
             StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
@@ -148,10 +146,17 @@ public sealed class AudiverisModel
         var wrapper = root.Element(wrapperName)
             ?? throw new InvalidDataException($"Missing '{wrapperName}' element.");
 
-        return wrapper
-            .Elements("row")
-            .Select(ReadNumericElement)
-            .ToArray();
+        var rows = wrapper.Elements("row").ToArray();
+        var matrix = rows.Select(ReadNumericElement).ToArray();
+
+        if (matrix.Length > 0 && matrix[0].Length == 0)
+        {
+            throw new InvalidDataException(
+                $"Could not parse '{wrapperName}' row XML: "
+                + rows[0].ToString(SaveOptions.DisableFormatting));
+        }
+
+        return matrix;
     }
 
     private static double[] ReadVector(XDocument document)
