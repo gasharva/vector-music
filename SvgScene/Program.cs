@@ -4,14 +4,43 @@ using SvgMusic.Scene;
 if (args.Length == 0)
 {
     Console.Error.WriteLine(
-        "Usage: dotnet run -- <input.svg> [notation-scene.json] [--debug] [--verbose-json]");
+        "Usage: dotnet run -- <input.svg> [notation-scene.json] [--debug] [--verbose-json] [--export-glyphs <directory>]");
     return 2;
 }
 
 var input = args[0];
+var exportGlyphsIndex = Array.FindIndex(
+    args,
+    argument => argument.Equals(
+        "--export-glyphs",
+        StringComparison.OrdinalIgnoreCase));
+
+string? exportGlyphsDirectory = null;
+
+if (exportGlyphsIndex >= 0)
+{
+    if (exportGlyphsIndex + 1 >= args.Length)
+    {
+        Console.Error.WriteLine("--export-glyphs requires an output directory.");
+        return 2;
+    }
+
+    exportGlyphsDirectory = args[exportGlyphsIndex + 1];
+}
+
 var positional = args
     .Skip(1)
-    .Where(argument => !argument.StartsWith("--", StringComparison.Ordinal))
+    .Where((argument, index) =>
+    {
+        var actualIndex = index + 1;
+
+        if (actualIndex == exportGlyphsIndex + 1)
+        {
+            return false;
+        }
+
+        return !argument.StartsWith("--", StringComparison.Ordinal);
+    })
     .ToArray();
 
 var output = positional.Length > 0
@@ -96,6 +125,22 @@ File.WriteAllText(
     JsonSerializer.Serialize(layout, jsonOptions));
 
 Console.WriteLine($"Written score layout JSON: {layoutOutput}");
+
+if (exportGlyphsDirectory is not null)
+{
+    var manifest = new GlyphPngExporter().Export(
+        geometry,
+        notation,
+        layout,
+        exportGlyphsDirectory);
+
+    Console.WriteLine(
+        $"Exported classifier glyph PNGs: {manifest.Glyphs.Count} "
+        + $"to {Path.GetFullPath(exportGlyphsDirectory)}");
+    Console.WriteLine(
+        $"Raster interline: source={manifest.SourceInterline:F3}, "
+        + $"target={manifest.TargetInterline}px");
+}
 
 if (verbose)
 {
