@@ -14,7 +14,11 @@ public sealed class ScoreLayoutDebugRenderer
         "#7b1fa2",
         "#00838f",
         "#5d4037",
-        "#455a64"
+        "#455a64",
+        "#c2185b",
+        "#00796b",
+        "#512da8",
+        "#689f38"
     ];
 
     public void Render(
@@ -33,34 +37,42 @@ public sealed class ScoreLayoutDebugRenderer
             new XAttribute("id", "debug-score-layout"),
             new XAttribute("pointer-events", "none"));
 
+        var regionIndex = 0;
+
         for (var systemIndex = 0; systemIndex < layout.Systems.Count; systemIndex++)
         {
             var system = layout.Systems[systemIndex];
-            var color = Palette[systemIndex % Palette.Length];
 
             foreach (var pair in system.StaffPairs)
             {
-                AddPairBounds(group, ns, pair, color, unit);
-
                 var upper = layout.Staffs.First(staff => staff.Id == pair.UpperStaffId);
                 var lower = layout.Staffs.First(staff => staff.Id == pair.LowerStaffId);
 
-                AddStaff(group, ns, upper, color, unit);
-                AddStaff(group, ns, lower, color, unit);
-                AddMeasureBoundaries(group, ns, pair, color, unit);
+                for (var measureIndex = 0; measureIndex < pair.Measures.Count; measureIndex++)
+                {
+                    var measure = pair.Measures[measureIndex];
+                    var color = Palette[regionIndex % Palette.Length];
+                    regionIndex++;
 
-                group.Add(new XElement(
-                    ns + "text",
-                    new XAttribute("x", F(pair.Bounds.MinX)),
-                    new XAttribute("y", F(pair.Bounds.MinY - 3.0 * unit)),
-                    new XAttribute("font-family", "Arial, sans-serif"),
-                    new XAttribute("font-size", F(7.5 * unit)),
-                    new XAttribute("font-weight", "700"),
-                    new XAttribute("fill", color),
-                    new XAttribute("stroke", "white"),
-                    new XAttribute("stroke-width", F(0.8 * unit)),
-                    new XAttribute("paint-order", "stroke fill"),
-                    $"{system.Id} / {pair.Id}"));
+                    AddMeasureRegion(
+                        group,
+                        ns,
+                        systemIndex + 1,
+                        measureIndex + 1,
+                        measure.XStart,
+                        measure.XEnd,
+                        pair.Bounds.MinY,
+                        pair.Bounds.MaxY,
+                        color,
+                        unit);
+
+                    AddStaffSlice(group, ns, upper, measure.XStart, measure.XEnd, color, unit);
+                    AddStaffSlice(group, ns, lower, measure.XStart, measure.XEnd, color, unit);
+                    AddLedgerSlice(group, ns, upper, measure.XStart, measure.XEnd, color, unit);
+                    AddLedgerSlice(group, ns, lower, measure.XStart, measure.XEnd, color, unit);
+                }
+
+                AddMeasureBoundaries(group, ns, pair, unit);
             }
         }
 
@@ -68,61 +80,107 @@ public sealed class ScoreLayoutDebugRenderer
         document.Save(output, SaveOptions.DisableFormatting);
     }
 
-    private static void AddPairBounds(
+    private static void AddMeasureRegion(
         XElement group,
         XNamespace ns,
-        StaffPairLayout pair,
+        int systemNumber,
+        int measureNumber,
+        double xStart,
+        double xEnd,
+        double yStart,
+        double yEnd,
         string color,
         double unit)
     {
         group.Add(new XElement(
             ns + "rect",
-            new XAttribute("x", F(pair.Bounds.MinX)),
-            new XAttribute("y", F(pair.Bounds.MinY)),
-            new XAttribute("width", F(pair.Bounds.Width)),
-            new XAttribute("height", F(pair.Bounds.Height)),
+            new XAttribute("x", F(xStart)),
+            new XAttribute("y", F(yStart)),
+            new XAttribute("width", F(Math.Max(0, xEnd - xStart))),
+            new XAttribute("height", F(Math.Max(0, yEnd - yStart))),
             new XAttribute("fill", color),
-            new XAttribute("fill-opacity", "0.04"),
+            new XAttribute("fill-opacity", "0.055"),
             new XAttribute("stroke", color),
-            new XAttribute("stroke-width", F(0.8 * unit)),
+            new XAttribute("stroke-width", F(0.9 * unit)),
             new XAttribute("stroke-dasharray", $"{F(4 * unit)} {F(3 * unit)}"),
-            new XAttribute("opacity", "0.75")));
+            new XAttribute("opacity", "0.9")));
+
+        var label = $"s{systemNumber}+m{measureNumber}";
+        var labelX = xStart + 2.5 * unit;
+        var labelY = yStart + 8.5 * unit;
+
+        group.Add(new XElement(
+            ns + "text",
+            new XAttribute("x", F(labelX)),
+            new XAttribute("y", F(labelY)),
+            new XAttribute("font-family", "Arial, sans-serif"),
+            new XAttribute("font-size", F(7.5 * unit)),
+            new XAttribute("font-weight", "700"),
+            new XAttribute("fill", color),
+            new XAttribute("stroke", "white"),
+            new XAttribute("stroke-width", F(1.1 * unit)),
+            new XAttribute("paint-order", "stroke fill"),
+            label));
     }
 
-    private static void AddStaff(
+    private static void AddStaffSlice(
         XElement group,
         XNamespace ns,
         StaffLayout staff,
+        double xStart,
+        double xEnd,
         string color,
         double unit)
     {
         foreach (var line in staff.Lines)
         {
+            var start = Math.Max(line.XStart, xStart);
+            var end = Math.Min(line.XEnd, xEnd);
+
+            if (end <= start)
+                continue;
+
             group.Add(new XElement(
                 ns + "line",
-                new XAttribute("x1", F(line.XStart)),
+                new XAttribute("x1", F(start)),
                 new XAttribute("y1", F(line.Y)),
-                new XAttribute("x2", F(line.XEnd)),
+                new XAttribute("x2", F(end)),
                 new XAttribute("y2", F(line.Y)),
                 new XAttribute("stroke", color),
                 new XAttribute("stroke-width", F(1.8 * unit)),
-                new XAttribute("opacity", "0.72")));
+                new XAttribute("opacity", "0.78")));
         }
+    }
 
+    private static void AddLedgerSlice(
+        XElement group,
+        XNamespace ns,
+        StaffLayout staff,
+        double xStart,
+        double xEnd,
+        string color,
+        double unit)
+    {
         foreach (var level in staff.LedgerLevels)
         {
             foreach (var segment in level.Segments)
             {
+                var start = Math.Max(segment.XStart, xStart);
+                var end = Math.Min(segment.XEnd, xEnd);
+
+                if (end <= start)
+                    continue;
+
                 group.Add(new XElement(
                     ns + "line",
-                    new XAttribute("x1", F(segment.XStart)),
+                    new XAttribute("x1", F(start)),
                     new XAttribute("y1", F(level.Y)),
-                    new XAttribute("x2", F(segment.XEnd)),
+                    new XAttribute("x2", F(end)),
                     new XAttribute("y2", F(level.Y)),
                     new XAttribute("stroke", color),
                     new XAttribute("stroke-width", F(2.6 * unit)),
                     new XAttribute("stroke-linecap", "round"),
-                    new XAttribute("opacity", "0.88")));
+                    new XAttribute("opacity", "0.9")));
             }
         }
     }
@@ -131,7 +189,6 @@ public sealed class ScoreLayoutDebugRenderer
         XElement group,
         XNamespace ns,
         StaffPairLayout pair,
-        string color,
         double unit)
     {
         foreach (var boundary in pair.Boundaries)
@@ -142,9 +199,9 @@ public sealed class ScoreLayoutDebugRenderer
                 new XAttribute("y1", F(boundary.UpperY)),
                 new XAttribute("x2", F(boundary.X)),
                 new XAttribute("y2", F(boundary.LowerY)),
-                new XAttribute("stroke", color),
-                new XAttribute("stroke-width", F(2.2 * unit)),
-                new XAttribute("opacity", "0.82")));
+                new XAttribute("stroke", "#202020"),
+                new XAttribute("stroke-width", F(1.25 * unit)),
+                new XAttribute("opacity", "0.72")));
         }
     }
 
