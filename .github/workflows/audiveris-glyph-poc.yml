@@ -1,0 +1,33 @@
+name: Audiveris glyph PoC
+
+on:
+  push:
+    branches:
+      - audiveris-glyph-poc
+    paths:
+      - "AudiverisGlyphPoc/**"
+      - ".github/workflows/audiveris-glyph-poc.yml"
+  workflow_dispatch:
+
+jobs:
+  build-and-inspect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build
+        run: dotnet build AudiverisGlyphPoc/AudiverisGlyphPoc.csproj --configuration Release
+
+      - name: Load official Audiveris model
+        run: |
+          dotnet run \
+            --project AudiverisGlyphPoc/AudiverisGlyphPoc.csproj \
+            --configuration Release \
+            --no-build
