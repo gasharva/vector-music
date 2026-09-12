@@ -195,6 +195,7 @@ public sealed class SymbolClassificationDebugRenderer
     {
         const string timePrefix = "TIME_";
         const string tupletPrefix = "TUPLET_";
+        const string digitPrefix = "DIGIT_";
 
         string? suffix = null;
 
@@ -206,22 +207,26 @@ public sealed class SymbolClassificationDebugRenderer
         {
             suffix = label[tupletPrefix.Length..];
         }
+        else if (label.StartsWith(digitPrefix, StringComparison.Ordinal))
+        {
+            suffix = label[digitPrefix.Length..];
+        }
 
         digit = suffix switch
         {
-            "ZERO" => "0",
-            "ONE" => "1",
-            "TWO" => "2",
-            "THREE" => "3",
-            "FOUR" => "4",
-            "FIVE" => "5",
-            "SIX" => "6",
-            "SEVEN" => "7",
-            "EIGHT" => "8",
-            "NINE" => "9",
-            "TEN" => "10",
-            "ELEVEN" => "11",
-            "TWELVE" => "12",
+            "0" or "ZERO" => "0",
+            "1" or "ONE" => "1",
+            "2" or "TWO" => "2",
+            "3" or "THREE" => "3",
+            "4" or "FOUR" => "4",
+            "5" or "FIVE" => "5",
+            "6" or "SIX" => "6",
+            "7" or "SEVEN" => "7",
+            "8" or "EIGHT" => "8",
+            "9" or "NINE" => "9",
+            "10" or "TEN" => "10",
+            "11" or "ELEVEN" => "11",
+            "12" or "TWELVE" => "12",
             _ => null
         };
 
