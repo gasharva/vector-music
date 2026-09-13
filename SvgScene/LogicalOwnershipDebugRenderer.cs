@@ -79,19 +79,16 @@ public sealed class LogicalOwnershipDebugRenderer
             .FirstOrDefault(element => element.Name.LocalName == "defs");
 
         var recolored = 0;
-        var reconstructedConflicts = 0;
-        var unresolvedConflicts = 0;
+        var compoundConflicts = 0;
         var unmapped = 0;
 
-        foreach (var pair in shapesBySourceElement.ToArray())
+        foreach (var pair in shapesBySourceElement)
         {
             var sourceElement = pair.Key;
             var ownedShapes = pair.Value
-                .Select(shape => new
-                {
-                    Shape = shape,
-                    Assignment = assignments.GetValueOrDefault(shape.Id)
-                })
+                .Select(shape => new OwnedSourceShape(
+                    shape,
+                    assignments.GetValueOrDefault(shape.Id)))
                 .Where(item => item.Assignment is not null)
                 .ToArray();
 
@@ -100,36 +97,45 @@ public sealed class LogicalOwnershipDebugRenderer
                 continue;
             }
 
-            var starts = ownedShapes
-                .Select(item => item.Assignment!.Ownership.Start)
-                .Distinct()
+            var coordinateGroups = ownedShapes
+                .GroupBy(item => item.Assignment!.Ownership.Start)
+                .OrderByDescending(group => group.Count())
+                .ThenBy(group => group.Key.StaffId, StringComparer.Ordinal)
+                .ThenBy(group => group.Key.MeasureId, StringComparer.Ordinal)
                 .ToArray();
 
-            if (starts.Length != 1)
-            {
-                if (TryRenderCompoundPathFromGeometry(
-                        root,
-                        sourceElement,
-                        pair.Value,
-                        assignments,
-                        colors))
-                {
-                    reconstructedConflicts++;
-                }
-                else
-                {
-                    unresolvedConflicts++;
-                    sourceElement.SetAttributeValue(
-                        "data-ownership-debug",
-                        "conflict");
-                }
-
-                continue;
-            }
-
-            var color = colors.GetValueOrDefault(starts[0], "#616161");
+            var chosenCoordinate = coordinateGroups[0].Key;
+            var color = colors.GetValueOrDefault(chosenCoordinate, "#616161");
             var hasFill = ownedShapes.Any(item => item.Shape.HasFill);
             var hasStroke = ownedShapes.Any(item => item.Shape.HasStroke);
+
+            // IMPORTANT: this renderer is diagnostic only. One original SVG element
+            // can contain several independent subpaths which our normalizer later
+            // splits into shape-N.1, shape-N.2, ... and those pieces may legitimately
+            // belong to different staff/measure coordinates.
+            //
+            // Do not split, remove, reconstruct or move that source SVG element here.
+            // Previous attempts did exactly that and broke staff lines, barlines and
+            // filled beam geometry. Preserve the original SVG geometry byte-for-byte
+            // and use one representative ownership color for the whole compound item.
+            // The conflicting logical coordinates are recorded as data attributes so
+            // the visualization stays trustworthy about the fact that this is only a
+            // display compromise.
+            if (coordinateGroups.Length > 1)
+            {
+                compoundConflicts++;
+
+                sourceElement.SetAttributeValue(
+                    "data-ownership-debug",
+                    "compound-conflict");
+
+                sourceElement.SetAttributeValue(
+                    "data-ownership-alternatives",
+                    string.Join(
+                        ",",
+                        coordinateGroups.Select(group =>
+                            $"{group.Key.StaffId}+{group.Key.MeasureId}:{group.Count()}")));
+            }
 
             if (sourceElement.Name.LocalName == "use")
             {
@@ -157,175 +163,16 @@ public sealed class LogicalOwnershipDebugRenderer
 
             sourceElement.SetAttributeValue(
                 "data-ownership",
-                $"{starts[0].StaffId}+{starts[0].MeasureId}");
+                $"{chosenCoordinate.StaffId}+{chosenCoordinate.MeasureId}");
 
             recolored++;
         }
 
         root.SetAttributeValue(
             "data-ownership-debug-summary",
-            $"recolored={recolored}; reconstructed-conflicts={reconstructedConflicts}; "
-            + $"unresolved-conflicts={unresolvedConflicts}; unmapped={unmapped}");
+            $"recolored={recolored}; compound-conflicts={compoundConflicts}; unmapped={unmapped}");
 
         document.Save(output, SaveOptions.DisableFormatting);
-    }
-
-    private static bool TryRenderCompoundPathFromGeometry(
-        XElement root,
-        XElement sourceElement,
-        IReadOnlyList<GeometricShape> shapes,
-        IReadOnlyDictionary<string, LogicalOwnershipAssignment> assignments,
-        IReadOnlyDictionary<LogicalCoordinate, string> colors)
-    {
-        if (sourceElement.Name.LocalName != "path")
-        {
-            return false;
-        }
-
-        var indexedShapes = shapes
-            .Select(shape => new
-            {
-                Shape = shape,
-                ComponentIndex = ParseComponentIndex(shape.Id)
-            })
-            .Where(item => item.ComponentIndex is not null)
-            .OrderBy(item => item.ComponentIndex)
-            .ToArray();
-
-        if (indexedShapes.Length <= 1)
-        {
-            return false;
-        }
-
-        // Do not split the original d string here. A later subpath may start with
-        // a relative 'm', whose origin is the previous subpath's current point.
-        // Cutting such a path into independent strings changes its geometry and
-        // is exactly what made staff lines and barlines "walk away".
-        //
-        // The GeometricShape components already contain the normalized absolute
-        // geometry produced by SvgNormalizer/CompoundShapeSplitter. For this
-        // debug-only conflict case we render those components at root level.
-        // This keeps ownership logic untouched and guarantees correct positions.
-        var debugGroup = new XElement(
-            root.Name.Namespace + "g",
-            new XAttribute("data-ownership-debug", "compound-path-components"));
-
-        foreach (var item in indexedShapes)
-        {
-            var shape = item.Shape;
-            var pathData = BuildPathData(shape.EffectiveContours);
-
-            if (string.IsNullOrWhiteSpace(pathData))
-            {
-                continue;
-            }
-
-            var path = new XElement(
-                root.Name.Namespace + "path",
-                new XAttribute("d", pathData),
-                new XAttribute("data-source-shape", shape.Id));
-
-            var color = "#000000";
-
-            if (assignments.TryGetValue(shape.Id, out var assignment))
-            {
-                var coordinate = assignment.Ownership.Start;
-                color = colors.GetValueOrDefault(coordinate, "#616161");
-
-                path.SetAttributeValue(
-                    "data-ownership",
-                    $"{coordinate.StaffId}+{coordinate.MeasureId}");
-            }
-
-            if (shape.HasFill)
-            {
-                path.SetAttributeValue("fill", color);
-            }
-            else
-            {
-                path.SetAttributeValue("fill", "none");
-            }
-
-            if (shape.HasStroke)
-            {
-                path.SetAttributeValue("stroke", color);
-
-                if (shape.StrokeWidth > 0)
-                {
-                    path.SetAttributeValue(
-                        "stroke-width",
-                        FormatNumber(shape.StrokeWidth));
-                }
-            }
-            else
-            {
-                path.SetAttributeValue("stroke", "none");
-            }
-
-            debugGroup.Add(path);
-        }
-
-        if (!debugGroup.HasElements)
-        {
-            return false;
-        }
-
-        sourceElement.Remove();
-        root.Add(debugGroup);
-        return true;
-    }
-
-    private static string BuildPathData(
-        IReadOnlyList<GeometricContour> contours)
-    {
-        var parts = new List<string>();
-
-        foreach (var contour in contours)
-        {
-            if (contour.Points.Count == 0)
-            {
-                continue;
-            }
-
-            var first = contour.Points[0];
-            parts.Add($"M {FormatPoint(first)}");
-
-            for (var index = 1; index < contour.Points.Count; index++)
-            {
-                parts.Add($"L {FormatPoint(contour.Points[index])}");
-            }
-
-            if (contour.IsClosed)
-            {
-                parts.Add("Z");
-            }
-        }
-
-        return string.Join(" ", parts);
-    }
-
-    private static string FormatPoint(PointD point) =>
-        $"{FormatNumber(point.X)} {FormatNumber(point.Y)}";
-
-    private static string FormatNumber(double value) =>
-        value.ToString("0.###", CultureInfo.InvariantCulture);
-
-    private static int? ParseComponentIndex(string shapeId)
-    {
-        var separator = shapeId.IndexOf('.', StringComparison.Ordinal);
-
-        if (separator < 0 || separator + 1 >= shapeId.Length)
-        {
-            return null;
-        }
-
-        return int.TryParse(
-            shapeId[(separator + 1)..],
-            NumberStyles.Integer,
-            CultureInfo.InvariantCulture,
-            out var index)
-                ? index
-                : null;
     }
 
     private static bool TryRecolorUse(
@@ -568,8 +415,11 @@ public sealed class LogicalOwnershipDebugRenderer
         {
             "path" => !string.IsNullOrWhiteSpace((string?)element.Attribute("d")),
             "line" => true,
-            "polyline" or "polygon" => !string.IsNullOrWhiteSpace((string?)element.Attribute("points")),
-            "rect" => PositiveAttribute(element, "width") && PositiveAttribute(element, "height"),
+            "polyline" or "polygon" =>
+                !string.IsNullOrWhiteSpace((string?)element.Attribute("points")),
+            "rect" =>
+                PositiveAttribute(element, "width")
+                && PositiveAttribute(element, "height"),
             _ => false
         };
     }
@@ -669,4 +519,8 @@ public sealed class LogicalOwnershipDebugRenderer
         new(value
             .Select(character => char.IsLetterOrDigit(character) ? character : '-')
             .ToArray());
+
+    private sealed record OwnedSourceShape(
+        GeometricShape Shape,
+        LogicalOwnershipAssignment? Assignment);
 }
