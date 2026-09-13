@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace SvgMusic.Scene;
@@ -21,6 +22,10 @@ public sealed class LogicalOwnershipDebugRenderer
         "#689f38"
     ];
 
+    private static readonly Regex StylePropertyRegex = new(
+        @"(?<name>[a-zA-Z-]+)\s*:\s*(?<value>[^;]+)",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
     public void Render(
         string input,
         GeometricScene geometry,
@@ -29,205 +34,444 @@ public sealed class LogicalOwnershipDebugRenderer
         LogicalOwnershipScene ownership,
         string output)
     {
-        new ScoreLayoutDebugRenderer().Render(input, layout, output);
-
-        var document = XDocument.Load(output, LoadOptions.PreserveWhitespace);
+        var document = XDocument.Load(input, LoadOptions.PreserveWhitespace);
         var root = document.Root
             ?? throw new InvalidOperationException("SVG has no root element.");
 
-        var ns = root.Name.Namespace;
-        var unit = DebugUnit(root);
         var colors = BuildColorMap(layout);
-        var coordinateCenters = BuildCoordinateCenters(layout);
-        var shapesById = geometry.Shapes.ToDictionary(
-            shape => shape.Id,
-            StringComparer.Ordinal);
         var assignments = ownership.Assignments.ToDictionary(
             assignment => assignment.ShapeId,
             StringComparer.Ordinal);
 
-        var defs = new XElement(ns + "defs");
-        var group = new XElement(
-            ns + "g",
-            new XAttribute("id", "debug-logical-ownership"),
-            new XAttribute("pointer-events", "none"));
+        var sourceElementsByShapeNumber = BuildSourceElementMap(root);
+        var shapesBySourceElement = new Dictionary<XElement, List<GeometricShape>>();
 
-        foreach (var stroke in notation.Strokes)
+        foreach (var shape in geometry.Shapes)
         {
-            if (!assignments.TryGetValue(stroke.ShapeId, out var assignment))
+            var baseNumber = ParseBaseShapeNumber(shape.Id);
+
+            if (baseNumber is null
+                || !sourceElementsByShapeNumber.TryGetValue(baseNumber.Value, out var sourceElement))
             {
                 continue;
             }
 
-            var paint = ResolvePaint(
-                assignment.Ownership,
-                colors,
-                coordinateCenters,
-                defs,
-                ns,
-                stroke.ShapeId);
+            if (!shapesBySourceElement.TryGetValue(sourceElement, out var shapes))
+            {
+                shapes = [];
+                shapesBySourceElement[sourceElement] = shapes;
+            }
 
-            group.Add(new XElement(
-                ns + "line",
-                new XAttribute("x1", F(stroke.Start.X)),
-                new XAttribute("y1", F(stroke.Start.Y)),
-                new XAttribute("x2", F(stroke.End.X)),
-                new XAttribute("y2", F(stroke.End.Y)),
-                new XAttribute("stroke", paint),
-                new XAttribute("stroke-width", F(Math.Max(stroke.Width + unit, 1.7 * unit))),
-                new XAttribute("stroke-linecap", "round"),
-                new XAttribute("opacity", F(Opacity(assignment.Ownership)))));
+            shapes.Add(shape);
         }
 
-        foreach (var curve in notation.CurvedStrokes)
+        var definitions = root.Descendants()
+            .Where(element => element.Attribute("id") is not null)
+            .GroupBy(
+                element => (string)element.Attribute("id")!,
+                StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.First(),
+                StringComparer.Ordinal);
+
+        var defs = root.Descendants()
+            .FirstOrDefault(element => element.Name.LocalName == "defs");
+
+        var recolored = 0;
+        var conflicts = 0;
+        var unmapped = 0;
+
+        foreach (var pair in shapesBySourceElement)
         {
-            if (curve.Centerline.Count < 2
-                || !assignments.TryGetValue(curve.ShapeId, out var assignment))
+            var sourceElement = pair.Key;
+            var ownedShapes = pair.Value
+                .Select(shape => new
+                {
+                    Shape = shape,
+                    Assignment = assignments.GetValueOrDefault(shape.Id)
+                })
+                .Where(item => item.Assignment is not null)
+                .ToArray();
+
+            if (ownedShapes.Length == 0)
             {
                 continue;
             }
 
-            var paint = ResolvePaint(
-                assignment.Ownership,
-                colors,
-                coordinateCenters,
-                defs,
-                ns,
-                curve.ShapeId);
-            var pathData = "M "
-                + F(curve.Centerline[0].X)
-                + " "
-                + F(curve.Centerline[0].Y)
-                + string.Concat(curve.Centerline
-                    .Skip(1)
-                    .Select(point => $" L {F(point.X)} {F(point.Y)}"));
+            var starts = ownedShapes
+                .Select(item => item.Assignment!.Ownership.Start)
+                .Distinct()
+                .ToArray();
 
-            group.Add(new XElement(
-                ns + "path",
-                new XAttribute("d", pathData),
-                new XAttribute("fill", "none"),
-                new XAttribute("stroke", paint),
-                new XAttribute("stroke-width", F(2.1 * unit)),
-                new XAttribute("stroke-linecap", "round"),
-                new XAttribute("stroke-linejoin", "round"),
-                new XAttribute("opacity", F(Opacity(assignment.Ownership)))));
+            // One original SVG element may contain several independent subpaths.
+            // If the splitter assigned those subpaths to different staff/measure
+            // coordinates, recoloring the original path would lie. Keep it black
+            // instead of drawing replacement geometry on top of it.
+            if (starts.Length != 1)
+            {
+                conflicts++;
+                sourceElement.SetAttributeValue("data-ownership-debug", "conflict");
+                continue;
+            }
+
+            var color = colors.GetValueOrDefault(starts[0], "#616161");
+            var hasFill = ownedShapes.Any(item => item.Shape.HasFill);
+            var hasStroke = ownedShapes.Any(item => item.Shape.HasStroke);
+
+            if (sourceElement.Name.LocalName == "use")
+            {
+                if (!TryRecolorUse(
+                        sourceElement,
+                        color,
+                        hasFill,
+                        hasStroke,
+                        definitions,
+                        defs,
+                        recolored))
+                {
+                    unmapped++;
+                    continue;
+                }
+            }
+            else
+            {
+                RecolorElement(
+                    sourceElement,
+                    color,
+                    hasFill,
+                    hasStroke);
+            }
+
+            sourceElement.SetAttributeValue(
+                "data-ownership",
+                $"{starts[0].StaffId}+{starts[0].MeasureId}");
+
+            recolored++;
         }
 
-        foreach (var ellipse in notation.Ellipses)
+        root.SetAttributeValue(
+            "data-ownership-debug-summary",
+            $"recolored={recolored}; conflicts={conflicts}; unmapped={unmapped}");
+
+        document.Save(output, SaveOptions.DisableFormatting);
+    }
+
+    private static bool TryRecolorUse(
+        XElement use,
+        string color,
+        bool hasFill,
+        bool hasStroke,
+        IReadOnlyDictionary<string, XElement> definitions,
+        XElement? defs,
+        int sequence)
+    {
+        if (defs is null)
         {
-            if (!assignments.TryGetValue(ellipse.ShapeId, out var assignment))
-            {
-                continue;
-            }
-
-            var paint = ResolvePaint(
-                assignment.Ownership,
-                colors,
-                coordinateCenters,
-                defs,
-                ns,
-                ellipse.ShapeId);
-            var degrees = ellipse.Rotation * 180.0 / Math.PI;
-
-            group.Add(new XElement(
-                ns + "ellipse",
-                new XAttribute("cx", F(ellipse.Center.X)),
-                new XAttribute("cy", F(ellipse.Center.Y)),
-                new XAttribute("rx", F(ellipse.MajorRadius)),
-                new XAttribute("ry", F(ellipse.MinorRadius)),
-                new XAttribute(
-                    "transform",
-                    $"rotate({F(degrees)} {F(ellipse.Center.X)} {F(ellipse.Center.Y)})"),
-                new XAttribute("fill", ellipse.IsHollow ? "none" : paint),
-                new XAttribute("fill-opacity", ellipse.IsHollow ? "0" : F(Opacity(assignment.Ownership))),
-                new XAttribute("stroke", paint),
-                new XAttribute("stroke-width", F(1.4 * unit)),
-                new XAttribute("opacity", F(Opacity(assignment.Ownership)))));
+            return false;
         }
 
-        foreach (var instance in notation.Instances)
+        var hrefAttribute = use.Attributes()
+            .FirstOrDefault(attribute => attribute.Name.LocalName == "href");
+        var href = hrefAttribute?.Value;
+
+        if (string.IsNullOrWhiteSpace(href)
+            || !href.StartsWith('#')
+            || !definitions.TryGetValue(href[1..], out var target))
         {
-            if (!assignments.TryGetValue(instance.ShapeId, out var assignment)
-                || !shapesById.TryGetValue(instance.ShapeId, out var shape))
+            return false;
+        }
+
+        var clone = new XElement(target);
+        var originalId = (string?)target.Attribute("id") ?? "glyph";
+        var cloneId = $"ownership-{MakeSafeId(originalId)}-{sequence + 1}";
+        clone.SetAttributeValue("id", cloneId);
+
+        RecolorTree(
+            clone,
+            color,
+            hasFill,
+            hasStroke);
+
+        defs.Add(clone);
+        hrefAttribute!.Value = "#" + cloneId;
+
+        return true;
+    }
+
+    private static void RecolorTree(
+        XElement element,
+        string color,
+        bool fallbackFill,
+        bool fallbackStroke)
+    {
+        if (IsGeometryElement(element))
+        {
+            var explicitFill = ReadPaint(element, "fill");
+            var explicitStroke = ReadPaint(element, "stroke");
+
+            var useFill = explicitFill is null
+                ? fallbackFill
+                : !IsNone(explicitFill);
+
+            var useStroke = explicitStroke is null
+                ? fallbackStroke
+                : !IsNone(explicitStroke);
+
+            RecolorElement(
+                element,
+                color,
+                useFill,
+                useStroke);
+        }
+
+        foreach (var child in element.Elements())
+        {
+            RecolorTree(
+                child,
+                color,
+                fallbackFill,
+                fallbackStroke);
+        }
+    }
+
+    private static void RecolorElement(
+        XElement element,
+        string color,
+        bool hasFill,
+        bool hasStroke)
+    {
+        if (hasFill)
+        {
+            SetPaint(element, "fill", color);
+        }
+
+        if (hasStroke)
+        {
+            SetPaint(element, "stroke", color);
+        }
+    }
+
+    private static string? ReadPaint(
+        XElement element,
+        string property)
+    {
+        var style = (string?)element.Attribute("style");
+
+        if (!string.IsNullOrWhiteSpace(style))
+        {
+            foreach (Match match in StylePropertyRegex.Matches(style))
             {
-                continue;
+                if (string.Equals(
+                        match.Groups["name"].Value,
+                        property,
+                        StringComparison.OrdinalIgnoreCase))
+                {
+                    return match.Groups["value"].Value.Trim();
+                }
             }
+        }
 
-            var paint = ResolvePaint(
-                assignment.Ownership,
-                colors,
-                coordinateCenters,
-                defs,
-                ns,
-                instance.ShapeId);
+        return (string?)element.Attribute(property);
+    }
 
-            foreach (var contour in shape.EffectiveContours)
+    private static void SetPaint(
+        XElement element,
+        string property,
+        string color)
+    {
+        var style = (string?)element.Attribute("style");
+
+        if (!string.IsNullOrWhiteSpace(style))
+        {
+            var properties = StylePropertyRegex.Matches(style)
+                .Cast<Match>()
+                .Select(match => new KeyValuePair<string, string>(
+                    match.Groups["name"].Value.Trim(),
+                    match.Groups["value"].Value.Trim()))
+                .ToList();
+
+            var found = false;
+
+            for (var index = 0; index < properties.Count; index++)
             {
-                if (contour.Points.Count < 2)
+                if (!string.Equals(
+                        properties[index].Key,
+                        property,
+                        StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
 
-                group.Add(new XElement(
-                    ns + "path",
-                    new XAttribute("d", BuildPathData(contour)),
-                    new XAttribute("fill", contour.IsClosed ? paint : "none"),
-                    new XAttribute("fill-opacity", contour.IsClosed ? F(Opacity(assignment.Ownership) * 0.72) : "0"),
-                    new XAttribute("stroke", paint),
-                    new XAttribute("stroke-width", F(Math.Max(unit, shape.StrokeWidth))),
-                    new XAttribute("stroke-linecap", "round"),
-                    new XAttribute("stroke-linejoin", "round"),
-                    new XAttribute("opacity", F(Opacity(assignment.Ownership)))));
+                properties[index] = new KeyValuePair<string, string>(
+                    properties[index].Key,
+                    color);
+                found = true;
             }
+
+            if (!found)
+            {
+                properties.Add(new KeyValuePair<string, string>(
+                    property,
+                    color));
+            }
+
+            element.SetAttributeValue(
+                "style",
+                string.Join(
+                    ";",
+                    properties.Select(item => $"{item.Key}:{item.Value}")));
+
+            return;
         }
 
-        if (defs.HasElements)
-        {
-            root.AddFirst(defs);
-        }
-
-        root.Add(group);
-        document.Save(output, SaveOptions.DisableFormatting);
+        element.SetAttributeValue(property, color);
     }
 
-    private static string ResolvePaint(
-        LogicalOwnership ownership,
-        IReadOnlyDictionary<LogicalCoordinate, string> colors,
-        IReadOnlyDictionary<LogicalCoordinate, PointD> centers,
-        XElement defs,
-        XNamespace ns,
-        string shapeId)
-    {
-        var startColor = colors.GetValueOrDefault(ownership.Start, "#616161");
+    private static bool IsNone(string value) =>
+        string.Equals(
+            value.Trim(),
+            "none",
+            StringComparison.OrdinalIgnoreCase);
 
-        if (!ownership.IsSpan)
+    private static IReadOnlyDictionary<int, XElement> BuildSourceElementMap(
+        XElement root)
+    {
+        var definitions = root.Descendants()
+            .Where(element => element.Attribute("id") is not null)
+            .GroupBy(
+                element => (string)element.Attribute("id")!,
+                StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.First(),
+                StringComparer.Ordinal);
+
+        var result = new Dictionary<int, XElement>();
+        var number = 0;
+
+        foreach (var element in root.Descendants())
         {
-            return startColor;
+            if (IsInsideDefs(element))
+            {
+                continue;
+            }
+
+            if (element.Name.LocalName == "use")
+            {
+                var href = element.Attributes()
+                    .FirstOrDefault(attribute => attribute.Name.LocalName == "href")
+                    ?.Value;
+
+                if (string.IsNullOrWhiteSpace(href)
+                    || !href.StartsWith('#')
+                    || !definitions.TryGetValue(href[1..], out var target))
+                {
+                    continue;
+                }
+
+                foreach (var source in GeometryElements(target))
+                {
+                    if (!CouldProduceGeometry(source))
+                    {
+                        continue;
+                    }
+
+                    result[++number] = element;
+                }
+
+                continue;
+            }
+
+            if (!IsGeometryElement(element)
+                || !CouldProduceGeometry(element))
+            {
+                continue;
+            }
+
+            result[++number] = element;
         }
 
-        var endColor = colors.GetValueOrDefault(ownership.End, startColor);
-        var start = centers.GetValueOrDefault(ownership.Start, new PointD(0, 0));
-        var end = centers.GetValueOrDefault(ownership.End, start);
-        var gradientId = "ownership-gradient-" + MakeSafeId(shapeId);
+        return result;
+    }
 
-        defs.Add(new XElement(
-            ns + "linearGradient",
-            new XAttribute("id", gradientId),
-            new XAttribute("gradientUnits", "userSpaceOnUse"),
-            new XAttribute("x1", F(start.X)),
-            new XAttribute("y1", F(start.Y)),
-            new XAttribute("x2", F(end.X)),
-            new XAttribute("y2", F(end.Y)),
-            new XElement(
-                ns + "stop",
-                new XAttribute("offset", "0%"),
-                new XAttribute("stop-color", startColor)),
-            new XElement(
-                ns + "stop",
-                new XAttribute("offset", "100%"),
-                new XAttribute("stop-color", endColor))));
+    private static bool CouldProduceGeometry(XElement element)
+    {
+        return element.Name.LocalName switch
+        {
+            "path" => !string.IsNullOrWhiteSpace((string?)element.Attribute("d")),
+            "line" => true,
+            "polyline" or "polygon" => !string.IsNullOrWhiteSpace((string?)element.Attribute("points")),
+            "rect" => PositiveAttribute(element, "width") && PositiveAttribute(element, "height"),
+            _ => false
+        };
+    }
 
-        return $"url(#{gradientId})";
+    private static bool PositiveAttribute(
+        XElement element,
+        string name)
+    {
+        var text = (string?)element.Attribute(name);
+
+        return double.TryParse(
+                text,
+                NumberStyles.Float,
+                CultureInfo.InvariantCulture,
+                out var value)
+            && value > 0;
+    }
+
+    private static IEnumerable<XElement> GeometryElements(
+        XElement target)
+    {
+        if (IsGeometryElement(target))
+        {
+            yield return target;
+        }
+
+        foreach (var element in target.Descendants())
+        {
+            if (IsGeometryElement(element)
+                && !element.Ancestors()
+                    .TakeWhile(ancestor => ancestor != target)
+                    .Any(ancestor => ancestor.Name.LocalName == "defs"))
+            {
+                yield return element;
+            }
+        }
+    }
+
+    private static bool IsGeometryElement(XElement element) =>
+        element.Name.LocalName is
+            "path"
+            or "line"
+            or "polyline"
+            or "polygon"
+            or "rect";
+
+    private static bool IsInsideDefs(XElement element) =>
+        element.Ancestors()
+            .Any(ancestor => ancestor.Name.LocalName == "defs");
+
+    private static int? ParseBaseShapeNumber(string shapeId)
+    {
+        if (!shapeId.StartsWith("shape-", StringComparison.Ordinal))
+        {
+            return null;
+        }
+
+        var end = shapeId.IndexOf('.', StringComparison.Ordinal);
+        var numberText = end >= 0
+            ? shapeId[6..end]
+            : shapeId[6..];
+
+        return int.TryParse(
+            numberText,
+            NumberStyles.Integer,
+            CultureInfo.InvariantCulture,
+            out var number)
+                ? number
+                : null;
     }
 
     private static IReadOnlyDictionary<LogicalCoordinate, string> BuildColorMap(
@@ -253,97 +497,8 @@ public sealed class LogicalOwnershipDebugRenderer
         return result;
     }
 
-    private static IReadOnlyDictionary<LogicalCoordinate, PointD> BuildCoordinateCenters(
-        ScoreLayout layout)
-    {
-        var result = new Dictionary<LogicalCoordinate, PointD>();
-        var staffs = layout.Staffs.ToDictionary(staff => staff.Id, StringComparer.Ordinal);
-
-        foreach (var system in layout.Systems)
-        {
-            foreach (var pair in system.StaffPairs)
-            {
-                foreach (var measure in pair.Measures)
-                {
-                    foreach (var staffId in new[] { pair.UpperStaffId, pair.LowerStaffId })
-                    {
-                        var staff = staffs[staffId];
-                        result[new LogicalCoordinate(staffId, measure.Id)] = new PointD(
-                            (measure.XStart + measure.XEnd) / 2.0,
-                            staff.Bounds.CenterY);
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private static double Opacity(LogicalOwnership ownership)
-    {
-        if (ownership.Reason == "BetweenStaffBridge")
-        {
-            return 0.78;
-        }
-
-        return ownership.Generation switch
-        {
-            1 => 0.90,
-            2 => 0.62,
-            3 => 0.38,
-            _ => 0.30
-        };
-    }
-
-    private static string BuildPathData(GeometricContour contour)
-    {
-        var first = contour.Points[0];
-        var data = "M " + F(first.X) + " " + F(first.Y);
-
-        foreach (var point in contour.Points.Skip(1))
-        {
-            data += " L " + F(point.X) + " " + F(point.Y);
-        }
-
-        if (contour.IsClosed)
-        {
-            data += " Z";
-        }
-
-        return data;
-    }
-
     private static string MakeSafeId(string value) =>
         new(value
             .Select(character => char.IsLetterOrDigit(character) ? character : '-')
             .ToArray());
-
-    private static double DebugUnit(XElement root)
-    {
-        var viewBox = ((string?)root.Attribute("viewBox"))?.Split(
-            [' ', ',', '\t', '\r', '\n'],
-            StringSplitOptions.RemoveEmptyEntries);
-
-        if (viewBox is { Length: 4 }
-            && double.TryParse(
-                viewBox[2],
-                NumberStyles.Float,
-                CultureInfo.InvariantCulture,
-                out var width)
-            && double.TryParse(
-                viewBox[3],
-                NumberStyles.Float,
-                CultureInfo.InvariantCulture,
-                out var height)
-            && width > 0
-            && height > 0)
-        {
-            return Math.Max(Math.Min(width, height) / 1000.0, 0.05);
-        }
-
-        return 1.0;
-    }
-
-    private static string F(double value) =>
-        value.ToString("0.###", CultureInfo.InvariantCulture);
 }
