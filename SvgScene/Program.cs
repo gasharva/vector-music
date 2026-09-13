@@ -85,6 +85,7 @@ var pipeline = new ScenePipeline(
 
 var (geometry, notation) = pipeline.Run(input);
 var layout = new ScoreLayoutAnalyzer().Analyze(notation);
+IReadOnlyList<string> bassClefRepairDiagnostics = Array.Empty<string>();
 
 if (classifySymbols)
 {
@@ -95,6 +96,18 @@ if (classifySymbols)
         geometry,
         notation,
         layout);
+
+    var bassClefRepair = new BassClefCompositeRepair(classifier);
+    notation = bassClefRepair.Repair(
+        geometry,
+        notation,
+        layout);
+    bassClefRepairDiagnostics = bassClefRepair.Diagnostics.ToArray();
+
+    foreach (var diagnostic in bassClefRepairDiagnostics)
+    {
+        Console.WriteLine($"[bass-clef-repair] {diagnostic}");
+    }
 
     var classifiedPrototypes = notation.Prototypes.Count(prototype =>
         prototype.Classification is not null);
@@ -192,6 +205,13 @@ if (classifySymbols)
         classifiedSvg);
 
     Console.WriteLine($"Written classified symbols SVG: {classifiedSvg}");
+
+    var repairLog = Path.Combine(
+        outputDirectory,
+        Path.GetFileNameWithoutExtension(input) + ".bass-clef-repair.txt");
+
+    File.WriteAllLines(repairLog, bassClefRepairDiagnostics);
+    Console.WriteLine($"Written bass clef repair log: {repairLog}");
 }
 
 if (exportGlyphsDirectory is not null)
