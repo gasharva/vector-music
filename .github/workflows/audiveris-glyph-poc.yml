@@ -10,6 +10,9 @@ on:
       - ".github/workflows/audiveris-glyph-poc.yml"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-classify:
     runs-on: ubuntu-latest
@@ -81,3 +84,14 @@ jobs:
           path: artifacts/
           if-no-files-found: error
           retention-days: 30
+
+      - name: Publish stable debug artifacts
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: debug-artifacts
+          publish_dir: ./artifacts
+          destination_dir: kancheli
+          keep_files: false
+          force_orphan: true
+          commit_message: "Update Kancheli debug artifacts from ${{ github.sha }}"
