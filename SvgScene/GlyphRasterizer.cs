@@ -9,6 +9,24 @@ public sealed class GlyphRasterizer
         double sourceInterline,
         int targetInterline)
     {
+        return Rasterize(
+            [shape],
+            sourceInterline,
+            targetInterline);
+    }
+
+    public RasterGlyphData Rasterize(
+        IReadOnlyList<GeometricShape> shapes,
+        double sourceInterline,
+        int targetInterline)
+    {
+        if (shapes.Count == 0)
+        {
+            throw new ArgumentException(
+                "At least one shape is required.",
+                nameof(shapes));
+        }
+
         if (sourceInterline <= 0)
         {
             throw new ArgumentOutOfRangeException(
@@ -24,22 +42,68 @@ public sealed class GlyphRasterizer
         }
 
         var scale = targetInterline / sourceInterline;
+        var bounds = UnionBounds(shapes);
         var width = Math.Max(
             1,
-            (int)Math.Ceiling(shape.Bounds.Width * scale) + 1 + 2 * Padding);
+            (int)Math.Ceiling(bounds.Width * scale) + 1 + 2 * Padding);
         var height = Math.Max(
             1,
-            (int)Math.Ceiling(shape.Bounds.Height * scale) + 1 + 2 * Padding);
+            (int)Math.Ceiling(bounds.Height * scale) + 1 + 2 * Padding);
 
         var pixels = Enumerable.Repeat((byte)255, width * height).ToArray();
 
+        foreach (var shape in shapes)
+        {
+            RasterizeShape(
+                shape,
+                bounds,
+                scale,
+                pixels,
+                width,
+                height);
+        }
+
+        return new RasterGlyphData(
+            width,
+            height,
+            pixels,
+            pixels.Count(value => value < 128),
+            targetInterline);
+    }
+
+    public static double ResolveSourceInterline(
+        ScoreLayout layout,
+        double fallback = 30)
+    {
+        var spacings = layout.Staffs
+            .Select(staff => staff.AverageLineSpacing)
+            .Where(value => value > 0)
+            .OrderBy(value => value)
+            .ToArray();
+
+        if (spacings.Length == 0)
+        {
+            return fallback;
+        }
+
+        return spacings[spacings.Length / 2];
+    }
+
+    private static void RasterizeShape(
+        GeometricShape shape,
+        BoundsD combinedBounds,
+        double scale,
+        byte[] pixels,
+        int width,
+        int height)
+    {
         var contours = shape.EffectiveContours
             .Where(contour => contour.Points.Count > 0)
             .Select(contour => new RasterContour(
                 contour.Points
                     .Select(point => new PointD(
-                        (point.X - shape.Bounds.MinX) * scale + Padding,
-                        (point.Y - shape.Bounds.MinY) * scale + Padding))
+                        (point.X - combinedBounds.MinX) * scale + Padding,
+                        (point.Y - combinedBounds.MinY) * scale + Padding))
                     .ToArray(),
                 contour.IsClosed))
             .ToArray();
@@ -79,31 +143,15 @@ public sealed class GlyphRasterizer
                 contour.Points,
                 strokeWidth);
         }
-
-        return new RasterGlyphData(
-            width,
-            height,
-            pixels,
-            pixels.Count(value => value < 128),
-            targetInterline);
     }
 
-    public static double ResolveSourceInterline(
-        ScoreLayout layout,
-        double fallback = 30)
+    private static BoundsD UnionBounds(IReadOnlyList<GeometricShape> shapes)
     {
-        var spacings = layout.Staffs
-            .Select(staff => staff.AverageLineSpacing)
-            .Where(value => value > 0)
-            .OrderBy(value => value)
-            .ToArray();
-
-        if (spacings.Length == 0)
-        {
-            return fallback;
-        }
-
-        return spacings[spacings.Length / 2];
+        return new BoundsD(
+            shapes.Min(shape => shape.Bounds.MinX),
+            shapes.Min(shape => shape.Bounds.MinY),
+            shapes.Max(shape => shape.Bounds.MaxX),
+            shapes.Max(shape => shape.Bounds.MaxY));
     }
 
     private static bool PointInPolygon(
