@@ -6,6 +6,8 @@ namespace SvgMusic.Scene;
 
 public sealed class LogicalOwnershipDebugRenderer
 {
+    private const string NeutralLayoutColor = "#000000";
+
     private static readonly string[] Palette =
     [
         "#d32f2f",
@@ -39,6 +41,7 @@ public sealed class LogicalOwnershipDebugRenderer
             ?? throw new InvalidOperationException("SVG has no root element.");
 
         var colors = BuildColorMap(layout);
+        var neutralShapeIds = BuildNeutralShapeIds(layout);
         var assignments = ownership.Assignments.ToDictionary(
             assignment => assignment.ShapeId,
             StringComparer.Ordinal);
@@ -84,13 +87,16 @@ public sealed class LogicalOwnershipDebugRenderer
 
         var renderResults = new Dictionary<string, ShapeRenderResult>(StringComparer.Ordinal);
         var recolored = 0;
+        var componentRendered = 0;
         var compoundConflicts = 0;
+        var neutralSources = 0;
         var unmapped = 0;
 
-        foreach (var pair in shapesBySourceElement)
+        foreach (var pair in shapesBySourceElement.ToArray())
         {
             var sourceElement = pair.Key;
-            var ownedShapes = pair.Value
+            var sourceShapes = pair.Value;
+            var ownedShapes = sourceShapes
                 .Select(shape => new OwnedSourceShape(
                     shape,
                     assignments.GetValueOrDefault(shape.Id)))
@@ -102,6 +108,32 @@ public sealed class LogicalOwnershipDebugRenderer
                 continue;
             }
 
+            var allNeutral = sourceShapes.All(shape =>
+                neutralShapeIds.Contains(shape.Id));
+
+            if (allNeutral)
+            {
+                neutralSources++;
+
+                sourceElement.SetAttributeValue(
+                    "data-ownership-debug",
+                    "neutral-layout");
+
+                foreach (var item in ownedShapes)
+                {
+                    var coordinate = item.Assignment!.Ownership.Start;
+
+                    renderResults[item.Shape.Id] = new ShapeRenderResult(
+                        true,
+                        "neutral-layout",
+                        coordinate,
+                        true,
+                        DescribeSource(sourceElement));
+                }
+
+                continue;
+            }
+
             var coordinateGroups = ownedShapes
                 .GroupBy(item => item.Assignment!.Ownership.Start)
                 .OrderByDescending(group => group.Count())
@@ -109,18 +141,43 @@ public sealed class LogicalOwnershipDebugRenderer
                 .ThenBy(group => group.Key.MeasureId, StringComparer.Ordinal)
                 .ToArray();
 
+            var hasNeutral = sourceShapes.Any(shape =>
+                neutralShapeIds.Contains(shape.Id));
+            var hasColored = sourceShapes.Any(shape =>
+                !neutralShapeIds.Contains(shape.Id));
+            var mixedNeutral = hasNeutral && hasColored;
+            var hasOwnershipConflict = coordinateGroups.Length > 1;
+
+            if (hasOwnershipConflict)
+            {
+                compoundConflicts++;
+            }
+
+            if ((hasOwnershipConflict || mixedNeutral)
+                && TryRenderCompoundComponents(
+                    root,
+                    sourceElement,
+                    sourceShapes,
+                    assignments,
+                    colors,
+                    neutralShapeIds,
+                    renderResults))
+            {
+                componentRendered++;
+                recolored++;
+                continue;
+            }
+
             var chosenCoordinate = coordinateGroups[0].Key;
             var color = colors.GetValueOrDefault(chosenCoordinate, "#616161");
             var hasFill = ownedShapes.Any(item => item.Shape.HasFill);
             var hasStroke = ownedShapes.Any(item => item.Shape.HasStroke);
-            var mode = coordinateGroups.Length > 1
+            var mode = hasOwnershipConflict
                 ? "compound-dominant"
                 : "direct";
 
-            if (coordinateGroups.Length > 1)
+            if (hasOwnershipConflict)
             {
-                compoundConflicts++;
-
                 sourceElement.SetAttributeValue(
                     "data-ownership-debug",
                     "compound-conflict");
@@ -193,7 +250,9 @@ public sealed class LogicalOwnershipDebugRenderer
 
         root.SetAttributeValue(
             "data-ownership-debug-summary",
-            $"recolored={recolored}; compound-conflicts={compoundConflicts}; unmapped={unmapped}");
+            $"recolored={recolored}; component-rendered={componentRendered}; "
+            + $"neutral-sources={neutralSources}; compound-conflicts={compoundConflicts}; "
+            + $"unmapped={unmapped}");
 
         document.Save(output, SaveOptions.DisableFormatting);
 
@@ -203,6 +262,198 @@ public sealed class LogicalOwnershipDebugRenderer
             assignments,
             sourceElementByShapeId,
             renderResults);
+    }
+
+    private static bool TryRenderCompoundComponents(
+        XElement root,
+        XElement sourceElement,
+        IReadOnlyList<GeometricShape> shapes,
+        IReadOnlyDictionary<string, LogicalOwnershipAssignment> assignments,
+        IReadOnlyDictionary<LogicalCoordinate, string> colors,
+        IReadOnlySet<string> neutralShapeIds,
+        IDictionary<string, ShapeRenderResult> renderResults)
+    {
+        if (sourceElement.Name.LocalName != "path"
+            || shapes.Count <= 1)
+        {
+            return false;
+        }
+
+        var prepared = new List<(GeometricShape Shape, string PathData)>();
+
+        foreach (var shape in shapes)
+        {
+            if (!shape.HasFill && !shape.HasStroke)
+            {
+                return false;
+            }
+
+            var pathData = BuildPathData(shape.EffectiveContours);
+
+            if (string.IsNullOrWhiteSpace(pathData))
+            {
+                return false;
+            }
+
+            prepared.Add((shape, pathData));
+        }
+
+        var sourceDescription = DescribeSource(sourceElement);
+        var group = new XElement(
+            root.Name.Namespace + "g",
+            new XAttribute(
+                "data-ownership-debug",
+                "compound-components"));
+
+        foreach (var item in prepared)
+        {
+            var shape = item.Shape;
+            var path = new XElement(sourceElement);
+
+            path.Attribute("id")?.Remove();
+            path.Attribute("transform")?.Remove();
+            path.SetAttributeValue("d", item.PathData);
+            path.SetAttributeValue("data-source-shape", shape.Id);
+
+            var isNeutral = neutralShapeIds.Contains(shape.Id);
+            LogicalCoordinate? displayedCoordinate = null;
+            var mode = isNeutral
+                ? "neutral-component"
+                : "compound-component";
+            var color = NeutralLayoutColor;
+
+            if (!isNeutral
+                && assignments.TryGetValue(shape.Id, out var assignment))
+            {
+                displayedCoordinate = assignment.Ownership.Start;
+                color = colors.GetValueOrDefault(
+                    displayedCoordinate,
+                    "#616161");
+
+                path.SetAttributeValue(
+                    "data-ownership",
+                    FormatCoordinate(displayedCoordinate));
+            }
+            else if (isNeutral)
+            {
+                path.SetAttributeValue(
+                    "data-ownership-debug",
+                    "neutral-layout-component");
+            }
+
+            SetShapePaint(
+                path,
+                shape,
+                color);
+
+            group.Add(path);
+
+            if (assignments.TryGetValue(shape.Id, out var shapeAssignment))
+            {
+                var ownCoordinate = shapeAssignment.Ownership.Start;
+
+                renderResults[shape.Id] = new ShapeRenderResult(
+                    true,
+                    mode,
+                    isNeutral ? ownCoordinate : displayedCoordinate,
+                    true,
+                    sourceDescription);
+            }
+        }
+
+        sourceElement.Remove();
+        root.Add(group);
+        return true;
+    }
+
+    private static void SetShapePaint(
+        XElement element,
+        GeometricShape shape,
+        string color)
+    {
+        SetPaint(
+            element,
+            "fill",
+            shape.HasFill ? color : "none");
+
+        SetPaint(
+            element,
+            "stroke",
+            shape.HasStroke ? color : "none");
+
+        if (shape.HasStroke && shape.StrokeWidth > 0)
+        {
+            SetStyleProperty(
+                element,
+                "stroke-width",
+                FormatNumber(shape.StrokeWidth));
+        }
+    }
+
+    private static string BuildPathData(
+        IReadOnlyList<GeometricContour> contours)
+    {
+        var parts = new List<string>();
+
+        foreach (var contour in contours)
+        {
+            if (contour.Points.Count == 0)
+            {
+                continue;
+            }
+
+            parts.Add(
+                $"M {FormatPoint(contour.Points[0])}");
+
+            for (var index = 1; index < contour.Points.Count; index++)
+            {
+                parts.Add(
+                    $"L {FormatPoint(contour.Points[index])}");
+            }
+
+            if (contour.IsClosed)
+            {
+                parts.Add("Z");
+            }
+        }
+
+        return string.Join(" ", parts);
+    }
+
+    private static string FormatPoint(PointD point) =>
+        $"{FormatNumber(point.X)} {FormatNumber(point.Y)}";
+
+    private static string FormatNumber(double value) =>
+        value.ToString("0.###", CultureInfo.InvariantCulture);
+
+    private static IReadOnlySet<string> BuildNeutralShapeIds(
+        ScoreLayout layout)
+    {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var staff in layout.Staffs)
+        {
+            foreach (var line in staff.Lines)
+            {
+                result.Add(line.StrokeId);
+            }
+        }
+
+        foreach (var system in layout.Systems)
+        {
+            foreach (var pair in system.StaffPairs)
+            {
+                foreach (var boundary in pair.Boundaries)
+                {
+                    foreach (var strokeId in boundary.StrokeIds)
+                    {
+                        result.Add(strokeId);
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     private static IReadOnlyDictionary<string, string> BuildShapeKinds(
@@ -248,10 +499,12 @@ public sealed class LogicalOwnershipDebugRenderer
         var lines = new List<string>
         {
             "OWNERSHIP RENDER DIAGNOSTICS",
-            "owned=no                 => ownership algorithm did not assign the shape",
-            "owned=yes rendered=no    => renderer/source mapping problem",
-            "mode=compound-dominant   => source SVG element contains shapes with different ownership; one display color was chosen",
-            "color-match=no           => shape has ownership, but compound source was displayed with another shape's color",
+            "owned=no                   => ownership algorithm did not assign the shape",
+            "owned=yes rendered=no      => renderer/source mapping problem",
+            "mode=compound-component    => this split component was rendered with its own ownership color",
+            "mode=neutral-layout        => staff/bar layout geometry intentionally remains black",
+            "mode=compound-dominant     => component rendering was impossible; one fallback color was chosen",
+            "color-match=no             => shape has ownership, but fallback compound source used another color",
             string.Empty,
             "SUMMARY"
         };
@@ -474,6 +727,17 @@ public sealed class LogicalOwnershipDebugRenderer
         string property,
         string color)
     {
+        SetStyleProperty(
+            element,
+            property,
+            color);
+    }
+
+    private static void SetStyleProperty(
+        XElement element,
+        string property,
+        string value)
+    {
         var style = (string?)element.Attribute("style");
 
         if (!string.IsNullOrWhiteSpace(style))
@@ -499,7 +763,7 @@ public sealed class LogicalOwnershipDebugRenderer
 
                 properties[index] = new KeyValuePair<string, string>(
                     properties[index].Key,
-                    color);
+                    value);
                 found = true;
             }
 
@@ -507,7 +771,7 @@ public sealed class LogicalOwnershipDebugRenderer
             {
                 properties.Add(new KeyValuePair<string, string>(
                     property,
-                    color));
+                    value));
             }
 
             element.SetAttributeValue(
@@ -519,7 +783,7 @@ public sealed class LogicalOwnershipDebugRenderer
             return;
         }
 
-        element.SetAttributeValue(property, color);
+        element.SetAttributeValue(property, value);
     }
 
     private static bool IsNone(string value) =>
