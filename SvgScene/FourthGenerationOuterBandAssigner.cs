@@ -1,16 +1,19 @@
 namespace SvgMusic.Scene;
 
 /// <summary>
-/// Adds a final, non-propagating ownership pass for notation outside a piano
-/// system: above the upper staff and below the lower staff.
+/// Adds a final ownership pass for notation outside a piano system: above the
+/// upper staff and below the lower staff.
 ///
-/// The pass works measure by measure. For each side it finds the furthest
-/// already-owned element which extends outside the staff and uses it as the
-/// outer edge of a rectangular ownership band. Any still-unowned element whose
-/// bounding box intersects that band receives generation-4 ownership.
+/// The primary pass works measure by measure. For each side it finds the
+/// furthest already-owned musical element which extends outside the staff and
+/// uses it as the outer edge of a rectangular ownership band. Staff lines and
+/// barlines are layout geometry and are never allowed to become outer anchors.
 ///
-/// Generation 4 never expands itself: all bands are built from a snapshot of
-/// ownership produced before this pass starts.
+/// A single bounded closure pass handles a useful edge case: a generation-4
+/// element owned by one measure may physically extend into an adjacent measure.
+/// If that adjacent measure has no primary band on the same side, the crossing
+/// element may seed one band there. Elements assigned by this closure never seed
+/// another pass, so generation 4 cannot keep expanding across the page.
 /// </summary>
 public sealed class FourthGenerationOuterBandAssigner
 {
@@ -31,19 +34,46 @@ public sealed class FourthGenerationOuterBandAssigner
                 assignment => assignment.Ownership,
                 StringComparer.Ordinal);
 
+        var layoutAnchorExclusions = BuildLayoutAnchorExclusions(layout);
         var snapshot = assignments.ToDictionary(
             pair => pair.Key,
             pair => pair.Value,
             StringComparer.Ordinal);
 
-        var bands = BuildOuterBands(
+        var primaryBands = BuildOuterBands(
             elements,
             layout,
-            snapshot);
+            snapshot,
+            layoutAnchorExclusions);
 
         AssignFourthGeneration(
             elements,
-            bands,
+            primaryBands,
+            assignments);
+
+        var firstWaveShapeIds = assignments
+            .Where(pair =>
+                !snapshot.ContainsKey(pair.Key)
+                && pair.Value.Generation == 4)
+            .Select(pair => pair.Key)
+            .ToHashSet(StringComparer.Ordinal);
+
+        var closureSnapshot = assignments.ToDictionary(
+            pair => pair.Key,
+            pair => pair.Value,
+            StringComparer.Ordinal);
+
+        var closureBands = BuildClosureBands(
+            elements,
+            layout,
+            closureSnapshot,
+            firstWaveShapeIds,
+            primaryBands,
+            layoutAnchorExclusions);
+
+        AssignFourthGeneration(
+            elements,
+            closureBands,
             assignments);
 
         var scene = ApplyOwnership(
@@ -67,7 +97,8 @@ public sealed class FourthGenerationOuterBandAssigner
     private static IReadOnlyList<OuterBand> BuildOuterBands(
         IReadOnlyList<OwnershipElement> elements,
         ScoreLayout layout,
-        IReadOnlyDictionary<string, LogicalOwnership> assignments)
+        IReadOnlyDictionary<string, LogicalOwnership> assignments,
+        IReadOnlySet<string> layoutAnchorExclusions)
     {
         var result = new List<OuterBand>();
         var staffsById = layout.Staffs.ToDictionary(
@@ -92,7 +123,8 @@ public sealed class FourthGenerationOuterBandAssigner
 
                     var upperAnchor = elements
                         .Where(element =>
-                            assignments.TryGetValue(element.ShapeId, out var ownership)
+                            !layoutAnchorExclusions.Contains(element.ShapeId)
+                            && assignments.TryGetValue(element.ShapeId, out var ownership)
                             && OwnershipTouches(ownership, upperCoordinate)
                             && HorizontallyIntersects(element.Bounds, measure)
                             && element.Bounds.MinY < upperStaff.Bounds.MinY)
@@ -110,12 +142,14 @@ public sealed class FourthGenerationOuterBandAssigner
                                 upperAnchor.Bounds.MinY,
                                 measure.XEnd,
                                 upperStaff.Bounds.MinY),
+                            OuterBandSide.Above,
                             "OuterBandAbove"));
                     }
 
                     var lowerAnchor = elements
                         .Where(element =>
-                            assignments.TryGetValue(element.ShapeId, out var ownership)
+                            !layoutAnchorExclusions.Contains(element.ShapeId)
+                            && assignments.TryGetValue(element.ShapeId, out var ownership)
                             && OwnershipTouches(ownership, lowerCoordinate)
                             && HorizontallyIntersects(element.Bounds, measure)
                             && element.Bounds.MaxY > lowerStaff.Bounds.MaxY)
@@ -133,6 +167,7 @@ public sealed class FourthGenerationOuterBandAssigner
                                 lowerStaff.Bounds.MaxY,
                                 measure.XEnd,
                                 lowerAnchor.Bounds.MaxY),
+                            OuterBandSide.Below,
                             "OuterBandBelow"));
                     }
                 }
@@ -140,6 +175,158 @@ public sealed class FourthGenerationOuterBandAssigner
         }
 
         return result;
+    }
+
+    private static IReadOnlyList<OuterBand> BuildClosureBands(
+        IReadOnlyList<OwnershipElement> elements,
+        ScoreLayout layout,
+        IReadOnlyDictionary<string, LogicalOwnership> assignments,
+        IReadOnlySet<string> firstWaveShapeIds,
+        IReadOnlyList<OuterBand> primaryBands,
+        IReadOnlySet<string> layoutAnchorExclusions)
+    {
+        if (firstWaveShapeIds.Count == 0)
+        {
+            return Array.Empty<OuterBand>();
+        }
+
+        var result = new List<OuterBand>();
+        var staffsById = layout.Staffs.ToDictionary(
+            staff => staff.Id,
+            StringComparer.Ordinal);
+        var primaryBandKeys = primaryBands
+            .Select(band => new OuterBandKey(
+                band.Coordinate,
+                band.Side))
+            .ToHashSet();
+
+        foreach (var system in layout.Systems)
+        {
+            foreach (var pair in system.StaffPairs)
+            {
+                var upperStaff = staffsById[pair.UpperStaffId];
+                var lowerStaff = staffsById[pair.LowerStaffId];
+
+                for (var measureIndex = 0; measureIndex < pair.Measures.Count; measureIndex++)
+                {
+                    var measure = pair.Measures[measureIndex];
+                    var neighborMeasureIds = GetNeighborMeasureIds(
+                        pair.Measures,
+                        measureIndex);
+
+                    if (neighborMeasureIds.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    var upperCoordinate = new LogicalCoordinate(
+                        upperStaff.Id,
+                        measure.Id);
+                    var upperKey = new OuterBandKey(
+                        upperCoordinate,
+                        OuterBandSide.Above);
+
+                    if (!primaryBandKeys.Contains(upperKey))
+                    {
+                        var upperAnchor = FindClosureAnchor(
+                            elements,
+                            assignments,
+                            firstWaveShapeIds,
+                            layoutAnchorExclusions,
+                            upperStaff.Id,
+                            upperCoordinate,
+                            neighborMeasureIds,
+                            measure,
+                            element => element.Bounds.MinY < upperStaff.Bounds.MinY,
+                            elementsOnSide => elementsOnSide
+                                .OrderBy(element => element.Bounds.MinY)
+                                .ThenBy(element => element.Bounds.MinX));
+
+                        if (upperAnchor is not null)
+                        {
+                            result.Add(new OuterBand(
+                                upperCoordinate,
+                                upperAnchor.ShapeId,
+                                new BoundsD(
+                                    measure.XStart,
+                                    upperAnchor.Bounds.MinY,
+                                    measure.XEnd,
+                                    upperStaff.Bounds.MinY),
+                                OuterBandSide.Above,
+                                "OuterBandAboveClosure"));
+                        }
+                    }
+
+                    var lowerCoordinate = new LogicalCoordinate(
+                        lowerStaff.Id,
+                        measure.Id);
+                    var lowerKey = new OuterBandKey(
+                        lowerCoordinate,
+                        OuterBandSide.Below);
+
+                    if (!primaryBandKeys.Contains(lowerKey))
+                    {
+                        var lowerAnchor = FindClosureAnchor(
+                            elements,
+                            assignments,
+                            firstWaveShapeIds,
+                            layoutAnchorExclusions,
+                            lowerStaff.Id,
+                            lowerCoordinate,
+                            neighborMeasureIds,
+                            measure,
+                            element => element.Bounds.MaxY > lowerStaff.Bounds.MaxY,
+                            elementsOnSide => elementsOnSide
+                                .OrderByDescending(element => element.Bounds.MaxY)
+                                .ThenBy(element => element.Bounds.MinX));
+
+                        if (lowerAnchor is not null)
+                        {
+                            result.Add(new OuterBand(
+                                lowerCoordinate,
+                                lowerAnchor.ShapeId,
+                                new BoundsD(
+                                    measure.XStart,
+                                    lowerStaff.Bounds.MaxY,
+                                    measure.XEnd,
+                                    lowerAnchor.Bounds.MaxY),
+                                OuterBandSide.Below,
+                                "OuterBandBelowClosure"));
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static OwnershipElement? FindClosureAnchor(
+        IReadOnlyList<OwnershipElement> elements,
+        IReadOnlyDictionary<string, LogicalOwnership> assignments,
+        IReadOnlySet<string> firstWaveShapeIds,
+        IReadOnlySet<string> layoutAnchorExclusions,
+        string staffId,
+        LogicalCoordinate currentCoordinate,
+        IReadOnlySet<string> neighborMeasureIds,
+        MeasureLayout measure,
+        Func<OwnershipElement, bool> isOnOuterSide,
+        Func<IEnumerable<OwnershipElement>, IOrderedEnumerable<OwnershipElement>> order)
+    {
+        var candidates = elements
+            .Where(element =>
+                firstWaveShapeIds.Contains(element.ShapeId)
+                && !layoutAnchorExclusions.Contains(element.ShapeId)
+                && assignments.TryGetValue(element.ShapeId, out var ownership)
+                && !OwnershipTouches(ownership, currentCoordinate)
+                && OwnershipTouchesNeighbor(
+                    ownership,
+                    staffId,
+                    neighborMeasureIds)
+                && HorizontallyIntersects(element.Bounds, measure)
+                && isOnOuterSide(element));
+
+        return order(candidates).FirstOrDefault();
     }
 
     private static void AssignFourthGeneration(
@@ -189,12 +376,84 @@ public sealed class FourthGenerationOuterBandAssigner
         }
     }
 
+    private static HashSet<string> BuildLayoutAnchorExclusions(
+        ScoreLayout layout)
+    {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var staff in layout.Staffs)
+        {
+            foreach (var line in staff.Lines)
+            {
+                result.Add(line.StrokeId);
+            }
+        }
+
+        foreach (var boundary in layout.Systems
+                     .SelectMany(system => system.StaffPairs)
+                     .SelectMany(pair => pair.Boundaries))
+        {
+            foreach (var strokeId in boundary.StrokeIds)
+            {
+                result.Add(strokeId);
+            }
+        }
+
+        return result;
+    }
+
+    private static HashSet<string> GetNeighborMeasureIds(
+        IReadOnlyList<MeasureLayout> measures,
+        int measureIndex)
+    {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+
+        if (measureIndex > 0)
+        {
+            result.Add(measures[measureIndex - 1].Id);
+        }
+
+        if (measureIndex + 1 < measures.Count)
+        {
+            result.Add(measures[measureIndex + 1].Id);
+        }
+
+        return result;
+    }
+
     private static bool OwnershipTouches(
         LogicalOwnership ownership,
         LogicalCoordinate coordinate)
     {
         return ownership.Start == coordinate
             || ownership.End == coordinate;
+    }
+
+    private static bool OwnershipTouchesNeighbor(
+        LogicalOwnership ownership,
+        string staffId,
+        IReadOnlySet<string> neighborMeasureIds)
+    {
+        return CoordinateTouchesNeighbor(
+                ownership.Start,
+                staffId,
+                neighborMeasureIds)
+            || CoordinateTouchesNeighbor(
+                ownership.End,
+                staffId,
+                neighborMeasureIds);
+    }
+
+    private static bool CoordinateTouchesNeighbor(
+        LogicalCoordinate coordinate,
+        string staffId,
+        IReadOnlySet<string> neighborMeasureIds)
+    {
+        return string.Equals(
+                coordinate.StaffId,
+                staffId,
+                StringComparison.Ordinal)
+            && neighborMeasureIds.Contains(coordinate.MeasureId);
     }
 
     private static bool HorizontallyIntersects(
@@ -416,6 +675,12 @@ public sealed class FourthGenerationOuterBandAssigner
             : int.MaxValue;
     }
 
+    private enum OuterBandSide
+    {
+        Above,
+        Below
+    }
+
     private sealed record OwnershipElement(
         string ShapeId,
         BoundsD Bounds,
@@ -426,5 +691,10 @@ public sealed class FourthGenerationOuterBandAssigner
         LogicalCoordinate Coordinate,
         string AnchorShapeId,
         BoundsD Bounds,
+        OuterBandSide Side,
         string Reason);
+
+    private sealed record OuterBandKey(
+        LogicalCoordinate Coordinate,
+        OuterBandSide Side);
 }
