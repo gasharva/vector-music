@@ -92,6 +92,13 @@ var ownershipResult = new LogicalOwnershipAnalyzer().AnalyzeAndApply(
     geometry,
     notation,
     layout);
+
+ownershipResult = new FourthGenerationOuterBandAssigner().AssignAndApply(
+    geometry,
+    ownershipResult.Scene,
+    layout,
+    ownershipResult.Ownership);
+
 notation = ownershipResult.Scene;
 var logicalOwnership = ownershipResult.Ownership;
 
@@ -116,6 +123,8 @@ Console.WriteLine(
     $"  generation 2              : {logicalOwnership.Assignments.Count(item => item.Ownership.Generation == 2)}");
 Console.WriteLine(
     $"  generation 3              : {logicalOwnership.Assignments.Count(item => item.Ownership.Generation == 3)}");
+Console.WriteLine(
+    $"  generation 4              : {logicalOwnership.Assignments.Count(item => item.Ownership.Generation == 4)}");
 Console.WriteLine(
     $"  coordinate spans          : {logicalOwnership.Assignments.Count(item => item.Ownership.IsSpan)}");
 
