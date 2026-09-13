@@ -8,17 +8,22 @@ public sealed class LogicalOwnershipDebugRenderer
 {
     private static readonly string[] Palette =
     [
-        "#d32f2f", "#1976d2", "#388e3c", "#f57c00",
-        "#7b1fa2", "#00838f", "#5d4037", "#455a64",
-        "#c2185b", "#00796b", "#512da8", "#689f38"
+        "#d32f2f",
+        "#1976d2",
+        "#388e3c",
+        "#f57c00",
+        "#7b1fa2",
+        "#00838f",
+        "#5d4037",
+        "#455a64",
+        "#c2185b",
+        "#00796b",
+        "#512da8",
+        "#689f38"
     ];
 
     private static readonly Regex StylePropertyRegex = new(
         @"(?<name>[a-zA-Z-]+)\s*:\s*(?<value>[^;]+)",
-        RegexOptions.Compiled | RegexOptions.CultureInvariant);
-
-    private static readonly Regex MoveCommandRegex = new(
-        @"(?<![A-Za-z])[Mm](?=\s*[-+]?\.?\d)",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     public void Render(
@@ -62,14 +67,19 @@ public sealed class LogicalOwnershipDebugRenderer
 
         var definitions = root.Descendants()
             .Where(element => element.Attribute("id") is not null)
-            .GroupBy(element => (string)element.Attribute("id")!, StringComparer.Ordinal)
-            .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
+            .GroupBy(
+                element => (string)element.Attribute("id")!,
+                StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.First(),
+                StringComparer.Ordinal);
 
         var defs = root.Descendants()
             .FirstOrDefault(element => element.Name.LocalName == "defs");
 
         var recolored = 0;
-        var splitConflicts = 0;
+        var reconstructedConflicts = 0;
         var unresolvedConflicts = 0;
         var unmapped = 0;
 
@@ -97,18 +107,21 @@ public sealed class LogicalOwnershipDebugRenderer
 
             if (starts.Length != 1)
             {
-                if (TrySplitAndRecolorCompoundPath(
+                if (TryRenderCompoundPathFromGeometry(
+                        root,
                         sourceElement,
                         pair.Value,
                         assignments,
                         colors))
                 {
-                    splitConflicts++;
+                    reconstructedConflicts++;
                 }
                 else
                 {
                     unresolvedConflicts++;
-                    sourceElement.SetAttributeValue("data-ownership-debug", "conflict");
+                    sourceElement.SetAttributeValue(
+                        "data-ownership-debug",
+                        "conflict");
                 }
 
                 continue;
@@ -135,7 +148,11 @@ public sealed class LogicalOwnershipDebugRenderer
             }
             else
             {
-                RecolorElement(sourceElement, color, hasFill, hasStroke);
+                RecolorElement(
+                    sourceElement,
+                    color,
+                    hasFill,
+                    hasStroke);
             }
 
             sourceElement.SetAttributeValue(
@@ -147,27 +164,20 @@ public sealed class LogicalOwnershipDebugRenderer
 
         root.SetAttributeValue(
             "data-ownership-debug-summary",
-            $"recolored={recolored}; split-conflicts={splitConflicts}; "
+            $"recolored={recolored}; reconstructed-conflicts={reconstructedConflicts}; "
             + $"unresolved-conflicts={unresolvedConflicts}; unmapped={unmapped}");
 
         document.Save(output, SaveOptions.DisableFormatting);
     }
 
-    private static bool TrySplitAndRecolorCompoundPath(
+    private static bool TryRenderCompoundPathFromGeometry(
+        XElement root,
         XElement sourceElement,
         IReadOnlyList<GeometricShape> shapes,
         IReadOnlyDictionary<string, LogicalOwnershipAssignment> assignments,
         IReadOnlyDictionary<LogicalCoordinate, string> colors)
     {
         if (sourceElement.Name.LocalName != "path")
-        {
-            return false;
-        }
-
-        var d = (string?)sourceElement.Attribute("d");
-        var subpaths = SplitOriginalPathData(d);
-
-        if (subpaths.Count <= 1)
         {
             return false;
         }
@@ -182,88 +192,123 @@ public sealed class LogicalOwnershipDebugRenderer
             .OrderBy(item => item.ComponentIndex)
             .ToArray();
 
-        // CompoundShapeSplitter numbers components in source contour order.
-        // For the debug renderer we can therefore keep the exact original path
-        // commands and only separate them at their original moveto boundaries.
-        if (indexedShapes.Length == 0
-            || indexedShapes.Any(item => item.ComponentIndex! < 1)
-            || indexedShapes.Max(item => item.ComponentIndex!.Value) > subpaths.Count)
+        if (indexedShapes.Length <= 1)
         {
             return false;
         }
 
-        var replacements = new List<XElement>(subpaths.Count);
+        // Do not split the original d string here. A later subpath may start with
+        // a relative 'm', whose origin is the previous subpath's current point.
+        // Cutting such a path into independent strings changes its geometry and
+        // is exactly what made staff lines and barlines "walk away".
+        //
+        // The GeometricShape components already contain the normalized absolute
+        // geometry produced by SvgNormalizer/CompoundShapeSplitter. For this
+        // debug-only conflict case we render those components at root level.
+        // This keeps ownership logic untouched and guarantees correct positions.
+        var debugGroup = new XElement(
+            root.Name.Namespace + "g",
+            new XAttribute("data-ownership-debug", "compound-path-components"));
 
-        for (var index = 0; index < subpaths.Count; index++)
+        foreach (var item in indexedShapes)
         {
-            var replacement = new XElement(sourceElement);
-            replacement.SetAttributeValue("d", subpaths[index]);
-            replacement.Attribute("id")?.Remove();
+            var shape = item.Shape;
+            var pathData = BuildPathData(shape.EffectiveContours);
 
-            var shape = indexedShapes
-                .FirstOrDefault(item => item.ComponentIndex == index + 1)
-                ?.Shape;
-
-            if (shape is not null
-                && assignments.TryGetValue(shape.Id, out var assignment))
+            if (string.IsNullOrWhiteSpace(pathData))
             {
-                var coordinate = assignment.Ownership.Start;
-                var color = colors.GetValueOrDefault(coordinate, "#616161");
-
-                RecolorElement(
-                    replacement,
-                    color,
-                    shape.HasFill,
-                    shape.HasStroke);
-
-                replacement.SetAttributeValue(
-                    "data-ownership",
-                    $"{coordinate.StaffId}+{coordinate.MeasureId}");
-                replacement.SetAttributeValue(
-                    "data-source-shape",
-                    shape.Id);
+                continue;
             }
 
-            replacements.Add(replacement);
+            var path = new XElement(
+                root.Name.Namespace + "path",
+                new XAttribute("d", pathData),
+                new XAttribute("data-source-shape", shape.Id));
+
+            var color = "#000000";
+
+            if (assignments.TryGetValue(shape.Id, out var assignment))
+            {
+                var coordinate = assignment.Ownership.Start;
+                color = colors.GetValueOrDefault(coordinate, "#616161");
+
+                path.SetAttributeValue(
+                    "data-ownership",
+                    $"{coordinate.StaffId}+{coordinate.MeasureId}");
+            }
+
+            if (shape.HasFill)
+            {
+                path.SetAttributeValue("fill", color);
+            }
+            else
+            {
+                path.SetAttributeValue("fill", "none");
+            }
+
+            if (shape.HasStroke)
+            {
+                path.SetAttributeValue("stroke", color);
+
+                if (shape.StrokeWidth > 0)
+                {
+                    path.SetAttributeValue(
+                        "stroke-width",
+                        FormatNumber(shape.StrokeWidth));
+                }
+            }
+            else
+            {
+                path.SetAttributeValue("stroke", "none");
+            }
+
+            debugGroup.Add(path);
         }
 
-        sourceElement.ReplaceWith(replacements);
+        if (!debugGroup.HasElements)
+        {
+            return false;
+        }
+
+        sourceElement.Remove();
+        root.Add(debugGroup);
         return true;
     }
 
-    private static IReadOnlyList<string> SplitOriginalPathData(string? d)
+    private static string BuildPathData(
+        IReadOnlyList<GeometricContour> contours)
     {
-        if (string.IsNullOrWhiteSpace(d))
+        var parts = new List<string>();
+
+        foreach (var contour in contours)
         {
-            return [];
-        }
-
-        var matches = MoveCommandRegex.Matches(d);
-
-        if (matches.Count <= 1)
-        {
-            return [d];
-        }
-
-        var result = new List<string>(matches.Count);
-
-        for (var index = 0; index < matches.Count; index++)
-        {
-            var start = matches[index].Index;
-            var end = index + 1 < matches.Count
-                ? matches[index + 1].Index
-                : d.Length;
-
-            var subpath = d[start..end].Trim();
-
-            if (subpath.Length > 0)
+            if (contour.Points.Count == 0)
             {
-                result.Add(subpath);
+                continue;
+            }
+
+            var first = contour.Points[0];
+            parts.Add($"M {FormatPoint(first)}");
+
+            for (var index = 1; index < contour.Points.Count; index++)
+            {
+                parts.Add($"L {FormatPoint(contour.Points[index])}");
+            }
+
+            if (contour.IsClosed)
+            {
+                parts.Add("Z");
             }
         }
 
-        return result;
+        return string.Join(" ", parts);
     }
+
+    private static string FormatPoint(PointD point) =>
+        $"{FormatNumber(point.X)} {FormatNumber(point.Y)}";
+
+    private static string FormatNumber(double value) =>
+        value.ToString("0.###", CultureInfo.InvariantCulture);
 
     private static int? ParseComponentIndex(string shapeId)
     {
@@ -313,7 +358,12 @@ public sealed class LogicalOwnershipDebugRenderer
         var cloneId = $"ownership-{MakeSafeId(originalId)}-{sequence + 1}";
         clone.SetAttributeValue("id", cloneId);
 
-        RecolorTree(clone, color, hasFill, hasStroke);
+        RecolorTree(
+            clone,
+            color,
+            hasFill,
+            hasStroke);
+
         defs.Add(clone);
         hrefAttribute!.Value = "#" + cloneId;
 
@@ -330,15 +380,29 @@ public sealed class LogicalOwnershipDebugRenderer
         {
             var explicitFill = ReadPaint(element, "fill");
             var explicitStroke = ReadPaint(element, "stroke");
-            var useFill = explicitFill is null ? fallbackFill : !IsNone(explicitFill);
-            var useStroke = explicitStroke is null ? fallbackStroke : !IsNone(explicitStroke);
 
-            RecolorElement(element, color, useFill, useStroke);
+            var useFill = explicitFill is null
+                ? fallbackFill
+                : !IsNone(explicitFill);
+
+            var useStroke = explicitStroke is null
+                ? fallbackStroke
+                : !IsNone(explicitStroke);
+
+            RecolorElement(
+                element,
+                color,
+                useFill,
+                useStroke);
         }
 
         foreach (var child in element.Elements())
         {
-            RecolorTree(child, color, fallbackFill, fallbackStroke);
+            RecolorTree(
+                child,
+                color,
+                fallbackFill,
+                fallbackStroke);
         }
     }
 
@@ -359,7 +423,9 @@ public sealed class LogicalOwnershipDebugRenderer
         }
     }
 
-    private static string? ReadPaint(XElement element, string property)
+    private static string? ReadPaint(
+        XElement element,
+        string property)
     {
         var style = (string?)element.Attribute("style");
 
@@ -380,7 +446,10 @@ public sealed class LogicalOwnershipDebugRenderer
         return (string?)element.Attribute(property);
     }
 
-    private static void SetPaint(XElement element, string property, string color)
+    private static void SetPaint(
+        XElement element,
+        string property,
+        string color)
     {
         var style = (string?)element.Attribute("style");
 
@@ -413,12 +482,17 @@ public sealed class LogicalOwnershipDebugRenderer
 
             if (!found)
             {
-                properties.Add(new KeyValuePair<string, string>(property, color));
+                properties.Add(new KeyValuePair<string, string>(
+                    property,
+                    color));
             }
 
             element.SetAttributeValue(
                 "style",
-                string.Join(";", properties.Select(item => $"{item.Key}:{item.Value}")));
+                string.Join(
+                    ";",
+                    properties.Select(item => $"{item.Key}:{item.Value}")));
+
             return;
         }
 
@@ -426,14 +500,23 @@ public sealed class LogicalOwnershipDebugRenderer
     }
 
     private static bool IsNone(string value) =>
-        string.Equals(value.Trim(), "none", StringComparison.OrdinalIgnoreCase);
+        string.Equals(
+            value.Trim(),
+            "none",
+            StringComparison.OrdinalIgnoreCase);
 
-    private static IReadOnlyDictionary<int, XElement> BuildSourceElementMap(XElement root)
+    private static IReadOnlyDictionary<int, XElement> BuildSourceElementMap(
+        XElement root)
     {
         var definitions = root.Descendants()
             .Where(element => element.Attribute("id") is not null)
-            .GroupBy(element => (string)element.Attribute("id")!, StringComparer.Ordinal)
-            .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
+            .GroupBy(
+                element => (string)element.Attribute("id")!,
+                StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.First(),
+                StringComparer.Ordinal);
 
         var result = new Dictionary<int, XElement>();
         var number = 0;
@@ -469,7 +552,8 @@ public sealed class LogicalOwnershipDebugRenderer
                 continue;
             }
 
-            if (IsGeometryElement(element) && CouldProduceGeometry(element))
+            if (IsGeometryElement(element)
+                && CouldProduceGeometry(element))
             {
                 result[++number] = element;
             }
@@ -490,7 +574,9 @@ public sealed class LogicalOwnershipDebugRenderer
         };
     }
 
-    private static bool PositiveAttribute(XElement element, string name)
+    private static bool PositiveAttribute(
+        XElement element,
+        string name)
     {
         var text = (string?)element.Attribute(name);
 
@@ -502,7 +588,8 @@ public sealed class LogicalOwnershipDebugRenderer
             && value > 0;
     }
 
-    private static IEnumerable<XElement> GeometryElements(XElement target)
+    private static IEnumerable<XElement> GeometryElements(
+        XElement target)
     {
         if (IsGeometryElement(target))
         {
@@ -522,10 +609,16 @@ public sealed class LogicalOwnershipDebugRenderer
     }
 
     private static bool IsGeometryElement(XElement element) =>
-        element.Name.LocalName is "path" or "line" or "polyline" or "polygon" or "rect";
+        element.Name.LocalName is
+            "path"
+            or "line"
+            or "polyline"
+            or "polygon"
+            or "rect";
 
     private static bool IsInsideDefs(XElement element) =>
-        element.Ancestors().Any(ancestor => ancestor.Name.LocalName == "defs");
+        element.Ancestors()
+            .Any(ancestor => ancestor.Name.LocalName == "defs");
 
     private static int? ParseBaseShapeNumber(string shapeId)
     {
@@ -535,7 +628,9 @@ public sealed class LogicalOwnershipDebugRenderer
         }
 
         var end = shapeId.IndexOf('.', StringComparison.Ordinal);
-        var numberText = end >= 0 ? shapeId[6..end] : shapeId[6..];
+        var numberText = end >= 0
+            ? shapeId[6..end]
+            : shapeId[6..];
 
         return int.TryParse(
             numberText,
@@ -546,7 +641,8 @@ public sealed class LogicalOwnershipDebugRenderer
                 : null;
     }
 
-    private static IReadOnlyDictionary<LogicalCoordinate, string> BuildColorMap(ScoreLayout layout)
+    private static IReadOnlyDictionary<LogicalCoordinate, string> BuildColorMap(
+        ScoreLayout layout)
     {
         var result = new Dictionary<LogicalCoordinate, string>();
         var regionIndex = 0;
@@ -559,6 +655,7 @@ public sealed class LogicalOwnershipDebugRenderer
                 {
                     result[new LogicalCoordinate(pair.UpperStaffId, measure.Id)] =
                         Palette[regionIndex++ % Palette.Length];
+
                     result[new LogicalCoordinate(pair.LowerStaffId, measure.Id)] =
                         Palette[regionIndex++ % Palette.Length];
                 }
@@ -569,5 +666,7 @@ public sealed class LogicalOwnershipDebugRenderer
     }
 
     private static string MakeSafeId(string value) =>
-        new(value.Select(character => char.IsLetterOrDigit(character) ? character : '-').ToArray());
+        new(value
+            .Select(character => char.IsLetterOrDigit(character) ? character : '-')
+            .ToArray());
 }
