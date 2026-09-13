@@ -72,7 +72,8 @@ public sealed record ShapeInstance(
     double Height,
     string SourceKind,
     string? SourceIndex,
-    SymbolClassification? Classification = null);
+    SymbolClassification? Classification = null,
+    IReadOnlyList<string>? AbsorbedPrimitiveShapeIds = null);
 
 public sealed record Stroke(
     string ShapeId,
