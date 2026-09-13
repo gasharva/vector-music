@@ -1,0 +1,11 @@
+CANDIDATE prototype-4 main=shape-5.1 dots=shape-5.2,shape-5.3
+RESULT    prototype-4 label=F_CLEF confidence=98.1 % interline=30
+ABSORB    prototype-4/shape-5.1 ellipses=shape-5.2,shape-5.3
+ABSORB    prototype-4/shape-121.1 ellipses=shape-121.2,shape-121.3
+ABSORB    prototype-4/shape-309.1 ellipses=shape-456.2,shape-456.3
+ABSORB    prototype-4/shape-456.1 ellipses=shape-568.2,shape-568.3
+ABSORB    prototype-4/shape-568.1 ellipses=shape-309.2,shape-309.3
+CANDIDATE prototype-15 main=shape-41 dots=shape-325,shape-326
+RESULT    prototype-15 label=EIGHTH_REST confidence=46.0 % interline=40
+REJECT    prototype-15 composite is not a confident F_CLEF
+SUMMARY   absorbedEllipses=10; remainingEllipses=364

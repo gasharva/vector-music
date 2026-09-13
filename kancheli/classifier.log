@@ -1,0 +1,122 @@
+Model: /home/runner/.local/share/vector-music/audiveris-glyph-poc/basic-classifier.zip
+Inputs : 110
+Hidden : 149
+Outputs: 149
+MixGlyphDescriptor features: 110
+Model input labels match the ported descriptor: PASS
+
+Glyph directory       : /home/runner/work/vector-music/vector-music/artifacts/glyphs
+Prototypes classified : 105
+Raster interlines      : 20, 30, 40 px
+Preview interline      : 30 px
+
+Best result per prototype:
+  prototype-1    instances=1   DIGIT_5                      score=0.9047 at=30px
+  prototype-2    instances=1   CLUTTER                      score=0.6981 at=20px
+  prototype-3    instances=5   G_CLEF                       score=0.9992 at=20px
+  prototype-4    instances=5   F_CLEF                       score=0.5709 at=40px
+  prototype-5    instances=2   TIME_FOUR                    score=0.9911 at=30px
+  prototype-6    instances=2   TIME_THREE                   score=0.9926 at=20px
+  prototype-7    instances=4   CLUTTER                      score=0.1063 at=40px
+  prototype-8    instances=11  FLAT                         score=0.9961 at=30px
+  prototype-9    instances=1   DYNAMICS_P                   score=0.5891 at=20px
+  prototype-10   instances=1   PLUCK_A                      score=0.2463 at=30px
+  prototype-11   instances=2   TIME_EIGHT                   score=0.3681 at=40px
+  prototype-12   instances=1   EIGHTH_set                   score=0.5284 at=20px
+  prototype-13   instances=1   EIGHTH_REST                  score=0.7937 at=30px
+  prototype-14   instances=1   PLUCK_A                      score=0.5557 at=40px
+  prototype-15   instances=3   DYNAMICS_PP                  score=0.9359 at=40px
+  prototype-16   instances=1   TUPLET_THREE                 score=0.8554 at=40px
+  prototype-17   instances=7   NATURAL                      score=0.9987 at=30px
+  prototype-18   instances=1   FLAG_2                       score=0.1479 at=20px
+  prototype-19   instances=1   CLUTTER                      score=0.0923 at=20px
+  prototype-20   instances=8   PEDAL_MARK                   score=0.9760 at=30px
+  prototype-21   instances=7   FLAG_1                       score=0.9394 at=40px
+  prototype-22   instances=24  SHARP                        score=0.9950 at=30px
+  prototype-23   instances=3   EIGHTH_REST                  score=0.8562 at=40px
+  prototype-24   instances=4   PLUCK_P                      score=0.5111 at=40px
+  prototype-25   instances=5   CLUTTER                      score=0.5296 at=20px
+  prototype-26   instances=6   TIME_THREE                   score=0.1918 at=30px
+  prototype-27   instances=3   PLUCK_A                      score=0.0884 at=40px
+  prototype-28   instances=1   LONG_REST                    score=0.4985 at=20px
+  prototype-29   instances=1   FLAG_1_DOWN                  score=0.0683 at=20px
+  prototype-30   instances=2   TIME_SIX                     score=0.9512 at=30px
+  prototype-31   instances=1   TIME_SIX                     score=0.7346 at=30px
+  prototype-32   instances=1   DYNAMICS_F                   score=0.9882 at=30px
+  prototype-33   instances=1   TIME_EIGHT                   score=0.2647 at=20px
+  prototype-34   instances=5   QUARTER_REST                 score=0.9951 at=20px
+  prototype-35   instances=2   PLUCK_M                      score=0.6621 at=30px
+  prototype-36   instances=15  ARPEGGIATO                   score=0.2748 at=20px
+  prototype-37   instances=1   FLAG_2                       score=0.9028 at=20px
+  prototype-38   instances=2   OTTAVA                       score=0.9504 at=40px
+  prototype-39   instances=1   DIGIT_1                      score=0.4840 at=40px
+  prototype-40   instances=1   DIGIT_1                      score=0.0992 at=30px
+  prototype-41   instances=1   FERMATA_BELOW                score=0.5033 at=30px
+  prototype-42   instances=1   DIGIT_1                      score=0.8781 at=40px
+  prototype-43   instances=2   FERMATA_BELOW                score=0.6076 at=40px
+  prototype-44   instances=1   ONE_16TH_REST                score=0.0473 at=20px
+  prototype-45   instances=2   DIGIT_2                      score=0.9877 at=20px
+  prototype-46   instances=1   DOUBLE_FLAT                  score=0.0714 at=40px
+  prototype-47   instances=1   PLUCK_A                      score=0.7293 at=30px
+  prototype-48   instances=1   TIME_SIX                     score=0.1149 at=30px
+  prototype-49   instances=2   CLUTTER                      score=0.5856 at=20px
+  prototype-50   instances=1   FLAT                         score=0.1532 at=40px
+  prototype-51   instances=2   DIGIT_1                      score=0.9793 at=30px
+  prototype-52   instances=1   PLUCK_M                      score=0.9697 at=20px
+  prototype-53   instances=1   PLUCK_P                      score=0.2011 at=30px
+  prototype-54   instances=1   OTTAVA                       score=0.2065 at=40px
+  prototype-55   instances=1   ROMAN_XI                     score=0.1301 at=20px
+  prototype-56   instances=3   DIGIT_1                      score=0.6446 at=30px
+  prototype-57   instances=2   TIME_SIX                     score=0.9723 at=30px
+  prototype-58   instances=2   TIME_SIX                     score=0.9946 at=20px
+  prototype-59   instances=1   TIME_SIX                     score=0.7470 at=30px
+  prototype-60   instances=2   TIME_FOUR                    score=0.1264 at=40px
+  prototype-61   instances=1   COMMON_TIME                  score=0.2219 at=20px
+  prototype-62   instances=1   DYNAMICS_F                   score=0.7073 at=20px
+  prototype-63   instances=1   DYNAMICS_P                   score=0.4343 at=30px
+  prototype-64   instances=1   MORDENT_INVERTED             score=0.0463 at=20px
+  prototype-65   instances=1   TUPLET_THREE                 score=0.1361 at=40px
+  prototype-66   instances=1   DYNAMICS_F                   score=0.1179 at=20px
+  prototype-67   instances=2   ACCENT                       score=0.0635 at=20px
+  prototype-68   instances=6   TUPLET_SIX                   score=0.2551 at=30px
+  prototype-69   instances=5   PLUCK_M                      score=0.8051 at=40px
+  prototype-70   instances=1   FLAG_1_DOWN                  score=0.6643 at=20px
+  prototype-71   instances=1   TR                           score=0.6665 at=30px
+  prototype-72   instances=3   TIME_TWO                     score=0.1327 at=20px
+  prototype-73   instances=1   MARCATO                      score=0.6265 at=20px
+  prototype-74   instances=3   ARPEGGIATO                   score=0.2065 at=40px
+  prototype-75   instances=3   DYNAMICS_P                   score=0.1937 at=20px
+  prototype-76   instances=3   TUPLET_THREE                 score=0.8816 at=20px
+  prototype-77   instances=1   DYNAMICS_FF                  score=0.2905 at=20px
+  prototype-78   instances=1   DYNAMICS_P                   score=0.1363 at=20px
+  prototype-79   instances=2   DIGIT_1                      score=0.5738 at=20px
+  prototype-80   instances=2   DYNAMICS_P                   score=0.5183 at=30px
+  prototype-81   instances=1   DYNAMICS_P                   score=0.4646 at=20px
+  prototype-82   instances=1   MARCATO                      score=0.0512 at=30px
+  prototype-83   instances=2   PLUCK_A                      score=0.8765 at=30px
+  prototype-84   instances=1   PLUCK_P                      score=0.1298 at=30px
+  prototype-85   instances=1   DYNAMICS_F                   score=0.1343 at=30px
+  prototype-86   instances=1   PLAYING_HALF_OPEN            score=0.2992 at=40px
+  prototype-87   instances=1   DIGIT_1                      score=0.7458 at=20px
+  prototype-88   instances=1   FERMATA_BELOW                score=0.4678 at=20px
+  prototype-89   instances=1   CLUTTER                      score=0.1169 at=20px
+  prototype-90   instances=1   TUPLET_THREE                 score=0.5146 at=20px
+  prototype-91   instances=1   TIME_SIX                     score=0.2291 at=20px
+  prototype-92   instances=2   DIGIT_1                      score=0.8510 at=40px
+  prototype-93   instances=1   EIGHTH_REST                  score=0.1563 at=40px
+  prototype-94   instances=2   TIME_SIX                     score=0.9891 at=30px
+  prototype-95   instances=1   TIME_SIX                     score=0.5116 at=20px
+  prototype-96   instances=1   TIME_SIX                     score=0.8680 at=30px
+  prototype-97   instances=1   COMMON_TIME                  score=0.3938 at=30px
+  prototype-98   instances=1   TIME_SIX                     score=0.2567 at=40px
+  prototype-99   instances=1   PLUCK_A                      score=0.1686 at=20px
+  prototype-100  instances=2   DIGIT_1                      score=0.8527 at=30px
+  prototype-101  instances=2   FERMATA_BELOW                score=0.6627 at=30px
+  prototype-102  instances=1   TUPLET_THREE                 score=0.7788 at=20px
+  prototype-103  instances=1   DIGIT_5                      score=0.8611 at=20px
+  prototype-104  instances=1   TENUTO                       score=0.9328 at=30px
+  prototype-105  instances=1   DIGIT_2                      score=0.9145 at=30px
+
+Written: /home/runner/work/vector-music/vector-music/artifacts/glyphs/multiscale-predictions.json
+Written: /home/runner/work/vector-music/vector-music/artifacts/glyphs/multiscale-predictions.csv
+Written: /home/runner/work/vector-music/vector-music/artifacts/glyphs/report.html

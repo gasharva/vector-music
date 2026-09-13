@@ -1,0 +1,1013 @@
+OWNERSHIP RENDER DIAGNOSTICS
+owned=no                   => ownership algorithm did not assign the shape
+owned=yes rendered=no      => renderer/source mapping problem
+mode=compound-component    => this split component was rendered with its own ownership color
+mode=neutral-layout        => staff/bar layout geometry intentionally remains black
+mode=compound-dominant     => component rendering was impossible; one fallback color was chosen
+color-match=no             => shape has ownership, but fallback compound source used another color
+
+SUMMARY
+Stroke        total= 323 owned= 319 rendered= 319 exact-color= 319
+CurvedStroke  total=  67 owned=  55 rendered=  55 exact-color=  55
+EllipseLike   total= 364 owned= 332 rendered= 332 exact-color= 332
+ShapeInstance total= 244 owned= 121 rendered= 121 exact-color= 121
+
+DETAILS
+shape-118.1  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-118.2  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-118.3  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-2         g2 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-118.4  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-2         g2 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-118.5  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-118.6  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-118.7  CurvedStroke  owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=compound-component; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-306.1  CurvedStroke  owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=compound-component; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-306.2  CurvedStroke  owned=yes staff-3+staff-pair-2-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-306.3  CurvedStroke  owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-306.4  CurvedStroke  owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-306.5  CurvedStroke  owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-306.6  CurvedStroke  owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-306.7  CurvedStroke  owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-306.8  CurvedStroke  owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-306.9  CurvedStroke  owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-33     CurvedStroke  owned=no  rendered=no  source=<use href=#n>
+shape-348    CurvedStroke  owned=yes staff-5+staff-pair-3-measure-1         g3 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-P-325>
+shape-450    CurvedStroke  owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-451    CurvedStroke  owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-452.1  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-3         g2 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-452.2  CurvedStroke  owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-453.1  CurvedStroke  owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-453.2  CurvedStroke  owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-453.3  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-453.4  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-453.5  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-2         g2 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-453.6  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-3         g2 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-453.7  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-453.8  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-4         g2 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-453.9  CurvedStroke  owned=yes staff-5+staff-pair-3-measure-4         g2 rendered=yes; mode=compound-component; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-565.1  CurvedStroke  owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-565.10 CurvedStroke  owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-565.2  CurvedStroke  owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-565.3  CurvedStroke  owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-565.4  CurvedStroke  owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-565.5  CurvedStroke  owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-565.6  CurvedStroke  owned=yes staff-8+staff-pair-4-measure-3         g2 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-565.7  CurvedStroke  owned=yes staff-7+staff-pair-4-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-565.8  CurvedStroke  owned=yes staff-7+staff-pair-4-measure-2         g2 rendered=yes; mode=compound-component; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-565.9  CurvedStroke  owned=yes staff-7+staff-pair-4-measure-2         g2 rendered=yes; mode=compound-component; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-623    CurvedStroke  owned=yes staff-8+staff-pair-4-measure-2         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-P-580>
+shape-693.1  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-693.10 CurvedStroke  owned=yes staff-9+staff-pair-5-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-693.11 CurvedStroke  owned=yes staff-9+staff-pair-5-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-693.12 CurvedStroke  owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.13 CurvedStroke  owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.14 CurvedStroke  owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=compound-component; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.2  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-693.3  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-693.4  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-1        g2 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-693.5  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.6  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.7  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.8  CurvedStroke  owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=compound-component; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-693.9  CurvedStroke  owned=yes staff-9+staff-pair-5-measure-1         g2 rendered=yes; mode=compound-component; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-722    CurvedStroke  owned=no  rendered=no  source=<use href=#av>
+shape-742    CurvedStroke  owned=no  rendered=no  source=<use href=#aL>
+shape-745.1  CurvedStroke  owned=no  rendered=no  source=<use href=#aN>
+shape-745.2  CurvedStroke  owned=no  rendered=no  source=<use href=#aN>
+shape-766.1  CurvedStroke  owned=no  rendered=no  source=<use href=#aV>
+shape-766.2  CurvedStroke  owned=no  rendered=no  source=<use href=#aV>
+shape-783    CurvedStroke  owned=no  rendered=no  source=<use href=#aL>
+shape-788    CurvedStroke  owned=no  rendered=no  source=<use href=#bf>
+shape-793    CurvedStroke  owned=no  rendered=no  source=<use href=#bk>
+shape-806    CurvedStroke  owned=no  rendered=no  source=<use href=#bx>
+shape-816    CurvedStroke  owned=no  rendered=no  source=<use href=#bF>
+shape-100    EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-h-84>
+shape-104    EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-j-88>
+shape-105    EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-i-89>
+shape-106    EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g2 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-i-90>
+shape-108    EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-j-92>
+shape-110    EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-j-94>
+shape-112    EllipseLike   owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-i-96>
+shape-113    EllipseLike   owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-i-97>
+shape-115    EllipseLike   owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-j-99>
+shape-116    EllipseLike   owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-j-100>
+shape-12     EllipseLike   owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-f-7>
+shape-126.1  EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g3 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-z-106>
+shape-127    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-i-107>
+shape-129    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-h-109>
+shape-132    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-h-112>
+shape-133    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-h-113>
+shape-135    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-h-115>
+shape-139    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-i-119>
+shape-14     EllipseLike   owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-f-9>
+shape-141    EllipseLike   owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-j-121>
+shape-142    EllipseLike   owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-i-122>
+shape-143    EllipseLike   owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-i-123>
+shape-145    EllipseLike   owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-j-125>
+shape-146    EllipseLike   owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-j-126>
+shape-148    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-i-128>
+shape-150    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-h-130>
+shape-154    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-h-134>
+shape-155    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-h-135>
+shape-157    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-h-137>
+shape-160    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-i-140>
+shape-161    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g2 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-i-141>
+shape-163    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-j-143>
+shape-165    EllipseLike   owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-j-145>
+shape-168    EllipseLike   owned=yes staff-4+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-i-148>
+shape-169    EllipseLike   owned=yes staff-4+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-i-149>
+shape-171    EllipseLike   owned=yes staff-4+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-j-151>
+shape-172    EllipseLike   owned=yes staff-4+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-j-152>
+shape-175    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-155>
+shape-177    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-157>
+shape-178    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-158>
+shape-182    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-162>
+shape-184    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-164>
+shape-185    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-165>
+shape-187    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-167>
+shape-189    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-169>
+shape-19     EllipseLike   owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-h-14>
+shape-190    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-170>
+shape-191    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-171>
+shape-192    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-172>
+shape-196    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-176>
+shape-198    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-178>
+shape-199    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-179>
+shape-200    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-180>
+shape-201    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-181>
+shape-203    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-183>
+shape-205    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-185>
+shape-206    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-186>
+shape-207    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-187>
+shape-208    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-188>
+shape-209    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-h-189>
+shape-21     EllipseLike   owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-h-16>
+shape-213    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-i-193>
+shape-214    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g2 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-i-194>
+shape-216    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-j-196>
+shape-218    EllipseLike   owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-j-198>
+shape-22     EllipseLike   owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-i-17>
+shape-222    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g3 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-E-202>
+shape-224    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-E-204>
+shape-235    EllipseLike   owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-E-215>
+shape-236    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-216>
+shape-238    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-218>
+shape-239    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-219>
+shape-24     EllipseLike   owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-j-19>
+shape-240    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-220>
+shape-241    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-221>
+shape-242    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-222>
+shape-247    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-227>
+shape-248    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-228>
+shape-249    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-229>
+shape-25     EllipseLike   owned=yes staff-2+staff-pair-1-measure-1         g2 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-i-20>
+shape-251    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-231>
+shape-252    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-232>
+shape-253    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-233>
+shape-254    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-234>
+shape-255    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-235>
+shape-258    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-238>
+shape-259    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-239>
+shape-26     EllipseLike   owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-i-21>
+shape-260    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-240>
+shape-262    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-242>
+shape-263    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-243>
+shape-264    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-244>
+shape-265    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-245>
+shape-266    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-246>
+shape-268    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-248>
+shape-269    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-249>
+shape-270    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-250>
+shape-271    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-251>
+shape-273    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-253>
+shape-274    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-254>
+shape-275    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-255>
+shape-276    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-256>
+shape-277    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-257>
+shape-28     EllipseLike   owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-j-23>
+shape-280    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-260>
+shape-281    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-261>
+shape-282    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-262>
+shape-283    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-263>
+shape-285    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-265>
+shape-286    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-266>
+shape-287    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-267>
+shape-288    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-268>
+shape-289    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-269>
+shape-29     EllipseLike   owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-j-24>
+shape-291    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-271>
+shape-292    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-272>
+shape-293    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-273>
+shape-294    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-274>
+shape-295    EllipseLike   owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-275>
+shape-297    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-277>
+shape-298    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-278>
+shape-299    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-279>
+shape-300    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-280>
+shape-301    EllipseLike   owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-h-281>
+shape-313.1  EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g3 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-z-290>
+shape-315.1  EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g3 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-z-292>
+shape-316    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-293>
+shape-317    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-294>
+shape-320    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-297>
+shape-321    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-298>
+shape-325    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-302>
+shape-326    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-303>
+shape-328    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-305>
+shape-329    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-h-306>
+shape-330    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-i-307>
+shape-332    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-j-309>
+shape-336    EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-j-313>
+shape-337    EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-j-314>
+shape-339    EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-i-316>
+shape-34     EllipseLike   owned=no  rendered=no  source=<use href=#o>
+shape-340    EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-i-317>
+shape-342    EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-j-319>
+shape-343    EllipseLike   owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-j-320>
+shape-352    EllipseLike   owned=yes staff-5+staff-pair-3-measure-1         g4 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-E-329>
+shape-353    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-h-330>
+shape-355    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-h-332>
+shape-356    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-h-333>
+shape-36     EllipseLike   owned=no  rendered=no  source=<use href=#o>
+shape-360    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-j-337>
+shape-361    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-j-338>
+shape-362    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-i-339>
+shape-363    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-i-340>
+shape-365    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-j-342>
+shape-366    EllipseLike   owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-j-343>
+shape-368    EllipseLike   owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-i-345>
+shape-369    EllipseLike   owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-i-346>
+shape-371    EllipseLike   owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-j-348>
+shape-372    EllipseLike   owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-j-349>
+shape-374    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-h-351>
+shape-376    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-h-353>
+shape-380    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-h-357>
+shape-382    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-h-359>
+shape-383    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-i-360>
+shape-384    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-i-361>
+shape-385    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-i-362>
+shape-387    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-j-364>
+shape-388    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-j-365>
+shape-389    EllipseLike   owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-j-366>
+shape-390    EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-i-367>
+shape-391    EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-i-368>
+shape-392    EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-i-369>
+shape-394    EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-j-371>
+shape-395    EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-j-372>
+shape-396    EllipseLike   owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-j-373>
+shape-413    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-390>
+shape-415    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-392>
+shape-418    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-395>
+shape-42     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-26>
+shape-421    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-398>
+shape-424    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-401>
+shape-425    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-402>
+shape-427    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-404>
+shape-430    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-407>
+shape-433    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-h-410>
+shape-436    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-413>
+shape-437    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-414>
+shape-438    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-415>
+shape-44     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-28>
+shape-440    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-j-417>
+shape-441    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-j-418>
+shape-442    EllipseLike   owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-j-419>
+shape-443    EllipseLike   owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-420>
+shape-444    EllipseLike   owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-421>
+shape-445    EllipseLike   owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-i-422>
+shape-447    EllipseLike   owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-j-424>
+shape-448    EllipseLike   owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-j-425>
+shape-449    EllipseLike   owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-j-426>
+shape-462.1  EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-z-436>
+shape-464.1  EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-z-438>
+shape-466    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g2 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-i-440>
+shape-469    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-h-443>
+shape-470    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-h-444>
+shape-472    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-h-446>
+shape-475    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-i-449>
+shape-476    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-i-450>
+shape-478    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-j-452>
+shape-479    EllipseLike   owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-j-453>
+shape-48     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-i-32>
+shape-480    EllipseLike   owned=yes staff-8+staff-pair-4-measure-1         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-i-454>
+shape-481    EllipseLike   owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-i-455>
+shape-483    EllipseLike   owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-j-457>
+shape-484    EllipseLike   owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-j-458>
+shape-485    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-i-459>
+shape-486    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-i-460>
+shape-487    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-i-461>
+shape-489    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-463>
+shape-490    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-464>
+shape-491    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-465>
+shape-494    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-468>
+shape-495    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-469>
+shape-497    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-471>
+shape-50     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-34>
+shape-500    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-i-474>
+shape-502    EllipseLike   owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-j-476>
+shape-507    EllipseLike   owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-481>
+shape-508    EllipseLike   owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-h-482>
+shape-51     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-35>
+shape-512    EllipseLike   owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-j-486>
+shape-513    EllipseLike   owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-j-487>
+shape-514    EllipseLike   owned=yes staff-8+staff-pair-4-measure-2         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-i-488>
+shape-516    EllipseLike   owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-j-490>
+shape-518    EllipseLike   owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-j-492>
+shape-520    EllipseLike   owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-494>
+shape-523    EllipseLike   owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-497>
+shape-527    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-501>
+shape-529    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-503>
+shape-53     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-37>
+shape-531    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-505>
+shape-533    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-507>
+shape-538    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-512>
+shape-539    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-513>
+shape-540    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-514>
+shape-541    EllipseLike   owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-h-515>
+shape-545    EllipseLike   owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-519>
+shape-547    EllipseLike   owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-j-521>
+shape-55     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-39>
+shape-550    EllipseLike   owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-524>
+shape-551    EllipseLike   owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-525>
+shape-553    EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-527>
+shape-555    EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-529>
+shape-557    EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-531>
+shape-559    EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-533>
+shape-563    EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-537>
+shape-564    EllipseLike   owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-h-538>
+shape-57     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-41>
+shape-574.1  EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g3 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-z-545>
+shape-576.1  EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g3 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-z-547>
+shape-578.1  EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g3 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-z-549>
+shape-579    EllipseLike   owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-550>
+shape-581    EllipseLike   owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-552>
+shape-583    EllipseLike   owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-554>
+shape-585    EllipseLike   owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-556>
+shape-587    EllipseLike   owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-558>
+shape-589    EllipseLike   owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-560>
+shape-59     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-h-43>
+shape-593    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-j-564>
+shape-594    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-565>
+shape-596    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-567>
+shape-598    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-569>
+shape-600    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-h-571>
+shape-604    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-j-575>
+shape-606    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-j-577>
+shape-607    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-j-578>
+shape-608    EllipseLike   owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-j-579>
+shape-610    EllipseLike   owned=no  rendered=no  source=<use href=#E>
+shape-612    EllipseLike   owned=no  rendered=no  source=<use href=#E>
+shape-615    EllipseLike   owned=no  rendered=no  source=<use href=#E>
+shape-617    EllipseLike   owned=no  rendered=no  source=<use href=#E>
+shape-620.1  EllipseLike   owned=no  rendered=no  source=<use href=#U>
+shape-624    EllipseLike   owned=no  rendered=no  source=<use href=#E>
+shape-625    EllipseLike   owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-581>
+shape-627    EllipseLike   owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-583>
+shape-629    EllipseLike   owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-585>
+shape-63     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-i-47>
+shape-631    EllipseLike   owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-587>
+shape-633    EllipseLike   owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-589>
+shape-635    EllipseLike   owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-591>
+shape-639    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-j-595>
+shape-64     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g2 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-i-48>
+shape-640    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-596>
+shape-642    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-598>
+shape-644    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-600>
+shape-646    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-h-602>
+shape-650    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-j-606>
+shape-651    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-j-607>
+shape-652    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-j-608>
+shape-653    EllipseLike   owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-j-609>
+shape-654    EllipseLike   owned=yes staff-9+staff-pair-5-measure-3         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-i-610>
+shape-656    EllipseLike   owned=yes staff-9+staff-pair-5-measure-3         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-j-612>
+shape-657    EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-h-613>
+shape-659    EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-h-615>
+shape-66     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-j-50>
+shape-661    EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-h-617>
+shape-663    EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-h-619>
+shape-665    EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-h-621>
+shape-667    EllipseLike   owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-h-623>
+shape-67     EllipseLike   owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-j-51>
+shape-673    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-h-629>
+shape-674    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-i-630>
+shape-675    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-i-631>
+shape-677    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-j-633>
+shape-678    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-j-634>
+shape-68     EllipseLike   owned=yes staff-2+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-i-52>
+shape-683    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-j-639>
+shape-684    EllipseLike   owned=yes staff-10+staff-pair-5-measure-4        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-i-640>
+shape-685    EllipseLike   owned=yes staff-10+staff-pair-5-measure-4        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-i-641>
+shape-687    EllipseLike   owned=yes staff-10+staff-pair-5-measure-4        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-j-643>
+shape-688    EllipseLike   owned=yes staff-10+staff-pair-5-measure-4        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-j-644>
+shape-69     EllipseLike   owned=yes staff-2+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-i-53>
+shape-690    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g3 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-W-646>
+shape-692    EllipseLike   owned=yes staff-9+staff-pair-5-measure-4         g4 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-W-648>
+shape-694    EllipseLike   owned=no  rendered=no  source=<use href=#Y>
+shape-701    EllipseLike   owned=no  rendered=no  source=<use href=#af>
+shape-702    EllipseLike   owned=no  rendered=no  source=<use href=#af>
+shape-709    EllipseLike   owned=no  rendered=no  source=<use href=#al>
+shape-71     EllipseLike   owned=yes staff-2+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-j-55>
+shape-710    EllipseLike   owned=no  rendered=no  source=<use href=#am>
+shape-711.1  EllipseLike   owned=no  rendered=no  source=<use href=#an>
+shape-715.1  EllipseLike   owned=no  rendered=no  source=<use href=#an>
+shape-718.1  EllipseLike   owned=no  rendered=no  source=<use href=#as>
+shape-72     EllipseLike   owned=yes staff-2+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-j-56>
+shape-720.1  EllipseLike   owned=no  rendered=no  source=<use href=#as>
+shape-727    EllipseLike   owned=no  rendered=no  source=<use href=#aB>
+shape-730.1  EllipseLike   owned=no  rendered=no  source=<use href=#as>
+shape-733    EllipseLike   owned=no  rendered=no  source=<use href=#aB>
+shape-74     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-h-58>
+shape-743    EllipseLike   owned=no  rendered=no  source=<use href=#aM>
+shape-753    EllipseLike   owned=no  rendered=no  source=<use href=#aM>
+shape-759    EllipseLike   owned=no  rendered=no  source=<use href=#aM>
+shape-76     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-h-60>
+shape-762    EllipseLike   owned=no  rendered=no  source=<use href=#aM>
+shape-768.1  EllipseLike   owned=no  rendered=no  source=<use href=#aX>
+shape-778    EllipseLike   owned=no  rendered=no  source=<use href=#aM>
+shape-780    EllipseLike   owned=no  rendered=no  source=<use href=#aM>
+shape-784.1  EllipseLike   owned=no  rendered=no  source=<use href=#aX>
+shape-795.1  EllipseLike   owned=no  rendered=no  source=<use href=#bm>
+shape-80     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-h-64>
+shape-804    EllipseLike   owned=no  rendered=no  source=<use href=#bv>
+shape-805.1  EllipseLike   owned=no  rendered=no  source=<use href=#bm>
+shape-813    EllipseLike   owned=no  rendered=no  source=<use href=#bE>
+shape-82     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-h-66>
+shape-83     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-i-67>
+shape-84     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g2 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-i-68>
+shape-86     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-j-70>
+shape-88     EllipseLike   owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-j-72>
+shape-89     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-i-73>
+shape-90     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-i-74>
+shape-91     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-i-75>
+shape-92     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-i-76>
+shape-94     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-j-78>
+shape-95     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-j-79>
+shape-96     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-j-80>
+shape-97     EllipseLike   owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<use href=#ownership-j-81>
+shape-98     EllipseLike   owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-h-82>
+shape-1      ShapeInstance owned=no  rendered=no  source=<use href=#a>
+shape-11     ShapeInstance owned=no  rendered=no  source=<path>
+shape-111    ShapeInstance owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-g-95>
+shape-117    ShapeInstance owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<use href=#ownership-w-101>
+shape-120    ShapeInstance owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-x-103>
+shape-121.1  ShapeInstance owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-y-104>
+shape-123    ShapeInstance owned=no  rendered=no  source=<path>
+shape-124    ShapeInstance owned=no  rendered=no  source=<path>
+shape-126.2  ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g2 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-z-106>
+shape-130    ShapeInstance owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-A-110>
+shape-136    ShapeInstance owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-g-116>
+shape-147    ShapeInstance owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<use href=#ownership-g-127>
+shape-15     ShapeInstance owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-g-10>
+shape-151    ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-g-131>
+shape-152    ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-A-132>
+shape-166    ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-B-146>
+shape-167    ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<use href=#ownership-B-147>
+shape-173    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-C-153>
+shape-179    ShapeInstance owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-B-159>
+shape-180    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-B-160>
+shape-193    ShapeInstance owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-B-173>
+shape-194    ShapeInstance owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-B-174>
+shape-2      ShapeInstance owned=no  rendered=no  source=<path>
+shape-210    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-B-190>
+shape-219    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-B-199>
+shape-220    ShapeInstance owned=yes staff-4+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-u-200>
+shape-221    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g2 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-D-201>
+shape-223    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g3 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-F-203>
+shape-225    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-H-205>
+shape-226    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-F-206>
+shape-227    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-F-207>
+shape-228    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-I-208>
+shape-229    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-J-209>
+shape-230    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-I-210>
+shape-231    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-K-211>
+shape-232    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-H-212>
+shape-233    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-L-213>
+shape-234    ShapeInstance owned=yes staff-3+staff-pair-2-measure-3         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<use href=#ownership-M-214>
+shape-243    ShapeInstance owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-B-223>
+shape-244    ShapeInstance owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-B-224>
+shape-245    ShapeInstance owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-B-225>
+shape-256    ShapeInstance owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-B-236>
+shape-278    ShapeInstance owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-B-258>
+shape-30     ShapeInstance owned=no  rendered=no  source=<use href=#k>
+shape-302    ShapeInstance owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-B-282>
+shape-305.1  ShapeInstance owned=yes staff-4+staff-pair-2-measure-4         g4 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-N-285>
+shape-305.2  ShapeInstance owned=yes staff-4+staff-pair-2-measure-4         g4 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<use href=#ownership-N-285>
+shape-308    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-x-287>
+shape-309.1  ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-y-288>
+shape-31     ShapeInstance owned=no  rendered=no  source=<use href=#l>
+shape-311    ShapeInstance owned=no  rendered=no  source=<path>
+shape-313.2  ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g2 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-z-290>
+shape-315.2  ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g2 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-z-292>
+shape-318    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-g-295>
+shape-32     ShapeInstance owned=no  rendered=no  source=<use href=#m>
+shape-333    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-w-310>
+shape-334    ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-O-311>
+shape-338    ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-g-315>
+shape-344    ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-w-321>
+shape-345    ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-w-322>
+shape-346    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-u-323>
+shape-347    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g4 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-H-324>
+shape-349    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g3 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-I-326>
+shape-35     ShapeInstance owned=no  rendered=no  source=<use href=#m>
+shape-350    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g3 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-Q-327>
+shape-351    ShapeInstance owned=yes staff-5+staff-pair-3-measure-1         g3 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<use href=#ownership-D-328>
+shape-367    ShapeInstance owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-g-344>
+shape-37     ShapeInstance owned=no  rendered=no  source=<use href=#q>
+shape-373    ShapeInstance owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<use href=#ownership-g-350>
+shape-39     ShapeInstance owned=no  rendered=no  source=<use href=#s>
+shape-397    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-w-374>
+shape-398    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-375>
+shape-399    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-376>
+shape-4      ShapeInstance owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-b-1>
+shape-40     ShapeInstance owned=no  rendered=no  source=<use href=#t>
+shape-400    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-377>
+shape-401    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-378>
+shape-402    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-379>
+shape-403    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-380>
+shape-404    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-381>
+shape-405    ShapeInstance owned=yes staff-5+staff-pair-3-measure-3         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-382>
+shape-406    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g2 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-383>
+shape-407    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-384>
+shape-408    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-385>
+shape-409    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-386>
+shape-41     ShapeInstance owned=yes staff-2+staff-pair-1-measure-1         g2 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-u-25>
+shape-410    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-387>
+shape-411    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-388>
+shape-412    ShapeInstance owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<use href=#ownership-R-389>
+shape-419    ShapeInstance owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-A-396>
+shape-422    ShapeInstance owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-S-399>
+shape-428    ShapeInstance owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-B-405>
+shape-431    ShapeInstance owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<use href=#ownership-w-408>
+shape-45     ShapeInstance owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-g-29>
+shape-455    ShapeInstance owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-x-431>
+shape-456.1  ShapeInstance owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-y-432>
+shape-458    ShapeInstance owned=no  rendered=no  source=<path>
+shape-459    ShapeInstance owned=yes staff-8+staff-pair-4-measure-2         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-T-433>
+shape-462.2  ShapeInstance owned=yes staff-8+staff-pair-4-measure-3         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-z-436>
+shape-464.2  ShapeInstance owned=yes staff-8+staff-pair-4-measure-4         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-z-438>
+shape-465    ShapeInstance owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-O-439>
+shape-467    ShapeInstance owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<use href=#ownership-A-441>
+shape-492    ShapeInstance owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-A-466>
+shape-5.1    ShapeInstance owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-c-2>
+shape-503    ShapeInstance owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-B-477>
+shape-504    ShapeInstance owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-C-478>
+shape-505    ShapeInstance owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-A-479>
+shape-509    ShapeInstance owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-B-483>
+shape-510    ShapeInstance owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<use href=#ownership-B-484>
+shape-519    ShapeInstance owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-B-493>
+shape-521    ShapeInstance owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-B-495>
+shape-524    ShapeInstance owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-B-498>
+shape-534    ShapeInstance owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<use href=#ownership-B-508>
+shape-542    ShapeInstance owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-C-516>
+shape-543    ShapeInstance owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-A-517>
+shape-548    ShapeInstance owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<use href=#ownership-w-522>
+shape-567    ShapeInstance owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-x-540>
+shape-568.1  ShapeInstance owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-y-541>
+shape-570    ShapeInstance owned=no  rendered=no  source=<path>
+shape-571    ShapeInstance owned=yes staff-9+staff-pair-5-measure-1         g3 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-T-542>
+shape-574.2  ShapeInstance owned=yes staff-10+staff-pair-5-measure-1        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<use href=#ownership-z-545>
+shape-576.2  ShapeInstance owned=yes staff-10+staff-pair-5-measure-2        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<use href=#ownership-z-547>
+shape-578.2  ShapeInstance owned=yes staff-10+staff-pair-5-measure-3        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<use href=#ownership-z-549>
+shape-6      ShapeInstance owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-d-3>
+shape-609    ShapeInstance owned=no  rendered=no  source=<use href=#D>
+shape-611    ShapeInstance owned=no  rendered=no  source=<use href=#F>
+shape-613    ShapeInstance owned=no  rendered=no  source=<use href=#H>
+shape-614    ShapeInstance owned=no  rendered=no  source=<use href=#D>
+shape-616    ShapeInstance owned=no  rendered=no  source=<use href=#F>
+shape-618    ShapeInstance owned=no  rendered=no  source=<use href=#H>
+shape-619    ShapeInstance owned=no  rendered=no  source=<use href=#L>
+shape-62     ShapeInstance owned=yes staff-1+staff-pair-1-measure-2         g2 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-v-46>
+shape-620.2  ShapeInstance owned=no  rendered=no  source=<use href=#U>
+shape-621    ShapeInstance owned=no  rendered=no  source=<use href=#Q>
+shape-622    ShapeInstance owned=no  rendered=no  source=<use href=#H>
+shape-670    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g2 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-O-626>
+shape-671    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g2 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-O-627>
+shape-679    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-B-635>
+shape-680    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-B-636>
+shape-681    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-O-637>
+shape-689    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g3 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-V-645>
+shape-691    ShapeInstance owned=yes staff-9+staff-pair-5-measure-4         g4 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<use href=#ownership-X-647>
+shape-695    ShapeInstance owned=no  rendered=no  source=<use href=#aa>
+shape-696    ShapeInstance owned=no  rendered=no  source=<use href=#ab>
+shape-697    ShapeInstance owned=no  rendered=no  source=<use href=#ac>
+shape-698    ShapeInstance owned=no  rendered=no  source=<use href=#ad>
+shape-7      ShapeInstance owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-e-4>
+shape-700    ShapeInstance owned=no  rendered=no  source=<use href=#ad>
+shape-703    ShapeInstance owned=no  rendered=no  source=<use href=#ab>
+shape-704    ShapeInstance owned=no  rendered=no  source=<use href=#ag>
+shape-705    ShapeInstance owned=no  rendered=no  source=<use href=#ah>
+shape-706    ShapeInstance owned=no  rendered=no  source=<use href=#ai>
+shape-707    ShapeInstance owned=no  rendered=no  source=<use href=#aj>
+shape-708    ShapeInstance owned=no  rendered=no  source=<use href=#ak>
+shape-711.2  ShapeInstance owned=no  rendered=no  source=<use href=#an>
+shape-712    ShapeInstance owned=no  rendered=no  source=<use href=#ao>
+shape-713    ShapeInstance owned=no  rendered=no  source=<use href=#ap>
+shape-714    ShapeInstance owned=no  rendered=no  source=<use href=#aq>
+shape-715.2  ShapeInstance owned=no  rendered=no  source=<use href=#an>
+shape-716    ShapeInstance owned=no  rendered=no  source=<use href=#aj>
+shape-717    ShapeInstance owned=no  rendered=no  source=<use href=#ar>
+shape-718.2  ShapeInstance owned=no  rendered=no  source=<use href=#as>
+shape-719    ShapeInstance owned=no  rendered=no  source=<use href=#at>
+shape-720.2  ShapeInstance owned=no  rendered=no  source=<use href=#as>
+shape-721    ShapeInstance owned=no  rendered=no  source=<use href=#au>
+shape-723    ShapeInstance owned=no  rendered=no  source=<use href=#aw>
+shape-724    ShapeInstance owned=no  rendered=no  source=<use href=#ax>
+shape-725    ShapeInstance owned=no  rendered=no  source=<use href=#ay>
+shape-726    ShapeInstance owned=no  rendered=no  source=<use href=#aA>
+shape-728    ShapeInstance owned=no  rendered=no  source=<use href=#ax>
+shape-729    ShapeInstance owned=no  rendered=no  source=<use href=#aC>
+shape-73     ShapeInstance owned=yes staff-2+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-2; color-match=yes; source=<use href=#ownership-g-57>
+shape-730.2  ShapeInstance owned=no  rendered=no  source=<use href=#as>
+shape-731    ShapeInstance owned=no  rendered=no  source=<use href=#au>
+shape-732    ShapeInstance owned=no  rendered=no  source=<use href=#at>
+shape-734    ShapeInstance owned=no  rendered=no  source=<use href=#aD>
+shape-735    ShapeInstance owned=no  rendered=no  source=<use href=#aE>
+shape-736    ShapeInstance owned=no  rendered=no  source=<use href=#aF>
+shape-737    ShapeInstance owned=no  rendered=no  source=<use href=#aG>
+shape-738    ShapeInstance owned=no  rendered=no  source=<use href=#aH>
+shape-739    ShapeInstance owned=no  rendered=no  source=<use href=#aI>
+shape-740    ShapeInstance owned=no  rendered=no  source=<use href=#aH>
+shape-741    ShapeInstance owned=no  rendered=no  source=<use href=#aK>
+shape-744    ShapeInstance owned=no  rendered=no  source=<use href=#aI>
+shape-746    ShapeInstance owned=no  rendered=no  source=<use href=#aO>
+shape-747    ShapeInstance owned=no  rendered=no  source=<use href=#aG>
+shape-748    ShapeInstance owned=no  rendered=no  source=<use href=#aH>
+shape-749    ShapeInstance owned=no  rendered=no  source=<use href=#aP>
+shape-750    ShapeInstance owned=no  rendered=no  source=<use href=#aQ>
+shape-751    ShapeInstance owned=no  rendered=no  source=<use href=#aR>
+shape-752    ShapeInstance owned=no  rendered=no  source=<use href=#aI>
+shape-754    ShapeInstance owned=no  rendered=no  source=<use href=#aP>
+shape-755    ShapeInstance owned=no  rendered=no  source=<use href=#aS>
+shape-756    ShapeInstance owned=no  rendered=no  source=<use href=#aT>
+shape-757    ShapeInstance owned=no  rendered=no  source=<use href=#aU>
+shape-758    ShapeInstance owned=no  rendered=no  source=<use href=#aR>
+shape-760    ShapeInstance owned=no  rendered=no  source=<use href=#aT>
+shape-761    ShapeInstance owned=no  rendered=no  source=<use href=#aT>
+shape-763    ShapeInstance owned=no  rendered=no  source=<use href=#aI>
+shape-764    ShapeInstance owned=no  rendered=no  source=<use href=#aH>
+shape-765    ShapeInstance owned=no  rendered=no  source=<use href=#aS>
+shape-767    ShapeInstance owned=no  rendered=no  source=<use href=#aW>
+shape-768.2  ShapeInstance owned=no  rendered=no  source=<use href=#aX>
+shape-769    ShapeInstance owned=no  rendered=no  source=<use href=#aR>
+shape-770    ShapeInstance owned=no  rendered=no  source=<use href=#aI>
+shape-771    ShapeInstance owned=no  rendered=no  source=<use href=#aY>
+shape-772    ShapeInstance owned=no  rendered=no  source=<use href=#aZ>
+shape-773    ShapeInstance owned=no  rendered=no  source=<use href=#ba>
+shape-774    ShapeInstance owned=no  rendered=no  source=<use href=#bb>
+shape-775    ShapeInstance owned=no  rendered=no  source=<use href=#aP>
+shape-776    ShapeInstance owned=no  rendered=no  source=<use href=#bb>
+shape-777    ShapeInstance owned=no  rendered=no  source=<use href=#bc>
+shape-779    ShapeInstance owned=no  rendered=no  source=<use href=#bd>
+shape-781    ShapeInstance owned=no  rendered=no  source=<use href=#aY>
+shape-782    ShapeInstance owned=no  rendered=no  source=<use href=#aH>
+shape-784.2  ShapeInstance owned=no  rendered=no  source=<use href=#aX>
+shape-785    ShapeInstance owned=no  rendered=no  source=<use href=#aS>
+shape-786    ShapeInstance owned=no  rendered=no  source=<use href=#be>
+shape-787    ShapeInstance owned=no  rendered=no  source=<use href=#aH>
+shape-789    ShapeInstance owned=no  rendered=no  source=<use href=#bg>
+shape-790    ShapeInstance owned=no  rendered=no  source=<use href=#bh>
+shape-791    ShapeInstance owned=no  rendered=no  source=<use href=#bi>
+shape-792    ShapeInstance owned=no  rendered=no  source=<use href=#bj>
+shape-794    ShapeInstance owned=no  rendered=no  source=<use href=#bl>
+shape-795.2  ShapeInstance owned=no  rendered=no  source=<use href=#bm>
+shape-796    ShapeInstance owned=no  rendered=no  source=<use href=#bn>
+shape-797    ShapeInstance owned=no  rendered=no  source=<use href=#bo>
+shape-798    ShapeInstance owned=no  rendered=no  source=<use href=#bq>
+shape-799    ShapeInstance owned=no  rendered=no  source=<use href=#bo>
+shape-8      ShapeInstance owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-d-5>
+shape-800    ShapeInstance owned=no  rendered=no  source=<use href=#br>
+shape-801    ShapeInstance owned=no  rendered=no  source=<use href=#bs>
+shape-802    ShapeInstance owned=no  rendered=no  source=<use href=#bt>
+shape-803    ShapeInstance owned=no  rendered=no  source=<use href=#bu>
+shape-805.2  ShapeInstance owned=no  rendered=no  source=<use href=#bm>
+shape-807    ShapeInstance owned=no  rendered=no  source=<use href=#by>
+shape-808    ShapeInstance owned=no  rendered=no  source=<use href=#bz>
+shape-809    ShapeInstance owned=no  rendered=no  source=<use href=#bA>
+shape-810    ShapeInstance owned=no  rendered=no  source=<use href=#bB>
+shape-811    ShapeInstance owned=no  rendered=no  source=<use href=#bC>
+shape-812    ShapeInstance owned=no  rendered=no  source=<use href=#bD>
+shape-814    ShapeInstance owned=no  rendered=no  source=<use href=#by>
+shape-815    ShapeInstance owned=no  rendered=no  source=<use href=#bz>
+shape-9      ShapeInstance owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<use href=#ownership-e-6>
+shape-10.1   Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.10  Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.11  Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.12  Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.13  Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.14  Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.2   Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-10.3   Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-10.4   Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-10.5   Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.6   Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.7   Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.8   Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-10.9   Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-101    Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-102    Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-103    Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-107    Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-109    Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-114    Stroke        owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<path>
+shape-119    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.1  Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.10 Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.11 Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.12 Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.13 Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.14 Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.2  Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-122.3  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-122.4  Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-122.5  Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.6  Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.7  Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.8  Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-122.9  Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-125.1  Stroke        owned=yes staff-4+staff-pair-2-measure-3         g4 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-125.2  Stroke        owned=yes staff-4+staff-pair-2-measure-3         g4 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-125.3  Stroke        owned=yes staff-4+staff-pair-2-measure-4         g4 rendered=yes; mode=compound-component; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-128    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-13     Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-131    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-134    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-137    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-138    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-140    Stroke        owned=yes staff-3+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-144    Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<path>
+shape-149    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-153    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-156    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-158    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-159    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-16     Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-162    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-164    Stroke        owned=yes staff-3+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-17     Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-170    Stroke        owned=yes staff-4+staff-pair-2-measure-2         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<path>
+shape-174    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-176.1  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-176.2  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-18     Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-181.1  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-181.2  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-183.1  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-183.2  Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-186    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-188    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-195    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-197    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-20     Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-202    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-204    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-211    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-212    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-215    Stroke        owned=yes staff-3+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-217    Stroke        owned=yes staff-4+staff-pair-2-measure-3         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-3; color-match=yes; source=<path>
+shape-23     Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-237    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-246    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-250    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-257    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-261    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-267    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-27.1   Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-27.2   Stroke        owned=yes staff-2+staff-pair-1-measure-1         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-272    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-279    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-284    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-290    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-296    Stroke        owned=yes staff-4+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-3      Stroke        owned=yes staff-1+staff-pair-1-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
+shape-303    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-304    Stroke        owned=yes staff-3+staff-pair-2-measure-4         g1 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-4; color-match=yes; source=<path>
+shape-307    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.1  Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.10 Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.11 Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.12 Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.13 Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.14 Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.2  Stroke        owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-310.3  Stroke        owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-310.4  Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-310.5  Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.6  Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.7  Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.8  Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-310.9  Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-312.1  Stroke        owned=yes staff-6+staff-pair-3-measure-1         g4 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-312.2  Stroke        owned=yes staff-6+staff-pair-3-measure-1         g4 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-314.1  Stroke        owned=yes staff-6+staff-pair-3-measure-3         g4 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-314.2  Stroke        owned=yes staff-6+staff-pair-3-measure-3         g4 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-319    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-322    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-323    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-324    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-327    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-331    Stroke        owned=yes staff-5+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-335    Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-341    Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
+shape-354    Stroke        owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-357    Stroke        owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-358    Stroke        owned=yes staff-5+staff-pair-3-measure-2         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-359    Stroke        owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-364    Stroke        owned=yes staff-5+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-370    Stroke        owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<path>
+shape-375    Stroke        owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-377    Stroke        owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-378    Stroke        owned=yes staff-5+staff-pair-3-measure-3         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-379    Stroke        owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-38.1   Stroke        owned=no  rendered=no  source=<use href=#r>
+shape-38.2   Stroke        owned=no  rendered=no  source=<use href=#r>
+shape-381    Stroke        owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-386    Stroke        owned=yes staff-5+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-393    Stroke        owned=yes staff-6+staff-pair-3-measure-3         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-3; color-match=yes; source=<path>
+shape-414    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-416    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-417    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-420    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-423    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-426    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-429    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-43     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-432    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-434    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-435.1  Stroke        owned=yes staff-5+staff-pair-3-measure-4         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-435.2  Stroke        owned=yes staff-5+staff-pair-3-measure-4         g2 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-439    Stroke        owned=yes staff-5+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-5+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-446    Stroke        owned=yes staff-6+staff-pair-3-measure-4         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<path>
+shape-454    Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.1  Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.10 Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.11 Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.12 Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.13 Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.14 Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.2  Stroke        owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-457.3  Stroke        owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-457.4  Stroke        owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-457.5  Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.6  Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.7  Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.8  Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-457.9  Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-46     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-460    Stroke        owned=yes staff-8+staff-pair-4-measure-2         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-461.1  Stroke        owned=yes staff-8+staff-pair-4-measure-2         g3 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-461.2  Stroke        owned=yes staff-8+staff-pair-4-measure-3         g4 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-461.3  Stroke        owned=yes staff-8+staff-pair-4-measure-3         g4 rendered=yes; mode=compound-component; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-463.1  Stroke        owned=yes staff-8+staff-pair-4-measure-4         g4 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-463.2  Stroke        owned=yes staff-8+staff-pair-4-measure-4         g4 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-468    Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-47     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-471    Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-473    Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-474    Stroke        owned=yes staff-7+staff-pair-4-measure-1         g2 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-477    Stroke        owned=yes staff-7+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-482.1  Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-482.2  Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-482.3  Stroke        owned=yes staff-8+staff-pair-4-measure-1         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<path>
+shape-488    Stroke        owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-49     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-493    Stroke        owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-496    Stroke        owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-498    Stroke        owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-499    Stroke        owned=yes staff-7+staff-pair-4-measure-2         g2 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-501    Stroke        owned=yes staff-7+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-506    Stroke        owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-511    Stroke        owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-515.1  Stroke        owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-515.2  Stroke        owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
+shape-517    Stroke        owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-52     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-522    Stroke        owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-525    Stroke        owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-526    Stroke        owned=yes staff-7+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-528    Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-530    Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-532.1  Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-532.2  Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-535    Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-536    Stroke        owned=yes staff-8+staff-pair-4-measure-3         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-537.1  Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-537.2  Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
+shape-54     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-544    Stroke        owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-546    Stroke        owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-549    Stroke        owned=yes staff-7+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-552    Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-554    Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-556    Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-558    Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-56     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-560    Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-561    Stroke        owned=yes staff-8+staff-pair-4-measure-4         g2 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-562.1  Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-562.2  Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-562.3  Stroke        owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
+shape-566    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.1  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.10 Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=neutral-layout; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.11 Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=neutral-layout; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.12 Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=neutral-layout; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.13 Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=neutral-layout; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.14 Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=neutral-layout; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.2  Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-569.3  Stroke        owned=yes staff-9+staff-pair-5-measure-3         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-569.4  Stroke        owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<path>
+shape-569.5  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.6  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.7  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.8  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-569.9  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-572    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g4 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-573.1  Stroke        owned=no  rendered=no  source=<path>
+shape-573.2  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g4 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-573.3  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g4 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-575.1  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g4 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-575.2  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g4 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-577.1  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g4 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-577.2  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g4 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-58     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-580.1  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-580.2  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-582.1  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-582.2  Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-584    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-586    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-588    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-590    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-591    Stroke        owned=yes staff-9+staff-pair-5-measure-1         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-592.1  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-592.2  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-592.3  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-592.4  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-595    Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-597.1  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-597.2  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-599.1  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-599.2  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-599.3  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-60     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-601    Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-602.1  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-602.2  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-603.1  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-603.2  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-603.3  Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-605    Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
+shape-61.1   Stroke        owned=yes staff-1+staff-pair-1-measure-2         g2 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-61.2   Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-61.3   Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-626    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-628    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-630    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-632    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-634    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-636    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-637    Stroke        owned=yes staff-9+staff-pair-5-measure-2         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-638.1  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-638.2  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-638.3  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-641    Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-643    Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-645.1  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-645.2  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-647    Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-648.1  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-648.2  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-649.1  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-649.2  Stroke        owned=yes staff-10+staff-pair-5-measure-2        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-2; color-match=yes; source=<path>
+shape-65     Stroke        owned=yes staff-1+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-655    Stroke        owned=yes staff-9+staff-pair-5-measure-3         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-658    Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-660.1  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-660.2  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-662.1  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-662.2  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-662.3  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-664.1  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-664.2  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-664.3  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-666.1  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-666.2  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-666.3  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-666.4  Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-668    Stroke        owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-669    Stroke        owned=yes staff-10+staff-pair-5-measure-3        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
+shape-672    Stroke        owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<path>
+shape-676    Stroke        owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<path>
+shape-682    Stroke        owned=yes staff-9+staff-pair-5-measure-4         g1 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-4; color-match=yes; source=<path>
+shape-686.1  Stroke        owned=yes staff-10+staff-pair-5-measure-4        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-4; color-match=yes; source=<path>
+shape-686.2  Stroke        owned=yes staff-10+staff-pair-5-measure-4        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-4; color-match=yes; source=<path>
+shape-699    Stroke        owned=no  rendered=no  source=<use href=#ae>
+shape-70     Stroke        owned=yes staff-2+staff-pair-1-measure-2         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-2; color-match=yes; source=<path>
+shape-75     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-77     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-78     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-79     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-81     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-85     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-87     Stroke        owned=yes staff-1+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-93     Stroke        owned=yes staff-2+staff-pair-1-measure-3         g1 rendered=yes; mode=direct; displayed=staff-2+staff-pair-1-measure-3; color-match=yes; source=<path>
+shape-99     Stroke        owned=yes staff-1+staff-pair-1-measure-4         g1 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-4; color-match=yes; source=<path>

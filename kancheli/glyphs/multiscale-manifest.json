@@ -1,0 +1,3051 @@
+{
+  "PreviewInterline": 30,
+  "SourceInterline": 4.576251899999988,
+  "Glyphs": [
+    {
+      "ShapeId": "shape-1",
+      "PrototypeId": "prototype-1",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-1__prototype-1.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-1__prototype-1.png",
+          "Width": 25,
+          "Height": 34,
+          "ForegroundPixels": 121
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-1__prototype-1.png",
+          "Width": 32,
+          "Height": 47,
+          "ForegroundPixels": 270
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-1__prototype-1.png",
+          "Width": 40,
+          "Height": 59,
+          "ForegroundPixels": 495
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-2",
+      "PrototypeId": "prototype-2",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-2__prototype-2.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-2__prototype-2.png",
+          "Width": 2329,
+          "Height": 2920,
+          "ForegroundPixels": 6753520
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-2__prototype-2.png",
+          "Width": 3489,
+          "Height": 4376,
+          "ForegroundPixels": 15189314
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-2__prototype-2.png",
+          "Width": 4649,
+          "Height": 5831,
+          "ForegroundPixels": 27008258
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-4",
+      "PrototypeId": "prototype-3",
+      "PrototypeInstanceCount": 5,
+      "PreviewFileName": "shape-4__prototype-3.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-4__prototype-3.png",
+          "Width": 64,
+          "Height": 157,
+          "ForegroundPixels": 2208
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-4__prototype-3.png",
+          "Width": 91,
+          "Height": 231,
+          "ForegroundPixels": 4969
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-4__prototype-3.png",
+          "Width": 118,
+          "Height": 305,
+          "ForegroundPixels": 8807
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-5.1",
+      "PrototypeId": "prototype-4",
+      "PrototypeInstanceCount": 5,
+      "PreviewFileName": "shape-5.1__prototype-4.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-5.1__prototype-4.png",
+          "Width": 54,
+          "Height": 76,
+          "ForegroundPixels": 923
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-5.1__prototype-4.png",
+          "Width": 76,
+          "Height": 109,
+          "ForegroundPixels": 2090
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-5.1__prototype-4.png",
+          "Width": 98,
+          "Height": 143,
+          "ForegroundPixels": 3723
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-6",
+      "PrototypeId": "prototype-5",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-6__prototype-5.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-6__prototype-5.png",
+          "Width": 41,
+          "Height": 48,
+          "ForegroundPixels": 521
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-6__prototype-5.png",
+          "Width": 57,
+          "Height": 68,
+          "ForegroundPixels": 1203
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-6__prototype-5.png",
+          "Width": 73,
+          "Height": 87,
+          "ForegroundPixels": 2158
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-7",
+      "PrototypeId": "prototype-6",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-7__prototype-6.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-7__prototype-6.png",
+          "Width": 39,
+          "Height": 49,
+          "ForegroundPixels": 654
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-7__prototype-6.png",
+          "Width": 54,
+          "Height": 68,
+          "ForegroundPixels": 1461
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-7__prototype-6.png",
+          "Width": 69,
+          "Height": 88,
+          "ForegroundPixels": 2596
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-11",
+      "PrototypeId": "prototype-7",
+      "PrototypeInstanceCount": 4,
+      "PreviewFileName": "shape-11__prototype-7.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-11__prototype-7.png",
+          "Width": 30,
+          "Height": 325,
+          "ForegroundPixels": 1815
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-11__prototype-7.png",
+          "Width": 40,
+          "Height": 483,
+          "ForegroundPixels": 4053
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-11__prototype-7.png",
+          "Width": 50,
+          "Height": 641,
+          "ForegroundPixels": 7211
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-15",
+      "PrototypeId": "prototype-8",
+      "PrototypeInstanceCount": 11,
+      "PreviewFileName": "shape-15__prototype-8.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-15__prototype-8.png",
+          "Width": 26,
+          "Height": 57,
+          "ForegroundPixels": 233
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-15__prototype-8.png",
+          "Width": 34,
+          "Height": 80,
+          "ForegroundPixels": 532
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-15__prototype-8.png",
+          "Width": 43,
+          "Height": 104,
+          "ForegroundPixels": 961
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-30",
+      "PrototypeId": "prototype-9",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-30__prototype-9.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-30__prototype-9.png",
+          "Width": 35,
+          "Height": 40,
+          "ForegroundPixels": 369
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-30__prototype-9.png",
+          "Width": 48,
+          "Height": 56,
+          "ForegroundPixels": 828
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-30__prototype-9.png",
+          "Width": 61,
+          "Height": 71,
+          "ForegroundPixels": 1473
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-31",
+      "PrototypeId": "prototype-10",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-31__prototype-10.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-31__prototype-10.png",
+          "Width": 30,
+          "Height": 32,
+          "ForegroundPixels": 267
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-31__prototype-10.png",
+          "Width": 40,
+          "Height": 43,
+          "ForegroundPixels": 569
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-31__prototype-10.png",
+          "Width": 50,
+          "Height": 54,
+          "ForegroundPixels": 1033
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-32",
+      "PrototypeId": "prototype-11",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-32__prototype-11.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-32__prototype-11.png",
+          "Width": 24,
+          "Height": 32,
+          "ForegroundPixels": 182
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-32__prototype-11.png",
+          "Width": 31,
+          "Height": 43,
+          "ForegroundPixels": 425
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-32__prototype-11.png",
+          "Width": 39,
+          "Height": 54,
+          "ForegroundPixels": 747
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-37",
+      "PrototypeId": "prototype-12",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-37__prototype-12.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-37__prototype-12.png",
+          "Width": 41,
+          "Height": 69,
+          "ForegroundPixels": 341
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-37__prototype-12.png",
+          "Width": 57,
+          "Height": 99,
+          "ForegroundPixels": 791
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-37__prototype-12.png",
+          "Width": 73,
+          "Height": 129,
+          "ForegroundPixels": 1354
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-39",
+      "PrototypeId": "prototype-13",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-39__prototype-13.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-39__prototype-13.png",
+          "Width": 30,
+          "Height": 41,
+          "ForegroundPixels": 209
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-39__prototype-13.png",
+          "Width": 40,
+          "Height": 57,
+          "ForegroundPixels": 471
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-39__prototype-13.png",
+          "Width": 51,
+          "Height": 73,
+          "ForegroundPixels": 836
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-40",
+      "PrototypeId": "prototype-14",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-40__prototype-14.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-40__prototype-14.png",
+          "Width": 30,
+          "Height": 41,
+          "ForegroundPixels": 310
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-40__prototype-14.png",
+          "Width": 40,
+          "Height": 57,
+          "ForegroundPixels": 696
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-40__prototype-14.png",
+          "Width": 50,
+          "Height": 73,
+          "ForegroundPixels": 1238
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-41",
+      "PrototypeId": "prototype-15",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-41__prototype-15.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-41__prototype-15.png",
+          "Width": 79,
+          "Height": 45,
+          "ForegroundPixels": 1015
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-41__prototype-15.png",
+          "Width": 114,
+          "Height": 62,
+          "ForegroundPixels": 2315
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-41__prototype-15.png",
+          "Width": 149,
+          "Height": 80,
+          "ForegroundPixels": 4117
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-62",
+      "PrototypeId": "prototype-16",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-62__prototype-16.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-62__prototype-16.png",
+          "Width": 25,
+          "Height": 32,
+          "ForegroundPixels": 120
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-62__prototype-16.png",
+          "Width": 33,
+          "Height": 43,
+          "ForegroundPixels": 274
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-62__prototype-16.png",
+          "Width": 41,
+          "Height": 54,
+          "ForegroundPixels": 487
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-117",
+      "PrototypeId": "prototype-17",
+      "PrototypeInstanceCount": 7,
+      "PreviewFileName": "shape-117__prototype-17.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-117__prototype-17.png",
+          "Width": 23,
+          "Height": 70,
+          "ForegroundPixels": 323
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-117__prototype-17.png",
+          "Width": 29,
+          "Height": 100,
+          "ForegroundPixels": 737
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-117__prototype-17.png",
+          "Width": 36,
+          "Height": 131,
+          "ForegroundPixels": 1285
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-123",
+      "PrototypeId": "prototype-18",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-123__prototype-18.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-123__prototype-18.png",
+          "Width": 30,
+          "Height": 168,
+          "ForegroundPixels": 906
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-123__prototype-18.png",
+          "Width": 40,
+          "Height": 247,
+          "ForegroundPixels": 2030
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-123__prototype-18.png",
+          "Width": 50,
+          "Height": 326,
+          "ForegroundPixels": 3620
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-124",
+      "PrototypeId": "prototype-19",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-124__prototype-19.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-124__prototype-19.png",
+          "Width": 30,
+          "Height": 167,
+          "ForegroundPixels": 906
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-124__prototype-19.png",
+          "Width": 40,
+          "Height": 246,
+          "ForegroundPixels": 2026
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-124__prototype-19.png",
+          "Width": 50,
+          "Height": 325,
+          "ForegroundPixels": 3606
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-126.2",
+      "PrototypeId": "prototype-20",
+      "PrototypeInstanceCount": 8,
+      "PreviewFileName": "shape-126.2__prototype-20.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-126.2__prototype-20.png",
+          "Width": 67,
+          "Height": 50,
+          "ForegroundPixels": 600
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-126.2__prototype-20.png",
+          "Width": 96,
+          "Height": 70,
+          "ForegroundPixels": 1341
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-126.2__prototype-20.png",
+          "Width": 125,
+          "Height": 90,
+          "ForegroundPixels": 2409
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-130",
+      "PrototypeId": "prototype-21",
+      "PrototypeInstanceCount": 7,
+      "PreviewFileName": "shape-130__prototype-21.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-130__prototype-21.png",
+          "Width": 30,
+          "Height": 72,
+          "ForegroundPixels": 194
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-130__prototype-21.png",
+          "Width": 40,
+          "Height": 103,
+          "ForegroundPixels": 435
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-130__prototype-21.png",
+          "Width": 50,
+          "Height": 135,
+          "ForegroundPixels": 782
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-166",
+      "PrototypeId": "prototype-22",
+      "PrototypeInstanceCount": 24,
+      "PreviewFileName": "shape-166__prototype-22.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-166__prototype-22.png",
+          "Width": 29,
+          "Height": 64,
+          "ForegroundPixels": 496
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-166__prototype-22.png",
+          "Width": 38,
+          "Height": 91,
+          "ForegroundPixels": 1156
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-166__prototype-22.png",
+          "Width": 48,
+          "Height": 119,
+          "ForegroundPixels": 1903
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-173",
+      "PrototypeId": "prototype-23",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-173__prototype-23.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-173__prototype-23.png",
+          "Width": 31,
+          "Height": 47,
+          "ForegroundPixels": 245
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-173__prototype-23.png",
+          "Width": 41,
+          "Height": 65,
+          "ForegroundPixels": 553
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-173__prototype-23.png",
+          "Width": 52,
+          "Height": 84,
+          "ForegroundPixels": 973
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-221",
+      "PrototypeId": "prototype-24",
+      "PrototypeInstanceCount": 4,
+      "PreviewFileName": "shape-221__prototype-24.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-221__prototype-24.png",
+          "Width": 29,
+          "Height": 37,
+          "ForegroundPixels": 280
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-221__prototype-24.png",
+          "Width": 39,
+          "Height": 50,
+          "ForegroundPixels": 606
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-221__prototype-24.png",
+          "Width": 49,
+          "Height": 64,
+          "ForegroundPixels": 1070
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-223",
+      "PrototypeId": "prototype-25",
+      "PrototypeInstanceCount": 5,
+      "PreviewFileName": "shape-223__prototype-25.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-223__prototype-25.png",
+          "Width": 25,
+          "Height": 29,
+          "ForegroundPixels": 144
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-223__prototype-25.png",
+          "Width": 32,
+          "Height": 38,
+          "ForegroundPixels": 325
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-223__prototype-25.png",
+          "Width": 40,
+          "Height": 48,
+          "ForegroundPixels": 574
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-225",
+      "PrototypeId": "prototype-26",
+      "PrototypeInstanceCount": 6,
+      "PreviewFileName": "shape-225__prototype-26.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-225__prototype-26.png",
+          "Width": 27,
+          "Height": 28,
+          "ForegroundPixels": 189
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-225__prototype-26.png",
+          "Width": 36,
+          "Height": 38,
+          "ForegroundPixels": 434
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-225__prototype-26.png",
+          "Width": 44,
+          "Height": 47,
+          "ForegroundPixels": 756
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-228",
+      "PrototypeId": "prototype-27",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-228__prototype-27.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-228__prototype-27.png",
+          "Width": 25,
+          "Height": 29,
+          "ForegroundPixels": 150
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-228__prototype-27.png",
+          "Width": 32,
+          "Height": 38,
+          "ForegroundPixels": 358
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-228__prototype-27.png",
+          "Width": 40,
+          "Height": 48,
+          "ForegroundPixels": 610
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-229",
+      "PrototypeId": "prototype-28",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-229__prototype-28.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-229__prototype-28.png",
+          "Width": 19,
+          "Height": 36,
+          "ForegroundPixels": 160
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-229__prototype-28.png",
+          "Width": 24,
+          "Height": 49,
+          "ForegroundPixels": 374
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-229__prototype-28.png",
+          "Width": 29,
+          "Height": 62,
+          "ForegroundPixels": 615
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-231",
+      "PrototypeId": "prototype-29",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-231__prototype-29.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-231__prototype-29.png",
+          "Width": 25,
+          "Height": 28,
+          "ForegroundPixels": 139
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-231__prototype-29.png",
+          "Width": 33,
+          "Height": 38,
+          "ForegroundPixels": 300
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-231__prototype-29.png",
+          "Width": 41,
+          "Height": 47,
+          "ForegroundPixels": 540
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-233",
+      "PrototypeId": "prototype-30",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-233__prototype-30.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-233__prototype-30.png",
+          "Width": 29,
+          "Height": 28,
+          "ForegroundPixels": 236
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-233__prototype-30.png",
+          "Width": 39,
+          "Height": 38,
+          "ForegroundPixels": 496
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-233__prototype-30.png",
+          "Width": 49,
+          "Height": 47,
+          "ForegroundPixels": 880
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-234",
+      "PrototypeId": "prototype-31",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-234__prototype-31.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-234__prototype-31.png",
+          "Width": 29,
+          "Height": 36,
+          "ForegroundPixels": 279
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-234__prototype-31.png",
+          "Width": 39,
+          "Height": 50,
+          "ForegroundPixels": 589
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-234__prototype-31.png",
+          "Width": 49,
+          "Height": 63,
+          "ForegroundPixels": 1061
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-305.1",
+      "PrototypeId": "prototype-32",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-305.1__prototype-32.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-305.1__prototype-32.png",
+          "Width": 52,
+          "Height": 61,
+          "ForegroundPixels": 523
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-305.1__prototype-32.png",
+          "Width": 73,
+          "Height": 86,
+          "ForegroundPixels": 1176
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-305.1__prototype-32.png",
+          "Width": 95,
+          "Height": 112,
+          "ForegroundPixels": 2084
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-305.2",
+      "PrototypeId": "prototype-33",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-305.2__prototype-33.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-305.2__prototype-33.png",
+          "Width": 46,
+          "Height": 32,
+          "ForegroundPixels": 415
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-305.2__prototype-33.png",
+          "Width": 65,
+          "Height": 44,
+          "ForegroundPixels": 942
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-305.2__prototype-33.png",
+          "Width": 83,
+          "Height": 55,
+          "ForegroundPixels": 1661
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-334",
+      "PrototypeId": "prototype-34",
+      "PrototypeInstanceCount": 5,
+      "PreviewFileName": "shape-334__prototype-34.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-334__prototype-34.png",
+          "Width": 29,
+          "Height": 68,
+          "ForegroundPixels": 436
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-334__prototype-34.png",
+          "Width": 39,
+          "Height": 98,
+          "ForegroundPixels": 967
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-334__prototype-34.png",
+          "Width": 49,
+          "Height": 127,
+          "ForegroundPixels": 1720
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-350",
+      "PrototypeId": "prototype-35",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-350__prototype-35.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-350__prototype-35.png",
+          "Width": 40,
+          "Height": 28,
+          "ForegroundPixels": 336
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-350__prototype-35.png",
+          "Width": 56,
+          "Height": 38,
+          "ForegroundPixels": 728
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-350__prototype-35.png",
+          "Width": 71,
+          "Height": 47,
+          "ForegroundPixels": 1352
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-398",
+      "PrototypeId": "prototype-36",
+      "PrototypeInstanceCount": 15,
+      "PreviewFileName": "shape-398__prototype-36.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-398__prototype-36.png",
+          "Width": 20,
+          "Height": 58,
+          "ForegroundPixels": 262
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-398__prototype-36.png",
+          "Width": 25,
+          "Height": 82,
+          "ForegroundPixels": 590
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-398__prototype-36.png",
+          "Width": 31,
+          "Height": 106,
+          "ForegroundPixels": 1044
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-422",
+      "PrototypeId": "prototype-37",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-422__prototype-37.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-422__prototype-37.png",
+          "Width": 33,
+          "Height": 81,
+          "ForegroundPixels": 389
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-422__prototype-37.png",
+          "Width": 44,
+          "Height": 117,
+          "ForegroundPixels": 880
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-422__prototype-37.png",
+          "Width": 56,
+          "Height": 152,
+          "ForegroundPixels": 1548
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-459",
+      "PrototypeId": "prototype-38",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-459__prototype-38.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-459__prototype-38.png",
+          "Width": 31,
+          "Height": 35,
+          "ForegroundPixels": 243
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-459__prototype-38.png",
+          "Width": 42,
+          "Height": 48,
+          "ForegroundPixels": 554
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-459__prototype-38.png",
+          "Width": 53,
+          "Height": 60,
+          "ForegroundPixels": 982
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-620.2",
+      "PrototypeId": "prototype-39",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-620.2__prototype-39.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-620.2__prototype-39.png",
+          "Width": 19,
+          "Height": 28,
+          "ForegroundPixels": 112
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-620.2__prototype-39.png",
+          "Width": 24,
+          "Height": 37,
+          "ForegroundPixels": 254
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-620.2__prototype-39.png",
+          "Width": 29,
+          "Height": 46,
+          "ForegroundPixels": 420
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-689",
+      "PrototypeId": "prototype-40",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-689__prototype-40.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-689__prototype-40.png",
+          "Width": 20,
+          "Height": 38,
+          "ForegroundPixels": 92
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-689__prototype-40.png",
+          "Width": 25,
+          "Height": 52,
+          "ForegroundPixels": 203
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-689__prototype-40.png",
+          "Width": 30,
+          "Height": 66,
+          "ForegroundPixels": 360
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-691",
+      "PrototypeId": "prototype-41",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-691__prototype-41.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-691__prototype-41.png",
+          "Width": 25,
+          "Height": 28,
+          "ForegroundPixels": 85
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-691__prototype-41.png",
+          "Width": 33,
+          "Height": 37,
+          "ForegroundPixels": 183
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-691__prototype-41.png",
+          "Width": 41,
+          "Height": 46,
+          "ForegroundPixels": 332
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-695",
+      "PrototypeId": "prototype-42",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-695__prototype-42.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-695__prototype-42.png",
+          "Width": 19,
+          "Height": 31,
+          "ForegroundPixels": 72
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-695__prototype-42.png",
+          "Width": 23,
+          "Height": 41,
+          "ForegroundPixels": 158
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-695__prototype-42.png",
+          "Width": 28,
+          "Height": 52,
+          "ForegroundPixels": 286
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-696",
+      "PrototypeId": "prototype-43",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-696__prototype-43.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-696__prototype-43.png",
+          "Width": 23,
+          "Height": 31,
+          "ForegroundPixels": 106
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-696__prototype-43.png",
+          "Width": 30,
+          "Height": 42,
+          "ForegroundPixels": 243
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-696__prototype-43.png",
+          "Width": 36,
+          "Height": 53,
+          "ForegroundPixels": 431
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-697",
+      "PrototypeId": "prototype-44",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-697__prototype-44.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-697__prototype-44.png",
+          "Width": 23,
+          "Height": 31,
+          "ForegroundPixels": 67
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-697__prototype-44.png",
+          "Width": 30,
+          "Height": 41,
+          "ForegroundPixels": 157
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-697__prototype-44.png",
+          "Width": 37,
+          "Height": 52,
+          "ForegroundPixels": 279
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-698",
+      "PrototypeId": "prototype-45",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-698__prototype-45.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-698__prototype-45.png",
+          "Width": 23,
+          "Height": 31,
+          "ForegroundPixels": 83
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-698__prototype-45.png",
+          "Width": 30,
+          "Height": 41,
+          "ForegroundPixels": 208
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-698__prototype-45.png",
+          "Width": 37,
+          "Height": 52,
+          "ForegroundPixels": 363
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-704",
+      "PrototypeId": "prototype-46",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-704__prototype-46.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-704__prototype-46.png",
+          "Width": 26,
+          "Height": 33,
+          "ForegroundPixels": 125
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-704__prototype-46.png",
+          "Width": 34,
+          "Height": 45,
+          "ForegroundPixels": 275
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-704__prototype-46.png",
+          "Width": 43,
+          "Height": 57,
+          "ForegroundPixels": 455
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-705",
+      "PrototypeId": "prototype-47",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-705__prototype-47.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-705__prototype-47.png",
+          "Width": 23,
+          "Height": 25,
+          "ForegroundPixels": 80
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-705__prototype-47.png",
+          "Width": 29,
+          "Height": 33,
+          "ForegroundPixels": 193
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-705__prototype-47.png",
+          "Width": 36,
+          "Height": 40,
+          "ForegroundPixels": 338
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-706",
+      "PrototypeId": "prototype-48",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-706__prototype-48.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-706__prototype-48.png",
+          "Width": 26,
+          "Height": 25,
+          "ForegroundPixels": 96
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-706__prototype-48.png",
+          "Width": 34,
+          "Height": 32,
+          "ForegroundPixels": 236
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-706__prototype-48.png",
+          "Width": 42,
+          "Height": 40,
+          "ForegroundPixels": 401
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-707",
+      "PrototypeId": "prototype-49",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-707__prototype-49.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-707__prototype-49.png",
+          "Width": 22,
+          "Height": 25,
+          "ForegroundPixels": 62
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-707__prototype-49.png",
+          "Width": 28,
+          "Height": 33,
+          "ForegroundPixels": 142
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-707__prototype-49.png",
+          "Width": 34,
+          "Height": 40,
+          "ForegroundPixels": 245
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-708",
+      "PrototypeId": "prototype-50",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-708__prototype-50.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-708__prototype-50.png",
+          "Width": 26,
+          "Height": 33,
+          "ForegroundPixels": 126
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-708__prototype-50.png",
+          "Width": 34,
+          "Height": 45,
+          "ForegroundPixels": 279
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-708__prototype-50.png",
+          "Width": 42,
+          "Height": 57,
+          "ForegroundPixels": 480
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-711.2",
+      "PrototypeId": "prototype-51",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-711.2__prototype-51.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-711.2__prototype-51.png",
+          "Width": 17,
+          "Height": 25,
+          "ForegroundPixels": 50
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-711.2__prototype-51.png",
+          "Width": 20,
+          "Height": 32,
+          "ForegroundPixels": 110
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-711.2__prototype-51.png",
+          "Width": 24,
+          "Height": 40,
+          "ForegroundPixels": 185
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-712",
+      "PrototypeId": "prototype-52",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-712__prototype-52.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-712__prototype-52.png",
+          "Width": 35,
+          "Height": 25,
+          "ForegroundPixels": 137
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-712__prototype-52.png",
+          "Width": 48,
+          "Height": 32,
+          "ForegroundPixels": 360
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-712__prototype-52.png",
+          "Width": 61,
+          "Height": 40,
+          "ForegroundPixels": 604
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-713",
+      "PrototypeId": "prototype-53",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-713__prototype-53.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-713__prototype-53.png",
+          "Width": 26,
+          "Height": 25,
+          "ForegroundPixels": 105
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-713__prototype-53.png",
+          "Width": 34,
+          "Height": 32,
+          "ForegroundPixels": 214
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-713__prototype-53.png",
+          "Width": 42,
+          "Height": 40,
+          "ForegroundPixels": 393
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-714",
+      "PrototypeId": "prototype-54",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-714__prototype-54.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-714__prototype-54.png",
+          "Width": 19,
+          "Height": 25,
+          "ForegroundPixels": 64
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-714__prototype-54.png",
+          "Width": 24,
+          "Height": 33,
+          "ForegroundPixels": 152
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-714__prototype-54.png",
+          "Width": 29,
+          "Height": 40,
+          "ForegroundPixels": 264
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-717",
+      "PrototypeId": "prototype-55",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-717__prototype-55.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-717__prototype-55.png",
+          "Width": 76,
+          "Height": 61,
+          "ForegroundPixels": 1473
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-717__prototype-55.png",
+          "Width": 109,
+          "Height": 86,
+          "ForegroundPixels": 3287
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-717__prototype-55.png",
+          "Width": 142,
+          "Height": 112,
+          "ForegroundPixels": 5841
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-718.2",
+      "PrototypeId": "prototype-56",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-718.2__prototype-56.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-718.2__prototype-56.png",
+          "Width": 30,
+          "Height": 45,
+          "ForegroundPixels": 396
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-718.2__prototype-56.png",
+          "Width": 40,
+          "Height": 63,
+          "ForegroundPixels": 902
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-718.2__prototype-56.png",
+          "Width": 50,
+          "Height": 81,
+          "ForegroundPixels": 1545
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-719",
+      "PrototypeId": "prototype-57",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-719__prototype-57.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-719__prototype-57.png",
+          "Width": 51,
+          "Height": 45,
+          "ForegroundPixels": 827
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-719__prototype-57.png",
+          "Width": 71,
+          "Height": 63,
+          "ForegroundPixels": 1827
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-719__prototype-57.png",
+          "Width": 92,
+          "Height": 81,
+          "ForegroundPixels": 3208
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-721",
+      "PrototypeId": "prototype-58",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-721__prototype-58.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-721__prototype-58.png",
+          "Width": 44,
+          "Height": 46,
+          "ForegroundPixels": 676
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-721__prototype-58.png",
+          "Width": 61,
+          "Height": 65,
+          "ForegroundPixels": 1498
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-721__prototype-58.png",
+          "Width": 78,
+          "Height": 83,
+          "ForegroundPixels": 2668
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-723",
+      "PrototypeId": "prototype-59",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-723__prototype-59.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-723__prototype-59.png",
+          "Width": 50,
+          "Height": 46,
+          "ForegroundPixels": 789
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-723__prototype-59.png",
+          "Width": 70,
+          "Height": 64,
+          "ForegroundPixels": 1776
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-723__prototype-59.png",
+          "Width": 90,
+          "Height": 82,
+          "ForegroundPixels": 3156
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-724",
+      "PrototypeId": "prototype-60",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-724__prototype-60.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-724__prototype-60.png",
+          "Width": 39,
+          "Height": 45,
+          "ForegroundPixels": 505
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-724__prototype-60.png",
+          "Width": 54,
+          "Height": 63,
+          "ForegroundPixels": 1144
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-724__prototype-60.png",
+          "Width": 68,
+          "Height": 81,
+          "ForegroundPixels": 2021
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-725",
+      "PrototypeId": "prototype-61",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-725__prototype-61.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-725__prototype-61.png",
+          "Width": 40,
+          "Height": 46,
+          "ForegroundPixels": 587
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-725__prototype-61.png",
+          "Width": 55,
+          "Height": 65,
+          "ForegroundPixels": 1333
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-725__prototype-61.png",
+          "Width": 71,
+          "Height": 83,
+          "ForegroundPixels": 2344
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-726",
+      "PrototypeId": "prototype-62",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-726__prototype-62.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-726__prototype-62.png",
+          "Width": 39,
+          "Height": 65,
+          "ForegroundPixels": 640
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-726__prototype-62.png",
+          "Width": 54,
+          "Height": 92,
+          "ForegroundPixels": 1440
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-726__prototype-62.png",
+          "Width": 69,
+          "Height": 120,
+          "ForegroundPixels": 2572
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-729",
+      "PrototypeId": "prototype-63",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-729__prototype-63.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-729__prototype-63.png",
+          "Width": 51,
+          "Height": 61,
+          "ForegroundPixels": 967
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-729__prototype-63.png",
+          "Width": 72,
+          "Height": 86,
+          "ForegroundPixels": 2186
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-729__prototype-63.png",
+          "Width": 93,
+          "Height": 112,
+          "ForegroundPixels": 3905
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-734",
+      "PrototypeId": "prototype-64",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-734__prototype-64.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-734__prototype-64.png",
+          "Width": 45,
+          "Height": 57,
+          "ForegroundPixels": 678
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-734__prototype-64.png",
+          "Width": 62,
+          "Height": 80,
+          "ForegroundPixels": 1499
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-734__prototype-64.png",
+          "Width": 80,
+          "Height": 104,
+          "ForegroundPixels": 2625
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-735",
+      "PrototypeId": "prototype-65",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-735__prototype-65.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-735__prototype-65.png",
+          "Width": 42,
+          "Height": 60,
+          "ForegroundPixels": 661
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-735__prototype-65.png",
+          "Width": 58,
+          "Height": 86,
+          "ForegroundPixels": 1477
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-735__prototype-65.png",
+          "Width": 75,
+          "Height": 111,
+          "ForegroundPixels": 2623
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-736",
+      "PrototypeId": "prototype-66",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-736__prototype-66.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-736__prototype-66.png",
+          "Width": 39,
+          "Height": 45,
+          "ForegroundPixels": 242
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-736__prototype-66.png",
+          "Width": 54,
+          "Height": 62,
+          "ForegroundPixels": 555
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-736__prototype-66.png",
+          "Width": 69,
+          "Height": 80,
+          "ForegroundPixels": 963
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-737",
+      "PrototypeId": "prototype-67",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-737__prototype-67.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-737__prototype-67.png",
+          "Width": 33,
+          "Height": 47,
+          "ForegroundPixels": 278
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-737__prototype-67.png",
+          "Width": 44,
+          "Height": 66,
+          "ForegroundPixels": 624
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-737__prototype-67.png",
+          "Width": 56,
+          "Height": 85,
+          "ForegroundPixels": 1100
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-738",
+      "PrototypeId": "prototype-68",
+      "PrototypeInstanceCount": 6,
+      "PreviewFileName": "shape-738__prototype-68.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-738__prototype-68.png",
+          "Width": 28,
+          "Height": 34,
+          "ForegroundPixels": 165
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-738__prototype-68.png",
+          "Width": 37,
+          "Height": 46,
+          "ForegroundPixels": 374
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-738__prototype-68.png",
+          "Width": 46,
+          "Height": 58,
+          "ForegroundPixels": 667
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-739",
+      "PrototypeId": "prototype-69",
+      "PrototypeInstanceCount": 5,
+      "PreviewFileName": "shape-739__prototype-69.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-739__prototype-69.png",
+          "Width": 46,
+          "Height": 34,
+          "ForegroundPixels": 335
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-739__prototype-69.png",
+          "Width": 64,
+          "Height": 46,
+          "ForegroundPixels": 764
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-739__prototype-69.png",
+          "Width": 82,
+          "Height": 58,
+          "ForegroundPixels": 1356
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-741",
+      "PrototypeId": "prototype-70",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-741__prototype-70.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-741__prototype-70.png",
+          "Width": 39,
+          "Height": 60,
+          "ForegroundPixels": 226
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-741__prototype-70.png",
+          "Width": 54,
+          "Height": 86,
+          "ForegroundPixels": 501
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-741__prototype-70.png",
+          "Width": 69,
+          "Height": 111,
+          "ForegroundPixels": 892
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-746",
+      "PrototypeId": "prototype-71",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-746__prototype-71.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-746__prototype-71.png",
+          "Width": 57,
+          "Height": 44,
+          "ForegroundPixels": 413
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-746__prototype-71.png",
+          "Width": 80,
+          "Height": 61,
+          "ForegroundPixels": 927
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-746__prototype-71.png",
+          "Width": 104,
+          "Height": 79,
+          "ForegroundPixels": 1652
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-749",
+      "PrototypeId": "prototype-72",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-749__prototype-72.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-749__prototype-72.png",
+          "Width": 32,
+          "Height": 34,
+          "ForegroundPixels": 226
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-749__prototype-72.png",
+          "Width": 44,
+          "Height": 46,
+          "ForegroundPixels": 508
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-749__prototype-72.png",
+          "Width": 55,
+          "Height": 58,
+          "ForegroundPixels": 893
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-750",
+      "PrototypeId": "prototype-73",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-750__prototype-73.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-750__prototype-73.png",
+          "Width": 43,
+          "Height": 44,
+          "ForegroundPixels": 269
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-750__prototype-73.png",
+          "Width": 60,
+          "Height": 62,
+          "ForegroundPixels": 605
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-750__prototype-73.png",
+          "Width": 76,
+          "Height": 79,
+          "ForegroundPixels": 1105
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-751",
+      "PrototypeId": "prototype-74",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-751__prototype-74.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-751__prototype-74.png",
+          "Width": 20,
+          "Height": 47,
+          "ForegroundPixels": 160
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-751__prototype-74.png",
+          "Width": 26,
+          "Height": 66,
+          "ForegroundPixels": 359
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-751__prototype-74.png",
+          "Width": 31,
+          "Height": 85,
+          "ForegroundPixels": 636
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-755",
+      "PrototypeId": "prototype-75",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-755__prototype-75.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-755__prototype-75.png",
+          "Width": 35,
+          "Height": 47,
+          "ForegroundPixels": 289
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-755__prototype-75.png",
+          "Width": 47,
+          "Height": 66,
+          "ForegroundPixels": 649
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-755__prototype-75.png",
+          "Width": 60,
+          "Height": 85,
+          "ForegroundPixels": 1140
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-756",
+      "PrototypeId": "prototype-76",
+      "PrototypeInstanceCount": 3,
+      "PreviewFileName": "shape-756__prototype-76.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-756__prototype-76.png",
+          "Width": 26,
+          "Height": 34,
+          "ForegroundPixels": 141
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-756__prototype-76.png",
+          "Width": 34,
+          "Height": 46,
+          "ForegroundPixels": 308
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-756__prototype-76.png",
+          "Width": 42,
+          "Height": 58,
+          "ForegroundPixels": 549
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-757",
+      "PrototypeId": "prototype-77",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-757__prototype-77.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-757__prototype-77.png",
+          "Width": 38,
+          "Height": 44,
+          "ForegroundPixels": 360
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-757__prototype-77.png",
+          "Width": 52,
+          "Height": 61,
+          "ForegroundPixels": 806
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-757__prototype-77.png",
+          "Width": 67,
+          "Height": 78,
+          "ForegroundPixels": 1422
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-767",
+      "PrototypeId": "prototype-78",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-767__prototype-78.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-767__prototype-78.png",
+          "Width": 38,
+          "Height": 44,
+          "ForegroundPixels": 258
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-767__prototype-78.png",
+          "Width": 53,
+          "Height": 61,
+          "ForegroundPixels": 582
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-767__prototype-78.png",
+          "Width": 67,
+          "Height": 78,
+          "ForegroundPixels": 1034
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-768.2",
+      "PrototypeId": "prototype-79",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-768.2__prototype-79.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-768.2__prototype-79.png",
+          "Width": 19,
+          "Height": 34,
+          "ForegroundPixels": 110
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-768.2__prototype-79.png",
+          "Width": 24,
+          "Height": 46,
+          "ForegroundPixels": 244
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-768.2__prototype-79.png",
+          "Width": 28,
+          "Height": 58,
+          "ForegroundPixels": 434
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-771",
+      "PrototypeId": "prototype-80",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-771__prototype-80.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-771__prototype-80.png",
+          "Width": 30,
+          "Height": 47,
+          "ForegroundPixels": 268
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-771__prototype-80.png",
+          "Width": 41,
+          "Height": 66,
+          "ForegroundPixels": 608
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-771__prototype-80.png",
+          "Width": 51,
+          "Height": 85,
+          "ForegroundPixels": 1066
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-772",
+      "PrototypeId": "prototype-81",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-772__prototype-81.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-772__prototype-81.png",
+          "Width": 36,
+          "Height": 46,
+          "ForegroundPixels": 201
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-772__prototype-81.png",
+          "Width": 49,
+          "Height": 65,
+          "ForegroundPixels": 446
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-772__prototype-81.png",
+          "Width": 63,
+          "Height": 83,
+          "ForegroundPixels": 779
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-773",
+      "PrototypeId": "prototype-82",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-773__prototype-82.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-773__prototype-82.png",
+          "Width": 36,
+          "Height": 44,
+          "ForegroundPixels": 221
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-773__prototype-82.png",
+          "Width": 49,
+          "Height": 61,
+          "ForegroundPixels": 492
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-773__prototype-82.png",
+          "Width": 62,
+          "Height": 78,
+          "ForegroundPixels": 883
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-774",
+      "PrototypeId": "prototype-83",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-774__prototype-83.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-774__prototype-83.png",
+          "Width": 32,
+          "Height": 34,
+          "ForegroundPixels": 219
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-774__prototype-83.png",
+          "Width": 43,
+          "Height": 46,
+          "ForegroundPixels": 497
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-774__prototype-83.png",
+          "Width": 54,
+          "Height": 58,
+          "ForegroundPixels": 886
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-777",
+      "PrototypeId": "prototype-84",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-777__prototype-84.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-777__prototype-84.png",
+          "Width": 41,
+          "Height": 45,
+          "ForegroundPixels": 323
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-777__prototype-84.png",
+          "Width": 57,
+          "Height": 63,
+          "ForegroundPixels": 712
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-777__prototype-84.png",
+          "Width": 73,
+          "Height": 81,
+          "ForegroundPixels": 1266
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-779",
+      "PrototypeId": "prototype-85",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-779__prototype-85.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-779__prototype-85.png",
+          "Width": 37,
+          "Height": 46,
+          "ForegroundPixels": 300
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-779__prototype-85.png",
+          "Width": 50,
+          "Height": 65,
+          "ForegroundPixels": 672
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-779__prototype-85.png",
+          "Width": 64,
+          "Height": 83,
+          "ForegroundPixels": 1190
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-786",
+      "PrototypeId": "prototype-86",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-786__prototype-86.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-786__prototype-86.png",
+          "Width": 32,
+          "Height": 35,
+          "ForegroundPixels": 170
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-786__prototype-86.png",
+          "Width": 43,
+          "Height": 47,
+          "ForegroundPixels": 376
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-786__prototype-86.png",
+          "Width": 54,
+          "Height": 60,
+          "ForegroundPixels": 656
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-789",
+      "PrototypeId": "prototype-87",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-789__prototype-87.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-789__prototype-87.png",
+          "Width": 25,
+          "Height": 43,
+          "ForegroundPixels": 157
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-789__prototype-87.png",
+          "Width": 33,
+          "Height": 59,
+          "ForegroundPixels": 368
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-789__prototype-87.png",
+          "Width": 40,
+          "Height": 76,
+          "ForegroundPixels": 667
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-790",
+      "PrototypeId": "prototype-88",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-790__prototype-88.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-790__prototype-88.png",
+          "Width": 32,
+          "Height": 44,
+          "ForegroundPixels": 258
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-790__prototype-88.png",
+          "Width": 44,
+          "Height": 61,
+          "ForegroundPixels": 586
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-790__prototype-88.png",
+          "Width": 55,
+          "Height": 78,
+          "ForegroundPixels": 1039
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-791",
+      "PrototypeId": "prototype-89",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-791__prototype-89.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-791__prototype-89.png",
+          "Width": 34,
+          "Height": 43,
+          "ForegroundPixels": 174
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-791__prototype-89.png",
+          "Width": 46,
+          "Height": 59,
+          "ForegroundPixels": 390
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-791__prototype-89.png",
+          "Width": 59,
+          "Height": 76,
+          "ForegroundPixels": 693
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-792",
+      "PrototypeId": "prototype-90",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-792__prototype-90.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-792__prototype-90.png",
+          "Width": 34,
+          "Height": 43,
+          "ForegroundPixels": 213
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-792__prototype-90.png",
+          "Width": 46,
+          "Height": 59,
+          "ForegroundPixels": 512
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-792__prototype-90.png",
+          "Width": 58,
+          "Height": 76,
+          "ForegroundPixels": 907
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-794",
+      "PrototypeId": "prototype-91",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-794__prototype-91.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-794__prototype-91.png",
+          "Width": 44,
+          "Height": 45,
+          "ForegroundPixels": 465
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-794__prototype-91.png",
+          "Width": 61,
+          "Height": 63,
+          "ForegroundPixels": 1043
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-794__prototype-91.png",
+          "Width": 78,
+          "Height": 81,
+          "ForegroundPixels": 1863
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-795.2",
+      "PrototypeId": "prototype-92",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-795.2__prototype-92.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-795.2__prototype-92.png",
+          "Width": 23,
+          "Height": 33,
+          "ForegroundPixels": 182
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-795.2__prototype-92.png",
+          "Width": 30,
+          "Height": 45,
+          "ForegroundPixels": 398
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-795.2__prototype-92.png",
+          "Width": 36,
+          "Height": 57,
+          "ForegroundPixels": 700
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-796",
+      "PrototypeId": "prototype-93",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-796__prototype-93.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-796__prototype-93.png",
+          "Width": 35,
+          "Height": 45,
+          "ForegroundPixels": 276
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-796__prototype-93.png",
+          "Width": 48,
+          "Height": 63,
+          "ForegroundPixels": 611
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-796__prototype-93.png",
+          "Width": 61,
+          "Height": 81,
+          "ForegroundPixels": 1088
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-797",
+      "PrototypeId": "prototype-94",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-797__prototype-94.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-797__prototype-94.png",
+          "Width": 32,
+          "Height": 34,
+          "ForegroundPixels": 306
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-797__prototype-94.png",
+          "Width": 44,
+          "Height": 46,
+          "ForegroundPixels": 672
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-797__prototype-94.png",
+          "Width": 55,
+          "Height": 58,
+          "ForegroundPixels": 1192
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-798",
+      "PrototypeId": "prototype-95",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-798__prototype-95.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-798__prototype-95.png",
+          "Width": 44,
+          "Height": 44,
+          "ForegroundPixels": 532
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-798__prototype-95.png",
+          "Width": 62,
+          "Height": 61,
+          "ForegroundPixels": 1167
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-798__prototype-95.png",
+          "Width": 79,
+          "Height": 78,
+          "ForegroundPixels": 2119
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-800",
+      "PrototypeId": "prototype-96",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-800__prototype-96.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-800__prototype-96.png",
+          "Width": 37,
+          "Height": 33,
+          "ForegroundPixels": 357
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-800__prototype-96.png",
+          "Width": 51,
+          "Height": 45,
+          "ForegroundPixels": 830
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-800__prototype-96.png",
+          "Width": 64,
+          "Height": 57,
+          "ForegroundPixels": 1449
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-801",
+      "PrototypeId": "prototype-97",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-801__prototype-97.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-801__prototype-97.png",
+          "Width": 30,
+          "Height": 34,
+          "ForegroundPixels": 215
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-801__prototype-97.png",
+          "Width": 40,
+          "Height": 46,
+          "ForegroundPixels": 479
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-801__prototype-97.png",
+          "Width": 50,
+          "Height": 58,
+          "ForegroundPixels": 851
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-802",
+      "PrototypeId": "prototype-98",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-802__prototype-98.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-802__prototype-98.png",
+          "Width": 37,
+          "Height": 46,
+          "ForegroundPixels": 452
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-802__prototype-98.png",
+          "Width": 50,
+          "Height": 65,
+          "ForegroundPixels": 991
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-802__prototype-98.png",
+          "Width": 64,
+          "Height": 83,
+          "ForegroundPixels": 1772
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-803",
+      "PrototypeId": "prototype-99",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-803__prototype-99.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-803__prototype-99.png",
+          "Width": 30,
+          "Height": 34,
+          "ForegroundPixels": 257
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-803__prototype-99.png",
+          "Width": 40,
+          "Height": 46,
+          "ForegroundPixels": 583
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-803__prototype-99.png",
+          "Width": 50,
+          "Height": 58,
+          "ForegroundPixels": 1046
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-807",
+      "PrototypeId": "prototype-100",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-807__prototype-100.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-807__prototype-100.png",
+          "Width": 24,
+          "Height": 43,
+          "ForegroundPixels": 155
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-807__prototype-100.png",
+          "Width": 31,
+          "Height": 59,
+          "ForegroundPixels": 403
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-807__prototype-100.png",
+          "Width": 38,
+          "Height": 76,
+          "ForegroundPixels": 713
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-808",
+      "PrototypeId": "prototype-101",
+      "PrototypeInstanceCount": 2,
+      "PreviewFileName": "shape-808__prototype-101.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-808__prototype-101.png",
+          "Width": 31,
+          "Height": 44,
+          "ForegroundPixels": 272
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-808__prototype-101.png",
+          "Width": 41,
+          "Height": 61,
+          "ForegroundPixels": 596
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-808__prototype-101.png",
+          "Width": 52,
+          "Height": 78,
+          "ForegroundPixels": 1066
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-809",
+      "PrototypeId": "prototype-102",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-809__prototype-102.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-809__prototype-102.png",
+          "Width": 29,
+          "Height": 43,
+          "ForegroundPixels": 216
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-809__prototype-102.png",
+          "Width": 39,
+          "Height": 60,
+          "ForegroundPixels": 476
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-809__prototype-102.png",
+          "Width": 49,
+          "Height": 77,
+          "ForegroundPixels": 843
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-810",
+      "PrototypeId": "prototype-103",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-810__prototype-103.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-810__prototype-103.png",
+          "Width": 30,
+          "Height": 43,
+          "ForegroundPixels": 217
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-810__prototype-103.png",
+          "Width": 40,
+          "Height": 59,
+          "ForegroundPixels": 497
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-810__prototype-103.png",
+          "Width": 50,
+          "Height": 76,
+          "ForegroundPixels": 878
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-811",
+      "PrototypeId": "prototype-104",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-811__prototype-104.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-811__prototype-104.png",
+          "Width": 22,
+          "Height": 12,
+          "ForegroundPixels": 36
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-811__prototype-104.png",
+          "Width": 29,
+          "Height": 14,
+          "ForegroundPixels": 72
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-811__prototype-104.png",
+          "Width": 35,
+          "Height": 15,
+          "ForegroundPixels": 143
+        }
+      ]
+    },
+    {
+      "ShapeId": "shape-812",
+      "PrototypeId": "prototype-105",
+      "PrototypeInstanceCount": 1,
+      "PreviewFileName": "shape-812__prototype-105.png",
+      "Variants": [
+        {
+          "Interline": 20,
+          "FileName": ".scales/20/shape-812__prototype-105.png",
+          "Width": 31,
+          "Height": 43,
+          "ForegroundPixels": 225
+        },
+        {
+          "Interline": 30,
+          "FileName": "shape-812__prototype-105.png",
+          "Width": 42,
+          "Height": 59,
+          "ForegroundPixels": 513
+        },
+        {
+          "Interline": 40,
+          "FileName": ".scales/40/shape-812__prototype-105.png",
+          "Width": 52,
+          "Height": 76,
+          "ForegroundPixels": 907
+        }
+      ]
+    }
+  ]
+}

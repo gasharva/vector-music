@@ -1,0 +1,873 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audiveris multi-scale glyph report</title>
+<style>
+body { font-family: system-ui, sans-serif; margin: 24px; color: #222; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border-bottom: 1px solid #ddd; padding: 10px 12px; text-align: left; vertical-align: middle; }
+th { position: sticky; top: 0; background: white; z-index: 1; }
+tr:hover { background: #f7f7f7; }
+.glyph { width: 150px; height: 110px; object-fit: contain; image-rendering: pixelated; border: 1px solid #eee; background: white; }
+.score { font-variant-numeric: tabular-nums; }
+.best { font-weight: 800; }
+.high { color: #147a35; }
+.medium { color: #9a6400; }
+.low { color: #9b2c2c; }
+.meta { color: #666; margin-bottom: 18px; }
+.variant { white-space: nowrap; line-height: 1.55; }
+code { white-space: nowrap; }
+</style>
+</head>
+<body>
+<h1>Audiveris multi-scale glyph report</h1>
+<p class="meta">One representative contour per ShapePrototype. Each contour is rasterized independently from vector geometry at interline 20, 30 and 40 px. The preview image is 30px. Rows are sorted by the best confidence across the three scales.</p>
+<table>
+<thead><tr><th>Prototype</th><th>Instances</th><th>Contour</th><th>Winner</th><th>Confidence</th><th>Shape</th></tr></thead>
+<tbody>
+<tr>
+<td><code>prototype-3</code></td>
+<td>5</td>
+<td><img class="glyph" src="shape-4__prototype-3.png" alt="shape-4"></td>
+<td><div class="variant"><strong>G_CLEF</strong> · 20</div><div class="variant">G_CLEF · 30</div><div class="variant">G_CLEF · 40</div></td>
+<td><div class="variant score high best">99.9 % · 20</div><div class="variant score high">99.9 % · 30</div><div class="variant score high">99.9 % · 40</div></td>
+<td><code>shape-4</code></td>
+</tr>
+<tr>
+<td><code>prototype-17</code></td>
+<td>7</td>
+<td><img class="glyph" src="shape-117__prototype-17.png" alt="shape-117"></td>
+<td><div class="variant">NATURAL · 20</div><div class="variant"><strong>NATURAL</strong> · 30</div><div class="variant">NATURAL · 40</div></td>
+<td><div class="variant score high">99.9 % · 20</div><div class="variant score high best">99.9 % · 30</div><div class="variant score high">99.8 % · 40</div></td>
+<td><code>shape-117</code></td>
+</tr>
+<tr>
+<td><code>prototype-8</code></td>
+<td>11</td>
+<td><img class="glyph" src="shape-15__prototype-8.png" alt="shape-15"></td>
+<td><div class="variant">FLAT · 20</div><div class="variant"><strong>FLAT</strong> · 30</div><div class="variant">FLAT · 40</div></td>
+<td><div class="variant score high">99.5 % · 20</div><div class="variant score high best">99.6 % · 30</div><div class="variant score high">99.6 % · 40</div></td>
+<td><code>shape-15</code></td>
+</tr>
+<tr>
+<td><code>prototype-34</code></td>
+<td>5</td>
+<td><img class="glyph" src="shape-334__prototype-34.png" alt="shape-334"></td>
+<td><div class="variant"><strong>QUARTER_REST</strong> · 20</div><div class="variant">QUARTER_REST · 30</div><div class="variant">QUARTER_REST · 40</div></td>
+<td><div class="variant score high best">99.5 % · 20</div><div class="variant score high">99.2 % · 30</div><div class="variant score high">99.3 % · 40</div></td>
+<td><code>shape-334</code></td>
+</tr>
+<tr>
+<td><code>prototype-22</code></td>
+<td>24</td>
+<td><img class="glyph" src="shape-166__prototype-22.png" alt="shape-166"></td>
+<td><div class="variant">SHARP · 20</div><div class="variant"><strong>SHARP</strong> · 30</div><div class="variant">SHARP · 40</div></td>
+<td><div class="variant score high">98.3 % · 20</div><div class="variant score high best">99.5 % · 30</div><div class="variant score high">99.2 % · 40</div></td>
+<td><code>shape-166</code></td>
+</tr>
+<tr>
+<td><code>prototype-58</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-721__prototype-58.png" alt="shape-721"></td>
+<td><div class="variant"><strong>TIME_SIX</strong> · 20</div><div class="variant">TIME_SIX · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score high best">99.5 % · 20</div><div class="variant score high">98.9 % · 30</div><div class="variant score high">97.9 % · 40</div></td>
+<td><code>shape-721</code></td>
+</tr>
+<tr>
+<td><code>prototype-6</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-7__prototype-6.png" alt="shape-7"></td>
+<td><div class="variant"><strong>TIME_THREE</strong> · 20</div><div class="variant">TIME_THREE · 30</div><div class="variant">TIME_THREE · 40</div></td>
+<td><div class="variant score high best">99.3 % · 20</div><div class="variant score high">98.8 % · 30</div><div class="variant score high">99.0 % · 40</div></td>
+<td><code>shape-7</code></td>
+</tr>
+<tr>
+<td><code>prototype-5</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-6__prototype-5.png" alt="shape-6"></td>
+<td><div class="variant">TIME_FOUR · 20</div><div class="variant"><strong>TIME_FOUR</strong> · 30</div><div class="variant">TIME_FOUR · 40</div></td>
+<td><div class="variant score high">96.4 % · 20</div><div class="variant score high best">99.1 % · 30</div><div class="variant score high">97.6 % · 40</div></td>
+<td><code>shape-6</code></td>
+</tr>
+<tr>
+<td><code>prototype-94</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-797__prototype-94.png" alt="shape-797"></td>
+<td><div class="variant">TIME_SIX · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score high">97.2 % · 20</div><div class="variant score high best">98.9 % · 30</div><div class="variant score high">98.4 % · 40</div></td>
+<td><code>shape-797</code></td>
+</tr>
+<tr>
+<td><code>prototype-32</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-305.1__prototype-32.png" alt="shape-305.1"></td>
+<td><div class="variant">DYNAMICS_F · 20</div><div class="variant"><strong>DYNAMICS_F</strong> · 30</div><div class="variant">DYNAMICS_F · 40</div></td>
+<td><div class="variant score high">98.6 % · 20</div><div class="variant score high best">98.8 % · 30</div><div class="variant score high">98.5 % · 40</div></td>
+<td><code>shape-305.1</code></td>
+</tr>
+<tr>
+<td><code>prototype-45</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-698__prototype-45.png" alt="shape-698"></td>
+<td><div class="variant"><strong>DIGIT_2</strong> · 20</div><div class="variant">DIGIT_2 · 30</div><div class="variant">DIGIT_2 · 40</div></td>
+<td><div class="variant score high best">98.8 % · 20</div><div class="variant score high">94.8 % · 30</div><div class="variant score high">98.3 % · 40</div></td>
+<td><code>shape-698</code></td>
+</tr>
+<tr>
+<td><code>prototype-51</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-711.2__prototype-51.png" alt="shape-711.2"></td>
+<td><div class="variant">DOT_set · 20</div><div class="variant"><strong>DIGIT_1</strong> · 30</div><div class="variant">DIGIT_1 · 40</div></td>
+<td><div class="variant score low">8.3 % · 20</div><div class="variant score high best">97.9 % · 30</div><div class="variant score high">96.2 % · 40</div></td>
+<td><code>shape-711.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-20</code></td>
+<td>8</td>
+<td><img class="glyph" src="shape-126.2__prototype-20.png" alt="shape-126.2"></td>
+<td><div class="variant">PEDAL_MARK · 20</div><div class="variant"><strong>PEDAL_MARK</strong> · 30</div><div class="variant">PEDAL_MARK · 40</div></td>
+<td><div class="variant score high">96.7 % · 20</div><div class="variant score high best">97.6 % · 30</div><div class="variant score high">97.5 % · 40</div></td>
+<td><code>shape-126.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-57</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-719__prototype-57.png" alt="shape-719"></td>
+<td><div class="variant">TIME_SIX · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score high">97.0 % · 20</div><div class="variant score high best">97.2 % · 30</div><div class="variant score high">95.6 % · 40</div></td>
+<td><code>shape-719</code></td>
+</tr>
+<tr>
+<td><code>prototype-52</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-712__prototype-52.png" alt="shape-712"></td>
+<td><div class="variant"><strong>PLUCK_M</strong> · 20</div><div class="variant">PLUCK_M · 30</div><div class="variant">PLUCK_M · 40</div></td>
+<td><div class="variant score high best">97.0 % · 20</div><div class="variant score high">84.2 % · 30</div><div class="variant score high">91.8 % · 40</div></td>
+<td><code>shape-712</code></td>
+</tr>
+<tr>
+<td><code>prototype-30</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-233__prototype-30.png" alt="shape-233"></td>
+<td><div class="variant">TIME_SIX · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score medium">68.6 % · 20</div><div class="variant score high best">95.1 % · 30</div><div class="variant score medium">75.9 % · 40</div></td>
+<td><code>shape-233</code></td>
+</tr>
+<tr>
+<td><code>prototype-38</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-459__prototype-38.png" alt="shape-459"></td>
+<td><div class="variant">OTTAVA · 20</div><div class="variant">OTTAVA · 30</div><div class="variant"><strong>OTTAVA</strong> · 40</div></td>
+<td><div class="variant score high">87.9 % · 20</div><div class="variant score high">92.5 % · 30</div><div class="variant score high best">95.0 % · 40</div></td>
+<td><code>shape-459</code></td>
+</tr>
+<tr>
+<td><code>prototype-21</code></td>
+<td>7</td>
+<td><img class="glyph" src="shape-130__prototype-21.png" alt="shape-130"></td>
+<td><div class="variant">FLAG_1 · 20</div><div class="variant">FLAG_1 · 30</div><div class="variant"><strong>FLAG_1</strong> · 40</div></td>
+<td><div class="variant score high">89.3 % · 20</div><div class="variant score high">90.4 % · 30</div><div class="variant score high best">93.9 % · 40</div></td>
+<td><code>shape-130</code></td>
+</tr>
+<tr>
+<td><code>prototype-15</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-41__prototype-15.png" alt="shape-41"></td>
+<td><div class="variant">DYNAMICS_PP · 20</div><div class="variant">DYNAMICS_PP · 30</div><div class="variant"><strong>DYNAMICS_PP</strong> · 40</div></td>
+<td><div class="variant score high">89.6 % · 20</div><div class="variant score high">93.2 % · 30</div><div class="variant score high best">93.6 % · 40</div></td>
+<td><code>shape-41</code></td>
+</tr>
+<tr>
+<td><code>prototype-104</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-811__prototype-104.png" alt="shape-811"></td>
+<td><div class="variant">STACCATISSIMO_BELOW · 20</div><div class="variant"><strong>TENUTO</strong> · 30</div><div class="variant">TENUTO · 40</div></td>
+<td><div class="variant score low">6.7 % · 20</div><div class="variant score high best">93.3 % · 30</div><div class="variant score medium">57.5 % · 40</div></td>
+<td><code>shape-811</code></td>
+</tr>
+<tr>
+<td><code>prototype-105</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-812__prototype-105.png" alt="shape-812"></td>
+<td><div class="variant">DIGIT_2 · 20</div><div class="variant"><strong>DIGIT_2</strong> · 30</div><div class="variant">DIGIT_2 · 40</div></td>
+<td><div class="variant score medium">71.3 % · 20</div><div class="variant score high best">91.5 % · 30</div><div class="variant score high">83.5 % · 40</div></td>
+<td><code>shape-812</code></td>
+</tr>
+<tr>
+<td><code>prototype-1</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-1__prototype-1.png" alt="shape-1"></td>
+<td><div class="variant">DIGIT_5 · 20</div><div class="variant"><strong>DIGIT_5</strong> · 30</div><div class="variant">DIGIT_5 · 40</div></td>
+<td><div class="variant score high">82.5 % · 20</div><div class="variant score high best">90.5 % · 30</div><div class="variant score medium">78.2 % · 40</div></td>
+<td><code>shape-1</code></td>
+</tr>
+<tr>
+<td><code>prototype-37</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-422__prototype-37.png" alt="shape-422"></td>
+<td><div class="variant"><strong>FLAG_2</strong> · 20</div><div class="variant">FLAG_2 · 30</div><div class="variant">FLAG_2 · 40</div></td>
+<td><div class="variant score high best">90.3 % · 20</div><div class="variant score medium">79.1 % · 30</div><div class="variant score high">85.7 % · 40</div></td>
+<td><code>shape-422</code></td>
+</tr>
+<tr>
+<td><code>prototype-76</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-756__prototype-76.png" alt="shape-756"></td>
+<td><div class="variant"><strong>TUPLET_THREE</strong> · 20</div><div class="variant">TUPLET_THREE · 30</div><div class="variant">TUPLET_THREE · 40</div></td>
+<td><div class="variant score high best">88.2 % · 20</div><div class="variant score high">82.2 % · 30</div><div class="variant score high">85.3 % · 40</div></td>
+<td><code>shape-756</code></td>
+</tr>
+<tr>
+<td><code>prototype-42</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-695__prototype-42.png" alt="shape-695"></td>
+<td><div class="variant">DIGIT_1 · 20</div><div class="variant">DIGIT_1 · 30</div><div class="variant"><strong>DIGIT_1</strong> · 40</div></td>
+<td><div class="variant score medium">57.0 % · 20</div><div class="variant score high">80.5 % · 30</div><div class="variant score high best">87.8 % · 40</div></td>
+<td><code>shape-695</code></td>
+</tr>
+<tr>
+<td><code>prototype-83</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-774__prototype-83.png" alt="shape-774"></td>
+<td><div class="variant">PLUCK_A · 20</div><div class="variant"><strong>PLUCK_A</strong> · 30</div><div class="variant">PLUCK_A · 40</div></td>
+<td><div class="variant score high">83.3 % · 20</div><div class="variant score high best">87.7 % · 30</div><div class="variant score high">86.4 % · 40</div></td>
+<td><code>shape-774</code></td>
+</tr>
+<tr>
+<td><code>prototype-96</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-800__prototype-96.png" alt="shape-800"></td>
+<td><div class="variant">TIME_SIX · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score medium">69.0 % · 20</div><div class="variant score high best">86.8 % · 30</div><div class="variant score high">80.3 % · 40</div></td>
+<td><code>shape-800</code></td>
+</tr>
+<tr>
+<td><code>prototype-103</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-810__prototype-103.png" alt="shape-810"></td>
+<td><div class="variant"><strong>DIGIT_5</strong> · 20</div><div class="variant">DIGIT_5 · 30</div><div class="variant">DIGIT_5 · 40</div></td>
+<td><div class="variant score high best">86.1 % · 20</div><div class="variant score high">81.9 % · 30</div><div class="variant score medium">61.4 % · 40</div></td>
+<td><code>shape-810</code></td>
+</tr>
+<tr>
+<td><code>prototype-23</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-173__prototype-23.png" alt="shape-173"></td>
+<td><div class="variant">EIGHTH_REST · 20</div><div class="variant">EIGHTH_REST · 30</div><div class="variant"><strong>EIGHTH_REST</strong> · 40</div></td>
+<td><div class="variant score medium">64.3 % · 20</div><div class="variant score high">84.9 % · 30</div><div class="variant score high best">85.6 % · 40</div></td>
+<td><code>shape-173</code></td>
+</tr>
+<tr>
+<td><code>prototype-16</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-62__prototype-16.png" alt="shape-62"></td>
+<td><div class="variant">TUPLET_THREE · 20</div><div class="variant">TUPLET_THREE · 30</div><div class="variant"><strong>TUPLET_THREE</strong> · 40</div></td>
+<td><div class="variant score high">83.3 % · 20</div><div class="variant score high">84.7 % · 30</div><div class="variant score high best">85.5 % · 40</div></td>
+<td><code>shape-62</code></td>
+</tr>
+<tr>
+<td><code>prototype-100</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-807__prototype-100.png" alt="shape-807"></td>
+<td><div class="variant">DIGIT_1 · 20</div><div class="variant"><strong>DIGIT_1</strong> · 30</div><div class="variant">DIGIT_1 · 40</div></td>
+<td><div class="variant score medium">74.8 % · 20</div><div class="variant score high best">85.3 % · 30</div><div class="variant score high">84.5 % · 40</div></td>
+<td><code>shape-807</code></td>
+</tr>
+<tr>
+<td><code>prototype-92</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-795.2__prototype-92.png" alt="shape-795.2"></td>
+<td><div class="variant">DIGIT_1 · 20</div><div class="variant">DIGIT_1 · 30</div><div class="variant"><strong>DIGIT_1</strong> · 40</div></td>
+<td><div class="variant score medium">71.1 % · 20</div><div class="variant score medium">76.8 % · 30</div><div class="variant score high best">85.1 % · 40</div></td>
+<td><code>shape-795.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-69</code></td>
+<td>5</td>
+<td><img class="glyph" src="shape-739__prototype-69.png" alt="shape-739"></td>
+<td><div class="variant">PLUCK_M · 20</div><div class="variant">PLUCK_M · 30</div><div class="variant"><strong>PLUCK_M</strong> · 40</div></td>
+<td><div class="variant score medium">72.2 % · 20</div><div class="variant score medium">77.3 % · 30</div><div class="variant score high best">80.5 % · 40</div></td>
+<td><code>shape-739</code></td>
+</tr>
+<tr>
+<td><code>prototype-13</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-39__prototype-13.png" alt="shape-39"></td>
+<td><div class="variant">EIGHTH_REST · 20</div><div class="variant"><strong>EIGHTH_REST</strong> · 30</div><div class="variant">EIGHTH_REST · 40</div></td>
+<td><div class="variant score medium">65.9 % · 20</div><div class="variant score medium best">79.4 % · 30</div><div class="variant score medium">72.9 % · 40</div></td>
+<td><code>shape-39</code></td>
+</tr>
+<tr>
+<td><code>prototype-102</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-809__prototype-102.png" alt="shape-809"></td>
+<td><div class="variant"><strong>TUPLET_THREE</strong> · 20</div><div class="variant">TUPLET_THREE · 30</div><div class="variant">TUPLET_THREE · 40</div></td>
+<td><div class="variant score medium best">77.9 % · 20</div><div class="variant score medium">70.0 % · 30</div><div class="variant score medium">69.3 % · 40</div></td>
+<td><code>shape-809</code></td>
+</tr>
+<tr>
+<td><code>prototype-59</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-723__prototype-59.png" alt="shape-723"></td>
+<td><div class="variant">TIME_SIX · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score medium">55.4 % · 20</div><div class="variant score medium best">74.7 % · 30</div><div class="variant score medium">70.0 % · 40</div></td>
+<td><code>shape-723</code></td>
+</tr>
+<tr>
+<td><code>prototype-87</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-789__prototype-87.png" alt="shape-789"></td>
+<td><div class="variant"><strong>DIGIT_1</strong> · 20</div><div class="variant">DIGIT_1 · 30</div><div class="variant">DIGIT_1 · 40</div></td>
+<td><div class="variant score medium best">74.6 % · 20</div><div class="variant score medium">65.0 % · 30</div><div class="variant score medium">72.6 % · 40</div></td>
+<td><code>shape-789</code></td>
+</tr>
+<tr>
+<td><code>prototype-31</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-234__prototype-31.png" alt="shape-234"></td>
+<td><div class="variant">TIME_SIX · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score low">38.4 % · 20</div><div class="variant score medium best">73.5 % · 30</div><div class="variant score low">43.0 % · 40</div></td>
+<td><code>shape-234</code></td>
+</tr>
+<tr>
+<td><code>prototype-47</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-705__prototype-47.png" alt="shape-705"></td>
+<td><div class="variant">DIGIT_4 · 20</div><div class="variant"><strong>PLUCK_A</strong> · 30</div><div class="variant">PLUCK_A · 40</div></td>
+<td><div class="variant score low">21.7 % · 20</div><div class="variant score medium best">72.9 % · 30</div><div class="variant score medium">70.9 % · 40</div></td>
+<td><code>shape-705</code></td>
+</tr>
+<tr>
+<td><code>prototype-62</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-726__prototype-62.png" alt="shape-726"></td>
+<td><div class="variant"><strong>DYNAMICS_F</strong> · 20</div><div class="variant">DYNAMICS_F · 30</div><div class="variant">DYNAMICS_F · 40</div></td>
+<td><div class="variant score medium best">70.7 % · 20</div><div class="variant score medium">67.4 % · 30</div><div class="variant score medium">69.0 % · 40</div></td>
+<td><code>shape-726</code></td>
+</tr>
+<tr>
+<td><code>prototype-2</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-2__prototype-2.png" alt="shape-2"></td>
+<td><div class="variant"><strong>CLUTTER</strong> · 20</div><div class="variant">CLUTTER · 30</div><div class="variant">CLUTTER · 40</div></td>
+<td><div class="variant score medium best">69.8 % · 20</div><div class="variant score medium">69.8 % · 30</div><div class="variant score medium">69.8 % · 40</div></td>
+<td><code>shape-2</code></td>
+</tr>
+<tr>
+<td><code>prototype-71</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-746__prototype-71.png" alt="shape-746"></td>
+<td><div class="variant">TR · 20</div><div class="variant"><strong>TR</strong> · 30</div><div class="variant">TR · 40</div></td>
+<td><div class="variant score medium">59.2 % · 20</div><div class="variant score medium best">66.7 % · 30</div><div class="variant score medium">57.6 % · 40</div></td>
+<td><code>shape-746</code></td>
+</tr>
+<tr>
+<td><code>prototype-70</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-741__prototype-70.png" alt="shape-741"></td>
+<td><div class="variant"><strong>FLAG_1_DOWN</strong> · 20</div><div class="variant">FLAG_1_DOWN · 30</div><div class="variant">FLAG_1_DOWN · 40</div></td>
+<td><div class="variant score medium best">66.4 % · 20</div><div class="variant score medium">58.1 % · 30</div><div class="variant score medium">59.3 % · 40</div></td>
+<td><code>shape-741</code></td>
+</tr>
+<tr>
+<td><code>prototype-101</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-808__prototype-101.png" alt="shape-808"></td>
+<td><div class="variant">FERMATA_BELOW · 20</div><div class="variant"><strong>FERMATA_BELOW</strong> · 30</div><div class="variant">FERMATA_BELOW · 40</div></td>
+<td><div class="variant score medium">57.8 % · 20</div><div class="variant score medium best">66.3 % · 30</div><div class="variant score medium">63.1 % · 40</div></td>
+<td><code>shape-808</code></td>
+</tr>
+<tr>
+<td><code>prototype-35</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-350__prototype-35.png" alt="shape-350"></td>
+<td><div class="variant">PLUCK_M · 20</div><div class="variant"><strong>PLUCK_M</strong> · 30</div><div class="variant">PLUCK_M · 40</div></td>
+<td><div class="variant score medium">63.9 % · 20</div><div class="variant score medium best">66.2 % · 30</div><div class="variant score low">48.9 % · 40</div></td>
+<td><code>shape-350</code></td>
+</tr>
+<tr>
+<td><code>prototype-56</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-718.2__prototype-56.png" alt="shape-718.2"></td>
+<td><div class="variant">DIGIT_1 · 20</div><div class="variant"><strong>DIGIT_1</strong> · 30</div><div class="variant">DIGIT_1 · 40</div></td>
+<td><div class="variant score medium">62.1 % · 20</div><div class="variant score medium best">64.5 % · 30</div><div class="variant score medium">60.0 % · 40</div></td>
+<td><code>shape-718.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-73</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-750__prototype-73.png" alt="shape-750"></td>
+<td><div class="variant"><strong>MARCATO</strong> · 20</div><div class="variant">MARCATO · 30</div><div class="variant">MARCATO · 40</div></td>
+<td><div class="variant score medium best">62.6 % · 20</div><div class="variant score medium">55.0 % · 30</div><div class="variant score medium">52.8 % · 40</div></td>
+<td><code>shape-750</code></td>
+</tr>
+<tr>
+<td><code>prototype-43</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-696__prototype-43.png" alt="shape-696"></td>
+<td><div class="variant">TUPLET_SIX · 20</div><div class="variant">TUPLET_SIX · 30</div><div class="variant"><strong>FERMATA_BELOW</strong> · 40</div></td>
+<td><div class="variant score medium">53.8 % · 20</div><div class="variant score low">43.6 % · 30</div><div class="variant score medium best">60.8 % · 40</div></td>
+<td><code>shape-696</code></td>
+</tr>
+<tr>
+<td><code>prototype-9</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-30__prototype-9.png" alt="shape-30"></td>
+<td><div class="variant"><strong>DYNAMICS_P</strong> · 20</div><div class="variant">DYNAMICS_P · 30</div><div class="variant">DYNAMICS_P · 40</div></td>
+<td><div class="variant score medium best">58.9 % · 20</div><div class="variant score low">46.9 % · 30</div><div class="variant score low">36.8 % · 40</div></td>
+<td><code>shape-30</code></td>
+</tr>
+<tr>
+<td><code>prototype-49</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-707__prototype-49.png" alt="shape-707"></td>
+<td><div class="variant"><strong>CLUTTER</strong> · 20</div><div class="variant">COMMON_TIME · 30</div><div class="variant">COMMON_TIME · 40</div></td>
+<td><div class="variant score medium best">58.6 % · 20</div><div class="variant score low">29.3 % · 30</div><div class="variant score low">32.7 % · 40</div></td>
+<td><code>shape-707</code></td>
+</tr>
+<tr>
+<td><code>prototype-79</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-768.2__prototype-79.png" alt="shape-768.2"></td>
+<td><div class="variant"><strong>DIGIT_1</strong> · 20</div><div class="variant">DIGIT_1 · 30</div><div class="variant">DIGIT_1 · 40</div></td>
+<td><div class="variant score medium best">57.4 % · 20</div><div class="variant score medium">51.2 % · 30</div><div class="variant score low">41.4 % · 40</div></td>
+<td><code>shape-768.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-4</code></td>
+<td>5</td>
+<td><img class="glyph" src="shape-5.1__prototype-4.png" alt="shape-5.1"></td>
+<td><div class="variant">F_CLEF · 20</div><div class="variant">F_CLEF · 30</div><div class="variant"><strong>F_CLEF</strong> · 40</div></td>
+<td><div class="variant score low">42.9 % · 20</div><div class="variant score medium">56.8 % · 30</div><div class="variant score medium best">57.1 % · 40</div></td>
+<td><code>shape-5.1</code></td>
+</tr>
+<tr>
+<td><code>prototype-14</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-40__prototype-14.png" alt="shape-40"></td>
+<td><div class="variant">PLUCK_A · 20</div><div class="variant">PLUCK_A · 30</div><div class="variant"><strong>PLUCK_A</strong> · 40</div></td>
+<td><div class="variant score low">41.9 % · 20</div><div class="variant score low">45.3 % · 30</div><div class="variant score medium best">55.6 % · 40</div></td>
+<td><code>shape-40</code></td>
+</tr>
+<tr>
+<td><code>prototype-25</code></td>
+<td>5</td>
+<td><img class="glyph" src="shape-223__prototype-25.png" alt="shape-223"></td>
+<td><div class="variant"><strong>CLUTTER</strong> · 20</div><div class="variant">PLUCK_A · 30</div><div class="variant">PLUCK_A · 40</div></td>
+<td><div class="variant score medium best">53.0 % · 20</div><div class="variant score low">14.6 % · 30</div><div class="variant score low">15.5 % · 40</div></td>
+<td><code>shape-223</code></td>
+</tr>
+<tr>
+<td><code>prototype-12</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-37__prototype-12.png" alt="shape-37"></td>
+<td><div class="variant"><strong>EIGHTH_set</strong> · 20</div><div class="variant">EIGHTH_set · 30</div><div class="variant">EIGHTH_set · 40</div></td>
+<td><div class="variant score medium best">52.8 % · 20</div><div class="variant score medium">50.2 % · 30</div><div class="variant score medium">50.4 % · 40</div></td>
+<td><code>shape-37</code></td>
+</tr>
+<tr>
+<td><code>prototype-80</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-771__prototype-80.png" alt="shape-771"></td>
+<td><div class="variant">DYNAMICS_P · 20</div><div class="variant"><strong>DYNAMICS_P</strong> · 30</div><div class="variant">DYNAMICS_P · 40</div></td>
+<td><div class="variant score low">35.8 % · 20</div><div class="variant score medium best">51.8 % · 30</div><div class="variant score low">40.3 % · 40</div></td>
+<td><code>shape-771</code></td>
+</tr>
+<tr>
+<td><code>prototype-90</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-792__prototype-90.png" alt="shape-792"></td>
+<td><div class="variant"><strong>TUPLET_THREE</strong> · 20</div><div class="variant">TUPLET_THREE · 30</div><div class="variant">TUPLET_THREE · 40</div></td>
+<td><div class="variant score medium best">51.5 % · 20</div><div class="variant score low">27.4 % · 30</div><div class="variant score low">14.8 % · 40</div></td>
+<td><code>shape-792</code></td>
+</tr>
+<tr>
+<td><code>prototype-95</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-798__prototype-95.png" alt="shape-798"></td>
+<td><div class="variant"><strong>TIME_SIX</strong> · 20</div><div class="variant">TIME_SIX · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score medium best">51.2 % · 20</div><div class="variant score low">31.1 % · 30</div><div class="variant score low">17.8 % · 40</div></td>
+<td><code>shape-798</code></td>
+</tr>
+<tr>
+<td><code>prototype-24</code></td>
+<td>4</td>
+<td><img class="glyph" src="shape-221__prototype-24.png" alt="shape-221"></td>
+<td><div class="variant">PLUCK_P · 20</div><div class="variant">PLUCK_P · 30</div><div class="variant"><strong>PLUCK_P</strong> · 40</div></td>
+<td><div class="variant score low">34.1 % · 20</div><div class="variant score low">34.6 % · 30</div><div class="variant score medium best">51.1 % · 40</div></td>
+<td><code>shape-221</code></td>
+</tr>
+<tr>
+<td><code>prototype-41</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-691__prototype-41.png" alt="shape-691"></td>
+<td><div class="variant">FERMATA_BELOW · 20</div><div class="variant"><strong>FERMATA_BELOW</strong> · 30</div><div class="variant">COMMON_TIME · 40</div></td>
+<td><div class="variant score low">45.4 % · 20</div><div class="variant score medium best">50.3 % · 30</div><div class="variant score low">34.3 % · 40</div></td>
+<td><code>shape-691</code></td>
+</tr>
+<tr>
+<td><code>prototype-28</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-229__prototype-28.png" alt="shape-229"></td>
+<td><div class="variant"><strong>LONG_REST</strong> · 20</div><div class="variant">LONG_REST · 30</div><div class="variant">DIGIT_1 · 40</div></td>
+<td><div class="variant score low best">49.9 % · 20</div><div class="variant score low">17.7 % · 30</div><div class="variant score low">17.2 % · 40</div></td>
+<td><code>shape-229</code></td>
+</tr>
+<tr>
+<td><code>prototype-39</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-620.2__prototype-39.png" alt="shape-620.2"></td>
+<td><div class="variant">STACCATISSIMO · 20</div><div class="variant">DIGIT_1 · 30</div><div class="variant"><strong>DIGIT_1</strong> · 40</div></td>
+<td><div class="variant score low">40.4 % · 20</div><div class="variant score low">17.4 % · 30</div><div class="variant score low best">48.4 % · 40</div></td>
+<td><code>shape-620.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-88</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-790__prototype-88.png" alt="shape-790"></td>
+<td><div class="variant"><strong>FERMATA_BELOW</strong> · 20</div><div class="variant">FERMATA_BELOW · 30</div><div class="variant">FERMATA_BELOW · 40</div></td>
+<td><div class="variant score low best">46.8 % · 20</div><div class="variant score low">46.6 % · 30</div><div class="variant score low">45.1 % · 40</div></td>
+<td><code>shape-790</code></td>
+</tr>
+<tr>
+<td><code>prototype-81</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-772__prototype-81.png" alt="shape-772"></td>
+<td><div class="variant"><strong>DYNAMICS_P</strong> · 20</div><div class="variant">DYNAMICS_P · 30</div><div class="variant">DYNAMICS_P · 40</div></td>
+<td><div class="variant score low best">46.5 % · 20</div><div class="variant score low">26.1 % · 30</div><div class="variant score low">24.8 % · 40</div></td>
+<td><code>shape-772</code></td>
+</tr>
+<tr>
+<td><code>prototype-63</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-729__prototype-63.png" alt="shape-729"></td>
+<td><div class="variant">DYNAMICS_P · 20</div><div class="variant"><strong>DYNAMICS_P</strong> · 30</div><div class="variant">DYNAMICS_P · 40</div></td>
+<td><div class="variant score low">32.4 % · 20</div><div class="variant score low best">43.4 % · 30</div><div class="variant score low">35.6 % · 40</div></td>
+<td><code>shape-729</code></td>
+</tr>
+<tr>
+<td><code>prototype-97</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-801__prototype-97.png" alt="shape-801"></td>
+<td><div class="variant">COMMON_TIME · 20</div><div class="variant"><strong>COMMON_TIME</strong> · 30</div><div class="variant">COMMON_TIME · 40</div></td>
+<td><div class="variant score low">37.6 % · 20</div><div class="variant score low best">39.4 % · 30</div><div class="variant score low">34.4 % · 40</div></td>
+<td><code>shape-801</code></td>
+</tr>
+<tr>
+<td><code>prototype-11</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-32__prototype-11.png" alt="shape-32"></td>
+<td><div class="variant">TIME_EIGHT · 20</div><div class="variant">TIME_EIGHT · 30</div><div class="variant"><strong>TIME_EIGHT</strong> · 40</div></td>
+<td><div class="variant score low">36.7 % · 20</div><div class="variant score low">25.1 % · 30</div><div class="variant score low best">36.8 % · 40</div></td>
+<td><code>shape-32</code></td>
+</tr>
+<tr>
+<td><code>prototype-86</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-786__prototype-86.png" alt="shape-786"></td>
+<td><div class="variant">METRO_HALF · 20</div><div class="variant">PLAYING_HALF_OPEN · 30</div><div class="variant"><strong>PLAYING_HALF_OPEN</strong> · 40</div></td>
+<td><div class="variant score low">8.1 % · 20</div><div class="variant score low">12.6 % · 30</div><div class="variant score low best">29.9 % · 40</div></td>
+<td><code>shape-786</code></td>
+</tr>
+<tr>
+<td><code>prototype-77</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-757__prototype-77.png" alt="shape-757"></td>
+<td><div class="variant"><strong>DYNAMICS_FF</strong> · 20</div><div class="variant">DYNAMICS_FF · 30</div><div class="variant">DYNAMICS_FF · 40</div></td>
+<td><div class="variant score low best">29.0 % · 20</div><div class="variant score low">23.5 % · 30</div><div class="variant score low">25.2 % · 40</div></td>
+<td><code>shape-757</code></td>
+</tr>
+<tr>
+<td><code>prototype-36</code></td>
+<td>15</td>
+<td><img class="glyph" src="shape-398__prototype-36.png" alt="shape-398"></td>
+<td><div class="variant"><strong>ARPEGGIATO</strong> · 20</div><div class="variant">ARPEGGIATO · 30</div><div class="variant">ARPEGGIATO · 40</div></td>
+<td><div class="variant score low best">27.5 % · 20</div><div class="variant score low">27.4 % · 30</div><div class="variant score low">24.4 % · 40</div></td>
+<td><code>shape-398</code></td>
+</tr>
+<tr>
+<td><code>prototype-33</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-305.2__prototype-33.png" alt="shape-305.2"></td>
+<td><div class="variant"><strong>TIME_EIGHT</strong> · 20</div><div class="variant">TIME_EIGHT · 30</div><div class="variant">TIME_EIGHT · 40</div></td>
+<td><div class="variant score low best">26.5 % · 20</div><div class="variant score low">19.0 % · 30</div><div class="variant score low">19.2 % · 40</div></td>
+<td><code>shape-305.2</code></td>
+</tr>
+<tr>
+<td><code>prototype-98</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-802__prototype-98.png" alt="shape-802"></td>
+<td><div class="variant">PLUCK_P · 20</div><div class="variant">TIME_SIX · 30</div><div class="variant"><strong>TIME_SIX</strong> · 40</div></td>
+<td><div class="variant score low">10.1 % · 20</div><div class="variant score low">20.5 % · 30</div><div class="variant score low best">25.7 % · 40</div></td>
+<td><code>shape-802</code></td>
+</tr>
+<tr>
+<td><code>prototype-68</code></td>
+<td>6</td>
+<td><img class="glyph" src="shape-738__prototype-68.png" alt="shape-738"></td>
+<td><div class="variant">TUPLET_SIX · 20</div><div class="variant"><strong>TUPLET_SIX</strong> · 30</div><div class="variant">TUPLET_SIX · 40</div></td>
+<td><div class="variant score low">19.6 % · 20</div><div class="variant score low best">25.5 % · 30</div><div class="variant score low">23.1 % · 40</div></td>
+<td><code>shape-738</code></td>
+</tr>
+<tr>
+<td><code>prototype-10</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-31__prototype-10.png" alt="shape-31"></td>
+<td><div class="variant">PLUCK_A · 20</div><div class="variant"><strong>PLUCK_A</strong> · 30</div><div class="variant">TIME_THREE · 40</div></td>
+<td><div class="variant score low">19.5 % · 20</div><div class="variant score low best">24.6 % · 30</div><div class="variant score low">19.4 % · 40</div></td>
+<td><code>shape-31</code></td>
+</tr>
+<tr>
+<td><code>prototype-91</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-794__prototype-91.png" alt="shape-794"></td>
+<td><div class="variant"><strong>TIME_SIX</strong> · 20</div><div class="variant">TIME_SIX · 30</div><div class="variant">TIME_SIX · 40</div></td>
+<td><div class="variant score low best">22.9 % · 20</div><div class="variant score low">19.7 % · 30</div><div class="variant score low">19.1 % · 40</div></td>
+<td><code>shape-794</code></td>
+</tr>
+<tr>
+<td><code>prototype-61</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-725__prototype-61.png" alt="shape-725"></td>
+<td><div class="variant"><strong>COMMON_TIME</strong> · 20</div><div class="variant">COMMON_TIME · 30</div><div class="variant">COMMON_TIME · 40</div></td>
+<td><div class="variant score low best">22.2 % · 20</div><div class="variant score low">21.9 % · 30</div><div class="variant score low">18.9 % · 40</div></td>
+<td><code>shape-725</code></td>
+</tr>
+<tr>
+<td><code>prototype-74</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-751__prototype-74.png" alt="shape-751"></td>
+<td><div class="variant">ARPEGGIATO · 20</div><div class="variant">ARPEGGIATO · 30</div><div class="variant"><strong>ARPEGGIATO</strong> · 40</div></td>
+<td><div class="variant score low">12.9 % · 20</div><div class="variant score low">18.1 % · 30</div><div class="variant score low best">20.7 % · 40</div></td>
+<td><code>shape-751</code></td>
+</tr>
+<tr>
+<td><code>prototype-54</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-714__prototype-54.png" alt="shape-714"></td>
+<td><div class="variant">TUPLET_THREE · 20</div><div class="variant">TIME_EIGHT · 30</div><div class="variant"><strong>OTTAVA</strong> · 40</div></td>
+<td><div class="variant score low">15.7 % · 20</div><div class="variant score low">12.5 % · 30</div><div class="variant score low best">20.6 % · 40</div></td>
+<td><code>shape-714</code></td>
+</tr>
+<tr>
+<td><code>prototype-53</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-713__prototype-53.png" alt="shape-713"></td>
+<td><div class="variant">PLUCK_P · 20</div><div class="variant"><strong>PLUCK_P</strong> · 30</div><div class="variant">TIME_TWO · 40</div></td>
+<td><div class="variant score low">6.3 % · 20</div><div class="variant score low best">20.1 % · 30</div><div class="variant score low">19.3 % · 40</div></td>
+<td><code>shape-713</code></td>
+</tr>
+<tr>
+<td><code>prototype-75</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-755__prototype-75.png" alt="shape-755"></td>
+<td><div class="variant"><strong>DYNAMICS_P</strong> · 20</div><div class="variant">DYNAMICS_P · 30</div><div class="variant">DIGIT_4 · 40</div></td>
+<td><div class="variant score low best">19.4 % · 20</div><div class="variant score low">13.3 % · 30</div><div class="variant score low">15.1 % · 40</div></td>
+<td><code>shape-755</code></td>
+</tr>
+<tr>
+<td><code>prototype-26</code></td>
+<td>6</td>
+<td><img class="glyph" src="shape-225__prototype-26.png" alt="shape-225"></td>
+<td><div class="variant">PLUCK_A · 20</div><div class="variant"><strong>TIME_THREE</strong> · 30</div><div class="variant">TIME_THREE · 40</div></td>
+<td><div class="variant score low">17.0 % · 20</div><div class="variant score low best">19.2 % · 30</div><div class="variant score low">12.4 % · 40</div></td>
+<td><code>shape-225</code></td>
+</tr>
+<tr>
+<td><code>prototype-99</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-803__prototype-99.png" alt="shape-803"></td>
+<td><div class="variant"><strong>PLUCK_A</strong> · 20</div><div class="variant">PLUCK_A · 30</div><div class="variant">PLUCK_A · 40</div></td>
+<td><div class="variant score low best">16.9 % · 20</div><div class="variant score low">8.7 % · 30</div><div class="variant score low">8.5 % · 40</div></td>
+<td><code>shape-803</code></td>
+</tr>
+<tr>
+<td><code>prototype-93</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-796__prototype-93.png" alt="shape-796"></td>
+<td><div class="variant">EIGHTH_REST · 20</div><div class="variant">EIGHTH_REST · 30</div><div class="variant"><strong>EIGHTH_REST</strong> · 40</div></td>
+<td><div class="variant score low">15.1 % · 20</div><div class="variant score low">13.6 % · 30</div><div class="variant score low best">15.6 % · 40</div></td>
+<td><code>shape-796</code></td>
+</tr>
+<tr>
+<td><code>prototype-50</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-708__prototype-50.png" alt="shape-708"></td>
+<td><div class="variant">DYNAMICS_P · 20</div><div class="variant">FLAT · 30</div><div class="variant"><strong>FLAT</strong> · 40</div></td>
+<td><div class="variant score low">8.6 % · 20</div><div class="variant score low">5.5 % · 30</div><div class="variant score low best">15.3 % · 40</div></td>
+<td><code>shape-708</code></td>
+</tr>
+<tr>
+<td><code>prototype-18</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-123__prototype-18.png" alt="shape-123"></td>
+<td><div class="variant"><strong>FLAG_2</strong> · 20</div><div class="variant">FLAG_2 · 30</div><div class="variant">FLAG_2 · 40</div></td>
+<td><div class="variant score low best">14.8 % · 20</div><div class="variant score low">14.6 % · 30</div><div class="variant score low">13.2 % · 40</div></td>
+<td><code>shape-123</code></td>
+</tr>
+<tr>
+<td><code>prototype-78</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-767__prototype-78.png" alt="shape-767"></td>
+<td><div class="variant"><strong>DYNAMICS_P</strong> · 20</div><div class="variant">DYNAMICS_P · 30</div><div class="variant">DYNAMICS_P · 40</div></td>
+<td><div class="variant score low best">13.6 % · 20</div><div class="variant score low">10.5 % · 30</div><div class="variant score low">13.1 % · 40</div></td>
+<td><code>shape-767</code></td>
+</tr>
+<tr>
+<td><code>prototype-65</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-735__prototype-65.png" alt="shape-735"></td>
+<td><div class="variant">TUPLET_THREE · 20</div><div class="variant">TUPLET_THREE · 30</div><div class="variant"><strong>TUPLET_THREE</strong> · 40</div></td>
+<td><div class="variant score low">13.5 % · 20</div><div class="variant score low">11.5 % · 30</div><div class="variant score low best">13.6 % · 40</div></td>
+<td><code>shape-735</code></td>
+</tr>
+<tr>
+<td><code>prototype-85</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-779__prototype-85.png" alt="shape-779"></td>
+<td><div class="variant">DYNAMICS_F · 20</div><div class="variant"><strong>DYNAMICS_F</strong> · 30</div><div class="variant">DYNAMICS_F · 40</div></td>
+<td><div class="variant score low">11.9 % · 20</div><div class="variant score low best">13.4 % · 30</div><div class="variant score low">11.4 % · 40</div></td>
+<td><code>shape-779</code></td>
+</tr>
+<tr>
+<td><code>prototype-72</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-749__prototype-72.png" alt="shape-749"></td>
+<td><div class="variant"><strong>TIME_TWO</strong> · 20</div><div class="variant">TIME_EIGHT · 30</div><div class="variant">TIME_TWO · 40</div></td>
+<td><div class="variant score low best">13.3 % · 20</div><div class="variant score low">5.7 % · 30</div><div class="variant score low">10.9 % · 40</div></td>
+<td><code>shape-749</code></td>
+</tr>
+<tr>
+<td><code>prototype-55</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-717__prototype-55.png" alt="shape-717"></td>
+<td><div class="variant"><strong>ROMAN_XI</strong> · 20</div><div class="variant">ROMAN_XI · 30</div><div class="variant">ROMAN_XI · 40</div></td>
+<td><div class="variant score low best">13.0 % · 20</div><div class="variant score low">10.3 % · 30</div><div class="variant score low">12.7 % · 40</div></td>
+<td><code>shape-717</code></td>
+</tr>
+<tr>
+<td><code>prototype-84</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-777__prototype-84.png" alt="shape-777"></td>
+<td><div class="variant">PLUCK_P · 20</div><div class="variant"><strong>PLUCK_P</strong> · 30</div><div class="variant">PLUCK_P · 40</div></td>
+<td><div class="variant score low">12.5 % · 20</div><div class="variant score low best">13.0 % · 30</div><div class="variant score low">12.5 % · 40</div></td>
+<td><code>shape-777</code></td>
+</tr>
+<tr>
+<td><code>prototype-60</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-724__prototype-60.png" alt="shape-724"></td>
+<td><div class="variant">TIME_FOUR · 20</div><div class="variant">TIME_FOUR · 30</div><div class="variant"><strong>TIME_FOUR</strong> · 40</div></td>
+<td><div class="variant score low">6.9 % · 20</div><div class="variant score low">9.8 % · 30</div><div class="variant score low best">12.6 % · 40</div></td>
+<td><code>shape-724</code></td>
+</tr>
+<tr>
+<td><code>prototype-66</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-736__prototype-66.png" alt="shape-736"></td>
+<td><div class="variant"><strong>DYNAMICS_F</strong> · 20</div><div class="variant">DYNAMICS_F · 30</div><div class="variant">DYNAMICS_F · 40</div></td>
+<td><div class="variant score low best">11.8 % · 20</div><div class="variant score low">8.6 % · 30</div><div class="variant score low">6.4 % · 40</div></td>
+<td><code>shape-736</code></td>
+</tr>
+<tr>
+<td><code>prototype-89</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-791__prototype-89.png" alt="shape-791"></td>
+<td><div class="variant"><strong>CLUTTER</strong> · 20</div><div class="variant">CLUTTER · 30</div><div class="variant">CLUTTER · 40</div></td>
+<td><div class="variant score low best">11.7 % · 20</div><div class="variant score low">6.7 % · 30</div><div class="variant score low">7.9 % · 40</div></td>
+<td><code>shape-791</code></td>
+</tr>
+<tr>
+<td><code>prototype-48</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-706__prototype-48.png" alt="shape-706"></td>
+<td><div class="variant">TIME_EIGHT · 20</div><div class="variant"><strong>TIME_SIX</strong> · 30</div><div class="variant">PLUCK_P · 40</div></td>
+<td><div class="variant score low">8.1 % · 20</div><div class="variant score low best">11.5 % · 30</div><div class="variant score low">6.2 % · 40</div></td>
+<td><code>shape-706</code></td>
+</tr>
+<tr>
+<td><code>prototype-7</code></td>
+<td>4</td>
+<td><img class="glyph" src="shape-11__prototype-7.png" alt="shape-11"></td>
+<td><div class="variant">ARPEGGIATO · 20</div><div class="variant">CLUTTER · 30</div><div class="variant"><strong>CLUTTER</strong> · 40</div></td>
+<td><div class="variant score low">8.4 % · 20</div><div class="variant score low">9.9 % · 30</div><div class="variant score low best">10.6 % · 40</div></td>
+<td><code>shape-11</code></td>
+</tr>
+<tr>
+<td><code>prototype-40</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-689__prototype-40.png" alt="shape-689"></td>
+<td><div class="variant">PLAYING_HALF_OPEN · 20</div><div class="variant"><strong>DIGIT_1</strong> · 30</div><div class="variant">PLAYING_HALF_OPEN · 40</div></td>
+<td><div class="variant score low">4.3 % · 20</div><div class="variant score low best">9.9 % · 30</div><div class="variant score low">7.7 % · 40</div></td>
+<td><code>shape-689</code></td>
+</tr>
+<tr>
+<td><code>prototype-19</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-124__prototype-19.png" alt="shape-124"></td>
+<td><div class="variant"><strong>CLUTTER</strong> · 20</div><div class="variant">CLUTTER · 30</div><div class="variant">CLUTTER · 40</div></td>
+<td><div class="variant score low best">9.2 % · 20</div><div class="variant score low">8.2 % · 30</div><div class="variant score low">7.3 % · 40</div></td>
+<td><code>shape-124</code></td>
+</tr>
+<tr>
+<td><code>prototype-27</code></td>
+<td>3</td>
+<td><img class="glyph" src="shape-228__prototype-27.png" alt="shape-228"></td>
+<td><div class="variant">DOT_set · 20</div><div class="variant">TIME_SIX · 30</div><div class="variant"><strong>PLUCK_A</strong> · 40</div></td>
+<td><div class="variant score low">7.5 % · 20</div><div class="variant score low">6.9 % · 30</div><div class="variant score low best">8.8 % · 40</div></td>
+<td><code>shape-228</code></td>
+</tr>
+<tr>
+<td><code>prototype-46</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-704__prototype-46.png" alt="shape-704"></td>
+<td><div class="variant">DIGIT_4 · 20</div><div class="variant">DOUBLE_FLAT · 30</div><div class="variant"><strong>DOUBLE_FLAT</strong> · 40</div></td>
+<td><div class="variant score low">4.1 % · 20</div><div class="variant score low">5.0 % · 30</div><div class="variant score low best">7.1 % · 40</div></td>
+<td><code>shape-704</code></td>
+</tr>
+<tr>
+<td><code>prototype-29</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-231__prototype-29.png" alt="shape-231"></td>
+<td><div class="variant"><strong>FLAG_1_DOWN</strong> · 20</div><div class="variant">FLAG_1_DOWN · 30</div><div class="variant">TIME_FOUR · 40</div></td>
+<td><div class="variant score low best">6.8 % · 20</div><div class="variant score low">3.3 % · 30</div><div class="variant score low">6.8 % · 40</div></td>
+<td><code>shape-231</code></td>
+</tr>
+<tr>
+<td><code>prototype-67</code></td>
+<td>2</td>
+<td><img class="glyph" src="shape-737__prototype-67.png" alt="shape-737"></td>
+<td><div class="variant"><strong>ACCENT</strong> · 20</div><div class="variant">ACCENT · 30</div><div class="variant">ACCENT · 40</div></td>
+<td><div class="variant score low best">6.4 % · 20</div><div class="variant score low">4.5 % · 30</div><div class="variant score low">3.7 % · 40</div></td>
+<td><code>shape-737</code></td>
+</tr>
+<tr>
+<td><code>prototype-82</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-773__prototype-82.png" alt="shape-773"></td>
+<td><div class="variant">MARCATO · 20</div><div class="variant"><strong>MARCATO</strong> · 30</div><div class="variant">MARCATO · 40</div></td>
+<td><div class="variant score low">3.9 % · 20</div><div class="variant score low best">5.1 % · 30</div><div class="variant score low">4.7 % · 40</div></td>
+<td><code>shape-773</code></td>
+</tr>
+<tr>
+<td><code>prototype-44</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-697__prototype-44.png" alt="shape-697"></td>
+<td><div class="variant"><strong>ONE_16TH_REST</strong> · 20</div><div class="variant">EIGHTH_REST · 30</div><div class="variant">FLAT · 40</div></td>
+<td><div class="variant score low best">4.7 % · 20</div><div class="variant score low">3.5 % · 30</div><div class="variant score low">4.6 % · 40</div></td>
+<td><code>shape-697</code></td>
+</tr>
+<tr>
+<td><code>prototype-64</code></td>
+<td>1</td>
+<td><img class="glyph" src="shape-734__prototype-64.png" alt="shape-734"></td>
+<td><div class="variant"><strong>MORDENT_INVERTED</strong> · 20</div><div class="variant">MORDENT_INVERTED · 30</div><div class="variant">CAESURA · 40</div></td>
+<td><div class="variant score low best">4.6 % · 20</div><div class="variant score low">3.6 % · 30</div><div class="variant score low">3.8 % · 40</div></td>
+<td><code>shape-734</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
