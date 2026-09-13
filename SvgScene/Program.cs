@@ -11,43 +11,17 @@ if (args.Length == 0)
 }
 
 var input = args[0];
-var exportGlyphsIndex = Array.FindIndex(
+var exportGlyphsIndex = FindOption(args, "--export-glyphs");
+var modelIndex = FindOption(args, "--model");
+
+var exportGlyphsDirectory = ReadOptionValue(
     args,
-    argument => argument.Equals(
-        "--export-glyphs",
-        StringComparison.OrdinalIgnoreCase));
-
-string? exportGlyphsDirectory = null;
-
-if (exportGlyphsIndex >= 0)
-{
-    if (exportGlyphsIndex + 1 >= args.Length)
-    {
-        Console.Error.WriteLine("--export-glyphs requires an output directory.");
-        return 2;
-    }
-
-    exportGlyphsDirectory = args[exportGlyphsIndex + 1];
-}
-
-var modelIndex = Array.FindIndex(
+    exportGlyphsIndex,
+    "--export-glyphs");
+var modelPath = ReadOptionValue(
     args,
-    argument => argument.Equals(
-        "--model",
-        StringComparison.OrdinalIgnoreCase));
-
-string? modelPath = null;
-
-if (modelIndex >= 0)
-{
-    if (modelIndex + 1 >= args.Length)
-    {
-        Console.Error.WriteLine("--model requires a classifier archive path.");
-        return 2;
-    }
-
-    modelPath = args[modelIndex + 1];
-}
+    modelIndex,
+    "--model");
 
 var positional = args
     .Skip(1)
@@ -68,15 +42,9 @@ var positional = args
 var output = positional.Length > 0
     ? positional[0]
     : "notation-scene.json";
-
-var debug = args.Any(argument =>
-    argument.Equals("--debug", StringComparison.OrdinalIgnoreCase));
-
-var verbose = args.Any(argument =>
-    argument.Equals("--verbose-json", StringComparison.OrdinalIgnoreCase));
-
-var classifySymbols = args.Any(argument =>
-    argument.Equals("--classify-symbols", StringComparison.OrdinalIgnoreCase));
+var debug = HasOption(args, "--debug");
+var verbose = HasOption(args, "--verbose-json");
+var classifySymbols = HasOption(args, "--classify-symbols");
 
 var clusterer = new ShapeClusterer();
 var pipeline = new ScenePipeline(
@@ -120,6 +88,13 @@ if (classifySymbols)
         $"Confident prototypes >= 0.75: {confidentPrototypes}");
 }
 
+var ownershipResult = new LogicalOwnershipAnalyzer().AnalyzeAndApply(
+    geometry,
+    notation,
+    layout);
+notation = ownershipResult.Scene;
+var logicalOwnership = ownershipResult.Ownership;
+
 Console.WriteLine($"GeometricScene shapes       : {geometry.Shapes.Count}");
 Console.WriteLine($"NotationScene contours      : {notation.Instances.Count}");
 Console.WriteLine($"NotationScene prototypes    : {notation.Prototypes.Count}");
@@ -133,6 +108,16 @@ Console.WriteLine($"ScoreLayout systems         : {layout.Systems.Count}");
 Console.WriteLine(
     $"ScoreLayout measures        : "
     + $"{layout.Systems.SelectMany(system => system.StaffPairs).Sum(pair => pair.Measures.Count)}");
+Console.WriteLine(
+    $"Logical ownership assigned  : {logicalOwnership.Assignments.Count}");
+Console.WriteLine(
+    $"  generation 1              : {logicalOwnership.Assignments.Count(item => item.Ownership.Generation == 1)}");
+Console.WriteLine(
+    $"  generation 2              : {logicalOwnership.Assignments.Count(item => item.Ownership.Generation == 2)}");
+Console.WriteLine(
+    $"  generation 3              : {logicalOwnership.Assignments.Count(item => item.Ownership.Generation == 3)}");
+Console.WriteLine(
+    $"  coordinate spans          : {logicalOwnership.Assignments.Count(item => item.Ownership.IsSpan)}");
 
 foreach (var prototype in notation.Prototypes)
 {
@@ -150,6 +135,11 @@ foreach (var prototype in notation.Prototypes)
         + classification);
 }
 
+var jsonOptions = new JsonSerializerOptions
+{
+    WriteIndented = true
+};
+
 var compact = new
 {
     prototypes = notation.Prototypes.Select(prototype => new
@@ -165,12 +155,8 @@ var compact = new
     instances = notation.Instances,
     strokes = notation.Strokes,
     curvedStrokes = notation.CurvedStrokes,
-    ellipses = notation.Ellipses
-};
-
-var jsonOptions = new JsonSerializerOptions
-{
-    WriteIndented = true
+    ellipses = notation.Ellipses,
+    logicalOwnership = logicalOwnership.Assignments
 };
 
 File.WriteAllText(
@@ -181,22 +167,49 @@ Console.WriteLine($"Written compact JSON: {Path.GetFullPath(output)}");
 
 var outputDirectory = Path.GetDirectoryName(Path.GetFullPath(output))
     ?? Environment.CurrentDirectory;
+var baseName = Path.GetFileNameWithoutExtension(input);
 
 var layoutOutput = Path.Combine(
     outputDirectory,
     "score-layout.json");
-
 File.WriteAllText(
     layoutOutput,
     JsonSerializer.Serialize(layout, jsonOptions));
-
 Console.WriteLine($"Written score layout JSON: {layoutOutput}");
+
+var ownershipJson = Path.Combine(
+    outputDirectory,
+    baseName + ".ownership.json");
+File.WriteAllText(
+    ownershipJson,
+    JsonSerializer.Serialize(logicalOwnership, jsonOptions));
+Console.WriteLine($"Written logical ownership JSON: {ownershipJson}");
+
+var ownershipLog = Path.Combine(
+    outputDirectory,
+    baseName + ".ownership.txt");
+File.WriteAllLines(
+    ownershipLog,
+    logicalOwnership.Assignments.Select(FormatOwnership));
+Console.WriteLine($"Written logical ownership log: {ownershipLog}");
+
+var ownershipSvg = Path.Combine(
+    outputDirectory,
+    baseName + ".ownership.svg");
+new LogicalOwnershipDebugRenderer().Render(
+    input,
+    geometry,
+    notation,
+    layout,
+    logicalOwnership,
+    ownershipSvg);
+Console.WriteLine($"Written logical ownership SVG: {ownershipSvg}");
 
 if (classifySymbols)
 {
     var classifiedSvg = Path.Combine(
         outputDirectory,
-        Path.GetFileNameWithoutExtension(input) + ".classified-symbols.svg");
+        baseName + ".classified-symbols.svg");
 
     new SymbolClassificationDebugRenderer().Render(
         input,
@@ -208,7 +221,7 @@ if (classifySymbols)
 
     var repairLog = Path.Combine(
         outputDirectory,
-        Path.GetFileNameWithoutExtension(input) + ".bass-clef-repair.txt");
+        baseName + ".bass-clef-repair.txt");
 
     File.WriteAllLines(repairLog, bassClefRepairDiagnostics);
     Console.WriteLine($"Written bass clef repair log: {repairLog}");
@@ -248,17 +261,15 @@ if (debug)
     var debugDirectory = Path.GetDirectoryName(Path.GetFullPath(input))
         ?? Environment.CurrentDirectory;
 
-    var name = Path.GetFileNameWithoutExtension(input);
-
     new DebugSceneRenderer().RenderAll(
         input,
         notation,
         debugDirectory,
-        name);
+        baseName);
 
     var layoutSvg = Path.Combine(
         debugDirectory,
-        name + ".layout.svg");
+        baseName + ".layout.svg");
 
     new ScoreLayoutDebugRenderer().Render(
         input,
@@ -277,12 +288,12 @@ if (debug)
     })
     {
         Console.WriteLine(
-            $"  {Path.Combine(debugDirectory, name + "." + suffix + ".svg")}");
+            $"  {Path.Combine(debugDirectory, baseName + "." + suffix + ".svg")}");
     }
 
     var arcDiagnostics = Path.Combine(
         debugDirectory,
-        name + ".arc-diagnostics.txt");
+        baseName + ".arc-diagnostics.txt");
 
     File.WriteAllLines(
         arcDiagnostics,
@@ -296,7 +307,7 @@ if (debug)
 
     var strokeDiagnostics = Path.Combine(
         debugDirectory,
-        name + ".stroke-diagnostics.txt");
+        baseName + ".stroke-diagnostics.txt");
 
     File.WriteAllLines(
         strokeDiagnostics,
@@ -327,3 +338,48 @@ if (Path.GetFileName(input).Equals(
 }
 
 return 0;
+
+static int FindOption(string[] arguments, string option) =>
+    Array.FindIndex(
+        arguments,
+        argument => argument.Equals(option, StringComparison.OrdinalIgnoreCase));
+
+static string? ReadOptionValue(
+    string[] arguments,
+    int optionIndex,
+    string option)
+{
+    if (optionIndex < 0)
+    {
+        return null;
+    }
+
+    if (optionIndex + 1 >= arguments.Length)
+    {
+        throw new ArgumentException($"{option} requires a value.");
+    }
+
+    return arguments[optionIndex + 1];
+}
+
+static bool HasOption(string[] arguments, string option) =>
+    arguments.Any(argument =>
+        argument.Equals(option, StringComparison.OrdinalIgnoreCase));
+
+static string FormatOwnership(LogicalOwnershipAssignment assignment)
+{
+    var ownership = assignment.Ownership;
+    var start = $"{ownership.Start.StaffId}+{ownership.Start.MeasureId}";
+    var end = $"{ownership.End.StaffId}+{ownership.End.MeasureId}";
+    var parent = ownership.ParentShapeId is null
+        ? "-"
+        : ownership.ParentShapeId;
+
+    return $"{assignment.ShapeId,-12} "
+        + $"{assignment.Kind,-13} "
+        + $"g{ownership.Generation} "
+        + $"{start} -> {end} "
+        + $"reason={ownership.Reason}; "
+        + $"parent={parent}; "
+        + $"distance={ownership.Distance:F3}";
+}
