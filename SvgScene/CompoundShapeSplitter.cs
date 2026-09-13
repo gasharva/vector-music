@@ -73,7 +73,9 @@ public sealed class CompoundShapeSplitter : ICompoundShapeSplitter
                 shape.SourceIndex,
                 componentContours.Count == 1 && componentContours[0].IsClosed,
                 shape.StrokeWidth,
-                componentContours));
+                componentContours,
+                shape.HasFill,
+                shape.HasStroke));
         }
 
         return result;
