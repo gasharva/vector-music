@@ -47,6 +47,22 @@ public sealed class SymbolClassificationDebugRenderer
                 style.Color,
                 unit);
 
+            foreach (var absorbedShapeId in instance.AbsorbedPrimitiveShapeIds
+                         ?? Array.Empty<string>())
+            {
+                if (!shapesById.TryGetValue(absorbedShapeId, out var absorbedShape))
+                {
+                    continue;
+                }
+
+                AddShapeOverlay(
+                    group,
+                    ns,
+                    absorbedShape,
+                    style.Color,
+                    unit);
+            }
+
             if (style.DigitText is not null)
             {
                 AddDigitLabel(
