@@ -8,22 +8,17 @@ public sealed class LogicalOwnershipDebugRenderer
 {
     private static readonly string[] Palette =
     [
-        "#d32f2f",
-        "#1976d2",
-        "#388e3c",
-        "#f57c00",
-        "#7b1fa2",
-        "#00838f",
-        "#5d4037",
-        "#455a64",
-        "#c2185b",
-        "#00796b",
-        "#512da8",
-        "#689f38"
+        "#d32f2f", "#1976d2", "#388e3c", "#f57c00",
+        "#7b1fa2", "#00838f", "#5d4037", "#455a64",
+        "#c2185b", "#00796b", "#512da8", "#689f38"
     ];
 
     private static readonly Regex StylePropertyRegex = new(
         @"(?<name>[a-zA-Z-]+)\s*:\s*(?<value>[^;]+)",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
+    private static readonly Regex MoveCommandRegex = new(
+        @"(?<![A-Za-z])[Mm](?=\s*[-+]?\.?\d)",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     public void Render(
@@ -67,22 +62,18 @@ public sealed class LogicalOwnershipDebugRenderer
 
         var definitions = root.Descendants()
             .Where(element => element.Attribute("id") is not null)
-            .GroupBy(
-                element => (string)element.Attribute("id")!,
-                StringComparer.Ordinal)
-            .ToDictionary(
-                group => group.Key,
-                group => group.First(),
-                StringComparer.Ordinal);
+            .GroupBy(element => (string)element.Attribute("id")!, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
 
         var defs = root.Descendants()
             .FirstOrDefault(element => element.Name.LocalName == "defs");
 
         var recolored = 0;
-        var conflicts = 0;
+        var splitConflicts = 0;
+        var unresolvedConflicts = 0;
         var unmapped = 0;
 
-        foreach (var pair in shapesBySourceElement)
+        foreach (var pair in shapesBySourceElement.ToArray())
         {
             var sourceElement = pair.Key;
             var ownedShapes = pair.Value
@@ -104,14 +95,22 @@ public sealed class LogicalOwnershipDebugRenderer
                 .Distinct()
                 .ToArray();
 
-            // One original SVG element may contain several independent subpaths.
-            // If the splitter assigned those subpaths to different staff/measure
-            // coordinates, recoloring the original path would lie. Keep it black
-            // instead of drawing replacement geometry on top of it.
             if (starts.Length != 1)
             {
-                conflicts++;
-                sourceElement.SetAttributeValue("data-ownership-debug", "conflict");
+                if (TrySplitAndRecolorCompoundPath(
+                        sourceElement,
+                        pair.Value,
+                        assignments,
+                        colors))
+                {
+                    splitConflicts++;
+                }
+                else
+                {
+                    unresolvedConflicts++;
+                    sourceElement.SetAttributeValue("data-ownership-debug", "conflict");
+                }
+
                 continue;
             }
 
@@ -136,11 +135,7 @@ public sealed class LogicalOwnershipDebugRenderer
             }
             else
             {
-                RecolorElement(
-                    sourceElement,
-                    color,
-                    hasFill,
-                    hasStroke);
+                RecolorElement(sourceElement, color, hasFill, hasStroke);
             }
 
             sourceElement.SetAttributeValue(
@@ -152,9 +147,140 @@ public sealed class LogicalOwnershipDebugRenderer
 
         root.SetAttributeValue(
             "data-ownership-debug-summary",
-            $"recolored={recolored}; conflicts={conflicts}; unmapped={unmapped}");
+            $"recolored={recolored}; split-conflicts={splitConflicts}; "
+            + $"unresolved-conflicts={unresolvedConflicts}; unmapped={unmapped}");
 
         document.Save(output, SaveOptions.DisableFormatting);
+    }
+
+    private static bool TrySplitAndRecolorCompoundPath(
+        XElement sourceElement,
+        IReadOnlyList<GeometricShape> shapes,
+        IReadOnlyDictionary<string, LogicalOwnershipAssignment> assignments,
+        IReadOnlyDictionary<LogicalCoordinate, string> colors)
+    {
+        if (sourceElement.Name.LocalName != "path")
+        {
+            return false;
+        }
+
+        var d = (string?)sourceElement.Attribute("d");
+        var subpaths = SplitOriginalPathData(d);
+
+        if (subpaths.Count <= 1)
+        {
+            return false;
+        }
+
+        var indexedShapes = shapes
+            .Select(shape => new
+            {
+                Shape = shape,
+                ComponentIndex = ParseComponentIndex(shape.Id)
+            })
+            .Where(item => item.ComponentIndex is not null)
+            .OrderBy(item => item.ComponentIndex)
+            .ToArray();
+
+        // CompoundShapeSplitter numbers components in source contour order.
+        // For the debug renderer we can therefore keep the exact original path
+        // commands and only separate them at their original moveto boundaries.
+        if (indexedShapes.Length == 0
+            || indexedShapes.Any(item => item.ComponentIndex! < 1)
+            || indexedShapes.Max(item => item.ComponentIndex!.Value) > subpaths.Count)
+        {
+            return false;
+        }
+
+        var replacements = new List<XElement>(subpaths.Count);
+
+        for (var index = 0; index < subpaths.Count; index++)
+        {
+            var replacement = new XElement(sourceElement);
+            replacement.SetAttributeValue("d", subpaths[index]);
+            replacement.Attribute("id")?.Remove();
+
+            var shape = indexedShapes
+                .FirstOrDefault(item => item.ComponentIndex == index + 1)
+                ?.Shape;
+
+            if (shape is not null
+                && assignments.TryGetValue(shape.Id, out var assignment))
+            {
+                var coordinate = assignment.Ownership.Start;
+                var color = colors.GetValueOrDefault(coordinate, "#616161");
+
+                RecolorElement(
+                    replacement,
+                    color,
+                    shape.HasFill,
+                    shape.HasStroke);
+
+                replacement.SetAttributeValue(
+                    "data-ownership",
+                    $"{coordinate.StaffId}+{coordinate.MeasureId}");
+                replacement.SetAttributeValue(
+                    "data-source-shape",
+                    shape.Id);
+            }
+
+            replacements.Add(replacement);
+        }
+
+        sourceElement.ReplaceWith(replacements);
+        return true;
+    }
+
+    private static IReadOnlyList<string> SplitOriginalPathData(string? d)
+    {
+        if (string.IsNullOrWhiteSpace(d))
+        {
+            return [];
+        }
+
+        var matches = MoveCommandRegex.Matches(d);
+
+        if (matches.Count <= 1)
+        {
+            return [d];
+        }
+
+        var result = new List<string>(matches.Count);
+
+        for (var index = 0; index < matches.Count; index++)
+        {
+            var start = matches[index].Index;
+            var end = index + 1 < matches.Count
+                ? matches[index + 1].Index
+                : d.Length;
+
+            var subpath = d[start..end].Trim();
+
+            if (subpath.Length > 0)
+            {
+                result.Add(subpath);
+            }
+        }
+
+        return result;
+    }
+
+    private static int? ParseComponentIndex(string shapeId)
+    {
+        var separator = shapeId.IndexOf('.', StringComparison.Ordinal);
+
+        if (separator < 0 || separator + 1 >= shapeId.Length)
+        {
+            return null;
+        }
+
+        return int.TryParse(
+            shapeId[(separator + 1)..],
+            NumberStyles.Integer,
+            CultureInfo.InvariantCulture,
+            out var index)
+                ? index
+                : null;
     }
 
     private static bool TryRecolorUse(
@@ -187,12 +313,7 @@ public sealed class LogicalOwnershipDebugRenderer
         var cloneId = $"ownership-{MakeSafeId(originalId)}-{sequence + 1}";
         clone.SetAttributeValue("id", cloneId);
 
-        RecolorTree(
-            clone,
-            color,
-            hasFill,
-            hasStroke);
-
+        RecolorTree(clone, color, hasFill, hasStroke);
         defs.Add(clone);
         hrefAttribute!.Value = "#" + cloneId;
 
@@ -209,29 +330,15 @@ public sealed class LogicalOwnershipDebugRenderer
         {
             var explicitFill = ReadPaint(element, "fill");
             var explicitStroke = ReadPaint(element, "stroke");
+            var useFill = explicitFill is null ? fallbackFill : !IsNone(explicitFill);
+            var useStroke = explicitStroke is null ? fallbackStroke : !IsNone(explicitStroke);
 
-            var useFill = explicitFill is null
-                ? fallbackFill
-                : !IsNone(explicitFill);
-
-            var useStroke = explicitStroke is null
-                ? fallbackStroke
-                : !IsNone(explicitStroke);
-
-            RecolorElement(
-                element,
-                color,
-                useFill,
-                useStroke);
+            RecolorElement(element, color, useFill, useStroke);
         }
 
         foreach (var child in element.Elements())
         {
-            RecolorTree(
-                child,
-                color,
-                fallbackFill,
-                fallbackStroke);
+            RecolorTree(child, color, fallbackFill, fallbackStroke);
         }
     }
 
@@ -252,9 +359,7 @@ public sealed class LogicalOwnershipDebugRenderer
         }
     }
 
-    private static string? ReadPaint(
-        XElement element,
-        string property)
+    private static string? ReadPaint(XElement element, string property)
     {
         var style = (string?)element.Attribute("style");
 
@@ -275,10 +380,7 @@ public sealed class LogicalOwnershipDebugRenderer
         return (string?)element.Attribute(property);
     }
 
-    private static void SetPaint(
-        XElement element,
-        string property,
-        string color)
+    private static void SetPaint(XElement element, string property, string color)
     {
         var style = (string?)element.Attribute("style");
 
@@ -311,17 +413,12 @@ public sealed class LogicalOwnershipDebugRenderer
 
             if (!found)
             {
-                properties.Add(new KeyValuePair<string, string>(
-                    property,
-                    color));
+                properties.Add(new KeyValuePair<string, string>(property, color));
             }
 
             element.SetAttributeValue(
                 "style",
-                string.Join(
-                    ";",
-                    properties.Select(item => $"{item.Key}:{item.Value}")));
-
+                string.Join(";", properties.Select(item => $"{item.Key}:{item.Value}")));
             return;
         }
 
@@ -329,23 +426,14 @@ public sealed class LogicalOwnershipDebugRenderer
     }
 
     private static bool IsNone(string value) =>
-        string.Equals(
-            value.Trim(),
-            "none",
-            StringComparison.OrdinalIgnoreCase);
+        string.Equals(value.Trim(), "none", StringComparison.OrdinalIgnoreCase);
 
-    private static IReadOnlyDictionary<int, XElement> BuildSourceElementMap(
-        XElement root)
+    private static IReadOnlyDictionary<int, XElement> BuildSourceElementMap(XElement root)
     {
         var definitions = root.Descendants()
             .Where(element => element.Attribute("id") is not null)
-            .GroupBy(
-                element => (string)element.Attribute("id")!,
-                StringComparer.Ordinal)
-            .ToDictionary(
-                group => group.Key,
-                group => group.First(),
-                StringComparer.Ordinal);
+            .GroupBy(element => (string)element.Attribute("id")!, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
 
         var result = new Dictionary<int, XElement>();
         var number = 0;
@@ -372,24 +460,19 @@ public sealed class LogicalOwnershipDebugRenderer
 
                 foreach (var source in GeometryElements(target))
                 {
-                    if (!CouldProduceGeometry(source))
+                    if (CouldProduceGeometry(source))
                     {
-                        continue;
+                        result[++number] = element;
                     }
-
-                    result[++number] = element;
                 }
 
                 continue;
             }
 
-            if (!IsGeometryElement(element)
-                || !CouldProduceGeometry(element))
+            if (IsGeometryElement(element) && CouldProduceGeometry(element))
             {
-                continue;
+                result[++number] = element;
             }
-
-            result[++number] = element;
         }
 
         return result;
@@ -407,9 +490,7 @@ public sealed class LogicalOwnershipDebugRenderer
         };
     }
 
-    private static bool PositiveAttribute(
-        XElement element,
-        string name)
+    private static bool PositiveAttribute(XElement element, string name)
     {
         var text = (string?)element.Attribute(name);
 
@@ -421,8 +502,7 @@ public sealed class LogicalOwnershipDebugRenderer
             && value > 0;
     }
 
-    private static IEnumerable<XElement> GeometryElements(
-        XElement target)
+    private static IEnumerable<XElement> GeometryElements(XElement target)
     {
         if (IsGeometryElement(target))
         {
@@ -442,16 +522,10 @@ public sealed class LogicalOwnershipDebugRenderer
     }
 
     private static bool IsGeometryElement(XElement element) =>
-        element.Name.LocalName is
-            "path"
-            or "line"
-            or "polyline"
-            or "polygon"
-            or "rect";
+        element.Name.LocalName is "path" or "line" or "polyline" or "polygon" or "rect";
 
     private static bool IsInsideDefs(XElement element) =>
-        element.Ancestors()
-            .Any(ancestor => ancestor.Name.LocalName == "defs");
+        element.Ancestors().Any(ancestor => ancestor.Name.LocalName == "defs");
 
     private static int? ParseBaseShapeNumber(string shapeId)
     {
@@ -461,9 +535,7 @@ public sealed class LogicalOwnershipDebugRenderer
         }
 
         var end = shapeId.IndexOf('.', StringComparison.Ordinal);
-        var numberText = end >= 0
-            ? shapeId[6..end]
-            : shapeId[6..];
+        var numberText = end >= 0 ? shapeId[6..end] : shapeId[6..];
 
         return int.TryParse(
             numberText,
@@ -474,8 +546,7 @@ public sealed class LogicalOwnershipDebugRenderer
                 : null;
     }
 
-    private static IReadOnlyDictionary<LogicalCoordinate, string> BuildColorMap(
-        ScoreLayout layout)
+    private static IReadOnlyDictionary<LogicalCoordinate, string> BuildColorMap(ScoreLayout layout)
     {
         var result = new Dictionary<LogicalCoordinate, string>();
         var regionIndex = 0;
@@ -498,7 +569,5 @@ public sealed class LogicalOwnershipDebugRenderer
     }
 
     private static string MakeSafeId(string value) =>
-        new(value
-            .Select(character => char.IsLetterOrDigit(character) ? character : '-')
-            .ToArray());
+        new(value.Select(character => char.IsLetterOrDigit(character) ? character : '-').ToArray());
 }
