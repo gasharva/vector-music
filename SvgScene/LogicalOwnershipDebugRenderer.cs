@@ -42,9 +42,11 @@ public sealed class LogicalOwnershipDebugRenderer
         var assignments = ownership.Assignments.ToDictionary(
             assignment => assignment.ShapeId,
             StringComparer.Ordinal);
+        var shapeKinds = BuildShapeKinds(notation);
 
         var sourceElementsByShapeNumber = BuildSourceElementMap(root);
         var shapesBySourceElement = new Dictionary<XElement, List<GeometricShape>>();
+        var sourceElementByShapeId = new Dictionary<string, XElement>(StringComparer.Ordinal);
 
         foreach (var shape in geometry.Shapes)
         {
@@ -55,6 +57,8 @@ public sealed class LogicalOwnershipDebugRenderer
             {
                 continue;
             }
+
+            sourceElementByShapeId[shape.Id] = sourceElement;
 
             if (!shapesBySourceElement.TryGetValue(sourceElement, out var shapes))
             {
@@ -78,6 +82,7 @@ public sealed class LogicalOwnershipDebugRenderer
         var defs = root.Descendants()
             .FirstOrDefault(element => element.Name.LocalName == "defs");
 
+        var renderResults = new Dictionary<string, ShapeRenderResult>(StringComparer.Ordinal);
         var recolored = 0;
         var compoundConflicts = 0;
         var unmapped = 0;
@@ -108,19 +113,10 @@ public sealed class LogicalOwnershipDebugRenderer
             var color = colors.GetValueOrDefault(chosenCoordinate, "#616161");
             var hasFill = ownedShapes.Any(item => item.Shape.HasFill);
             var hasStroke = ownedShapes.Any(item => item.Shape.HasStroke);
+            var mode = coordinateGroups.Length > 1
+                ? "compound-dominant"
+                : "direct";
 
-            // IMPORTANT: this renderer is diagnostic only. One original SVG element
-            // can contain several independent subpaths which our normalizer later
-            // splits into shape-N.1, shape-N.2, ... and those pieces may legitimately
-            // belong to different staff/measure coordinates.
-            //
-            // Do not split, remove, reconstruct or move that source SVG element here.
-            // Previous attempts did exactly that and broke staff lines, barlines and
-            // filled beam geometry. Preserve the original SVG geometry byte-for-byte
-            // and use one representative ownership color for the whole compound item.
-            // The conflicting logical coordinates are recorded as data attributes so
-            // the visualization stays trustworthy about the fact that this is only a
-            // display compromise.
             if (coordinateGroups.Length > 1)
             {
                 compoundConflicts++;
@@ -137,20 +133,18 @@ public sealed class LogicalOwnershipDebugRenderer
                             $"{group.Key.StaffId}+{group.Key.MeasureId}:{group.Count()}")));
             }
 
+            var rendered = true;
+
             if (sourceElement.Name.LocalName == "use")
             {
-                if (!TryRecolorUse(
-                        sourceElement,
-                        color,
-                        hasFill,
-                        hasStroke,
-                        definitions,
-                        defs,
-                        recolored))
-                {
-                    unmapped++;
-                    continue;
-                }
+                rendered = TryRecolorUse(
+                    sourceElement,
+                    color,
+                    hasFill,
+                    hasStroke,
+                    definitions,
+                    defs,
+                    recolored);
             }
             else
             {
@@ -161,9 +155,38 @@ public sealed class LogicalOwnershipDebugRenderer
                     hasStroke);
             }
 
+            if (!rendered)
+            {
+                unmapped++;
+
+                foreach (var item in ownedShapes)
+                {
+                    renderResults[item.Shape.Id] = new ShapeRenderResult(
+                        false,
+                        "use-recolor-failed",
+                        null,
+                        false,
+                        DescribeSource(sourceElement));
+                }
+
+                continue;
+            }
+
             sourceElement.SetAttributeValue(
                 "data-ownership",
                 $"{chosenCoordinate.StaffId}+{chosenCoordinate.MeasureId}");
+
+            foreach (var item in ownedShapes)
+            {
+                var ownCoordinate = item.Assignment!.Ownership.Start;
+
+                renderResults[item.Shape.Id] = new ShapeRenderResult(
+                    true,
+                    mode,
+                    chosenCoordinate,
+                    ownCoordinate == chosenCoordinate,
+                    DescribeSource(sourceElement));
+            }
 
             recolored++;
         }
@@ -173,6 +196,159 @@ public sealed class LogicalOwnershipDebugRenderer
             $"recolored={recolored}; compound-conflicts={compoundConflicts}; unmapped={unmapped}");
 
         document.Save(output, SaveOptions.DisableFormatting);
+
+        WriteRenderDiagnostics(
+            output,
+            shapeKinds,
+            assignments,
+            sourceElementByShapeId,
+            renderResults);
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildShapeKinds(
+        NotationScene notation)
+    {
+        var result = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        foreach (var stroke in notation.Strokes)
+        {
+            result[stroke.ShapeId] = "Stroke";
+        }
+
+        foreach (var curve in notation.CurvedStrokes)
+        {
+            result[curve.ShapeId] = "CurvedStroke";
+        }
+
+        foreach (var ellipse in notation.Ellipses)
+        {
+            result[ellipse.ShapeId] = "EllipseLike";
+        }
+
+        foreach (var instance in notation.Instances)
+        {
+            result[instance.ShapeId] = "ShapeInstance";
+        }
+
+        return result;
+    }
+
+    private static void WriteRenderDiagnostics(
+        string output,
+        IReadOnlyDictionary<string, string> shapeKinds,
+        IReadOnlyDictionary<string, LogicalOwnershipAssignment> assignments,
+        IReadOnlyDictionary<string, XElement> sourceElementByShapeId,
+        IReadOnlyDictionary<string, ShapeRenderResult> renderResults)
+    {
+        var diagnosticsPath = Path.Combine(
+            Path.GetDirectoryName(Path.GetFullPath(output))
+                ?? Environment.CurrentDirectory,
+            Path.GetFileNameWithoutExtension(output) + ".render-diagnostics.txt");
+
+        var lines = new List<string>
+        {
+            "OWNERSHIP RENDER DIAGNOSTICS",
+            "owned=no                 => ownership algorithm did not assign the shape",
+            "owned=yes rendered=no    => renderer/source mapping problem",
+            "mode=compound-dominant   => source SVG element contains shapes with different ownership; one display color was chosen",
+            "color-match=no           => shape has ownership, but compound source was displayed with another shape's color",
+            string.Empty,
+            "SUMMARY"
+        };
+
+        foreach (var kind in new[] { "Stroke", "CurvedStroke", "EllipseLike", "ShapeInstance" })
+        {
+            var ids = shapeKinds
+                .Where(pair => pair.Value == kind)
+                .Select(pair => pair.Key)
+                .ToArray();
+            var owned = ids.Count(assignments.ContainsKey);
+            var rendered = ids.Count(id =>
+                renderResults.TryGetValue(id, out var result)
+                && result.Rendered);
+            var exactColor = ids.Count(id =>
+                renderResults.TryGetValue(id, out var result)
+                && result.Rendered
+                && result.ColorMatchesOwnership);
+
+            lines.Add(
+                $"{kind,-13} total={ids.Length,4} owned={owned,4} rendered={rendered,4} exact-color={exactColor,4}");
+        }
+
+        lines.Add(string.Empty);
+        lines.Add("DETAILS");
+
+        foreach (var pair in shapeKinds
+                     .OrderBy(pair => pair.Value, StringComparer.Ordinal)
+                     .ThenBy(pair => pair.Key, StringComparer.Ordinal))
+        {
+            var shapeId = pair.Key;
+            var kind = pair.Value;
+            var owned = assignments.TryGetValue(shapeId, out var assignment);
+            var source = sourceElementByShapeId.TryGetValue(shapeId, out var sourceElement)
+                ? DescribeSource(sourceElement)
+                : "-";
+
+            if (!owned)
+            {
+                lines.Add(
+                    $"{shapeId,-12} {kind,-13} owned=no  rendered=no  source={source}");
+                continue;
+            }
+
+            var ownership = assignment!.Ownership;
+            var coordinate = FormatCoordinate(ownership.Start);
+
+            if (!renderResults.TryGetValue(shapeId, out var renderResult))
+            {
+                var reason = sourceElement is null
+                    ? "source-not-mapped"
+                    : "source-not-recolored";
+
+                lines.Add(
+                    $"{shapeId,-12} {kind,-13} owned=yes {coordinate,-38} g{ownership.Generation} "
+                    + $"rendered=no  reason={reason}; source={source}");
+                continue;
+            }
+
+            var displayed = renderResult.DisplayedCoordinate is null
+                ? "-"
+                : FormatCoordinate(renderResult.DisplayedCoordinate);
+            var colorMatch = renderResult.ColorMatchesOwnership
+                ? "yes"
+                : "no";
+
+            lines.Add(
+                $"{shapeId,-12} {kind,-13} owned=yes {coordinate,-38} g{ownership.Generation} "
+                + $"rendered={(renderResult.Rendered ? "yes" : "no")}; "
+                + $"mode={renderResult.Mode}; displayed={displayed}; color-match={colorMatch}; "
+                + $"source={renderResult.Source}");
+        }
+
+        File.WriteAllLines(diagnosticsPath, lines);
+    }
+
+    private static string FormatCoordinate(LogicalCoordinate coordinate) =>
+        $"{coordinate.StaffId}+{coordinate.MeasureId}";
+
+    private static string DescribeSource(XElement element)
+    {
+        var id = (string?)element.Attribute("id");
+        var href = element.Attributes()
+            .FirstOrDefault(attribute => attribute.Name.LocalName == "href")
+            ?.Value;
+
+        if (!string.IsNullOrWhiteSpace(id))
+        {
+            return $"<{element.Name.LocalName} id={id}>";
+        }
+
+        if (!string.IsNullOrWhiteSpace(href))
+        {
+            return $"<{element.Name.LocalName} href={href}>";
+        }
+
+        return $"<{element.Name.LocalName}>";
     }
 
     private static bool TryRecolorUse(
@@ -523,4 +699,11 @@ public sealed class LogicalOwnershipDebugRenderer
     private sealed record OwnedSourceShape(
         GeometricShape Shape,
         LogicalOwnershipAssignment? Assignment);
+
+    private sealed record ShapeRenderResult(
+        bool Rendered,
+        string Mode,
+        LogicalCoordinate? DisplayedCoordinate,
+        bool ColorMatchesOwnership,
+        string Source);
 }
