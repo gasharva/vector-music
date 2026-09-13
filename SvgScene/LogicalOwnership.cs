@@ -41,7 +41,7 @@ public sealed class LogicalOwnershipAnalyzer
         NotationScene notation,
         ScoreLayout layout)
     {
-        var elements = BuildElements(geometry, notation);
+        var elements = BuildElements(geometry, notation, layout);
         var regions = BuildRegions(layout);
         var boundaries = layout.Systems
             .SelectMany(system => system.StaffPairs)
@@ -333,12 +333,31 @@ public sealed class LogicalOwnershipAnalyzer
 
     private static IReadOnlyList<OwnershipElement> BuildElements(
         GeometricScene geometry,
-        NotationScene notation)
+        NotationScene notation,
+        ScoreLayout layout)
     {
         var shapesById = geometry.Shapes.ToDictionary(
             shape => shape.Id,
             StringComparer.Ordinal);
         var result = new List<OwnershipElement>();
+
+        var maxMeasureWidth = layout.Systems
+            .SelectMany(system => system.StaffPairs)
+            .SelectMany(pair => pair.Measures)
+            .Select(measure => measure.XEnd - measure.XStart)
+            .DefaultIfEmpty(double.PositiveInfinity)
+            .Max();
+
+        var maxMeasureHeight = layout.Staffs
+            .Select(staff => staff.Bounds.Height + 2.0 * staff.AverageLineSpacing)
+            .DefaultIfEmpty(double.PositiveInfinity)
+            .Max();
+
+        bool IsOversized(BoundsD bounds)
+        {
+            return bounds.Width > maxMeasureWidth
+                && bounds.Height > maxMeasureHeight;
+        }
 
         foreach (var stroke in notation.Strokes)
         {
@@ -348,6 +367,11 @@ public sealed class LogicalOwnershipAnalyzer
                 Math.Min(stroke.Start.Y, stroke.End.Y) - half,
                 Math.Max(stroke.Start.X, stroke.End.X) + half,
                 Math.Max(stroke.Start.Y, stroke.End.Y) + half);
+
+            if (IsOversized(bounds))
+            {
+                continue;
+            }
 
             result.Add(new OwnershipElement(
                 stroke.ShapeId,
@@ -375,6 +399,11 @@ public sealed class LogicalOwnershipAnalyzer
                 raw.MaxX + maxHalfWidth,
                 raw.MaxY + maxHalfWidth);
 
+            if (IsOversized(bounds))
+            {
+                continue;
+            }
+
             result.Add(new OwnershipElement(
                 curve.ShapeId,
                 "CurvedStroke",
@@ -392,6 +421,12 @@ public sealed class LogicalOwnershipAnalyzer
                 ellipse.Center.Y - radius,
                 ellipse.Center.X + radius,
                 ellipse.Center.Y + radius);
+
+            if (IsOversized(bounds))
+            {
+                continue;
+            }
+
             var points = Enumerable.Range(0, 24)
                 .Select(index =>
                 {
@@ -423,7 +458,8 @@ public sealed class LogicalOwnershipAnalyzer
 
         foreach (var instance in notation.Instances)
         {
-            if (!shapesById.TryGetValue(instance.ShapeId, out var shape))
+            if (!shapesById.TryGetValue(instance.ShapeId, out var shape)
+                || IsOversized(shape.Bounds))
             {
                 continue;
             }
@@ -587,22 +623,18 @@ public sealed class LogicalOwnershipAnalyzer
         PointD c,
         PointD d)
     {
-        static double Cross(PointD p, PointD q, PointD r) =>
-            (q.X - p.X) * (r.Y - p.Y) - (q.Y - p.Y) * (r.X - p.X);
-
         var abC = Cross(a, b, c);
         var abD = Cross(a, b, d);
         var cdA = Cross(c, d, a);
         var cdB = Cross(c, d, b);
 
-        return abC * abD <= 0 && cdA * cdB <= 0;
+        return ((abC <= 0 && abD >= 0) || (abC >= 0 && abD <= 0))
+            && ((cdA <= 0 && cdB >= 0) || (cdA >= 0 && cdB <= 0));
     }
 
-    private static bool BoundsIntersect(BoundsD left, BoundsD right) =>
-        left.MaxX >= right.MinX
-        && left.MinX <= right.MaxX
-        && left.MaxY >= right.MinY
-        && left.MinY <= right.MaxY;
+    private static double Cross(PointD a, PointD b, PointD point) =>
+        (b.X - a.X) * (point.Y - a.Y)
+        - (b.Y - a.Y) * (point.X - a.X);
 
     private static bool PointInside(PointD point, BoundsD bounds) =>
         point.X >= bounds.MinX
@@ -610,17 +642,21 @@ public sealed class LogicalOwnershipAnalyzer
         && point.Y >= bounds.MinY
         && point.Y <= bounds.MaxY;
 
+    private static bool BoundsIntersect(BoundsD left, BoundsD right) =>
+        left.MaxX >= right.MinX
+        && right.MaxX >= left.MinX
+        && left.MaxY >= right.MinY
+        && right.MaxY >= left.MinY;
+
     private static double DistanceToBounds(PointD point, BoundsD bounds)
     {
-        var dx = Math.Max(Math.Max(bounds.MinX - point.X, 0), point.X - bounds.MaxX);
-        var dy = Math.Max(Math.Max(bounds.MinY - point.Y, 0), point.Y - bounds.MaxY);
-        return Math.Sqrt(dx * dx + dy * dy);
-    }
+        var dx = Math.Max(
+            Math.Max(bounds.MinX - point.X, 0),
+            point.X - bounds.MaxX);
+        var dy = Math.Max(
+            Math.Max(bounds.MinY - point.Y, 0),
+            point.Y - bounds.MaxY);
 
-    private static double Distance(PointD left, PointD right)
-    {
-        var dx = left.X - right.X;
-        var dy = left.Y - right.Y;
         return Math.Sqrt(dx * dx + dy * dy);
     }
 
@@ -633,16 +669,27 @@ public sealed class LogicalOwnershipAnalyzer
         var dy = end.Y - start.Y;
         var lengthSquared = dx * dx + dy * dy;
 
-        if (lengthSquared <= 1e-12)
+        if (lengthSquared <= 1e-24)
         {
             return Distance(point, start);
         }
 
-        var t = ((point.X - start.X) * dx + (point.Y - start.Y) * dy) / lengthSquared;
-        t = Math.Clamp(t, 0, 1);
-        return Distance(
-            point,
-            new PointD(start.X + t * dx, start.Y + t * dy));
+        var t = ((point.X - start.X) * dx + (point.Y - start.Y) * dy)
+            / lengthSquared;
+        t = Math.Max(0, Math.Min(1, t));
+
+        var projection = new PointD(
+            start.X + t * dx,
+            start.Y + t * dy);
+
+        return Distance(point, projection);
+    }
+
+    private static double Distance(PointD left, PointD right)
+    {
+        var dx = left.X - right.X;
+        var dy = left.Y - right.Y;
+        return Math.Sqrt(dx * dx + dy * dy);
     }
 
     private sealed record OwnershipRegion(
