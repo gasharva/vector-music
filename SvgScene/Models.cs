@@ -73,7 +73,8 @@ public sealed record ShapeInstance(
     string SourceKind,
     string? SourceIndex,
     SymbolClassification? Classification = null,
-    IReadOnlyList<string>? AbsorbedPrimitiveShapeIds = null);
+    IReadOnlyList<string>? AbsorbedPrimitiveShapeIds = null,
+    LogicalOwnership? Ownership = null);
 
 public sealed record Stroke(
     string ShapeId,
@@ -81,7 +82,8 @@ public sealed record Stroke(
     PointD End,
     double Width,
     string SourceKind,
-    string? SourceIndex);
+    string? SourceIndex,
+    LogicalOwnership? Ownership = null);
 
 public sealed record CurvedStroke(
     string ShapeId,
@@ -91,7 +93,8 @@ public sealed record CurvedStroke(
     double SameSideRatio,
     QuadraticApproximation? Quadratic,
     string SourceKind,
-    string? SourceIndex);
+    string? SourceIndex,
+    LogicalOwnership? Ownership = null);
 
 public sealed record QuadraticApproximation(
     PointD Start,
@@ -113,7 +116,8 @@ public sealed record EllipseLike(
     double? HoleRatio,
     double FitError,
     string SourceKind,
-    string? SourceIndex);
+    string? SourceIndex,
+    LogicalOwnership? Ownership = null);
 
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
