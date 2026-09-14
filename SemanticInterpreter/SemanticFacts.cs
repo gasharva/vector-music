@@ -150,6 +150,31 @@ public sealed record FlagAttachmentFact(
         Reason,
         SourceShapeIds);
 
+public sealed record BeamAttachmentFact(
+    int MeasureNumber,
+    string BeamShapeId,
+    int Level,
+    IReadOnlyList<string> AttachedStemIds,
+    IReadOnlyList<int> AttachedStaffs,
+    bool LeftEndSupported,
+    bool RightEndSupported,
+    bool IsHook,
+    bool IsCrossStaff,
+    double StartX,
+    double StartY,
+    double EndX,
+    double EndY,
+    double LengthInSpacings,
+    double WidthInSpacings,
+    double Slope,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "BeamAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
