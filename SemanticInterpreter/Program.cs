@@ -100,7 +100,8 @@ var semanticPipeline = new SemanticPipeline(
         new TimeSignaturePass(),
         new KeySignaturePass(),
         noteheadPass,
-        accidentalPass
+        accidentalPass,
+        new PitchPass()
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -216,6 +217,7 @@ File.WriteAllLines(
         $"semantic.keys={facts.OfType<KeySignatureFact>().Count()}",
         $"semantic.noteheads={facts.OfType<NoteheadFact>().Count()}",
         $"semantic.accidentals={facts.OfType<AccidentalFact>().Count()}",
+        $"semantic.pitches={facts.OfType<PitchFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
@@ -254,6 +256,7 @@ Console.WriteLine($"  times      : {facts.OfType<TimeSignatureFact>().Count()}")
 Console.WriteLine($"  keys       : {facts.OfType<KeySignatureFact>().Count()}");
 Console.WriteLine($"  noteheads  : {facts.OfType<NoteheadFact>().Count()}");
 Console.WriteLine($"  accidentals: {facts.OfType<AccidentalFact>().Count()}");
+Console.WriteLine($"  pitches    : {facts.OfType<PitchFact>().Count()}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
 Console.WriteLine($"  MXL        : {Path.GetFullPath(compressedMusicXmlPath)}");
@@ -343,6 +346,21 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"classifier={accidental.ClassificationConfidence:P1} "
                     + $"vertical-error={accidental.VerticalErrorInHalfSteps:F3} "
                     + $"confidence={accidental.Confidence:P1}; reason={accidental.Reason}";
+                break;
+
+            case PitchFact pitch:
+                var localAccidental = pitch.ActiveAccidentalKind is null
+                    ? "none"
+                    : $"{pitch.ActiveAccidentalKind}/{pitch.ActiveAccidentalShapeId}/"
+                        + (pitch.IsAccidentalExplicit ? "explicit" : "inherited");
+
+                yield return $"pitch m{pitch.MeasureNumber} staff={pitch.Staff} "
+                    + $"notehead={pitch.NoteheadId} staff-step={pitch.StaffStep} "
+                    + $"clef={pitch.ClefSign}{pitch.ClefLine}/{pitch.ClefShapeId} "
+                    + $"key={pitch.KeyFifths} local={localAccidental} "
+                    + $"step={pitch.Step} octave={pitch.Octave} alter={pitch.Alter} "
+                    + $"pitch={pitch.Pitch} confidence={pitch.Confidence:P1}; "
+                    + $"reason={pitch.Reason}";
                 break;
 
             default:
