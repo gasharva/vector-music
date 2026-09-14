@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
   <work>
     <work-title>When Almonds Blossomed - mangled</work-title>
@@ -32,41 +33,484 @@
           <line>4</line>
         </clef>
       </attributes>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
     </measure>
-    <measure number="2" />
-    <measure number="3" />
-    <measure number="4" />
-    <measure number="5" />
+    <measure number="2">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="3">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="4">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="5">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
     <measure number="6">
       <print new-system="yes" />
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
     </measure>
-    <measure number="7" />
-    <measure number="8" />
-    <measure number="9" />
-    <measure number="10" />
+    <measure number="7">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="8">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="9">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="10">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
     <measure number="11">
       <print new-system="yes" />
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
     </measure>
-    <measure number="12" />
-    <measure number="13" />
-    <measure number="14" />
-    <measure number="15" />
-    <measure number="16" />
-    <measure number="17" />
+    <measure number="12">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="13">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="14">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="15">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="16">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="17">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
     <measure number="18">
       <print new-system="yes" />
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
     </measure>
-    <measure number="19" />
-    <measure number="20" />
-    <measure number="21" />
-    <measure number="22" />
+    <measure number="19">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="20">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="21">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="22">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
     <measure number="23">
       <print new-system="yes" />
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
     </measure>
-    <measure number="24" />
-    <measure number="25" />
-    <measure number="26" />
-    <measure number="27" />
-    <measure number="28" />
+    <measure number="24">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="25">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="26">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="27">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
+    <measure number="28">
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3</duration>
+      </backup>
+      <note>
+        <rest measure="yes" />
+        <duration>3</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
   </part>
 </score-partwise>
