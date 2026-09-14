@@ -69,13 +69,70 @@ public sealed class ArtifactIndexWriter
                 runLogFileName,
                 "Run log",
                 "Console trace from the semantic pipeline.",
-                true),
-            new(
-                sourceSvgFileName,
-                "Source SVG",
-                "Exact SVG input used for this run.",
                 true)
         };
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.ownership.svg",
+            "Ownership coloring (SVG)",
+            "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.classified-symbols.svg",
+            "Classified symbols (SVG)",
+            "Audiveris symbol classifications overlaid on the original SVG.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.strokes.svg",
+            "Primitive strokes (SVG)",
+            "Straight strokes extracted by the SVG parser.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.arcs.svg",
+            "Primitive arcs (SVG)",
+            "Curved strokes and slur-like primitives extracted by the SVG parser.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.ellipses.svg",
+            "Ellipse-like primitives (SVG)",
+            "Filled and hollow ellipse-like primitives, including notehead candidates.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.contours.svg",
+            "Clustered contours (SVG)",
+            "Remaining contour instances with prototype labels.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "parser.ownership.render-diagnostics.txt",
+            "Ownership renderer diagnostics",
+            "Per-shape ownership/rendering diagnostics used to distinguish analyzer misses from visualization problems.",
+            true);
+
+        artifacts.Add(new ArtifactLink(
+            sourceSvgFileName,
+            "Source SVG",
+            "Exact SVG input used for this run.",
+            false));
 
         if (sourceMusicXmlFileName is not null)
         {
@@ -97,6 +154,26 @@ public sealed class ArtifactIndexWriter
             displayTitle,
             commit,
             artifacts);
+    }
+
+    private static void AddOptionalArtifact(
+        ICollection<ArtifactLink> artifacts,
+        string outputDirectory,
+        string fileName,
+        string label,
+        string description,
+        bool download)
+    {
+        if (!File.Exists(Path.Combine(outputDirectory, fileName)))
+        {
+            return;
+        }
+
+        artifacts.Add(new ArtifactLink(
+            fileName,
+            label,
+            description,
+            download));
     }
 
     private static string CopySourceFile(
