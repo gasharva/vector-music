@@ -47,6 +47,16 @@ var ownershipResult = new LogicalOwnershipAnalyzer().AnalyzeAndApply(
 notation = ownershipResult.Scene;
 var ownership = ownershipResult.Ownership;
 
+var ledgerLadderOwnership = new LedgerLadderEllipseOwnershipAssigner().AssignAndApply(
+    notation,
+    layout,
+    ownership);
+notation = ledgerLadderOwnership.Scene;
+ownership = ledgerLadderOwnership.Ownership;
+
+Console.WriteLine(
+    $"   ledger-ladder ellipse corrections: {ledgerLadderOwnership.Adjustments.Count}");
+
 var fourthGeneration = new FourthGenerationOuterBandAssigner().AssignAndApply(
     geometry,
     notation,
@@ -298,6 +308,7 @@ File.WriteAllLines(
         $"notation.curves={notation.CurvedStrokes.Count}",
         $"notation.ellipses={notation.Ellipses.Count}",
         $"ownership.assignments={ownership.Assignments.Count}",
+        $"ownership.ledgerLadderCorrections={ledgerLadderOwnership.Adjustments.Count}",
         $"semantic.measures={semanticDocument.Measures.Count}",
         $"semantic.facts={facts.Items.Count}",
         $"semantic.clefs={facts.OfType<ClefFact>().Count()}",
@@ -357,6 +368,7 @@ Console.WriteLine($"  pitches    : {facts.OfType<PitchFact>().Count()}");
 Console.WriteLine($"  stems      : {facts.OfType<StemAttachmentFact>().Count()}");
 Console.WriteLine($"  flags      : {facts.OfType<FlagAttachmentFact>().Count()}");
 Console.WriteLine($"  beams      : {facts.OfType<BeamAttachmentFact>().Count()}");
+Console.WriteLine($"  ownership ledger corrections: {ledgerLadderOwnership.Adjustments.Count}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
 Console.WriteLine($"  MXL        : {Path.GetFullPath(compressedMusicXmlPath)}");
