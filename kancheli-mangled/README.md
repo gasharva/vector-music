@@ -1,6 +1,6 @@
 # When Almonds Blossomed - mangled - artifacts
 
-Commit: `ba91f86f632a7abaa3d9f49660169ff907f25a33`
+Commit: `4a2f574069df9b37b2d090083dc57afba7914207`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Best choice for MuseScore; the browser should download it instead of displaying XML.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.
@@ -18,6 +18,10 @@ Commit: `ba91f86f632a7abaa3d9f49660169ff907f25a33`
 - [Flag attachment decisions](semantic.flags.txt) — Per-flag classifier label, level, matched stem free tip, geometric distances, ambiguity and rejected candidates.
 - [Detected beam attachments (SVG)](semantic.beams.svg) — BeamAttachmentPass overlay: primary/secondary beam levels are colored separately, stem intersections are marked, free hook ends are hollow red, and cross-staff beams are purple.
 - [Beam attachment decisions](semantic.beams.txt) — Beam-like stroke geometry, attached stems, inferred beam level, supported ends, hooks, cross-staff status and rejected candidates.
+- [Detected tuplets (SVG)](semantic.tuplets.svg) — TupletPass overlay on top of beam diagnostics: classifier tuplet digits are attached to nearby primary beam groups; corrected classifier numbers are highlighted and annotated with the inferred actual:normal ratio.
+- [Tuplet decisions](semantic.tuplets.txt) — Classifier tuplet candidates, matched beam groups, stem counts, actual:normal ratios and any classifier-number correction inferred from the rhythmic stem group.
+- [Detected augmentation dots (SVG)](semantic.dots.svg) — DotAttachmentPass overlay on top of tuplet diagnostics: accepted augmentation dots and their target noteheads are pink; rejected small ellipse candidates are faint gray.
+- [Augmentation-dot decisions](semantic.dots.txt) — Small filled ellipse candidates, size band, target noteheads, horizontal/vertical geometry and rejected dot-like marks such as articulation dots.
 - [Ownership coloring (SVG)](parser.ownership.svg) — Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.
 - [Classified symbols (SVG)](parser.classified-symbols.svg) — Audiveris symbol classifications overlaid on the original SVG.
 - [Primitive strokes (SVG)](parser.strokes.svg) — Straight strokes extracted by the SVG parser.

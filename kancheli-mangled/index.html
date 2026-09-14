@@ -18,7 +18,7 @@
 <body>
   <h1>When Almonds Blossomed - mangled</h1>
   <div class="meta">Semantic interpreter run artifacts
-    <br>commit <code>ba91f86f632a7abaa3d9f49660169ff907f25a33</code>
+    <br>commit <code>4a2f574069df9b37b2d090083dc57afba7914207</code>
   </div>
   <div class="artifact primary">
     <a href="kancheli.semantic.mxl" download>Compressed MusicXML (.mxl)</a>
@@ -83,6 +83,22 @@
   <div class="artifact">
     <a href="semantic.beams.txt" download>Beam attachment decisions</a>
     <p>Beam-like stroke geometry, attached stems, inferred beam level, supported ends, hooks, cross-staff status and rejected candidates.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.tuplets.svg">Detected tuplets (SVG)</a>
+    <p>TupletPass overlay on top of beam diagnostics: classifier tuplet digits are attached to nearby primary beam groups; corrected classifier numbers are highlighted and annotated with the inferred actual:normal ratio.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.tuplets.txt" download>Tuplet decisions</a>
+    <p>Classifier tuplet candidates, matched beam groups, stem counts, actual:normal ratios and any classifier-number correction inferred from the rhythmic stem group.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.dots.svg">Detected augmentation dots (SVG)</a>
+    <p>DotAttachmentPass overlay on top of tuplet diagnostics: accepted augmentation dots and their target noteheads are pink; rejected small ellipse candidates are faint gray.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.dots.txt" download>Augmentation-dot decisions</a>
+    <p>Small filled ellipse candidates, size band, target noteheads, horizontal/vertical geometry and rejected dot-like marks such as articulation dots.</p>
   </div>
   <div class="artifact">
     <a href="parser.ownership.svg">Ownership coloring (SVG)</a>
