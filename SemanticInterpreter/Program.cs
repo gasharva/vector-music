@@ -64,7 +64,9 @@ var semanticDocument = new MeasureSceneBuilder().Build(
 Console.WriteLine("6. Running granular semantic passes...");
 var semanticPipeline = new SemanticPipeline(
     [
-        new ClefPass()
+        new ClefPass(),
+        new TimeSignaturePass(),
+        new KeySignaturePass()
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -113,6 +115,8 @@ File.WriteAllLines(
         $"semantic.measures={semanticDocument.Measures.Count}",
         $"semantic.facts={facts.Items.Count}",
         $"semantic.clefs={facts.OfType<ClefFact>().Count()}",
+        $"semantic.times={facts.OfType<TimeSignatureFact>().Count()}",
+        $"semantic.keys={facts.OfType<KeySignatureFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}"
@@ -123,6 +127,8 @@ Console.WriteLine("Semantic interpretation complete:");
 Console.WriteLine($"  measures : {semanticDocument.Measures.Count}");
 Console.WriteLine($"  facts    : {facts.Items.Count}");
 Console.WriteLine($"  clefs    : {facts.OfType<ClefFact>().Count()}");
+Console.WriteLine($"  times    : {facts.OfType<TimeSignatureFact>().Count()}");
+Console.WriteLine($"  keys     : {facts.OfType<KeySignatureFact>().Count()}");
 Console.WriteLine($"  canonical: {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML : {Path.GetFullPath(musicXmlPath)}");
 
@@ -172,6 +178,21 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"{clef.Sign}{clef.Line} x={clef.X:F2} "
                     + $"confidence={clef.Confidence:P1} shape={clef.ShapeId}; "
                     + $"reason={clef.Reason}";
+                break;
+
+            case TimeSignatureFact time:
+                yield return $"time m{time.MeasureNumber} "
+                    + $"{time.Beats}/{time.BeatType} x={time.MinX:F2}..{time.MaxX:F2}; "
+                    + $"shapes={string.Join(',', time.SourceShapeIds)}; "
+                    + $"reason={time.Reason}";
+                break;
+
+            case KeySignatureFact key:
+                yield return $"key m{key.MeasureNumber} fifths={key.Fifths} "
+                    + $"kind={key.AccidentalKind} count={key.AccidentalCount} "
+                    + $"x={key.MinX:F2}..{key.MaxX:F2}; "
+                    + $"shapes={string.Join(',', key.SourceShapeIds)}; "
+                    + $"reason={key.Reason}";
                 break;
 
             default:
