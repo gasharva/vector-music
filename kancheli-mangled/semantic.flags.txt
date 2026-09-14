@@ -1,0 +1,20 @@
+FLAG ATTACHMENT ANALYSIS
+
+candidates=9
+accepted=9
+unmatched=0
+ambiguous=0
+stem-conflicts=0
+
+ACCEPTED FLAGS
+shape-670: FLAG_1; attached-flag; m5; level=1; classifier=99.8 %; stem=shape-570; tip=(2669.46,567.56); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-570 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-669: FLAG_1; attached-flag; m6; level=1; classifier=99.8 %; stem=shape-518; tip=(592.54,1192.44); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-518 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-675: FLAG_1_DOWN; attached-flag; m7; level=1; classifier=99.9 %; stem=shape-590; tip=(970.53,1433.10); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1_DOWN at 99.9 %; free tip of stem shape-590 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-677: FLAG_1; attached-flag; m7; level=1; classifier=99.8 %; stem=shape-647; tip=(999.20,1447.65); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-647 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-672: FLAG_1; attached-flag; m15; level=1; classifier=99.8 %; stem=shape-551; tip=(1628.20,1854.14); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-551 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-676: FLAG_1; attached-flag; m16; level=1; classifier=99.8 %; stem=shape-664; tip=(2015.68,2152.67); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-664 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-673: FLAG_1; attached-flag; m16; level=1; classifier=99.8 %; stem=shape-544; tip=(2139.59,1854.14); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-544 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-674: FLAG_1; attached-flag; m18; level=1; classifier=99.8 %; stem=shape-517; tip=(840.99,2561.38); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-517 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+shape-671: FLAG_1; attached-flag; m27; level=1; classifier=99.8 %; stem=shape-579; tip=(2803.04,3183.54); left-edge-distance=0.055sp; vertical-distance=0.000sp; confidence=97.6 %; FLAG_1 at 99.8 %; free tip of stem shape-579 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+
+REJECTED CLASSIFIED FLAGS

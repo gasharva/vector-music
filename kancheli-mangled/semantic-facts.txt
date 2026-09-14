@@ -11,6 +11,8 @@ PitchPass: added 301 pitch fact(s); local-explicit=41; local-inherited=38; key-o
 PitchPass: added 301 fact(s); total=655
 StemAttachmentPass decisions: candidates=297; accepted=188; unmatched=109; cross-staff=1; ambiguous-direction=0; noteheads-attached=301/301
 StemAttachmentPass: added 188 fact(s); total=843
+FlagAttachmentPass decisions: candidates=9; accepted=9; unmatched=0; ambiguous=0; stem-conflicts=0; levels=[1,1,1,1,1,1,1,1,1]
+FlagAttachmentPass: added 9 fact(s); total=852
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-982
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-984.2
 CanonicalBuilder: m1 time=3/4
@@ -860,6 +862,15 @@ stem m27 shape=shape-573 direction=Up cross-staff=False noteheads=[shape-693] st
 stem m27 shape=shape-576 direction=Up cross-staff=False noteheads=[shape-682] staffs=[1] from=(2607.17,3189.46) to=(2607.17,3245.75) length=2.34sp width=0.110sp confidence=78.1 %; reason=vertical stroke touches 1 notehead(s); best edge distance=0.094sp; vertical-ratio=0.000; width=0.110sp; direction=Up; cross-staff=False
 stem m27 shape=shape-578 direction=Up cross-staff=False noteheads=[shape-715] staffs=[1] from=(2691.05,3189.37) to=(2691.05,3245.75) length=2.34sp width=0.110sp confidence=78.1 %; reason=vertical stroke touches 1 notehead(s); best edge distance=0.094sp; vertical-ratio=0.000; width=0.110sp; direction=Up; cross-staff=False
 stem m27 shape=shape-579 direction=Up cross-staff=False noteheads=[shape-716] staffs=[1] from=(2803.04,3183.54) to=(2803.04,3257.80) length=3.08sp width=0.110sp confidence=78.1 %; reason=vertical stroke touches 1 notehead(s); best edge distance=0.094sp; vertical-ratio=0.000; width=0.110sp; direction=Up; cross-staff=False
+flag m5 shape=shape-670 label=FLAG_1 level=1 stem=shape-570 tip=(2669.46,567.56) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-570 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m6 shape=shape-669 label=FLAG_1 level=1 stem=shape-518 tip=(592.54,1192.44) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-518 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m7 shape=shape-675 label=FLAG_1_DOWN level=1 stem=shape-590 tip=(970.53,1433.10) cross-staff-stem=False classifier=99.9 % confidence=97.6 %; reason=FLAG_1_DOWN at 99.9 %; free tip of stem shape-590 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m7 shape=shape-677 label=FLAG_1 level=1 stem=shape-647 tip=(999.20,1447.65) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-647 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m15 shape=shape-672 label=FLAG_1 level=1 stem=shape-551 tip=(1628.20,1854.14) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-551 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m16 shape=shape-676 label=FLAG_1 level=1 stem=shape-664 tip=(2015.68,2152.67) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-664 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m16 shape=shape-673 label=FLAG_1 level=1 stem=shape-544 tip=(2139.59,1854.14) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-544 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m18 shape=shape-674 label=FLAG_1 level=1 stem=shape-517 tip=(840.99,2561.38) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-517 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
+flag m27 shape=shape-671 label=FLAG_1 level=1 stem=shape-579 tip=(2803.04,3183.54) cross-staff-stem=False classifier=99.8 % confidence=97.6 %; reason=FLAG_1 at 99.8 %; free tip of stem shape-579 is 0.055sp from flag left edge and 0.000sp from its vertical bbox; level=1
 
 BUILD TRACE
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-982

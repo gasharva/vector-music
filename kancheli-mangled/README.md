@@ -1,6 +1,6 @@
 # When Almonds Blossomed - mangled - artifacts
 
-Commit: `1ccc449ce7e24a97351855da75e9989b181675b9`
+Commit: `d9d0f9cb91946acbf0e7f507ee3b6f8d1b9177c0`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Best choice for MuseScore; the browser should download it instead of displaying XML.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.
@@ -14,6 +14,8 @@ Commit: `1ccc449ce7e24a97351855da75e9989b181675b9`
 - [Accidental targets and propagation](semantic.accidentals.txt) — Classifier candidates, logical anchor matching, explicit notehead target and all noteheads affected until the next accidental on the same staff-step or measure end.
 - [Detected stem attachments (SVG)](semantic.stems.svg) — StemAttachmentPass overlay: accepted stems are magenta, cross-staff stems purple, attached noteheads are ringed, unmatched vertical candidates are faint gray dashed lines.
 - [Stem attachment decisions](semantic.stems.txt) — Per-stem geometry, attached noteheads, inferred stem direction, cross-staff status and unmatched vertical stroke candidates.
+- [Detected flag attachments (SVG)](semantic.flags.svg) — FlagAttachmentPass overlay on top of stem diagnostics: attached classifier flags are blue, their matched free stem tip is marked, rejected classified flags are dashed.
+- [Flag attachment decisions](semantic.flags.txt) — Per-flag classifier label, level, matched stem free tip, geometric distances, ambiguity and rejected candidates.
 - [Ownership coloring (SVG)](parser.ownership.svg) — Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.
 - [Classified symbols (SVG)](parser.classified-symbols.svg) — Audiveris symbol classifications overlaid on the original SVG.
 - [Primitive strokes (SVG)](parser.strokes.svg) — Straight strokes extracted by the SVG parser.
