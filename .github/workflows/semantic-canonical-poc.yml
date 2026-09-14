@@ -65,6 +65,5 @@ jobs:
           publish_branch: semantic-artifacts
           publish_dir: ./artifacts
           destination_dir: kancheli-mangled
-          keep_files: false
-          force_orphan: true
+          keep_files: true
           commit_message: "Update semantic mangled Kancheli artifacts from ${{ github.sha }}"
