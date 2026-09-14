@@ -1,12 +1,13 @@
 TUPLET ANALYSIS
 
-candidates=2
-accepted=0
+candidates=3
+accepted=1
 corrected-from-stem-count=0
 rejected=2
 
 ACCEPTED TUPLETS
+shape-1106: DIGIT_5; attached-tuplet; m2 staff=1; classifier=71.4 %; displayed=5; ratio=5:4; corrected=False; beam=shape-1073; stems=[shape-539,shape-483,shape-533,shape-527,shape-515]; center-error=0.068sp; vertical-distance=0.850sp; confidence=81.3 %; DIGIT_5 at 71.4 %; matched beam shape-1073; center-error=0.068sp; vertical-distance=0.850sp; classifier number 5 agrees with the 5-stem beam group; ratio=5:4
 
 REJECTED TUPLET CANDIDATES
-shape-65: TUPLET_SIX; no-nearby-primary-beam; m6 staff=1; classifier=79.5 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet digit has no compatible level-1 beam group in the same measure
-shape-63.2: TUPLET_SIX; no-nearby-primary-beam; m18 staff=1; classifier=79.5 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet digit has no compatible level-1 beam group in the same measure
+shape-65: TUPLET_SIX; no-nearby-primary-beam; m6 staff=1; classifier=79.5 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet/digit candidate has no compatible level-1 beam group in the same measure
+shape-63.2: TUPLET_SIX; no-nearby-primary-beam; m18 staff=1; classifier=79.5 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet/digit candidate has no compatible level-1 beam group in the same measure
