@@ -1,6 +1,6 @@
 # When Almonds Blossomed - mangled - artifacts
 
-Commit: `5b8c71d6d45f79792e47c21bfce3ec3fd62ecac1`
+Commit: `ef59d54ee2eec2d8bcc82e630fe163c974755945`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Best choice for MuseScore; the browser should download it instead of displaying XML.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.
@@ -10,6 +10,8 @@ Commit: `5b8c71d6d45f79792e47c21bfce3ec3fd62ecac1`
 - [Run log](semantic-run.log) — Console trace from the semantic pipeline.
 - [Detected noteheads (SVG)](semantic.noteheads.svg) — Semantic NoteheadPass overlay: accepted filled noteheads are green, hollow noteheads blue, small-dot size cluster orange, off-grid ellipses gray.
 - [Notehead size ranking and decisions](semantic.noteheads.txt) — All ellipse candidates ranked by normalized size with small-dot split, staff-grid alignment and final NoteheadPass decision.
+- [Detected local accidentals (SVG)](semantic.accidentals.svg) — AccidentalPass overlay on top of notehead diagnostics: accepted accidentals are orange, explicit target noteheads have a solid orange ring, inherited targets a dashed orange ring.
+- [Accidental targets and propagation](semantic.accidentals.txt) — Classifier candidates, logical anchor matching, explicit notehead target and all noteheads affected until the next accidental on the same staff-step or measure end.
 - [Ownership coloring (SVG)](parser.ownership.svg) — Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.
 - [Classified symbols (SVG)](parser.classified-symbols.svg) — Audiveris symbol classifications overlaid on the original SVG.
 - [Primitive strokes (SVG)](parser.strokes.svg) — Straight strokes extracted by the SVG parser.

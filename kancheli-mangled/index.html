@@ -18,7 +18,7 @@
 <body>
   <h1>When Almonds Blossomed - mangled</h1>
   <div class="meta">Semantic interpreter run artifacts
-    <br>commit <code>5b8c71d6d45f79792e47c21bfce3ec3fd62ecac1</code>
+    <br>commit <code>ef59d54ee2eec2d8bcc82e630fe163c974755945</code>
   </div>
   <div class="artifact primary">
     <a href="kancheli.semantic.mxl" download>Compressed MusicXML (.mxl)</a>
@@ -51,6 +51,14 @@
   <div class="artifact">
     <a href="semantic.noteheads.txt" download>Notehead size ranking and decisions</a>
     <p>All ellipse candidates ranked by normalized size with small-dot split, staff-grid alignment and final NoteheadPass decision.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.accidentals.svg">Detected local accidentals (SVG)</a>
+    <p>AccidentalPass overlay on top of notehead diagnostics: accepted accidentals are orange, explicit target noteheads have a solid orange ring, inherited targets a dashed orange ring.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.accidentals.txt" download>Accidental targets and propagation</a>
+    <p>Classifier candidates, logical anchor matching, explicit notehead target and all noteheads affected until the next accidental on the same staff-step or measure end.</p>
   </div>
   <div class="artifact">
     <a href="parser.ownership.svg">Ownership coloring (SVG)</a>
