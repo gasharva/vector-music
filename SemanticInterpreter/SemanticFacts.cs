@@ -111,6 +111,27 @@ public sealed record PitchFact(
         Reason,
         SourceShapeIds);
 
+public sealed record StemAttachmentFact(
+    int MeasureNumber,
+    string StemShapeId,
+    StemDirection Direction,
+    IReadOnlyList<string> AttachedNoteheadIds,
+    IReadOnlyList<int> AttachedStaffs,
+    bool IsCrossStaff,
+    double StartX,
+    double StartY,
+    double EndX,
+    double EndY,
+    double LengthInSpacings,
+    double WidthInSpacings,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "StemAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
