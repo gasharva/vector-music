@@ -55,13 +55,43 @@ var fourthGeneration = new FourthGenerationOuterBandAssigner().AssignAndApply(
 notation = fourthGeneration.Scene;
 ownership = fourthGeneration.Ownership;
 
-Console.WriteLine("5. Building measure-oriented semantic scene...");
+Console.WriteLine("5. Writing SVG parser diagnostics...");
+const string parserBaseName = "parser";
+const string classifiedSymbolsFileName = "parser.classified-symbols.svg";
+const string ownershipSvgFileName = "parser.ownership.svg";
+const string ownershipDiagnosticsFileName = "parser.ownership.render-diagnostics.txt";
+
+new DebugSceneRenderer().RenderAll(
+    input,
+    notation,
+    outputDirectory,
+    parserBaseName);
+
+new SymbolClassificationDebugRenderer().Render(
+    input,
+    geometry,
+    notation,
+    Path.Combine(
+        outputDirectory,
+        classifiedSymbolsFileName));
+
+new LogicalOwnershipDebugRenderer().Render(
+    input,
+    geometry,
+    notation,
+    layout,
+    ownership,
+    Path.Combine(
+        outputDirectory,
+        ownershipSvgFileName));
+
+Console.WriteLine("6. Building measure-oriented semantic scene...");
 var semanticDocument = new MeasureSceneBuilder().Build(
     geometry,
     notation,
     layout);
 
-Console.WriteLine("6. Running granular semantic passes...");
+Console.WriteLine("7. Running granular semantic passes...");
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
@@ -70,7 +100,7 @@ var semanticPipeline = new SemanticPipeline(
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
-Console.WriteLine("7. Building CanonicalNotation v0.3 skeleton...");
+Console.WriteLine("8. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -91,7 +121,7 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("8. Writing MusicXML...");
+Console.WriteLine("9. Writing MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
@@ -99,7 +129,7 @@ new MusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
-Console.WriteLine("9. Writing compressed MusicXML (.mxl)...");
+Console.WriteLine("10. Writing compressed MusicXML (.mxl)...");
 var compressedMusicXmlPath = Path.Combine(
     outputDirectory,
     compressedMusicXmlFileName);
@@ -135,10 +165,17 @@ File.WriteAllLines(
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
-        $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}"
+        $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}",
+        $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
+        $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
+        $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
+        $"parser.contours={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".contours.svg"))}",
+        $"parser.classified={Path.GetFullPath(Path.Combine(outputDirectory, classifiedSymbolsFileName))}",
+        $"parser.ownership={Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}",
+        $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
 
-Console.WriteLine("10. Writing artifact index...");
+Console.WriteLine("11. Writing artifact index...");
 new ArtifactIndexWriter().Write(
     outputDirectory,
     input,
@@ -160,6 +197,7 @@ Console.WriteLine($"  keys     : {facts.OfType<KeySignatureFact>().Count()}");
 Console.WriteLine($"  canonical: {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML : {Path.GetFullPath(musicXmlPath)}");
 Console.WriteLine($"  MXL      : {Path.GetFullPath(compressedMusicXmlPath)}");
+Console.WriteLine($"  ownership: {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
 Console.WriteLine($"  index    : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
 return 0;
