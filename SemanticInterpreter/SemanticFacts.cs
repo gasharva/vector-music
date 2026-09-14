@@ -20,6 +20,33 @@ public sealed record ClefFact(
         Reason,
         SourceShapeIds);
 
+public sealed record TimeSignatureFact(
+    int MeasureNumber,
+    int Beats,
+    int BeatType,
+    double MinX,
+    double MaxX,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "TimeSignaturePass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record KeySignatureFact(
+    int MeasureNumber,
+    int Fifths,
+    string AccidentalKind,
+    int AccidentalCount,
+    double MinX,
+    double MaxX,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "KeySignaturePass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
