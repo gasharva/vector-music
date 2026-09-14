@@ -155,6 +155,38 @@ public sealed class ArtifactIndexWriter
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
+            "semantic.tuplets.svg",
+            "Detected tuplets (SVG)",
+            "TupletPass overlay on top of beam diagnostics: classifier tuplet digits are attached to nearby primary beam groups; corrected classifier numbers are highlighted and annotated with the inferred actual:normal ratio.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.tuplets.txt",
+            "Tuplet decisions",
+            "Classifier tuplet candidates, matched beam groups, stem counts, actual:normal ratios and any classifier-number correction inferred from the rhythmic stem group.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.dots.svg",
+            "Detected augmentation dots (SVG)",
+            "DotAttachmentPass overlay on top of tuplet diagnostics: accepted augmentation dots and their target noteheads are pink; rejected small ellipse candidates are faint gray.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.dots.txt",
+            "Augmentation-dot decisions",
+            "Small filled ellipse candidates, size band, target noteheads, horizontal/vertical geometry and rejected dot-like marks such as articulation dots.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
             "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
