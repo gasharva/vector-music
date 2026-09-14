@@ -121,11 +121,11 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("9. Writing MusicXML...");
+Console.WriteLine("9. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
-new MusicXmlWriter().Write(
+new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
