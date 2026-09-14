@@ -18,7 +18,7 @@
 <body>
   <h1>When Almonds Blossomed - mangled</h1>
   <div class="meta">Semantic interpreter run artifacts
-    <br>commit <code>d9d2407aa287be3d70f0ef2443ec981b7d2b90be</code>
+    <br>commit <code>6230d27285e3b2e9a8c80ab790f07c85df88d3f7</code>
   </div>
   <div class="artifact primary">
     <a href="kancheli.semantic.mxl" download>Compressed MusicXML (.mxl)</a>
@@ -45,7 +45,35 @@
     <p>Console trace from the semantic pipeline.</p>
   </div>
   <div class="artifact">
-    <a href="source.svg" download>Source SVG</a>
+    <a href="parser.ownership.svg">Ownership coloring (SVG)</a>
+    <p>Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.classified-symbols.svg">Classified symbols (SVG)</a>
+    <p>Audiveris symbol classifications overlaid on the original SVG.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.strokes.svg">Primitive strokes (SVG)</a>
+    <p>Straight strokes extracted by the SVG parser.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.arcs.svg">Primitive arcs (SVG)</a>
+    <p>Curved strokes and slur-like primitives extracted by the SVG parser.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.ellipses.svg">Ellipse-like primitives (SVG)</a>
+    <p>Filled and hollow ellipse-like primitives, including notehead candidates.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.contours.svg">Clustered contours (SVG)</a>
+    <p>Remaining contour instances with prototype labels.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.ownership.render-diagnostics.txt" download>Ownership renderer diagnostics</a>
+    <p>Per-shape ownership/rendering diagnostics used to distinguish analyzer misses from visualization problems.</p>
+  </div>
+  <div class="artifact">
+    <a href="source.svg">Source SVG</a>
     <p>Exact SVG input used for this run.</p>
   </div>
   <div class="artifact">
