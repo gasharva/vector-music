@@ -87,6 +87,30 @@ public sealed record AccidentalFact(
         Reason,
         SourceShapeIds);
 
+public sealed record PitchFact(
+    int MeasureNumber,
+    int Staff,
+    string NoteheadId,
+    string Step,
+    int Octave,
+    int Alter,
+    string Pitch,
+    int StaffStep,
+    string ClefSign,
+    int ClefLine,
+    string ClefShapeId,
+    int KeyFifths,
+    string? ActiveAccidentalShapeId,
+    AccidentalKind? ActiveAccidentalKind,
+    bool IsAccidentalExplicit,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "PitchPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
