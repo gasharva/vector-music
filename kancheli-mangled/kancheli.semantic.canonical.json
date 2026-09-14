@@ -1,0 +1,172 @@
+{
+  "format": "CanonicalNotation",
+  "version": "0.3",
+  "metadata": {
+    "title": "When Almonds Blossomed - mangled",
+    "composer": "Giya Kancheli"
+  },
+  "parts": [
+    {
+      "id": "P1",
+      "name": "Piano",
+      "measures": [
+        {
+          "number": 1,
+          "events": [],
+          "attributes": {
+            "time": {
+              "beats": 3,
+              "beatType": 4
+            },
+            "key": {
+              "fifths": -4
+            },
+            "staves": 2,
+            "clefs": [
+              {
+                "staff": 1,
+                "sign": "G",
+                "line": 2
+              },
+              {
+                "staff": 2,
+                "sign": "F",
+                "line": 4
+              }
+            ]
+          }
+        },
+        {
+          "number": 2,
+          "events": []
+        },
+        {
+          "number": 3,
+          "events": []
+        },
+        {
+          "number": 4,
+          "events": []
+        },
+        {
+          "number": 5,
+          "events": []
+        },
+        {
+          "number": 6,
+          "events": [],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 7,
+          "events": []
+        },
+        {
+          "number": 8,
+          "events": []
+        },
+        {
+          "number": 9,
+          "events": []
+        },
+        {
+          "number": 10,
+          "events": []
+        },
+        {
+          "number": 11,
+          "events": [],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 12,
+          "events": []
+        },
+        {
+          "number": 13,
+          "events": []
+        },
+        {
+          "number": 14,
+          "events": []
+        },
+        {
+          "number": 15,
+          "events": []
+        },
+        {
+          "number": 16,
+          "events": []
+        },
+        {
+          "number": 17,
+          "events": []
+        },
+        {
+          "number": 18,
+          "events": [],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 19,
+          "events": []
+        },
+        {
+          "number": 20,
+          "events": []
+        },
+        {
+          "number": 21,
+          "events": []
+        },
+        {
+          "number": 22,
+          "events": []
+        },
+        {
+          "number": 23,
+          "events": [],
+          "layout": {
+            "breakBefore": "system"
+          }
+        },
+        {
+          "number": 24,
+          "events": []
+        },
+        {
+          "number": 25,
+          "events": []
+        },
+        {
+          "number": 26,
+          "events": []
+        },
+        {
+          "number": 27,
+          "events": []
+        },
+        {
+          "number": 28,
+          "events": []
+        }
+      ]
+    }
+  ],
+  "relations": {
+    "beams": [],
+    "ties": [],
+    "slurs": [],
+    "tuplets": [],
+    "arpeggios": [],
+    "hairpins": [],
+    "pedals": [],
+    "octaveShifts": []
+  }
+}

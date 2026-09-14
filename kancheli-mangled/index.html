@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When Almonds Blossomed - mangled - artifacts</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.45; }
+    h1 { margin-bottom: 0.25rem; }
+    .meta { color: #666; margin-bottom: 2rem; }
+    .artifact { border: 1px solid #ddd; border-radius: 10px; padding: 14px 16px; margin: 12px 0; }
+    .artifact.primary { border-width: 2px; }
+    .artifact a { font-size: 1.05rem; font-weight: 650; }
+    .artifact p { margin: 0.4rem 0 0; color: #555; }
+    code { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <h1>When Almonds Blossomed - mangled</h1>
+  <div class="meta">Semantic interpreter run artifacts
+    <br>commit <code>46afae0205851ff2afd241948cfe89f92f21d7e7</code>
+  </div>
+  <div class="artifact primary">
+    <a href="kancheli.semantic.mxl" download>Compressed MusicXML (.mxl)</a>
+    <p>Best choice for MuseScore; the browser should download it instead of displaying XML.</p>
+  </div>
+  <div class="artifact">
+    <a href="kancheli.semantic.musicxml" download>MusicXML (.musicxml)</a>
+    <p>Generated MusicXML before compression.</p>
+  </div>
+  <div class="artifact">
+    <a href="kancheli.semantic.canonical.json" download>CanonicalNotation JSON</a>
+    <p>Canonical v0.3 produced by the semantic passes.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic-facts.txt" download>Semantic facts</a>
+    <p>Facts and evidence emitted by individual semantic passes.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic-summary.txt" download>Run summary</a>
+    <p>Counts and output paths from the semantic run.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic-run.log" download>Run log</a>
+    <p>Console trace from the semantic pipeline.</p>
+  </div>
+  <div class="artifact">
+    <a href="source.svg" download>Source SVG</a>
+    <p>Exact SVG input used for this run.</p>
+  </div>
+  <div class="artifact">
+    <a href="source.musicxml" download>Reference source MusicXML</a>
+    <p>MuseScore source used as a visual and semantic oracle for this fixture.</p>
+  </div>
+</body>
+</html>

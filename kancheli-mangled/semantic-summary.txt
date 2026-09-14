@@ -1,0 +1,16 @@
+input=/home/runner/work/vector-music/vector-music/Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg
+geometry.shapes=1353
+notation.instances=254
+notation.strokes=641
+notation.curves=36
+notation.ellipses=412
+ownership.assignments=1257
+semantic.measures=28
+semantic.facts=12
+semantic.clefs=10
+semantic.times=1
+semantic.keys=1
+canonical.measures=28
+canonical.path=/home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.canonical.json
+musicxml.path=/home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.musicxml
+mxl.path=/home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.mxl

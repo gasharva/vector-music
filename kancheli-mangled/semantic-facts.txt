@@ -1,0 +1,28 @@
+SEMANTIC PASS TRACE
+ClefPass: added 10 fact(s); total=10
+TimeSignaturePass: added 1 fact(s); total=11
+KeySignaturePass: added 1 fact(s); total=12
+CanonicalBuilder: m1 staff 1 clef=G2 from shape-978
+CanonicalBuilder: m1 staff 2 clef=F4 from shape-981.2
+CanonicalBuilder: m1 time=3/4
+CanonicalBuilder: m1 key fifths=-4
+
+FACTS
+clef m1 staff=1 G2 x=316.66 confidence=99.9 % shape=shape-978; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-1+staff-pair-1-measure-1
+clef m1 staff=2 F4 x=311.26 confidence=98.6 % shape=shape-981.2; reason=Audiveris F_CLEF at 98.6 %; logical owner=staff-2+staff-pair-1-measure-1
+clef m6 staff=1 G2 x=196.19 confidence=99.9 % shape=shape-979; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-3+staff-pair-2-measure-1
+clef m6 staff=2 F4 x=190.79 confidence=98.6 % shape=shape-985.2; reason=Audiveris F_CLEF at 98.6 %; logical owner=staff-4+staff-pair-2-measure-1
+clef m11 staff=1 G2 x=196.19 confidence=99.9 % shape=shape-980; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-5+staff-pair-3-measure-1
+clef m11 staff=2 F4 x=190.79 confidence=98.6 % shape=shape-982.2; reason=Audiveris F_CLEF at 98.6 %; logical owner=staff-6+staff-pair-3-measure-1
+clef m18 staff=1 G2 x=196.19 confidence=99.9 % shape=shape-976; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-7+staff-pair-4-measure-1
+clef m18 staff=2 F4 x=190.79 confidence=98.6 % shape=shape-983.2; reason=Audiveris F_CLEF at 98.6 %; logical owner=staff-8+staff-pair-4-measure-1
+clef m23 staff=1 G2 x=196.19 confidence=99.9 % shape=shape-977; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-9+staff-pair-5-measure-1
+clef m23 staff=2 F4 x=190.79 confidence=98.6 % shape=shape-984.2; reason=Audiveris F_CLEF at 98.6 %; logical owner=staff-10+staff-pair-5-measure-1
+time m1 3/4 x=497.94..539.19; shapes=shape-1027,shape-1026,shape-1029,shape-1028; reason=Both staves independently read as 3/4; only common signatures are accepted; no inference fallback is used.
+key m1 fifths=-4 kind=flat count=4 x=373.90..473.81; shapes=shape-990,shape-991,shape-992,shape-993,shape-1022,shape-1023,shape-1024,shape-1025; reason=Both staves independently match the canonical flat key-signature relative position sequence with 4 symbol(s); fifths=-4.
+
+BUILD TRACE
+CanonicalBuilder: m1 staff 1 clef=G2 from shape-978
+CanonicalBuilder: m1 staff 2 clef=F4 from shape-981.2
+CanonicalBuilder: m1 time=3/4
+CanonicalBuilder: m1 key fifths=-4

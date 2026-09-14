@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<score-partwise version="4.0">
+  <work>
+    <work-title>When Almonds Blossomed - mangled</work-title>
+  </work>
+  <identification>
+    <creator type="composer">Giya Kancheli</creator>
+  </identification>
+  <part-list>
+    <score-part id="P1">
+      <part-name>Piano</part-name>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <attributes>
+        <divisions>1</divisions>
+        <key>
+          <fifths>-4</fifths>
+        </key>
+        <time>
+          <beats>3</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <staves>2</staves>
+        <clef number="1">
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <clef number="2">
+          <sign>F</sign>
+          <line>4</line>
+        </clef>
+      </attributes>
+    </measure>
+    <measure number="2" />
+    <measure number="3" />
+    <measure number="4" />
+    <measure number="5" />
+    <measure number="6">
+      <print new-system="yes" />
+    </measure>
+    <measure number="7" />
+    <measure number="8" />
+    <measure number="9" />
+    <measure number="10" />
+    <measure number="11">
+      <print new-system="yes" />
+    </measure>
+    <measure number="12" />
+    <measure number="13" />
+    <measure number="14" />
+    <measure number="15" />
+    <measure number="16" />
+    <measure number="17" />
+    <measure number="18">
+      <print new-system="yes" />
+    </measure>
+    <measure number="19" />
+    <measure number="20" />
+    <measure number="21" />
+    <measure number="22" />
+    <measure number="23">
+      <print new-system="yes" />
+    </measure>
+    <measure number="24" />
+    <measure number="25" />
+    <measure number="26" />
+    <measure number="27" />
+    <measure number="28" />
+  </part>
+</score-partwise>
