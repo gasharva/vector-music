@@ -153,7 +153,7 @@ public sealed class TupletAnalyzer
             return Rejected(
                 candidate,
                 "no-nearby-primary-beam",
-                "classified tuplet digit has no compatible level-1 beam group in the same measure");
+                "classified tuplet/digit candidate has no compatible level-1 beam group in the same measure");
         }
 
         var best = matches[0];
@@ -311,13 +311,23 @@ public sealed class TupletAnalyzer
 
     private static int? TryReadTupletNumber(string label)
     {
-        const string prefix = "TUPLET_";
-        if (!label.StartsWith(prefix, StringComparison.Ordinal))
+        const string tupletPrefix = "TUPLET_";
+        const string digitPrefix = "DIGIT_";
+        string? suffix = null;
+
+        if (label.StartsWith(tupletPrefix, StringComparison.Ordinal))
+        {
+            suffix = label[tupletPrefix.Length..];
+        }
+        else if (label.StartsWith(digitPrefix, StringComparison.Ordinal))
+        {
+            suffix = label[digitPrefix.Length..];
+        }
+
+        if (suffix is null)
         {
             return null;
         }
-
-        var suffix = label[prefix.Length..];
 
         if (int.TryParse(suffix, out var numeric)
             && numeric >= MinimumPlausibleTupletCount
