@@ -75,6 +75,22 @@ public sealed class ArtifactIndexWriter
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
+            "semantic.noteheads.svg",
+            "Detected noteheads (SVG)",
+            "Semantic NoteheadPass overlay: accepted filled noteheads are green, hollow noteheads blue, small-dot size cluster orange, off-grid ellipses gray.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.noteheads.txt",
+            "Notehead size ranking and decisions",
+            "All ellipse candidates ranked by normalized size with small-dot split, staff-grid alignment and final NoteheadPass decision.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
             "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
