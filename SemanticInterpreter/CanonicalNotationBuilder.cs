@@ -16,6 +16,14 @@ public sealed class CanonicalNotationBuilder
             .ToDictionary(
                 group => group.Key,
                 group => group.ToArray());
+        var timeFacts = facts
+            .OfType<TimeSignatureFact>()
+            .ToDictionary(
+                fact => fact.MeasureNumber);
+        var keyFacts = facts
+            .OfType<KeySignatureFact>()
+            .ToDictionary(
+                fact => fact.MeasureNumber);
 
         var currentClefs = new Dictionary<int, Clef>();
         var measures = new List<Measure>();
@@ -60,11 +68,39 @@ public sealed class CanonicalNotationBuilder
                 }
             }
 
+            TimeSignature? time = null;
+            KeySignature? key = null;
+
+            if (timeFacts.TryGetValue(measure.Number, out var timeFact))
+            {
+                time = new TimeSignature(
+                    timeFact.Beats,
+                    timeFact.BeatType);
+
+                facts.AddTrace(
+                    $"CanonicalBuilder: m{measure.Number} "
+                    + $"time={timeFact.Beats}/{timeFact.BeatType}");
+            }
+
+            if (keyFacts.TryGetValue(measure.Number, out var keyFact))
+            {
+                key = new KeySignature(keyFact.Fifths);
+
+                facts.AddTrace(
+                    $"CanonicalBuilder: m{measure.Number} "
+                    + $"key fifths={keyFact.Fifths}");
+            }
+
             MeasureAttributes? attributes = null;
 
-            if (measure.Number == 1 || clefChanges.Count > 0)
+            if (measure.Number == 1
+                || clefChanges.Count > 0
+                || time is not null
+                || key is not null)
             {
                 attributes = new MeasureAttributes(
+                    Time: time,
+                    Key: key,
                     Staves: measure.Number == 1 ? 2 : null,
                     Clefs: clefChanges.Count > 0
                         ? clefChanges
