@@ -15,12 +15,13 @@ Downloading official Audiveris basic-classifier.zip...
 
 Semantic interpretation complete:
   measures   : 28
-  facts      : 354
+  facts      : 655
   clefs      : 10
   times      : 1
   keys       : 1
   noteheads  : 301
   accidentals: 41
+  pitches    : 301
   canonical  : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.canonical.json
   MusicXML   : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.musicxml
   MXL        : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.mxl
