@@ -21,7 +21,8 @@ public sealed record StaffMeasureScene(
     string StaffId,
     BoundsD StaffBounds,
     double LineSpacing,
-    IReadOnlyList<SemanticElement> Elements);
+    IReadOnlyList<SemanticElement> Elements,
+    IReadOnlyList<LedgerLevelLayout>? LedgerLevels = null);
 
 public abstract record SemanticElement
 {
