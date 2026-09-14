@@ -81,7 +81,7 @@ public sealed class CompressedMusicXmlWriter
             CompressionLevel.Optimal);
 
         using var stream = entry.Open();
-        new MusicXmlWriter()
+        new MuseScoreCompatibleMusicXmlWriter()
             .Write(score)
             .Save(stream);
     }
