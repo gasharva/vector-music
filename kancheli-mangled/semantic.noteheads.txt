@@ -1,0 +1,724 @@
+NOTEHEAD ANALYSIS
+
+SIZE PROFILE
+ellipses=402
+small-dot-cluster=True
+threshold=0.694 staff-spaces
+small-count=88
+notehead-band-count=314
+small-median=0.400 staff-spaces
+notehead-median=1.145 staff-spaces
+
+RANKED BY NORMALIZED ELLIPSE SIZE
+rank  size(sp)  decision                 measure staff step  grid-error  fill    shape
+   1     0.313  small-dot-size-cluster         1     1   -7       0.111  filled  shape-1040
+   2     0.350  small-dot-size-cluster        21     2   14       0.132  filled  shape-1134.2
+   3     0.350  small-dot-size-cluster        20     2   14       0.132  filled  shape-1138.2
+   4     0.350  small-dot-size-cluster        14     1  -14       0.066  filled  shape-1126.2
+   5     0.350  small-dot-size-cluster        23     2   14       0.133  filled  shape-1140.2
+   6     0.350  small-dot-size-cluster        18     2   14       0.132  filled  shape-1124.2
+   7     0.350  small-dot-size-cluster        19     2   14       0.132  filled  shape-1132.2
+   8     0.350  small-dot-size-cluster        25     2   14       0.133  filled  shape-1142.2
+   9     0.350  small-dot-size-cluster        11     2   13       0.478  filled  shape-1128.2
+  10     0.350  small-dot-size-cluster        13     2   13       0.478  filled  shape-1136.2
+  11     0.350  small-dot-size-cluster        17     2   13       0.478  filled  shape-1130.2
+  12     0.400  small-dot-size-cluster        15     1   -9       0.001  filled  shape-1146
+  13     0.400  small-dot-size-cluster        14     1   -5       0.001  filled  shape-1148
+  14     0.400  small-dot-size-cluster        16     1   -3       0.000  filled  shape-1150
+  15     0.400  small-dot-size-cluster        16     1   -3       0.000  filled  shape-1152
+  16     0.400  small-dot-size-cluster        16     1   -5       0.001  filled  shape-1156
+  17     0.400  small-dot-size-cluster        16     1    1       0.000  filled  shape-1164
+  18     0.400  small-dot-size-cluster        15     1   -3       0.000  filled  shape-1167
+  19     0.400  small-dot-size-cluster        14     1    1       0.000  filled  shape-1171
+  20     0.400  small-dot-size-cluster        14     1    3       0.000  filled  shape-1172
+  21     0.400  small-dot-size-cluster        15     1    1       0.000  filled  shape-1173
+  22     0.400  small-dot-size-cluster        14     1    5       0.000  filled  shape-1174
+  23     0.400  small-dot-size-cluster         4     2    1       0.000  filled  shape-1178
+  24     0.400  small-dot-size-cluster         4     2   -5       0.000  filled  shape-1179
+  25     0.400  small-dot-size-cluster         5     2   -3       0.000  filled  shape-1181
+  26     0.400  small-dot-size-cluster         2     2   -1       0.000  filled  shape-1182
+  27     0.400  small-dot-size-cluster         2     2   -7       0.000  filled  shape-1187
+  28     0.400  small-dot-size-cluster         3     2   -3       0.000  filled  shape-1201
+  29     0.400  small-dot-size-cluster         3     2   -5       0.000  filled  shape-1203
+  30     0.400  small-dot-size-cluster         5     2   -7       0.000  filled  shape-1208
+  31     0.400  small-dot-size-cluster         3     2    3       0.000  filled  shape-1209
+  32     0.400  small-dot-size-cluster         1     2   -9       0.000  filled  shape-1211
+  33     0.400  small-dot-size-cluster         3     2   -1       0.000  filled  shape-1213
+  34     0.400  small-dot-size-cluster         1     2   -5       0.000  filled  shape-1214
+  35     0.400  small-dot-size-cluster        10     2   -7       0.000  filled  shape-1189
+  36     0.400  small-dot-size-cluster        10     2   -1       0.001  filled  shape-1193
+  37     0.400  small-dot-size-cluster         9     2    3       0.001  filled  shape-1205
+  38     0.400  small-dot-size-cluster         9     2   -3       0.000  filled  shape-1212
+  39     0.400  small-dot-size-cluster         7     2    7       0.000  filled  shape-1216
+  40     0.400  small-dot-size-cluster        12     1    5       0.000  filled  shape-1158
+  41     0.400  small-dot-size-cluster        12     1    1       0.000  filled  shape-1159
+  42     0.400  small-dot-size-cluster        12     1    3       0.000  filled  shape-1160
+  43     0.400  small-dot-size-cluster         6     2    1       0.000  filled  shape-1200
+  44     0.400  small-dot-size-cluster         6     2   -5       0.001  filled  shape-1204
+  45     0.400  small-dot-size-cluster        25     1    1       0.000  filled  shape-1144
+  46     0.400  small-dot-size-cluster        25     1   -1       0.000  filled  shape-1145
+  47     0.400  small-dot-size-cluster        27     1   -1       0.000  filled  shape-1155
+  48     0.400  small-dot-size-cluster        26     2   -7       0.000  filled  shape-1180
+  49     0.400  small-dot-size-cluster        27     2   -3       0.000  filled  shape-1192
+  50     0.400  small-dot-size-cluster        27     2   -7       0.000  filled  shape-1194
+  51     0.400  small-dot-size-cluster        24     2   -9       0.001  filled  shape-1196
+  52     0.400  small-dot-size-cluster        24     2   -7       0.000  filled  shape-1197
+  53     0.400  small-dot-size-cluster        24     2   -5       0.000  filled  shape-1198
+  54     0.400  small-dot-size-cluster        24     2   -3       0.000  filled  shape-1199
+  55     0.400  small-dot-size-cluster        22     2   -3       0.000  filled  shape-1202
+  56     0.400  small-dot-size-cluster        26     2   -1       0.000  filled  shape-1206
+  57     0.400  small-dot-size-cluster        24     2    1       0.000  filled  shape-1207
+  58     0.400  small-dot-size-cluster        22     2   -9       0.001  filled  shape-1210
+  59     0.400  small-dot-size-cluster        21     1   -3       0.000  filled  shape-1153
+  60     0.400  small-dot-size-cluster         5     1    1       0.000  filled  shape-1149
+  61     0.400  small-dot-size-cluster         2     1   -1       0.000  filled  shape-1154
+  62     0.400  small-dot-size-cluster         4     1    5       0.000  filled  shape-1157
+  63     0.400  small-dot-size-cluster         5     1    5       0.000  filled  shape-1163
+  64     0.400  small-dot-size-cluster         2     1    5       0.000  filled  shape-1165
+  65     0.400  small-dot-size-cluster         4     1    3       0.000  filled  shape-1166
+  66     0.400  small-dot-size-cluster         2     1    3       0.000  filled  shape-1170
+  67     0.400  small-dot-size-cluster         3     1    5       0.000  filled  shape-1175
+  68     0.400  small-dot-size-cluster         3     1    3       0.000  filled  shape-1177
+  69     0.400  small-dot-size-cluster         7     1    1       0.001  filled  shape-1151
+  70     0.400  small-dot-size-cluster        10     1    3       0.000  filled  shape-1161
+  71     0.400  small-dot-size-cluster         9     1    3       0.000  filled  shape-1162
+  72     0.400  small-dot-size-cluster        10     1   -1       0.000  filled  shape-1169
+  73     0.400  small-dot-size-cluster         6     1   -1       0.000  filled  shape-1147
+  74     0.400  small-dot-size-cluster         6     1    3       0.000  filled  shape-1168
+  75     0.400  small-dot-size-cluster         6     1    5       0.000  filled  shape-1176
+  76     0.400  small-dot-size-cluster        15     2    1       0.001  filled  shape-1183
+  77     0.400  small-dot-size-cluster        13     2   -5       0.001  filled  shape-1185
+  78     0.400  small-dot-size-cluster        13     2   -3       0.001  filled  shape-1188
+  79     0.400  small-dot-size-cluster        14     2    1       0.001  filled  shape-1190
+  80     0.400  small-dot-size-cluster        15     2  -11       0.001  filled  shape-1195
+  81     0.400  small-dot-size-cluster        16     2    5       0.000  filled  shape-1215
+  82     0.400  small-dot-size-cluster        12     2    1       0.001  filled  shape-1184
+  83     0.400  small-dot-size-cluster        13     2   -3       0.001  filled  shape-1186
+  84     0.400  small-dot-size-cluster        11     2   -5       0.001  filled  shape-1191
+  85     0.420  small-dot-size-cluster        27     2    3       0.000  filled  shape-125
+  86     0.420  small-dot-size-cluster        27     2    5       0.000  filled  shape-126
+  87     0.420  small-dot-size-cluster        27     1    3       0.000  filled  shape-86
+  88     0.420  small-dot-size-cluster        27     1    5       0.000  filled  shape-87
+  89     1.145  notehead                      12     1   -4       0.004  filled  shape-683
+  90     1.145  notehead                      14     1   -4       0.004  filled  shape-696
+  91     1.145  notehead                      12     1   -3       0.004  filled  shape-708
+  92     1.145  notehead                      12     1   -3       0.004  filled  shape-680
+  93     1.145  notehead                      14     1   -3       0.004  filled  shape-734
+  94     1.145  notehead                      12     1   -4       0.004  filled  shape-684
+  95     1.145  notehead                       7     2   -3       0.004  filled  shape-916
+  96     1.145  notehead                      16     1   -5       0.003  filled  shape-692
+  97     1.145  notehead                      14     1   -4       0.004  filled  shape-697
+  98     1.145  notehead                      16     1   -4       0.004  filled  shape-704
+  99     1.145  notehead                      14     1   -4       0.004  filled  shape-721
+ 100     1.145  notehead                      14     1   -6       0.004  filled  shape-722
+ 101     1.145  notehead                      15     1   -4       0.004  filled  shape-737
+ 102     1.145  notehead                      14     1   -5       0.003  filled  shape-754
+ 103     1.145  notehead                      14     1   -4       0.004  filled  shape-761
+ 104     1.145  notehead                      16     1   -3       0.004  filled  shape-779
+ 105     1.145  notehead                      14     1   -5       0.003  filled  shape-784
+ 106     1.145  notehead                      15     1   -4       0.004  filled  shape-804
+ 107     1.145  notehead                      15     1   -5       0.003  filled  shape-738
+ 108     1.145  notehead                      23     1   -5       0.004  filled  shape-700
+ 109     1.145  notehead                      23     1   -4       0.004  filled  shape-764
+ 110     1.145  notehead                      23     1   -5       0.004  filled  shape-775
+ 111     1.145  notehead                      18     2   -2       0.004  filled  shape-852
+ 112     1.145  notehead                      18     2   -3       0.004  filled  shape-853
+ 113     1.145  notehead                      19     2    0       0.004  filled  shape-858
+ 114     1.145  notehead                      19     2   -4       0.003  filled  shape-859
+ 115     1.145  notehead                      23     2   -6       0.004  filled  shape-927
+ 116     1.145  notehead                      23     2   -7       0.004  filled  shape-929
+ 117     1.145  notehead                      23     1   -4       0.004  filled  shape-710
+ 118     1.145  notehead                      18     2    6       0.004  filled  shape-849
+ 119     1.145  notehead                      23     2   -2       0.004  filled  shape-891
+ 120     1.145  notehead                      23     2    2       0.004  filled  shape-925
+ 121     1.145  notehead                      23     1   -3       0.004  filled  shape-760
+ 122     1.145  notehead                      23     1   -4       0.004  filled  shape-762
+ 123     1.145  notehead                      18     2   -4       0.003  filled  shape-854
+ 124     1.145  notehead                      18     2  -10       0.004  filled  shape-855
+ 125     1.145  notehead                       8     2   -7       0.004  filled  shape-860
+ 126     1.145  notehead                       8     2   -6       0.004  filled  shape-861
+ 127     1.145  notehead                       8     2   -5       0.003  filled  shape-862
+ 128     1.145  notehead                       8     2   -4       0.004  filled  shape-863
+ 129     1.145  notehead                       8     2   -3       0.004  filled  shape-864
+ 130     1.145  notehead                       8     2   -6       0.004  filled  shape-867
+ 131     1.145  notehead                       8     2   -5       0.003  filled  shape-868
+ 132     1.145  notehead                       8     2   -4       0.004  filled  shape-869
+ 133     1.145  notehead                       8     2   -3       0.004  filled  shape-870
+ 134     1.145  notehead                       8     2   -6       0.004  filled  shape-875
+ 135     1.145  notehead                       8     2   -5       0.003  filled  shape-876
+ 136     1.145  notehead                       8     2   -4       0.004  filled  shape-877
+ 137     1.145  notehead                       8     2   -3       0.004  filled  shape-878
+ 138     1.145  notehead                       8     2   -6       0.004  filled  shape-879
+ 139     1.145  notehead                       8     2   -5       0.003  filled  shape-880
+ 140     1.145  notehead                       8     2   -4       0.004  filled  shape-881
+ 141     1.145  notehead                       8     2   -3       0.004  filled  shape-882
+ 142     1.145  notehead                       8     2   -6       0.004  filled  shape-885
+ 143     1.145  notehead                       8     2   -5       0.003  filled  shape-886
+ 144     1.145  notehead                       8     2   -4       0.004  filled  shape-888
+ 145     1.145  notehead                       8     2   -3       0.004  filled  shape-889
+ 146     1.145  notehead                       8     2   -6       0.004  filled  shape-892
+ 147     1.145  notehead                       8     2   -5       0.003  filled  shape-893
+ 148     1.145  notehead                       8     2   -4       0.004  filled  shape-894
+ 149     1.145  notehead                       8     2   -3       0.004  filled  shape-900
+ 150     1.145  notehead                       7     2   -6       0.004  filled  shape-901
+ 151     1.145  notehead                       7     2   -5       0.003  filled  shape-902
+ 152     1.145  notehead                       7     2   -4       0.004  filled  shape-903
+ 153     1.145  notehead                       7     2   -3       0.004  filled  shape-904
+ 154     1.145  notehead                       7     2   -5       0.003  filled  shape-905
+ 155     1.145  notehead                       7     2   -4       0.004  filled  shape-906
+ 156     1.145  notehead                       7     2   -3       0.004  filled  shape-908
+ 157     1.145  notehead                       7     2   -5       0.003  filled  shape-910
+ 158     1.145  notehead                       7     2   -4       0.004  filled  shape-911
+ 159     1.145  notehead                      16     1   -3       0.004  filled  shape-679
+ 160     1.145  notehead                      16     1   -4       0.004  filled  shape-685
+ 161     1.145  notehead                       7     2   -3       0.004  filled  shape-913
+ 162     1.145  notehead                       7     2   -3       0.004  filled  shape-915
+ 163     1.145  notehead                      16     1   -4       0.004  filled  shape-687
+ 164     1.145  notehead                      17     1    1       0.004  filled  shape-695
+ 165     1.145  notehead                      17     1   -2       0.004  filled  shape-706
+ 166     1.145  notehead                      18     2    2       0.004  filled  shape-851
+ 167     1.145  notehead                      24     1    0       0.004  filled  shape-728
+ 168     1.145  notehead                      24     1   -1       0.004  filled  shape-730
+ 169     1.145  notehead                      24     1   -1       0.004  filled  shape-731
+ 170     1.145  notehead                      24     1   -2       0.004  filled  shape-732
+ 171     1.145  notehead                      24     1   -2       0.004  filled  shape-740
+ 172     1.145  notehead                      24     1   -3       0.004  filled  shape-751
+ 173     1.145  notehead                      19     2   -8       0.003  filled  shape-865
+ 174     1.145  notehead                      19     2   -9       0.003  filled  shape-866
+ 175     1.145  notehead                      20     2    2       0.004  filled  shape-883
+ 176     1.145  notehead                      20     2   -2       0.004  filled  shape-884
+ 177     1.145  notehead                      20     2   -6       0.004  filled  shape-887
+ 178     1.145  notehead                      20     2   -7       0.004  filled  shape-890
+ 179     1.145  notehead                      25     2    3       0.004  filled  shape-946
+ 180     1.145  notehead                      25     2   -3       0.004  filled  shape-949
+ 181     1.145  notehead                      25     2   -5       0.004  filled  shape-950
+ 182     1.145  notehead                      25     2   -6       0.004  filled  shape-951
+ 183     1.145  notehead                      25     2   -8       0.004  filled  shape-952
+ 184     1.145  notehead                      18     1   -2       0.004  filled  shape-757
+ 185     1.145  notehead                      19     1   -6       0.004  filled  shape-765
+ 186     1.145  notehead                      18     1    0       0.004  filled  shape-835
+ 187     1.145  notehead                      27     1   -1       0.004  filled  shape-682
+ 188     1.145  notehead                      27     1    0       0.004  filled  shape-693
+ 189     1.145  notehead                      27     1   -1       0.004  filled  shape-715
+ 190     1.145  notehead                      27     1    0       0.004  filled  shape-716
+ 191     1.145  notehead                      26     1    1       0.004  filled  shape-755
+ 192     1.145  notehead                      21     2    1       0.004  filled  shape-907
+ 193     1.145  notehead                      21     2   -5       0.003  filled  shape-909
+ 194     1.145  notehead                      21     2   -8       0.003  filled  shape-912
+ 195     1.145  notehead                      21     2   -9       0.003  filled  shape-914
+ 196     1.145  notehead                      21     2  -10       0.004  filled  shape-917
+ 197     1.145  notehead                      25     2  -10       0.004  filled  shape-953
+ 198     1.145  notehead                      18     1   -1       0.003  filled  shape-833
+ 199     1.145  notehead                      19     1   -5       0.003  filled  shape-690
+ 200     1.145  notehead                      20     1   -4       0.004  filled  shape-691
+ 201     1.145  notehead                      20     1   -5       0.003  filled  shape-702
+ 202     1.145  notehead                      20     1   -4       0.004  filled  shape-753
+ 203     1.145  notehead                      19     1   -7       0.004  filled  shape-774
+ 204     1.145  notehead                      20     1   -3       0.004  filled  shape-786
+ 205     1.145  notehead                      19     1   -7       0.004  filled  shape-787
+ 206     1.145  notehead                      20     1   -3       0.004  filled  shape-794
+ 207     1.145  notehead                      19     1   -6       0.004  filled  shape-800
+ 208     1.145  notehead                      19     1   -6       0.004  filled  shape-803
+ 209     1.145  notehead                      22     1   -1       0.003  filled  shape-705
+ 210     1.145  notehead                      20     1   -2       0.004  filled  shape-801
+ 211     1.145  notehead                      21     1   10       0.145  filled  shape-919
+ 212     1.145  notehead                       1     1    0       0.004  filled  shape-713
+ 213     1.145  notehead                       1     1    0       0.004  filled  shape-707
+ 214     1.145  notehead                       1     1   -1       0.004  filled  shape-711
+ 215     1.145  notehead                       1     1   -1       0.004  filled  shape-712
+ 216     1.145  notehead                       2     1    0       0.004  filled  shape-714
+ 217     1.145  notehead                       2     1    0       0.004  filled  shape-733
+ 218     1.145  notehead                       2     1   -1       0.004  filled  shape-725
+ 219     1.145  notehead                       2     1   -1       0.004  filled  shape-726
+ 220     1.145  notehead                       2     1    1       0.004  filled  shape-729
+ 221     1.145  notehead                       2     1    1       0.004  filled  shape-735
+ 222     1.145  notehead                       2     1    2       0.004  filled  shape-742
+ 223     1.145  notehead                       2     1    1       0.004  filled  shape-743
+ 224     1.145  notehead                       3     1    1       0.004  filled  shape-748
+ 225     1.145  notehead                       3     1    0       0.004  filled  shape-766
+ 226     1.145  notehead                       3     1    0       0.004  filled  shape-767
+ 227     1.145  notehead                       3     1    1       0.004  filled  shape-768
+ 228     1.145  notehead                       5     1    0       0.004  filled  shape-744
+ 229     1.145  notehead                       4     1    1       0.004  filled  shape-769
+ 230     1.145  notehead                       4     1    0       0.004  filled  shape-788
+ 231     1.145  notehead                       5     1    1       0.004  filled  shape-792
+ 232     1.145  notehead                       5     1    0       0.004  filled  shape-703
+ 233     1.145  notehead                       5     1   -1       0.004  filled  shape-763
+ 234     1.145  notehead                       6     1    1       0.005  filled  shape-802
+ 235     1.145  notehead                       8     1    0       0.004  filled  shape-778
+ 236     1.145  notehead                       8     1    2       0.004  filled  shape-781
+ 237     1.145  notehead                       8     1    4       0.004  filled  shape-783
+ 238     1.145  notehead                       7     1    7       0.004  filled  shape-827
+ 239     1.145  notehead                       7     1    5       0.004  filled  shape-829
+ 240     1.145  notehead                       6     1   -1       0.004  filled  shape-785
+ 241     1.145  notehead                       6     1    0       0.004  filled  shape-776
+ 242     1.145  notehead                       6     1    0       0.004  filled  shape-777
+ 243     1.145  notehead                       8     1    5       0.004  filled  shape-678
+ 244     1.145  notehead                       8     1    2       0.004  filled  shape-686
+ 245     1.145  notehead                       8     1    3       0.004  filled  shape-688
+ 246     1.145  notehead                       8     1    4       0.004  filled  shape-689
+ 247     1.145  notehead                       8     1    5       0.004  filled  shape-694
+ 248     1.145  notehead                       8     1    4       0.004  filled  shape-698
+ 249     1.145  notehead                       8     1    5       0.004  filled  shape-699
+ 250     1.145  notehead                       8     1    2       0.004  filled  shape-739
+ 251     1.145  notehead                       8     1    3       0.004  filled  shape-741
+ 252     1.145  notehead                       8     1    5       0.004  filled  shape-747
+ 253     1.145  notehead                       8     1    4       0.004  filled  shape-759
+ 254     1.145  notehead                       8     1    1       0.005  filled  shape-780
+ 255     1.145  notehead                       8     1    3       0.004  filled  shape-782
+ 256     1.145  notehead                       8     1    3       0.004  filled  shape-790
+ 257     1.145  notehead                       8     1    5       0.004  filled  shape-791
+ 258     1.145  notehead                       8     1    1       0.005  filled  shape-793
+ 259     1.145  notehead                       8     1    2       0.004  filled  shape-796
+ 260     1.145  notehead                       8     1    3       0.004  filled  shape-797
+ 261     1.145  notehead                       8     1    4       0.004  filled  shape-798
+ 262     1.145  notehead                       8     1    5       0.004  filled  shape-799
+ 263     1.145  notehead                       8     1    1       0.005  filled  shape-805
+ 264     1.145  notehead                       8     1    2       0.004  filled  shape-806
+ 265     1.145  notehead                       8     1    3       0.004  filled  shape-807
+ 266     1.145  notehead                       7     1    5       0.004  filled  shape-811
+ 267     1.145  notehead                       7     1    7       0.004  filled  shape-819
+ 268     1.145  notehead                       7     1    4       0.004  filled  shape-823
+ 269     1.145  notehead                       7     1    5       0.004  filled  shape-825
+ 270     1.145  notehead                       7     1    3       0.004  filled  shape-832
+ 271     1.145  notehead                       7     1    6       0.004  filled  shape-842
+ 272     1.145  notehead                       7     1    4       0.004  filled  shape-824
+ 273     1.145  notehead                       7     1    6       0.004  filled  shape-838
+ 274     1.145  notehead                      10     1   -4       0.004  filled  shape-719
+ 275     1.145  notehead                      10     1   -2       0.005  filled  shape-720
+ 276     1.145  notehead                      10     1   -3       0.005  filled  shape-746
+ 277     1.145  notehead                       9     1   -1       0.004  filled  shape-750
+ 278     1.145  notehead                       9     1   -4       0.004  filled  shape-752
+ 279     1.145  notehead                       9     1   -4       0.004  filled  shape-756
+ 280     1.145  notehead                       9     1   -2       0.005  filled  shape-758
+ 281     1.145  notehead                       9     1   -1       0.004  filled  shape-771
+ 282     1.145  notehead                       9     1   -2       0.005  filled  shape-772
+ 283     1.145  notehead                       9     1   -3       0.005  filled  shape-749
+ 284     1.145  notehead                       9     1   -3       0.005  filled  shape-770
+ 285     1.145  notehead                      16     2   -3       0.005  filled  shape-940
+ 286     1.145  notehead                      16     2   -4       0.004  filled  shape-947
+ 287     1.145  notehead                      17     2   -6       0.005  filled  shape-845
+ 288     1.145  notehead                      17     2   -7       0.005  filled  shape-846
+ 289     1.145  notehead                      17     2   -2       0.005  filled  shape-965
+ 290     1.145  notehead                      17     2   -6       0.005  filled  shape-966
+ 291     1.145  notehead                      17     2   -7       0.005  filled  shape-970
+ 292     1.145  notehead                      17     2    2       0.004  filled  shape-972
+ 293     1.145  notehead                      17     2   -2       0.005  filled  shape-973
+ 294     1.145  notehead                      17     2    2       0.004  filled  shape-974
+ 295     1.146  notehead                      23     2    2       0.004  hollow  shape-931
+ 296     1.146  notehead                      23     2   -7       0.004  hollow  shape-934
+ 297     1.146  notehead                      23     2   -2       0.004  hollow  shape-932
+ 298     1.146  notehead                      23     2   -9       0.004  hollow  shape-935
+ 299     1.146  notehead                      12     1    0       0.005  hollow  shape-809
+ 300     1.146  notehead                      12     1    2       0.004  hollow  shape-810
+ 301     1.146  notehead                      12     1    4       0.005  hollow  shape-815
+ 302     1.146  notehead                      23     2   -6       0.004  hollow  shape-933
+ 303     1.146  notehead                      14     1    0       0.005  hollow  shape-839
+ 304     1.146  notehead                      14     1    2       0.004  hollow  shape-840
+ 305     1.146  notehead                      14     1    4       0.005  hollow  shape-841
+ 306     1.146  notehead                      25     1   -1       0.005  hollow  shape-723
+ 307     1.146  notehead                      25     1    0       0.005  hollow  shape-724
+ 308     1.146  notehead                      19     2    0       0.005  hollow  shape-871
+ 309     1.146  notehead                      19     2   -4       0.004  hollow  shape-872
+ 310     1.146  notehead                      19     2   -8       0.004  hollow  shape-873
+ 311     1.146  notehead                      19     2   -9       0.004  hollow  shape-874
+ 312     1.146  notehead                      20     2    2       0.004  hollow  shape-895
+ 313     1.146  notehead                      20     2   -2       0.004  hollow  shape-896
+ 314     1.146  notehead                      20     2   -6       0.004  hollow  shape-897
+ 315     1.146  notehead                      20     2   -7       0.004  hollow  shape-898
+ 316     1.146  notehead                      20     2   -9       0.004  hollow  shape-899
+ 317     1.146  notehead                      24     2   -9       0.004  hollow  shape-918
+ 318     1.146  notehead                      24     2    2       0.004  hollow  shape-941
+ 319     1.146  notehead                      24     2   -2       0.004  hollow  shape-942
+ 320     1.146  notehead                      24     2   -6       0.004  hollow  shape-943
+ 321     1.146  notehead                      24     2   -7       0.004  hollow  shape-944
+ 322     1.146  notehead                       1     2   -8       0.004  hollow  shape-954
+ 323     1.146  notehead                       1     2   -4       0.004  hollow  shape-955
+ 324     1.146  notehead                      15     1    0       0.005  hollow  shape-843
+ 325     1.146  notehead                      16     1    1       0.004  hollow  shape-813
+ 326     1.146  notehead                      15     1   -3       0.004  hollow  shape-837
+ 327     1.146  notehead                       6     2   -4       0.005  hollow  shape-922
+ 328     1.146  notehead                       6     2    2       0.004  hollow  shape-923
+ 329     1.146  notehead                       2     2    0       0.005  hollow  shape-948
+ 330     1.146  notehead                       3     2   -5       0.004  hollow  shape-936
+ 331     1.146  notehead                       3     2   -4       0.004  hollow  shape-937
+ 332     1.146  notehead                       3     2    0       0.005  hollow  shape-938
+ 333     1.146  notehead                       3     2    4       0.005  hollow  shape-939
+ 334     1.146  notehead                       2     2   -6       0.004  hollow  shape-945
+ 335     1.146  notehead                       7     2    6       0.004  hollow  shape-977
+ 336     1.146  notehead                      26     1    3       0.005  hollow  shape-709
+ 337     1.146  notehead                      18     1   -2       0.004  hollow  shape-736
+ 338     1.146  notehead                      26     1    4       0.005  hollow  shape-745
+ 339     1.146  notehead                      27     1    3       0.005  hollow  shape-808
+ 340     1.146  notehead                      26     1    2       0.005  hollow  shape-814
+ 341     1.146  notehead                      22     2   -2       0.004  hollow  shape-920
+ 342     1.146  notehead                      22     2   -8       0.004  hollow  shape-921
+ 343     1.146  notehead                      26     2    0       0.005  hollow  shape-957
+ 344     1.146  notehead                      26     2   -6       0.004  hollow  shape-958
+ 345     1.146  notehead                      27     2   -3       0.004  hollow  shape-962
+ 346     1.146  notehead                      27     2   -7       0.004  hollow  shape-963
+ 347     1.146  notehead                      17     1   -2       0.004  hollow  shape-727
+ 348     1.146  notehead                       5     2   -6       0.004  hollow  shape-924
+ 349     1.146  notehead                       5     2   -2       0.004  hollow  shape-926
+ 350     1.146  notehead                       4     2   -5       0.004  hollow  shape-928
+ 351     1.146  notehead                       4     2    1       0.004  hollow  shape-930
+ 352     1.146  notehead                      10     2   -6       0.004  hollow  shape-847
+ 353     1.146  notehead                      10     2    0       0.005  hollow  shape-848
+ 354     1.146  notehead                       9     2   -3       0.004  hollow  shape-856
+ 355     1.146  notehead                       9     2    3       0.004  hollow  shape-857
+ 356     1.146  notehead                       9     2   -5       0.004  hollow  shape-976
+ 357     1.146  notehead                       9     2   -6       0.004  hollow  shape-978
+ 358     1.146  notehead                      22     1    2       0.004  hollow  shape-681
+ 359     1.146  notehead                      21     1   -3       0.004  hollow  shape-701
+ 360     1.146  notehead                      22     1    1       0.004  hollow  shape-795
+ 361     1.146  notehead                      22     1    0       0.005  hollow  shape-812
+ 362     1.146  notehead                       1     1    2       0.005  hollow  shape-816
+ 363     1.146  notehead                       3     1    3       0.005  hollow  shape-844
+ 364     1.146  notehead                       2     1    4       0.005  hollow  shape-817
+ 365     1.146  notehead                       2     1    3       0.005  hollow  shape-818
+ 366     1.146  notehead                       3     1    5       0.005  hollow  shape-834
+ 367     1.146  notehead                       4     1    0       0.005  hollow  shape-789
+ 368     1.146  notehead                       4     1    5       0.005  hollow  shape-822
+ 369     1.146  notehead                       4     1    3       0.005  hollow  shape-828
+ 370     1.146  notehead                       5     1    4       0.005  hollow  shape-830
+ 371     1.146  notehead                       6     1    2       0.005  hollow  shape-826
+ 372     1.146  notehead                       6     1    5       0.005  hollow  shape-836
+ 373     1.146  notehead                       7     1    2       0.005  hollow  shape-773
+ 374     1.146  notehead                      12     2   -5       0.005  hollow  shape-968
+ 375     1.146  notehead                      12     2   -3       0.005  hollow  shape-969
+ 376     1.146  notehead                      12     2    1       0.005  hollow  shape-971
+ 377     1.146  notehead                      14     2   -5       0.005  hollow  shape-960
+ 378     1.146  notehead                      14     2   -3       0.005  hollow  shape-961
+ 379     1.146  notehead                      14     2    1       0.005  hollow  shape-964
+ 380     1.146  notehead                      15     2    1       0.005  hollow  shape-850
+ 381     1.146  notehead                      15     2  -10       0.006  hollow  shape-967
+ 382     1.146  notehead                      16     2    5       0.005  hollow  shape-975
+ 383     1.146  notehead                      10     1   -4       0.005  hollow  shape-717
+ 384     1.146  notehead                      10     1   -2       0.005  hollow  shape-718
+ 385     1.146  notehead                      10     1   -1       0.005  hollow  shape-820
+ 386     1.146  notehead                      10     1    3       0.004  hollow  shape-821
+ 387     1.146  notehead                       9     1    2       0.005  hollow  shape-831
+ 388     1.146  notehead                      16     2   -3       0.005  hollow  shape-956
+ 389     1.146  notehead                      16     2   -4       0.005  hollow  shape-959
+ 390     1.181  off-staff-grid                25     1   -8       0.358  filled  shape-1110.3
+ 391     1.181  off-staff-grid                22     1   -6       0.357  filled  shape-1114.3
+ 392     1.264  off-staff-grid                27     1  -10       0.378  hollow  shape-1109.6
+ 393     1.264  notehead                       7     1   -6       0.130  hollow  shape-1123.15
+ 394     1.264  notehead                       7     1   -6       0.130  hollow  shape-1123.2
+ 395     1.264  notehead                       7     1   -6       0.130  hollow  shape-1123.4
+ 396     1.275  off-staff-grid                25     1   -8       0.397  hollow  shape-1110.2
+ 397     1.275  off-staff-grid                25     1   -8       0.397  hollow  shape-1110.4
+ 398     1.275  notehead                       2     1  -11       0.150  hollow  shape-1113.6
+ 399     1.275  notehead                       1     1  -11       0.150  hollow  shape-1111.5
+ 400     1.275  notehead                       1     1  -11       0.150  hollow  shape-1111.7
+ 401     1.275  off-staff-grid                22     1   -6       0.396  hollow  shape-1114.2
+ 402     1.275  off-staff-grid                22     1   -6       0.396  hollow  shape-1114.4
+
+ACCEPTED NOTEHEADS
+shape-707: notehead; m1 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-816: notehead; m1 staff=1; size=1.146sp; step=2; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.005; fill=hollow
+shape-711: notehead; m1 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-1111.5: notehead; m1 staff=1; size=1.275sp; step=-11; grid-error=0.150; fill=hollow; confidence=90.0 %; size=1.275sp is above dot threshold=0.694sp; staff-step=-11; grid-error=0.150; fill=hollow
+shape-1111.7: notehead; m1 staff=1; size=1.275sp; step=-11; grid-error=0.150; fill=hollow; confidence=90.0 %; size=1.275sp is above dot threshold=0.694sp; staff-step=-11; grid-error=0.150; fill=hollow
+shape-712: notehead; m1 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-713: notehead; m1 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-954: notehead; m1 staff=2; size=1.146sp; step=-8; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.004; fill=hollow
+shape-955: notehead; m1 staff=2; size=1.146sp; step=-4; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=hollow
+shape-817: notehead; m2 staff=1; size=1.146sp; step=4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.005; fill=hollow
+shape-714: notehead; m2 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-818: notehead; m2 staff=1; size=1.146sp; step=3; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.005; fill=hollow
+shape-1113.6: notehead; m2 staff=1; size=1.275sp; step=-11; grid-error=0.150; fill=hollow; confidence=90.0 %; size=1.275sp is above dot threshold=0.694sp; staff-step=-11; grid-error=0.150; fill=hollow
+shape-725: notehead; m2 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-726: notehead; m2 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-729: notehead; m2 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-733: notehead; m2 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-735: notehead; m2 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-742: notehead; m2 staff=1; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-743: notehead; m2 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-945: notehead; m2 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-948: notehead; m2 staff=2; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-748: notehead; m3 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-844: notehead; m3 staff=1; size=1.146sp; step=3; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.005; fill=hollow
+shape-834: notehead; m3 staff=1; size=1.146sp; step=5; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.005; fill=hollow
+shape-766: notehead; m3 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-767: notehead; m3 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-768: notehead; m3 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-937: notehead; m3 staff=2; size=1.146sp; step=-4; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=hollow
+shape-938: notehead; m3 staff=2; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-939: notehead; m3 staff=2; size=1.146sp; step=4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.005; fill=hollow
+shape-936: notehead; m3 staff=2; size=1.146sp; step=-5; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.004; fill=hollow
+shape-769: notehead; m4 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-828: notehead; m4 staff=1; size=1.146sp; step=3; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.005; fill=hollow
+shape-822: notehead; m4 staff=1; size=1.146sp; step=5; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.005; fill=hollow
+shape-788: notehead; m4 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-789: notehead; m4 staff=1; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-928: notehead; m4 staff=2; size=1.146sp; step=-5; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.004; fill=hollow
+shape-930: notehead; m4 staff=2; size=1.146sp; step=1; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=hollow
+shape-792: notehead; m5 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-830: notehead; m5 staff=1; size=1.146sp; step=4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.005; fill=hollow
+shape-703: notehead; m5 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-744: notehead; m5 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-763: notehead; m5 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-924: notehead; m5 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-926: notehead; m5 staff=2; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-826: notehead; m6 staff=1; size=1.146sp; step=2; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.005; fill=hollow
+shape-836: notehead; m6 staff=1; size=1.146sp; step=5; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.005; fill=hollow
+shape-785: notehead; m6 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-776: notehead; m6 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-777: notehead; m6 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-802: notehead; m6 staff=1; size=1.145sp; step=1; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=filled
+shape-922: notehead; m6 staff=2; size=1.146sp; step=-4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.005; fill=hollow
+shape-923: notehead; m6 staff=2; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-773: notehead; m7 staff=1; size=1.146sp; step=2; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.005; fill=hollow
+shape-1123.2: notehead; m7 staff=1; size=1.264sp; step=-6; grid-error=0.130; fill=hollow; confidence=91.3 %; size=1.264sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.130; fill=hollow
+shape-829: notehead; m7 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-827: notehead; m7 staff=1; size=1.145sp; step=7; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=7; grid-error=0.004; fill=filled
+shape-1123.4: notehead; m7 staff=1; size=1.264sp; step=-6; grid-error=0.130; fill=hollow; confidence=91.3 %; size=1.264sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.130; fill=hollow
+shape-811: notehead; m7 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-819: notehead; m7 staff=1; size=1.145sp; step=7; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=7; grid-error=0.004; fill=filled
+shape-824: notehead; m7 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-838: notehead; m7 staff=1; size=1.145sp; step=6; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=6; grid-error=0.004; fill=filled
+shape-823: notehead; m7 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-842: notehead; m7 staff=1; size=1.145sp; step=6; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=6; grid-error=0.004; fill=filled
+shape-832: notehead; m7 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-825: notehead; m7 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-1123.15: notehead; m7 staff=1; size=1.264sp; step=-6; grid-error=0.130; fill=hollow; confidence=91.3 %; size=1.264sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.130; fill=hollow
+shape-977: notehead; m7 staff=2; size=1.146sp; step=6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=6; grid-error=0.004; fill=hollow
+shape-916: notehead; m7 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-915: notehead; m7 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-910: notehead; m7 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-913: notehead; m7 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-911: notehead; m7 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-905: notehead; m7 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-908: notehead; m7 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-906: notehead; m7 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-902: notehead; m7 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-904: notehead; m7 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-901: notehead; m7 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-903: notehead; m7 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-790: notehead; m8 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-791: notehead; m8 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-741: notehead; m8 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-747: notehead; m8 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-739: notehead; m8 staff=1; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-759: notehead; m8 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-688: notehead; m8 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-694: notehead; m8 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-686: notehead; m8 staff=1; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-689: notehead; m8 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-805: notehead; m8 staff=1; size=1.145sp; step=1; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=filled
+shape-807: notehead; m8 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-699: notehead; m8 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-806: notehead; m8 staff=1; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-698: notehead; m8 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-793: notehead; m8 staff=1; size=1.145sp; step=1; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=filled
+shape-797: notehead; m8 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-799: notehead; m8 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-796: notehead; m8 staff=1; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-798: notehead; m8 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-780: notehead; m8 staff=1; size=1.145sp; step=1; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=filled
+shape-782: notehead; m8 staff=1; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-678: notehead; m8 staff=1; size=1.145sp; step=5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.004; fill=filled
+shape-778: notehead; m8 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-781: notehead; m8 staff=1; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-783: notehead; m8 staff=1; size=1.145sp; step=4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.004; fill=filled
+shape-893: notehead; m8 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-900: notehead; m8 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-892: notehead; m8 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-894: notehead; m8 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-886: notehead; m8 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-889: notehead; m8 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-885: notehead; m8 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-888: notehead; m8 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-880: notehead; m8 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-882: notehead; m8 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-879: notehead; m8 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-881: notehead; m8 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-876: notehead; m8 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-878: notehead; m8 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-875: notehead; m8 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-877: notehead; m8 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-868: notehead; m8 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-870: notehead; m8 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-867: notehead; m8 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-869: notehead; m8 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-861: notehead; m8 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-863: notehead; m8 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-860: notehead; m8 staff=2; size=1.145sp; step=-7; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=filled
+shape-862: notehead; m8 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-864: notehead; m8 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-770: notehead; m9 staff=1; size=1.145sp; step=-3; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=filled
+shape-771: notehead; m9 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-831: notehead; m9 staff=1; size=1.146sp; step=2; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.005; fill=hollow
+shape-756: notehead; m9 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-758: notehead; m9 staff=1; size=1.145sp; step=-2; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.005; fill=filled
+shape-752: notehead; m9 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-772: notehead; m9 staff=1; size=1.145sp; step=-2; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.005; fill=filled
+shape-749: notehead; m9 staff=1; size=1.145sp; step=-3; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=filled
+shape-750: notehead; m9 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-856: notehead; m9 staff=2; size=1.146sp; step=-3; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=hollow
+shape-857: notehead; m9 staff=2; size=1.146sp; step=3; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=hollow
+shape-976: notehead; m9 staff=2; size=1.146sp; step=-5; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.004; fill=hollow
+shape-978: notehead; m9 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-746: notehead; m10 staff=1; size=1.145sp; step=-3; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=filled
+shape-820: notehead; m10 staff=1; size=1.146sp; step=-1; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.005; fill=hollow
+shape-821: notehead; m10 staff=1; size=1.146sp; step=3; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=hollow
+shape-719: notehead; m10 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-720: notehead; m10 staff=1; size=1.145sp; step=-2; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.005; fill=filled
+shape-717: notehead; m10 staff=1; size=1.146sp; step=-4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.005; fill=hollow
+shape-718: notehead; m10 staff=1; size=1.146sp; step=-2; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.005; fill=hollow
+shape-847: notehead; m10 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-848: notehead; m10 staff=2; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-708: notehead; m12 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-809: notehead; m12 staff=1; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-810: notehead; m12 staff=1; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-815: notehead; m12 staff=1; size=1.146sp; step=4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.005; fill=hollow
+shape-684: notehead; m12 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-683: notehead; m12 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-680: notehead; m12 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-968: notehead; m12 staff=2; size=1.146sp; step=-5; grid-error=0.005; fill=hollow; confidence=99.6 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.005; fill=hollow
+shape-969: notehead; m12 staff=2; size=1.146sp; step=-3; grid-error=0.005; fill=hollow; confidence=99.6 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=hollow
+shape-971: notehead; m12 staff=2; size=1.146sp; step=1; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=hollow
+shape-734: notehead; m14 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-839: notehead; m14 staff=1; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-840: notehead; m14 staff=1; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-841: notehead; m14 staff=1; size=1.146sp; step=4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.005; fill=hollow
+shape-696: notehead; m14 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-697: notehead; m14 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-721: notehead; m14 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-722: notehead; m14 staff=1; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-784: notehead; m14 staff=1; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-754: notehead; m14 staff=1; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-761: notehead; m14 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-960: notehead; m14 staff=2; size=1.146sp; step=-5; grid-error=0.005; fill=hollow; confidence=99.6 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.005; fill=hollow
+shape-961: notehead; m14 staff=2; size=1.146sp; step=-3; grid-error=0.005; fill=hollow; confidence=99.6 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=hollow
+shape-964: notehead; m14 staff=2; size=1.146sp; step=1; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=hollow
+shape-837: notehead; m15 staff=1; size=1.146sp; step=-3; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=hollow
+shape-843: notehead; m15 staff=1; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-804: notehead; m15 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-737: notehead; m15 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-738: notehead; m15 staff=1; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-967: notehead; m15 staff=2; size=1.146sp; step=-10; grid-error=0.006; fill=hollow; confidence=99.6 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-10; grid-error=0.006; fill=hollow
+shape-850: notehead; m15 staff=2; size=1.146sp; step=1; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.005; fill=hollow
+shape-692: notehead; m16 staff=1; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-779: notehead; m16 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-813: notehead; m16 staff=1; size=1.146sp; step=1; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=hollow
+shape-704: notehead; m16 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-687: notehead; m16 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-685: notehead; m16 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-679: notehead; m16 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-975: notehead; m16 staff=2; size=1.146sp; step=5; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=5; grid-error=0.005; fill=hollow
+shape-940: notehead; m16 staff=2; size=1.145sp; step=-3; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=filled
+shape-947: notehead; m16 staff=2; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-956: notehead; m16 staff=2; size=1.146sp; step=-3; grid-error=0.005; fill=hollow; confidence=99.6 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.005; fill=hollow
+shape-959: notehead; m16 staff=2; size=1.146sp; step=-4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.005; fill=hollow
+shape-727: notehead; m17 staff=1; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-695: notehead; m17 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-706: notehead; m17 staff=1; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-974: notehead; m17 staff=2; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-965: notehead; m17 staff=2; size=1.145sp; step=-2; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.005; fill=filled
+shape-966: notehead; m17 staff=2; size=1.145sp; step=-6; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.005; fill=filled
+shape-970: notehead; m17 staff=2; size=1.145sp; step=-7; grid-error=0.005; fill=filled; confidence=99.6 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.005; fill=filled
+shape-845: notehead; m17 staff=2; size=1.145sp; step=-6; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.005; fill=filled
+shape-846: notehead; m17 staff=2; size=1.145sp; step=-7; grid-error=0.005; fill=filled; confidence=99.6 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.005; fill=filled
+shape-973: notehead; m17 staff=2; size=1.145sp; step=-2; grid-error=0.005; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.005; fill=filled
+shape-972: notehead; m17 staff=2; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-736: notehead; m18 staff=1; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-835: notehead; m18 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-833: notehead; m18 staff=1; size=1.145sp; step=-1; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.003; fill=filled
+shape-757: notehead; m18 staff=1; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-849: notehead; m18 staff=2; size=1.145sp; step=6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=6; grid-error=0.004; fill=filled
+shape-851: notehead; m18 staff=2; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-852: notehead; m18 staff=2; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-853: notehead; m18 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-855: notehead; m18 staff=2; size=1.145sp; step=-10; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-10; grid-error=0.004; fill=filled
+shape-854: notehead; m18 staff=2; size=1.145sp; step=-4; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.003; fill=filled
+shape-765: notehead; m19 staff=1; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-774: notehead; m19 staff=1; size=1.145sp; step=-7; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=filled
+shape-787: notehead; m19 staff=1; size=1.145sp; step=-7; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=filled
+shape-800: notehead; m19 staff=1; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-803: notehead; m19 staff=1; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-690: notehead; m19 staff=1; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-858: notehead; m19 staff=2; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-859: notehead; m19 staff=2; size=1.145sp; step=-4; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.003; fill=filled
+shape-865: notehead; m19 staff=2; size=1.145sp; step=-8; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.003; fill=filled
+shape-866: notehead; m19 staff=2; size=1.145sp; step=-9; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.003; fill=filled
+shape-873: notehead; m19 staff=2; size=1.146sp; step=-8; grid-error=0.004; fill=hollow; confidence=99.8 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.004; fill=hollow
+shape-874: notehead; m19 staff=2; size=1.146sp; step=-9; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.004; fill=hollow
+shape-872: notehead; m19 staff=2; size=1.146sp; step=-4; grid-error=0.004; fill=hollow; confidence=99.8 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=hollow
+shape-871: notehead; m19 staff=2; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-702: notehead; m20 staff=1; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-691: notehead; m20 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-753: notehead; m20 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-786: notehead; m20 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-794: notehead; m20 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-801: notehead; m20 staff=1; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-883: notehead; m20 staff=2; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-884: notehead; m20 staff=2; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-887: notehead; m20 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-890: notehead; m20 staff=2; size=1.145sp; step=-7; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=filled
+shape-897: notehead; m20 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-899: notehead; m20 staff=2; size=1.146sp; step=-9; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.004; fill=hollow
+shape-898: notehead; m20 staff=2; size=1.146sp; step=-7; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=hollow
+shape-896: notehead; m20 staff=2; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-895: notehead; m20 staff=2; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-701: notehead; m21 staff=1; size=1.146sp; step=-3; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=hollow
+shape-919: notehead; m21 staff=1; size=1.145sp; step=10; grid-error=0.145; fill=filled; confidence=90.3 %; size=1.145sp is above dot threshold=0.694sp; staff-step=10; grid-error=0.145; fill=filled
+shape-907: notehead; m21 staff=2; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-909: notehead; m21 staff=2; size=1.145sp; step=-5; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; fill=filled
+shape-912: notehead; m21 staff=2; size=1.145sp; step=-8; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.003; fill=filled
+shape-914: notehead; m21 staff=2; size=1.145sp; step=-9; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.003; fill=filled
+shape-917: notehead; m21 staff=2; size=1.145sp; step=-10; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-10; grid-error=0.004; fill=filled
+shape-681: notehead; m22 staff=1; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-795: notehead; m22 staff=1; size=1.146sp; step=1; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=hollow
+shape-812: notehead; m22 staff=1; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-705: notehead; m22 staff=1; size=1.145sp; step=-1; grid-error=0.003; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.003; fill=filled
+shape-921: notehead; m22 staff=2; size=1.146sp; step=-8; grid-error=0.004; fill=hollow; confidence=99.8 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.004; fill=hollow
+shape-920: notehead; m22 staff=2; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-710: notehead; m23 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-700: notehead; m23 staff=1; size=1.145sp; step=-5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.004; fill=filled
+shape-775: notehead; m23 staff=1; size=1.145sp; step=-5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.004; fill=filled
+shape-764: notehead; m23 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-762: notehead; m23 staff=1; size=1.145sp; step=-4; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-4; grid-error=0.004; fill=filled
+shape-760: notehead; m23 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-925: notehead; m23 staff=2; size=1.145sp; step=2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=filled
+shape-891: notehead; m23 staff=2; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-927: notehead; m23 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-929: notehead; m23 staff=2; size=1.145sp; step=-7; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=filled
+shape-933: notehead; m23 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-935: notehead; m23 staff=2; size=1.146sp; step=-9; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.004; fill=hollow
+shape-934: notehead; m23 staff=2; size=1.146sp; step=-7; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=hollow
+shape-932: notehead; m23 staff=2; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-931: notehead; m23 staff=2; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-751: notehead; m24 staff=1; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-740: notehead; m24 staff=1; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-732: notehead; m24 staff=1; size=1.145sp; step=-2; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=filled
+shape-731: notehead; m24 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-730: notehead; m24 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-728: notehead; m24 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-943: notehead; m24 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-918: notehead; m24 staff=2; size=1.146sp; step=-9; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.004; fill=hollow
+shape-944: notehead; m24 staff=2; size=1.146sp; step=-7; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=hollow
+shape-942: notehead; m24 staff=2; size=1.146sp; step=-2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; fill=hollow
+shape-941: notehead; m24 staff=2; size=1.146sp; step=2; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; fill=hollow
+shape-724: notehead; m25 staff=1; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-723: notehead; m25 staff=1; size=1.146sp; step=-1; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.005; fill=hollow
+shape-946: notehead; m25 staff=2; size=1.145sp; step=3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.004; fill=filled
+shape-949: notehead; m25 staff=2; size=1.145sp; step=-3; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=filled
+shape-950: notehead; m25 staff=2; size=1.145sp; step=-5; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.004; fill=filled
+shape-951: notehead; m25 staff=2; size=1.145sp; step=-6; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=filled
+shape-952: notehead; m25 staff=2; size=1.145sp; step=-8; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.004; fill=filled
+shape-953: notehead; m25 staff=2; size=1.145sp; step=-10; grid-error=0.004; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-10; grid-error=0.004; fill=filled
+shape-745: notehead; m26 staff=1; size=1.146sp; step=4; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=4; grid-error=0.005; fill=hollow
+shape-709: notehead; m26 staff=1; size=1.146sp; step=3; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.005; fill=hollow
+shape-814: notehead; m26 staff=1; size=1.146sp; step=2; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.005; fill=hollow
+shape-755: notehead; m26 staff=1; size=1.145sp; step=1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; fill=filled
+shape-958: notehead; m26 staff=2; size=1.146sp; step=-6; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-6; grid-error=0.004; fill=hollow
+shape-957: notehead; m26 staff=2; size=1.146sp; step=0; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; fill=hollow
+shape-808: notehead; m27 staff=1; size=1.146sp; step=3; grid-error=0.005; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=3; grid-error=0.005; fill=hollow
+shape-693: notehead; m27 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-682: notehead; m27 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-715: notehead; m27 staff=1; size=1.145sp; step=-1; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-1; grid-error=0.004; fill=filled
+shape-716: notehead; m27 staff=1; size=1.145sp; step=0; grid-error=0.004; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.004; fill=filled
+shape-963: notehead; m27 staff=2; size=1.146sp; step=-7; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-7; grid-error=0.004; fill=hollow
+shape-962: notehead; m27 staff=2; size=1.146sp; step=-3; grid-error=0.004; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; fill=hollow
