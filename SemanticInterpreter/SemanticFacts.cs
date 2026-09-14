@@ -47,6 +47,26 @@ public sealed record KeySignatureFact(
         Reason,
         SourceShapeIds);
 
+public sealed record NoteheadFact(
+    int MeasureNumber,
+    int Staff,
+    string ShapeId,
+    double CenterX,
+    double CenterY,
+    double MajorRadius,
+    double MinorRadius,
+    string FillKind,
+    double NormalizedSize,
+    int StaffStep,
+    double StaffStepError,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "NoteheadPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
