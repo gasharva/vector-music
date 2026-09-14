@@ -139,6 +139,22 @@ public sealed class ArtifactIndexWriter
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
+            "semantic.beams.svg",
+            "Detected beam attachments (SVG)",
+            "BeamAttachmentPass overlay: primary/secondary beam levels are colored separately, stem intersections are marked, free hook ends are hollow red, and cross-staff beams are purple.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.beams.txt",
+            "Beam attachment decisions",
+            "Beam-like stroke geometry, attached stems, inferred beam level, supported ends, hooks, cross-staff status and rejected candidates.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
             "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
