@@ -3,7 +3,7 @@ ClefPass: added 10 fact(s); total=10
 TimeSignaturePass: added 1 fact(s); total=11
 KeySignaturePass: added 1 fact(s); total=12
 NoteheadPass size profile: ellipses=402; small-dot cluster=88; notehead-size band=314; threshold=0.694sp; small-median=0.400sp; notehead-median=1.145sp
-NoteheadPass decisions: total=402; accepted=301; small-dots=88; off-grid=7
+NoteheadPass decisions: total=402; accepted=301; small-dots=88; off-grid=7; unsupported-ledger=6
 NoteheadPass: added 301 fact(s); total=313
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-982
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-984.2
