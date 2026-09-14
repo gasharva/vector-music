@@ -77,9 +77,16 @@ var canonical = new CanonicalNotationBuilder().Build(
     title,
     composer);
 
+const string canonicalFileName = "kancheli.semantic.canonical.json";
+const string musicXmlFileName = "kancheli.semantic.musicxml";
+const string compressedMusicXmlFileName = "kancheli.semantic.mxl";
+const string factsFileName = "semantic-facts.txt";
+const string summaryFileName = "semantic-summary.txt";
+const string runLogFileName = "semantic-run.log";
+
 var canonicalPath = Path.Combine(
     outputDirectory,
-    "kancheli.semantic.canonical.json");
+    canonicalFileName);
 File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
@@ -87,21 +94,29 @@ File.WriteAllText(
 Console.WriteLine("8. Writing MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
-    "kancheli.semantic.musicxml");
+    musicXmlFileName);
 new MusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
+Console.WriteLine("9. Writing compressed MusicXML (.mxl)...");
+var compressedMusicXmlPath = Path.Combine(
+    outputDirectory,
+    compressedMusicXmlFileName);
+new CompressedMusicXmlWriter().Write(
+    canonical,
+    compressedMusicXmlPath);
+
 var factsPath = Path.Combine(
     outputDirectory,
-    "semantic-facts.txt");
+    factsFileName);
 File.WriteAllLines(
     factsPath,
     FormatFacts(facts));
 
 var summaryPath = Path.Combine(
     outputDirectory,
-    "semantic-summary.txt");
+    summaryFileName);
 File.WriteAllLines(
     summaryPath,
     [
@@ -119,8 +134,21 @@ File.WriteAllLines(
         $"semantic.keys={facts.OfType<KeySignatureFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
-        $"musicxml.path={Path.GetFullPath(musicXmlPath)}"
+        $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
+        $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}"
     ]);
+
+Console.WriteLine("10. Writing artifact index...");
+new ArtifactIndexWriter().Write(
+    outputDirectory,
+    input,
+    title,
+    canonicalFileName,
+    musicXmlFileName,
+    compressedMusicXmlFileName,
+    factsFileName,
+    summaryFileName,
+    runLogFileName);
 
 Console.WriteLine();
 Console.WriteLine("Semantic interpretation complete:");
@@ -131,6 +159,8 @@ Console.WriteLine($"  times    : {facts.OfType<TimeSignatureFact>().Count()}");
 Console.WriteLine($"  keys     : {facts.OfType<KeySignatureFact>().Count()}");
 Console.WriteLine($"  canonical: {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML : {Path.GetFullPath(musicXmlPath)}");
+Console.WriteLine($"  MXL      : {Path.GetFullPath(compressedMusicXmlPath)}");
+Console.WriteLine($"  index    : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
 return 0;
 
