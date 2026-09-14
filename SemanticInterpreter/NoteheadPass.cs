@@ -48,11 +48,15 @@ public sealed class NoteheadPass : ISemanticPass
             decision.Decision == "small-dot-size-cluster");
         var rejectedByGrid = analysis.Decisions.Count(decision =>
             decision.Decision == "off-staff-grid");
+        var rejectedByLedger = analysis.Decisions.Count(decision =>
+            decision.Decision == "unsupported-ledger-position");
 
         facts.AddTrace(
             $"NoteheadPass decisions: total={analysis.Decisions.Count}; "
             + $"accepted={analysis.Accepted.Count}; "
-            + $"small-dots={rejectedBySize}; off-grid={rejectedByGrid}");
+            + $"small-dots={rejectedBySize}; "
+            + $"off-grid={rejectedByGrid}; "
+            + $"unsupported-ledger={rejectedByLedger}");
     }
 
     private static string FormatSizeProfile(EllipseSizeProfile profile)
