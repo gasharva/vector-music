@@ -107,6 +107,8 @@ var accidentalPass = new AccidentalPass();
 var stemPass = new StemAttachmentPass();
 var flagPass = new FlagAttachmentPass();
 var beamPass = new BeamAttachmentPass();
+var tupletPass = new TupletPass();
+var dotPass = new DotAttachmentPass();
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
@@ -117,7 +119,9 @@ var semanticPipeline = new SemanticPipeline(
         new PitchPass(),
         stemPass,
         flagPass,
-        beamPass
+        beamPass,
+        tupletPass,
+        dotPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -131,6 +135,10 @@ const string flagsSvgFileName = "semantic.flags.svg";
 const string flagsDiagnosticsFileName = "semantic.flags.txt";
 const string beamsSvgFileName = "semantic.beams.svg";
 const string beamsDiagnosticsFileName = "semantic.beams.txt";
+const string tupletsSvgFileName = "semantic.tuplets.svg";
+const string tupletsDiagnosticsFileName = "semantic.tuplets.txt";
+const string dotsSvgFileName = "semantic.dots.svg";
+const string dotsDiagnosticsFileName = "semantic.dots.txt";
 
 var noteheadsSvgPath = Path.Combine(
     outputDirectory,
@@ -147,6 +155,12 @@ var flagsSvgPath = Path.Combine(
 var beamsSvgPath = Path.Combine(
     outputDirectory,
     beamsSvgFileName);
+var tupletsSvgPath = Path.Combine(
+    outputDirectory,
+    tupletsSvgFileName);
+var dotsSvgPath = Path.Combine(
+    outputDirectory,
+    dotsSvgFileName);
 
 if (noteheadPass.LastAnalysis is not null)
 {
@@ -251,7 +265,51 @@ if (beamPass.LastAnalysis is not null)
             beamsDiagnosticsFileName));
 }
 
-Console.WriteLine("13. Building CanonicalNotation v0.3 skeleton...");
+if (tupletPass.LastAnalysis is not null)
+{
+    Console.WriteLine("13. Writing tuplet diagnostics...");
+    var tupletDebugRenderer = new TupletDebugRenderer();
+    var tupletBaseSvg = File.Exists(beamsSvgPath)
+        ? beamsSvgPath
+        : File.Exists(flagsSvgPath)
+            ? flagsSvgPath
+            : input;
+
+    tupletDebugRenderer.Render(
+        tupletBaseSvg,
+        tupletPass.LastAnalysis,
+        tupletsSvgPath);
+
+    tupletDebugRenderer.WriteReport(
+        tupletPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            tupletsDiagnosticsFileName));
+}
+
+if (dotPass.LastAnalysis is not null)
+{
+    Console.WriteLine("14. Writing augmentation-dot diagnostics...");
+    var dotDebugRenderer = new DotDebugRenderer();
+    var dotBaseSvg = File.Exists(tupletsSvgPath)
+        ? tupletsSvgPath
+        : File.Exists(beamsSvgPath)
+            ? beamsSvgPath
+            : input;
+
+    dotDebugRenderer.Render(
+        dotBaseSvg,
+        dotPass.LastAnalysis,
+        dotsSvgPath);
+
+    dotDebugRenderer.WriteReport(
+        dotPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            dotsDiagnosticsFileName));
+}
+
+Console.WriteLine("15. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -272,7 +330,7 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("14. Writing MuseScore-compatible MusicXML...");
+Console.WriteLine("16. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
@@ -280,7 +338,7 @@ new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
-Console.WriteLine("15. Writing compressed MusicXML (.mxl)...");
+Console.WriteLine("17. Writing compressed MusicXML (.mxl)...");
 var compressedMusicXmlPath = Path.Combine(
     outputDirectory,
     compressedMusicXmlFileName);
@@ -320,6 +378,9 @@ File.WriteAllLines(
         $"semantic.stems={facts.OfType<StemAttachmentFact>().Count()}",
         $"semantic.flags={facts.OfType<FlagAttachmentFact>().Count()}",
         $"semantic.beams={facts.OfType<BeamAttachmentFact>().Count()}",
+        $"semantic.tuplets={facts.OfType<TupletFact>().Count()}",
+        $"semantic.dotAttachments={facts.OfType<DotAttachmentFact>().Count()}",
+        $"semantic.augmentationDots={facts.OfType<DotAttachmentFact>().Sum(dot => dot.Count)}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
@@ -334,6 +395,10 @@ File.WriteAllLines(
         $"semantic.flagsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, flagsDiagnosticsFileName))}",
         $"semantic.beamsSvg={Path.GetFullPath(beamsSvgPath)}",
         $"semantic.beamsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, beamsDiagnosticsFileName))}",
+        $"semantic.tupletsSvg={Path.GetFullPath(tupletsSvgPath)}",
+        $"semantic.tupletsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, tupletsDiagnosticsFileName))}",
+        $"semantic.dotsSvg={Path.GetFullPath(dotsSvgPath)}",
+        $"semantic.dotsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, dotsDiagnosticsFileName))}",
         $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
         $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
         $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
@@ -343,7 +408,7 @@ File.WriteAllLines(
         $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
 
-Console.WriteLine("16. Writing artifact index...");
+Console.WriteLine("18. Writing artifact index...");
 new ArtifactIndexWriter().Write(
     outputDirectory,
     input,
@@ -368,6 +433,9 @@ Console.WriteLine($"  pitches    : {facts.OfType<PitchFact>().Count()}");
 Console.WriteLine($"  stems      : {facts.OfType<StemAttachmentFact>().Count()}");
 Console.WriteLine($"  flags      : {facts.OfType<FlagAttachmentFact>().Count()}");
 Console.WriteLine($"  beams      : {facts.OfType<BeamAttachmentFact>().Count()}");
+Console.WriteLine($"  tuplets    : {facts.OfType<TupletFact>().Count()}");
+Console.WriteLine($"  dot targets: {facts.OfType<DotAttachmentFact>().Count()}");
+Console.WriteLine($"  augm. dots : {facts.OfType<DotAttachmentFact>().Sum(dot => dot.Count)}");
 Console.WriteLine($"  ownership ledger corrections: {ledgerLadderOwnership.Adjustments.Count}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
@@ -377,6 +445,8 @@ Console.WriteLine($"  accidentals: {Path.GetFullPath(accidentalsSvgPath)}");
 Console.WriteLine($"  stems      : {Path.GetFullPath(stemsSvgPath)}");
 Console.WriteLine($"  flags      : {Path.GetFullPath(flagsSvgPath)}");
 Console.WriteLine($"  beams      : {Path.GetFullPath(beamsSvgPath)}");
+Console.WriteLine($"  tuplets    : {Path.GetFullPath(tupletsSvgPath)}");
+Console.WriteLine($"  dots       : {Path.GetFullPath(dotsSvgPath)}");
 Console.WriteLine($"  ownership  : {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
 Console.WriteLine($"  index      : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
@@ -509,6 +579,24 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"length={beam.LengthInSpacings:F2}sp width={beam.WidthInSpacings:F3}sp "
                     + $"slope={beam.Slope:F3} confidence={beam.Confidence:P1}; "
                     + $"reason={beam.Reason}";
+                break;
+
+            case TupletFact tuplet:
+                yield return $"tuplet m{tuplet.MeasureNumber} shape={tuplet.TupletShapeId} "
+                    + $"label={tuplet.ClassificationLabel} displayed={tuplet.DisplayedNumber} "
+                    + $"ratio={tuplet.ActualNotes}:{tuplet.NormalNotes} "
+                    + $"corrected={tuplet.CorrectedFromStemCount} beam={tuplet.PrimaryBeamShapeId} "
+                    + $"stems=[{string.Join(',', tuplet.AttachedStemIds)}] "
+                    + $"noteheads=[{string.Join(',', tuplet.AttachedNoteheadIds)}] "
+                    + $"classifier={tuplet.ClassificationConfidence:P1} "
+                    + $"confidence={tuplet.Confidence:P1}; reason={tuplet.Reason}";
+                break;
+
+            case DotAttachmentFact dot:
+                yield return $"dot m{dot.MeasureNumber} staff={dot.Staff} "
+                    + $"target={dot.TargetNoteheadId} count={dot.Count} "
+                    + $"shapes=[{string.Join(',', dot.DotShapeIds)}] "
+                    + $"confidence={dot.Confidence:P1}; reason={dot.Reason}";
                 break;
 
             default:
