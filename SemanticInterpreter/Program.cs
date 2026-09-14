@@ -93,17 +93,25 @@ var semanticDocument = new MeasureSceneBuilder().Build(
 
 Console.WriteLine("7. Running granular semantic passes...");
 var noteheadPass = new NoteheadPass();
+var accidentalPass = new AccidentalPass();
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
         new TimeSignaturePass(),
         new KeySignaturePass(),
-        noteheadPass
+        noteheadPass,
+        accidentalPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
 const string noteheadsSvgFileName = "semantic.noteheads.svg";
 const string noteheadsDiagnosticsFileName = "semantic.noteheads.txt";
+const string accidentalsSvgFileName = "semantic.accidentals.svg";
+const string accidentalsDiagnosticsFileName = "semantic.accidentals.txt";
+
+var noteheadsSvgPath = Path.Combine(
+    outputDirectory,
+    noteheadsSvgFileName);
 
 if (noteheadPass.LastAnalysis is not null)
 {
@@ -113,9 +121,7 @@ if (noteheadPass.LastAnalysis is not null)
     noteheadDebugRenderer.Render(
         input,
         noteheadPass.LastAnalysis,
-        Path.Combine(
-            outputDirectory,
-            noteheadsSvgFileName));
+        noteheadsSvgPath);
 
     noteheadDebugRenderer.WriteReport(
         noteheadPass.LastAnalysis,
@@ -124,7 +130,29 @@ if (noteheadPass.LastAnalysis is not null)
             noteheadsDiagnosticsFileName));
 }
 
-Console.WriteLine("9. Building CanonicalNotation v0.3 skeleton...");
+if (accidentalPass.LastAnalysis is not null)
+{
+    Console.WriteLine("9. Writing accidental diagnostics...");
+    var accidentalDebugRenderer = new AccidentalDebugRenderer();
+    var accidentalBaseSvg = File.Exists(noteheadsSvgPath)
+        ? noteheadsSvgPath
+        : input;
+
+    accidentalDebugRenderer.Render(
+        accidentalBaseSvg,
+        accidentalPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            accidentalsSvgFileName));
+
+    accidentalDebugRenderer.WriteReport(
+        accidentalPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            accidentalsDiagnosticsFileName));
+}
+
+Console.WriteLine("10. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -145,7 +173,7 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("10. Writing MuseScore-compatible MusicXML...");
+Console.WriteLine("11. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
@@ -153,7 +181,7 @@ new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
-Console.WriteLine("11. Writing compressed MusicXML (.mxl)...");
+Console.WriteLine("12. Writing compressed MusicXML (.mxl)...");
 var compressedMusicXmlPath = Path.Combine(
     outputDirectory,
     compressedMusicXmlFileName);
@@ -187,12 +215,15 @@ File.WriteAllLines(
         $"semantic.times={facts.OfType<TimeSignatureFact>().Count()}",
         $"semantic.keys={facts.OfType<KeySignatureFact>().Count()}",
         $"semantic.noteheads={facts.OfType<NoteheadFact>().Count()}",
+        $"semantic.accidentals={facts.OfType<AccidentalFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
         $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}",
-        $"semantic.noteheadsSvg={Path.GetFullPath(Path.Combine(outputDirectory, noteheadsSvgFileName))}",
+        $"semantic.noteheadsSvg={Path.GetFullPath(noteheadsSvgPath)}",
         $"semantic.noteheadsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, noteheadsDiagnosticsFileName))}",
+        $"semantic.accidentalsSvg={Path.GetFullPath(Path.Combine(outputDirectory, accidentalsSvgFileName))}",
+        $"semantic.accidentalsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, accidentalsDiagnosticsFileName))}",
         $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
         $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
         $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
@@ -202,7 +233,7 @@ File.WriteAllLines(
         $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
 
-Console.WriteLine("12. Writing artifact index...");
+Console.WriteLine("13. Writing artifact index...");
 new ArtifactIndexWriter().Write(
     outputDirectory,
     input,
@@ -216,18 +247,20 @@ new ArtifactIndexWriter().Write(
 
 Console.WriteLine();
 Console.WriteLine("Semantic interpretation complete:");
-Console.WriteLine($"  measures : {semanticDocument.Measures.Count}");
-Console.WriteLine($"  facts    : {facts.Items.Count}");
-Console.WriteLine($"  clefs    : {facts.OfType<ClefFact>().Count()}");
-Console.WriteLine($"  times    : {facts.OfType<TimeSignatureFact>().Count()}");
-Console.WriteLine($"  keys     : {facts.OfType<KeySignatureFact>().Count()}");
-Console.WriteLine($"  noteheads: {facts.OfType<NoteheadFact>().Count()}");
-Console.WriteLine($"  canonical: {Path.GetFullPath(canonicalPath)}");
-Console.WriteLine($"  MusicXML : {Path.GetFullPath(musicXmlPath)}");
-Console.WriteLine($"  MXL      : {Path.GetFullPath(compressedMusicXmlPath)}");
-Console.WriteLine($"  noteheads: {Path.GetFullPath(Path.Combine(outputDirectory, noteheadsSvgFileName))}");
-Console.WriteLine($"  ownership: {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
-Console.WriteLine($"  index    : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
+Console.WriteLine($"  measures   : {semanticDocument.Measures.Count}");
+Console.WriteLine($"  facts      : {facts.Items.Count}");
+Console.WriteLine($"  clefs      : {facts.OfType<ClefFact>().Count()}");
+Console.WriteLine($"  times      : {facts.OfType<TimeSignatureFact>().Count()}");
+Console.WriteLine($"  keys       : {facts.OfType<KeySignatureFact>().Count()}");
+Console.WriteLine($"  noteheads  : {facts.OfType<NoteheadFact>().Count()}");
+Console.WriteLine($"  accidentals: {facts.OfType<AccidentalFact>().Count()}");
+Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
+Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
+Console.WriteLine($"  MXL        : {Path.GetFullPath(compressedMusicXmlPath)}");
+Console.WriteLine($"  noteheads  : {Path.GetFullPath(noteheadsSvgPath)}");
+Console.WriteLine($"  accidentals: {Path.GetFullPath(Path.Combine(outputDirectory, accidentalsSvgFileName))}");
+Console.WriteLine($"  ownership  : {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
+Console.WriteLine($"  index      : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
 return 0;
 
@@ -298,6 +331,18 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"fill={notehead.FillKind} size={notehead.NormalizedSize:F3}sp "
                     + $"staff-step={notehead.StaffStep} error={notehead.StaffStepError:F3} "
                     + $"confidence={notehead.Confidence:P1}; reason={notehead.Reason}";
+                break;
+
+            case AccidentalFact accidental:
+                yield return $"accidental m{accidental.MeasureNumber} staff={accidental.Staff} "
+                    + $"shape={accidental.ShapeId} kind={accidental.Kind} "
+                    + $"anchor=({accidental.AnchorX:F2},{accidental.AnchorY:F2}) "
+                    + $"staff-step={accidental.StaffStep} "
+                    + $"explicit={accidental.ExplicitTargetNoteheadId} "
+                    + $"affected=[{string.Join(',', accidental.AffectedNoteheadIds)}] "
+                    + $"classifier={accidental.ClassificationConfidence:P1} "
+                    + $"vertical-error={accidental.VerticalErrorInHalfSteps:F3} "
+                    + $"confidence={accidental.Confidence:P1}; reason={accidental.Reason}";
                 break;
 
             default:
