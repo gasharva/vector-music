@@ -5,18 +5,14 @@ public sealed class KeySignaturePass : ISemanticPass
     private const double MinimumClassificationConfidence = 0.70;
     private const double MaximumStepError = 0.90;
 
-    private static readonly IReadOnlyDictionary<string, double[]> TreblePatterns =
+    // Vertical staff-step patterns in circle-of-fifths order. The absolute
+    // offset differs between clefs and glyph designs; the relative pattern
+    // does not. We therefore fit one common Y offset before validating.
+    private static readonly IReadOnlyDictionary<string, double[]> PositionPatterns =
         new Dictionary<string, double[]>(StringComparer.Ordinal)
         {
             ["sharp"] = [0, 3, -1, 2, 5, 1, 4],
             ["flat"] = [4, 1, 5, 2, 6, 3, 7]
-        };
-
-    private static readonly IReadOnlyDictionary<string, double[]> BassPatterns =
-        new Dictionary<string, double[]>(StringComparer.Ordinal)
-        {
-            ["sharp"] = [2, 5, 1, 4, 0, 3, 6],
-            ["flat"] = [6, 3, 7, 4, 8, 5, 9]
         };
 
     public string Name => nameof(KeySignaturePass);
@@ -71,7 +67,8 @@ public sealed class KeySignaturePass : ISemanticPass
             upper.Fifths == 0
                 ? "No key-signature symbols exist between clef and time signature on either staff; fifths=0."
                 : $"Both staves independently match the canonical {upper.Kind} key-signature "
-                    + $"position sequence with {Math.Abs(upper.Fifths)} symbol(s); fifths={upper.Fifths}.",
+                    + $"relative position sequence with {Math.Abs(upper.Fifths)} symbol(s); "
+                    + $"fifths={upper.Fifths}.",
             sourceShapeIds));
     }
 
@@ -133,7 +130,8 @@ public sealed class KeySignaturePass : ISemanticPass
             throw new InvalidDataException(
                 $"Suspicious key signature in measure {measure.Number}, "
                 + $"staff {staff.StaffNumber}: found {candidates.Length} glyphs "
-                + $"between clef and time signature; maximum is 7.");
+                + $"between clef and time signature; maximum is 7. "
+                + DescribeCandidates(candidates, staff.LineSpacing));
         }
 
         var classifiedKinds = candidates
@@ -146,7 +144,8 @@ public sealed class KeySignaturePass : ISemanticPass
         {
             throw new InvalidDataException(
                 $"Unsupported accidental type inside initial key signature in measure "
-                + $"{measure.Number}, staff {staff.StaffNumber}.");
+                + $"{measure.Number}, staff {staff.StaffNumber}. "
+                + DescribeCandidates(candidates, staff.LineSpacing));
         }
 
         var musicalKinds = classifiedKinds
@@ -157,45 +156,58 @@ public sealed class KeySignaturePass : ISemanticPass
         {
             throw new InvalidDataException(
                 $"Mixed flats and sharps inside key signature in measure "
-                + $"{measure.Number}, staff {staff.StaffNumber}.");
+                + $"{measure.Number}, staff {staff.StaffNumber}. "
+                + DescribeCandidates(candidates, staff.LineSpacing));
         }
 
-        var geometricKind = InferKindFromPositions(
+        var geometricKinds = InferKindsFromRelativePositions(
             candidates,
-            staff,
-            clef.Sign);
+            staff.LineSpacing);
 
-        if (geometricKind is null)
+        string kind;
+
+        if (musicalKinds.Length == 1)
         {
-            throw new InvalidDataException(
-                $"Key-signature glyphs in measure {measure.Number}, "
-                + $"staff {staff.StaffNumber} do not match the canonical "
-                + $"flat or sharp vertical sequence.");
+            kind = musicalKinds[0]!;
+
+            if (!geometricKinds.Contains(kind, StringComparer.Ordinal))
+            {
+                throw new InvalidDataException(
+                    $"Key-signature classifier/geometry disagreement in measure "
+                    + $"{measure.Number}, staff {staff.StaffNumber}: classifier says "
+                    + $"{kind}, relative positions match "
+                    + $"[{string.Join(", ", geometricKinds)}]. "
+                    + DescribeCandidates(candidates, staff.LineSpacing));
+            }
         }
-
-        if (musicalKinds.Length == 1
-            && musicalKinds[0] != geometricKind)
+        else
         {
-            throw new InvalidDataException(
-                $"Key-signature classifier/geometry disagreement in measure "
-                + $"{measure.Number}, staff {staff.StaffNumber}: classifier says "
-                + $"{musicalKinds[0]}, positions say {geometricKind}.");
+            if (geometricKinds.Count != 1)
+            {
+                throw new InvalidDataException(
+                    $"Cannot infer a unique key-signature accidental kind in measure "
+                    + $"{measure.Number}, staff {staff.StaffNumber}; relative positions "
+                    + $"match [{string.Join(", ", geometricKinds)}]. "
+                    + DescribeCandidates(candidates, staff.LineSpacing));
+            }
+
+            kind = geometricKinds[0];
         }
 
         ValidateClassifiedGlyphs(
             candidates,
-            geometricKind,
+            kind,
             measure.Number,
             staff.StaffNumber);
 
         var count = candidates.Length;
-        var fifths = geometricKind == "sharp"
+        var fifths = kind == "sharp"
             ? count
             : -count;
 
         return new StaffKey(
             fifths,
-            geometricKind,
+            kind,
             candidates.Min(candidate => candidate.Bounds.MinX),
             candidates.Max(candidate => candidate.Bounds.MaxX),
             candidates.Select(candidate => candidate.ShapeId).ToArray());
@@ -247,31 +259,37 @@ public sealed class KeySignaturePass : ISemanticPass
         };
     }
 
-    private static string? InferKindFromPositions(
+    private static IReadOnlyList<string> InferKindsFromRelativePositions(
         IReadOnlyList<ShapeElement> candidates,
-        StaffMeasureScene staff,
-        string clefSign)
+        double lineSpacing)
     {
-        var patterns = clefSign switch
+        var halfSpacing = lineSpacing / 2.0;
+
+        if (halfSpacing <= 0)
         {
-            "G" => TreblePatterns,
-            "F" => BassPatterns,
-            _ => throw new InvalidDataException(
-                $"KeySignaturePass currently supports G and F clefs only, got {clefSign}.")
-        };
+            return [];
+        }
 
         var matches = new List<(string Kind, double Error)>();
 
-        foreach (var pair in patterns)
+        foreach (var pair in PositionPatterns)
         {
             var pattern = pair.Value;
-            var maxError = 0.0;
-            var sumError = 0.0;
-            var halfSpacing = staff.LineSpacing / 2.0;
+            var offsets = new double[candidates.Count];
 
             for (var index = 0; index < candidates.Count; index++)
             {
-                var expectedY = staff.StaffBounds.MinY
+                offsets[index] = candidates[index].CenterY
+                    - pattern[index] * halfSpacing;
+            }
+
+            var fittedOffset = offsets.Average();
+            var maxError = 0.0;
+            var sumError = 0.0;
+
+            for (var index = 0; index < candidates.Count; index++)
+            {
+                var expectedY = fittedOffset
                     + pattern[index] * halfSpacing;
                 var stepError = Math.Abs(
                     candidates[index].CenterY - expectedY) / halfSpacing;
@@ -290,7 +308,7 @@ public sealed class KeySignaturePass : ISemanticPass
             .OrderBy(match => match.Error)
             .ThenBy(match => match.Kind, StringComparer.Ordinal)
             .Select(match => match.Kind)
-            .FirstOrDefault();
+            .ToArray();
     }
 
     private static void ValidateClassifiedGlyphs(
@@ -322,6 +340,28 @@ public sealed class KeySignaturePass : ISemanticPass
                     + $"expected {expectedKind}, classifier says {kind}.");
             }
         }
+    }
+
+    private static string DescribeCandidates(
+        IReadOnlyList<ShapeElement> candidates,
+        double lineSpacing)
+    {
+        var halfSpacing = lineSpacing / 2.0;
+
+        return "candidates=" + string.Join(
+            "; ",
+            candidates.Select(candidate =>
+            {
+                var label = candidate.Classification?.Label ?? "unclassified";
+                var confidence = candidate.Classification?.Confidence ?? 0;
+                var normalizedY = halfSpacing > 0
+                    ? candidate.CenterY / halfSpacing
+                    : candidate.CenterY;
+
+                return $"{candidate.ShapeId}:{label}@{confidence:P0} "
+                    + $"x={candidate.CenterX:F2} y={candidate.CenterY:F2} "
+                    + $"yn={normalizedY:F2}";
+            }));
     }
 
     private sealed record StaffKey(
