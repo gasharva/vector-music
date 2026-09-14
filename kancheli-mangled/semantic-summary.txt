@@ -5,6 +5,7 @@ notation.strokes=641
 notation.curves=36
 notation.ellipses=412
 ownership.assignments=1260
+ownership.ledgerLadderCorrections=1
 semantic.measures=28
 semantic.facts=910
 semantic.clefs=10

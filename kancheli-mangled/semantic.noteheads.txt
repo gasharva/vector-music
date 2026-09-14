@@ -207,21 +207,21 @@ rank  size(sp)  decision                     measure staff step  grid-error ledg
  194     1.145  notehead                           21     2   -8       0.003 ok:4   filled  shape-912
  195     1.145  notehead                           21     2   -9       0.003 ok:4   filled  shape-914
  196     1.145  notehead                           21     2  -10       0.004 ok:5   filled  shape-917
- 197     1.145  notehead                           25     2  -10       0.004 ok:5   filled  shape-953
- 198     1.145  notehead                           18     1   -1       0.003 -      filled  shape-833
- 199     1.145  notehead                           19     1   -5       0.003 ok:2   filled  shape-690
- 200     1.145  notehead                           20     1   -4       0.004 ok:2   filled  shape-691
- 201     1.145  notehead                           20     1   -5       0.003 ok:2   filled  shape-702
- 202     1.145  notehead                           20     1   -4       0.004 ok:2   filled  shape-753
- 203     1.145  notehead                           19     1   -7       0.004 ok:3   filled  shape-774
- 204     1.145  notehead                           20     1   -3       0.004 ok:1   filled  shape-786
- 205     1.145  notehead                           19     1   -7       0.004 ok:3   filled  shape-787
- 206     1.145  notehead                           20     1   -3       0.004 ok:1   filled  shape-794
- 207     1.145  notehead                           19     1   -6       0.004 ok:3   filled  shape-800
- 208     1.145  notehead                           19     1   -6       0.004 ok:3   filled  shape-803
- 209     1.145  notehead                           22     1   -1       0.003 -      filled  shape-705
- 210     1.145  notehead                           20     1   -2       0.004 ok:1   filled  shape-801
- 211     1.145  notehead                           21     1   10       0.145 ok:1   filled  shape-919
+ 197     1.145  notehead                           21     2  -12       0.003 ok:6   filled  shape-919
+ 198     1.145  notehead                           25     2  -10       0.004 ok:5   filled  shape-953
+ 199     1.145  notehead                           18     1   -1       0.003 -      filled  shape-833
+ 200     1.145  notehead                           19     1   -5       0.003 ok:2   filled  shape-690
+ 201     1.145  notehead                           20     1   -4       0.004 ok:2   filled  shape-691
+ 202     1.145  notehead                           20     1   -5       0.003 ok:2   filled  shape-702
+ 203     1.145  notehead                           20     1   -4       0.004 ok:2   filled  shape-753
+ 204     1.145  notehead                           19     1   -7       0.004 ok:3   filled  shape-774
+ 205     1.145  notehead                           20     1   -3       0.004 ok:1   filled  shape-786
+ 206     1.145  notehead                           19     1   -7       0.004 ok:3   filled  shape-787
+ 207     1.145  notehead                           20     1   -3       0.004 ok:1   filled  shape-794
+ 208     1.145  notehead                           19     1   -6       0.004 ok:3   filled  shape-800
+ 209     1.145  notehead                           19     1   -6       0.004 ok:3   filled  shape-803
+ 210     1.145  notehead                           22     1   -1       0.003 -      filled  shape-705
+ 211     1.145  notehead                           20     1   -2       0.004 ok:1   filled  shape-801
  212     1.145  notehead                            1     1    0       0.004 -      filled  shape-713
  213     1.145  notehead                            1     1    0       0.004 -      filled  shape-707
  214     1.145  notehead                            1     1   -1       0.004 -      filled  shape-711
@@ -657,12 +657,12 @@ shape-898: notehead; m20 staff=2; size=1.146sp; step=-7; grid-error=0.004; ledge
 shape-896: notehead; m20 staff=2; size=1.146sp; step=-2; grid-error=0.004; ledger-levels=1; ledger-support=True; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-2; grid-error=0.004; supported by 1 local ledger level(s) above; fill=hollow
 shape-895: notehead; m20 staff=2; size=1.146sp; step=2; grid-error=0.004; ledger-levels=0; ledger-support=True; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; position is inside the staff or in the immediately adjacent staff space; fill=hollow
 shape-701: notehead; m21 staff=1; size=1.146sp; step=-3; grid-error=0.004; ledger-levels=1; ledger-support=True; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=-3; grid-error=0.004; supported by 1 local ledger level(s) above; fill=hollow
-shape-919: notehead; m21 staff=1; size=1.145sp; step=10; grid-error=0.145; ledger-levels=1; ledger-support=True; fill=filled; confidence=90.3 %; size=1.145sp is above dot threshold=0.694sp; staff-step=10; grid-error=0.145; supported by 1 local ledger level(s) below; fill=filled
 shape-907: notehead; m21 staff=2; size=1.145sp; step=1; grid-error=0.004; ledger-levels=0; ledger-support=True; fill=filled; confidence=99.7 %; size=1.145sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; position is inside the staff or in the immediately adjacent staff space; fill=filled
 shape-909: notehead; m21 staff=2; size=1.145sp; step=-5; grid-error=0.003; ledger-levels=2; ledger-support=True; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-5; grid-error=0.003; supported by 2 local ledger level(s) above; fill=filled
 shape-912: notehead; m21 staff=2; size=1.145sp; step=-8; grid-error=0.003; ledger-levels=4; ledger-support=True; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-8; grid-error=0.003; supported by 4 local ledger level(s) above; fill=filled
 shape-914: notehead; m21 staff=2; size=1.145sp; step=-9; grid-error=0.003; ledger-levels=4; ledger-support=True; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-9; grid-error=0.003; supported by 4 local ledger level(s) above; fill=filled
 shape-917: notehead; m21 staff=2; size=1.145sp; step=-10; grid-error=0.004; ledger-levels=5; ledger-support=True; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-10; grid-error=0.004; supported by 5 local ledger level(s) above; fill=filled
+shape-919: notehead; m21 staff=2; size=1.145sp; step=-12; grid-error=0.003; ledger-levels=6; ledger-support=True; fill=filled; confidence=99.8 %; size=1.145sp is above dot threshold=0.694sp; staff-step=-12; grid-error=0.003; supported by 6 local ledger level(s) above; fill=filled
 shape-681: notehead; m22 staff=1; size=1.146sp; step=2; grid-error=0.004; ledger-levels=0; ledger-support=True; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=2; grid-error=0.004; position is inside the staff or in the immediately adjacent staff space; fill=hollow
 shape-795: notehead; m22 staff=1; size=1.146sp; step=1; grid-error=0.004; ledger-levels=0; ledger-support=True; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=1; grid-error=0.004; position is inside the staff or in the immediately adjacent staff space; fill=hollow
 shape-812: notehead; m22 staff=1; size=1.146sp; step=0; grid-error=0.005; ledger-levels=0; ledger-support=True; fill=hollow; confidence=99.7 %; size=1.146sp is above dot threshold=0.694sp; staff-step=0; grid-error=0.005; position is inside the staff or in the immediately adjacent staff space; fill=hollow
