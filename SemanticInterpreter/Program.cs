@@ -92,15 +92,39 @@ var semanticDocument = new MeasureSceneBuilder().Build(
     layout);
 
 Console.WriteLine("7. Running granular semantic passes...");
+var noteheadPass = new NoteheadPass();
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
         new TimeSignaturePass(),
-        new KeySignaturePass()
+        new KeySignaturePass(),
+        noteheadPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
-Console.WriteLine("8. Building CanonicalNotation v0.3 skeleton...");
+const string noteheadsSvgFileName = "semantic.noteheads.svg";
+const string noteheadsDiagnosticsFileName = "semantic.noteheads.txt";
+
+if (noteheadPass.LastAnalysis is not null)
+{
+    Console.WriteLine("8. Writing notehead diagnostics...");
+    var noteheadDebugRenderer = new NoteheadDebugRenderer();
+
+    noteheadDebugRenderer.Render(
+        input,
+        noteheadPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            noteheadsSvgFileName));
+
+    noteheadDebugRenderer.WriteReport(
+        noteheadPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            noteheadsDiagnosticsFileName));
+}
+
+Console.WriteLine("9. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -121,7 +145,7 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("9. Writing MuseScore-compatible MusicXML...");
+Console.WriteLine("10. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
@@ -129,7 +153,7 @@ new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
-Console.WriteLine("10. Writing compressed MusicXML (.mxl)...");
+Console.WriteLine("11. Writing compressed MusicXML (.mxl)...");
 var compressedMusicXmlPath = Path.Combine(
     outputDirectory,
     compressedMusicXmlFileName);
@@ -162,10 +186,13 @@ File.WriteAllLines(
         $"semantic.clefs={facts.OfType<ClefFact>().Count()}",
         $"semantic.times={facts.OfType<TimeSignatureFact>().Count()}",
         $"semantic.keys={facts.OfType<KeySignatureFact>().Count()}",
+        $"semantic.noteheads={facts.OfType<NoteheadFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
         $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}",
+        $"semantic.noteheadsSvg={Path.GetFullPath(Path.Combine(outputDirectory, noteheadsSvgFileName))}",
+        $"semantic.noteheadsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, noteheadsDiagnosticsFileName))}",
         $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
         $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
         $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
@@ -175,7 +202,7 @@ File.WriteAllLines(
         $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
 
-Console.WriteLine("11. Writing artifact index...");
+Console.WriteLine("12. Writing artifact index...");
 new ArtifactIndexWriter().Write(
     outputDirectory,
     input,
@@ -194,9 +221,11 @@ Console.WriteLine($"  facts    : {facts.Items.Count}");
 Console.WriteLine($"  clefs    : {facts.OfType<ClefFact>().Count()}");
 Console.WriteLine($"  times    : {facts.OfType<TimeSignatureFact>().Count()}");
 Console.WriteLine($"  keys     : {facts.OfType<KeySignatureFact>().Count()}");
+Console.WriteLine($"  noteheads: {facts.OfType<NoteheadFact>().Count()}");
 Console.WriteLine($"  canonical: {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML : {Path.GetFullPath(musicXmlPath)}");
 Console.WriteLine($"  MXL      : {Path.GetFullPath(compressedMusicXmlPath)}");
+Console.WriteLine($"  noteheads: {Path.GetFullPath(Path.Combine(outputDirectory, noteheadsSvgFileName))}");
 Console.WriteLine($"  ownership: {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
 Console.WriteLine($"  index    : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
@@ -261,6 +290,14 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"x={key.MinX:F2}..{key.MaxX:F2}; "
                     + $"shapes={string.Join(',', key.SourceShapeIds)}; "
                     + $"reason={key.Reason}";
+                break;
+
+            case NoteheadFact notehead:
+                yield return $"notehead m{notehead.MeasureNumber} staff={notehead.Staff} "
+                    + $"shape={notehead.ShapeId} x={notehead.CenterX:F2} y={notehead.CenterY:F2} "
+                    + $"fill={notehead.FillKind} size={notehead.NormalizedSize:F3}sp "
+                    + $"staff-step={notehead.StaffStep} error={notehead.StaffStepError:F3} "
+                    + $"confidence={notehead.Confidence:P1}; reason={notehead.Reason}";
                 break;
 
             default:
