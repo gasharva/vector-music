@@ -94,6 +94,7 @@ var semanticDocument = new MeasureSceneBuilder().Build(
 Console.WriteLine("7. Running granular semantic passes...");
 var noteheadPass = new NoteheadPass();
 var accidentalPass = new AccidentalPass();
+var stemPass = new StemAttachmentPass();
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
@@ -101,7 +102,8 @@ var semanticPipeline = new SemanticPipeline(
         new KeySignaturePass(),
         noteheadPass,
         accidentalPass,
-        new PitchPass()
+        new PitchPass(),
+        stemPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -109,10 +111,18 @@ const string noteheadsSvgFileName = "semantic.noteheads.svg";
 const string noteheadsDiagnosticsFileName = "semantic.noteheads.txt";
 const string accidentalsSvgFileName = "semantic.accidentals.svg";
 const string accidentalsDiagnosticsFileName = "semantic.accidentals.txt";
+const string stemsSvgFileName = "semantic.stems.svg";
+const string stemsDiagnosticsFileName = "semantic.stems.txt";
 
 var noteheadsSvgPath = Path.Combine(
     outputDirectory,
     noteheadsSvgFileName);
+var accidentalsSvgPath = Path.Combine(
+    outputDirectory,
+    accidentalsSvgFileName);
+var stemsSvgPath = Path.Combine(
+    outputDirectory,
+    stemsSvgFileName);
 
 if (noteheadPass.LastAnalysis is not null)
 {
@@ -142,9 +152,7 @@ if (accidentalPass.LastAnalysis is not null)
     accidentalDebugRenderer.Render(
         accidentalBaseSvg,
         accidentalPass.LastAnalysis,
-        Path.Combine(
-            outputDirectory,
-            accidentalsSvgFileName));
+        accidentalsSvgPath);
 
     accidentalDebugRenderer.WriteReport(
         accidentalPass.LastAnalysis,
@@ -153,7 +161,29 @@ if (accidentalPass.LastAnalysis is not null)
             accidentalsDiagnosticsFileName));
 }
 
-Console.WriteLine("10. Building CanonicalNotation v0.3 skeleton...");
+if (stemPass.LastAnalysis is not null)
+{
+    Console.WriteLine("10. Writing stem attachment diagnostics...");
+    var stemDebugRenderer = new StemDebugRenderer();
+    var stemBaseSvg = File.Exists(accidentalsSvgPath)
+        ? accidentalsSvgPath
+        : File.Exists(noteheadsSvgPath)
+            ? noteheadsSvgPath
+            : input;
+
+    stemDebugRenderer.Render(
+        stemBaseSvg,
+        stemPass.LastAnalysis,
+        stemsSvgPath);
+
+    stemDebugRenderer.WriteReport(
+        stemPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            stemsDiagnosticsFileName));
+}
+
+Console.WriteLine("11. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -174,7 +204,7 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("11. Writing MuseScore-compatible MusicXML...");
+Console.WriteLine("12. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
@@ -182,7 +212,7 @@ new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
-Console.WriteLine("12. Writing compressed MusicXML (.mxl)...");
+Console.WriteLine("13. Writing compressed MusicXML (.mxl)...");
 var compressedMusicXmlPath = Path.Combine(
     outputDirectory,
     compressedMusicXmlFileName);
@@ -218,14 +248,17 @@ File.WriteAllLines(
         $"semantic.noteheads={facts.OfType<NoteheadFact>().Count()}",
         $"semantic.accidentals={facts.OfType<AccidentalFact>().Count()}",
         $"semantic.pitches={facts.OfType<PitchFact>().Count()}",
+        $"semantic.stems={facts.OfType<StemAttachmentFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
         $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}",
         $"semantic.noteheadsSvg={Path.GetFullPath(noteheadsSvgPath)}",
         $"semantic.noteheadsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, noteheadsDiagnosticsFileName))}",
-        $"semantic.accidentalsSvg={Path.GetFullPath(Path.Combine(outputDirectory, accidentalsSvgFileName))}",
+        $"semantic.accidentalsSvg={Path.GetFullPath(accidentalsSvgPath)}",
         $"semantic.accidentalsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, accidentalsDiagnosticsFileName))}",
+        $"semantic.stemsSvg={Path.GetFullPath(stemsSvgPath)}",
+        $"semantic.stemsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, stemsDiagnosticsFileName))}",
         $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
         $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
         $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
@@ -235,7 +268,7 @@ File.WriteAllLines(
         $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
 
-Console.WriteLine("13. Writing artifact index...");
+Console.WriteLine("14. Writing artifact index...");
 new ArtifactIndexWriter().Write(
     outputDirectory,
     input,
@@ -257,11 +290,13 @@ Console.WriteLine($"  keys       : {facts.OfType<KeySignatureFact>().Count()}");
 Console.WriteLine($"  noteheads  : {facts.OfType<NoteheadFact>().Count()}");
 Console.WriteLine($"  accidentals: {facts.OfType<AccidentalFact>().Count()}");
 Console.WriteLine($"  pitches    : {facts.OfType<PitchFact>().Count()}");
+Console.WriteLine($"  stems      : {facts.OfType<StemAttachmentFact>().Count()}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
 Console.WriteLine($"  MXL        : {Path.GetFullPath(compressedMusicXmlPath)}");
 Console.WriteLine($"  noteheads  : {Path.GetFullPath(noteheadsSvgPath)}");
-Console.WriteLine($"  accidentals: {Path.GetFullPath(Path.Combine(outputDirectory, accidentalsSvgFileName))}");
+Console.WriteLine($"  accidentals: {Path.GetFullPath(accidentalsSvgPath)}");
+Console.WriteLine($"  stems      : {Path.GetFullPath(stemsSvgPath)}");
 Console.WriteLine($"  ownership  : {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
 Console.WriteLine($"  index      : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
@@ -361,6 +396,17 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"step={pitch.Step} octave={pitch.Octave} alter={pitch.Alter} "
                     + $"pitch={pitch.Pitch} confidence={pitch.Confidence:P1}; "
                     + $"reason={pitch.Reason}";
+                break;
+
+            case StemAttachmentFact stem:
+                yield return $"stem m{stem.MeasureNumber} shape={stem.StemShapeId} "
+                    + $"direction={stem.Direction} cross-staff={stem.IsCrossStaff} "
+                    + $"noteheads=[{string.Join(',', stem.AttachedNoteheadIds)}] "
+                    + $"staffs=[{string.Join(',', stem.AttachedStaffs)}] "
+                    + $"from=({stem.StartX:F2},{stem.StartY:F2}) "
+                    + $"to=({stem.EndX:F2},{stem.EndY:F2}) "
+                    + $"length={stem.LengthInSpacings:F2}sp width={stem.WidthInSpacings:F3}sp "
+                    + $"confidence={stem.Confidence:P1}; reason={stem.Reason}";
                 break;
 
             default:
