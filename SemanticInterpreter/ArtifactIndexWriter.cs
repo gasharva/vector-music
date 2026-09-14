@@ -107,6 +107,22 @@ public sealed class ArtifactIndexWriter
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
+            "semantic.stems.svg",
+            "Detected stem attachments (SVG)",
+            "StemAttachmentPass overlay: accepted stems are magenta, cross-staff stems purple, attached noteheads are ringed, unmatched vertical candidates are faint gray dashed lines.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.stems.txt",
+            "Stem attachment decisions",
+            "Per-stem geometry, attached noteheads, inferred stem direction, cross-staff status and unmatched vertical stroke candidates.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
             "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
