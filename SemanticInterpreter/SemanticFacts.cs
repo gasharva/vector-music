@@ -67,6 +67,26 @@ public sealed record NoteheadFact(
         Reason,
         SourceShapeIds);
 
+public sealed record AccidentalFact(
+    int MeasureNumber,
+    int Staff,
+    string ShapeId,
+    AccidentalKind Kind,
+    double AnchorX,
+    double AnchorY,
+    int StaffStep,
+    string ExplicitTargetNoteheadId,
+    IReadOnlyList<string> AffectedNoteheadIds,
+    double ClassificationConfidence,
+    double VerticalErrorInHalfSteps,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "AccidentalPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
