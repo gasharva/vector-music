@@ -8,6 +8,7 @@ public sealed record NoteheadCandidate(
     string StaffId,
     double StaffTopY,
     double LineSpacing,
+    IReadOnlyList<LedgerLevelLayout> LedgerLevels,
     EllipseElement Ellipse,
     double NormalizedSize);
 
@@ -22,8 +23,14 @@ public sealed record EllipseSizeProfile(
 
 public sealed record StaffGridMatch(
     bool IsAligned,
+    bool HasLedgerSupport,
     int NearestStep,
-    double ErrorInHalfSteps);
+    double ErrorInHalfSteps,
+    int RequiredLedgerLevels,
+    string SupportReason)
+{
+    public bool IsValid => IsAligned && HasLedgerSupport;
+}
 
 public sealed record NoteheadDecision(
     NoteheadCandidate Candidate,
@@ -170,6 +177,7 @@ public sealed class EllipseSizeProfiler
 public sealed class StaffGridRule
 {
     private const double MaximumErrorInHalfSteps = 0.30;
+    private const int BottomStaffLineStep = 8;
 
     public StaffGridMatch Evaluate(NoteheadCandidate candidate)
     {
@@ -179,23 +187,125 @@ public sealed class StaffGridRule
         {
             return new StaffGridMatch(
                 false,
+                false,
                 0,
-                double.PositiveInfinity);
+                double.PositiveInfinity,
+                0,
+                "staff spacing is not positive");
         }
 
         var rawStep = (candidate.Ellipse.CenterY - candidate.StaffTopY) / halfStep;
         var nearestStep = (int)Math.Round(rawStep);
         var error = Math.Abs(rawStep - nearestStep);
+        var isAligned = error <= MaximumErrorInHalfSteps;
+
+        if (!isAligned)
+        {
+            return new StaffGridMatch(
+                false,
+                false,
+                nearestStep,
+                error,
+                0,
+                "ellipse center is not on the staff half-step grid");
+        }
+
+        var requiredLedgerLevels = RequiredLedgerLevels(nearestStep);
+        if (requiredLedgerLevels == 0)
+        {
+            return new StaffGridMatch(
+                true,
+                true,
+                nearestStep,
+                error,
+                0,
+                "position is inside the staff or in the immediately adjacent staff space");
+        }
+
+        var direction = nearestStep < 0
+            ? "above"
+            : "below";
+        var missingLevel = FindMissingLocalLedgerLevel(
+            candidate,
+            direction,
+            requiredLedgerLevels);
+
+        if (missingLevel is not null)
+        {
+            return new StaffGridMatch(
+                true,
+                false,
+                nearestStep,
+                error,
+                requiredLedgerLevels,
+                $"requires {requiredLedgerLevels} local ledger level(s) {direction}, "
+                + $"but level {missingLevel.Value} does not cross this ellipse x-range");
+        }
 
         return new StaffGridMatch(
-            error <= MaximumErrorInHalfSteps,
+            true,
+            true,
             nearestStep,
-            error);
+            error,
+            requiredLedgerLevels,
+            $"supported by {requiredLedgerLevels} local ledger level(s) {direction}");
+    }
+
+    private static int RequiredLedgerLevels(int nearestStep)
+    {
+        if (nearestStep >= -1 && nearestStep <= BottomStaffLineStep + 1)
+        {
+            return 0;
+        }
+
+        if (nearestStep < -1)
+        {
+            return -nearestStep / 2;
+        }
+
+        return (nearestStep - BottomStaffLineStep) / 2;
+    }
+
+    private static int? FindMissingLocalLedgerLevel(
+        NoteheadCandidate candidate,
+        string direction,
+        int requiredLedgerLevels)
+    {
+        var allowance = candidate.LineSpacing * 0.15;
+        var ellipseBounds = candidate.Ellipse.Bounds;
+
+        for (var step = 1; step <= requiredLedgerLevels; step++)
+        {
+            var level = candidate.LedgerLevels.FirstOrDefault(item =>
+                string.Equals(
+                    item.Direction,
+                    direction,
+                    StringComparison.OrdinalIgnoreCase)
+                && item.Step == step);
+
+            if (level is null)
+            {
+                return step;
+            }
+
+            var crossesEllipse = level.Segments.Any(segment =>
+                segment.XEnd + allowance >= ellipseBounds.MinX
+                && segment.XStart - allowance <= ellipseBounds.MaxX);
+
+            if (!crossesEllipse)
+            {
+                return step;
+            }
+        }
+
+        return null;
     }
 }
 
 public sealed class NoteheadAnalyzer
 {
+    private const double MaximumGridError = 0.30;
+
     private readonly EllipseSizeProfiler _sizeProfiler;
     private readonly StaffGridRule _staffGridRule;
 
@@ -262,11 +372,23 @@ public sealed class NoteheadAnalyzer
                 grid,
                 fillKind,
                 0,
-                $"center is {grid.ErrorInHalfSteps:F3} half-step(s) from nearest staff/ledger position");
+                $"center is {grid.ErrorInHalfSteps:F3} half-step(s) from nearest staff position");
+        }
+
+        if (!grid.HasLedgerSupport)
+        {
+            return new NoteheadDecision(
+                candidate,
+                false,
+                "unsupported-ledger-position",
+                grid,
+                fillKind,
+                0,
+                grid.SupportReason);
         }
 
         var alignmentScore = Math.Clamp(
-            1.0 - grid.ErrorInHalfSteps / 0.30,
+            1.0 - grid.ErrorInHalfSteps / MaximumGridError,
             0,
             1);
         var confidence = 0.80 + alignmentScore * 0.20;
@@ -281,7 +403,8 @@ public sealed class NoteheadAnalyzer
             grid,
             fillKind,
             confidence,
-            $"{sizeReason}; staff-step={grid.NearestStep}; grid-error={grid.ErrorInHalfSteps:F3}; fill={fillKind}");
+            $"{sizeReason}; staff-step={grid.NearestStep}; "
+            + $"grid-error={grid.ErrorInHalfSteps:F3}; {grid.SupportReason}; fill={fillKind}");
     }
 
     private sealed class EllipseCollector : SemanticVisitor
@@ -311,6 +434,7 @@ public sealed class NoteheadAnalyzer
                 staff.StaffId,
                 staff.StaffBounds.MinY,
                 staff.LineSpacing,
+                staff.LedgerLevels ?? [],
                 ellipse,
                 normalizedSize));
         }
