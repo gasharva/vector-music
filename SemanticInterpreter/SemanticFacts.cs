@@ -132,6 +132,24 @@ public sealed record StemAttachmentFact(
         Reason,
         SourceShapeIds);
 
+public sealed record FlagAttachmentFact(
+    int MeasureNumber,
+    string FlagShapeId,
+    string StemShapeId,
+    int Level,
+    string ClassificationLabel,
+    double ClassificationConfidence,
+    double StemTipX,
+    double StemTipY,
+    bool IsCrossStaffStem,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "FlagAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
