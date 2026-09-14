@@ -132,7 +132,7 @@ public sealed class EllipseSizeProfiler
     private static EllipseSizeProfile NoSplit(
         IReadOnlyList<NoteheadCandidate> ranked)
     {
-        var median = ranked.Count == 0
+        double? median = ranked.Count == 0
             ? null
             : Median(ranked.Select(item => item.NormalizedSize));
 
