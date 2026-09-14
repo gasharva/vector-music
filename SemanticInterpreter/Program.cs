@@ -96,6 +96,7 @@ var noteheadPass = new NoteheadPass();
 var accidentalPass = new AccidentalPass();
 var stemPass = new StemAttachmentPass();
 var flagPass = new FlagAttachmentPass();
+var beamPass = new BeamAttachmentPass();
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
@@ -105,7 +106,8 @@ var semanticPipeline = new SemanticPipeline(
         accidentalPass,
         new PitchPass(),
         stemPass,
-        flagPass
+        flagPass,
+        beamPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -117,6 +119,8 @@ const string stemsSvgFileName = "semantic.stems.svg";
 const string stemsDiagnosticsFileName = "semantic.stems.txt";
 const string flagsSvgFileName = "semantic.flags.svg";
 const string flagsDiagnosticsFileName = "semantic.flags.txt";
+const string beamsSvgFileName = "semantic.beams.svg";
+const string beamsDiagnosticsFileName = "semantic.beams.txt";
 
 var noteheadsSvgPath = Path.Combine(
     outputDirectory,
@@ -130,6 +134,9 @@ var stemsSvgPath = Path.Combine(
 var flagsSvgPath = Path.Combine(
     outputDirectory,
     flagsSvgFileName);
+var beamsSvgPath = Path.Combine(
+    outputDirectory,
+    beamsSvgFileName);
 
 if (noteheadPass.LastAnalysis is not null)
 {
@@ -212,7 +219,29 @@ if (flagPass.LastAnalysis is not null)
             flagsDiagnosticsFileName));
 }
 
-Console.WriteLine("12. Building CanonicalNotation v0.3 skeleton...");
+if (beamPass.LastAnalysis is not null)
+{
+    Console.WriteLine("12. Writing beam attachment diagnostics...");
+    var beamDebugRenderer = new BeamDebugRenderer();
+    var beamBaseSvg = File.Exists(flagsSvgPath)
+        ? flagsSvgPath
+        : File.Exists(stemsSvgPath)
+            ? stemsSvgPath
+            : input;
+
+    beamDebugRenderer.Render(
+        beamBaseSvg,
+        beamPass.LastAnalysis,
+        beamsSvgPath);
+
+    beamDebugRenderer.WriteReport(
+        beamPass.LastAnalysis,
+        Path.Combine(
+            outputDirectory,
+            beamsDiagnosticsFileName));
+}
+
+Console.WriteLine("13. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -233,7 +262,7 @@ File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("13. Writing MuseScore-compatible MusicXML...");
+Console.WriteLine("14. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
     musicXmlFileName);
@@ -241,7 +270,7 @@ new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
-Console.WriteLine("14. Writing compressed MusicXML (.mxl)...");
+Console.WriteLine("15. Writing compressed MusicXML (.mxl)...");
 var compressedMusicXmlPath = Path.Combine(
     outputDirectory,
     compressedMusicXmlFileName);
@@ -279,6 +308,7 @@ File.WriteAllLines(
         $"semantic.pitches={facts.OfType<PitchFact>().Count()}",
         $"semantic.stems={facts.OfType<StemAttachmentFact>().Count()}",
         $"semantic.flags={facts.OfType<FlagAttachmentFact>().Count()}",
+        $"semantic.beams={facts.OfType<BeamAttachmentFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
@@ -291,6 +321,8 @@ File.WriteAllLines(
         $"semantic.stemsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, stemsDiagnosticsFileName))}",
         $"semantic.flagsSvg={Path.GetFullPath(flagsSvgPath)}",
         $"semantic.flagsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, flagsDiagnosticsFileName))}",
+        $"semantic.beamsSvg={Path.GetFullPath(beamsSvgPath)}",
+        $"semantic.beamsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, beamsDiagnosticsFileName))}",
         $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
         $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
         $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
@@ -300,7 +332,7 @@ File.WriteAllLines(
         $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
 
-Console.WriteLine("15. Writing artifact index...");
+Console.WriteLine("16. Writing artifact index...");
 new ArtifactIndexWriter().Write(
     outputDirectory,
     input,
@@ -324,6 +356,7 @@ Console.WriteLine($"  accidentals: {facts.OfType<AccidentalFact>().Count()}");
 Console.WriteLine($"  pitches    : {facts.OfType<PitchFact>().Count()}");
 Console.WriteLine($"  stems      : {facts.OfType<StemAttachmentFact>().Count()}");
 Console.WriteLine($"  flags      : {facts.OfType<FlagAttachmentFact>().Count()}");
+Console.WriteLine($"  beams      : {facts.OfType<BeamAttachmentFact>().Count()}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
 Console.WriteLine($"  MXL        : {Path.GetFullPath(compressedMusicXmlPath)}");
@@ -331,6 +364,7 @@ Console.WriteLine($"  noteheads  : {Path.GetFullPath(noteheadsSvgPath)}");
 Console.WriteLine($"  accidentals: {Path.GetFullPath(accidentalsSvgPath)}");
 Console.WriteLine($"  stems      : {Path.GetFullPath(stemsSvgPath)}");
 Console.WriteLine($"  flags      : {Path.GetFullPath(flagsSvgPath)}");
+Console.WriteLine($"  beams      : {Path.GetFullPath(beamsSvgPath)}");
 Console.WriteLine($"  ownership  : {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
 Console.WriteLine($"  index      : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
@@ -450,6 +484,19 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"cross-staff-stem={flag.IsCrossStaffStem} "
                     + $"classifier={flag.ClassificationConfidence:P1} "
                     + $"confidence={flag.Confidence:P1}; reason={flag.Reason}";
+                break;
+
+            case BeamAttachmentFact beam:
+                yield return $"beam m{beam.MeasureNumber} shape={beam.BeamShapeId} "
+                    + $"level={beam.Level} hook={beam.IsHook} cross-staff={beam.IsCrossStaff} "
+                    + $"stems=[{string.Join(',', beam.AttachedStemIds)}] "
+                    + $"staffs=[{string.Join(',', beam.AttachedStaffs)}] "
+                    + $"left={beam.LeftEndSupported} right={beam.RightEndSupported} "
+                    + $"from=({beam.StartX:F2},{beam.StartY:F2}) "
+                    + $"to=({beam.EndX:F2},{beam.EndY:F2}) "
+                    + $"length={beam.LengthInSpacings:F2}sp width={beam.WidthInSpacings:F3}sp "
+                    + $"slope={beam.Slope:F3} confidence={beam.Confidence:P1}; "
+                    + $"reason={beam.Reason}";
                 break;
 
             default:
