@@ -200,8 +200,11 @@ public sealed class StemAttachmentAnalyzer
             .Select(match => match.Notehead.Staff)
             .Distinct()
             .ToArray();
-        var isCrossStaff = candidate.OwnershipSpansStaffs
-            || attachedStaffs.Length > 1;
+
+        // A long stem can physically enter the neighboring staff's ownership
+        // region without being cross-staff notation. Cross-staff is a semantic
+        // property: the stem must actually serve noteheads from multiple staffs.
+        var isCrossStaff = attachedStaffs.Length > 1;
         var bestMatch = matches[0];
         var verticalityScore = Math.Clamp(
             1.0 - candidate.VerticalRatio / MaximumVerticalRatio,
@@ -227,7 +230,9 @@ public sealed class StemAttachmentAnalyzer
             + $"best edge distance={bestMatch.EdgeDistanceInSpacings:F3}sp; "
             + $"vertical-ratio={candidate.VerticalRatio:F3}; "
             + $"width={candidate.NormalizedWidth:F3}sp; "
-            + $"direction={direction}; cross-staff={isCrossStaff}");
+            + $"direction={direction}; "
+            + $"ownership-span={candidate.OwnershipSpansStaffs}; "
+            + $"cross-staff={isCrossStaff}");
     }
 
     private static StemNoteheadMatch? Match(
