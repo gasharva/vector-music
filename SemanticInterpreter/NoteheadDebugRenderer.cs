@@ -83,22 +83,28 @@ public sealed class NoteheadDebugRenderer
             $"notehead-median={FormatNullable(profile.NoteheadMedian)} staff-spaces",
             string.Empty,
             "RANKED BY NORMALIZED ELLIPSE SIZE",
-            "rank  size(sp)  decision                 measure staff step  grid-error  fill    shape"
+            "rank  size(sp)  decision                     measure staff step  grid-error ledger fill    shape"
         };
 
         for (var index = 0; index < profile.RankedCandidates.Count; index++)
         {
             var candidate = profile.RankedCandidates[index];
             var decision = decisionsByShape[candidate.Ellipse.ShapeId];
+            var ledger = decision.Grid.RequiredLedgerLevels == 0
+                ? "-"
+                : decision.Grid.HasLedgerSupport
+                    ? $"ok:{decision.Grid.RequiredLedgerLevels}"
+                    : $"no:{decision.Grid.RequiredLedgerLevels}";
 
             lines.Add(
                 $"{index + 1,4}  "
                 + $"{candidate.NormalizedSize,8:F3}  "
-                + $"{decision.Decision,-23}  "
+                + $"{decision.Decision,-28}  "
                 + $"{candidate.MeasureNumber,7} "
                 + $"{candidate.StaffNumber,5} "
                 + $"{decision.Grid.NearestStep,4}  "
-                + $"{decision.Grid.ErrorInHalfSteps,10:F3}  "
+                + $"{decision.Grid.ErrorInHalfSteps,10:F3} "
+                + $"{ledger,-6} "
                 + $"{decision.FillKind,-6}  "
                 + candidate.Ellipse.ShapeId);
         }
@@ -107,6 +113,15 @@ public sealed class NoteheadDebugRenderer
         lines.Add("ACCEPTED NOTEHEADS");
 
         foreach (var decision in analysis.Accepted)
+        {
+            lines.Add(Describe(decision));
+        }
+
+        lines.Add(string.Empty);
+        lines.Add("REJECTED: UNSUPPORTED LEDGER POSITIONS");
+
+        foreach (var decision in analysis.Decisions.Where(decision =>
+                     decision.Decision == "unsupported-ledger-position"))
         {
             lines.Add(Describe(decision));
         }
@@ -149,6 +164,16 @@ public sealed class NoteheadDebugRenderer
                 "0.72");
         }
 
+        if (decision.Decision == "unsupported-ledger-position")
+        {
+            return new DebugStyle(
+                "#c2185b",
+                "none",
+                "0",
+                1.5,
+                "0.80");
+        }
+
         return new DebugStyle(
             "#757575",
             "none",
@@ -166,6 +191,8 @@ public sealed class NoteheadDebugRenderer
             + $"size={candidate.NormalizedSize:F3}sp; "
             + $"step={decision.Grid.NearestStep}; "
             + $"grid-error={decision.Grid.ErrorInHalfSteps:F3}; "
+            + $"ledger-levels={decision.Grid.RequiredLedgerLevels}; "
+            + $"ledger-support={decision.Grid.HasLedgerSupport}; "
             + $"fill={decision.FillKind}; "
             + $"confidence={decision.Confidence:P1}; "
             + decision.Reason;
@@ -192,7 +219,10 @@ public sealed class NoteheadDebugRenderer
             decision.Decision == "small-dot-size-cluster");
         var offGrid = analysis.Decisions.Count(decision =>
             decision.Decision == "off-staff-grid");
-        var text = $"noteheads={accepted}; small dots={small}; off-grid={offGrid}";
+        var unsupportedLedger = analysis.Decisions.Count(decision =>
+            decision.Decision == "unsupported-ledger-position");
+        var text = $"noteheads={accepted}; small dots={small}; "
+            + $"off-grid={offGrid}; unsupported-ledger={unsupportedLedger}";
 
         group.Add(new XElement(
             ns + "text",
