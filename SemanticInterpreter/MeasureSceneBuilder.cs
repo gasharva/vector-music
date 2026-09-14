@@ -10,6 +10,9 @@ public sealed class MeasureSceneBuilder
         ScoreLayout layout)
     {
         var elements = BuildElements(geometry, notation);
+        var staffsById = layout.Staffs.ToDictionary(
+            staff => staff.Id,
+            StringComparer.Ordinal);
         var measures = new List<MeasureScene>();
         var measureNumber = 1;
 
@@ -23,6 +26,8 @@ public sealed class MeasureSceneBuilder
             }
 
             var pair = system.StaffPairs[0];
+            var upperStaff = staffsById[pair.UpperStaffId];
+            var lowerStaff = staffsById[pair.LowerStaffId];
 
             foreach (var measure in pair.Measures)
             {
@@ -60,10 +65,14 @@ public sealed class MeasureSceneBuilder
                     new StaffMeasureScene(
                         1,
                         pair.UpperStaffId,
+                        upperStaff.Bounds,
+                        upperStaff.AverageLineSpacing,
                         upperElements),
                     new StaffMeasureScene(
                         2,
                         pair.LowerStaffId,
+                        lowerStaff.Bounds,
+                        lowerStaff.AverageLineSpacing,
                         lowerElements)));
 
                 measureNumber++;

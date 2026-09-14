@@ -55,51 +55,98 @@ var fourthGeneration = new FourthGenerationOuterBandAssigner().AssignAndApply(
 notation = fourthGeneration.Scene;
 ownership = fourthGeneration.Ownership;
 
-Console.WriteLine("5. Building measure-oriented semantic scene...");
+Console.WriteLine("5. Writing SVG parser diagnostics...");
+const string parserBaseName = "parser";
+const string classifiedSymbolsFileName = "parser.classified-symbols.svg";
+const string ownershipSvgFileName = "parser.ownership.svg";
+const string ownershipDiagnosticsFileName = "parser.ownership.render-diagnostics.txt";
+
+new DebugSceneRenderer().RenderAll(
+    input,
+    notation,
+    outputDirectory,
+    parserBaseName);
+
+new SymbolClassificationDebugRenderer().Render(
+    input,
+    geometry,
+    notation,
+    Path.Combine(
+        outputDirectory,
+        classifiedSymbolsFileName));
+
+new LogicalOwnershipDebugRenderer().Render(
+    input,
+    geometry,
+    notation,
+    layout,
+    ownership,
+    Path.Combine(
+        outputDirectory,
+        ownershipSvgFileName));
+
+Console.WriteLine("6. Building measure-oriented semantic scene...");
 var semanticDocument = new MeasureSceneBuilder().Build(
     geometry,
     notation,
     layout);
 
-Console.WriteLine("6. Running granular semantic passes...");
+Console.WriteLine("7. Running granular semantic passes...");
 var semanticPipeline = new SemanticPipeline(
     [
-        new ClefPass()
+        new ClefPass(),
+        new TimeSignaturePass(),
+        new KeySignaturePass()
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
-Console.WriteLine("7. Building CanonicalNotation v0.3 skeleton...");
+Console.WriteLine("8. Building CanonicalNotation v0.3 skeleton...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
     title,
     composer);
 
+const string canonicalFileName = "kancheli.semantic.canonical.json";
+const string musicXmlFileName = "kancheli.semantic.musicxml";
+const string compressedMusicXmlFileName = "kancheli.semantic.mxl";
+const string factsFileName = "semantic-facts.txt";
+const string summaryFileName = "semantic-summary.txt";
+const string runLogFileName = "semantic-run.log";
+
 var canonicalPath = Path.Combine(
     outputDirectory,
-    "kancheli.semantic.canonical.json");
+    canonicalFileName);
 File.WriteAllText(
     canonicalPath,
     CanonicalJson.Serialize(canonical));
 
-Console.WriteLine("8. Writing MusicXML...");
+Console.WriteLine("9. Writing MuseScore-compatible MusicXML...");
 var musicXmlPath = Path.Combine(
     outputDirectory,
-    "kancheli.semantic.musicxml");
-new MusicXmlWriter().Write(
+    musicXmlFileName);
+new MuseScoreCompatibleMusicXmlWriter().Write(
     canonical,
     musicXmlPath);
 
+Console.WriteLine("10. Writing compressed MusicXML (.mxl)...");
+var compressedMusicXmlPath = Path.Combine(
+    outputDirectory,
+    compressedMusicXmlFileName);
+new CompressedMusicXmlWriter().Write(
+    canonical,
+    compressedMusicXmlPath);
+
 var factsPath = Path.Combine(
     outputDirectory,
-    "semantic-facts.txt");
+    factsFileName);
 File.WriteAllLines(
     factsPath,
     FormatFacts(facts));
 
 var summaryPath = Path.Combine(
     outputDirectory,
-    "semantic-summary.txt");
+    summaryFileName);
 File.WriteAllLines(
     summaryPath,
     [
@@ -113,18 +160,45 @@ File.WriteAllLines(
         $"semantic.measures={semanticDocument.Measures.Count}",
         $"semantic.facts={facts.Items.Count}",
         $"semantic.clefs={facts.OfType<ClefFact>().Count()}",
+        $"semantic.times={facts.OfType<TimeSignatureFact>().Count()}",
+        $"semantic.keys={facts.OfType<KeySignatureFact>().Count()}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
-        $"musicxml.path={Path.GetFullPath(musicXmlPath)}"
+        $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
+        $"mxl.path={Path.GetFullPath(compressedMusicXmlPath)}",
+        $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
+        $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
+        $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
+        $"parser.contours={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".contours.svg"))}",
+        $"parser.classified={Path.GetFullPath(Path.Combine(outputDirectory, classifiedSymbolsFileName))}",
+        $"parser.ownership={Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}",
+        $"parser.ownershipDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, ownershipDiagnosticsFileName))}"
     ]);
+
+Console.WriteLine("11. Writing artifact index...");
+new ArtifactIndexWriter().Write(
+    outputDirectory,
+    input,
+    title,
+    canonicalFileName,
+    musicXmlFileName,
+    compressedMusicXmlFileName,
+    factsFileName,
+    summaryFileName,
+    runLogFileName);
 
 Console.WriteLine();
 Console.WriteLine("Semantic interpretation complete:");
 Console.WriteLine($"  measures : {semanticDocument.Measures.Count}");
 Console.WriteLine($"  facts    : {facts.Items.Count}");
 Console.WriteLine($"  clefs    : {facts.OfType<ClefFact>().Count()}");
+Console.WriteLine($"  times    : {facts.OfType<TimeSignatureFact>().Count()}");
+Console.WriteLine($"  keys     : {facts.OfType<KeySignatureFact>().Count()}");
 Console.WriteLine($"  canonical: {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML : {Path.GetFullPath(musicXmlPath)}");
+Console.WriteLine($"  MXL      : {Path.GetFullPath(compressedMusicXmlPath)}");
+Console.WriteLine($"  ownership: {Path.GetFullPath(Path.Combine(outputDirectory, ownershipSvgFileName))}");
+Console.WriteLine($"  index    : {Path.GetFullPath(Path.Combine(outputDirectory, "index.html"))}");
 
 return 0;
 
@@ -172,6 +246,21 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"{clef.Sign}{clef.Line} x={clef.X:F2} "
                     + $"confidence={clef.Confidence:P1} shape={clef.ShapeId}; "
                     + $"reason={clef.Reason}";
+                break;
+
+            case TimeSignatureFact time:
+                yield return $"time m{time.MeasureNumber} "
+                    + $"{time.Beats}/{time.BeatType} x={time.MinX:F2}..{time.MaxX:F2}; "
+                    + $"shapes={string.Join(',', time.SourceShapeIds)}; "
+                    + $"reason={time.Reason}";
+                break;
+
+            case KeySignatureFact key:
+                yield return $"key m{key.MeasureNumber} fifths={key.Fifths} "
+                    + $"kind={key.AccidentalKind} count={key.AccidentalCount} "
+                    + $"x={key.MinX:F2}..{key.MaxX:F2}; "
+                    + $"shapes={string.Join(',', key.SourceShapeIds)}; "
+                    + $"reason={key.Reason}";
                 break;
 
             default:

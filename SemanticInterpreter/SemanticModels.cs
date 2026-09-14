@@ -19,6 +19,8 @@ public sealed record MeasureScene(
 public sealed record StaffMeasureScene(
     int StaffNumber,
     string StaffId,
+    BoundsD StaffBounds,
+    double LineSpacing,
     IReadOnlyList<SemanticElement> Elements);
 
 public abstract record SemanticElement

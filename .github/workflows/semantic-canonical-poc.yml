@@ -9,6 +9,7 @@ on:
       - "SvgScene/**"
       - "AudiverisGlyphPoc/**"
       - "CanonicalNotation/**"
+      - "Samples/kancheli-almonds-mangled/**"
       - ".github/workflows/semantic-canonical-poc.yml"
   workflow_dispatch:
 
@@ -28,25 +29,10 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Reconstruct internet Kancheli fixture
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          mkdir -p ci-input
-
-          cat SvgScene/Fixtures/almonds-internet.svg.gz.b64.parts/part-* \
-            | base64 --decode \
-            | gzip --decompress \
-            > ci-input/almonds-internet.svg
-
-          echo "50ebc277329e20ca2cc1f7efc055eb7d9f04b8765cca34b5a90509e0f7fdd2fe  ci-input/almonds-internet.svg" \
-            | sha256sum --check -
-
       - name: Build semantic interpreter
         run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
 
-      - name: Interpret SVG and write MusicXML
+      - name: Interpret mangled Kancheli SVG and write MusicXML
         shell: bash
         run: |
           set -euo pipefail
@@ -58,16 +44,41 @@ jobs:
             --configuration Release \
             --no-build \
             -- \
-            ci-input/almonds-internet.svg \
+            Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg \
             artifacts \
-            --title "When Almonds Blossomed" \
+            --title "When Almonds Blossomed - mangled" \
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
+
+      - name: Smoke-check MusicXML and MXL
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          grep -q '<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN"' \
+            artifacts/kancheli.semantic.musicxml
+          grep -q '<rest measure="yes"' artifacts/kancheli.semantic.musicxml
+
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          mxl = Path("artifacts/kancheli.semantic.mxl")
+          with ZipFile(mxl) as archive:
+              names = archive.namelist()
+              assert names[0] == "mimetype", names
+              assert "META-INF/container.xml" in names, names
+              assert "score.musicxml" in names, names
+
+              score = archive.read("score.musicxml").decode("utf-8-sig")
+              assert "<!DOCTYPE score-partwise PUBLIC" in score
+              assert '<rest measure="yes"' in score
+          PY
 
       - name: Upload semantic artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: semantic-kancheli-musicxml
+          name: semantic-kancheli-mangled-musicxml
           path: artifacts/
           if-no-files-found: error
           retention-days: 30
@@ -78,7 +89,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: semantic-artifacts
           publish_dir: ./artifacts
-          destination_dir: kancheli
-          keep_files: false
-          force_orphan: true
-          commit_message: "Update semantic Kancheli artifacts from ${{ github.sha }}"
+          destination_dir: kancheli-mangled
+          keep_files: true
+          commit_message: "Update semantic mangled Kancheli artifacts from ${{ github.sha }}"
