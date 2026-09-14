@@ -1,0 +1,12 @@
+TUPLET ANALYSIS
+
+candidates=2
+accepted=0
+corrected-from-stem-count=0
+rejected=2
+
+ACCEPTED TUPLETS
+
+REJECTED TUPLET CANDIDATES
+shape-65: TUPLET_SIX; no-nearby-primary-beam; m6 staff=1; classifier=79.5 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet digit has no compatible level-1 beam group in the same measure
+shape-63.2: TUPLET_SIX; no-nearby-primary-beam; m18 staff=1; classifier=79.5 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet digit has no compatible level-1 beam group in the same measure
