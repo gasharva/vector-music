@@ -123,6 +123,22 @@ public sealed class ArtifactIndexWriter
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
+            "semantic.flags.svg",
+            "Detected flag attachments (SVG)",
+            "FlagAttachmentPass overlay on top of stem diagnostics: attached classifier flags are blue, their matched free stem tip is marked, rejected classified flags are dashed.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.flags.txt",
+            "Flag attachment decisions",
+            "Per-flag classifier label, level, matched stem free tip, geometric distances, ambiguity and rejected candidates.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
             "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
