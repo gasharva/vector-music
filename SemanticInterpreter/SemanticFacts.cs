@@ -175,6 +175,40 @@ public sealed record BeamAttachmentFact(
         Reason,
         SourceShapeIds);
 
+public sealed record TupletFact(
+    int MeasureNumber,
+    string TupletShapeId,
+    string ClassificationLabel,
+    int DisplayedNumber,
+    int ActualNotes,
+    int NormalNotes,
+    bool CorrectedFromStemCount,
+    string PrimaryBeamShapeId,
+    IReadOnlyList<string> AttachedStemIds,
+    IReadOnlyList<string> AttachedNoteheadIds,
+    double ClassificationConfidence,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "TupletPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record DotAttachmentFact(
+    int MeasureNumber,
+    int Staff,
+    string TargetNoteheadId,
+    IReadOnlyList<string> DotShapeIds,
+    int Count,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "DotAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
