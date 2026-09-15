@@ -5,11 +5,12 @@ namespace SvgMusic.Semantics;
 /// <summary>
 /// Projects accepted semantic facts into a deliberately simple CanonicalNotation score.
 ///
-/// This is a raw preview, not the final rhythm/voice reconstruction. Notes that share an
-/// accepted stem become one chord event. Unstemmed noteheads at essentially the same X
-/// become a chord. Within each staff we then serialize events from left to right using the
-/// inferred durations. That is enough to inspect pitch, accidental and duration recognition
-/// in MuseScore while voice/rest/onset reconstruction is still missing.
+/// This is a raw preview, not the final rhythm/voice reconstruction. Chord membership is
+/// supplied explicitly by ChordPass; the builder no longer guesses chords from geometry.
+/// Remaining noteheads become single-note pitched events. Within each staff we then serialize
+/// events from left to right using inferred durations, which is enough to inspect pitch,
+/// accidentals, durations and chord recognition in MuseScore while onset/voice/rest
+/// reconstruction is still missing.
 /// </summary>
 public sealed class CanonicalNotationBuilder
 {
@@ -37,6 +38,7 @@ public sealed class CanonicalNotationBuilder
         var pitches = facts.OfType<PitchFact>().ToArray();
         var durations = facts.OfType<DurationFact>().ToArray();
         var stems = facts.OfType<StemAttachmentFact>().ToArray();
+        var chords = facts.OfType<ChordFact>().ToArray();
 
         if (noteheads.Length > 0 && durations.Length == 0)
         {
@@ -145,6 +147,7 @@ public sealed class CanonicalNotationBuilder
                 pitchesByNotehead,
                 durationsByNotehead,
                 stems,
+                chords,
                 facts,
                 noteheadToEventId,
                 stemToEventId,
@@ -171,6 +174,7 @@ public sealed class CanonicalNotationBuilder
         facts.AddTrace(
             $"CanonicalBuilder: raw-note-preview events={measures.Sum(measure => measure.Events.Count)}; "
             + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
+            + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tuplet-relations={tupletRelations.Count}");
 
         return new CanonicalNotation(
@@ -195,6 +199,7 @@ public sealed class CanonicalNotationBuilder
         IReadOnlyDictionary<string, PitchFact> pitchesByNotehead,
         IReadOnlyDictionary<string, DurationFact> durationsByNotehead,
         IReadOnlyList<StemAttachmentFact> allStems,
+        IReadOnlyList<ChordFact> allChords,
         SemanticFacts facts,
         IDictionary<string, string> noteheadToEventId,
         IDictionary<string, string> stemToEventId,
@@ -221,7 +226,6 @@ public sealed class CanonicalNotationBuilder
         var measureStems = allStems
             .Where(stem => stem.MeasureNumber == measure.Number)
             .ToArray();
-
         var preferredStemByNotehead = measureStems
             .SelectMany(stem => stem.AttachedNoteheadIds.Select(noteheadId => new
             {
@@ -242,26 +246,32 @@ public sealed class CanonicalNotationBuilder
         var drafts = new List<RawEventDraft>();
         var consumed = new HashSet<string>(StringComparer.Ordinal);
 
-        foreach (var stem in preferredStemByNotehead.Values
-                     .DistinctBy(stem => stem.StemShapeId)
-                     .OrderBy(stem => Math.Min(stem.StartX, stem.EndX)))
+        foreach (var chord in allChords
+                     .Where(chord => chord.MeasureNumber == measure.Number)
+                     .OrderBy(chord => chord.AnchorX)
+                     .ThenBy(chord => chord.ChordId, StringComparer.Ordinal))
         {
-            var chordNoteheads = stem.AttachedNoteheadIds
-                .Where(noteheadId =>
-                    preferredStemByNotehead.TryGetValue(noteheadId, out var preferred)
-                    && preferred.StemShapeId == stem.StemShapeId)
+            var chordNoteheads = chord.NoteheadIds
                 .Where(availableIds.Contains)
+                .Where(noteheadId => !consumed.Contains(noteheadId))
                 .Select(noteheadId => noteheadsById[noteheadId])
                 .OrderBy(note => note.Staff)
                 .ThenBy(note => note.CenterY)
                 .ToArray();
 
-            if (chordNoteheads.Length == 0)
+            if (chordNoteheads.Length < 2)
             {
+                facts.AddTrace(
+                    $"CanonicalBuilder: {chord.ChordId} ignored because only "
+                    + $"{chordNoteheads.Length} projected notehead(s) remain");
                 continue;
             }
 
-            var eventId = $"m{measure.Number}-{stem.StemShapeId}";
+            var stem = chord.StemShapeId is null
+                ? null
+                : measureStems.FirstOrDefault(candidate =>
+                    candidate.StemShapeId == chord.StemShapeId);
+            var eventId = chord.ChordId;
             var draft = BuildDraft(
                 eventId,
                 chordNoteheads,
@@ -270,7 +280,11 @@ public sealed class CanonicalNotationBuilder
                 durationsByNotehead,
                 facts);
             drafts.Add(draft);
-            stemToEventId[stem.StemShapeId] = eventId;
+
+            if (stem is not null)
+            {
+                stemToEventId[stem.StemShapeId] = eventId;
+            }
 
             foreach (var notehead in chordNoteheads)
             {
@@ -279,36 +293,37 @@ public sealed class CanonicalNotationBuilder
             }
         }
 
-        var unstemmedIndex = 0;
-        foreach (var staffGroup in measureNoteheads
+        foreach (var notehead in measureNoteheads
                      .Where(note => !consumed.Contains(note.ShapeId))
-                     .GroupBy(note => note.Staff)
-                     .OrderBy(group => group.Key))
+                     .OrderBy(note => note.CenterX)
+                     .ThenBy(note => note.Staff)
+                     .ThenBy(note => note.CenterY))
         {
-            var spacing = staffGroup.Key == 1
-                ? measure.Upper.LineSpacing
-                : measure.Lower.LineSpacing;
-            var tolerance = Math.Max(0.01, spacing * 0.35);
+            preferredStemByNotehead.TryGetValue(
+                notehead.ShapeId,
+                out var stem);
 
-            foreach (var cluster in ClusterByX(
-                         staffGroup.OrderBy(note => note.CenterX).ToArray(),
-                         tolerance))
+            var eventId = stem is null
+                ? $"m{measure.Number}-note-{notehead.ShapeId}"
+                : $"m{measure.Number}-{stem.StemShapeId}";
+
+            if (drafts.Any(draft => draft.Event.Id == eventId))
             {
-                unstemmedIndex++;
-                var eventId = $"m{measure.Number}-u{staffGroup.Key}-{unstemmedIndex}";
-                var draft = BuildDraft(
-                    eventId,
-                    cluster,
-                    null,
-                    pitchesByNotehead,
-                    durationsByNotehead,
-                    facts);
-                drafts.Add(draft);
+                eventId += $"-{notehead.ShapeId}";
+            }
 
-                foreach (var notehead in cluster)
-                {
-                    noteheadToEventId[notehead.ShapeId] = eventId;
-                }
+            drafts.Add(BuildDraft(
+                eventId,
+                [notehead],
+                stem,
+                pitchesByNotehead,
+                durationsByNotehead,
+                facts));
+            noteheadToEventId[notehead.ShapeId] = eventId;
+
+            if (stem is not null && !stemToEventId.ContainsKey(stem.StemShapeId))
+            {
+                stemToEventId[stem.StemShapeId] = eventId;
             }
         }
 
@@ -338,8 +353,8 @@ public sealed class CanonicalNotationBuilder
         facts.AddTrace(
             $"CanonicalBuilder: m{measure.Number} raw events={assigned.Count}; "
             + $"projected-noteheads={measureNoteheads.Length}; "
-            + $"stem-events={drafts.Count(draft => draft.StemShapeId is not null)}; "
-            + $"unstemmed-events={drafts.Count(draft => draft.StemShapeId is null)}");
+            + $"chord-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) > 1)}; "
+            + $"single-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) == 1)}");
 
         return assigned
             .OrderBy(ev => eventX[ev.Id])
@@ -412,6 +427,8 @@ public sealed class CanonicalNotationBuilder
                     _ => null
                 });
 
+        // CanonicalNotation v0.3 uses the historical "chord" event kind for every pitched
+        // event; a singleton simply has one note and therefore emits no MusicXML <chord/>.
         var ev = new CanonicalEvent
         {
             Id = eventId,
@@ -428,36 +445,6 @@ public sealed class CanonicalNotationBuilder
             x,
             voice,
             stem?.StemShapeId);
-    }
-
-    private static IReadOnlyList<IReadOnlyList<NoteheadFact>> ClusterByX(
-        IReadOnlyList<NoteheadFact> ordered,
-        double tolerance)
-    {
-        var result = new List<IReadOnlyList<NoteheadFact>>();
-        var current = new List<NoteheadFact>();
-        double? anchor = null;
-
-        foreach (var notehead in ordered)
-        {
-            if (anchor is null || Math.Abs(notehead.CenterX - anchor.Value) <= tolerance)
-            {
-                current.Add(notehead);
-                anchor = current.Average(note => note.CenterX);
-                continue;
-            }
-
-            result.Add(current.ToArray());
-            current = [notehead];
-            anchor = notehead.CenterX;
-        }
-
-        if (current.Count > 0)
-        {
-            result.Add(current.ToArray());
-        }
-
-        return result;
     }
 
     private static List<BeamRelation> BuildBeamRelations(
