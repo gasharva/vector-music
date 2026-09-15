@@ -62,6 +62,63 @@ public sealed class DotAttachmentAnalyzerTests
     }
 
     [Fact]
+    public void MixedFillLayers_InSameDotColumn_KeepIndependentLeftoverDot()
+    {
+        const int measure = 3;
+        const int staff = 1;
+        const double spacing = 10.0;
+
+        var facts = new SemanticFacts();
+        facts.Add(Notehead("n-filled", measure, staff, 100, 100, 1, "filled", spacing));
+        facts.Add(Notehead("n-hollow-top", measure, staff, 100, 120, 0, "hollow", spacing));
+        facts.Add(Notehead("n-hollow-bottom", measure, staff, 100, 130, 2, "hollow", spacing));
+
+        var document = Document(
+            measure,
+            spacing,
+            staff,
+            Dot("d-filled", 118, 100, measure, staff, spacing),
+            Dot("d-hollow-top", 118, 125, measure, staff, spacing),
+            Dot("d-hollow-bottom", 118, 135, measure, staff, spacing));
+
+        var result = new DotAttachmentAnalyzer().Analyze(document, facts);
+
+        Assert.Equal(3, result.Accepted.Count);
+        Assert.Equal("n-filled", Target(result, "d-filled"));
+        Assert.Equal("n-hollow-top", Target(result, "d-hollow-top"));
+        Assert.Equal("n-hollow-bottom", Target(result, "d-hollow-bottom"));
+    }
+
+    [Fact]
+    public void SameSourceDotInDifferentMeasures_KeepsSeparateDecisions()
+    {
+        const int staff = 1;
+        const double spacing = 10.0;
+
+        var facts = new SemanticFacts();
+        facts.Add(Notehead("n1", 1, staff, 100, 100, 1, "filled", spacing));
+        facts.Add(Notehead("n2", 2, staff, 100, 100, 1, "filled", spacing));
+
+        var document = new SemanticDocument(
+        [
+            Measure(1, spacing, staff, Dot("shared-dot", 118, 100, 1, staff, spacing)),
+            Measure(2, spacing, staff, Dot("shared-dot", 118, 100, 2, staff, spacing))
+        ]);
+
+        var result = new DotAttachmentAnalyzer().Analyze(document, facts);
+        var decisions = result.Accepted
+            .Where(decision => decision.Candidate.Ellipse.ShapeId == "shared-dot")
+            .OrderBy(decision => decision.Candidate.MeasureNumber)
+            .ToArray();
+
+        Assert.Equal(2, decisions.Length);
+        Assert.Equal(1, decisions[0].Candidate.MeasureNumber);
+        Assert.Equal("n1", decisions[0].Match!.Notehead.ShapeId);
+        Assert.Equal(2, decisions[1].Candidate.MeasureNumber);
+        Assert.Equal("n2", decisions[1].Match!.Notehead.ShapeId);
+    }
+
+    [Fact]
     public void NoteheadColumns_UseTransitiveXOverlapButKeepFillKindsSeparate()
     {
         const double spacing = 10.0;
@@ -145,6 +202,18 @@ public sealed class DotAttachmentAnalyzerTests
         int staff,
         params EllipseElement[] dots)
     {
+        return new SemanticDocument(
+        [
+            Measure(measure, spacing, staff, dots)
+        ]);
+    }
+
+    private static MeasureScene Measure(
+        int measure,
+        double spacing,
+        int staff,
+        params EllipseElement[] dots)
+    {
         var upper = new StaffMeasureScene(
             staff,
             "staff-1",
@@ -158,19 +227,16 @@ public sealed class DotAttachmentAnalyzerTests
             spacing,
             Array.Empty<SemanticElement>());
 
-        return new SemanticDocument(
-        [
-            new MeasureScene(
-                measure,
-                "system-1",
-                "pair-1",
-                $"measure-{measure}",
-                0,
-                300,
-                false,
-                upper,
-                lower)
-        ]);
+        return new MeasureScene(
+            measure,
+            "system-1",
+            "pair-1",
+            $"measure-{measure}",
+            0,
+            300,
+            false,
+            upper,
+            lower);
     }
 
     private static DotCandidate Candidate(
