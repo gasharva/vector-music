@@ -253,7 +253,7 @@
               }
             },
             {
-              "id": "m2-shape-471",
+              "id": "m2-shape-517",
               "type": "chord",
               "at": "11/8",
               "voice": 1,
@@ -412,7 +412,7 @@
               }
             },
             {
-              "id": "m3-shape-505",
+              "id": "m3-shape-541",
               "type": "chord",
               "at": "7/8",
               "voice": 1,
@@ -429,7 +429,7 @@
               }
             },
             {
-              "id": "m3-shape-507",
+              "id": "m3-shape-543",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -446,7 +446,7 @@
               }
             },
             {
-              "id": "m3-shape-517",
+              "id": "m3-shape-544",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -468,7 +468,7 @@
           "number": 4,
           "events": [
             {
-              "id": "m4-shape-520",
+              "id": "m4-shape-546",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -535,7 +535,7 @@
               }
             },
             {
-              "id": "m4-shape-524",
+              "id": "m4-shape-555",
               "type": "chord",
               "at": "7/8",
               "voice": 1,
@@ -552,7 +552,7 @@
               }
             },
             {
-              "id": "m4-shape-476",
+              "id": "m4-shape-557",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -574,7 +574,7 @@
           "number": 5,
           "events": [
             {
-              "id": "m5-shape-570",
+              "id": "m5-shape-584",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -617,7 +617,7 @@
               }
             },
             {
-              "id": "m5-shape-483",
+              "id": "m5-shape-559",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -635,7 +635,7 @@
               }
             },
             {
-              "id": "m5-shape-496",
+              "id": "m5-shape-475",
               "type": "chord",
               "at": "9/8",
               "voice": 1,
@@ -652,7 +652,7 @@
               }
             },
             {
-              "id": "m5-shape-493",
+              "id": "m5-shape-476",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -669,7 +669,7 @@
               }
             },
             {
-              "id": "m5-shape-538",
+              "id": "m5-shape-490",
               "type": "chord",
               "at": "11/8",
               "voice": 1,
@@ -744,7 +744,7 @@
               }
             },
             {
-              "id": "m6-shape-543",
+              "id": "m6-shape-473",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -765,7 +765,7 @@
               }
             },
             {
-              "id": "m6-shape-495",
+              "id": "m6-shape-489",
               "type": "chord",
               "at": "9/8",
               "voice": 1,
@@ -782,7 +782,7 @@
               }
             },
             {
-              "id": "m6-shape-500",
+              "id": "m6-shape-492",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -799,7 +799,7 @@
               }
             },
             {
-              "id": "m6-shape-513",
+              "id": "m6-shape-496",
               "type": "chord",
               "at": "11/8",
               "voice": 1,
@@ -824,7 +824,7 @@
           "number": 7,
           "events": [
             {
-              "id": "m7-shape-518",
+              "id": "m7-shape-500",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -845,7 +845,7 @@
               }
             },
             {
-              "id": "m7-shape-658",
+              "id": "m7-shape-660",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -887,7 +887,7 @@
               }
             },
             {
-              "id": "m7-shape-622",
+              "id": "m7-shape-651",
               "type": "chord",
               "at": "3/4",
               "voice": 2,
@@ -928,7 +928,7 @@
               }
             },
             {
-              "id": "m7-shape-633",
+              "id": "m7-shape-656",
               "type": "chord",
               "at": "7/8",
               "voice": 2,
@@ -1478,7 +1478,7 @@
           "number": 9,
           "events": [
             {
-              "id": "m9-shape-581",
+              "id": "m9-shape-574",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -1659,7 +1659,7 @@
               }
             },
             {
-              "id": "m10-shape-485",
+              "id": "m10-shape-538",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -1755,7 +1755,7 @@
           "number": 12,
           "events": [
             {
-              "id": "m12-shape-550",
+              "id": "m12-shape-569",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -1823,7 +1823,7 @@
               }
             },
             {
-              "id": "m12-shape-548",
+              "id": "m12-shape-537",
               "type": "chord",
               "at": "7/8",
               "voice": 1,
@@ -1840,7 +1840,7 @@
               }
             },
             {
-              "id": "m12-shape-508",
+              "id": "m12-shape-535",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -1857,7 +1857,7 @@
               }
             },
             {
-              "id": "m12-shape-532",
+              "id": "m12-shape-531",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -1883,7 +1883,7 @@
           "number": 14,
           "events": [
             {
-              "id": "m14-shape-536",
+              "id": "m14-shape-505",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -1952,7 +1952,7 @@
               }
             },
             {
-              "id": "m14-shape-544",
+              "id": "m14-shape-567",
               "type": "chord",
               "at": "7/8",
               "voice": 1,
@@ -1969,7 +1969,7 @@
               }
             },
             {
-              "id": "m14-shape-519",
+              "id": "m14-shape-568",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -1987,7 +1987,7 @@
               }
             },
             {
-              "id": "m14-shape-477",
+              "id": "m14-shape-474",
               "type": "chord",
               "at": "19/16",
               "voice": 1,
@@ -2004,7 +2004,7 @@
               }
             },
             {
-              "id": "m14-shape-472",
+              "id": "m14-shape-477",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -2021,7 +2021,7 @@
               }
             },
             {
-              "id": "m14-shape-569",
+              "id": "m14-shape-483",
               "type": "chord",
               "at": "21/16",
               "voice": 1,
@@ -2041,7 +2041,7 @@
               }
             },
             {
-              "id": "m14-shape-568",
+              "id": "m14-shape-484",
               "type": "chord",
               "at": "11/8",
               "voice": 1,
@@ -2061,7 +2061,7 @@
               }
             },
             {
-              "id": "m14-shape-567",
+              "id": "m14-shape-485",
               "type": "chord",
               "at": "23/16",
               "voice": 1,
@@ -2126,7 +2126,7 @@
               }
             },
             {
-              "id": "m15-shape-516",
+              "id": "m15-shape-511",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -2143,7 +2143,7 @@
               }
             },
             {
-              "id": "m15-shape-542",
+              "id": "m15-shape-480",
               "type": "chord",
               "at": "7/8",
               "voice": 1,
@@ -2160,7 +2160,7 @@
               }
             },
             {
-              "id": "m15-shape-553",
+              "id": "m15-shape-547",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -2182,7 +2182,7 @@
           "number": 16,
           "events": [
             {
-              "id": "m16-shape-579",
+              "id": "m16-shape-585",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -2295,7 +2295,7 @@
               }
             },
             {
-              "id": "m16-shape-488",
+              "id": "m16-shape-495",
               "type": "chord",
               "at": "9/8",
               "voice": 1,
@@ -2312,7 +2312,7 @@
               }
             },
             {
-              "id": "m16-shape-534",
+              "id": "m16-shape-518",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -2329,7 +2329,7 @@
               }
             },
             {
-              "id": "m16-shape-556",
+              "id": "m16-shape-479",
               "type": "chord",
               "at": "11/8",
               "voice": 1,
@@ -2351,7 +2351,7 @@
           "number": 17,
           "events": [
             {
-              "id": "m17-shape-545",
+              "id": "m17-shape-554",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -2371,7 +2371,7 @@
               }
             },
             {
-              "id": "m17-shape-650",
+              "id": "m17-shape-598",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -2388,7 +2388,7 @@
               }
             },
             {
-              "id": "m17-shape-640",
+              "id": "m17-shape-599",
               "type": "chord",
               "at": "1/8",
               "voice": 2,
@@ -2405,7 +2405,7 @@
               }
             },
             {
-              "id": "m17-shape-605",
+              "id": "m17-shape-602",
               "type": "chord",
               "at": "1/4",
               "voice": 2,
@@ -2422,7 +2422,7 @@
               }
             },
             {
-              "id": "m17-shape-625",
+              "id": "m17-shape-604",
               "type": "chord",
               "at": "3/8",
               "voice": 2,
@@ -2471,7 +2471,7 @@
               }
             },
             {
-              "id": "m17-shape-492",
+              "id": "m17-shape-545",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -2491,7 +2491,7 @@
               }
             },
             {
-              "id": "m17-shape-504",
+              "id": "m17-shape-508",
               "type": "chord",
               "at": "5/8",
               "voice": 1,
@@ -2513,7 +2513,7 @@
           "number": 18,
           "events": [
             {
-              "id": "m18-shape-546",
+              "id": "m18-shape-516",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -2533,7 +2533,7 @@
               }
             },
             {
-              "id": "m18-shape-593",
+              "id": "m18-shape-608",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -2550,7 +2550,7 @@
               }
             },
             {
-              "id": "m18-shape-596",
+              "id": "m18-shape-611",
               "type": "chord",
               "at": "1/8",
               "voice": 2,
@@ -2567,7 +2567,7 @@
               }
             },
             {
-              "id": "m18-shape-598",
+              "id": "m18-shape-614",
               "type": "chord",
               "at": "1/4",
               "voice": 2,
@@ -2584,7 +2584,7 @@
               }
             },
             {
-              "id": "m18-shape-600",
+              "id": "m18-shape-618",
               "type": "chord",
               "at": "3/8",
               "voice": 2,
@@ -2643,7 +2643,7 @@
               }
             },
             {
-              "id": "m18-shape-555",
+              "id": "m18-shape-552",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -2668,7 +2668,7 @@
           "number": 19,
           "events": [
             {
-              "id": "m19-shape-557",
+              "id": "m19-shape-562",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -2685,7 +2685,7 @@
               }
             },
             {
-              "id": "m19-shape-615",
+              "id": "m19-shape-640",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -2702,7 +2702,7 @@
               }
             },
             {
-              "id": "m19-shape-617",
+              "id": "m19-shape-642",
               "type": "chord",
               "at": "1/16",
               "voice": 2,
@@ -2719,7 +2719,7 @@
               }
             },
             {
-              "id": "m19-shape-484",
+              "id": "m19-shape-471",
               "type": "chord",
               "at": "1/8",
               "voice": 1,
@@ -2736,7 +2736,7 @@
               }
             },
             {
-              "id": "m19-shape-609",
+              "id": "m19-shape-644",
               "type": "chord",
               "at": "1/8",
               "voice": 2,
@@ -2753,7 +2753,7 @@
               }
             },
             {
-              "id": "m19-shape-629",
+              "id": "m19-shape-646",
               "type": "chord",
               "at": "3/16",
               "voice": 2,
@@ -2799,7 +2799,7 @@
               }
             },
             {
-              "id": "m19-shape-498",
+              "id": "m19-shape-501",
               "type": "chord",
               "at": "1/4",
               "voice": 1,
@@ -2816,7 +2816,7 @@
               }
             },
             {
-              "id": "m19-shape-509",
+              "id": "m19-shape-528",
               "type": "chord",
               "at": "3/8",
               "voice": 1,
@@ -2833,7 +2833,7 @@
               }
             },
             {
-              "id": "m19-shape-510",
+              "id": "m19-shape-534",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -2850,7 +2850,7 @@
               }
             },
             {
-              "id": "m19-shape-547",
+              "id": "m19-shape-539",
               "type": "chord",
               "at": "5/8",
               "voice": 1,
@@ -2872,7 +2872,7 @@
           "number": 20,
           "events": [
             {
-              "id": "m20-shape-559",
+              "id": "m20-shape-550",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -2889,7 +2889,7 @@
               }
             },
             {
-              "id": "m20-shape-644",
+              "id": "m20-shape-649",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -2906,7 +2906,7 @@
               }
             },
             {
-              "id": "m20-shape-614",
+              "id": "m20-shape-650",
               "type": "chord",
               "at": "1/16",
               "voice": 2,
@@ -2923,7 +2923,7 @@
               }
             },
             {
-              "id": "m20-shape-552",
+              "id": "m20-shape-509",
               "type": "chord",
               "at": "1/8",
               "voice": 1,
@@ -2940,7 +2940,7 @@
               }
             },
             {
-              "id": "m20-shape-628",
+              "id": "m20-shape-633",
               "type": "chord",
               "at": "1/8",
               "voice": 2,
@@ -2957,7 +2957,7 @@
               }
             },
             {
-              "id": "m20-shape-616",
+              "id": "m20-shape-653",
               "type": "chord",
               "at": "3/16",
               "voice": 2,
@@ -3007,7 +3007,7 @@
               }
             },
             {
-              "id": "m20-shape-554",
+              "id": "m20-shape-560",
               "type": "chord",
               "at": "1/4",
               "voice": 1,
@@ -3024,7 +3024,7 @@
               }
             },
             {
-              "id": "m20-shape-486",
+              "id": "m20-shape-551",
               "type": "chord",
               "at": "3/8",
               "voice": 1,
@@ -3041,7 +3041,7 @@
               }
             },
             {
-              "id": "m20-shape-560",
+              "id": "m20-shape-487",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -3058,7 +3058,7 @@
               }
             },
             {
-              "id": "m20-shape-558",
+              "id": "m20-shape-482",
               "type": "chord",
               "at": "5/8",
               "voice": 1,
@@ -3080,7 +3080,7 @@
           "number": 21,
           "events": [
             {
-              "id": "m21-shape-595",
+              "id": "m21-shape-592",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -3097,7 +3097,7 @@
               }
             },
             {
-              "id": "m21-shape-549",
+              "id": "m21-shape-558",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -3115,7 +3115,7 @@
               }
             },
             {
-              "id": "m21-shape-592",
+              "id": "m21-shape-594",
               "type": "chord",
               "at": "1/8",
               "voice": 2,
@@ -3132,7 +3132,7 @@
               }
             },
             {
-              "id": "m21-shape-653",
+              "id": "m21-shape-595",
               "type": "chord",
               "at": "1/4",
               "voice": 2,
@@ -3149,7 +3149,7 @@
               }
             },
             {
-              "id": "m21-shape-612",
+              "id": "m21-shape-597",
               "type": "chord",
               "at": "3/8",
               "voice": 2,
@@ -3166,7 +3166,7 @@
               }
             },
             {
-              "id": "m21-shape-624",
+              "id": "m21-shape-600",
               "type": "chord",
               "at": "1/2",
               "voice": 2,
@@ -3183,7 +3183,7 @@
               }
             },
             {
-              "id": "m21-shape-638",
+              "id": "m21-shape-603",
               "type": "chord",
               "at": "5/8",
               "voice": 2,
@@ -3254,7 +3254,7 @@
               }
             },
             {
-              "id": "m22-shape-571",
+              "id": "m22-shape-579",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -3271,7 +3271,7 @@
               }
             },
             {
-              "id": "m22-shape-531",
+              "id": "m22-shape-542",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -3293,7 +3293,7 @@
           "number": 23,
           "events": [
             {
-              "id": "m23-shape-506",
+              "id": "m23-shape-536",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -3310,7 +3310,7 @@
               }
             },
             {
-              "id": "m23-shape-618",
+              "id": "m23-shape-607",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -3327,7 +3327,7 @@
               }
             },
             {
-              "id": "m23-shape-613",
+              "id": "m23-shape-609",
               "type": "chord",
               "at": "1/16",
               "voice": 2,
@@ -3344,7 +3344,7 @@
               }
             },
             {
-              "id": "m23-shape-479",
+              "id": "m23-shape-533",
               "type": "chord",
               "at": "1/8",
               "voice": 1,
@@ -3361,7 +3361,7 @@
               }
             },
             {
-              "id": "m23-shape-602",
+              "id": "m23-shape-610",
               "type": "chord",
               "at": "1/8",
               "voice": 2,
@@ -3378,7 +3378,7 @@
               }
             },
             {
-              "id": "m23-shape-594",
+              "id": "m23-shape-615",
               "type": "chord",
               "at": "3/16",
               "voice": 2,
@@ -3428,7 +3428,7 @@
               }
             },
             {
-              "id": "m23-shape-511",
+              "id": "m23-shape-530",
               "type": "chord",
               "at": "1/4",
               "voice": 1,
@@ -3445,7 +3445,7 @@
               }
             },
             {
-              "id": "m23-shape-501",
+              "id": "m23-shape-526",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -3462,7 +3462,7 @@
               }
             },
             {
-              "id": "m23-shape-489",
+              "id": "m23-shape-524",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -3479,7 +3479,7 @@
               }
             },
             {
-              "id": "m23-shape-480",
+              "id": "m23-shape-519",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -3538,7 +3538,7 @@
               }
             },
             {
-              "id": "m24-shape-473",
+              "id": "m24-shape-510",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -3555,7 +3555,7 @@
               }
             },
             {
-              "id": "m24-shape-561",
+              "id": "m24-shape-507",
               "type": "chord",
               "at": "1/4",
               "voice": 1,
@@ -3572,7 +3572,7 @@
               }
             },
             {
-              "id": "m24-shape-562",
+              "id": "m24-shape-504",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -3589,7 +3589,7 @@
               }
             },
             {
-              "id": "m24-shape-563",
+              "id": "m24-shape-503",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -3606,7 +3606,7 @@
               }
             },
             {
-              "id": "m24-shape-564",
+              "id": "m24-shape-498",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -3623,7 +3623,7 @@
               }
             },
             {
-              "id": "m24-shape-565",
+              "id": "m24-shape-493",
               "type": "chord",
               "at": "5/4",
               "voice": 1,
@@ -3645,7 +3645,7 @@
           "number": 25,
           "events": [
             {
-              "id": "m25-shape-630",
+              "id": "m25-shape-622",
               "type": "chord",
               "at": "0",
               "voice": 2,
@@ -3687,7 +3687,7 @@
               }
             },
             {
-              "id": "m25-shape-631",
+              "id": "m25-shape-623",
               "type": "chord",
               "at": "1/4",
               "voice": 2,
@@ -3704,7 +3704,7 @@
               }
             },
             {
-              "id": "m25-shape-632",
+              "id": "m25-shape-624",
               "type": "chord",
               "at": "1/2",
               "voice": 2,
@@ -3721,7 +3721,7 @@
               }
             },
             {
-              "id": "m25-shape-634",
+              "id": "m25-shape-625",
               "type": "chord",
               "at": "5/8",
               "voice": 2,
@@ -3741,7 +3741,7 @@
               }
             },
             {
-              "id": "m25-shape-636",
+              "id": "m25-shape-628",
               "type": "chord",
               "at": "3/4",
               "voice": 2,
@@ -3758,7 +3758,7 @@
               }
             },
             {
-              "id": "m25-shape-639",
+              "id": "m25-shape-630",
               "type": "chord",
               "at": "7/8",
               "voice": 2,
@@ -3826,7 +3826,7 @@
               }
             },
             {
-              "id": "m26-shape-582",
+              "id": "m26-shape-588",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -3865,7 +3865,7 @@
           "number": 27,
           "events": [
             {
-              "id": "m27-shape-585",
+              "id": "m27-shape-582",
               "type": "chord",
               "at": "0",
               "voice": 1,
@@ -3910,7 +3910,7 @@
               }
             },
             {
-              "id": "m27-shape-515",
+              "id": "m27-shape-481",
               "type": "chord",
               "at": "1/2",
               "voice": 1,
@@ -3927,7 +3927,7 @@
               }
             },
             {
-              "id": "m27-shape-522",
+              "id": "m27-shape-565",
               "type": "chord",
               "at": "3/4",
               "voice": 1,
@@ -3947,7 +3947,7 @@
               }
             },
             {
-              "id": "m27-shape-526",
+              "id": "m27-shape-564",
               "type": "chord",
               "at": "1",
               "voice": 1,
@@ -3965,7 +3965,7 @@
               }
             },
             {
-              "id": "m27-shape-528",
+              "id": "m27-shape-563",
               "type": "chord",
               "at": "11/8",
               "voice": 1,
@@ -4020,38 +4020,6 @@
               }
             },
             {
-              "id": "chord-m28-65",
-              "type": "chord",
-              "at": "0",
-              "voice": 1,
-              "duration": "1",
-              "notes": [
-                {
-                  "pitch": "C5",
-                  "staff": 1
-                },
-                {
-                  "pitch": "Bb4",
-                  "staff": 1
-                },
-                {
-                  "pitch": "Ab4",
-                  "staff": 1
-                },
-                {
-                  "pitch": "F4",
-                  "staff": 1
-                },
-                {
-                  "pitch": "Eb4",
-                  "staff": 1
-                }
-              ],
-              "notation": {
-                "noteType": "whole"
-              }
-            },
-            {
               "id": "chord-m28-64",
               "type": "chord",
               "at": "1/2",
@@ -4098,7 +4066,7 @@
   "relations": {
     "beams": [
       {
-        "id": "beam-shape-1064",
+        "id": "beam-shape-1069",
         "level": 1,
         "events": [
           "m1-shape-478",
@@ -4106,7 +4074,7 @@
         ]
       },
       {
-        "id": "beam-shape-1098",
+        "id": "beam-shape-1070",
         "level": 1,
         "events": [
           "m2-shape-499",
@@ -4114,10 +4082,10 @@
         ]
       },
       {
-        "id": "beam-shape-1093",
+        "id": "beam-shape-1073",
         "level": 1,
         "events": [
-          "m2-shape-471",
+          "m2-shape-517",
           "m2-shape-521",
           "m2-shape-523",
           "m2-shape-525",
@@ -4125,10 +4093,10 @@
         ]
       },
       {
-        "id": "beam-shape-1094",
+        "id": "beam-shape-1074",
         "level": 2,
         "events": [
-          "m2-shape-471",
+          "m2-shape-517",
           "m2-shape-521",
           "m2-shape-523",
           "m2-shape-525",
@@ -4136,10 +4104,10 @@
         ]
       },
       {
-        "id": "beam-shape-1095",
+        "id": "beam-shape-1075",
         "level": 3,
         "events": [
-          "m2-shape-471",
+          "m2-shape-517",
           "m2-shape-521",
           "m2-shape-523",
           "m2-shape-525",
@@ -4147,39 +4115,39 @@
         ]
       },
       {
-        "id": "beam-shape-1070",
+        "id": "beam-shape-1079",
         "level": 1,
         "events": [
           "m3-shape-529",
-          "m3-shape-505"
+          "m3-shape-541"
         ]
       },
       {
-        "id": "beam-shape-1066",
+        "id": "beam-shape-1081",
         "level": 1,
         "events": [
-          "m4-shape-520",
-          "m4-shape-524"
+          "m4-shape-546",
+          "m4-shape-555"
         ]
       },
       {
-        "id": "beam-shape-1077",
+        "id": "beam-shape-1088",
         "level": 1,
         "events": [
-          "m5-shape-493",
-          "m5-shape-538"
+          "m5-shape-476",
+          "m5-shape-490"
         ]
       },
       {
-        "id": "beam-shape-1096",
+        "id": "beam-shape-1089",
         "level": 1,
         "events": [
-          "m6-shape-500",
-          "m6-shape-513"
+          "m6-shape-492",
+          "m6-shape-496"
         ]
       },
       {
-        "id": "beam-shape-1101",
+        "id": "beam-shape-1099",
         "level": 1,
         "events": [
           "chord-m7-12",
@@ -4187,15 +4155,15 @@
         ]
       },
       {
-        "id": "beam-shape-1105",
+        "id": "beam-shape-1106",
         "level": 1,
         "events": [
-          "m7-shape-633",
+          "m7-shape-656",
           "chord-m7-14"
         ]
       },
       {
-        "id": "beam-shape-1100",
+        "id": "beam-shape-1098",
         "level": 1,
         "events": [
           "chord-m7-15",
@@ -4203,7 +4171,7 @@
         ]
       },
       {
-        "id": "beam-shape-1118",
+        "id": "beam-shape-1103",
         "level": 1,
         "events": [
           "chord-m7-16",
@@ -4211,7 +4179,7 @@
         ]
       },
       {
-        "id": "beam-shape-1103",
+        "id": "beam-shape-1102",
         "level": 1,
         "events": [
           "chord-m8-19",
@@ -4219,7 +4187,7 @@
         ]
       },
       {
-        "id": "beam-shape-1078",
+        "id": "beam-shape-1090",
         "level": 1,
         "events": [
           "chord-m8-20",
@@ -4227,7 +4195,7 @@
         ]
       },
       {
-        "id": "beam-shape-1111",
+        "id": "beam-shape-1104",
         "level": 1,
         "events": [
           "chord-m8-23",
@@ -4235,7 +4203,7 @@
         ]
       },
       {
-        "id": "beam-shape-1074",
+        "id": "beam-shape-1091",
         "level": 1,
         "events": [
           "chord-m8-24",
@@ -4243,7 +4211,7 @@
         ]
       },
       {
-        "id": "beam-shape-1110",
+        "id": "beam-shape-1118",
         "level": 1,
         "events": [
           "chord-m8-27",
@@ -4251,7 +4219,7 @@
         ]
       },
       {
-        "id": "beam-shape-1090",
+        "id": "beam-shape-1092",
         "level": 1,
         "events": [
           "chord-m8-28",
@@ -4259,7 +4227,7 @@
         ]
       },
       {
-        "id": "beam-shape-1079",
+        "id": "beam-shape-1086",
         "level": 1,
         "events": [
           "chord-m9-31",
@@ -4267,275 +4235,275 @@
         ]
       },
       {
-        "id": "beam-shape-1069",
+        "id": "beam-shape-1063",
         "level": 1,
         "events": [
-          "m10-shape-485",
+          "m10-shape-538",
           "chord-m10-39"
-        ]
-      },
-      {
-        "id": "beam-shape-1068",
-        "level": 1,
-        "events": [
-          "m12-shape-550",
-          "m12-shape-548"
-        ]
-      },
-      {
-        "id": "beam-shape-1089",
-        "level": 1,
-        "events": [
-          "m14-shape-536",
-          "m14-shape-544"
-        ]
-      },
-      {
-        "id": "beam-shape-1085",
-        "level": 1,
-        "events": [
-          "m14-shape-519",
-          "m14-shape-477"
-        ]
-      },
-      {
-        "id": "beam-shape-1091",
-        "level": 1,
-        "events": [
-          "m14-shape-472",
-          "m14-shape-569",
-          "m14-shape-568",
-          "m14-shape-567"
-        ]
-      },
-      {
-        "id": "beam-shape-1086",
-        "level": 2,
-        "events": [
-          "m14-shape-477"
-        ],
-        "hook": "backward"
-      },
-      {
-        "id": "beam-shape-1092",
-        "level": 2,
-        "events": [
-          "m14-shape-472",
-          "m14-shape-569",
-          "m14-shape-568",
-          "m14-shape-567"
-        ]
-      },
-      {
-        "id": "beam-shape-1082",
-        "level": 1,
-        "events": [
-          "m15-shape-542",
-          "m15-shape-553"
-        ]
-      },
-      {
-        "id": "beam-shape-1081",
-        "level": 1,
-        "events": [
-          "m16-shape-534",
-          "m16-shape-556"
-        ]
-      },
-      {
-        "id": "beam-shape-1102",
-        "level": 1,
-        "events": [
-          "m17-shape-650",
-          "m17-shape-640"
-        ]
-      },
-      {
-        "id": "beam-shape-1109",
-        "level": 1,
-        "events": [
-          "m17-shape-605",
-          "m17-shape-625"
-        ]
-      },
-      {
-        "id": "beam-shape-1097",
-        "level": 1,
-        "events": [
-          "m17-shape-492",
-          "m17-shape-504"
-        ]
-      },
-      {
-        "id": "beam-shape-1113",
-        "level": 1,
-        "events": [
-          "m18-shape-593",
-          "m18-shape-596"
-        ]
-      },
-      {
-        "id": "beam-shape-1117",
-        "level": 1,
-        "events": [
-          "m18-shape-598",
-          "m18-shape-600"
-        ]
-      },
-      {
-        "id": "beam-shape-1084",
-        "level": 1,
-        "events": [
-          "m19-shape-557",
-          "m19-shape-484"
-        ]
-      },
-      {
-        "id": "beam-shape-1121",
-        "level": 1,
-        "events": [
-          "m19-shape-615",
-          "m19-shape-617",
-          "m19-shape-609",
-          "m19-shape-629"
         ]
       },
       {
         "id": "beam-shape-1076",
         "level": 1,
         "events": [
-          "m19-shape-498",
-          "m19-shape-509"
+          "m12-shape-569",
+          "m12-shape-537"
         ]
+      },
+      {
+        "id": "beam-shape-1068",
+        "level": 1,
+        "events": [
+          "m14-shape-505",
+          "m14-shape-567"
+        ]
+      },
+      {
+        "id": "beam-shape-1084",
+        "level": 1,
+        "events": [
+          "m14-shape-568",
+          "m14-shape-474"
+        ]
+      },
+      {
+        "id": "beam-shape-1071",
+        "level": 1,
+        "events": [
+          "m14-shape-477",
+          "m14-shape-483",
+          "m14-shape-484",
+          "m14-shape-485"
+        ]
+      },
+      {
+        "id": "beam-shape-1085",
+        "level": 2,
+        "events": [
+          "m14-shape-474"
+        ],
+        "hook": "backward"
       },
       {
         "id": "beam-shape-1072",
-        "level": 1,
-        "events": [
-          "m19-shape-510",
-          "m19-shape-547"
-        ]
-      },
-      {
-        "id": "beam-shape-1122",
         "level": 2,
         "events": [
-          "m19-shape-615",
-          "m19-shape-617",
-          "m19-shape-609",
-          "m19-shape-629"
+          "m14-shape-477",
+          "m14-shape-483",
+          "m14-shape-484",
+          "m14-shape-485"
         ]
       },
       {
-        "id": "beam-shape-1088",
+        "id": "beam-shape-1095",
         "level": 1,
         "events": [
-          "m20-shape-559",
-          "m20-shape-552"
+          "m15-shape-480",
+          "m15-shape-547"
         ]
       },
       {
-        "id": "beam-shape-1107",
+        "id": "beam-shape-1066",
         "level": 1,
         "events": [
-          "m20-shape-644",
-          "m20-shape-614",
-          "m20-shape-628",
-          "m20-shape-616"
-        ]
-      },
-      {
-        "id": "beam-shape-1075",
-        "level": 1,
-        "events": [
-          "m20-shape-554",
-          "m20-shape-486"
-        ]
-      },
-      {
-        "id": "beam-shape-1087",
-        "level": 1,
-        "events": [
-          "m20-shape-560",
-          "m20-shape-558"
-        ]
-      },
-      {
-        "id": "beam-shape-1108",
-        "level": 2,
-        "events": [
-          "m20-shape-644",
-          "m20-shape-614",
-          "m20-shape-628",
-          "m20-shape-616"
-        ]
-      },
-      {
-        "id": "beam-shape-1112",
-        "level": 1,
-        "events": [
-          "m21-shape-595",
-          "m21-shape-592"
-        ]
-      },
-      {
-        "id": "beam-shape-1114",
-        "level": 1,
-        "events": [
-          "m21-shape-653",
-          "m21-shape-612"
-        ]
-      },
-      {
-        "id": "beam-shape-1104",
-        "level": 1,
-        "events": [
-          "m21-shape-624",
-          "m21-shape-638"
-        ]
-      },
-      {
-        "id": "beam-shape-1067",
-        "level": 1,
-        "events": [
-          "m23-shape-506",
-          "m23-shape-479"
+          "m16-shape-518",
+          "m16-shape-479"
         ]
       },
       {
         "id": "beam-shape-1115",
         "level": 1,
         "events": [
-          "m23-shape-618",
-          "m23-shape-613",
-          "m23-shape-602",
-          "m23-shape-594"
+          "m17-shape-598",
+          "m17-shape-599"
+        ]
+      },
+      {
+        "id": "beam-shape-1117",
+        "level": 1,
+        "events": [
+          "m17-shape-602",
+          "m17-shape-604"
+        ]
+      },
+      {
+        "id": "beam-shape-1065",
+        "level": 1,
+        "events": [
+          "m17-shape-545",
+          "m17-shape-508"
+        ]
+      },
+      {
+        "id": "beam-shape-1105",
+        "level": 1,
+        "events": [
+          "m18-shape-608",
+          "m18-shape-611"
         ]
       },
       {
         "id": "beam-shape-1116",
+        "level": 1,
+        "events": [
+          "m18-shape-614",
+          "m18-shape-618"
+        ]
+      },
+      {
+        "id": "beam-shape-1080",
+        "level": 1,
+        "events": [
+          "m19-shape-562",
+          "m19-shape-471"
+        ]
+      },
+      {
+        "id": "beam-shape-1113",
+        "level": 1,
+        "events": [
+          "m19-shape-640",
+          "m19-shape-642",
+          "m19-shape-644",
+          "m19-shape-646"
+        ]
+      },
+      {
+        "id": "beam-shape-1087",
+        "level": 1,
+        "events": [
+          "m19-shape-501",
+          "m19-shape-528"
+        ]
+      },
+      {
+        "id": "beam-shape-1062",
+        "level": 1,
+        "events": [
+          "m19-shape-534",
+          "m19-shape-539"
+        ]
+      },
+      {
+        "id": "beam-shape-1114",
         "level": 2,
         "events": [
-          "m23-shape-618",
-          "m23-shape-613",
-          "m23-shape-602",
-          "m23-shape-594"
+          "m19-shape-640",
+          "m19-shape-642",
+          "m19-shape-644",
+          "m19-shape-646"
         ]
       },
       {
-        "id": "beam-shape-1106",
+        "id": "beam-shape-1093",
         "level": 1,
         "events": [
-          "m25-shape-632",
-          "m25-shape-634"
+          "m20-shape-550",
+          "m20-shape-509"
         ]
       },
       {
-        "id": "beam-shape-1120",
+        "id": "beam-shape-1108",
         "level": 1,
         "events": [
-          "m25-shape-636",
-          "m25-shape-639"
+          "m20-shape-649",
+          "m20-shape-650",
+          "m20-shape-633",
+          "m20-shape-653"
+        ]
+      },
+      {
+        "id": "beam-shape-1097",
+        "level": 1,
+        "events": [
+          "m20-shape-560",
+          "m20-shape-551"
+        ]
+      },
+      {
+        "id": "beam-shape-1096",
+        "level": 1,
+        "events": [
+          "m20-shape-487",
+          "m20-shape-482"
+        ]
+      },
+      {
+        "id": "beam-shape-1109",
+        "level": 2,
+        "events": [
+          "m20-shape-649",
+          "m20-shape-650",
+          "m20-shape-633",
+          "m20-shape-653"
+        ]
+      },
+      {
+        "id": "beam-shape-1110",
+        "level": 1,
+        "events": [
+          "m21-shape-592",
+          "m21-shape-594"
+        ]
+      },
+      {
+        "id": "beam-shape-1111",
+        "level": 1,
+        "events": [
+          "m21-shape-595",
+          "m21-shape-597"
+        ]
+      },
+      {
+        "id": "beam-shape-1119",
+        "level": 1,
+        "events": [
+          "m21-shape-600",
+          "m21-shape-603"
+        ]
+      },
+      {
+        "id": "beam-shape-1064",
+        "level": 1,
+        "events": [
+          "m23-shape-536",
+          "m23-shape-533"
+        ]
+      },
+      {
+        "id": "beam-shape-1100",
+        "level": 1,
+        "events": [
+          "m23-shape-607",
+          "m23-shape-609",
+          "m23-shape-610",
+          "m23-shape-615"
+        ]
+      },
+      {
+        "id": "beam-shape-1101",
+        "level": 2,
+        "events": [
+          "m23-shape-607",
+          "m23-shape-609",
+          "m23-shape-610",
+          "m23-shape-615"
+        ]
+      },
+      {
+        "id": "beam-shape-1107",
+        "level": 1,
+        "events": [
+          "m25-shape-624",
+          "m25-shape-625"
+        ]
+      },
+      {
+        "id": "beam-shape-1112",
+        "level": 1,
+        "events": [
+          "m25-shape-628",
+          "m25-shape-630"
         ]
       }
     ],
@@ -4543,9 +4511,9 @@
     "slurs": [],
     "tuplets": [
       {
-        "id": "tuplet-shape-1123",
+        "id": "tuplet-shape-1121",
         "events": [
-          "m2-shape-471",
+          "m2-shape-517",
           "m2-shape-521",
           "m2-shape-523",
           "m2-shape-525",
