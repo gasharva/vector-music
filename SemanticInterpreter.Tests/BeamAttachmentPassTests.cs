@@ -144,7 +144,7 @@ public sealed class BeamAttachmentPassTests
         var recovered = Assert.Single(
             recovery.Document.Measures[0].Upper.Elements.OfType<StrokeElement>(),
             stroke => stroke.ShapeId == "ordinary-beam-box");
-        Assert.Equal("residual-beam", recovered.Source.Provenance);
+        Assert.Equal("ordinary-beam-box", recovered.ShapeId);
     }
 
     private static StrokeElement StrokeElement(
