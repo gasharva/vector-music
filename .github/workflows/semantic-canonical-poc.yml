@@ -64,15 +64,30 @@ jobs:
           grep -q '<pitch>' artifacts/kancheli.semantic.musicxml
           grep -q '<type>' artifacts/kancheli.semantic.musicxml
           grep -q '<duration>' artifacts/kancheli.semantic.musicxml
+          grep -q '^semantic.chords=' artifacts/semantic-summary.txt
 
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
+          import xml.etree.ElementTree as ET
 
-          musicxml = Path("artifacts/kancheli.semantic.musicxml").read_text(encoding="utf-8-sig")
+          musicxml_path = Path("artifacts/kancheli.semantic.musicxml")
+          musicxml = musicxml_path.read_text(encoding="utf-8-sig")
           assert musicxml.count("<pitch>") > 0
           assert musicxml.count("<duration>") > 0
           assert musicxml.count("<type>") > 0
+
+          root = ET.parse(musicxml_path).getroot()
+          chord_continuations = sum(
+              1 for note in root.iter("note") if note.find("chord") is not None
+          )
+          assert chord_continuations > 0, "ChordPass produced no MusicXML <chord/> continuations"
+
+          summary = Path("artifacts/semantic-summary.txt").read_text(encoding="utf-8")
+          chord_line = next(
+              line for line in summary.splitlines() if line.startswith("semantic.chords=")
+          )
+          assert int(chord_line.split("=", 1)[1]) > 0, chord_line
 
           mxl = Path("artifacts/kancheli.semantic.mxl")
           with ZipFile(mxl) as archive:
@@ -86,6 +101,7 @@ jobs:
               assert "<pitch>" in score
               assert "<duration>" in score
               assert "<type>" in score
+              assert "<chord" in score
           PY
 
       - name: Upload semantic artifacts
