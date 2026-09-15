@@ -15,7 +15,18 @@ public sealed class SemanticPipeline
 
     public SemanticPipeline(IEnumerable<ISemanticPass> passes)
     {
-        _passes = passes.ToArray();
+        var materialized = passes.ToList();
+
+        // Duration is a terminal derived fact: once noteheads are part of a semantic
+        // pipeline, infer duration after the supplied attachment passes unless the
+        // caller already positioned DurationPass explicitly.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not DurationPass))
+        {
+            materialized.Add(new DurationPass());
+        }
+
+        _passes = materialized;
     }
 
     public SemanticFacts Run(SemanticDocument document)
