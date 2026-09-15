@@ -43,11 +43,10 @@ public sealed record TieAnalysisResult(
 /// Converts the same-pitch curved-stroke hypotheses deliberately reserved by
 /// SlurPass into semantic ties.
 ///
-/// The expensive/ambiguous part is deciding what a raw curve connects. Rather than
-/// maintain a second nearly-identical endpoint matcher, TiePass reuses SlurPass on a
-/// shadow fact set and consumes only its tie-like decisions. The current score has a
-/// few dozen curves, so repeating this geometric pass is negligible and guarantees
-/// that slur/tie classification cannot drift apart.
+/// SlurPass decides which raw curves are tie-like. TieCandidateMatcher then performs
+/// a global one-curve/one-note-pair assignment, which is important for tied chords:
+/// independent nearest-neighbour matching can otherwise attach neighbouring curves
+/// to the same pitch twice.
 /// </summary>
 public sealed class TiePass : ISemanticPass
 {
@@ -68,14 +67,6 @@ public sealed class TiePass : ISemanticPass
         var classifier = new SlurPass();
         classifier.Run(document, shadowFacts);
 
-        var pitchByNotehead = facts
-            .OfType<PitchFact>()
-            .GroupBy(pitch => pitch.NoteheadId, StringComparer.Ordinal)
-            .ToDictionary(
-                group => group.Key,
-                group => group.OrderByDescending(pitch => pitch.Confidence).First(),
-                StringComparer.Ordinal);
-
         var claimedBySlur = facts
             .OfType<SlurFact>()
             .Select(slur => slur.CurveShapeId)
@@ -84,21 +75,24 @@ public sealed class TiePass : ISemanticPass
             .OfType<TieFact>()
             .Select(tie => tie.CurveShapeId)
             .ToHashSet(StringComparer.Ordinal);
-
-        var decisions = new List<TieDecision>();
-        var tieCandidates = classifier.LastAnalysis?.Decisions
+        var tieLike = classifier.LastAnalysis?.Decisions
             .Where(decision => decision.Decision == "tie-like")
+            .Where(decision => !alreadyTied.Contains(decision.CurveShapeId))
             .OrderBy(decision => decision.CurveShapeId, StringComparer.Ordinal)
             .ToArray()
             ?? Array.Empty<SlurDecision>();
+        var tieLikeIds = tieLike
+            .Where(decision => !claimedBySlur.Contains(decision.CurveShapeId))
+            .Select(decision => decision.CurveShapeId)
+            .ToHashSet(StringComparer.Ordinal);
+        var matched = TieCandidateMatcher.Match(
+            document,
+            facts,
+            tieLikeIds);
+        var decisions = new List<TieDecision>();
 
-        foreach (var candidate in tieCandidates)
+        foreach (var candidate in tieLike)
         {
-            if (alreadyTied.Contains(candidate.CurveShapeId))
-            {
-                continue;
-            }
-
             if (claimedBySlur.Contains(candidate.CurveShapeId))
             {
                 decisions.Add(Reject(
@@ -108,52 +102,35 @@ public sealed class TiePass : ISemanticPass
                 continue;
             }
 
-            if (candidate.FromNotehead is null
-                || candidate.ToNotehead is null
-                || candidate.StartDistanceInSpacings is null
-                || candidate.EndDistanceInSpacings is null)
+            if (!matched.TryGetValue(candidate.CurveShapeId, out var match))
             {
                 decisions.Add(Reject(
                     candidate,
-                    "incomplete-tie-candidate",
-                    $"{candidate.CurveShapeId}: tie-like decision has incomplete endpoints"));
+                    "no-unique-pair",
+                    $"{candidate.CurveShapeId}: no unused same-pitch endpoint pair remains after global tie matching"));
                 continue;
             }
 
-            if (!pitchByNotehead.TryGetValue(candidate.FromNotehead.ShapeId, out var fromPitch)
-                || !pitchByNotehead.TryGetValue(candidate.ToNotehead.ShapeId, out var toPitch)
-                || !string.Equals(fromPitch.Pitch, toPitch.Pitch, StringComparison.Ordinal))
-            {
-                decisions.Add(Reject(
-                    candidate,
-                    "pitch-mismatch",
-                    $"{candidate.CurveShapeId}: tie endpoints no longer resolve to one pitch"));
-                continue;
-            }
-
-            var distanceSum = candidate.StartDistanceInSpacings.Value
-                + candidate.EndDistanceInSpacings.Value;
             var confidence = Math.Clamp(
-                0.99 - 0.11 * distanceSum,
+                0.99 - 0.11 * match.Score,
                 0.60,
                 0.99);
-            var reason = $"{candidate.CurveShapeId}: same-pitch curved stroke joins "
-                + $"{candidate.FromNotehead.ShapeId} -> {candidate.ToNotehead.ShapeId} "
-                + $"at {fromPitch.Pitch}; distances="
-                + $"{candidate.StartDistanceInSpacings.Value:F2}/"
-                + $"{candidate.EndDistanceInSpacings.Value:F2}sp; "
-                + $"placement={candidate.Placement ?? "unspecified"}";
+            var reason = $"{candidate.CurveShapeId}: globally matched same-pitch curved stroke "
+                + $"{match.FromNotehead.ShapeId} -> {match.ToNotehead.ShapeId} "
+                + $"at {match.Pitch}; distances="
+                + $"{match.StartDistanceInSpacings:F2}/{match.EndDistanceInSpacings:F2}sp; "
+                + $"placement={match.Placement ?? "unspecified"}";
 
             decisions.Add(new TieDecision(
                 candidate.CurveShapeId,
                 true,
                 "tie",
-                candidate.FromNotehead,
-                candidate.ToNotehead,
-                fromPitch.Pitch,
-                candidate.Placement,
-                candidate.StartDistanceInSpacings,
-                candidate.EndDistanceInSpacings,
+                match.FromNotehead,
+                match.ToNotehead,
+                match.Pitch,
+                match.Placement,
+                match.StartDistanceInSpacings,
+                match.EndDistanceInSpacings,
                 confidence,
                 reason));
         }
@@ -184,7 +161,7 @@ public sealed class TiePass : ISemanticPass
         facts.AddTrace(
             $"TiePass: candidates={decisions.Count}; accepted={decisions.Count(decision => decision.Accepted)}; "
             + $"claimed-by-slur={decisions.Count(decision => decision.Decision == "claimed-by-slur")}; "
-            + $"rejected={decisions.Count(decision => !decision.Accepted)}");
+            + $"unmatched={decisions.Count(decision => decision.Decision == "no-unique-pair")}");
     }
 
     private static TieDecision Reject(
