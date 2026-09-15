@@ -2360,9 +2360,10 @@
     <measure number="13">
       <note>
         <rest />
-        <duration>20</duration>
+        <duration>30</duration>
         <voice>1</voice>
         <type>quarter</type>
+        <dot />
         <staff>1</staff>
       </note>
       <note>
@@ -2402,7 +2403,7 @@
         <beam number="1">end</beam>
       </note>
       <backup>
-        <duration>50</duration>
+        <duration>60</duration>
       </backup>
       <note>
         <pitch>
@@ -4097,6 +4098,9 @@
       <backup>
         <duration>80</duration>
       </backup>
+      <forward>
+        <duration>40</duration>
+      </forward>
       <note>
         <pitch>
           <step>B</step>
@@ -4154,7 +4158,7 @@
         <staff>2</staff>
       </note>
       <backup>
-        <duration>40</duration>
+        <duration>80</duration>
       </backup>
       <note>
         <pitch>
