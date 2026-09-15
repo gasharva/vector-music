@@ -47,12 +47,21 @@ public sealed class SemanticPipeline
             materialized.Add(new VoicePass());
         }
 
-        // Onsets are the final current rhythmic fact: they consume duration, chord,
-        // rest and voice assignments and recover exact positions inside the measure.
+        // Onsets consume duration, chord, rest and voice assignments and recover
+        // exact positions inside the measure.
         if (materialized.Any(pass => pass is NoteheadPass)
             && materialized.All(pass => pass is not OnsetPass))
         {
             materialized.Add(new OnsetPass());
+        }
+
+        // Curves are already extracted geometrically. Semantic slur attachment is
+        // deliberately last: it can use the final chord/voice/onset context and keep
+        // same-pitch arches reserved for a later TiePass.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not SlurPass))
+        {
+            materialized.Add(new SlurPass());
         }
 
         _passes = materialized;
