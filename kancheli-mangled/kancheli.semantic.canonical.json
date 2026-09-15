@@ -3323,8 +3323,8 @@
             {
               "id": "m20-shape-579",
               "type": "chord",
-              "at": "1/2",
-              "voice": 1,
+              "at": "1/4",
+              "voice": 2,
               "duration": "1/2",
               "notes": [
                 {
@@ -3340,7 +3340,7 @@
             {
               "id": "m20-shape-542",
               "type": "chord",
-              "at": "1",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -3895,8 +3895,8 @@
             {
               "id": "m24-shape-588",
               "type": "chord",
-              "at": "1/2",
-              "voice": 1,
+              "at": "1/4",
+              "voice": 2,
               "duration": "1/2",
               "notes": [
                 {
@@ -3912,7 +3912,7 @@
             {
               "id": "m24-shape-502",
               "type": "chord",
-              "at": "1",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/4",
               "notes": [

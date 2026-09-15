@@ -3577,17 +3577,6 @@
       </note>
       <note>
         <pitch>
-          <step>F</step>
-          <octave>5</octave>
-        </pitch>
-        <duration>40</duration>
-        <voice>1</voice>
-        <type>half</type>
-        <stem>down</stem>
-        <staff>1</staff>
-      </note>
-      <note>
-        <pitch>
           <step>G</step>
           <octave>5</octave>
         </pitch>
@@ -3598,7 +3587,24 @@
         <staff>1</staff>
       </note>
       <backup>
-        <duration>100</duration>
+        <duration>60</duration>
+      </backup>
+      <forward>
+        <duration>20</duration>
+      </forward>
+      <note>
+        <pitch>
+          <step>F</step>
+          <octave>5</octave>
+        </pitch>
+        <duration>40</duration>
+        <voice>2</voice>
+        <type>half</type>
+        <stem>down</stem>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>60</duration>
       </backup>
       <note>
         <pitch>
@@ -4167,18 +4173,6 @@
       </note>
       <note>
         <pitch>
-          <step>D</step>
-          <alter>-1</alter>
-          <octave>5</octave>
-        </pitch>
-        <duration>40</duration>
-        <voice>1</voice>
-        <type>half</type>
-        <stem>down</stem>
-        <staff>1</staff>
-      </note>
-      <note>
-        <pitch>
           <step>E</step>
           <alter>-1</alter>
           <octave>5</octave>
@@ -4190,7 +4184,25 @@
         <staff>1</staff>
       </note>
       <backup>
-        <duration>100</duration>
+        <duration>60</duration>
+      </backup>
+      <forward>
+        <duration>20</duration>
+      </forward>
+      <note>
+        <pitch>
+          <step>D</step>
+          <alter>-1</alter>
+          <octave>5</octave>
+        </pitch>
+        <duration>40</duration>
+        <voice>2</voice>
+        <type>half</type>
+        <stem>down</stem>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>60</duration>
       </backup>
       <note>
         <pitch>

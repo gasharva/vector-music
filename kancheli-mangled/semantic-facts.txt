@@ -33,11 +33,15 @@ ChordDurationNormalizationPass: chords-normalized=2; member-durations-updated=2
 ChordDurationNormalizationPass: added 0 fact(s); total=1392
 VoicePass: assignments=202; polyphonic-staff-measures=20; voice1=172; voice2=30; low-confidence=0
 VoicePass: added 202 fact(s); total=1594
-OnsetPass: assignments=202; anchored=22; low-confidence=1
+MeasureFitVoicePass: refined-staffs=2; voice-facts-updated=6
+MeasureFitVoicePass: added 0 fact(s); total=1594
+OnsetPass: assignments=202; anchored=22; low-confidence=3
 OnsetPass: added 202 fact(s); total=1796
-OnsetPass: assignments=202; anchored=21; low-confidence=0
+OnsetPass: assignments=202; anchored=21; low-confidence=2
 VoiceContinuityPass: corrected=1; old-onsets-removed=202; onsets-recomputed=True
 VoiceContinuityPass: added 0 fact(s); total=1796
+MeasureEndOnsetRefinementPass: corrected=2
+MeasureEndOnsetRefinementPass: added 0 fact(s); total=1796
 SlurPass: curves=37; accepted=1; tie-like=26; vertical/non-span=7; unattached=3
 SlurPass: added 1 fact(s); total=1797
 TiePass: candidates=26; accepted=26; claimed-by-slur=0; unmatched=0
@@ -68,11 +72,11 @@ CanonicalBuilder: m16 events=9; projected-noteheads=10; rests=1; dotted-rests=0;
 CanonicalBuilder: m17 events=11; projected-noteheads=14; rests=0; dotted-rests=0; chord-events=1; single-events=10; semantic-onsets=11; voices=[1,5]
 CanonicalBuilder: m18 events=11; projected-noteheads=15; rests=0; dotted-rests=0; chord-events=1; single-events=10; semantic-onsets=11; voices=[1,5]
 CanonicalBuilder: m19 events=7; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=0; single-events=7; semantic-onsets=7; voices=[1,5]
-CanonicalBuilder: m20 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,5]
+CanonicalBuilder: m20 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,2,5]
 CanonicalBuilder: m21 events=11; projected-noteheads=15; rests=0; dotted-rests=0; chord-events=1; single-events=10; semantic-onsets=11; voices=[1,5]
 CanonicalBuilder: m22 events=7; projected-noteheads=11; rests=0; dotted-rests=0; chord-events=1; single-events=6; semantic-onsets=7; voices=[1,5]
 CanonicalBuilder: m23 events=7; projected-noteheads=8; rests=0; dotted-rests=0; chord-events=1; single-events=6; semantic-onsets=7; voices=[1,5]
-CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,5]
+CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,2,5]
 CanonicalBuilder: m25 events=6; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=1; single-events=5; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m26 time=4/4
 CanonicalBuilder: m26 events=8; projected-noteheads=9; rests=6; dotted-rests=0; chord-events=2; single-events=0; semantic-onsets=8; voices=[1,2,5,6]
@@ -1626,6 +1630,9 @@ VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignor
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
+VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context; measure-fit refinement: provisional single voice totals 5/4 in 3/4 measure; up-stream=3/4, down-stream=1/2; opposite stems split into local voices
+VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context; measure-fit refinement: provisional single voice totals 5/4 in 3/4 measure; up-stream=3/4, down-stream=1/2; opposite stems split into local voices
+VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context; measure-fit refinement: provisional single voice totals 5/4 in 3/4 measure; up-stream=3/4, down-stream=1/2; opposite stems split into local voices
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
@@ -1652,12 +1659,9 @@ VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignor
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
+VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context; measure-fit refinement: provisional single voice totals 5/4 in 3/4 measure; up-stream=3/4, down-stream=1/2; opposite stems split into local voices
+VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context; measure-fit refinement: provisional single voice totals 5/4 in 3/4 measure; up-stream=3/4, down-stream=1/2; opposite stems split into local voices
+VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context; measure-fit refinement: provisional single voice totals 5/4 in 3/4 measure; up-stream=3/4, down-stream=1/2; opposite stems split into local voices
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: polyphonic staff: down-stem pitched event belongs to local voice 2
 VoicePass: polyphonic staff: up-stem pitched event belongs to local voice 1
@@ -1828,6 +1832,9 @@ OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: no cross-voice x anchor to local voice 1; secondary voice provisionally starts at measure origin; measure-end refinement: x interpolation estimates 0.229, and duration 1/2 ending at 3/4 implies onset 1/4
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
@@ -1854,12 +1861,9 @@ OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
-OnsetPass: single local voice: onset is cumulative semantic duration in x-order
-OnsetPass: single local voice: onset is cumulative semantic duration in x-order
-OnsetPass: single local voice: onset is cumulative semantic duration in x-order
-OnsetPass: single local voice: onset is cumulative semantic duration in x-order
-OnsetPass: single local voice: onset is cumulative semantic duration in x-order
-OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: no cross-voice x anchor to local voice 1; secondary voice provisionally starts at measure origin; measure-end refinement: x interpolation estimates 0.222, and duration 1/2 ending at 3/4 implies onset 1/4
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: local voice 1 chosen as rhythmic backbone
 OnsetPass: local voice 1 chosen as rhythmic backbone
@@ -1930,11 +1934,11 @@ CanonicalBuilder: m16 events=9; projected-noteheads=10; rests=1; dotted-rests=0;
 CanonicalBuilder: m17 events=11; projected-noteheads=14; rests=0; dotted-rests=0; chord-events=1; single-events=10; semantic-onsets=11; voices=[1,5]
 CanonicalBuilder: m18 events=11; projected-noteheads=15; rests=0; dotted-rests=0; chord-events=1; single-events=10; semantic-onsets=11; voices=[1,5]
 CanonicalBuilder: m19 events=7; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=0; single-events=7; semantic-onsets=7; voices=[1,5]
-CanonicalBuilder: m20 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,5]
+CanonicalBuilder: m20 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,2,5]
 CanonicalBuilder: m21 events=11; projected-noteheads=15; rests=0; dotted-rests=0; chord-events=1; single-events=10; semantic-onsets=11; voices=[1,5]
 CanonicalBuilder: m22 events=7; projected-noteheads=11; rests=0; dotted-rests=0; chord-events=1; single-events=6; semantic-onsets=7; voices=[1,5]
 CanonicalBuilder: m23 events=7; projected-noteheads=8; rests=0; dotted-rests=0; chord-events=1; single-events=6; semantic-onsets=7; voices=[1,5]
-CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,5]
+CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; chord-events=2; single-events=2; semantic-onsets=4; voices=[1,2,5]
 CanonicalBuilder: m25 events=6; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=1; single-events=5; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m26 time=4/4
 CanonicalBuilder: m26 events=8; projected-noteheads=9; rests=6; dotted-rests=0; chord-events=2; single-events=0; semantic-onsets=8; voices=[1,2,5,6]
