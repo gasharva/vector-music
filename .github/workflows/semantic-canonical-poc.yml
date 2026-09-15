@@ -98,6 +98,14 @@ jobs:
               tie_starts, tie_stops, tied_starts, tied_stops
           )
 
+          for note in root.iter("note"):
+              tie_types = [tie.get("type") for tie in note.findall("tie")]
+              tied_types = [tied.get("type") for tied in note.findall("./notations/tied")]
+              assert tie_types.count("start") <= 1, tie_types
+              assert tie_types.count("stop") <= 1, tie_types
+              assert tied_types.count("start") <= 1, tied_types
+              assert tied_types.count("stop") <= 1, tied_types
+
           summary = Path("artifacts/semantic-summary.txt").read_text(encoding="utf-8")
           chord_line = next(
               line for line in summary.splitlines() if line.startswith("semantic.chords=")
