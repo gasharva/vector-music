@@ -18,26 +18,33 @@ StemAttachmentPass decisions: candidates=294; accepted=190; unmatched=104; cross
 StemAttachmentPass: added 190 fact(s); total=866
 FlagAttachmentPass decisions: candidates=9; accepted=9; unmatched=0; ambiguous=0; stem-conflicts=0; levels=[1,1,1,1,1,1,1,1,1]
 FlagAttachmentPass: added 9 fact(s); total=875
-BeamAttachmentPass decisions: candidates=55; accepted=52; hooks=1; recovered-compact-hooks=4; cross-staff=0; levels=[L1=45,L2=6,L3=1]
-BeamAttachmentPass: added 52 fact(s); total=927
+BeamAttachmentPass decisions: candidates=62; accepted=59; hooks=1; recovered-residual-beams=11; cross-staff=0; levels=[L1=52,L2=6,L3=1]
+BeamAttachmentPass: added 59 fact(s); total=934
 TupletPass decisions: candidates=3; accepted=1; corrected-from-stem-count=0; unmatched=2
-TupletPass: added 1 fact(s); total=928
-RestPass: added 12 fact(s); total=940
+TupletPass: added 1 fact(s); total=935
+RestPass: added 12 fact(s); total=947
 DotAttachmentPass decisions: candidates=88; accepted-note-dots=70; accepted-rest-dots=1; attached-noteheads=70; attached-rests=1; rejected=17; dot-size-band=0.229..0.779sp
-DotAttachmentPass: added 71 fact(s); total=1011
-DurationPass decisions: noteheads=310; types=[half=100,quarter=45,eighth=143,16th=17,32nd=5]; dotted=70; tuplets=5; subdivided=165; filled-without-stem-fallback=0
-DurationPass: added 310 fact(s); total=1321
+DotAttachmentPass: added 71 fact(s); total=1018
+DurationPass decisions: noteheads=310; types=[half=100,quarter=31,eighth=157,16th=17,32nd=5]; dotted=70; tuplets=5; subdivided=179; filled-without-stem-fallback=0
+DurationPass: added 310 fact(s); total=1328
 ChordPass: chords=64; stem-backed=64; stemless-whole=0; noteheads-in-chords=184
-ChordPass: added 64 fact(s); total=1385
+ChordPass: added 64 fact(s); total=1392
+ChordDurationNormalizationPass: chords-normalized=2; member-durations-updated=2
+ChordDurationNormalizationPass: added 0 fact(s); total=1392
 VoicePass: assignments=202; polyphonic-staff-measures=20; voice1=172; voice2=30; low-confidence=0
-VoicePass: added 202 fact(s); total=1587
-OnsetPass warning: m25 staff 1 events extend to 1.0000 beyond measure length 0.7500
+VoicePass: added 202 fact(s); total=1594
 OnsetPass: assignments=202; anchored=22; low-confidence=1
-OnsetPass: added 202 fact(s); total=1789
+OnsetPass: added 202 fact(s); total=1796
+OnsetPass: assignments=202; anchored=21; low-confidence=0
+VoiceContinuityPass: corrected=1; old-onsets-removed=202; onsets-recomputed=True
+VoiceContinuityPass: added 0 fact(s); total=1796
 SlurPass: curves=37; accepted=1; tie-like=26; vertical/non-span=7; unattached=3
-SlurPass: added 1 fact(s); total=1790
+SlurPass: added 1 fact(s); total=1797
 TiePass: candidates=26; accepted=26; claimed-by-slur=0; unmatched=0
-TiePass: added 26 fact(s); total=1816
+TiePass: added 26 fact(s); total=1823
+TieOwnershipRecoveryPass: unclaimed-curves=10; same-pitch-candidates=6; recovered=3; ownership-mismatch=3
+TieSpatialRecoveryPass: curves=37; recovered=3
+TieSpatialRecoveryPass: added 3 fact(s); total=1826
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-988.2
 CanonicalBuilder: m1 time=3/4
@@ -52,10 +59,8 @@ CanonicalBuilder: m7 events=14; projected-noteheads=24; rests=2; dotted-rests=0;
 CanonicalBuilder: m8 events=12; projected-noteheads=51; rests=0; dotted-rests=0; chord-events=12; single-events=0; semantic-onsets=12; voices=[1,5]
 CanonicalBuilder: m9 events=8; projected-noteheads=13; rests=1; dotted-rests=0; chord-events=6; single-events=1; semantic-onsets=8; voices=[1,2,5,6]
 CanonicalBuilder: m10 events=5; projected-noteheads=9; rests=0; dotted-rests=0; chord-events=4; single-events=1; semantic-onsets=5; voices=[1,2,5]
-CanonicalBuilder: chord-m11-42 chord duration disagreement; using half/1/2 from shape-868
 CanonicalBuilder: m11 events=6; projected-noteheads=10; rests=0; dotted-rests=0; chord-events=2; single-events=4; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m12 events=10; projected-noteheads=14; rests=0; dotted-rests=0; chord-events=2; single-events=8; semantic-onsets=10; voices=[1,2,5]
-CanonicalBuilder: chord-m13-46 chord duration disagreement; using half/1/2 from shape-856
 CanonicalBuilder: m13 events=6; projected-noteheads=7; rests=1; dotted-rests=1; chord-events=2; single-events=3; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m14 events=9; projected-noteheads=12; rests=1; dotted-rests=0; chord-events=3; single-events=5; semantic-onsets=9; voices=[1,2,5,6]
 CanonicalBuilder: m15 events=8; projected-noteheads=11; rests=0; dotted-rests=0; chord-events=1; single-events=7; semantic-onsets=8; voices=[1,5]
@@ -71,7 +76,7 @@ CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; 
 CanonicalBuilder: m25 events=6; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=1; single-events=5; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m26 time=4/4
 CanonicalBuilder: m26 events=8; projected-noteheads=9; rests=6; dotted-rests=0; chord-events=2; single-events=0; semantic-onsets=8; voices=[1,2,5,6]
-CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=52; tie-relations=26; slur-relations=1; tuplet-relations=1; onsets=202; dotted-rests=1
+CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=59; tie-relations=29; slur-relations=1; tuplet-relations=1; onsets=202; dotted-rests=1
 
 FACTS
 clef m1 staff=1 G2 x=365.74 confidence=99.9 % shape=shape-983; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-1+staff-pair-1-measure-1
@@ -999,8 +1004,15 @@ beam m19 shape=shape-1119 level=1 hook=False cross-staff=False stems=[shape-600,
 beam m21 shape=shape-1064 level=1 hook=False cross-staff=False stems=[shape-536,shape-533] staffs=[1] left=True right=True from=(445.62,3537.24) to=(532.69,3533.63) length=4.10sp width=0.581sp slope=-0.041 confidence=89.3 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.041; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 beam m21 shape=shape-1101 level=2 hook=False cross-staff=False stems=[shape-607,shape-609,shape-610,shape-615] staffs=[2] left=True right=True from=(445.72,3830.32) to=(579.52,3826.76) length=6.30sp width=0.583sp slope=-0.027 confidence=89.6 %; reason=beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.583sp; slope=-0.027; level=2 from per-stem rank(s) [2,2,2,2]; both beam ends terminate at stems
 beam m21 shape=shape-1100 level=1 hook=False cross-staff=False stems=[shape-607,shape-609,shape-610,shape-615] staffs=[2] left=True right=True from=(445.72,3846.25) to=(579.52,3842.69) length=6.30sp width=0.583sp slope=-0.027 confidence=89.6 %; reason=beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.583sp; slope=-0.027; level=1 from per-stem rank(s) [1,1,1,1]; first-level beam has both ends supported by stems
+beam m21 shape=shape-1083 level=1 hook=False cross-staff=False stems=[shape-530,shape-526] staffs=[1] left=True right=True from=(649.64,3535.43) to=(708.01,3535.43) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m21 shape=shape-1094 level=1 hook=False cross-staff=False stems=[shape-524,shape-519] staffs=[1] left=True right=True from=(762.14,3535.43) to=(820.51,3535.43) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m22 shape=shape-1082 level=1 hook=False cross-staff=False stems=[shape-510,shape-507] staffs=[1] left=True right=True from=(933.69,3535.43) to=(992.07,3535.43) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m22 shape=shape-1067 level=1 hook=False cross-staff=False stems=[shape-504,shape-503] staffs=[1] left=True right=True from=(1046.19,3540.74) to=(1104.57,3540.74) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m22 shape=shape-1078 level=1 hook=False cross-staff=False stems=[shape-498,shape-493] staffs=[1] left=True right=True from=(1184.18,3434.55) to=(1242.55,3434.55) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m23 shape=shape-1120 level=1 hook=False cross-staff=False stems=[shape-622,shape-623] staffs=[2] left=True right=True from=(1337.96,3679.86) to=(1396.33,3679.86) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 beam m23 shape=shape-1107 level=1 hook=False cross-staff=False stems=[shape-624,shape-625] staffs=[2] left=True right=True from=(1424.63,3803.82) to=(1490.55,3800.15) length=3.11sp width=0.580sp slope=-0.056 confidence=89.0 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.580sp; slope=-0.056; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 beam m23 shape=shape-1112 level=1 hook=False cross-staff=False stems=[shape-628,shape-630] staffs=[2] left=True right=True from=(1543.39,3809.34) to=(1603.65,3799.94) length=2.87sp width=0.572sp slope=-0.156 confidence=86.8 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.572sp; slope=-0.156; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m25 shape=shape-1077 level=1 hook=False cross-staff=False stems=[shape-481,shape-565] staffs=[1] left=True right=True from=(1993.98,3434.55) to=(2052.36,3434.55) length=2.75sp width=0.752sp slope=0.000 confidence=74.5 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 tuplet m2 shape=shape-1121 label=DIGIT_5 displayed=5 ratio=5:4 corrected=False beam=shape-1073 stems=[shape-517,shape-521,shape-523,shape-525,shape-527] noteheads=[shape-704,shape-707,shape-708,shape-709,shape-710] classifier=65.2 % confidence=78.3 %; reason=DIGIT_5 at 65.2 %; matched beam shape-1073; center-error=0.058sp; vertical-distance=0.814sp; classifier number 5 agrees with the 5-stem beam group; ratio=5:4
 RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
 RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
@@ -1240,7 +1252,7 @@ duration m11 staff=1 notehead=shape-822 stem=shape-573 type=half base=1/2 effect
 duration m11 staff=1 notehead=shape-717 stem=shape-537 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m11 staff=1 notehead=shape-715 stem=shape-535 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
 duration m11 staff=1 notehead=shape-748 stem=shape-531 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m11 staff=2 notehead=shape-868 stem=shape-648 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
+duration m11 staff=2 notehead=shape-868 stem=shape-648 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=83.1 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2; chord normalization: dots=1 propagated from another member of chord-m11-42
 duration m11 staff=2 notehead=shape-956 stem=shape-648 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m11 staff=2 notehead=shape-877 stem=shape-648 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m12 staff=1 notehead=shape-773 stem=shape-505 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
@@ -1262,7 +1274,7 @@ duration m13 staff=1 notehead=shape-832 stem=shape-586 type=half base=1/2 effect
 duration m13 staff=1 notehead=shape-767 stem=shape-511 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m13 staff=1 notehead=shape-792 stem=shape-480 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m13 staff=1 notehead=shape-760 stem=shape-547 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
-duration m13 staff=2 notehead=shape-856 stem=shape-657 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
+duration m13 staff=2 notehead=shape-856 stem=shape-657 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=83.2 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2; chord normalization: dots=1 propagated from another member of chord-m13-46
 duration m13 staff=2 notehead=shape-920 stem=shape-657 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m14 staff=1 notehead=shape-672 stem=shape-556 type=quarter base=1/4 effective=3/8 dots=1 level=0 tuplet=-:- confidence=85.0 %; reason=filled notehead with stem and no flag/beam -> quarter; dots=1; no tuplet scaling; base=1/4; effective=3/8
 duration m14 staff=1 notehead=shape-784 stem=shape-556 type=quarter base=1/4 effective=3/8 dots=1 level=0 tuplet=-:- confidence=85.0 %; reason=filled notehead with stem and no flag/beam -> quarter; dots=1; no tuplet scaling; base=1/4; effective=3/8
@@ -1341,10 +1353,10 @@ duration m20 staff=2 notehead=shape-869 stem=shape-652 type=half base=1/2 effect
 duration m20 staff=2 notehead=shape-916 stem=shape-652 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m21 staff=1 notehead=shape-733 stem=shape-536 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m21 staff=1 notehead=shape-683 stem=shape-533 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
-duration m21 staff=1 notehead=shape-738 stem=shape-530 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m21 staff=1 notehead=shape-703 stem=shape-526 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m21 staff=1 notehead=shape-694 stem=shape-524 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m21 staff=1 notehead=shape-680 stem=shape-519 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
+duration m21 staff=1 notehead=shape-738 stem=shape-530 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m21 staff=1 notehead=shape-703 stem=shape-526 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m21 staff=1 notehead=shape-694 stem=shape-524 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m21 staff=1 notehead=shape-680 stem=shape-519 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m21 staff=2 notehead=shape-974 stem=shape-607 type=16th base=1/16 effective=1/16 dots=0 level=2 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=2; no augmentation dots; no tuplet scaling; base=1/16; effective=1/16
 duration m21 staff=2 notehead=shape-939 stem=shape-609 type=16th base=1/16 effective=1/16 dots=0 level=2 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=2; no augmentation dots; no tuplet scaling; base=1/16; effective=1/16
 duration m21 staff=2 notehead=shape-917 stem=shape-610 type=16th base=1/16 effective=1/16 dots=0 level=2 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=2; no augmentation dots; no tuplet scaling; base=1/16; effective=1/16
@@ -1354,12 +1366,12 @@ duration m21 staff=2 notehead=shape-886 stem=shape-616 type=half base=1/2 effect
 duration m21 staff=2 notehead=shape-889 stem=shape-616 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
 duration m21 staff=2 notehead=shape-894 stem=shape-616 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
 duration m21 staff=2 notehead=shape-895 stem=shape-616 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
-duration m22 staff=1 notehead=shape-768 stem=shape-510 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m22 staff=1 notehead=shape-772 stem=shape-507 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m22 staff=1 notehead=shape-774 stem=shape-504 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m22 staff=1 notehead=shape-775 stem=shape-503 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m22 staff=1 notehead=shape-776 stem=shape-498 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m22 staff=1 notehead=shape-777 stem=shape-493 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
+duration m22 staff=1 notehead=shape-768 stem=shape-510 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m22 staff=1 notehead=shape-772 stem=shape-507 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m22 staff=1 notehead=shape-774 stem=shape-504 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m22 staff=1 notehead=shape-775 stem=shape-503 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m22 staff=1 notehead=shape-776 stem=shape-498 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m22 staff=1 notehead=shape-777 stem=shape-493 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m22 staff=2 notehead=shape-881 stem=shape-617 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m22 staff=2 notehead=shape-883 stem=shape-617 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m22 staff=2 notehead=shape-882 stem=shape-617 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
@@ -1367,8 +1379,8 @@ duration m22 staff=2 notehead=shape-880 stem=shape-617 type=half base=1/2 effect
 duration m22 staff=2 notehead=shape-879 stem=shape-617 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.9 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m23 staff=1 notehead=shape-779 stem=shape-488 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m23 staff=1 notehead=shape-780 stem=shape-488 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
-duration m23 staff=2 notehead=shape-902 stem=shape-622 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m23 staff=2 notehead=shape-905 stem=shape-623 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
+duration m23 staff=2 notehead=shape-902 stem=shape-622 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m23 staff=2 notehead=shape-905 stem=shape-623 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m23 staff=2 notehead=shape-908 stem=shape-624 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m23 staff=2 notehead=shape-912 stem=shape-625 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m23 staff=2 notehead=shape-918 stem=shape-628 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=77.8 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
@@ -1380,8 +1392,8 @@ duration m24 staff=1 notehead=shape-793 stem=shape-502 type=quarter base=1/4 eff
 duration m24 staff=2 notehead=shape-929 stem=shape-631 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m24 staff=2 notehead=shape-928 stem=shape-631 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=84.0 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
 duration m25 staff=1 notehead=shape-818 stem=shape-582 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=77.7 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
-duration m25 staff=1 notehead=shape-796 stem=shape-481 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
-duration m25 staff=1 notehead=shape-675 stem=shape-565 type=quarter base=1/4 effective=1/4 dots=0 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; no augmentation dots; no tuplet scaling; base=1/4; effective=1/4
+duration m25 staff=1 notehead=shape-796 stem=shape-481 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
+duration m25 staff=1 notehead=shape-675 stem=shape-565 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=74.5 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m25 staff=1 notehead=shape-679 stem=shape-564 type=quarter base=1/4 effective=3/8 dots=1 level=0 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem and no flag/beam -> quarter; dots=1; no tuplet scaling; base=1/4; effective=3/8
 duration m25 staff=1 notehead=shape-681 stem=shape-563 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m25 staff=2 notehead=shape-946 stem=shape-635 type=half base=1/2 effective=3/4 dots=1 level=0 tuplet=-:- confidence=83.9 %; reason=hollow notehead with stem -> half; dots=1; no tuplet scaling; base=1/2; effective=3/4
@@ -1576,7 +1588,7 @@ VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignor
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
 VoicePass: staff has no simultaneous two-voice evidence; stem direction is ignored in monophonic context
-VoicePass: polyphonic staff: down-stem pitched event belongs to local voice 2
+VoicePass: polyphonic staff: down-stem pitched event belongs to local voice 2; voice continuity: Ab5 continues through rest shape-1042; lead-in reassigned to local voice 1
 VoicePass: polyphonic staff: down-stem pitched event belongs to local voice 2
 VoicePass: rest is vertically separated from an aligned pitched event and therefore belongs to the other local voice
 VoicePass: polyphonic staff: up-stem pitched event belongs to local voice 1
@@ -1780,8 +1792,8 @@ OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: local voice 1 chosen as rhythmic backbone
 OnsetPass: local voice 1 chosen as rhythmic backbone
-OnsetPass: secondary voice propagated from x-aligned backbone voice 1
-OnsetPass: x-aligned anchor to backbone voice 1 conflicts with accumulated durations; kept monotonic duration cursor
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
 OnsetPass: single local voice: onset is cumulative semantic duration in x-order
@@ -1890,6 +1902,9 @@ tie shape-152 m15->m15 staff=2 pitch=G4 noteheads=shape-865->shape-900 placement
 tie shape-153 m15->m15 staff=2 pitch=C4 noteheads=shape-860->shape-906 placement=below distance=0.04/0.25sp confidence=95.8 %; reason=shape-153: globally matched same-pitch curved stroke shape-860 -> shape-906 at C4; distances=0.04/0.25sp; placement=below
 tie shape-154 m15->m15 staff=2 pitch=F3 noteheads=shape-857->shape-907 placement=below distance=0.04/0.25sp confidence=95.8 %; reason=shape-154: globally matched same-pitch curved stroke shape-857 -> shape-907 at F3; distances=0.04/0.25sp; placement=below
 tie shape-155 m14->m14 staff=2 pitch=D4 noteheads=shape-847->shape-897 placement=above distance=0.78/0.25sp confidence=87.7 %; reason=shape-155: globally matched same-pitch curved stroke shape-847 -> shape-897 at D4; distances=0.78/0.25sp; placement=above
+tie shape-139 m11->m12 staff=2 pitch=F4 noteheads=shape-868->shape-841 placement=above distance=0.06/0.04sp confidence=95.0 %; reason=shape-139: recovered same-pitch tie shape-868 -> shape-841 at F4; endpoint distances=0.06/0.04sp; curve-staffs=[1]; endpoint-staff=2; ownership-mismatch=True
+tie shape-143 m21->m22 staff=2 pitch=G4 noteheads=shape-892->shape-881 placement=below distance=0.25/0.35sp confidence=90.0 %; reason=shape-143: recovered same-pitch tie shape-892 -> shape-881 at G4; endpoint distances=0.25/0.35sp; curve-staffs=[1]; endpoint-staff=2; ownership-mismatch=True
+tie shape-141 m11->m12 staff=2 pitch=Db4 noteheads=shape-956->shape-842 placement=above distance=1.21/0.25sp confidence=81.4 %; reason=shape-141: recovered same-pitch tie shape-956 -> shape-842 at Db4; endpoint distances=1.21/0.25sp; curve-staffs=[1]; endpoint-staff=2; ownership-mismatch=True
 
 BUILD TRACE
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
@@ -1906,10 +1921,8 @@ CanonicalBuilder: m7 events=14; projected-noteheads=24; rests=2; dotted-rests=0;
 CanonicalBuilder: m8 events=12; projected-noteheads=51; rests=0; dotted-rests=0; chord-events=12; single-events=0; semantic-onsets=12; voices=[1,5]
 CanonicalBuilder: m9 events=8; projected-noteheads=13; rests=1; dotted-rests=0; chord-events=6; single-events=1; semantic-onsets=8; voices=[1,2,5,6]
 CanonicalBuilder: m10 events=5; projected-noteheads=9; rests=0; dotted-rests=0; chord-events=4; single-events=1; semantic-onsets=5; voices=[1,2,5]
-CanonicalBuilder: chord-m11-42 chord duration disagreement; using half/1/2 from shape-868
 CanonicalBuilder: m11 events=6; projected-noteheads=10; rests=0; dotted-rests=0; chord-events=2; single-events=4; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m12 events=10; projected-noteheads=14; rests=0; dotted-rests=0; chord-events=2; single-events=8; semantic-onsets=10; voices=[1,2,5]
-CanonicalBuilder: chord-m13-46 chord duration disagreement; using half/1/2 from shape-856
 CanonicalBuilder: m13 events=6; projected-noteheads=7; rests=1; dotted-rests=1; chord-events=2; single-events=3; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m14 events=9; projected-noteheads=12; rests=1; dotted-rests=0; chord-events=3; single-events=5; semantic-onsets=9; voices=[1,2,5,6]
 CanonicalBuilder: m15 events=8; projected-noteheads=11; rests=0; dotted-rests=0; chord-events=1; single-events=7; semantic-onsets=8; voices=[1,5]
@@ -1925,4 +1938,4 @@ CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; 
 CanonicalBuilder: m25 events=6; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=1; single-events=5; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m26 time=4/4
 CanonicalBuilder: m26 events=8; projected-noteheads=9; rests=6; dotted-rests=0; chord-events=2; single-events=0; semantic-onsets=8; voices=[1,2,5,6]
-CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=52; tie-relations=26; slur-relations=1; tuplet-relations=1; onsets=202; dotted-rests=1
+CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=59; tie-relations=29; slur-relations=1; tuplet-relations=1; onsets=202; dotted-rests=1

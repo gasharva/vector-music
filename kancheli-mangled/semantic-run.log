@@ -21,7 +21,7 @@ Downloading official Audiveris basic-classifier.zip...
 
 Semantic interpretation complete:
   measures   : 26
-  facts      : 1816
+  facts      : 1826
   clefs      : 10
   times      : 2
   keys       : 1
@@ -30,13 +30,13 @@ Semantic interpretation complete:
   pitches    : 310
   stems      : 190
   flags      : 9
-  beams      : 52
+  beams      : 59
   tuplets    : 1
   dot targets: 70
   augm. dots : 70
   durations  : 310
   chords     : 64
-  ties       : 26
+  ties       : 29
   slurs      : 1
   ownership ledger corrections: 1
   canonical  : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.canonical.json

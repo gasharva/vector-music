@@ -1,11 +1,11 @@
 BEAM ATTACHMENT ANALYSIS
 
-candidates=55
-accepted=52
+candidates=62
+accepted=59
 rejected=3
 hooks=1
 cross-staff=0
-level-1=45
+level-1=52
 level-2=6
 level-3=1
 level-4+=0
@@ -61,8 +61,15 @@ shape-1119: attached-primary-beam; m19; level=1; from=(2284.02,3086.11) to=(2360
 shape-1064: attached-primary-beam; m21; level=1; from=(445.62,3537.24) to=(532.69,3533.63); length=4.10sp; width=0.581sp; slope=-0.041; left=True; right=True; hook=False; cross-staff=False; stems=[shape-536@0.04sp,shape-533@0.00sp]; confidence=89.3 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.041; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 shape-1101: attached-secondary-beam; m21; level=2; from=(445.72,3830.32) to=(579.52,3826.76); length=6.30sp; width=0.583sp; slope=-0.027; left=True; right=True; hook=False; cross-staff=False; stems=[shape-607@0.79sp,shape-609@0.77sp,shape-610@0.74sp,shape-615@0.71sp]; confidence=89.6 %; beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.583sp; slope=-0.027; level=2 from per-stem rank(s) [2,2,2,2]; both beam ends terminate at stems
 shape-1100: attached-primary-beam; m21; level=1; from=(445.72,3846.25) to=(579.52,3842.69); length=6.30sp; width=0.583sp; slope=-0.027; left=True; right=True; hook=False; cross-staff=False; stems=[shape-607@0.04sp,shape-609@0.02sp,shape-610@0.00sp,shape-615@0.00sp]; confidence=89.6 %; beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.583sp; slope=-0.027; level=1 from per-stem rank(s) [1,1,1,1]; first-level beam has both ends supported by stems
+shape-1083: attached-primary-beam; m21; level=1; from=(649.64,3535.43) to=(708.01,3535.43); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-530@0.00sp,shape-526@0.12sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1094: attached-primary-beam; m21; level=1; from=(762.14,3535.43) to=(820.51,3535.43); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-524@0.00sp,shape-519@0.12sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1082: attached-primary-beam; m22; level=1; from=(933.69,3535.43) to=(992.07,3535.43); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-510@0.00sp,shape-507@0.12sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1067: attached-primary-beam; m22; level=1; from=(1046.19,3540.74) to=(1104.57,3540.74); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-504@0.00sp,shape-503@0.12sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1078: attached-primary-beam; m22; level=1; from=(1184.18,3434.55) to=(1242.55,3434.55); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-498@0.12sp,shape-493@0.00sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1120: attached-primary-beam; m23; level=1; from=(1337.96,3679.86) to=(1396.33,3679.86); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-622@0.00sp,shape-623@0.12sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 shape-1107: attached-primary-beam; m23; level=1; from=(1424.63,3803.82) to=(1490.55,3800.15); length=3.11sp; width=0.580sp; slope=-0.056; left=True; right=True; hook=False; cross-staff=False; stems=[shape-624@0.04sp,shape-625@0.00sp]; confidence=89.0 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.580sp; slope=-0.056; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 shape-1112: attached-primary-beam; m23; level=1; from=(1543.39,3809.34) to=(1603.65,3799.94); length=2.87sp; width=0.572sp; slope=-0.156; left=True; right=True; hook=False; cross-staff=False; stems=[shape-628@0.03sp,shape-630@0.00sp]; confidence=86.8 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.572sp; slope=-0.156; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1077: attached-primary-beam; m25; level=1; from=(1993.98,3434.55) to=(2052.36,3434.55); length=2.75sp; width=0.752sp; slope=0.000; left=True; right=True; hook=False; cross-staff=False; stems=[shape-481@0.00sp,shape-565@0.12sp]; confidence=74.5 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.752sp; slope=0.000; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 
 REJECTED BEAM-LIKE STROKES
 shape-1043: no-intersecting-stem; m26; level=-; from=(2366.94,3500.96) to=(2394.55,3500.96); length=1.30sp; width=0.544sp; slope=0.000; left=False; right=False; hook=False; cross-staff=False; stems=[-]; confidence=0.0 %; beam-like horizontal stroke does not intersect any accepted stem in the same measure
