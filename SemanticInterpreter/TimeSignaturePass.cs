@@ -24,61 +24,94 @@ public sealed class TimeSignaturePass : ISemanticPass
         SemanticDocument document,
         SemanticFacts facts)
     {
-        var firstMeasure = document.Measures
+        var measures = document.Measures
             .OrderBy(measure => measure.Number)
-            .FirstOrDefault()
-            ?? throw new InvalidOperationException(
-                "TimeSignaturePass requires at least one measure.");
+            .ToArray();
 
-        var collector = new Visitor(firstMeasure.Number);
+        if (measures.Length == 0)
+        {
+            throw new InvalidOperationException(
+                "TimeSignaturePass requires at least one measure.");
+        }
+
+        var collector = new Visitor();
         collector.Visit(document);
 
-        var upper = ReadStaffSignature(
-            firstMeasure,
-            firstMeasure.Upper,
-            collector.Candidates,
-            facts);
-        var lower = ReadStaffSignature(
-            firstMeasure,
-            firstMeasure.Lower,
-            collector.Candidates,
-            facts);
+        var firstMeasureNumber = measures[0].Number;
 
-        if (upper.Beats != lower.Beats
-            || upper.BeatType != lower.BeatType)
+        foreach (var measure in measures)
         {
-            throw new InvalidDataException(
-                $"Time signature disagreement between staves in measure "
-                + $"{firstMeasure.Number}: upper={upper.Beats}/{upper.BeatType}, "
-                + $"lower={lower.Beats}/{lower.BeatType}.");
+            var measureCandidates = collector.Candidates
+                .Where(candidate => candidate.MeasureNumber == measure.Number)
+                .ToArray();
+
+            var upper = TryReadStaffSignature(
+                measure,
+                measure.Upper,
+                measureCandidates,
+                facts);
+            var lower = TryReadStaffSignature(
+                measure,
+                measure.Lower,
+                measureCandidates,
+                facts);
+
+            if (upper is null && lower is null)
+            {
+                if (measure.Number == firstMeasureNumber)
+                {
+                    throw new InvalidDataException(
+                        $"No time signature found in first measure {measure.Number}.");
+                }
+
+                // No printed signature means the active signature is inherited.
+                continue;
+            }
+
+            if (upper is null || lower is null)
+            {
+                throw new InvalidDataException(
+                    $"Incomplete time signature in measure {measure.Number}: "
+                    + $"upper={(upper is null ? "missing" : $"{upper.Beats}/{upper.BeatType}")}, "
+                    + $"lower={(lower is null ? "missing" : $"{lower.Beats}/{lower.BeatType}")}.");
+            }
+
+            if (upper.Beats != lower.Beats
+                || upper.BeatType != lower.BeatType)
+            {
+                throw new InvalidDataException(
+                    $"Time signature disagreement between staves in measure "
+                    + $"{measure.Number}: upper={upper.Beats}/{upper.BeatType}, "
+                    + $"lower={lower.Beats}/{lower.BeatType}.");
+            }
+
+            if (!SupportedSignatures.Contains((upper.Beats, upper.BeatType)))
+            {
+                throw new InvalidDataException(
+                    $"Unsupported or suspicious time signature "
+                    + $"{upper.Beats}/{upper.BeatType} in measure {measure.Number}.");
+            }
+
+            var sources = upper.SourceShapeIds
+                .Concat(lower.SourceShapeIds)
+                .Distinct(StringComparer.Ordinal)
+                .ToArray();
+            var minX = Math.Min(upper.MinX, lower.MinX);
+            var maxX = Math.Max(upper.MaxX, lower.MaxX);
+
+            facts.Add(new TimeSignatureFact(
+                measure.Number,
+                upper.Beats,
+                upper.BeatType,
+                minX,
+                maxX,
+                $"Both staves independently read as {upper.Beats}/{upper.BeatType}; "
+                    + $"only common signatures are accepted.",
+                sources));
         }
-
-        if (!SupportedSignatures.Contains((upper.Beats, upper.BeatType)))
-        {
-            throw new InvalidDataException(
-                $"Unsupported or suspicious time signature "
-                + $"{upper.Beats}/{upper.BeatType} in measure {firstMeasure.Number}.");
-        }
-
-        var sources = upper.SourceShapeIds
-            .Concat(lower.SourceShapeIds)
-            .Distinct(StringComparer.Ordinal)
-            .ToArray();
-        var minX = Math.Min(upper.MinX, lower.MinX);
-        var maxX = Math.Max(upper.MaxX, lower.MaxX);
-
-        facts.Add(new TimeSignatureFact(
-            firstMeasure.Number,
-            upper.Beats,
-            upper.BeatType,
-            minX,
-            maxX,
-            $"Both staves independently read as {upper.Beats}/{upper.BeatType}; "
-                + $"only common signatures are accepted.",
-            sources));
     }
 
-    private static StaffSignature ReadStaffSignature(
+    private static StaffSignature? TryReadStaffSignature(
         MeasureScene measure,
         StaffMeasureScene staff,
         IReadOnlyList<TimeCandidate> allCandidates,
@@ -93,7 +126,7 @@ public sealed class TimeSignaturePass : ISemanticPass
             .FirstOrDefault();
 
         var leftBoundary = clef?.X ?? measure.XStart;
-        if (clef is null)
+        if (clef is null && allCandidates.Count > 0)
         {
             // Time candidates are already classifier-filtered to TIME_*/COMMON_TIME/CUT_TIME,
             // so a missing clef fact need not prevent reading the signature itself. Keep the
@@ -117,9 +150,7 @@ public sealed class TimeSignaturePass : ISemanticPass
 
         if (candidates.Length == 0)
         {
-            throw new InvalidDataException(
-                $"No time-signature glyphs found at the beginning of measure "
-                + $"{measure.Number}, staff {staff.StaffNumber}.");
+            return null;
         }
 
         var common = candidates
@@ -232,14 +263,8 @@ public sealed class TimeSignaturePass : ISemanticPass
 
     private sealed class Visitor : SemanticVisitor
     {
-        private readonly int _measureNumber;
         private readonly List<TimeCandidate> _candidates = [];
         private readonly HashSet<string> _seen = new(StringComparer.Ordinal);
-
-        public Visitor(int measureNumber)
-        {
-            _measureNumber = measureNumber;
-        }
 
         public IReadOnlyList<TimeCandidate> Candidates => _candidates;
 
@@ -248,8 +273,7 @@ public sealed class TimeSignaturePass : ISemanticPass
             StaffMeasureScene staff,
             ShapeElement shape)
         {
-            if (measure.Number != _measureNumber
-                || !_seen.Add($"{measure.Number}:{staff.StaffNumber}:{shape.ShapeId}"))
+            if (!_seen.Add($"{measure.Number}:{staff.StaffNumber}:{shape.ShapeId}"))
             {
                 return;
             }
@@ -272,6 +296,7 @@ public sealed class TimeSignaturePass : ISemanticPass
             }
 
             _candidates.Add(new TimeCandidate(
+                measure.Number,
                 staff.StaffNumber,
                 shape.ShapeId,
                 classification.Label,
@@ -281,6 +306,7 @@ public sealed class TimeSignaturePass : ISemanticPass
     }
 
     private sealed record TimeCandidate(
+        int MeasureNumber,
         int Staff,
         string ShapeId,
         string Label,
