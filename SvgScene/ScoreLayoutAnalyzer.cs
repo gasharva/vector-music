@@ -340,19 +340,52 @@ public sealed class ScoreLayoutAnalyzer
         StaffLayout lower,
         IReadOnlyList<NormalizedStroke> vertical)
     {
-        var upperBars = vertical
-            .Where(stroke => SpansStaff(stroke, upper))
-            .ToList();
-
-        var lowerBars = vertical
-            .Where(stroke => SpansStaff(stroke, lower))
-            .ToList();
-
-        var xTolerance = Math.Min(
+        var spacing = Math.Min(
             upper.AverageLineSpacing,
-            lower.AverageLineSpacing) * 0.4;
+            lower.AverageLineSpacing);
+        var endpointTolerance = spacing * 0.35;
+        var xTolerance = spacing * 0.4;
+        var clusterTolerance = spacing * 0.8;
 
         var boundaries = new List<MeasureBoundary>();
+
+        // Some engravers emit one continuous barline through both staves.
+        foreach (var pairBar in vertical.Where(stroke =>
+                     FitsPairBoundary(
+                         stroke,
+                         upper,
+                         lower,
+                         endpointTolerance)))
+        {
+            boundaries.Add(new MeasureBoundary(
+                pairBar.CenterX,
+                upper.Bounds.MinY,
+                lower.Bounds.MaxY,
+                [pairBar.Stroke.ShapeId]));
+        }
+
+        // MuseScore commonly emits a piano barline as an upper segment that runs
+        // from the top of the upper staff to the top of the lower staff, plus a
+        // lower segment spanning the lower staff. A local upper+lower pair is also
+        // accepted for engravers that split both staves independently.
+        //
+        // Requiring those endpoint phases is important: the old SpansStaff rule
+        // accepted ordinary note stems that merely covered most of each staff.
+        // When stems happened to line up vertically in both staves, they created
+        // phantom measure boundaries.
+        var upperBars = vertical
+            .Where(stroke => FitsUpperBoundarySegment(
+                stroke,
+                upper,
+                lower,
+                endpointTolerance))
+            .ToList();
+        var lowerBars = vertical
+            .Where(stroke => FitsStaffBoundarySegment(
+                stroke,
+                lower,
+                endpointTolerance))
+            .ToList();
         var usedLower = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var upperBar in upperBars.OrderBy(bar => bar.CenterX))
@@ -377,21 +410,94 @@ public sealed class ScoreLayoutAnalyzer
                 [upperBar.Stroke.ShapeId, lowerBar.Stroke.ShapeId]));
         }
 
-        return boundaries
-            .OrderBy(boundary => boundary.X)
-            .ToArray();
+        return ClusterMeasureBoundaries(
+            boundaries,
+            clusterTolerance);
     }
 
-    private static bool SpansStaff(
+    private static bool FitsUpperBoundarySegment(
         NormalizedStroke stroke,
-        StaffLayout staff)
+        StaffLayout upper,
+        StaffLayout lower,
+        double tolerance)
     {
-        var tolerance = staff.AverageLineSpacing * 0.45;
+        return FitsStaffBoundarySegment(stroke, upper, tolerance)
+            || (Math.Abs(stroke.YStart - upper.Bounds.MinY) <= tolerance
+                && Math.Abs(stroke.YEnd - lower.Bounds.MinY) <= tolerance
+                && IsWithinStaffWidth(stroke, upper, tolerance)
+                && IsWithinStaffWidth(stroke, lower, tolerance));
+    }
 
-        return stroke.YStart <= staff.Bounds.MinY + tolerance
-            && stroke.YEnd >= staff.Bounds.MaxY - tolerance
-            && stroke.CenterX >= staff.Bounds.MinX - tolerance
+    private static bool FitsStaffBoundarySegment(
+        NormalizedStroke stroke,
+        StaffLayout staff,
+        double tolerance)
+    {
+        return Math.Abs(stroke.YStart - staff.Bounds.MinY) <= tolerance
+            && Math.Abs(stroke.YEnd - staff.Bounds.MaxY) <= tolerance
+            && IsWithinStaffWidth(stroke, staff, tolerance);
+    }
+
+    private static bool FitsPairBoundary(
+        NormalizedStroke stroke,
+        StaffLayout upper,
+        StaffLayout lower,
+        double tolerance)
+    {
+        return Math.Abs(stroke.YStart - upper.Bounds.MinY) <= tolerance
+            && Math.Abs(stroke.YEnd - lower.Bounds.MaxY) <= tolerance
+            && IsWithinStaffWidth(stroke, upper, tolerance)
+            && IsWithinStaffWidth(stroke, lower, tolerance);
+    }
+
+    private static bool IsWithinStaffWidth(
+        NormalizedStroke stroke,
+        StaffLayout staff,
+        double tolerance)
+    {
+        return stroke.CenterX >= staff.Bounds.MinX - tolerance
             && stroke.CenterX <= staff.Bounds.MaxX + tolerance;
+    }
+
+    private static IReadOnlyList<MeasureBoundary> ClusterMeasureBoundaries(
+        IReadOnlyList<MeasureBoundary> boundaries,
+        double xTolerance)
+    {
+        if (boundaries.Count == 0)
+        {
+            return [];
+        }
+
+        var ordered = boundaries
+            .OrderBy(boundary => boundary.X)
+            .ToArray();
+        var groups = new List<List<MeasureBoundary>>();
+        var current = new List<MeasureBoundary> { ordered[0] };
+
+        foreach (var boundary in ordered.Skip(1))
+        {
+            if (boundary.X - current[^1].X <= xTolerance)
+            {
+                current.Add(boundary);
+                continue;
+            }
+
+            groups.Add(current);
+            current = [boundary];
+        }
+
+        groups.Add(current);
+
+        return groups
+            .Select(group => new MeasureBoundary(
+                group.Average(boundary => boundary.X),
+                group.Min(boundary => boundary.UpperY),
+                group.Max(boundary => boundary.LowerY),
+                group.SelectMany(boundary => boundary.StrokeIds)
+                    .Distinct(StringComparer.Ordinal)
+                    .OrderBy(id => id, StringComparer.Ordinal)
+                    .ToArray()))
+            .ToArray();
     }
 
     private static IReadOnlyList<MeasureLayout> BuildMeasures(
