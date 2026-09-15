@@ -69,6 +69,8 @@ jobs:
           grep -q '<type>' artifacts/kancheli.semantic.musicxml
           grep -q '<duration>' artifacts/kancheli.semantic.musicxml
           grep -q '^semantic.chords=' artifacts/semantic-summary.txt
+          grep -q '^semantic.ties=' artifacts/semantic-summary.txt
+          grep -q '^canonical.ties=' artifacts/semantic-summary.txt
 
           python3 - <<'PY'
           from pathlib import Path
@@ -87,11 +89,31 @@ jobs:
           )
           assert chord_continuations > 0, "ChordPass produced no MusicXML <chord/> continuations"
 
+          tie_starts = sum(1 for tie in root.iter("tie") if tie.get("type") == "start")
+          tie_stops = sum(1 for tie in root.iter("tie") if tie.get("type") == "stop")
+          tied_starts = sum(1 for tied in root.iter("tied") if tied.get("type") == "start")
+          tied_stops = sum(1 for tied in root.iter("tied") if tied.get("type") == "stop")
+          assert tie_starts > 0, "TiePass produced no MusicXML <tie type='start'> markers"
+          assert tie_starts == tie_stops == tied_starts == tied_stops, (
+              tie_starts, tie_stops, tied_starts, tied_stops
+          )
+
           summary = Path("artifacts/semantic-summary.txt").read_text(encoding="utf-8")
           chord_line = next(
               line for line in summary.splitlines() if line.startswith("semantic.chords=")
           )
+          tie_line = next(
+              line for line in summary.splitlines() if line.startswith("semantic.ties=")
+          )
+          canonical_tie_line = next(
+              line for line in summary.splitlines() if line.startswith("canonical.ties=")
+          )
           assert int(chord_line.split("=", 1)[1]) > 0, chord_line
+          tie_count = int(tie_line.split("=", 1)[1])
+          canonical_tie_count = int(canonical_tie_line.split("=", 1)[1])
+          assert tie_count > 0, tie_line
+          assert canonical_tie_count == tie_count, (tie_line, canonical_tie_line)
+          assert tie_starts == canonical_tie_count, (tie_starts, canonical_tie_count)
 
           mxl = Path("artifacts/kancheli.semantic.mxl")
           with ZipFile(mxl) as archive:
@@ -106,6 +128,8 @@ jobs:
               assert "<duration>" in score
               assert "<type>" in score
               assert "<chord" in score
+              assert "<tie " in score
+              assert "<tied " in score
           PY
 
       - name: Upload semantic artifacts
