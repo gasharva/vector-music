@@ -36,6 +36,15 @@ public sealed class SemanticPipeline
             materialized.Add(new RestPass());
         }
 
+        // Voice inference needs both pitched/chord facts and rests. Keep it last among
+        // the current semantic passes so monophonic vs two-voice evidence is evaluated
+        // only after all of those event candidates exist.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not VoicePass))
+        {
+            materialized.Add(new VoicePass());
+        }
+
         _passes = materialized;
     }
 
