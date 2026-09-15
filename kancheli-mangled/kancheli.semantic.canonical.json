@@ -17,7 +17,7 @@
               "id": "m1-shape-572",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "1/2",
               "notes": [
                 {
@@ -34,7 +34,7 @@
               "id": "chord-m1-1",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -55,7 +55,7 @@
             {
               "id": "m1-shape-478",
               "type": "chord",
-              "at": "1/2",
+              "at": "0",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -72,7 +72,7 @@
             {
               "id": "m1-shape-491",
               "type": "chord",
-              "at": "5/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -92,7 +92,7 @@
             {
               "id": "m1-shape-494",
               "type": "chord",
-              "at": "3/4",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -109,7 +109,7 @@
             {
               "id": "m1-shape-497",
               "type": "chord",
-              "at": "1",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -154,7 +154,7 @@
               "id": "chord-m2-2",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -175,7 +175,7 @@
             {
               "id": "m2-shape-499",
               "type": "chord",
-              "at": "3/4",
+              "at": "0",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -193,7 +193,7 @@
               "id": "chord-m2-3",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -217,7 +217,7 @@
             {
               "id": "m2-shape-512",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -237,7 +237,7 @@
             {
               "id": "m2-shape-514",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "3/8",
               "notes": [
@@ -255,7 +255,7 @@
             {
               "id": "m2-shape-517",
               "type": "chord",
-              "at": "11/8",
+              "at": "5/8",
               "voice": 1,
               "duration": "1/40",
               "notes": [
@@ -272,7 +272,7 @@
             {
               "id": "m2-shape-521",
               "type": "chord",
-              "at": "7/5",
+              "at": "13/20",
               "voice": 1,
               "duration": "1/40",
               "notes": [
@@ -289,7 +289,7 @@
             {
               "id": "m2-shape-523",
               "type": "chord",
-              "at": "57/40",
+              "at": "27/40",
               "voice": 1,
               "duration": "1/40",
               "notes": [
@@ -306,7 +306,7 @@
             {
               "id": "m2-shape-525",
               "type": "chord",
-              "at": "29/20",
+              "at": "7/10",
               "voice": 1,
               "duration": "1/40",
               "notes": [
@@ -323,7 +323,7 @@
             {
               "id": "m2-shape-527",
               "type": "chord",
-              "at": "59/40",
+              "at": "29/40",
               "voice": 1,
               "duration": "1/40",
               "notes": [
@@ -346,7 +346,7 @@
               "id": "chord-m3-4",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -367,7 +367,7 @@
             {
               "id": "m3-shape-529",
               "type": "chord",
-              "at": "3/4",
+              "at": "0",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -385,7 +385,7 @@
               "id": "chord-m3-5",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -414,7 +414,7 @@
             {
               "id": "m3-shape-541",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -431,7 +431,7 @@
             {
               "id": "m3-shape-543",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -448,7 +448,7 @@
             {
               "id": "m3-shape-544",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -487,8 +487,8 @@
             {
               "id": "chord-m4-6",
               "type": "chord",
-              "at": "1/8",
-              "voice": 1,
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -513,7 +513,7 @@
               "id": "chord-m4-7",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -537,7 +537,7 @@
             {
               "id": "m4-shape-555",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -554,7 +554,7 @@
             {
               "id": "m4-shape-557",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/2",
               "notes": [
@@ -577,7 +577,7 @@
               "id": "m5-shape-584",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -595,7 +595,7 @@
               "id": "chord-m5-8",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -619,7 +619,7 @@
             {
               "id": "m5-shape-559",
               "type": "chord",
-              "at": "3/4",
+              "at": "0",
               "voice": 1,
               "duration": "3/8",
               "notes": [
@@ -637,7 +637,7 @@
             {
               "id": "m5-shape-475",
               "type": "chord",
-              "at": "9/8",
+              "at": "3/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -654,7 +654,7 @@
             {
               "id": "m5-shape-476",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -671,7 +671,7 @@
             {
               "id": "m5-shape-490",
               "type": "chord",
-              "at": "11/8",
+              "at": "5/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -697,7 +697,7 @@
               "id": "chord-m6-9",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -725,7 +725,7 @@
               "id": "chord-m6-10",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -746,7 +746,7 @@
             {
               "id": "m6-shape-473",
               "type": "chord",
-              "at": "3/4",
+              "at": "0",
               "voice": 1,
               "duration": "3/8",
               "notes": [
@@ -767,7 +767,7 @@
             {
               "id": "m6-shape-489",
               "type": "chord",
-              "at": "9/8",
+              "at": "3/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -784,7 +784,7 @@
             {
               "id": "m6-shape-492",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -801,7 +801,7 @@
             {
               "id": "m6-shape-496",
               "type": "chord",
-              "at": "11/8",
+              "at": "5/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -828,7 +828,7 @@
               "type": "rest",
               "at": "0",
               "staff": 1,
-              "voice": 1,
+              "voice": 2,
               "duration": "1/8",
               "notation": {
                 "noteType": "eighth"
@@ -839,7 +839,7 @@
               "type": "rest",
               "at": "0",
               "staff": 2,
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notation": {
                 "noteType": "eighth"
@@ -848,7 +848,7 @@
             {
               "id": "m7-shape-500",
               "type": "chord",
-              "at": "1/8",
+              "at": "0",
               "voice": 1,
               "duration": "3/4",
               "notes": [
@@ -869,8 +869,8 @@
             {
               "id": "m7-shape-660",
               "type": "chord",
-              "at": "1/8",
-              "voice": 2,
+              "at": "0",
+              "voice": 6,
               "duration": "3/4",
               "notes": [
                 {
@@ -887,8 +887,8 @@
             {
               "id": "chord-m7-11",
               "type": "chord",
-              "at": "7/8",
-              "voice": 1,
+              "at": "1/8",
+              "voice": 2,
               "duration": "1/8",
               "notes": [
                 {
@@ -911,8 +911,8 @@
             {
               "id": "m7-shape-651",
               "type": "chord",
-              "at": "7/8",
-              "voice": 2,
+              "at": "1/8",
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -931,8 +931,8 @@
             {
               "id": "chord-m7-12",
               "type": "chord",
-              "at": "1",
-              "voice": 1,
+              "at": "1/4",
+              "voice": 2,
               "duration": "1/8",
               "notes": [
                 {
@@ -952,8 +952,8 @@
             {
               "id": "m7-shape-656",
               "type": "chord",
-              "at": "1",
-              "voice": 2,
+              "at": "1/4",
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -969,8 +969,8 @@
             {
               "id": "chord-m7-13",
               "type": "chord",
-              "at": "9/8",
-              "voice": 1,
+              "at": "3/8",
+              "voice": 2,
               "duration": "1/8",
               "notes": [
                 {
@@ -990,8 +990,8 @@
             {
               "id": "chord-m7-14",
               "type": "chord",
-              "at": "9/8",
-              "voice": 2,
+              "at": "3/8",
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1018,8 +1018,8 @@
             {
               "id": "chord-m7-15",
               "type": "chord",
-              "at": "5/4",
-              "voice": 1,
+              "at": "1/2",
+              "voice": 2,
               "duration": "1/8",
               "notes": [
                 {
@@ -1039,8 +1039,8 @@
             {
               "id": "chord-m7-16",
               "type": "chord",
-              "at": "5/4",
-              "voice": 2,
+              "at": "1/2",
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1064,8 +1064,8 @@
             {
               "id": "chord-m7-17",
               "type": "chord",
-              "at": "11/8",
-              "voice": 1,
+              "at": "5/8",
+              "voice": 2,
               "duration": "1/8",
               "notes": [
                 {
@@ -1085,8 +1085,8 @@
             {
               "id": "chord-m7-18",
               "type": "chord",
-              "at": "11/8",
-              "voice": 2,
+              "at": "5/8",
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1120,7 +1120,7 @@
               "id": "chord-m8-19",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1179,7 +1179,7 @@
               "id": "chord-m8-21",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1240,7 +1240,7 @@
               "id": "chord-m8-23",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1298,7 +1298,7 @@
               "id": "chord-m8-25",
               "type": "chord",
               "at": "3/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1363,7 +1363,7 @@
               "id": "chord-m8-27",
               "type": "chord",
               "at": "1/2",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1425,7 +1425,7 @@
               "id": "chord-m8-29",
               "type": "chord",
               "at": "5/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -1504,7 +1504,7 @@
               "type": "rest",
               "at": "0",
               "staff": 2,
-              "voice": 2,
+              "voice": 6,
               "duration": "1/4",
               "notation": {
                 "noteType": "quarter"
@@ -1514,7 +1514,7 @@
               "id": "m9-shape-574",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -1531,8 +1531,8 @@
             {
               "id": "chord-m9-32",
               "type": "chord",
-              "at": "1/4",
-              "voice": 2,
+              "at": "0",
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -1553,7 +1553,7 @@
             {
               "id": "chord-m9-31",
               "type": "chord",
-              "at": "3/4",
+              "at": "0",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -1577,7 +1577,7 @@
             {
               "id": "chord-m9-33",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -1598,8 +1598,8 @@
             {
               "id": "chord-m9-34",
               "type": "chord",
-              "at": "1",
-              "voice": 2,
+              "at": "1/4",
+              "voice": 6,
               "duration": "1/2",
               "notes": [
                 {
@@ -1622,7 +1622,7 @@
             {
               "id": "chord-m9-35",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -1643,7 +1643,7 @@
             {
               "id": "chord-m9-36",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -1667,10 +1667,27 @@
           "number": 10,
           "events": [
             {
-              "id": "chord-m10-37",
+              "id": "m10-shape-538",
               "type": "chord",
               "at": "0",
               "voice": 1,
+              "duration": "1/8",
+              "notes": [
+                {
+                  "pitch": "Bb5",
+                  "staff": 1
+                }
+              ],
+              "notation": {
+                "noteType": "eighth",
+                "stem": "up"
+              }
+            },
+            {
+              "id": "chord-m10-37",
+              "type": "chord",
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -1692,27 +1709,10 @@
               }
             },
             {
-              "id": "m10-shape-538",
-              "type": "chord",
-              "at": "3/4",
-              "voice": 1,
-              "duration": "1/8",
-              "notes": [
-                {
-                  "pitch": "Bb5",
-                  "staff": 1
-                }
-              ],
-              "notation": {
-                "noteType": "eighth",
-                "stem": "up"
-              }
-            },
-            {
               "id": "chord-m10-38",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -1736,7 +1736,7 @@
             {
               "id": "chord-m10-39",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -1757,7 +1757,7 @@
             {
               "id": "chord-m10-40",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/2",
               "notes": [
@@ -1800,8 +1800,8 @@
             {
               "id": "chord-m11-41",
               "type": "chord",
-              "at": "1/8",
-              "voice": 1,
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -1827,7 +1827,7 @@
               "id": "chord-m11-42",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/2",
               "notes": [
                 {
@@ -1854,7 +1854,7 @@
             {
               "id": "m11-shape-537",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -1871,7 +1871,7 @@
             {
               "id": "m11-shape-535",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -1888,7 +1888,7 @@
             {
               "id": "m11-shape-531",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -1930,8 +1930,8 @@
             {
               "id": "chord-m12-43",
               "type": "chord",
-              "at": "1/8",
-              "voice": 1,
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -1957,7 +1957,7 @@
               "id": "chord-m12-44",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -1985,7 +1985,7 @@
             {
               "id": "m12-shape-567",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2002,7 +2002,7 @@
             {
               "id": "m12-shape-568",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "3/16",
               "notes": [
@@ -2020,7 +2020,7 @@
             {
               "id": "m12-shape-474",
               "type": "chord",
-              "at": "19/16",
+              "at": "7/16",
               "voice": 1,
               "duration": "1/16",
               "notes": [
@@ -2037,7 +2037,7 @@
             {
               "id": "m12-shape-477",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/16",
               "notes": [
@@ -2054,7 +2054,7 @@
             {
               "id": "m12-shape-483",
               "type": "chord",
-              "at": "21/16",
+              "at": "9/16",
               "voice": 1,
               "duration": "1/16",
               "notes": [
@@ -2074,7 +2074,7 @@
             {
               "id": "m12-shape-484",
               "type": "chord",
-              "at": "11/8",
+              "at": "5/8",
               "voice": 1,
               "duration": "1/16",
               "notes": [
@@ -2094,7 +2094,7 @@
             {
               "id": "m12-shape-485",
               "type": "chord",
-              "at": "23/16",
+              "at": "11/16",
               "voice": 1,
               "duration": "1/16",
               "notes": [
@@ -2127,8 +2127,8 @@
             {
               "id": "chord-m13-45",
               "type": "chord",
-              "at": "1/4",
-              "voice": 1,
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -2150,7 +2150,7 @@
               "id": "chord-m13-46",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/2",
               "notes": [
                 {
@@ -2170,7 +2170,7 @@
             {
               "id": "m13-shape-511",
               "type": "chord",
-              "at": "1",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2187,7 +2187,7 @@
             {
               "id": "m13-shape-480",
               "type": "chord",
-              "at": "9/8",
+              "at": "3/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2204,7 +2204,7 @@
             {
               "id": "m13-shape-547",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2228,7 +2228,7 @@
               "type": "rest",
               "at": "0",
               "staff": 2,
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notation": {
                 "noteType": "eighth"
@@ -2238,7 +2238,7 @@
               "id": "m14-shape-585",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -2258,8 +2258,8 @@
             {
               "id": "m14-shape-659",
               "type": "chord",
-              "at": "1/8",
-              "voice": 2,
+              "at": "0",
+              "voice": 6,
               "duration": "3/4",
               "notes": [
                 {
@@ -2276,7 +2276,7 @@
             {
               "id": "chord-m14-47",
               "type": "chord",
-              "at": "3/4",
+              "at": "0",
               "voice": 1,
               "duration": "3/8",
               "notes": [
@@ -2302,8 +2302,8 @@
             {
               "id": "chord-m14-48",
               "type": "chord",
-              "at": "7/8",
-              "voice": 2,
+              "at": "1/8",
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2329,8 +2329,8 @@
             {
               "id": "chord-m14-49",
               "type": "chord",
-              "at": "1",
-              "voice": 2,
+              "at": "1/4",
+              "voice": 5,
               "duration": "1/2",
               "notes": [
                 {
@@ -2350,7 +2350,7 @@
             {
               "id": "m14-shape-495",
               "type": "chord",
-              "at": "9/8",
+              "at": "3/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2367,7 +2367,7 @@
             {
               "id": "m14-shape-518",
               "type": "chord",
-              "at": "5/4",
+              "at": "1/2",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2384,7 +2384,7 @@
             {
               "id": "m14-shape-479",
               "type": "chord",
-              "at": "11/8",
+              "at": "5/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2427,7 +2427,7 @@
               "id": "m15-shape-598",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2444,7 +2444,7 @@
               "id": "m15-shape-599",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2461,7 +2461,7 @@
               "id": "m15-shape-602",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2478,7 +2478,7 @@
               "id": "m15-shape-604",
               "type": "chord",
               "at": "3/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2498,7 +2498,7 @@
               "id": "chord-m15-50",
               "type": "chord",
               "at": "1/2",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/4",
               "notes": [
                 {
@@ -2569,7 +2569,7 @@
               "id": "m16-shape-516",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "1/2",
               "notes": [
                 {
@@ -2589,7 +2589,7 @@
               "id": "m16-shape-608",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2606,7 +2606,7 @@
               "id": "m16-shape-611",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2623,7 +2623,7 @@
               "id": "m16-shape-614",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2640,7 +2640,7 @@
               "id": "m16-shape-618",
               "type": "chord",
               "at": "3/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -2657,7 +2657,7 @@
               "id": "chord-m16-51",
               "type": "chord",
               "at": "1/2",
-              "voice": 1,
+              "voice": 2,
               "duration": "1/4",
               "notes": [
                 {
@@ -2677,7 +2677,7 @@
             {
               "id": "m16-rest-shape-1042",
               "type": "rest",
-              "at": "3/4",
+              "at": "0",
               "staff": 1,
               "voice": 1,
               "duration": "1/8",
@@ -2689,7 +2689,7 @@
               "id": "chord-m16-52",
               "type": "chord",
               "at": "1/2",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/4",
               "notes": [
                 {
@@ -2709,7 +2709,7 @@
             {
               "id": "m16-shape-552",
               "type": "chord",
-              "at": "7/8",
+              "at": "1/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -2752,7 +2752,7 @@
               "id": "m17-shape-640",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -2769,7 +2769,7 @@
               "id": "m17-shape-642",
               "type": "chord",
               "at": "1/16",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -2803,7 +2803,7 @@
               "id": "m17-shape-644",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -2820,7 +2820,7 @@
               "id": "m17-shape-646",
               "type": "chord",
               "at": "3/16",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -2837,7 +2837,7 @@
               "id": "chord-m17-53",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/2",
               "notes": [
                 {
@@ -2956,7 +2956,7 @@
               "id": "m18-shape-649",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -2973,7 +2973,7 @@
               "id": "m18-shape-650",
               "type": "chord",
               "at": "1/16",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3007,7 +3007,7 @@
               "id": "m18-shape-633",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3024,7 +3024,7 @@
               "id": "m18-shape-653",
               "type": "chord",
               "at": "3/16",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3041,7 +3041,7 @@
               "id": "chord-m18-54",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/2",
               "notes": [
                 {
@@ -3147,7 +3147,7 @@
               "id": "m19-shape-592",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3182,7 +3182,7 @@
               "id": "m19-shape-594",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3199,7 +3199,7 @@
               "id": "m19-shape-595",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3216,7 +3216,7 @@
               "id": "m19-shape-597",
               "type": "chord",
               "at": "3/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3233,7 +3233,7 @@
               "id": "m19-shape-600",
               "type": "chord",
               "at": "1/2",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3250,7 +3250,7 @@
               "id": "m19-shape-603",
               "type": "chord",
               "at": "5/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3272,7 +3272,7 @@
               "id": "chord-m20-55",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -3377,7 +3377,7 @@
               "id": "m21-shape-607",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3394,7 +3394,7 @@
               "id": "m21-shape-609",
               "type": "chord",
               "at": "1/16",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3428,7 +3428,7 @@
               "id": "m21-shape-610",
               "type": "chord",
               "at": "1/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3445,7 +3445,7 @@
               "id": "m21-shape-615",
               "type": "chord",
               "at": "3/16",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/16",
               "notes": [
                 {
@@ -3462,7 +3462,7 @@
               "id": "chord-m21-57",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/2",
               "notes": [
                 {
@@ -3571,7 +3571,7 @@
               "id": "chord-m22-58",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -3712,7 +3712,7 @@
               "id": "m23-shape-622",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/4",
               "notes": [
                 {
@@ -3754,7 +3754,7 @@
               "id": "m23-shape-623",
               "type": "chord",
               "at": "1/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/4",
               "notes": [
                 {
@@ -3771,7 +3771,7 @@
               "id": "m23-shape-624",
               "type": "chord",
               "at": "1/2",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3788,7 +3788,7 @@
               "id": "m23-shape-625",
               "type": "chord",
               "at": "5/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3808,7 +3808,7 @@
               "id": "m23-shape-628",
               "type": "chord",
               "at": "3/4",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3825,7 +3825,7 @@
               "id": "m23-shape-630",
               "type": "chord",
               "at": "7/8",
-              "voice": 2,
+              "voice": 5,
               "duration": "1/8",
               "notes": [
                 {
@@ -3847,7 +3847,7 @@
               "id": "chord-m24-60",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -3932,7 +3932,7 @@
               "id": "m25-shape-582",
               "type": "chord",
               "at": "0",
-              "voice": 1,
+              "voice": 2,
               "duration": "1/2",
               "notes": [
                 {
@@ -3949,7 +3949,7 @@
               "id": "chord-m25-62",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 5,
               "duration": "3/4",
               "notes": [
                 {
@@ -3976,7 +3976,7 @@
             {
               "id": "m25-shape-481",
               "type": "chord",
-              "at": "1/2",
+              "at": "0",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -3993,7 +3993,7 @@
             {
               "id": "m25-shape-565",
               "type": "chord",
-              "at": "3/4",
+              "at": "1/4",
               "voice": 1,
               "duration": "1/4",
               "notes": [
@@ -4013,7 +4013,7 @@
             {
               "id": "m25-shape-564",
               "type": "chord",
-              "at": "1",
+              "at": "1/2",
               "voice": 1,
               "duration": "3/8",
               "notes": [
@@ -4031,7 +4031,7 @@
             {
               "id": "m25-shape-563",
               "type": "chord",
-              "at": "11/8",
+              "at": "7/8",
               "voice": 1,
               "duration": "1/8",
               "notes": [
@@ -4054,7 +4054,7 @@
               "id": "chord-m26-63",
               "type": "chord",
               "at": "0",
-              "voice": 2,
+              "voice": 6,
               "duration": "1/2",
               "notes": [
                 {
@@ -4097,9 +4097,9 @@
             {
               "id": "m26-rest-shape-1045",
               "type": "rest",
-              "at": "1",
+              "at": "0",
               "staff": 1,
-              "voice": 1,
+              "voice": 2,
               "duration": "1/2",
               "notation": {
                 "noteType": "half"
@@ -4110,7 +4110,7 @@
               "type": "rest",
               "at": "1/2",
               "staff": 2,
-              "voice": 2,
+              "voice": 6,
               "duration": "1/4",
               "notation": {
                 "noteType": "quarter"
@@ -4119,9 +4119,9 @@
             {
               "id": "m26-rest-shape-1046",
               "type": "rest",
-              "at": "3/2",
+              "at": "1/2",
               "staff": 1,
-              "voice": 1,
+              "voice": 2,
               "duration": "1/2",
               "notation": {
                 "noteType": "half"
@@ -4130,8 +4130,8 @@
             {
               "id": "chord-m26-64",
               "type": "chord",
-              "at": "3/4",
-              "voice": 2,
+              "at": "0",
+              "voice": 5,
               "duration": "1/4",
               "notes": [
                 {
@@ -4159,9 +4159,9 @@
             {
               "id": "m26-rest-shape-1049",
               "type": "rest",
-              "at": "1",
+              "at": "1/4",
               "staff": 2,
-              "voice": 2,
+              "voice": 5,
               "duration": "1/4",
               "notation": {
                 "noteType": "quarter"
@@ -4170,9 +4170,9 @@
             {
               "id": "m26-rest-shape-1053",
               "type": "rest",
-              "at": "5/4",
+              "at": "3/4",
               "staff": 2,
-              "voice": 2,
+              "voice": 6,
               "duration": "1/4",
               "notation": {
                 "noteType": "quarter"
