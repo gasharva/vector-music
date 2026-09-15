@@ -22,15 +22,18 @@ BeamAttachmentPass decisions: candidates=55; accepted=52; hooks=1; recovered-com
 BeamAttachmentPass: added 52 fact(s); total=927
 TupletPass decisions: candidates=3; accepted=1; corrected-from-stem-count=0; unmatched=2
 TupletPass: added 1 fact(s); total=928
-DotAttachmentPass decisions: candidates=88; accepted-dots=70; attached-noteheads=70; rejected=18; dot-size-band=0.229..0.779sp
-DotAttachmentPass: added 70 fact(s); total=998
+RestPass: added 12 fact(s); total=940
+DotAttachmentPass decisions: candidates=88; accepted-note-dots=70; accepted-rest-dots=1; attached-noteheads=70; attached-rests=1; rejected=17; dot-size-band=0.229..0.779sp
+DotAttachmentPass: added 71 fact(s); total=1011
 DurationPass decisions: noteheads=310; types=[half=100,quarter=45,eighth=143,16th=17,32nd=5]; dotted=70; tuplets=5; subdivided=165; filled-without-stem-fallback=0
-DurationPass: added 310 fact(s); total=1308
+DurationPass: added 310 fact(s); total=1321
 ChordPass: chords=64; stem-backed=64; stemless-whole=0; noteheads-in-chords=184
-ChordPass: added 64 fact(s); total=1372
-RestPass: added 12 fact(s); total=1384
+ChordPass: added 64 fact(s); total=1385
 VoicePass: assignments=202; polyphonic-staff-measures=20; voice1=172; voice2=30; low-confidence=0
-VoicePass: added 202 fact(s); total=1586
+VoicePass: added 202 fact(s); total=1587
+OnsetPass warning: m25 staff 1 events extend to 1.0000 beyond measure length 0.7500
+OnsetPass: assignments=202; anchored=22; low-confidence=1
+OnsetPass: added 202 fact(s); total=1789
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-988.2
 CanonicalBuilder: m1 time=3/4
@@ -995,6 +998,18 @@ beam m21 shape=shape-1100 level=1 hook=False cross-staff=False stems=[shape-607,
 beam m23 shape=shape-1107 level=1 hook=False cross-staff=False stems=[shape-624,shape-625] staffs=[2] left=True right=True from=(1424.63,3803.82) to=(1490.55,3800.15) length=3.11sp width=0.580sp slope=-0.056 confidence=89.0 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.580sp; slope=-0.056; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 beam m23 shape=shape-1112 level=1 hook=False cross-staff=False stems=[shape-628,shape-630] staffs=[2] left=True right=True from=(1543.39,3809.34) to=(1603.65,3799.94) length=2.87sp width=0.572sp slope=-0.156 confidence=86.8 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.572sp; slope=-0.156; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 tuplet m2 shape=shape-1121 label=DIGIT_5 displayed=5 ratio=5:4 corrected=False beam=shape-1073 stems=[shape-517,shape-521,shape-523,shape-525,shape-527] noteheads=[shape-704,shape-707,shape-708,shape-709,shape-710] classifier=65.2 % confidence=78.3 %; reason=DIGIT_5 at 65.2 %; matched beam shape-1073; center-error=0.058sp; vertical-distance=0.814sp; classifier number 5 agrees with the 5-stem beam group; ratio=5:4
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: HW_REST_set resolved by staff-grid phase as whole rest; pitch=-3.50, 2*pitch=-7
+RestPass: HW_REST_set resolved by staff-grid phase as half rest; pitch=1.49, 2*pitch=3
+RestPass: HW_REST_set resolved by staff-grid phase as half rest; pitch=1.49, 2*pitch=3
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
 dot m1 staff=2 target=shape-866 count=1 shapes=[shape-1194] confidence=85.3 %; reason=1 augmentation dot(s) attached to notehead shape-866; global monotonic dot-column match 2/2; note-column fill=hollow; small filled ellipse size=0.400sp; target=shape-866; horizontal-gap=0.460sp; vertical-offset=0.498sp (expected 0.50sp for staff-step -8)
 dot m1 staff=2 target=shape-864 count=1 shapes=[shape-1191] confidence=85.3 %; reason=1 augmentation dot(s) attached to notehead shape-864; global monotonic dot-column match 2/2; note-column fill=hollow; small filled ellipse size=0.400sp; target=shape-864; horizontal-gap=0.460sp; vertical-offset=0.498sp (expected 0.50sp for staff-step -4)
 dot m2 staff=1 target=shape-807 count=1 shapes=[shape-1171] confidence=85.3 %; reason=1 augmentation dot(s) attached to notehead shape-807; global monotonic dot-column match 2/2; note-column fill=hollow; small filled ellipse size=0.400sp; target=shape-807; horizontal-gap=0.460sp; vertical-offset=0.002sp (expected 0.00sp for staff-step 3)
@@ -1065,6 +1080,7 @@ dot m24 staff=2 target=shape-928 count=1 shapes=[shape-1214] confidence=85.3 %; 
 dot m25 staff=1 target=shape-679 count=1 shapes=[shape-1160] confidence=85.3 %; reason=1 augmentation dot(s) attached to notehead shape-679; small filled ellipse size=0.400sp; target=shape-679; horizontal-gap=0.460sp; vertical-offset=0.002sp (expected 0.00sp for staff-step -1)
 dot m25 staff=2 target=shape-946 count=1 shapes=[shape-1221] confidence=85.3 %; reason=1 augmentation dot(s) attached to notehead shape-946; global monotonic dot-column match 2/2; note-column fill=hollow; small filled ellipse size=0.400sp; target=shape-946; horizontal-gap=0.460sp; vertical-offset=0.002sp (expected 0.00sp for staff-step -7)
 dot m25 staff=2 target=shape-944 count=1 shapes=[shape-1226] confidence=85.3 %; reason=1 augmentation dot(s) attached to notehead shape-944; global monotonic dot-column match 2/2; note-column fill=hollow; small filled ellipse size=0.400sp; target=shape-944; horizontal-gap=0.460sp; vertical-offset=0.002sp (expected 0.00sp for staff-step -3)
+DotAttachmentPass: 1 augmentation dot(s) attached to rest shape-1044; rest-dot geometry horizontal=1.169sp; vertical=0.360sp
 duration m1 staff=1 notehead=shape-802 stem=shape-572 type=half base=1/2 effective=1/2 dots=0 level=0 tuplet=-:- confidence=77.8 %; reason=hollow notehead with stem -> half; no augmentation dots; no tuplet scaling; base=1/2; effective=1/2
 duration m1 staff=1 notehead=shape-676 stem=shape-478 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
 duration m1 staff=1 notehead=shape-686 stem=shape-491 type=eighth base=1/8 effective=1/8 dots=0 level=1 tuplet=-:- confidence=79.0 %; reason=filled notehead with stem; deepest flag/beam level=1; no augmentation dots; no tuplet scaling; base=1/8; effective=1/8
@@ -1439,18 +1455,6 @@ chord m24 id=chord-m24-61 type=half fill=hollow stem=shape-513 x=1732.23 staffs=
 chord m25 id=chord-m25-62 type=half fill=hollow stem=shape-635 x=1982.23 staffs=[2] noteheads=[shape-946,shape-944] confidence=91.9 %; reason=2 hollow noteheads share accepted stem shape-635; staffs=[2]; duration-agreement=True
 chord m26 id=chord-m26-63 type=half fill=hollow stem=shape-636 x=2370.49 staffs=[2] noteheads=[shape-961,shape-960,shape-959,shape-958,shape-957] confidence=92.3 %; reason=5 hollow noteheads share accepted stem shape-636; staffs=[2]; duration-agreement=True
 chord m26 id=chord-m26-64 type=quarter fill=filled stem=shape-637 x=2519.99 staffs=[2] noteheads=[shape-965,shape-964,shape-963,shape-962] confidence=92.4 %; reason=4 filled noteheads share accepted stem shape-637; staffs=[2]; duration-agreement=True
-RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
-RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
-RestPass: classifier directly identifies QUARTER_REST as a quarter rest
-RestPass: classifier directly identifies QUARTER_REST as a quarter rest
-RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
-RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
-RestPass: HW_REST_set resolved by staff-grid phase as whole rest; pitch=-3.50, 2*pitch=-7
-RestPass: HW_REST_set resolved by staff-grid phase as half rest; pitch=1.49, 2*pitch=3
-RestPass: HW_REST_set resolved by staff-grid phase as half rest; pitch=1.49, 2*pitch=3
-RestPass: classifier directly identifies QUARTER_REST as a quarter rest
-RestPass: classifier directly identifies QUARTER_REST as a quarter rest
-RestPass: classifier directly identifies QUARTER_REST as a quarter rest
 VoicePass: polyphonic staff: down-stem pitched event belongs to local voice 2
 VoicePass: polyphonic staff: up-stem pitched event belongs to local voice 1
 VoicePass: polyphonic staff: up-stem pitched event belongs to local voice 1
@@ -1653,6 +1657,208 @@ VoicePass: unpaired rest is displaced below staff center; assigning local voice 
 VoicePass: polyphonic staff: up-stem pitched event belongs to local voice 1
 VoicePass: vertically paired rests at one rhythmic x-position: upper rest is local voice 1
 VoicePass: vertically paired rests at one rhythmic x-position: lower rest is local voice 2
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 2
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 2
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: secondary voice propagated from x-aligned backbone voice 1
+OnsetPass: x-aligned anchor to backbone voice 1 conflicts with accumulated durations; kept monotonic duration cursor
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: local voice 1 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 1
+OnsetPass: single local voice: onset is cumulative semantic duration in x-order
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: x-aligned to backbone voice 2
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: local voice 2 chosen as rhythmic backbone
+OnsetPass: secondary voice propagated from x-aligned backbone voice 2
+OnsetPass: x-aligned to backbone voice 2
 
 BUILD TRACE
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
