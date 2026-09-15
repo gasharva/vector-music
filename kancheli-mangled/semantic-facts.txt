@@ -13,12 +13,12 @@ StemAttachmentPass decisions: candidates=297; accepted=188; unmatched=109; cross
 StemAttachmentPass: added 188 fact(s); total=843
 FlagAttachmentPass decisions: candidates=9; accepted=9; unmatched=0; ambiguous=0; stem-conflicts=0; levels=[1,1,1,1,1,1,1,1,1]
 FlagAttachmentPass: added 9 fact(s); total=852
-BeamAttachmentPass decisions: candidates=58; accepted=58; hooks=0; cross-staff=0; levels=[L1=52,L2=5,L3=1]
-BeamAttachmentPass: added 58 fact(s); total=910
+BeamAttachmentPass decisions: candidates=59; accepted=59; hooks=1; recovered-compact-hooks=1; cross-staff=0; levels=[L1=52,L2=6,L3=1]
+BeamAttachmentPass: added 59 fact(s); total=911
 TupletPass decisions: candidates=3; accepted=1; corrected-from-stem-count=0; unmatched=2
-TupletPass: added 1 fact(s); total=911
+TupletPass: added 1 fact(s); total=912
 DotAttachmentPass decisions: candidates=93; accepted-dots=71; attached-noteheads=71; rejected=22; dot-size-band=0.229..0.779sp
-DotAttachmentPass: added 71 fact(s); total=982
+DotAttachmentPass: added 71 fact(s); total=983
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-982
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-984.2
 CanonicalBuilder: m1 time=3/4
@@ -901,6 +901,7 @@ beam m10 shape=shape-1070 level=1 hook=False cross-staff=False stems=[shape-540,
 beam m12 shape=shape-1061 level=1 hook=False cross-staff=False stems=[shape-523,shape-500] staffs=[1] left=True right=True from=(445.16,1877.09) to=(532.37,1872.97) length=3.62sp width=0.581sp slope=-0.047 confidence=89.2 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.047; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 beam m14 shape=shape-1047 level=1 hook=False cross-staff=False stems=[shape-516,shape-537] staffs=[1] left=True right=True from=(859.22,1877.09) to=(946.43,1872.97) length=3.62sp width=0.581sp slope=-0.047 confidence=89.2 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.047; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 beam m14 shape=shape-1068 level=1 hook=False cross-staff=False stems=[shape-541,shape-546] staffs=[1] left=True right=True from=(1027.24,1858.95) to=(1123.45,1860.99) length=3.99sp width=0.584sp slope=0.021 confidence=89.6 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.584sp; slope=0.021; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+beam m14 shape=shape-1069 level=2 hook=True cross-staff=False stems=[shape-546] staffs=[1] left=False right=True from=(1092.02,1878.04) to=(1123.34,1878.04) length=1.30sp width=0.500sp slope=0.000 confidence=84.7 %; reason=beam-like stroke intersects 1 stem(s); left-supported=False; right-supported=True; width=0.500sp; slope=0.000; level=2 from per-stem rank(s) [2]; one beam end is intentionally free (beam hook)
 beam m14 shape=shape-1056 level=1 hook=False cross-staff=False stems=[shape-550,shape-554,shape-558,shape-562] staffs=[1] left=True right=True from=(1190.29,1834.83) to=(1412.26,1848.97) length=9.23sp width=0.585sp slope=0.064 confidence=88.3 %; reason=beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.585sp; slope=0.064; level=1 from per-stem rank(s) [1,1,1,1]; first-level beam has both ends supported by stems
 beam m14 shape=shape-1057 level=2 hook=False cross-staff=False stems=[shape-550,shape-554,shape-558,shape-562] staffs=[1] left=True right=True from=(1190.29,1852.90) to=(1412.26,1867.04) length=9.23sp width=0.585sp slope=0.064 confidence=88.3 %; reason=beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.585sp; slope=0.064; level=2 from per-stem rank(s) [2,2,2,2]; both beam ends terminate at stems
 beam m15 shape=shape-1082 level=1 hook=False cross-staff=False stems=[shape-481,shape-577] staffs=[1] left=True right=True from=(1710.45,1865.04) to=(1797.66,1860.92) length=3.62sp width=0.581sp slope=-0.047 confidence=89.1 %; reason=beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.047; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems

@@ -1,12 +1,12 @@
 BEAM ATTACHMENT ANALYSIS
 
-candidates=58
-accepted=58
+candidates=59
+accepted=59
 rejected=0
-hooks=0
+hooks=1
 cross-staff=0
 level-1=52
-level-2=5
+level-2=6
 level-3=1
 level-4+=0
 
@@ -35,6 +35,7 @@ shape-1070: attached-primary-beam; m10; level=1; from=(2629.13,1167.19) to=(2723
 shape-1061: attached-primary-beam; m12; level=1; from=(445.16,1877.09) to=(532.37,1872.97); length=3.62sp; width=0.581sp; slope=-0.047; left=True; right=True; hook=False; cross-staff=False; stems=[shape-523@0.00sp,shape-500@0.04sp]; confidence=89.2 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.047; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 shape-1047: attached-primary-beam; m14; level=1; from=(859.22,1877.09) to=(946.43,1872.97); length=3.62sp; width=0.581sp; slope=-0.047; left=True; right=True; hook=False; cross-staff=False; stems=[shape-516@0.00sp,shape-537@0.04sp]; confidence=89.2 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.047; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
 shape-1068: attached-primary-beam; m14; level=1; from=(1027.24,1858.95) to=(1123.45,1860.99); length=3.99sp; width=0.584sp; slope=0.021; left=True; right=True; hook=False; cross-staff=False; stems=[shape-541@0.00sp,shape-546@0.04sp]; confidence=89.6 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.584sp; slope=0.021; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems
+shape-1069: attached-beam-hook; m14; level=2; from=(1092.02,1878.04) to=(1123.34,1878.04); length=1.30sp; width=0.500sp; slope=0.000; left=False; right=True; hook=True; cross-staff=False; stems=[shape-546@0.75sp]; confidence=84.7 %; beam-like stroke intersects 1 stem(s); left-supported=False; right-supported=True; width=0.500sp; slope=0.000; level=2 from per-stem rank(s) [2]; one beam end is intentionally free (beam hook)
 shape-1056: attached-primary-beam; m14; level=1; from=(1190.29,1834.83) to=(1412.26,1848.97); length=9.23sp; width=0.585sp; slope=0.064; left=True; right=True; hook=False; cross-staff=False; stems=[shape-550@0.00sp,shape-554@0.00sp,shape-558@0.02sp,shape-562@0.04sp]; confidence=88.3 %; beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.585sp; slope=0.064; level=1 from per-stem rank(s) [1,1,1,1]; first-level beam has both ends supported by stems
 shape-1057: attached-secondary-beam; m14; level=2; from=(1190.29,1852.90) to=(1412.26,1867.04); length=9.23sp; width=0.585sp; slope=0.064; left=True; right=True; hook=False; cross-staff=False; stems=[shape-550@0.71sp,shape-554@0.74sp,shape-558@0.77sp,shape-562@0.79sp]; confidence=88.3 %; beam-like stroke intersects 4 stem(s); left-supported=True; right-supported=True; width=0.585sp; slope=0.064; level=2 from per-stem rank(s) [2,2,2,2]; both beam ends terminate at stems
 shape-1082: attached-primary-beam; m15; level=1; from=(1710.45,1865.04) to=(1797.66,1860.92); length=3.62sp; width=0.581sp; slope=-0.047; left=True; right=True; hook=False; cross-staff=False; stems=[shape-481@0.00sp,shape-577@0.04sp]; confidence=89.1 %; beam-like stroke intersects 2 stem(s); left-supported=True; right-supported=True; width=0.581sp; slope=-0.047; level=1 from per-stem rank(s) [1,1]; first-level beam has both ends supported by stems

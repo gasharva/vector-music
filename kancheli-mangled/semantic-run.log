@@ -21,7 +21,7 @@ Downloading official Audiveris basic-classifier.zip...
 
 Semantic interpretation complete:
   measures   : 28
-  facts      : 982
+  facts      : 983
   clefs      : 10
   times      : 1
   keys       : 1
@@ -30,7 +30,7 @@ Semantic interpretation complete:
   pitches    : 301
   stems      : 188
   flags      : 9
-  beams      : 58
+  beams      : 59
   tuplets    : 1
   dot targets: 71
   augm. dots : 71
