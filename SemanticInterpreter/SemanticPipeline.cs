@@ -58,6 +58,18 @@ public sealed class SemanticPipeline
             materialized.Add(new VoicePass());
         }
 
+        // Some overlapping voices have no simultaneous x-position to trigger the
+        // primary VoicePass. Rhythmic overfill plus opposite stems can still prove
+        // that a provisional single voice must be split before onset reconstruction.
+        if (materialized.Any(pass => pass is VoicePass)
+            && materialized.All(pass => pass is not MeasureFitVoicePass))
+        {
+            var voiceIndex = materialized.FindLastIndex(pass => pass is VoicePass);
+            materialized.Insert(
+                voiceIndex + 1,
+                new MeasureFitVoicePass());
+        }
+
         // Onsets consume duration, chord, rest and voice assignments and recover
         // exact positions inside the measure.
         if (materialized.Any(pass => pass is NoteheadPass)
@@ -75,6 +87,21 @@ public sealed class SemanticPipeline
             materialized.Insert(
                 onsetIndex + 1,
                 new VoiceContinuityPass());
+        }
+
+        // A single secondary sustained event can have no exact cross-voice x anchor.
+        // After all voice refinements are stable, use the barline as an additional
+        // timing constraint when geometry clearly supports an end-of-measure fit.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not MeasureEndOnsetRefinementPass))
+        {
+            var continuityIndex = materialized.FindLastIndex(pass => pass is VoiceContinuityPass);
+            var insertionIndex = continuityIndex >= 0
+                ? continuityIndex + 1
+                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new MeasureEndOnsetRefinementPass());
         }
 
         // Curves are already extracted geometrically. SlurPass classifies their
