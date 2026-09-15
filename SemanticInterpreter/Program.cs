@@ -109,6 +109,8 @@ var flagPass = new FlagAttachmentPass();
 var beamPass = new BeamAttachmentPass();
 var tupletPass = new TupletPass();
 var dotPass = new DotAttachmentPass();
+var durationPass = new DurationPass();
+var chordPass = new ChordPass();
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
@@ -121,7 +123,9 @@ var semanticPipeline = new SemanticPipeline(
         flagPass,
         beamPass,
         tupletPass,
-        dotPass
+        dotPass,
+        durationPass,
+        chordPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -309,7 +313,7 @@ if (dotPass.LastAnalysis is not null)
             dotsDiagnosticsFileName));
 }
 
-Console.WriteLine("15. Building CanonicalNotation v0.3 skeleton...");
+Console.WriteLine("15. Building CanonicalNotation v0.3 raw preview...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -381,6 +385,9 @@ File.WriteAllLines(
         $"semantic.tuplets={facts.OfType<TupletFact>().Count()}",
         $"semantic.dotAttachments={facts.OfType<DotAttachmentFact>().Count()}",
         $"semantic.augmentationDots={facts.OfType<DotAttachmentFact>().Sum(dot => dot.Count)}",
+        $"semantic.durations={facts.OfType<DurationFact>().Count()}",
+        $"semantic.chords={facts.OfType<ChordFact>().Count()}",
+        $"semantic.chordNoteheads={facts.OfType<ChordFact>().Sum(chord => chord.NoteheadIds.Count)}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
@@ -436,6 +443,8 @@ Console.WriteLine($"  beams      : {facts.OfType<BeamAttachmentFact>().Count()}"
 Console.WriteLine($"  tuplets    : {facts.OfType<TupletFact>().Count()}");
 Console.WriteLine($"  dot targets: {facts.OfType<DotAttachmentFact>().Count()}");
 Console.WriteLine($"  augm. dots : {facts.OfType<DotAttachmentFact>().Sum(dot => dot.Count)}");
+Console.WriteLine($"  durations  : {facts.OfType<DurationFact>().Count()}");
+Console.WriteLine($"  chords     : {facts.OfType<ChordFact>().Count()}");
 Console.WriteLine($"  ownership ledger corrections: {ledgerLadderOwnership.Adjustments.Count}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
@@ -597,6 +606,25 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"target={dot.TargetNoteheadId} count={dot.Count} "
                     + $"shapes=[{string.Join(',', dot.DotShapeIds)}] "
                     + $"confidence={dot.Confidence:P1}; reason={dot.Reason}";
+                break;
+
+            case DurationFact duration:
+                yield return $"duration m{duration.MeasureNumber} staff={duration.Staff} "
+                    + $"notehead={duration.NoteheadId} stem={duration.StemShapeId ?? "none"} "
+                    + $"type={duration.NoteType} base={duration.BaseDuration} "
+                    + $"effective={duration.EffectiveDuration} dots={duration.Dots} "
+                    + $"level={duration.SubdivisionLevel} "
+                    + $"tuplet={duration.TupletActual?.ToString() ?? "-"}:{duration.TupletNormal?.ToString() ?? "-"} "
+                    + $"confidence={duration.Confidence:P1}; reason={duration.Reason}";
+                break;
+
+            case ChordFact chord:
+                yield return $"chord m{chord.MeasureNumber} id={chord.ChordId} "
+                    + $"type={chord.NoteType} fill={chord.FillKind} "
+                    + $"stem={chord.StemShapeId ?? "none"} x={chord.AnchorX:F2} "
+                    + $"staffs=[{string.Join(',', chord.Staffs)}] "
+                    + $"noteheads=[{string.Join(',', chord.NoteheadIds)}] "
+                    + $"confidence={chord.Confidence:P1}; reason={chord.Reason}";
                 break;
 
             default:
