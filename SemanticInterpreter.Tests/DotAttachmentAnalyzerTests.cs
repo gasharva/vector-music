@@ -43,7 +43,7 @@ public sealed class DotAttachmentAnalyzerTests
         const double spacing = 20.0;
 
         var facts = new SemanticFacts();
-        facts.Add(Notehead("n1", measure, staff, 100, 100, 1, "filled", spacing));
+        facts.Add(Notehead("n1", measure, staff, 100, 100, 1, "filled", spacing, radius: 10));
 
         var document = Document(
             measure,
@@ -77,9 +77,9 @@ public sealed class DotAttachmentAnalyzerTests
         var columns = helper.Build(noteheads);
 
         Assert.Equal(2, columns.Count);
-        var filled = Assert.Single(columns.Where(column => column.FillKind == "filled"));
+        var filled = Assert.Single(columns, column => column.FillKind == "filled");
         Assert.Equal(new[] { "f1", "f2", "f3" }, filled.Noteheads.Select(note => note.ShapeId));
-        var hollow = Assert.Single(columns.Where(column => column.FillKind == "hollow"));
+        var hollow = Assert.Single(columns, column => column.FillKind == "hollow");
         Assert.Equal("h1", Assert.Single(hollow.Noteheads).ShapeId);
     }
 
@@ -104,8 +104,8 @@ public sealed class DotAttachmentAnalyzerTests
         DotAnalysisResult result,
         string dotId)
     {
-        return Assert.Single(result.Accepted.Where(decision =>
-                decision.Candidate.Ellipse.ShapeId == dotId))
+        return Assert.Single(result.Accepted, decision =>
+                decision.Candidate.Ellipse.ShapeId == dotId)
             .Match!
             .Notehead
             .ShapeId;
