@@ -171,6 +171,9 @@ public sealed class CanonicalNotationBuilder
             facts,
             stemToEventId,
             eventX);
+        var tieRelations = TieRelationProjector.Build(
+            facts,
+            noteheadToEventId);
         var slurRelations = BuildSlurRelations(
             facts,
             noteheadToEventId);
@@ -184,8 +187,9 @@ public sealed class CanonicalNotationBuilder
             + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
             + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == "rest"))}; "
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
-            + $"beam-relations={beamRelations.Count}; slur-relations={slurRelations.Count}; "
-            + $"tuplet-relations={tupletRelations.Count}; onsets={onsets.Length}; dotted-rests={restDots.Length}");
+            + $"beam-relations={beamRelations.Count}; tie-relations={tieRelations.Count}; "
+            + $"slur-relations={slurRelations.Count}; tuplet-relations={tupletRelations.Count}; "
+            + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
         return new CanonicalNotation(
             "CanonicalNotation",
@@ -194,7 +198,7 @@ public sealed class CanonicalNotationBuilder
             [new Part("P1", "Piano", measures)],
             new Relations(
                 beamRelations,
-                [],
+                tieRelations,
                 slurRelations,
                 tupletRelations,
                 [],
