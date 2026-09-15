@@ -65,7 +65,7 @@ public sealed class KeySignaturePass : ISemanticPass
             Math.Min(upper.MinX, lower.MinX),
             Math.Max(upper.MaxX, lower.MaxX),
             upper.Fifths == 0
-                ? "No key-signature symbols exist between clef and time signature on either staff; fifths=0."
+                ? "No key-signature symbols exist before the time signature on either staff; fifths=0."
                 : $"Both staves independently match the canonical {upper.Kind} key-signature "
                     + $"relative position sequence with {Math.Abs(upper.Fifths)} symbol(s); "
                     + $"fifths={upper.Fifths}.",
@@ -84,24 +84,36 @@ public sealed class KeySignaturePass : ISemanticPass
                 fact.MeasureNumber == measure.Number
                 && fact.Staff == staff.StaffNumber)
             .OrderBy(fact => fact.X)
-            .FirstOrDefault()
-            ?? throw new InvalidDataException(
-                $"Cannot read key signature in measure {measure.Number}, "
-                + $"staff {staff.StaffNumber}: no clef fact exists.");
+            .FirstOrDefault();
 
-        var clefElement = staff.Elements
-            .FirstOrDefault(element => element.ShapeId == clef.ShapeId)
-            ?? throw new InvalidDataException(
-                $"Clef source {clef.ShapeId} is absent from semantic staff scene.");
+        var zoneLeft = measure.XStart;
 
-        var zoneLeft = clefElement.Bounds.MaxX;
+        if (clef is not null)
+        {
+            var clefElement = staff.Elements
+                .FirstOrDefault(element => element.ShapeId == clef.ShapeId)
+                ?? throw new InvalidDataException(
+                    $"Clef source {clef.ShapeId} is absent from semantic staff scene.");
+            zoneLeft = clefElement.Bounds.MaxX;
+        }
+        else
+        {
+            // We can still recognize a key signature without naming the clef: the candidate
+            // set is restricted to accidental-like ShapeElements and validated by the full
+            // relative-position pattern, and both staves must independently agree. This keeps
+            // one missed clef classification from blocking otherwise unambiguous key evidence.
+            facts.AddTrace(
+                $"KeySignaturePass: m{measure.Number} staff {staff.StaffNumber} "
+                + "has no clef fact; using measure start as the key-signature left boundary");
+        }
+
         var zoneRight = time.MinX;
 
         if (zoneRight <= zoneLeft)
         {
             throw new InvalidDataException(
                 $"Invalid key-signature search zone in measure {measure.Number}, "
-                + $"staff {staff.StaffNumber}: clefRight={zoneLeft:F2}, "
+                + $"staff {staff.StaffNumber}: left={zoneLeft:F2}, "
                 + $"timeLeft={zoneRight:F2}.");
         }
 
@@ -125,12 +137,27 @@ public sealed class KeySignaturePass : ISemanticPass
                 []);
         }
 
+        // A missing clef can leave its main contour in the broad fallback zone. Prefer the
+        // confidently classified accidental candidates when they exist; otherwise retain the
+        // geometric path below for unclassified key glyphs.
+        if (clef is null)
+        {
+            var classifiedAccidentals = candidates
+                .Where(shape => GetClassifiedAccidentalKind(shape) is "flat" or "sharp")
+                .ToArray();
+
+            if (classifiedAccidentals.Length > 0)
+            {
+                candidates = classifiedAccidentals;
+            }
+        }
+
         if (candidates.Length > 7)
         {
             throw new InvalidDataException(
                 $"Suspicious key signature in measure {measure.Number}, "
                 + $"staff {staff.StaffNumber}: found {candidates.Length} glyphs "
-                + $"between clef and time signature; maximum is 7. "
+                + $"before the time signature; maximum is 7. "
                 + DescribeCandidates(candidates, staff.LineSpacing));
         }
 
