@@ -10,7 +10,7 @@ SUMMARY
 Stroke        total= 626 owned= 623 rendered= 623 exact-color= 623
 CurvedStroke  total=  39 owned=  37 rendered=  37 exact-color=  37
 EllipseLike   total= 417 owned= 409 rendered= 409 exact-color= 409
-ShapeInstance total= 271 owned= 217 rendered= 217 exact-color= 217
+ShapeInstance total= 270 owned= 216 rendered= 216 exact-color= 216
 
 DETAILS
 shape-1122   CurvedStroke  owned=yes staff-1+staff-pair-1-measure-1         g4 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
@@ -582,7 +582,6 @@ shape-1128.6 ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g4 r
 shape-1128.7 ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
 shape-1128.8 ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
 shape-1128.9 ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g4 rendered=yes; mode=direct; displayed=staff-3+staff-pair-2-measure-2; color-match=yes; source=<path>
-shape-1129   ShapeInstance owned=yes staff-10+staff-pair-5-measure-3        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<polyline>
 shape-1131   ShapeInstance owned=yes staff-7+staff-pair-4-measure-2         g2 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
 shape-1134   ShapeInstance owned=yes staff-6+staff-pair-3-measure-4         g2 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<path>
 shape-1137.1 ShapeInstance owned=yes staff-4+staff-pair-2-measure-2         g3 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<path>
