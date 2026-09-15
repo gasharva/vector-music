@@ -171,6 +171,9 @@ public sealed class CanonicalNotationBuilder
             facts,
             stemToEventId,
             eventX);
+        var slurRelations = BuildSlurRelations(
+            facts,
+            noteheadToEventId);
         var tupletRelations = BuildTupletRelations(
             facts,
             noteheadToEventId,
@@ -181,8 +184,8 @@ public sealed class CanonicalNotationBuilder
             + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
             + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == "rest"))}; "
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
-            + $"beam-relations={beamRelations.Count}; tuplet-relations={tupletRelations.Count}; "
-            + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
+            + $"beam-relations={beamRelations.Count}; slur-relations={slurRelations.Count}; "
+            + $"tuplet-relations={tupletRelations.Count}; onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
         return new CanonicalNotation(
             "CanonicalNotation",
@@ -192,7 +195,7 @@ public sealed class CanonicalNotationBuilder
             new Relations(
                 beamRelations,
                 [],
-                [],
+                slurRelations,
                 tupletRelations,
                 [],
                 [],
@@ -643,6 +646,34 @@ public sealed class CanonicalNotationBuilder
                 $"beam-{beam.BeamShapeId}",
                 beam.Level,
                 events));
+        }
+
+        return result;
+    }
+
+    private static List<SlurRelation> BuildSlurRelations(
+        SemanticFacts facts,
+        IReadOnlyDictionary<string, string> noteheadToEventId)
+    {
+        var result = new List<SlurRelation>();
+
+        foreach (var slur in facts
+                     .OfType<SlurFact>()
+                     .OrderBy(slur => slur.StartMeasureNumber)
+                     .ThenBy(slur => slur.CurveShapeId, StringComparer.Ordinal))
+        {
+            if (!noteheadToEventId.TryGetValue(slur.FromNoteheadId, out var fromEvent)
+                || !noteheadToEventId.TryGetValue(slur.ToNoteheadId, out var toEvent)
+                || string.Equals(fromEvent, toEvent, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            result.Add(new SlurRelation(
+                $"slur-{slur.CurveShapeId}",
+                fromEvent,
+                toEvent,
+                slur.Placement));
         }
 
         return result;
