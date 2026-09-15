@@ -5,12 +5,11 @@ namespace SvgMusic.Semantics;
 /// <summary>
 /// Projects accepted semantic facts into a deliberately simple CanonicalNotation score.
 ///
-/// This is a raw preview, not the final rhythm/voice reconstruction. Chord membership is
-/// supplied explicitly by ChordPass; the builder no longer guesses chords from geometry.
-/// Remaining noteheads become single-note pitched events and RestPass facts become rest events.
-/// Within each provisional voice we serialize events from left to right using inferred durations,
-/// which is enough to inspect pitch, accidentals, durations, chords and rests in MuseScore while
-/// onset/voice reconstruction is still missing.
+/// Chord membership and local voice identity are supplied explicitly by ChordPass and
+/// VoicePass; the builder no longer guesses either from geometry. Remaining noteheads
+/// become single-note pitched events and RestPass facts become rest events. Onsets are
+/// still provisional: inside each detected voice we serialize events from left to right
+/// using inferred durations so the raw MusicXML can be inspected in MuseScore.
 /// </summary>
 public sealed class CanonicalNotationBuilder
 {
@@ -40,6 +39,7 @@ public sealed class CanonicalNotationBuilder
         var stems = facts.OfType<StemAttachmentFact>().ToArray();
         var chords = facts.OfType<ChordFact>().ToArray();
         var rests = facts.OfType<RestFact>().ToArray();
+        var voices = facts.OfType<VoiceFact>().ToArray();
 
         if (noteheads.Length > 0 && durations.Length == 0)
         {
@@ -150,6 +150,7 @@ public sealed class CanonicalNotationBuilder
                 stems,
                 chords,
                 rests,
+                voices,
                 facts,
                 noteheadToEventId,
                 stemToEventId,
@@ -204,6 +205,7 @@ public sealed class CanonicalNotationBuilder
         IReadOnlyList<StemAttachmentFact> allStems,
         IReadOnlyList<ChordFact> allChords,
         IReadOnlyList<RestFact> allRests,
+        IReadOnlyList<VoiceFact> allVoices,
         SemanticFacts facts,
         IDictionary<string, string> noteheadToEventId,
         IDictionary<string, string> stemToEventId,
@@ -225,6 +227,16 @@ public sealed class CanonicalNotationBuilder
             .ThenBy(rest => rest.CenterY)
             .ThenBy(rest => rest.ShapeId, StringComparer.Ordinal)
             .ToArray();
+        var measureVoices = allVoices
+            .Where(voice => voice.MeasureNumber == measure.Number)
+            .GroupBy(voice => new VoiceKey(
+                voice.TargetKind,
+                voice.TargetId))
+            .ToDictionary(
+                group => group.Key,
+                group => group
+                    .OrderByDescending(voice => voice.Confidence)
+                    .First());
 
         if (measureNoteheads.Length == 0 && measureRests.Length == 0)
         {
@@ -283,10 +295,19 @@ public sealed class CanonicalNotationBuilder
                 : measureStems.FirstOrDefault(candidate =>
                     candidate.StemShapeId == chord.StemShapeId);
             var eventId = chord.ChordId;
+            var fallbackStaff = chord.Staffs.Count > 0
+                ? chord.Staffs[0]
+                : chordNoteheads[0].Staff;
+            var voice = ResolveCanonicalVoice(
+                measureVoices,
+                VoiceTargetKind.Chord,
+                chord.ChordId,
+                fallbackStaff);
             var draft = BuildDraft(
                 eventId,
                 chordNoteheads,
                 stem,
+                voice,
                 pitchesByNotehead,
                 durationsByNotehead,
                 facts);
@@ -323,10 +344,16 @@ public sealed class CanonicalNotationBuilder
                 eventId += $"-{notehead.ShapeId}";
             }
 
+            var voice = ResolveCanonicalVoice(
+                measureVoices,
+                VoiceTargetKind.Notehead,
+                notehead.ShapeId,
+                notehead.Staff);
             drafts.Add(BuildDraft(
                 eventId,
                 [notehead],
                 stem,
+                voice,
                 pitchesByNotehead,
                 durationsByNotehead,
                 facts));
@@ -340,7 +367,11 @@ public sealed class CanonicalNotationBuilder
 
         foreach (var rest in measureRests)
         {
-            var voice = rest.Staff;
+            var voice = ResolveCanonicalVoice(
+                measureVoices,
+                VoiceTargetKind.Rest,
+                rest.ShapeId,
+                rest.Staff);
             var eventId = $"m{measure.Number}-rest-{rest.ShapeId}";
             var restEvent = new CanonicalEvent
             {
@@ -389,7 +420,8 @@ public sealed class CanonicalNotationBuilder
             + $"projected-noteheads={measureNoteheads.Length}; "
             + $"rests={measureRests.Length}; "
             + $"chord-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) > 1)}; "
-            + $"single-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) == 1)}");
+            + $"single-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) == 1)}; "
+            + $"voices=[{string.Join(',', drafts.Select(draft => draft.Voice).Distinct().OrderBy(voice => voice))}]");
 
         return assigned
             .OrderBy(ev => eventX[ev.Id])
@@ -402,6 +434,7 @@ public sealed class CanonicalNotationBuilder
         string eventId,
         IReadOnlyList<NoteheadFact> noteheads,
         StemAttachmentFact? stem,
+        int voice,
         IReadOnlyDictionary<string, PitchFact> pitchesByNotehead,
         IReadOnlyDictionary<string, DurationFact> durationsByNotehead,
         SemanticFacts facts)
@@ -438,14 +471,6 @@ public sealed class CanonicalNotationBuilder
             })
             .ToList();
 
-        var staffs = noteheads
-            .Select(note => note.Staff)
-            .Distinct()
-            .OrderBy(staff => staff)
-            .ToArray();
-        var voice = staffs.Length == 1
-            ? staffs[0]
-            : 1;
         var x = noteheads.Average(note => note.CenterX);
 
         var notation = new EventNotation(
@@ -480,6 +505,35 @@ public sealed class CanonicalNotationBuilder
             x,
             voice,
             stem?.StemShapeId);
+    }
+
+    private static int ResolveCanonicalVoice(
+        IReadOnlyDictionary<VoiceKey, VoiceFact> measureVoices,
+        VoiceTargetKind targetKind,
+        string targetId,
+        int fallbackStaff)
+    {
+        if (measureVoices.TryGetValue(
+                new VoiceKey(targetKind, targetId),
+                out var voice))
+        {
+            return CanonicalVoice(
+                voice.Staff,
+                voice.LocalVoice);
+        }
+
+        return CanonicalVoice(
+            fallbackStaff,
+            1);
+    }
+
+    private static int CanonicalVoice(
+        int staff,
+        int localVoice)
+    {
+        var normalizedStaff = Math.Max(1, staff);
+        var normalizedVoice = Math.Clamp(localVoice, 1, 4);
+        return (normalizedStaff - 1) * 4 + normalizedVoice;
     }
 
     private static List<BeamRelation> BuildBeamRelations(
@@ -612,6 +666,10 @@ public sealed class CanonicalNotationBuilder
             .ThenByDescending(fact => fact.Confidence)
             .FirstOrDefault();
     }
+
+    private readonly record struct VoiceKey(
+        VoiceTargetKind TargetKind,
+        string TargetId);
 
     private sealed record RawEventDraft(
         CanonicalEvent Event,
