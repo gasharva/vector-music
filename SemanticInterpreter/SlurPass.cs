@@ -45,17 +45,20 @@ public sealed record SlurAnalysisResult(
 /// Converts already extracted CurvedStroke geometry into semantic slurs.
 ///
 /// ArcExtractor deliberately does only geometry. This pass attaches each horizontal
-/// arch to pitched endpoints, using both noteheads and their stems. Same-pitch arches
-/// are conservatively kept out of SlurPass because they are tie candidates and should
-/// later be handled by a dedicated TiePass.
+/// arch to pitched endpoints, using both noteheads and their stems. A same-pitch
+/// hypothesis is tested first because ties and slurs share the same raw arc geometry;
+/// plausible ties are reserved for a later TiePass instead of leaking into SlurPass.
 /// </summary>
 public sealed class SlurPass : ISemanticPass
 {
     private const double MinimumHorizontalSpanInSpacings = 1.20;
-    private const double MaximumEndpointDistanceInSpacings = 2.20;
+    private const double MaximumSlurEndpointDistanceInSpacings = 2.20;
+    private const double MaximumTieEndpointDistanceInSpacings = 3.25;
+    private const double TiePreferenceMarginInSpacings = 0.80;
+    private const double MaximumUnopposedTieScoreInSpacings = 5.00;
     private const double DifferentVoicePenaltyInSpacings = 0.35;
     private const double DifferentStaffPenaltyInSpacings = 0.45;
-    private const int EndpointCandidateLimit = 8;
+    private const int EndpointCandidateLimit = 14;
 
     public string Name => nameof(SlurPass);
 
@@ -240,32 +243,109 @@ public sealed class SlurPass : ISemanticPass
             return Reject(
                 curve,
                 "non-horizontal-arch",
-                $"horizontal span {horizontalSpan:F2}sp is too small for a note-to-note slur");
+                $"{curve.ShapeId}: horizontal span {horizontalSpan:F2}sp is too small for a note-to-note slur");
         }
 
-        var startCandidates = EndpointCandidates(
+        // Use a wider search radius for the tie hypothesis. Engraving can place a tie
+        // endpoint on the far side of a chord or shared stem; pitch identity is a much
+        // stronger clue than raw nearest-neighbour distance in that case.
+        var wideStartCandidates = EndpointCandidates(
             left,
             observation,
             anchors,
-            spacing);
-        var endCandidates = EndpointCandidates(
+            spacing,
+            MaximumTieEndpointDistanceInSpacings);
+        var wideEndCandidates = EndpointCandidates(
             right,
             observation,
             anchors,
-            spacing);
+            spacing,
+            MaximumTieEndpointDistanceInSpacings);
 
+        var bestTie = FindBestPair(
+            wideStartCandidates,
+            wideEndCandidates,
+            requireSamePitch: true);
+
+        var slurStartCandidates = wideStartCandidates
+            .Where(candidate => candidate.DistanceInSpacings <= MaximumSlurEndpointDistanceInSpacings)
+            .ToArray();
+        var slurEndCandidates = wideEndCandidates
+            .Where(candidate => candidate.DistanceInSpacings <= MaximumSlurEndpointDistanceInSpacings)
+            .ToArray();
+        var bestSlur = FindBestPair(
+            slurStartCandidates,
+            slurEndCandidates,
+            requireSamePitch: false);
+
+        if (bestTie is not null
+            && (bestSlur is null
+                ? bestTie.Score <= MaximumUnopposedTieScoreInSpacings
+                : bestTie.Score <= bestSlur.Score + TiePreferenceMarginInSpacings))
+        {
+            return TieLike(curve, left, right, bestTie);
+        }
+
+        if (bestSlur is null)
+        {
+            return Reject(
+                curve,
+                "no-endpoint-pair",
+                $"{curve.ShapeId}: no distinct chronological pitched events lie close enough to both arc endpoints");
+        }
+
+        // A same-pitch pair can also win the ordinary geometric search exactly. Keep
+        // the semantic boundary explicit even when the wide tie pass was unnecessary.
+        if (IsSamePitchVoice(bestSlur.Start.Anchor, bestSlur.End.Anchor))
+        {
+            return TieLike(curve, left, right, bestSlur);
+        }
+
+        var from = bestSlur.Start.Anchor;
+        var to = bestSlur.End.Anchor;
+        var placement = Placement(curve, left, right);
+        var meanDistance = (bestSlur.Start.DistanceInSpacings + bestSlur.End.DistanceInSpacings) / 2.0;
+        var confidence = Math.Clamp(
+            0.98 - 0.22 * meanDistance - 0.04 * bestSlur.Score,
+            0.55,
+            0.99);
+
+        return new SlurDecision(
+            curve.ShapeId,
+            curve,
+            true,
+            "slur",
+            from.Notehead,
+            to.Notehead,
+            placement,
+            bestSlur.Start.DistanceInSpacings,
+            bestSlur.End.DistanceInSpacings,
+            confidence,
+            $"{curve.ShapeId}: curved stroke endpoints attach to {from.Notehead.ShapeId}/{from.Pitch.Pitch} and "
+            + $"{to.Notehead.ShapeId}/{to.Pitch.Pitch}; distances="
+            + $"{bestSlur.Start.DistanceInSpacings:F2}/{bestSlur.End.DistanceInSpacings:F2}sp; "
+            + $"placement={placement ?? "unspecified"}");
+    }
+
+    private static PairChoice? FindBestPair(
+        IReadOnlyList<EndpointChoice> startCandidates,
+        IReadOnlyList<EndpointChoice> endCandidates,
+        bool requireSamePitch)
+    {
         PairChoice? best = null;
 
         foreach (var start in startCandidates)
         {
             foreach (var end in endCandidates)
             {
-                if (start.Anchor.Notehead.ShapeId == end.Anchor.Notehead.ShapeId)
+                if (start.Anchor.Notehead.ShapeId == end.Anchor.Notehead.ShapeId
+                    || SameTarget(start.Anchor, end.Anchor)
+                    || ComesAfter(start.Anchor.Notehead, end.Anchor.Notehead))
                 {
                     continue;
                 }
 
-                if (ComesAfter(start.Anchor.Notehead, end.Anchor.Notehead))
+                if (requireSamePitch && !IsSamePitchVoice(start.Anchor, end.Anchor))
                 {
                     continue;
                 }
@@ -289,64 +369,56 @@ public sealed class SlurPass : ISemanticPass
             }
         }
 
-        if (best is null)
-        {
-            return Reject(
-                curve,
-                "no-endpoint-pair",
-                "no distinct chronological pitched events lie close enough to both arc endpoints");
-        }
+        return best;
+    }
 
-        var from = best.Start.Anchor;
-        var to = best.End.Anchor;
+    private static bool SameTarget(
+        EndpointAnchor first,
+        EndpointAnchor second)
+    {
+        return first.TargetKind == second.TargetKind
+            && string.Equals(first.TargetId, second.TargetId, StringComparison.Ordinal);
+    }
 
-        if (string.Equals(from.Pitch.Pitch, to.Pitch.Pitch, StringComparison.Ordinal)
-            && from.Notehead.Staff == to.Notehead.Staff
-            && from.LocalVoice == to.LocalVoice)
-        {
-            return new SlurDecision(
-                curve.ShapeId,
-                curve,
-                false,
-                "tie-like",
-                from.Notehead,
-                to.Notehead,
-                Placement(curve, left, right),
-                best.Start.DistanceInSpacings,
-                best.End.DistanceInSpacings,
-                0,
-                $"arc joins the same pitch {from.Pitch.Pitch} in one staff/voice; reserved for TiePass");
-        }
+    private static bool IsSamePitchVoice(
+        EndpointAnchor first,
+        EndpointAnchor second)
+    {
+        return string.Equals(first.Pitch.Pitch, second.Pitch.Pitch, StringComparison.Ordinal)
+            && first.Notehead.Staff == second.Notehead.Staff
+            && first.LocalVoice == second.LocalVoice;
+    }
 
-        var placement = Placement(curve, left, right);
-        var meanDistance = (best.Start.DistanceInSpacings + best.End.DistanceInSpacings) / 2.0;
-        var confidence = Math.Clamp(
-            0.98 - 0.22 * meanDistance - 0.04 * best.Score,
-            0.55,
-            0.99);
+    private static SlurDecision TieLike(
+        CurvedStroke curve,
+        PointD left,
+        PointD right,
+        PairChoice pair)
+    {
+        var from = pair.Start.Anchor;
+        var to = pair.End.Anchor;
 
         return new SlurDecision(
             curve.ShapeId,
             curve,
-            true,
-            "slur",
+            false,
+            "tie-like",
             from.Notehead,
             to.Notehead,
-            placement,
-            best.Start.DistanceInSpacings,
-            best.End.DistanceInSpacings,
-            confidence,
-            $"curved stroke endpoints attach to {from.Notehead.ShapeId}/{from.Pitch.Pitch} and "
-            + $"{to.Notehead.ShapeId}/{to.Pitch.Pitch}; distances="
-            + $"{best.Start.DistanceInSpacings:F2}/{best.End.DistanceInSpacings:F2}sp; "
-            + $"placement={placement ?? "unspecified"}");
+            Placement(curve, left, right),
+            pair.Start.DistanceInSpacings,
+            pair.End.DistanceInSpacings,
+            0,
+            $"{curve.ShapeId}: same-pitch arc {from.Pitch.Pitch} joins separate events in one staff/voice; "
+            + $"distances={pair.Start.DistanceInSpacings:F2}/{pair.End.DistanceInSpacings:F2}sp; reserved for TiePass");
     }
 
     private static IReadOnlyList<EndpointChoice> EndpointCandidates(
         PointD endpoint,
         CurveObservation observation,
         IReadOnlyList<EndpointAnchor> anchors,
-        double spacing)
+        double spacing,
+        double maximumDistanceInSpacings)
     {
         return anchors
             .Where(anchor => observation.Measures.Contains(anchor.Notehead.MeasureNumber))
@@ -354,7 +426,7 @@ public sealed class SlurPass : ISemanticPass
             .Select(anchor => new EndpointChoice(
                 anchor,
                 EndpointDistance(endpoint, anchor) / spacing))
-            .Where(candidate => candidate.DistanceInSpacings <= MaximumEndpointDistanceInSpacings)
+            .Where(candidate => candidate.DistanceInSpacings <= maximumDistanceInSpacings)
             .OrderBy(candidate => candidate.DistanceInSpacings)
             .ThenBy(candidate => candidate.Anchor.Notehead.MeasureNumber)
             .ThenBy(candidate => candidate.Anchor.Notehead.CenterX)
