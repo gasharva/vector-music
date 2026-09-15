@@ -86,11 +86,13 @@ public sealed class TiePass : ISemanticPass
             .ToHashSet(StringComparer.Ordinal);
 
         var decisions = new List<TieDecision>();
+        var tieCandidates = classifier.LastAnalysis?.Decisions
+            .Where(decision => decision.Decision == "tie-like")
+            .OrderBy(decision => decision.CurveShapeId, StringComparer.Ordinal)
+            .ToArray()
+            ?? Array.Empty<SlurDecision>();
 
-        foreach (var candidate in classifier.LastAnalysis?.Decisions
-                     .Where(decision => decision.Decision == "tie-like")
-                     .OrderBy(decision => decision.CurveShapeId, StringComparer.Ordinal)
-                 ?? [])
+        foreach (var candidate in tieCandidates)
         {
             if (alreadyTied.Contains(candidate.CurveShapeId))
             {
