@@ -36,6 +36,41 @@ public sealed class DotAttachmentAnalyzerTests
     }
 
     [Fact]
+    public void DisplacedSecondChord_UsesColumnGapInsteadOfPerNoteGap()
+    {
+        const int measure = 3;
+        const int staff = 2;
+        const double spacing = 24.0945;
+        const double noteRadius = 16.674;
+        const double dotRadius = 4.819;
+
+        var facts = new SemanticFacts();
+        facts.Add(Notehead("shape-936", measure, staff, 1746.389, 879.039, -5, "hollow", spacing, noteRadius));
+        facts.Add(Notehead("shape-937", measure, staff, 1717.719, 891.086, -4, "hollow", spacing, noteRadius));
+        facts.Add(Notehead("shape-938", measure, staff, 1717.719, 939.275, 0, "hollow", spacing, noteRadius));
+        facts.Add(Notehead("shape-939", measure, staff, 1717.719, 987.464, 4, "hollow", spacing, noteRadius));
+
+        var document = Document(
+            measure,
+            spacing,
+            staff,
+            Dot("shape-1203", 1778.979, 879.094, measure, staff, spacing, dotRadius),
+            Dot("shape-1201", 1778.979, 903.189, measure, staff, spacing, dotRadius),
+            Dot("shape-1213", 1778.979, 927.283, measure, staff, spacing, dotRadius),
+            Dot("shape-1209", 1778.979, 975.472, measure, staff, spacing, dotRadius));
+
+        var result = new DotAttachmentAnalyzer().Analyze(document, facts);
+
+        Assert.Equal(4, result.Accepted.Count);
+        Assert.Equal("shape-936", Target(result, "shape-1203"));
+        Assert.Equal("shape-937", Target(result, "shape-1201"));
+        Assert.Equal("shape-938", Target(result, "shape-1213"));
+        Assert.Equal("shape-939", Target(result, "shape-1209"));
+        Assert.All(result.Accepted, decision =>
+            Assert.Contains("global monotonic dot-column match", decision.Reason));
+    }
+
+    [Fact]
     public void HorizontalDoubleDot_RemainsFallbackAndBothDotsMayTargetSameNote()
     {
         const int measure = 1;
