@@ -2,6 +2,7 @@ namespace SvgMusic.Semantics;
 
 public sealed record DotCandidate(
     int MeasureNumber,
+    int StaffNumber,
     EllipseElement Ellipse,
     double LineSpacing,
     double NormalizedSize);
@@ -43,6 +44,20 @@ public sealed class DotAttachmentAnalyzer
     private const double MaximumLineNoteVerticalOffsetInSpacings = 0.78;
     private const double ExpectedLineNoteVerticalOffsetInSpacings = 0.50;
 
+    private readonly NoteheadColumnHelper _noteheadColumnHelper;
+    private readonly DotColumnHelper _dotColumnHelper;
+    private readonly AugmentationDotMatcher _columnMatcher;
+
+    public DotAttachmentAnalyzer(
+        NoteheadColumnHelper? noteheadColumnHelper = null,
+        DotColumnHelper? dotColumnHelper = null,
+        AugmentationDotMatcher? columnMatcher = null)
+    {
+        _noteheadColumnHelper = noteheadColumnHelper ?? new NoteheadColumnHelper();
+        _dotColumnHelper = dotColumnHelper ?? new DotColumnHelper();
+        _columnMatcher = columnMatcher ?? new AugmentationDotMatcher();
+    }
+
     public DotAnalysisResult Analyze(
         SemanticDocument document,
         SemanticFacts facts)
@@ -72,12 +87,12 @@ public sealed class DotAttachmentAnalyzer
             noteheadIds,
             minimumDotSize,
             maximumDotSize);
-        var decisions = candidates
-            .Select(candidate => MatchNotehead(
-                candidate,
+        var decisions = MatchCandidates(
+                candidates,
                 noteheads,
-                noteheadMedianSize))
+                noteheadMedianSize)
             .OrderBy(decision => decision.Candidate.MeasureNumber)
+            .ThenBy(decision => decision.Candidate.StaffNumber)
             .ThenBy(decision => decision.Candidate.Ellipse.CenterX)
             .ThenBy(decision => decision.Candidate.Ellipse.CenterY)
             .ThenBy(decision => decision.Candidate.Ellipse.ShapeId, StringComparer.Ordinal)
@@ -88,6 +103,87 @@ public sealed class DotAttachmentAnalyzer
             minimumDotSize,
             maximumDotSize,
             decisions);
+    }
+
+    private IReadOnlyList<DotDecision> MatchCandidates(
+        IReadOnlyList<DotCandidate> candidates,
+        IReadOnlyList<NoteheadFact> noteheads,
+        double noteheadMedianSize)
+    {
+        var decisions = new Dictionary<string, DotDecision>(StringComparer.Ordinal);
+        var noteColumns = _noteheadColumnHelper.Build(noteheads);
+        var dotColumns = _dotColumnHelper.Build(candidates);
+
+        foreach (var dotColumn in dotColumns.Where(column => column.Dots.Count >= 2))
+        {
+            var possible = noteColumns
+                .Where(column =>
+                    column.MeasureNumber == dotColumn.MeasureNumber
+                    && column.Staff == dotColumn.Staff
+                    && column.Noteheads.Count >= 2)
+                .Select(column => _columnMatcher.Match(
+                    dotColumn,
+                    column,
+                    Match))
+                .Where(match => match.MatchedCount >= 2)
+                .OrderByDescending(match => match.MatchedCount)
+                .ThenByDescending(match => match.TotalScore)
+                .ThenBy(match => match.TotalVerticalError)
+                .ThenBy(match => match.HorizontalDistanceInSpacings)
+                .ThenBy(match => match.NoteheadColumn.CenterX)
+                .ToArray();
+
+            if (possible.Length == 0)
+            {
+                continue;
+            }
+
+            var best = possible[0];
+            var matchedDotIds = best.Assignments
+                .Select(assignment => assignment.Dot.Ellipse.ShapeId)
+                .ToHashSet(StringComparer.Ordinal);
+
+            foreach (var assignment in best.Assignments)
+            {
+                decisions[assignment.Dot.Ellipse.ShapeId] = Accepted(
+                    assignment.Dot,
+                    assignment.Match,
+                    noteheadMedianSize,
+                    $"global monotonic dot-column match {best.MatchedCount}/{dotColumn.Dots.Count}; "
+                    + $"note-column fill={best.NoteheadColumn.FillKind}; ");
+            }
+
+            // Once a real stacked-dot column has a multi-note global solution,
+            // do not independently reattach a leftover dot to a note already used by that
+            // solution. That would recreate the duplicate-target failure this pass avoids.
+            foreach (var dot in dotColumn.Dots.Where(dot =>
+                         !matchedDotIds.Contains(dot.Ellipse.ShapeId)))
+            {
+                decisions[dot.Ellipse.ShapeId] = Rejected(
+                    dot,
+                    "no-monotonic-notehead-match",
+                    "small filled ellipse belongs to a stacked dot column, but no remaining notehead can be assigned without crossing or duplicating the global column match");
+            }
+        }
+
+        // Preserve the proven single-dot and horizontal double-dot behavior as a fallback.
+        // Only dots consumed by a successful multi-note column solution are excluded here.
+        foreach (var candidate in candidates)
+        {
+            if (decisions.ContainsKey(candidate.Ellipse.ShapeId))
+            {
+                continue;
+            }
+
+            decisions[candidate.Ellipse.ShapeId] = MatchNotehead(
+                candidate,
+                noteheads,
+                noteheadMedianSize);
+        }
+
+        return candidates
+            .Select(candidate => decisions[candidate.Ellipse.ShapeId])
+            .ToArray();
     }
 
     private static IReadOnlyList<DotCandidate> CollectCandidates(
@@ -110,38 +206,67 @@ public sealed class DotAttachmentAnalyzer
                 continue;
             }
 
-            foreach (var ellipse in measure.Upper.Elements
-                         .OfType<EllipseElement>()
-                         .Concat(measure.Lower.Elements.OfType<EllipseElement>()))
-            {
-                var key = $"{measure.Number}:{ellipse.ShapeId}";
-                if (!seen.Add(key)
-                    || noteheadIds.Contains(ellipse.ShapeId)
-                    || ellipse.Source.IsHollow)
-                {
-                    continue;
-                }
-
-                var equivalentDiameter = 2.0 * Math.Sqrt(
-                    Math.Max(ellipse.Source.MajorRadius, 0)
-                    * Math.Max(ellipse.Source.MinorRadius, 0));
-                var normalizedSize = equivalentDiameter / lineSpacing;
-
-                if (normalizedSize < minimumDotSize
-                    || normalizedSize > maximumDotSize)
-                {
-                    continue;
-                }
-
-                result.Add(new DotCandidate(
-                    measure.Number,
-                    ellipse,
-                    lineSpacing,
-                    normalizedSize));
-            }
+            CollectFromStaff(
+                measure,
+                measure.Upper,
+                lineSpacing,
+                noteheadIds,
+                minimumDotSize,
+                maximumDotSize,
+                seen,
+                result);
+            CollectFromStaff(
+                measure,
+                measure.Lower,
+                lineSpacing,
+                noteheadIds,
+                minimumDotSize,
+                maximumDotSize,
+                seen,
+                result);
         }
 
         return result;
+    }
+
+    private static void CollectFromStaff(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        double lineSpacing,
+        IReadOnlySet<string> noteheadIds,
+        double minimumDotSize,
+        double maximumDotSize,
+        ISet<string> seen,
+        ICollection<DotCandidate> result)
+    {
+        foreach (var ellipse in staff.Elements.OfType<EllipseElement>())
+        {
+            var key = $"{measure.Number}:{ellipse.ShapeId}";
+            if (!seen.Add(key)
+                || noteheadIds.Contains(ellipse.ShapeId)
+                || ellipse.Source.IsHollow)
+            {
+                continue;
+            }
+
+            var equivalentDiameter = 2.0 * Math.Sqrt(
+                Math.Max(ellipse.Source.MajorRadius, 0)
+                * Math.Max(ellipse.Source.MinorRadius, 0));
+            var normalizedSize = equivalentDiameter / lineSpacing;
+
+            if (normalizedSize < minimumDotSize
+                || normalizedSize > maximumDotSize)
+            {
+                continue;
+            }
+
+            result.Add(new DotCandidate(
+                measure.Number,
+                staff.StaffNumber,
+                ellipse,
+                lineSpacing,
+                normalizedSize));
+        }
     }
 
     private static DotDecision MatchNotehead(
@@ -150,7 +275,9 @@ public sealed class DotAttachmentAnalyzer
         double noteheadMedianSize)
     {
         var matches = noteheads
-            .Where(notehead => notehead.MeasureNumber == candidate.MeasureNumber)
+            .Where(notehead =>
+                notehead.MeasureNumber == candidate.MeasureNumber
+                && notehead.Staff == candidate.StaffNumber)
             .Select(notehead => Match(
                 candidate,
                 notehead))
@@ -169,7 +296,19 @@ public sealed class DotAttachmentAnalyzer
                 "small filled ellipse has no notehead immediately to its left at an augmentation-dot vertical position");
         }
 
-        var best = matches[0];
+        return Accepted(
+            candidate,
+            matches[0],
+            noteheadMedianSize,
+            string.Empty);
+    }
+
+    private static DotDecision Accepted(
+        DotCandidate candidate,
+        DotNoteheadMatch match,
+        double noteheadMedianSize,
+        string reasonPrefix)
+    {
         var expectedDotSize = noteheadMedianSize
             * ExpectedDotToNoteheadMedianRatio;
         var sizeError = Math.Abs(
@@ -179,26 +318,33 @@ public sealed class DotAttachmentAnalyzer
             1.0 - sizeError,
             0,
             1);
-        var confidence = best.Score * 0.78
+        var confidence = match.Score * 0.78
             + sizeScore * 0.22;
 
         return new DotDecision(
             candidate,
             true,
             "augmentation-dot",
-            best,
+            match,
             confidence,
-            $"small filled ellipse size={candidate.NormalizedSize:F3}sp; "
-            + $"target={best.Notehead.ShapeId}; "
-            + $"horizontal-gap={best.HorizontalGapInSpacings:F3}sp; "
-            + $"vertical-offset={best.VerticalOffsetInSpacings:F3}sp "
-            + $"(expected {best.ExpectedVerticalOffsetInSpacings:F2}sp for staff-step {best.Notehead.StaffStep})");
+            reasonPrefix
+            + $"small filled ellipse size={candidate.NormalizedSize:F3}sp; "
+            + $"target={match.Notehead.ShapeId}; "
+            + $"horizontal-gap={match.HorizontalGapInSpacings:F3}sp; "
+            + $"vertical-offset={match.VerticalOffsetInSpacings:F3}sp "
+            + $"(expected {match.ExpectedVerticalOffsetInSpacings:F2}sp for staff-step {match.Notehead.StaffStep})");
     }
 
     private static DotNoteheadMatch? Match(
         DotCandidate candidate,
         NoteheadFact notehead)
     {
+        if (notehead.MeasureNumber != candidate.MeasureNumber
+            || notehead.Staff != candidate.StaffNumber)
+        {
+            return null;
+        }
+
         var spacing = candidate.LineSpacing;
         var dot = candidate.Ellipse;
         var horizontalRadius = Math.Max(
