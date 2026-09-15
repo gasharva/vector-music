@@ -7,7 +7,7 @@ namespace SvgMusic.Semantics;
 ///
 /// This is a raw preview, not the final rhythm/voice reconstruction. Chord membership is
 /// supplied explicitly by ChordPass; the builder no longer guesses chords from geometry.
-/// Remaining noteheads become single-note events. Within each staff we then serialize
+/// Remaining noteheads become single-note pitched events. Within each staff we then serialize
 /// events from left to right using inferred durations, which is enough to inspect pitch,
 /// accidentals, durations and chord recognition in MuseScore while onset/voice/rest
 /// reconstruction is still missing.
@@ -427,10 +427,12 @@ public sealed class CanonicalNotationBuilder
                     _ => null
                 });
 
+        // CanonicalNotation v0.3 uses the historical "chord" event kind for every pitched
+        // event; a singleton simply has one note and therefore emits no MusicXML <chord/>.
         var ev = new CanonicalEvent
         {
             Id = eventId,
-            Type = noteheads.Count > 1 ? "chord" : "note",
+            Type = "chord",
             At = "0",
             Voice = voice,
             Duration = selectedDuration.EffectiveDuration,
