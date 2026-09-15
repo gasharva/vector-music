@@ -95,11 +95,11 @@ public sealed class BeamAttachmentPassTests
 
         Assert.Contains(
             facts.Trace,
-            line => line.Contains("recovered-compact-hooks=1", StringComparison.Ordinal));
+            line => line.Contains("recovered-residual-beams=1", StringComparison.Ordinal));
     }
 
     [Fact]
-    public void ResidualBoxOutsideHookLengthBand_IsNotRecovered()
+    public void OrdinaryLengthResidualBeamBox_IsRecoveredForDownstreamValidation()
     {
         const double spacing = 24.0;
         var ownership = new LogicalOwnership(
@@ -109,8 +109,8 @@ public sealed class BeamAttachmentPassTests
             null,
             0,
             "test");
-        var longBox = ResidualShape(
-            "long-box",
+        var beamBox = ResidualShape(
+            "ordinary-beam-box",
             new BoundsD(100, 100, 180, 112),
             ownership);
         var document = new SemanticDocument(
@@ -128,7 +128,7 @@ public sealed class BeamAttachmentPassTests
                     "staff-1",
                     new BoundsD(0, 80, 300, 180),
                     spacing,
-                    [longBox]),
+                    [beamBox]),
                 new StaffMeasureScene(
                     2,
                     "staff-2",
@@ -139,8 +139,12 @@ public sealed class BeamAttachmentPassTests
 
         var recovery = new ResidualBeamHookRecovery().Recover(document);
 
-        Assert.Equal(0, recovery.RecoveredCount);
-        Assert.Single(recovery.Document.Measures[0].Upper.Elements);
+        Assert.Equal(1, recovery.RecoveredCount);
+        Assert.Equal(2, recovery.Document.Measures[0].Upper.Elements.Count);
+        var recovered = Assert.Single(
+            recovery.Document.Measures[0].Upper.Elements.OfType<StrokeElement>(),
+            stroke => stroke.ShapeId == "ordinary-beam-box");
+        Assert.Equal("residual-beam", recovered.Source.Provenance);
     }
 
     private static StrokeElement StrokeElement(
