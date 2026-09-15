@@ -59,7 +59,7 @@ public sealed class DurationPass : ISemanticPass
                 .FirstOrDefault();
 
             var matchingFlags = stem is null
-                ? []
+                ? Array.Empty<FlagAttachmentFact>()
                 : flags
                     .Where(flag =>
                         flag.MeasureNumber == notehead.MeasureNumber
@@ -67,7 +67,7 @@ public sealed class DurationPass : ISemanticPass
                     .ToArray();
 
             var matchingBeams = stem is null
-                ? []
+                ? Array.Empty<BeamAttachmentFact>()
                 : beams
                     .Where(beam =>
                         beam.MeasureNumber == notehead.MeasureNumber
