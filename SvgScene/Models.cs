@@ -119,12 +119,39 @@ public sealed record EllipseLike(
     string? SourceIndex,
     LogicalOwnership? Ownership = null);
 
+public enum HairpinKind
+{
+    Crescendo,
+    Diminuendo
+}
+
+/// <summary>
+/// A purely geometric wedge primitive. Musical attachment and exact dynamic
+/// meaning are deliberately left to a later semantic pass.
+/// </summary>
+public sealed record HairpinPrimitive(
+    string ShapeId,
+    HairpinKind Kind,
+    PointD Apex,
+    PointD OpenUpper,
+    PointD OpenLower,
+    double Length,
+    double Opening,
+    double Confidence,
+    string SourceKind,
+    string? SourceIndex,
+    LogicalOwnership? Ownership = null);
+
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
     IReadOnlyList<ShapeInstance> Instances,
     IReadOnlyList<Stroke> Strokes,
     IReadOnlyList<CurvedStroke> CurvedStrokes,
-    IReadOnlyList<EllipseLike> Ellipses);
+    IReadOnlyList<EllipseLike> Ellipses)
+{
+    public IReadOnlyList<HairpinPrimitive> Hairpins { get; init; } =
+        Array.Empty<HairpinPrimitive>();
+}
 
 public sealed record ShapeDescriptor(
     double AspectRatio,
