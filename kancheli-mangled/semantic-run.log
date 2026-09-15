@@ -14,26 +14,28 @@ Downloading official Audiveris basic-classifier.zip...
 12. Writing beam attachment diagnostics...
 13. Writing tuplet diagnostics...
 14. Writing augmentation-dot diagnostics...
-15. Building CanonicalNotation v0.3 skeleton...
+15. Building CanonicalNotation v0.3 raw preview...
 16. Writing MuseScore-compatible MusicXML...
 17. Writing compressed MusicXML (.mxl)...
 18. Writing artifact index...
 
 Semantic interpretation complete:
-  measures   : 28
-  facts      : 1284
+  measures   : 29
+  facts      : 1385
   clefs      : 10
   times      : 1
   keys       : 1
-  noteheads  : 301
+  noteheads  : 315
   accidentals: 41
-  pitches    : 301
-  stems      : 188
+  pitches    : 315
+  stems      : 190
   flags      : 9
-  beams      : 59
+  beams      : 52
   tuplets    : 1
-  dot targets: 71
-  augm. dots : 71
+  dot targets: 70
+  augm. dots : 70
+  durations  : 315
+  chords     : 65
   ownership ledger corrections: 1
   canonical  : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.canonical.json
   MusicXML   : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.musicxml
