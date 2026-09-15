@@ -73,6 +73,7 @@ jobs:
           grep -q '^canonical.ties=' artifacts/semantic-summary.txt
 
           python3 - <<'PY'
+          from fractions import Fraction
           from pathlib import Path
           from zipfile import ZipFile
           import json
@@ -152,15 +153,15 @@ jobs:
               if measure["number"] == 16
           )
 
-          def pitched_event(pitch, duration):
+          def pitched_event(events, pitch, duration=None):
               return next(
-                  event for event in m16_events
-                  if event.get("duration") == duration
+                  event for event in events
+                  if (duration is None or event.get("duration") == duration)
                   and any(note.get("pitch") == pitch for note in event.get("notes") or [])
               )
 
-          lead = pitched_event("Ab5", "1/2")
-          returned = pitched_event("Ab5", "1/8")
+          lead = pitched_event(m16_events, "Ab5", "1/2")
+          returned = pitched_event(m16_events, "Ab5", "1/8")
           rest = next(
               event for event in m16_events
               if event.get("type") == "rest" and event.get("staff") == 1
@@ -174,6 +175,31 @@ jobs:
           assert (rest["voice"], rest["at"]) == (1, "1/2"), rest
           assert (returned["voice"], returned["at"]) == (1, "5/8"), returned
           assert (parallel["voice"], parallel["at"]) == (2, "1/2"), parallel
+
+          # Visual regression: m20 and m24 contain an unaligned half-note second
+          # voice. It enters on beat 2 (onset 1/4) and must end exactly at the 3/4
+          # barline instead of being serialized after the first half-note chord.
+          for measure_no, secondary_pitch, final_pitch in (
+              (20, "F5", "G5"),
+              (24, "Db5", "Eb5"),
+          ):
+              events = next(
+                  measure["events"]
+                  for measure in canonical["parts"][0]["measures"]
+                  if measure["number"] == measure_no
+              )
+              secondary = pitched_event(events, secondary_pitch, "1/2")
+              final = pitched_event(events, final_pitch, "1/4")
+              assert (secondary["voice"], secondary["at"]) == (2, "1/4"), secondary
+              assert (final["voice"], final["at"]) == (1, "1/2"), final
+
+              for voice in {event["voice"] for event in events}:
+                  voice_events = [event for event in events if event["voice"] == voice]
+                  max_end = max(
+                      Fraction(event["at"]) + Fraction(event["duration"])
+                      for event in voice_events
+                  )
+                  assert max_end <= Fraction(3, 4), (measure_no, voice, max_end)
 
           # Visual regression: m21 and m22 each contain three beamed eighth-note
           # pairs in the upper staff. Every pair needs one begin and one end marker.
