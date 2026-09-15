@@ -75,6 +75,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
+          import json
           import xml.etree.ElementTree as ET
 
           musicxml_path = Path("artifacts/kancheli.semantic.musicxml")
@@ -122,6 +123,57 @@ jobs:
           assert tie_count > 0, tie_line
           assert canonical_tie_count == tie_count, (tie_line, canonical_tie_line)
           assert tie_starts == canonical_tie_count, (tie_starts, canonical_tie_count)
+
+          # Visual regression: m11 lower chord has three tied pitches into m12.
+          m11 = next(measure for measure in root.iter("measure") if measure.get("number") == "11")
+          m11_lower_ties = [
+              note for note in m11.findall("note")
+              if note.findtext("staff") == "2"
+              and any(tie.get("type") == "start" for tie in note.findall("tie"))
+          ]
+          assert len(m11_lower_ties) == 3, len(m11_lower_ties)
+
+          # Visual regression: both notes of the lower-staff chord in m13 are dotted.
+          m13 = next(measure for measure in root.iter("measure") if measure.get("number") == "13")
+          m13_lower = [note for note in m13.findall("note") if note.findtext("staff") == "2"]
+          assert len(m13_lower) == 2, len(m13_lower)
+          assert all(len(note.findall("dot")) == 1 for note in m13_lower), [
+              len(note.findall("dot")) for note in m13_lower
+          ]
+
+          # Visual regression: m16 is two voices, not three. Voice 1 is
+          # Ab5 half -> eighth rest -> Ab5 eighth; voice 2 enters at 1/2 with F5/G5.
+          canonical = json.loads(
+              Path("artifacts/kancheli.semantic.canonical.json").read_text(encoding="utf-8-sig")
+          )
+          m16_events = next(
+              measure["events"]
+              for measure in canonical["parts"][0]["measures"]
+              if measure["number"] == 16
+          )
+
+          def pitched_event(pitch, duration):
+              return next(
+                  event for event in m16_events
+                  if event.get("duration") == duration
+                  and any(note.get("pitch") == pitch for note in event.get("notes") or [])
+              )
+
+          lead = pitched_event("Ab5", "1/2")
+          returned = pitched_event("Ab5", "1/8")
+          rest = next(
+              event for event in m16_events
+              if event.get("type") == "rest" and event.get("staff") == 1
+          )
+          parallel = next(
+              event for event in m16_events
+              if event.get("duration") == "1/4"
+              and {note.get("pitch") for note in event.get("notes") or []} == {"F5", "G5"}
+          )
+          assert (lead["voice"], lead["at"]) == (1, "0"), lead
+          assert (rest["voice"], rest["at"]) == (1, "1/2"), rest
+          assert (returned["voice"], returned["at"]) == (1, "5/8"), returned
+          assert (parallel["voice"], parallel["at"]) == (2, "1/2"), parallel
 
           mxl = Path("artifacts/kancheli.semantic.mxl")
           with ZipFile(mxl) as archive:
