@@ -24,6 +24,12 @@ public sealed record AugmentationDotColumnMatch(
 /// </summary>
 public sealed class AugmentationDotMatcher
 {
+    private const double MinimumColumnHorizontalGapInSpacings = -0.15;
+    private const double MaximumColumnHorizontalGapInSpacings = 1.20;
+    private const double MaximumSpaceNoteVerticalOffsetInSpacings = 0.34;
+    private const double MinimumLineNoteVerticalOffsetInSpacings = 0.18;
+    private const double MaximumLineNoteVerticalOffsetInSpacings = 0.78;
+    private const double ExpectedLineNoteVerticalOffsetInSpacings = 0.50;
     private const double VerticalErrorScaleInSpacings = 0.34;
     private const double HorizontalScaleInSpacings = 1.20;
     private const double ScoreEpsilon = 1e-9;
@@ -35,6 +41,22 @@ public sealed class AugmentationDotMatcher
     {
         if (dotColumn.MeasureNumber != noteheadColumn.MeasureNumber
             || dotColumn.Staff != noteheadColumn.Staff)
+        {
+            return Empty(dotColumn, noteheadColumn);
+        }
+
+        var averageSpacing = dotColumn.Dots
+            .Where(dot => dot.LineSpacing > 0)
+            .Select(dot => dot.LineSpacing)
+            .DefaultIfEmpty(1.0)
+            .Average();
+        var columnHorizontalGapInSpacings =
+            (dotColumn.MinX - noteheadColumn.MaxX)
+            / Math.Max(averageSpacing, 0.001);
+
+        if (dotColumn.CenterX <= noteheadColumn.CenterX
+            || columnHorizontalGapInSpacings < MinimumColumnHorizontalGapInSpacings
+            || columnHorizontalGapInSpacings > MaximumColumnHorizontalGapInSpacings)
         {
             return Empty(dotColumn, noteheadColumn);
         }
@@ -84,9 +106,15 @@ public sealed class AugmentationDotMatcher
                     continue;
                 }
 
+                // First keep the normal local rule. If it rejects only because an
+                // individual notehead in a stacked second is shifted left, the
+                // already-approved column geometry lets Y perform the assignment.
                 var match = pairEvaluator(
-                    dots[dotIndex],
-                    notes[noteIndex]);
+                        dots[dotIndex],
+                        notes[noteIndex])
+                    ?? MatchInsideCompatibleColumns(
+                        dots[dotIndex],
+                        notes[noteIndex]);
                 if (match is null)
                 {
                     continue;
@@ -117,11 +145,6 @@ public sealed class AugmentationDotMatcher
 
         var best = states[notes.Length, dots.Length]
             ?? MatchState.Empty;
-        var averageSpacing = dotColumn.Dots
-            .Where(dot => dot.LineSpacing > 0)
-            .Select(dot => dot.LineSpacing)
-            .DefaultIfEmpty(1.0)
-            .Average();
 
         return new AugmentationDotColumnMatch(
             dotColumn,
@@ -129,8 +152,88 @@ public sealed class AugmentationDotMatcher
             best.Assignments,
             best.Score,
             best.VerticalError,
-            Math.Abs(dotColumn.CenterX - noteheadColumn.CenterX)
-            / Math.Max(averageSpacing, 0.001));
+            Math.Abs(columnHorizontalGapInSpacings));
+    }
+
+    private static DotNoteheadMatch? MatchInsideCompatibleColumns(
+        DotCandidate candidate,
+        NoteheadFact notehead)
+    {
+        if (candidate.MeasureNumber != notehead.MeasureNumber
+            || candidate.StaffNumber != notehead.Staff
+            || candidate.LineSpacing <= 0
+            || candidate.Ellipse.CenterX <= notehead.CenterX)
+        {
+            return null;
+        }
+
+        var spacing = candidate.LineSpacing;
+        var dot = candidate.Ellipse;
+        var noteHorizontalRadius = Math.Max(
+            notehead.MajorRadius,
+            notehead.MinorRadius);
+        var dotRadius = Math.Max(
+            dot.Source.MajorRadius,
+            dot.Source.MinorRadius);
+        var horizontalGapInSpacings = (
+            dot.CenterX - dotRadius
+            - (notehead.CenterX + noteHorizontalRadius)) / spacing;
+        var verticalOffsetInSpacings = Math.Abs(
+            dot.CenterY - notehead.CenterY) / spacing;
+        var noteIsOnLine = Math.Abs(notehead.StaffStep) % 2 == 0;
+        double expectedVerticalOffset;
+        double verticalScore;
+
+        if (noteIsOnLine)
+        {
+            if (verticalOffsetInSpacings < MinimumLineNoteVerticalOffsetInSpacings
+                || verticalOffsetInSpacings > MaximumLineNoteVerticalOffsetInSpacings)
+            {
+                return null;
+            }
+
+            expectedVerticalOffset = ExpectedLineNoteVerticalOffsetInSpacings;
+            var error = Math.Abs(
+                verticalOffsetInSpacings - expectedVerticalOffset);
+            var tolerance = Math.Max(
+                expectedVerticalOffset - MinimumLineNoteVerticalOffsetInSpacings,
+                MaximumLineNoteVerticalOffsetInSpacings - expectedVerticalOffset);
+            verticalScore = Math.Clamp(
+                1.0 - error / tolerance,
+                0,
+                1);
+        }
+        else
+        {
+            if (verticalOffsetInSpacings > MaximumSpaceNoteVerticalOffsetInSpacings)
+            {
+                return null;
+            }
+
+            expectedVerticalOffset = 0;
+            verticalScore = Math.Clamp(
+                1.0 - verticalOffsetInSpacings
+                    / MaximumSpaceNoteVerticalOffsetInSpacings,
+                0,
+                1);
+        }
+
+        // The enclosing column already passed the horizontal gate. Individual X
+        // displacement therefore becomes only a weak preference, not a veto.
+        var horizontalScore = Math.Clamp(
+            1.0 - Math.Max(0, horizontalGapInSpacings)
+                / HorizontalScaleInSpacings,
+            0,
+            1);
+        var score = verticalScore * 0.95
+            + horizontalScore * 0.05;
+
+        return new DotNoteheadMatch(
+            notehead,
+            horizontalGapInSpacings,
+            verticalOffsetInSpacings,
+            expectedVerticalOffset,
+            score);
     }
 
     private static AugmentationDotColumnMatch Empty(
