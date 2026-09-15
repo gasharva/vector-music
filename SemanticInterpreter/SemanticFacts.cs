@@ -259,6 +259,33 @@ public sealed class SemanticFacts
         _items.Add(fact);
     }
 
+    public void Replace(
+        SemanticFact original,
+        SemanticFact replacement)
+    {
+        var index = _items.FindIndex(item => ReferenceEquals(item, original));
+        if (index < 0)
+        {
+            index = _items.FindIndex(item => Equals(item, original));
+        }
+
+        if (index < 0)
+        {
+            throw new InvalidOperationException(
+                $"Semantic fact to replace was not found: {original.Pass} / {original.Reason}");
+        }
+
+        _items[index] = replacement;
+    }
+
+    public int RemoveWhere<TFact>(Func<TFact, bool> predicate)
+        where TFact : SemanticFact
+    {
+        return _items.RemoveAll(item =>
+            item is TFact typed
+            && predicate(typed));
+    }
+
     public IEnumerable<TFact> OfType<TFact>()
         where TFact : SemanticFact
     {
