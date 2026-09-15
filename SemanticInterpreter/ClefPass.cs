@@ -29,10 +29,11 @@ public sealed class ClefPass : ISemanticPass
             ShapeElement shape)
         {
             var classification = shape.Classification;
+            var logicalKey = $"{measure.Number}:{staff.StaffNumber}:{shape.ShapeId}";
 
             if (classification is null
                 || classification.Confidence < MinimumConfidence
-                || !_seen.Add(shape.ShapeId))
+                || !_seen.Add(logicalKey))
             {
                 return;
             }
