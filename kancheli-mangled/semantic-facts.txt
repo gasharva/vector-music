@@ -28,40 +28,41 @@ DurationPass decisions: noteheads=310; types=[half=100,quarter=45,eighth=143,16t
 DurationPass: added 310 fact(s); total=1306
 ChordPass: chords=64; stem-backed=64; stemless-whole=0; noteheads-in-chords=184
 ChordPass: added 64 fact(s); total=1370
+RestPass: added 12 fact(s); total=1382
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-988.2
 CanonicalBuilder: m1 time=3/4
 CanonicalBuilder: m1 key fifths=-4
-CanonicalBuilder: m1 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
-CanonicalBuilder: m2 raw events=10; projected-noteheads=12; chord-events=2; single-events=8
-CanonicalBuilder: m3 raw events=6; projected-noteheads=10; chord-events=2; single-events=4
-CanonicalBuilder: m4 raw events=5; projected-noteheads=7; chord-events=2; single-events=3
-CanonicalBuilder: m5 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
-CanonicalBuilder: m6 raw events=6; projected-noteheads=8; chord-events=2; single-events=4
-CanonicalBuilder: m7 raw events=12; projected-noteheads=24; chord-events=8; single-events=4
-CanonicalBuilder: m8 raw events=12; projected-noteheads=51; chord-events=12; single-events=0
-CanonicalBuilder: m9 raw events=7; projected-noteheads=13; chord-events=6; single-events=1
-CanonicalBuilder: m10 raw events=5; projected-noteheads=9; chord-events=4; single-events=1
+CanonicalBuilder: m1 raw events=6; projected-noteheads=7; rests=0; chord-events=1; single-events=5
+CanonicalBuilder: m2 raw events=10; projected-noteheads=12; rests=0; chord-events=2; single-events=8
+CanonicalBuilder: m3 raw events=6; projected-noteheads=10; rests=0; chord-events=2; single-events=4
+CanonicalBuilder: m4 raw events=5; projected-noteheads=7; rests=0; chord-events=2; single-events=3
+CanonicalBuilder: m5 raw events=6; projected-noteheads=7; rests=0; chord-events=1; single-events=5
+CanonicalBuilder: m6 raw events=6; projected-noteheads=8; rests=0; chord-events=2; single-events=4
+CanonicalBuilder: m7 raw events=14; projected-noteheads=24; rests=2; chord-events=8; single-events=4
+CanonicalBuilder: m8 raw events=12; projected-noteheads=51; rests=0; chord-events=12; single-events=0
+CanonicalBuilder: m9 raw events=8; projected-noteheads=13; rests=1; chord-events=6; single-events=1
+CanonicalBuilder: m10 raw events=5; projected-noteheads=9; rests=0; chord-events=4; single-events=1
 CanonicalBuilder: chord-m12-42 chord duration disagreement; using half/1/2 from shape-868
-CanonicalBuilder: m12 raw events=6; projected-noteheads=10; chord-events=2; single-events=4
-CanonicalBuilder: m14 raw events=10; projected-noteheads=14; chord-events=2; single-events=8
+CanonicalBuilder: m12 raw events=6; projected-noteheads=10; rests=0; chord-events=2; single-events=4
+CanonicalBuilder: m14 raw events=10; projected-noteheads=14; rests=0; chord-events=2; single-events=8
 CanonicalBuilder: chord-m15-46 chord duration disagreement; using half/1/2 from shape-856
-CanonicalBuilder: m15 raw events=5; projected-noteheads=7; chord-events=2; single-events=3
-CanonicalBuilder: m16 raw events=8; projected-noteheads=12; chord-events=3; single-events=5
-CanonicalBuilder: m17 raw events=8; projected-noteheads=11; chord-events=1; single-events=7
-CanonicalBuilder: m18 raw events=8; projected-noteheads=10; chord-events=2; single-events=6
-CanonicalBuilder: m19 raw events=11; projected-noteheads=14; chord-events=1; single-events=10
-CanonicalBuilder: m20 raw events=11; projected-noteheads=15; chord-events=1; single-events=10
-CanonicalBuilder: m21 raw events=7; projected-noteheads=7; chord-events=0; single-events=7
-CanonicalBuilder: m22 raw events=4; projected-noteheads=6; chord-events=2; single-events=2
-CanonicalBuilder: m23 raw events=11; projected-noteheads=15; chord-events=1; single-events=10
-CanonicalBuilder: m24 raw events=7; projected-noteheads=11; chord-events=1; single-events=6
-CanonicalBuilder: m25 raw events=7; projected-noteheads=8; chord-events=1; single-events=6
-CanonicalBuilder: m26 raw events=4; projected-noteheads=6; chord-events=2; single-events=2
-CanonicalBuilder: m27 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
+CanonicalBuilder: m15 raw events=6; projected-noteheads=7; rests=1; chord-events=2; single-events=3
+CanonicalBuilder: m16 raw events=9; projected-noteheads=12; rests=1; chord-events=3; single-events=5
+CanonicalBuilder: m17 raw events=8; projected-noteheads=11; rests=0; chord-events=1; single-events=7
+CanonicalBuilder: m18 raw events=9; projected-noteheads=10; rests=1; chord-events=2; single-events=6
+CanonicalBuilder: m19 raw events=11; projected-noteheads=14; rests=0; chord-events=1; single-events=10
+CanonicalBuilder: m20 raw events=11; projected-noteheads=15; rests=0; chord-events=1; single-events=10
+CanonicalBuilder: m21 raw events=7; projected-noteheads=7; rests=0; chord-events=0; single-events=7
+CanonicalBuilder: m22 raw events=4; projected-noteheads=6; rests=0; chord-events=2; single-events=2
+CanonicalBuilder: m23 raw events=11; projected-noteheads=15; rests=0; chord-events=1; single-events=10
+CanonicalBuilder: m24 raw events=7; projected-noteheads=11; rests=0; chord-events=1; single-events=6
+CanonicalBuilder: m25 raw events=7; projected-noteheads=8; rests=0; chord-events=1; single-events=6
+CanonicalBuilder: m26 raw events=4; projected-noteheads=6; rests=0; chord-events=2; single-events=2
+CanonicalBuilder: m27 raw events=6; projected-noteheads=7; rests=0; chord-events=1; single-events=5
 CanonicalBuilder: m28 time=4/4
-CanonicalBuilder: m28 raw events=2; projected-noteheads=9; chord-events=2; single-events=0
-CanonicalBuilder: raw-note-preview events=190; notes=310; chord-events=64; beam-relations=52; tuplet-relations=1
+CanonicalBuilder: m28 raw events=8; projected-noteheads=9; rests=6; chord-events=2; single-events=0
+CanonicalBuilder: raw-note-preview events=202; notes=310; rests=12; chord-events=64; beam-relations=52; tuplet-relations=1
 
 FACTS
 clef m1 staff=1 G2 x=365.74 confidence=99.9 % shape=shape-983; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-1+staff-pair-1-measure-1
@@ -1434,39 +1435,51 @@ chord m26 id=chord-m26-61 type=half fill=hollow stem=shape-513 x=1732.23 staffs=
 chord m27 id=chord-m27-62 type=half fill=hollow stem=shape-635 x=1982.23 staffs=[2] noteheads=[shape-946,shape-944] confidence=91.9 %; reason=2 hollow noteheads share accepted stem shape-635; staffs=[2]; duration-agreement=True
 chord m28 id=chord-m28-63 type=half fill=hollow stem=shape-636 x=2370.49 staffs=[2] noteheads=[shape-961,shape-960,shape-959,shape-958,shape-957] confidence=92.3 %; reason=5 hollow noteheads share accepted stem shape-636; staffs=[2]; duration-agreement=True
 chord m28 id=chord-m28-64 type=quarter fill=filled stem=shape-637 x=2519.99 staffs=[2] noteheads=[shape-965,shape-964,shape-963,shape-962] confidence=92.4 %; reason=4 filled noteheads share accepted stem shape-637; staffs=[2]; duration-agreement=True
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: classifier directly identifies EIGHTH_REST as a eighth rest
+RestPass: HW_REST_set resolved by staff-grid phase as whole rest; pitch=-3.50, 2*pitch=-7
+RestPass: HW_REST_set resolved by staff-grid phase as half rest; pitch=1.49, 2*pitch=3
+RestPass: HW_REST_set resolved by staff-grid phase as half rest; pitch=1.49, 2*pitch=3
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
+RestPass: classifier directly identifies QUARTER_REST as a quarter rest
 
 BUILD TRACE
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-988.2
 CanonicalBuilder: m1 time=3/4
 CanonicalBuilder: m1 key fifths=-4
-CanonicalBuilder: m1 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
-CanonicalBuilder: m2 raw events=10; projected-noteheads=12; chord-events=2; single-events=8
-CanonicalBuilder: m3 raw events=6; projected-noteheads=10; chord-events=2; single-events=4
-CanonicalBuilder: m4 raw events=5; projected-noteheads=7; chord-events=2; single-events=3
-CanonicalBuilder: m5 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
-CanonicalBuilder: m6 raw events=6; projected-noteheads=8; chord-events=2; single-events=4
-CanonicalBuilder: m7 raw events=12; projected-noteheads=24; chord-events=8; single-events=4
-CanonicalBuilder: m8 raw events=12; projected-noteheads=51; chord-events=12; single-events=0
-CanonicalBuilder: m9 raw events=7; projected-noteheads=13; chord-events=6; single-events=1
-CanonicalBuilder: m10 raw events=5; projected-noteheads=9; chord-events=4; single-events=1
+CanonicalBuilder: m1 raw events=6; projected-noteheads=7; rests=0; chord-events=1; single-events=5
+CanonicalBuilder: m2 raw events=10; projected-noteheads=12; rests=0; chord-events=2; single-events=8
+CanonicalBuilder: m3 raw events=6; projected-noteheads=10; rests=0; chord-events=2; single-events=4
+CanonicalBuilder: m4 raw events=5; projected-noteheads=7; rests=0; chord-events=2; single-events=3
+CanonicalBuilder: m5 raw events=6; projected-noteheads=7; rests=0; chord-events=1; single-events=5
+CanonicalBuilder: m6 raw events=6; projected-noteheads=8; rests=0; chord-events=2; single-events=4
+CanonicalBuilder: m7 raw events=14; projected-noteheads=24; rests=2; chord-events=8; single-events=4
+CanonicalBuilder: m8 raw events=12; projected-noteheads=51; rests=0; chord-events=12; single-events=0
+CanonicalBuilder: m9 raw events=8; projected-noteheads=13; rests=1; chord-events=6; single-events=1
+CanonicalBuilder: m10 raw events=5; projected-noteheads=9; rests=0; chord-events=4; single-events=1
 CanonicalBuilder: chord-m12-42 chord duration disagreement; using half/1/2 from shape-868
-CanonicalBuilder: m12 raw events=6; projected-noteheads=10; chord-events=2; single-events=4
-CanonicalBuilder: m14 raw events=10; projected-noteheads=14; chord-events=2; single-events=8
+CanonicalBuilder: m12 raw events=6; projected-noteheads=10; rests=0; chord-events=2; single-events=4
+CanonicalBuilder: m14 raw events=10; projected-noteheads=14; rests=0; chord-events=2; single-events=8
 CanonicalBuilder: chord-m15-46 chord duration disagreement; using half/1/2 from shape-856
-CanonicalBuilder: m15 raw events=5; projected-noteheads=7; chord-events=2; single-events=3
-CanonicalBuilder: m16 raw events=8; projected-noteheads=12; chord-events=3; single-events=5
-CanonicalBuilder: m17 raw events=8; projected-noteheads=11; chord-events=1; single-events=7
-CanonicalBuilder: m18 raw events=8; projected-noteheads=10; chord-events=2; single-events=6
-CanonicalBuilder: m19 raw events=11; projected-noteheads=14; chord-events=1; single-events=10
-CanonicalBuilder: m20 raw events=11; projected-noteheads=15; chord-events=1; single-events=10
-CanonicalBuilder: m21 raw events=7; projected-noteheads=7; chord-events=0; single-events=7
-CanonicalBuilder: m22 raw events=4; projected-noteheads=6; chord-events=2; single-events=2
-CanonicalBuilder: m23 raw events=11; projected-noteheads=15; chord-events=1; single-events=10
-CanonicalBuilder: m24 raw events=7; projected-noteheads=11; chord-events=1; single-events=6
-CanonicalBuilder: m25 raw events=7; projected-noteheads=8; chord-events=1; single-events=6
-CanonicalBuilder: m26 raw events=4; projected-noteheads=6; chord-events=2; single-events=2
-CanonicalBuilder: m27 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
+CanonicalBuilder: m15 raw events=6; projected-noteheads=7; rests=1; chord-events=2; single-events=3
+CanonicalBuilder: m16 raw events=9; projected-noteheads=12; rests=1; chord-events=3; single-events=5
+CanonicalBuilder: m17 raw events=8; projected-noteheads=11; rests=0; chord-events=1; single-events=7
+CanonicalBuilder: m18 raw events=9; projected-noteheads=10; rests=1; chord-events=2; single-events=6
+CanonicalBuilder: m19 raw events=11; projected-noteheads=14; rests=0; chord-events=1; single-events=10
+CanonicalBuilder: m20 raw events=11; projected-noteheads=15; rests=0; chord-events=1; single-events=10
+CanonicalBuilder: m21 raw events=7; projected-noteheads=7; rests=0; chord-events=0; single-events=7
+CanonicalBuilder: m22 raw events=4; projected-noteheads=6; rests=0; chord-events=2; single-events=2
+CanonicalBuilder: m23 raw events=11; projected-noteheads=15; rests=0; chord-events=1; single-events=10
+CanonicalBuilder: m24 raw events=7; projected-noteheads=11; rests=0; chord-events=1; single-events=6
+CanonicalBuilder: m25 raw events=7; projected-noteheads=8; rests=0; chord-events=1; single-events=6
+CanonicalBuilder: m26 raw events=4; projected-noteheads=6; rests=0; chord-events=2; single-events=2
+CanonicalBuilder: m27 raw events=6; projected-noteheads=7; rests=0; chord-events=1; single-events=5
 CanonicalBuilder: m28 time=4/4
-CanonicalBuilder: m28 raw events=2; projected-noteheads=9; chord-events=2; single-events=0
-CanonicalBuilder: raw-note-preview events=190; notes=310; chord-events=64; beam-relations=52; tuplet-relations=1
+CanonicalBuilder: m28 raw events=8; projected-noteheads=9; rests=6; chord-events=2; single-events=0
+CanonicalBuilder: raw-note-preview events=202; notes=310; rests=12; chord-events=64; beam-relations=52; tuplet-relations=1
