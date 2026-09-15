@@ -2092,6 +2092,9 @@
         <dot />
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <slur type="start" number="1" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2134,6 +2137,9 @@
         <type>half</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="start" number="2" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2284,6 +2290,9 @@
         <dot />
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <slur type="stop" number="1" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2327,6 +2336,9 @@
         <dot />
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="2" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2573,6 +2585,10 @@
         <accidental>natural</accidental>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="start" number="3" placement="above" />
+          <slur type="start" number="4" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2597,6 +2613,10 @@
         <type>half</type>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="3" placement="above" />
+          <slur type="stop" number="4" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2678,6 +2698,9 @@
         <stem>up</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <slur type="start" number="6" placement="below" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -2690,6 +2713,9 @@
         <stem>up</stem>
         <staff>2</staff>
         <beam number="1">end</beam>
+        <notations>
+          <slur type="start" number="5" placement="below" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -2726,6 +2752,10 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="5" placement="below" />
+          <slur type="stop" number="6" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2839,6 +2869,9 @@
         <stem>up</stem>
         <staff>2</staff>
         <beam number="1">begin</beam>
+        <notations>
+          <slur type="start" number="7" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -2888,6 +2921,9 @@
         <type>quarter</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="7" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2996,6 +3032,9 @@
         <staff>2</staff>
         <beam number="1">begin</beam>
         <beam number="2">begin</beam>
+        <notations>
+          <slur type="start" number="8" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3010,6 +3049,9 @@
         <staff>2</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <slur type="start" number="9" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3048,6 +3090,10 @@
         <type>half</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="8" placement="above" />
+          <slur type="stop" number="9" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -3181,6 +3227,9 @@
         <staff>2</staff>
         <beam number="1">begin</beam>
         <beam number="2">begin</beam>
+        <notations>
+          <slur type="start" number="10" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3194,6 +3243,9 @@
         <staff>2</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <slur type="start" number="11" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3221,6 +3273,9 @@
         <staff>2</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
+        <notations>
+          <slur type="start" number="12" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3232,6 +3287,11 @@
         <type>half</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="10" placement="above" />
+          <slur type="stop" number="11" placement="above" />
+          <slur type="stop" number="12" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -3541,6 +3601,9 @@
         <staff>2</staff>
         <beam number="1">begin</beam>
         <beam number="2">begin</beam>
+        <notations>
+          <slur type="start" number="17" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3554,6 +3617,9 @@
         <staff>2</staff>
         <beam number="1">continue</beam>
         <beam number="2">continue</beam>
+        <notations>
+          <slur type="start" number="13" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3581,6 +3647,9 @@
         <staff>2</staff>
         <beam number="1">end</beam>
         <beam number="2">end</beam>
+        <notations>
+          <slur type="start" number="14" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -3592,6 +3661,13 @@
         <type>half</type>
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="13" placement="above" />
+          <slur type="stop" number="14" placement="above" />
+          <slur type="start" number="15" placement="below" />
+          <slur type="start" number="16" placement="below" />
+          <slur type="stop" number="17" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -3727,6 +3803,10 @@
         <dot />
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <slur type="stop" number="15" placement="below" />
+          <slur type="stop" number="16" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />

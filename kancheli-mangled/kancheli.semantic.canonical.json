@@ -4635,7 +4635,110 @@
       }
     ],
     "ties": [],
-    "slurs": [],
+    "slurs": [
+      {
+        "id": "slur-shape-127",
+        "from": "chord-m11-41",
+        "to": "chord-m12-43",
+        "placement": "below"
+      },
+      {
+        "id": "slur-shape-142",
+        "from": "chord-m11-42",
+        "to": "chord-m12-44",
+        "placement": "below"
+      },
+      {
+        "id": "slur-shape-134",
+        "from": "chord-m14-48",
+        "to": "chord-m14-49",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-155",
+        "from": "chord-m14-48",
+        "to": "chord-m14-49",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-153",
+        "from": "m15-shape-599",
+        "to": "chord-m15-50",
+        "placement": "below"
+      },
+      {
+        "id": "slur-shape-154",
+        "from": "m15-shape-598",
+        "to": "chord-m15-50",
+        "placement": "below"
+      },
+      {
+        "id": "slur-shape-126",
+        "from": "m16-shape-608",
+        "to": "chord-m16-52",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-132",
+        "from": "m17-shape-640",
+        "to": "chord-m17-53",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-135",
+        "from": "m17-shape-642",
+        "to": "chord-m17-53",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-138",
+        "from": "m18-shape-649",
+        "to": "chord-m18-54",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-147",
+        "from": "m18-shape-650",
+        "to": "chord-m18-54",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-149",
+        "from": "m18-shape-653",
+        "to": "chord-m18-54",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-131",
+        "from": "m21-shape-609",
+        "to": "chord-m21-57",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-133",
+        "from": "m21-shape-615",
+        "to": "chord-m21-57",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-140",
+        "from": "chord-m21-57",
+        "to": "chord-m22-58",
+        "placement": "below"
+      },
+      {
+        "id": "slur-shape-144",
+        "from": "chord-m21-57",
+        "to": "chord-m22-58",
+        "placement": "below"
+      },
+      {
+        "id": "slur-shape-150",
+        "from": "m21-shape-607",
+        "to": "chord-m21-57",
+        "placement": "above"
+      }
+    ],
     "tuplets": [
       {
         "id": "tuplet-shape-1121",

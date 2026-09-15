@@ -1,6 +1,6 @@
 # When Almonds Blossomed - mangled - artifacts
 
-Commit: `85cfb506b752f3c4d8f4b9d227c33bb78a01c43e`
+Commit: `cd141d4cae82026ae2d3694852e0741b978d74a9`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Best choice for MuseScore; the browser should download it instead of displaying XML.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.
