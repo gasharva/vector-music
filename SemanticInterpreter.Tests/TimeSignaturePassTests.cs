@@ -52,6 +52,44 @@ public sealed class TimeSignaturePassTests
             signature => signature.MeasureNumber == 2);
     }
 
+    [Fact]
+    public void LaterPartialTimeLikeGlyphs_AreIgnoredInsteadOfBreakingPipeline()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(1, 1, "m1-u-3", "TIME_THREE", new BoundsD(40, 115, 50, 125)),
+                    TimeShape(1, 1, "m1-u-4", "TIME_FOUR", new BoundsD(40, 155, 50, 165))
+                ],
+                [
+                    TimeShape(1, 2, "m1-l-3", "TIME_THREE", new BoundsD(40, 235, 50, 245)),
+                    TimeShape(1, 2, "m1-l-4", "TIME_FOUR", new BoundsD(40, 275, 50, 285))
+                ]),
+            Measure(
+                2,
+                [
+                    TimeShape(2, 1, "noise-1", "TIME_THREE", new BoundsD(50, 112, 60, 122)),
+                    TimeShape(2, 1, "noise-2", "TIME_TWO", new BoundsD(68, 118, 78, 128))
+                ],
+                [])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass().Run(document, facts);
+
+        var signatures = facts.OfType<TimeSignatureFact>().ToArray();
+        var signature = Assert.Single(signatures);
+        Assert.Equal(1, signature.MeasureNumber);
+        Assert.Equal(3, signature.Beats);
+        Assert.Equal(4, signature.BeatType);
+        Assert.Contains(
+            facts.Trace,
+            line => line.Contains("ignored later time-signature candidate", StringComparison.Ordinal));
+    }
+
     private static MeasureScene Measure(
         int number,
         IReadOnlyList<SemanticElement> upper,
