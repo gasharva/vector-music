@@ -47,6 +47,188 @@ public sealed record KeySignatureFact(
         Reason,
         SourceShapeIds);
 
+public sealed record NoteheadFact(
+    int MeasureNumber,
+    int Staff,
+    string ShapeId,
+    double CenterX,
+    double CenterY,
+    double MajorRadius,
+    double MinorRadius,
+    string FillKind,
+    double NormalizedSize,
+    int StaffStep,
+    double StaffStepError,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "NoteheadPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record AccidentalFact(
+    int MeasureNumber,
+    int Staff,
+    string ShapeId,
+    AccidentalKind Kind,
+    double AnchorX,
+    double AnchorY,
+    int StaffStep,
+    string ExplicitTargetNoteheadId,
+    IReadOnlyList<string> AffectedNoteheadIds,
+    double ClassificationConfidence,
+    double VerticalErrorInHalfSteps,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "AccidentalPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record PitchFact(
+    int MeasureNumber,
+    int Staff,
+    string NoteheadId,
+    string Step,
+    int Octave,
+    int Alter,
+    string Pitch,
+    int StaffStep,
+    string ClefSign,
+    int ClefLine,
+    string ClefShapeId,
+    int KeyFifths,
+    string? ActiveAccidentalShapeId,
+    AccidentalKind? ActiveAccidentalKind,
+    bool IsAccidentalExplicit,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "PitchPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record StemAttachmentFact(
+    int MeasureNumber,
+    string StemShapeId,
+    StemDirection Direction,
+    IReadOnlyList<string> AttachedNoteheadIds,
+    IReadOnlyList<int> AttachedStaffs,
+    bool IsCrossStaff,
+    double StartX,
+    double StartY,
+    double EndX,
+    double EndY,
+    double LengthInSpacings,
+    double WidthInSpacings,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "StemAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record FlagAttachmentFact(
+    int MeasureNumber,
+    string FlagShapeId,
+    string StemShapeId,
+    int Level,
+    string ClassificationLabel,
+    double ClassificationConfidence,
+    double StemTipX,
+    double StemTipY,
+    bool IsCrossStaffStem,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "FlagAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record BeamAttachmentFact(
+    int MeasureNumber,
+    string BeamShapeId,
+    int Level,
+    IReadOnlyList<string> AttachedStemIds,
+    IReadOnlyList<int> AttachedStaffs,
+    bool LeftEndSupported,
+    bool RightEndSupported,
+    bool IsHook,
+    bool IsCrossStaff,
+    double StartX,
+    double StartY,
+    double EndX,
+    double EndY,
+    double LengthInSpacings,
+    double WidthInSpacings,
+    double Slope,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "BeamAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record TupletFact(
+    int MeasureNumber,
+    string TupletShapeId,
+    string ClassificationLabel,
+    int DisplayedNumber,
+    int ActualNotes,
+    int NormalNotes,
+    bool CorrectedFromStemCount,
+    string PrimaryBeamShapeId,
+    IReadOnlyList<string> AttachedStemIds,
+    IReadOnlyList<string> AttachedNoteheadIds,
+    double ClassificationConfidence,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "TupletPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record DotAttachmentFact(
+    int MeasureNumber,
+    int Staff,
+    string TargetNoteheadId,
+    IReadOnlyList<string> DotShapeIds,
+    int Count,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "DotAttachmentPass",
+        Reason,
+        SourceShapeIds);
+
+public sealed record DurationFact(
+    int MeasureNumber,
+    int Staff,
+    string NoteheadId,
+    string? StemShapeId,
+    string BaseDuration,
+    string EffectiveDuration,
+    string NoteType,
+    int Dots,
+    int SubdivisionLevel,
+    int? TupletActual,
+    int? TupletNormal,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "DurationPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];

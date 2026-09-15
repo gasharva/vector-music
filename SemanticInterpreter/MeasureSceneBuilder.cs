@@ -67,13 +67,15 @@ public sealed class MeasureSceneBuilder
                         pair.UpperStaffId,
                         upperStaff.Bounds,
                         upperStaff.AverageLineSpacing,
-                        upperElements),
+                        upperElements,
+                        upperStaff.LedgerLevels),
                     new StaffMeasureScene(
                         2,
                         pair.LowerStaffId,
                         lowerStaff.Bounds,
                         lowerStaff.AverageLineSpacing,
-                        lowerElements)));
+                        lowerElements,
+                        lowerStaff.LedgerLevels)));
 
                 measureNumber++;
             }

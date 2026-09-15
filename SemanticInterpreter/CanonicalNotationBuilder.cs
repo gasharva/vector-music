@@ -2,6 +2,15 @@ using SvgMusic.Canonical;
 
 namespace SvgMusic.Semantics;
 
+/// <summary>
+/// Projects accepted semantic facts into a deliberately simple CanonicalNotation score.
+///
+/// This is a raw preview, not the final rhythm/voice reconstruction. Notes that share an
+/// accepted stem become one chord event. Unstemmed noteheads at essentially the same X
+/// become a chord. Within each staff we then serialize events from left to right using the
+/// inferred durations. That is enough to inspect pitch, accidental and duration recognition
+/// in MuseScore while voice/rest/onset reconstruction is still missing.
+/// </summary>
 public sealed class CanonicalNotationBuilder
 {
     public CanonicalNotation Build(
@@ -24,9 +33,32 @@ public sealed class CanonicalNotationBuilder
             .OfType<KeySignatureFact>()
             .ToDictionary(
                 fact => fact.MeasureNumber);
+        var noteheads = facts.OfType<NoteheadFact>().ToArray();
+        var pitches = facts.OfType<PitchFact>().ToArray();
+        var durations = facts.OfType<DurationFact>().ToArray();
+        var stems = facts.OfType<StemAttachmentFact>().ToArray();
+
+        if (noteheads.Length > 0 && durations.Length == 0)
+        {
+            throw new InvalidDataException(
+                "CanonicalNotationBuilder requires DurationPass to run before raw note projection.");
+        }
+
+        var noteheadsById = noteheads.ToDictionary(
+            note => note.ShapeId,
+            StringComparer.Ordinal);
+        var pitchesByNotehead = pitches.ToDictionary(
+            pitch => pitch.NoteheadId,
+            StringComparer.Ordinal);
+        var durationsByNotehead = durations.ToDictionary(
+            duration => duration.NoteheadId,
+            StringComparer.Ordinal);
 
         var currentClefs = new Dictionary<int, Clef>();
         var measures = new List<Measure>();
+        var noteheadToEventId = new Dictionary<string, string>(StringComparer.Ordinal);
+        var stemToEventId = new Dictionary<string, string>(StringComparer.Ordinal);
+        var eventX = new Dictionary<string, double>(StringComparer.Ordinal);
 
         foreach (var measure in document.Measures)
         {
@@ -107,14 +139,39 @@ public sealed class CanonicalNotationBuilder
                         : null);
             }
 
+            var events = BuildRawNoteEvents(
+                measure,
+                noteheadsById,
+                pitchesByNotehead,
+                durationsByNotehead,
+                stems,
+                facts,
+                noteheadToEventId,
+                stemToEventId,
+                eventX);
+
             measures.Add(new Measure(
                 measure.Number,
-                [],
+                events,
                 attributes,
                 Layout: measure.BreakBefore
                     ? new LayoutHint("system")
                     : null));
         }
+
+        var beamRelations = BuildBeamRelations(
+            facts,
+            stemToEventId,
+            eventX);
+        var tupletRelations = BuildTupletRelations(
+            facts,
+            noteheadToEventId,
+            eventX);
+
+        facts.AddTrace(
+            $"CanonicalBuilder: raw-note-preview events={measures.Sum(measure => measure.Events.Count)}; "
+            + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
+            + $"beam-relations={beamRelations.Count}; tuplet-relations={tupletRelations.Count}");
 
         return new CanonicalNotation(
             "CanonicalNotation",
@@ -122,14 +179,399 @@ public sealed class CanonicalNotationBuilder
             new Metadata(title, composer),
             [new Part("P1", "Piano", measures)],
             new Relations(
+                beamRelations,
                 [],
                 [],
-                [],
-                [],
+                tupletRelations,
                 [],
                 [],
                 [],
                 []));
+    }
+
+    private static List<CanonicalEvent> BuildRawNoteEvents(
+        MeasureScene measure,
+        IReadOnlyDictionary<string, NoteheadFact> noteheadsById,
+        IReadOnlyDictionary<string, PitchFact> pitchesByNotehead,
+        IReadOnlyDictionary<string, DurationFact> durationsByNotehead,
+        IReadOnlyList<StemAttachmentFact> allStems,
+        SemanticFacts facts,
+        IDictionary<string, string> noteheadToEventId,
+        IDictionary<string, string> stemToEventId,
+        IDictionary<string, double> eventX)
+    {
+        var measureNoteheads = noteheadsById.Values
+            .Where(note =>
+                note.MeasureNumber == measure.Number
+                && pitchesByNotehead.ContainsKey(note.ShapeId)
+                && durationsByNotehead.ContainsKey(note.ShapeId))
+            .OrderBy(note => note.CenterX)
+            .ThenBy(note => note.Staff)
+            .ThenBy(note => note.CenterY)
+            .ToArray();
+
+        if (measureNoteheads.Length == 0)
+        {
+            return [];
+        }
+
+        var availableIds = measureNoteheads
+            .Select(note => note.ShapeId)
+            .ToHashSet(StringComparer.Ordinal);
+        var measureStems = allStems
+            .Where(stem => stem.MeasureNumber == measure.Number)
+            .ToArray();
+
+        var preferredStemByNotehead = measureStems
+            .SelectMany(stem => stem.AttachedNoteheadIds.Select(noteheadId => new
+            {
+                NoteheadId = noteheadId,
+                Stem = stem
+            }))
+            .Where(item => availableIds.Contains(item.NoteheadId))
+            .GroupBy(item => item.NoteheadId, StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group
+                    .OrderByDescending(item => item.Stem.Confidence)
+                    .ThenBy(item => item.Stem.StemShapeId, StringComparer.Ordinal)
+                    .First()
+                    .Stem,
+                StringComparer.Ordinal);
+
+        var drafts = new List<RawEventDraft>();
+        var consumed = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var stem in preferredStemByNotehead.Values
+                     .DistinctBy(stem => stem.StemShapeId)
+                     .OrderBy(stem => Math.Min(stem.StartX, stem.EndX)))
+        {
+            var chordNoteheads = stem.AttachedNoteheadIds
+                .Where(noteheadId =>
+                    preferredStemByNotehead.TryGetValue(noteheadId, out var preferred)
+                    && preferred.StemShapeId == stem.StemShapeId)
+                .Where(availableIds.Contains)
+                .Select(noteheadId => noteheadsById[noteheadId])
+                .OrderBy(note => note.Staff)
+                .ThenBy(note => note.CenterY)
+                .ToArray();
+
+            if (chordNoteheads.Length == 0)
+            {
+                continue;
+            }
+
+            var eventId = $"m{measure.Number}-{stem.StemShapeId}";
+            var draft = BuildDraft(
+                eventId,
+                chordNoteheads,
+                stem,
+                pitchesByNotehead,
+                durationsByNotehead,
+                facts);
+            drafts.Add(draft);
+            stemToEventId[stem.StemShapeId] = eventId;
+
+            foreach (var notehead in chordNoteheads)
+            {
+                consumed.Add(notehead.ShapeId);
+                noteheadToEventId[notehead.ShapeId] = eventId;
+            }
+        }
+
+        var unstemmedIndex = 0;
+        foreach (var staffGroup in measureNoteheads
+                     .Where(note => !consumed.Contains(note.ShapeId))
+                     .GroupBy(note => note.Staff)
+                     .OrderBy(group => group.Key))
+        {
+            var spacing = staffGroup.Key == 1
+                ? measure.Upper.LineSpacing
+                : measure.Lower.LineSpacing;
+            var tolerance = Math.Max(0.01, spacing * 0.35);
+
+            foreach (var cluster in ClusterByX(
+                         staffGroup.OrderBy(note => note.CenterX).ToArray(),
+                         tolerance))
+            {
+                unstemmedIndex++;
+                var eventId = $"m{measure.Number}-u{staffGroup.Key}-{unstemmedIndex}";
+                var draft = BuildDraft(
+                    eventId,
+                    cluster,
+                    null,
+                    pitchesByNotehead,
+                    durationsByNotehead,
+                    facts);
+                drafts.Add(draft);
+
+                foreach (var notehead in cluster)
+                {
+                    noteheadToEventId[notehead.ShapeId] = eventId;
+                }
+            }
+        }
+
+        var assigned = new List<CanonicalEvent>(drafts.Count);
+
+        foreach (var voiceGroup in drafts
+                     .GroupBy(draft => draft.Voice)
+                     .OrderBy(group => group.Key))
+        {
+            var cursor = Fraction.Zero;
+
+            foreach (var draft in voiceGroup
+                         .OrderBy(item => item.X)
+                         .ThenBy(item => item.Event.Id, StringComparer.Ordinal))
+            {
+                var ev = draft.Event with
+                {
+                    At = cursor.ToString()
+                };
+
+                assigned.Add(ev);
+                eventX[ev.Id] = draft.X;
+                cursor += Fraction.Parse(ev.Duration ?? "0");
+            }
+        }
+
+        facts.AddTrace(
+            $"CanonicalBuilder: m{measure.Number} raw events={assigned.Count}; "
+            + $"projected-noteheads={measureNoteheads.Length}; "
+            + $"stem-events={drafts.Count(draft => draft.StemShapeId is not null)}; "
+            + $"unstemmed-events={drafts.Count(draft => draft.StemShapeId is null)}");
+
+        return assigned
+            .OrderBy(ev => eventX[ev.Id])
+            .ThenBy(ev => ev.Voice ?? 1)
+            .ThenBy(ev => ev.Id, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    private static RawEventDraft BuildDraft(
+        string eventId,
+        IReadOnlyList<NoteheadFact> noteheads,
+        StemAttachmentFact? stem,
+        IReadOnlyDictionary<string, PitchFact> pitchesByNotehead,
+        IReadOnlyDictionary<string, DurationFact> durationsByNotehead,
+        SemanticFacts facts)
+    {
+        var durationFacts = noteheads
+            .Select(note => durationsByNotehead[note.ShapeId])
+            .ToArray();
+        var selectedDuration = durationFacts
+            .OrderByDescending(duration => duration.Confidence)
+            .ThenBy(duration => duration.NoteheadId, StringComparer.Ordinal)
+            .First();
+
+        if (durationFacts.Any(duration =>
+                duration.EffectiveDuration != selectedDuration.EffectiveDuration
+                || duration.NoteType != selectedDuration.NoteType
+                || duration.Dots != selectedDuration.Dots))
+        {
+            facts.AddTrace(
+                $"CanonicalBuilder: {eventId} chord duration disagreement; "
+                + $"using {selectedDuration.NoteType}/{selectedDuration.EffectiveDuration} "
+                + $"from {selectedDuration.NoteheadId}");
+        }
+
+        var notes = noteheads
+            .OrderBy(note => note.Staff)
+            .ThenBy(note => note.CenterY)
+            .Select(note =>
+            {
+                var pitch = pitchesByNotehead[note.ShapeId];
+                return new CanonicalNote(
+                    pitch.Pitch,
+                    note.Staff,
+                    ExplicitAccidental(pitch));
+            })
+            .ToList();
+
+        var staffs = noteheads
+            .Select(note => note.Staff)
+            .Distinct()
+            .OrderBy(staff => staff)
+            .ToArray();
+        var voice = staffs.Length == 1
+            ? staffs[0]
+            : 1;
+        var x = noteheads.Average(note => note.CenterX);
+
+        var notation = new EventNotation(
+            NoteType: selectedDuration.NoteType,
+            Dots: selectedDuration.Dots > 0
+                ? selectedDuration.Dots
+                : null,
+            Stem: stem is null
+                ? null
+                : stem.Direction switch
+                {
+                    StemDirection.Up => "up",
+                    StemDirection.Down => "down",
+                    _ => null
+                });
+
+        var ev = new CanonicalEvent
+        {
+            Id = eventId,
+            Type = "chord",
+            At = "0",
+            Voice = voice,
+            Duration = selectedDuration.EffectiveDuration,
+            Notes = notes,
+            Notation = notation
+        };
+
+        return new RawEventDraft(
+            ev,
+            x,
+            voice,
+            stem?.StemShapeId);
+    }
+
+    private static IReadOnlyList<IReadOnlyList<NoteheadFact>> ClusterByX(
+        IReadOnlyList<NoteheadFact> ordered,
+        double tolerance)
+    {
+        var result = new List<IReadOnlyList<NoteheadFact>>();
+        var current = new List<NoteheadFact>();
+        double? anchor = null;
+
+        foreach (var notehead in ordered)
+        {
+            if (anchor is null || Math.Abs(notehead.CenterX - anchor.Value) <= tolerance)
+            {
+                current.Add(notehead);
+                anchor = current.Average(note => note.CenterX);
+                continue;
+            }
+
+            result.Add(current.ToArray());
+            current = [notehead];
+            anchor = notehead.CenterX;
+        }
+
+        if (current.Count > 0)
+        {
+            result.Add(current.ToArray());
+        }
+
+        return result;
+    }
+
+    private static List<BeamRelation> BuildBeamRelations(
+        SemanticFacts facts,
+        IReadOnlyDictionary<string, string> stemToEventId,
+        IReadOnlyDictionary<string, double> eventX)
+    {
+        var result = new List<BeamRelation>();
+
+        foreach (var beam in facts
+                     .OfType<BeamAttachmentFact>()
+                     .OrderBy(beam => beam.MeasureNumber)
+                     .ThenBy(beam => beam.Level)
+                     .ThenBy(beam => beam.StartX))
+        {
+            var events = beam.AttachedStemIds
+                .Where(stemToEventId.ContainsKey)
+                .Select(stemId => stemToEventId[stemId])
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(eventId => eventX.TryGetValue(eventId, out var x) ? x : double.MaxValue)
+                .ToList();
+
+            if (beam.IsHook)
+            {
+                if (events.Count != 1)
+                {
+                    continue;
+                }
+
+                var hook = beam.LeftEndSupported && !beam.RightEndSupported
+                    ? "forward"
+                    : !beam.LeftEndSupported && beam.RightEndSupported
+                        ? "backward"
+                        : null;
+
+                if (hook is null)
+                {
+                    continue;
+                }
+
+                result.Add(new BeamRelation(
+                    $"beam-{beam.BeamShapeId}",
+                    beam.Level,
+                    events,
+                    hook));
+                continue;
+            }
+
+            if (events.Count < 2)
+            {
+                continue;
+            }
+
+            result.Add(new BeamRelation(
+                $"beam-{beam.BeamShapeId}",
+                beam.Level,
+                events));
+        }
+
+        return result;
+    }
+
+    private static List<TupletRelation> BuildTupletRelations(
+        SemanticFacts facts,
+        IReadOnlyDictionary<string, string> noteheadToEventId,
+        IReadOnlyDictionary<string, double> eventX)
+    {
+        var result = new List<TupletRelation>();
+
+        foreach (var tuplet in facts
+                     .OfType<TupletFact>()
+                     .OrderBy(tuplet => tuplet.MeasureNumber)
+                     .ThenBy(tuplet => tuplet.TupletShapeId, StringComparer.Ordinal))
+        {
+            var events = tuplet.AttachedNoteheadIds
+                .Where(noteheadToEventId.ContainsKey)
+                .Select(noteheadId => noteheadToEventId[noteheadId])
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(eventId => eventX.TryGetValue(eventId, out var x) ? x : double.MaxValue)
+                .ToList();
+
+            if (events.Count < 2)
+            {
+                continue;
+            }
+
+            result.Add(new TupletRelation(
+                $"tuplet-{tuplet.TupletShapeId}",
+                events,
+                tuplet.ActualNotes,
+                tuplet.NormalNotes));
+        }
+
+        return result;
+    }
+
+    private static Accidental? ExplicitAccidental(PitchFact pitch)
+    {
+        if (!pitch.IsAccidentalExplicit || pitch.ActiveAccidentalKind is null)
+        {
+            return null;
+        }
+
+        var type = pitch.ActiveAccidentalKind.Value switch
+        {
+            AccidentalKind.Flat => "flat",
+            AccidentalKind.Sharp => "sharp",
+            AccidentalKind.Natural => "natural",
+            AccidentalKind.DoubleFlat => "flat-flat",
+            AccidentalKind.DoubleSharp => "double-sharp",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        return new Accidental(type);
     }
 
     private static ClefFact? SelectSystemStartClef(
@@ -148,4 +590,10 @@ public sealed class CanonicalNotationBuilder
             .ThenByDescending(fact => fact.Confidence)
             .FirstOrDefault();
     }
+
+    private sealed record RawEventDraft(
+        CanonicalEvent Event,
+        double X,
+        int Voice,
+        string? StemShapeId);
 }

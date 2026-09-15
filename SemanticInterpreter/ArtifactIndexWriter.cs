@@ -75,6 +75,118 @@ public sealed class ArtifactIndexWriter
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
+            "semantic.noteheads.svg",
+            "Detected noteheads (SVG)",
+            "Semantic NoteheadPass overlay: accepted filled noteheads are green, hollow noteheads blue, small-dot size cluster orange, off-grid ellipses gray.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.noteheads.txt",
+            "Notehead size ranking and decisions",
+            "All ellipse candidates ranked by normalized size with small-dot split, staff-grid alignment and final NoteheadPass decision.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.accidentals.svg",
+            "Detected local accidentals (SVG)",
+            "AccidentalPass overlay on top of notehead diagnostics: accepted accidentals are orange, explicit target noteheads have a solid orange ring, inherited targets a dashed orange ring.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.accidentals.txt",
+            "Accidental targets and propagation",
+            "Classifier candidates, logical anchor matching, explicit notehead target and all noteheads affected until the next accidental on the same staff-step or measure end.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.stems.svg",
+            "Detected stem attachments (SVG)",
+            "StemAttachmentPass overlay: accepted stems are magenta, cross-staff stems purple, attached noteheads are ringed, unmatched vertical candidates are faint gray dashed lines.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.stems.txt",
+            "Stem attachment decisions",
+            "Per-stem geometry, attached noteheads, inferred stem direction, cross-staff status and unmatched vertical stroke candidates.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.flags.svg",
+            "Detected flag attachments (SVG)",
+            "FlagAttachmentPass overlay on top of stem diagnostics: attached classifier flags are blue, their matched free stem tip is marked, rejected classified flags are dashed.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.flags.txt",
+            "Flag attachment decisions",
+            "Per-flag classifier label, level, matched stem free tip, geometric distances, ambiguity and rejected candidates.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.beams.svg",
+            "Detected beam attachments (SVG)",
+            "BeamAttachmentPass overlay: primary/secondary beam levels are colored separately, stem intersections are marked, free hook ends are hollow red, and cross-staff beams are purple.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.beams.txt",
+            "Beam attachment decisions",
+            "Beam-like stroke geometry, attached stems, inferred beam level, supported ends, hooks, cross-staff status and rejected candidates.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.tuplets.svg",
+            "Detected tuplets (SVG)",
+            "TupletPass overlay on top of beam diagnostics: classifier tuplet digits are attached to nearby primary beam groups; corrected classifier numbers are highlighted and annotated with the inferred actual:normal ratio.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.tuplets.txt",
+            "Tuplet decisions",
+            "Classifier tuplet candidates, matched beam groups, stem counts, actual:normal ratios and any classifier-number correction inferred from the rhythmic stem group.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.dots.svg",
+            "Detected augmentation dots (SVG)",
+            "DotAttachmentPass overlay on top of tuplet diagnostics: accepted augmentation dots and their target noteheads are pink; rejected small ellipse candidates are faint gray.",
+            false);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
+            "semantic.dots.txt",
+            "Augmentation-dot decisions",
+            "Small filled ellipse candidates, size band, target noteheads, horizontal/vertical geometry and rejected dot-like marks such as articulation dots.",
+            true);
+
+        AddOptionalArtifact(
+            artifacts,
+            outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
             "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",

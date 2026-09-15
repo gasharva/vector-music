@@ -6,6 +6,7 @@ on:
       - semantic-canonical-poc
     paths:
       - "SemanticInterpreter/**"
+      - "SemanticInterpreter.Tests/**"
       - "SvgScene/**"
       - "AudiverisGlyphPoc/**"
       - "CanonicalNotation/**"
@@ -29,6 +30,9 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
+      - name: Run semantic unit tests
+        run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
+
       - name: Build semantic interpreter
         run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
 
@@ -50,18 +54,25 @@ jobs:
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
 
-      - name: Smoke-check MusicXML and MXL
+      - name: Smoke-check raw MusicXML and MXL
         shell: bash
         run: |
           set -euo pipefail
 
           grep -q '<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN"' \
             artifacts/kancheli.semantic.musicxml
-          grep -q '<rest measure="yes"' artifacts/kancheli.semantic.musicxml
+          grep -q '<pitch>' artifacts/kancheli.semantic.musicxml
+          grep -q '<type>' artifacts/kancheli.semantic.musicxml
+          grep -q '<duration>' artifacts/kancheli.semantic.musicxml
 
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
+
+          musicxml = Path("artifacts/kancheli.semantic.musicxml").read_text(encoding="utf-8-sig")
+          assert musicxml.count("<pitch>") > 0
+          assert musicxml.count("<duration>") > 0
+          assert musicxml.count("<type>") > 0
 
           mxl = Path("artifacts/kancheli.semantic.mxl")
           with ZipFile(mxl) as archive:
@@ -72,7 +83,9 @@ jobs:
 
               score = archive.read("score.musicxml").decode("utf-8-sig")
               assert "<!DOCTYPE score-partwise PUBLIC" in score
-              assert '<rest measure="yes"' in score
+              assert "<pitch>" in score
+              assert "<duration>" in score
+              assert "<type>" in score
           PY
 
       - name: Upload semantic artifacts
