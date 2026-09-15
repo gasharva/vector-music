@@ -209,6 +209,26 @@ public sealed record DotAttachmentFact(
         Reason,
         SourceShapeIds);
 
+public sealed record DurationFact(
+    int MeasureNumber,
+    int Staff,
+    string NoteheadId,
+    string? StemShapeId,
+    string BaseDuration,
+    string EffectiveDuration,
+    string NoteType,
+    int Dots,
+    int SubdivisionLevel,
+    int? TupletActual,
+    int? TupletNormal,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "DurationPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
