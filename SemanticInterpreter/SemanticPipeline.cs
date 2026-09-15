@@ -55,13 +55,28 @@ public sealed class SemanticPipeline
             materialized.Add(new OnsetPass());
         }
 
-        // Curves are already extracted geometrically. Semantic slur attachment is
-        // deliberately last: it can use the final chord/voice/onset context and keep
-        // same-pitch arches reserved for a later TiePass.
+        // Curves are already extracted geometrically. SlurPass classifies their
+        // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
             && materialized.All(pass => pass is not SlurPass))
         {
-            materialized.Add(new SlurPass());
+            var tieIndex = materialized.FindIndex(pass => pass is TiePass);
+            if (tieIndex >= 0)
+            {
+                materialized.Insert(tieIndex, new SlurPass());
+            }
+            else
+            {
+                materialized.Add(new SlurPass());
+            }
+        }
+
+        // TiePass consumes the same-pitch arc hypotheses after SlurPass has claimed
+        // genuine slurs, so one raw curve cannot become both relations.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not TiePass))
+        {
+            materialized.Add(new TiePass());
         }
 
         _passes = materialized;
