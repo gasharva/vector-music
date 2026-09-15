@@ -4634,7 +4634,320 @@
         ]
       }
     ],
-    "ties": [],
+    "ties": [
+      {
+        "id": "tie-shape-127",
+        "from": {
+          "event": "chord-m11-41",
+          "note": "Bb4"
+        },
+        "to": {
+          "event": "chord-m12-43",
+          "note": "Bb4"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-128",
+        "from": {
+          "event": "chord-m11-41",
+          "note": "Db5"
+        },
+        "to": {
+          "event": "chord-m12-43",
+          "note": "Db5"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-129",
+        "from": {
+          "event": "chord-m11-41",
+          "note": "Bb4"
+        },
+        "to": {
+          "event": "chord-m12-43",
+          "note": "Bb4"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-142",
+        "from": {
+          "event": "chord-m11-42",
+          "note": "G3"
+        },
+        "to": {
+          "event": "chord-m12-44",
+          "note": "G3"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-134",
+        "from": {
+          "event": "chord-m14-48",
+          "note": "E4"
+        },
+        "to": {
+          "event": "chord-m14-49",
+          "note": "E4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-155",
+        "from": {
+          "event": "chord-m14-48",
+          "note": "E4"
+        },
+        "to": {
+          "event": "chord-m14-49",
+          "note": "E4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-151",
+        "from": {
+          "event": "m15-shape-604",
+          "note": "A4"
+        },
+        "to": {
+          "event": "chord-m15-50",
+          "note": "A4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-152",
+        "from": {
+          "event": "m15-shape-602",
+          "note": "G4"
+        },
+        "to": {
+          "event": "chord-m15-50",
+          "note": "G4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-153",
+        "from": {
+          "event": "m15-shape-599",
+          "note": "C4"
+        },
+        "to": {
+          "event": "chord-m15-50",
+          "note": "C4"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-154",
+        "from": {
+          "event": "m15-shape-598",
+          "note": "F3"
+        },
+        "to": {
+          "event": "chord-m15-50",
+          "note": "F3"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-132",
+        "from": {
+          "event": "m17-shape-640",
+          "note": "Ab3"
+        },
+        "to": {
+          "event": "chord-m17-53",
+          "note": "Ab3"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-135",
+        "from": {
+          "event": "m17-shape-642",
+          "note": "Eb4"
+        },
+        "to": {
+          "event": "chord-m17-53",
+          "note": "Eb4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-136",
+        "from": {
+          "event": "m17-shape-646",
+          "note": "C5"
+        },
+        "to": {
+          "event": "chord-m17-53",
+          "note": "C5"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-137",
+        "from": {
+          "event": "m17-shape-644",
+          "note": "Bb4"
+        },
+        "to": {
+          "event": "chord-m17-53",
+          "note": "Bb4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-138",
+        "from": {
+          "event": "m18-shape-649",
+          "note": "F3"
+        },
+        "to": {
+          "event": "chord-m18-54",
+          "note": "F3"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-147",
+        "from": {
+          "event": "m18-shape-650",
+          "note": "C4"
+        },
+        "to": {
+          "event": "chord-m18-54",
+          "note": "C4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-148",
+        "from": {
+          "event": "m18-shape-633",
+          "note": "G4"
+        },
+        "to": {
+          "event": "chord-m18-54",
+          "note": "G4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-149",
+        "from": {
+          "event": "m18-shape-653",
+          "note": "Ab4"
+        },
+        "to": {
+          "event": "chord-m18-54",
+          "note": "Ab4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-130",
+        "from": {
+          "event": "chord-m21-57",
+          "note": "C5"
+        },
+        "to": {
+          "event": "chord-m22-58",
+          "note": "C5"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-131",
+        "from": {
+          "event": "m21-shape-609",
+          "note": "C4"
+        },
+        "to": {
+          "event": "chord-m21-57",
+          "note": "C4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-133",
+        "from": {
+          "event": "m21-shape-615",
+          "note": "Ab4"
+        },
+        "to": {
+          "event": "chord-m21-57",
+          "note": "Ab4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-140",
+        "from": {
+          "event": "chord-m21-57",
+          "note": "C4"
+        },
+        "to": {
+          "event": "chord-m22-58",
+          "note": "C4"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-144",
+        "from": {
+          "event": "chord-m21-57",
+          "note": "F3"
+        },
+        "to": {
+          "event": "chord-m22-58",
+          "note": "F3"
+        },
+        "placement": "below"
+      },
+      {
+        "id": "tie-shape-145",
+        "from": {
+          "event": "m21-shape-610",
+          "note": "G4"
+        },
+        "to": {
+          "event": "chord-m21-57",
+          "note": "G4"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-146",
+        "from": {
+          "event": "chord-m21-57",
+          "note": "C5"
+        },
+        "to": {
+          "event": "chord-m22-58",
+          "note": "C5"
+        },
+        "placement": "above"
+      },
+      {
+        "id": "tie-shape-150",
+        "from": {
+          "event": "m21-shape-607",
+          "note": "F3"
+        },
+        "to": {
+          "event": "chord-m21-57",
+          "note": "F3"
+        },
+        "placement": "above"
+      }
+    ],
     "slurs": [
       {
         "id": "slur-shape-126",
