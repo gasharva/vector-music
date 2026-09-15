@@ -6,6 +6,7 @@ on:
       - semantic-canonical-poc
     paths:
       - "SemanticInterpreter/**"
+      - "SemanticInterpreter.Tests/**"
       - "SvgScene/**"
       - "AudiverisGlyphPoc/**"
       - "CanonicalNotation/**"
@@ -28,6 +29,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
+
+      - name: Run semantic unit tests
+        run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
 
       - name: Build semantic interpreter
         run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
