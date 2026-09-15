@@ -34,8 +34,8 @@ VoicePass: added 202 fact(s); total=1587
 OnsetPass warning: m25 staff 1 events extend to 1.0000 beyond measure length 0.7500
 OnsetPass: assignments=202; anchored=22; low-confidence=1
 OnsetPass: added 202 fact(s); total=1789
-SlurPass: curves=37; accepted=17; tie-like=10; vertical/non-span=7; unattached=3
-SlurPass: added 17 fact(s); total=1806
+SlurPass: curves=37; accepted=1; tie-like=26; vertical/non-span=7; unattached=3
+SlurPass: added 1 fact(s); total=1790
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-988.2
 CanonicalBuilder: m1 time=3/4
@@ -69,7 +69,7 @@ CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; 
 CanonicalBuilder: m25 events=6; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=1; single-events=5; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m26 time=4/4
 CanonicalBuilder: m26 events=8; projected-noteheads=9; rests=6; dotted-rests=0; chord-events=2; single-events=0; semantic-onsets=8; voices=[1,2,5,6]
-CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=52; slur-relations=17; tuplet-relations=1; onsets=202; dotted-rests=1
+CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=52; slur-relations=1; tuplet-relations=1; onsets=202; dotted-rests=1
 
 FACTS
 clef m1 staff=1 G2 x=365.74 confidence=99.9 % shape=shape-983; reason=Audiveris G_CLEF at 99.9 %; logical owner=staff-1+staff-pair-1-measure-1
@@ -1861,23 +1861,7 @@ OnsetPass: local voice 2 chosen as rhythmic backbone
 OnsetPass: local voice 2 chosen as rhythmic backbone
 OnsetPass: secondary voice propagated from x-aligned backbone voice 2
 OnsetPass: x-aligned to backbone voice 2
-SlurPass: curved stroke endpoints attach to shape-843/Bb2 and shape-848/Db5; distances=0.63/0.21sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-822/Bb4 and shape-823/Db5; distances=0.05/0.25sp; placement=below
-SlurPass: curved stroke endpoints attach to shape-939/C4 and shape-892/G4; distances=0.06/0.25sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-975/Ab3 and shape-875/Bb4; distances=0.06/0.25sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-913/Ab4 and shape-886/C5; distances=0.06/0.20sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-931/E4 and shape-897/D4; distances=0.19/0.04sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-925/Eb4 and shape-875/Bb4; distances=0.06/0.25sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-850/F3 and shape-888/G4; distances=0.06/0.25sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-894/C4 and shape-881/G4; distances=0.43/0.25sp; placement=below
-SlurPass: curved stroke endpoints attach to shape-877/G3 and shape-841/F4; distances=0.05/0.25sp; placement=below
-SlurPass: curved stroke endpoints attach to shape-895/F3 and shape-881/G4; distances=0.05/0.25sp; placement=below
-SlurPass: curved stroke endpoints attach to shape-919/C4 and shape-888/G4; distances=0.06/0.25sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-858/Ab4 and shape-903/C5; distances=0.06/0.20sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-974/F3 and shape-892/G4; distances=0.06/0.25sp; placement=above
-SlurPass: curved stroke endpoints attach to shape-860/C4 and shape-900/G4; distances=0.04/0.25sp; placement=below
-SlurPass: curved stroke endpoints attach to shape-857/F3 and shape-900/G4; distances=0.04/0.25sp; placement=below
-SlurPass: curved stroke endpoints attach to shape-931/E4 and shape-897/D4; distances=0.06/0.25sp; placement=above
+SlurPass: shape-126: curved stroke endpoints attach to shape-843/Bb2 and shape-848/Db5; distances=0.63/0.21sp; placement=above
 
 BUILD TRACE
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-983
@@ -1913,4 +1897,4 @@ CanonicalBuilder: m24 events=4; projected-noteheads=6; rests=0; dotted-rests=0; 
 CanonicalBuilder: m25 events=6; projected-noteheads=7; rests=0; dotted-rests=0; chord-events=1; single-events=5; semantic-onsets=6; voices=[1,2,5]
 CanonicalBuilder: m26 time=4/4
 CanonicalBuilder: m26 events=8; projected-noteheads=9; rests=6; dotted-rests=0; chord-events=2; single-events=0; semantic-onsets=8; voices=[1,2,5,6]
-CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=52; slur-relations=17; tuplet-relations=1; onsets=202; dotted-rests=1
+CanonicalBuilder: events=202; notes=310; rests=12; chord-events=64; beam-relations=52; slur-relations=1; tuplet-relations=1; onsets=202; dotted-rests=1
