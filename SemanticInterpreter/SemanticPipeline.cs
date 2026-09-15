@@ -26,6 +26,16 @@ public sealed class SemanticPipeline
             materialized.Add(new DurationPass());
         }
 
+        // Rests are independent semantic events rather than notehead-derived facts.
+        // Full score pipelines already contain NoteheadPass, so append RestPass once
+        // all attachment/stem facts are available. That also lets HW_REST_set reject
+        // a rectangle crossed by an accepted stem.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not RestPass))
+        {
+            materialized.Add(new RestPass());
+        }
+
         _passes = materialized;
     }
 
