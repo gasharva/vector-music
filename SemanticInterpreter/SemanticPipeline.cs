@@ -101,16 +101,16 @@ public sealed class SemanticPipeline
             materialized.Add(new TiePass());
         }
 
-        // Ledger-note tie curves can be owned by the neighbouring staff even though
-        // both note endpoints belong to the same musical staff. Recover only curves
-        // left unclaimed by the normal slur/tie classifiers.
+        // Curves crossing a barline can be logically owned by only one of its two
+        // measures, and ledger curves can also sit in the neighbouring staff band.
+        // Recovery therefore uses global page geometry after the normal classifiers.
         if (materialized.Any(pass => pass is TiePass)
-            && materialized.All(pass => pass is not TieOwnershipRecoveryPass))
+            && materialized.All(pass => pass is not TieSpatialRecoveryPass))
         {
             var tieIndex = materialized.FindLastIndex(pass => pass is TiePass);
             materialized.Insert(
                 tieIndex + 1,
-                new TieOwnershipRecoveryPass());
+                new TieSpatialRecoveryPass());
         }
 
         _passes = materialized;
