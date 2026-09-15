@@ -17,6 +17,7 @@ public sealed class ShapeClusterer : IShapeClusterer
 {
     private readonly double _distanceThreshold;
     private readonly IGeometryAnalyzer _geometryAnalyzer;
+    private readonly IHairpinExtractor _hairpinExtractor;
     private readonly IArcExtractor _arcExtractor;
     private readonly IEllipseLikeExtractor _ellipseExtractor;
     private readonly ShapeDescriptorMatcher _descriptorMatcher;
@@ -31,9 +32,11 @@ public sealed class ShapeClusterer : IShapeClusterer
         IGeometryAnalyzer? geometryAnalyzer = null,
         IArcExtractor? arcExtractor = null,
         IEllipseLikeExtractor? ellipseExtractor = null,
+        IHairpinExtractor? hairpinExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
+        _hairpinExtractor = hairpinExtractor ?? new HairpinExtractor();
         _arcExtractor = arcExtractor ?? new ArcExtractor();
         _ellipseExtractor = ellipseExtractor ?? new EllipseLikeExtractor();
         _descriptorMatcher = new ShapeDescriptorMatcher();
@@ -50,6 +53,7 @@ public sealed class ShapeClusterer : IShapeClusterer
         var strokes = new List<Stroke>();
         var curvedStrokes = new List<CurvedStroke>();
         var ellipses = new List<EllipseLike>();
+        var hairpins = new List<HairpinPrimitive>();
 
         foreach (var shape in scene.Shapes)
         {
@@ -58,6 +62,16 @@ public sealed class ShapeClusterer : IShapeClusterer
                 out var stroke))
             {
                 strokes.Add(stroke);
+                continue;
+            }
+
+            // Hairpins are V-shaped open contours. Detect them before the generic
+            // curved-stroke extractor so a wedge cannot be reinterpreted as an arc.
+            if (_hairpinExtractor.TryCreateHairpin(
+                shape,
+                out var hairpin))
+            {
+                hairpins.Add(hairpin);
                 continue;
             }
 
@@ -88,7 +102,10 @@ public sealed class ShapeClusterer : IShapeClusterer
             instances,
             strokes,
             curvedStrokes,
-            ellipses);
+            ellipses)
+        {
+            Hairpins = hairpins
+        };
     }
 
     private void AddResidualShape(
