@@ -25,10 +25,11 @@ public sealed class ChordDurationNormalizationPass : ISemanticPass
                     duration.MeasureNumber,
                     duration.NoteheadId));
         var dotFacts = facts.OfType<DotAttachmentFact>().ToArray();
+        var chordFacts = facts.OfType<ChordFact>().ToArray();
         var normalized = 0;
         var chords = 0;
 
-        foreach (var chord in facts.OfType<ChordFact>())
+        foreach (var chord in chordFacts)
         {
             var members = chord.NoteheadIds
                 .Select(noteheadId => new DurationKey(
