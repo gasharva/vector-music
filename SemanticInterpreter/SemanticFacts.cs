@@ -229,6 +229,23 @@ public sealed record DurationFact(
         Reason,
         SourceShapeIds);
 
+public sealed record ChordFact(
+    int MeasureNumber,
+    string ChordId,
+    IReadOnlyList<int> Staffs,
+    IReadOnlyList<string> NoteheadIds,
+    string? StemShapeId,
+    string FillKind,
+    string NoteType,
+    double AnchorX,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "ChordPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class SemanticFacts
 {
     private readonly List<SemanticFact> _items = [];
