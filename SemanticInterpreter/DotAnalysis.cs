@@ -110,81 +110,133 @@ public sealed class DotAttachmentAnalyzer
         IReadOnlyList<NoteheadFact> noteheads,
         double noteheadMedianSize)
     {
-        var decisions = new Dictionary<string, DotDecision>(StringComparer.Ordinal);
+        var decisions = new Dictionary<CandidateKey, DotDecision>();
+        var excludedTargets = new Dictionary<CandidateKey, HashSet<string>>();
         var noteColumns = _noteheadColumnHelper.Build(noteheads);
         var dotColumns = _dotColumnHelper.Build(candidates);
 
-        foreach (var dotColumn in dotColumns.Where(column => column.Dots.Count >= 2))
+        foreach (var originalDotColumn in dotColumns.Where(column => column.Dots.Count >= 2))
         {
-            var possible = noteColumns
-                .Where(column =>
-                    column.MeasureNumber == dotColumn.MeasureNumber
-                    && column.Staff == dotColumn.Staff
-                    && column.Noteheads.Count >= 2)
-                .Select(column => _columnMatcher.Match(
-                    dotColumn,
-                    column,
-                    Match))
-                .Where(match => match.MatchedCount >= 2)
-                .OrderByDescending(match => match.MatchedCount)
-                .ThenByDescending(match => match.TotalScore)
-                .ThenBy(match => match.TotalVerticalError)
-                .ThenBy(match => match.HorizontalDistanceInSpacings)
-                .ThenBy(match => match.NoteheadColumn.CenterX)
-                .ToArray();
+            var remainingDots = originalDotColumn.Dots.ToList();
+            var usedTargets = new HashSet<string>(StringComparer.Ordinal);
 
-            if (possible.Length == 0)
+            // One physical x-column may contain several rhythmic layers (for example,
+            // filled and hollow heads sharing the same x). Consume the strongest
+            // multi-note solution, remove only what it owns, then let another
+            // notehead column compete for the remaining dots.
+            while (remainingDots.Count >= 2)
             {
-                continue;
+                var dotColumn = new DotColumn(
+                    originalDotColumn.MeasureNumber,
+                    originalDotColumn.Staff,
+                    originalDotColumn.MinX,
+                    originalDotColumn.MaxX,
+                    remainingDots.ToArray());
+
+                var possible = noteColumns
+                    .Where(column =>
+                        column.MeasureNumber == dotColumn.MeasureNumber
+                        && column.Staff == dotColumn.Staff)
+                    .Select(column => FilterUsedTargets(column, usedTargets))
+                    .Where(column => column.Noteheads.Count >= 2)
+                    .Select(column => _columnMatcher.Match(
+                        dotColumn,
+                        column,
+                        Match))
+                    .Where(match => match.MatchedCount >= 2)
+                    .OrderByDescending(match => match.MatchedCount)
+                    .ThenByDescending(match => match.TotalScore)
+                    .ThenBy(match => match.TotalVerticalError)
+                    .ThenBy(match => match.HorizontalDistanceInSpacings)
+                    .ThenBy(match => match.NoteheadColumn.CenterX)
+                    .ToArray();
+
+                if (possible.Length == 0)
+                {
+                    break;
+                }
+
+                var best = possible[0];
+                var matchedKeys = best.Assignments
+                    .Select(assignment => Key(assignment.Dot))
+                    .ToHashSet();
+
+                foreach (var assignment in best.Assignments)
+                {
+                    var key = Key(assignment.Dot);
+                    decisions[key] = Accepted(
+                        assignment.Dot,
+                        assignment.Match,
+                        noteheadMedianSize,
+                        $"global monotonic dot-column match {best.MatchedCount}/{dotColumn.Dots.Count}; "
+                        + $"note-column fill={best.NoteheadColumn.FillKind}; ");
+                    usedTargets.Add(assignment.Match.Notehead.ShapeId);
+                }
+
+                remainingDots.RemoveAll(dot => matchedKeys.Contains(Key(dot)));
             }
 
-            var best = possible[0];
-            var matchedDotIds = best.Assignments
-                .Select(assignment => assignment.Dot.Ellipse.ShapeId)
-                .ToHashSet(StringComparer.Ordinal);
-
-            foreach (var assignment in best.Assignments)
+            // Leftovers may legitimately belong to another rhythmic layer in the
+            // same x-column. Keep the old local matcher for them, but forbid it
+            // from stealing a notehead already consumed by the global solution.
+            foreach (var dot in remainingDots)
             {
-                decisions[assignment.Dot.Ellipse.ShapeId] = Accepted(
-                    assignment.Dot,
-                    assignment.Match,
-                    noteheadMedianSize,
-                    $"global monotonic dot-column match {best.MatchedCount}/{dotColumn.Dots.Count}; "
-                    + $"note-column fill={best.NoteheadColumn.FillKind}; ");
-            }
+                var key = Key(dot);
+                if (usedTargets.Count == 0)
+                {
+                    continue;
+                }
 
-            // Once a real stacked-dot column has a multi-note global solution,
-            // do not independently reattach a leftover dot to a note already used by that
-            // solution. That would recreate the duplicate-target failure this pass avoids.
-            foreach (var dot in dotColumn.Dots.Where(dot =>
-                         !matchedDotIds.Contains(dot.Ellipse.ShapeId)))
-            {
-                decisions[dot.Ellipse.ShapeId] = Rejected(
-                    dot,
-                    "no-monotonic-notehead-match",
-                    "small filled ellipse belongs to a stacked dot column, but no remaining notehead can be assigned without crossing or duplicating the global column match");
+                excludedTargets[key] = new HashSet<string>(
+                    usedTargets,
+                    StringComparer.Ordinal);
             }
         }
 
         // Preserve the proven single-dot and horizontal double-dot behavior as a fallback.
-        // Only dots consumed by a successful multi-note column solution are excluded here.
         foreach (var candidate in candidates)
         {
-            if (decisions.ContainsKey(candidate.Ellipse.ShapeId))
+            var key = Key(candidate);
+            if (decisions.ContainsKey(key))
             {
                 continue;
             }
 
-            decisions[candidate.Ellipse.ShapeId] = MatchNotehead(
+            excludedTargets.TryGetValue(key, out var excluded);
+            decisions[key] = MatchNotehead(
                 candidate,
                 noteheads,
-                noteheadMedianSize);
+                noteheadMedianSize,
+                excluded);
         }
 
         return candidates
-            .Select(candidate => decisions[candidate.Ellipse.ShapeId])
+            .Select(candidate => decisions[Key(candidate)])
             .ToArray();
     }
+
+    private static NoteheadColumn FilterUsedTargets(
+        NoteheadColumn column,
+        IReadOnlySet<string> usedTargets)
+    {
+        if (usedTargets.Count == 0)
+        {
+            return column;
+        }
+
+        return column with
+        {
+            Noteheads = column.Noteheads
+                .Where(notehead => !usedTargets.Contains(notehead.ShapeId))
+                .ToArray()
+        };
+    }
+
+    private static CandidateKey Key(DotCandidate candidate) =>
+        new(
+            candidate.MeasureNumber,
+            candidate.StaffNumber,
+            candidate.Ellipse.ShapeId);
 
     private static IReadOnlyList<DotCandidate> CollectCandidates(
         SemanticDocument document,
@@ -272,12 +324,15 @@ public sealed class DotAttachmentAnalyzer
     private static DotDecision MatchNotehead(
         DotCandidate candidate,
         IReadOnlyList<NoteheadFact> noteheads,
-        double noteheadMedianSize)
+        double noteheadMedianSize,
+        IReadOnlySet<string>? excludedTargets = null)
     {
         var matches = noteheads
             .Where(notehead =>
                 notehead.MeasureNumber == candidate.MeasureNumber
-                && notehead.Staff == candidate.StaffNumber)
+                && notehead.Staff == candidate.StaffNumber
+                && (excludedTargets is null
+                    || !excludedTargets.Contains(notehead.ShapeId)))
             .Select(notehead => Match(
                 candidate,
                 notehead))
@@ -456,6 +511,11 @@ public sealed class DotAttachmentAnalyzer
 
         return (ordered[middle - 1] + ordered[middle]) / 2.0;
     }
+
+    private readonly record struct CandidateKey(
+        int MeasureNumber,
+        int StaffNumber,
+        string ShapeId);
 
     private static double AveragePositive(
         double first,
