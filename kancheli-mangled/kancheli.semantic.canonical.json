@@ -4639,11 +4639,11 @@
         "id": "tie-shape-127",
         "from": {
           "event": "chord-m11-41",
-          "note": "Bb4"
+          "note": "F5"
         },
         "to": {
           "event": "chord-m12-43",
-          "note": "Bb4"
+          "note": "F5"
         },
         "placement": "below"
       },
@@ -4699,11 +4699,11 @@
         "id": "tie-shape-155",
         "from": {
           "event": "chord-m14-48",
-          "note": "E4"
+          "note": "D4"
         },
         "to": {
           "event": "chord-m14-49",
-          "note": "E4"
+          "note": "D4"
         },
         "placement": "above"
       },
@@ -4855,11 +4855,11 @@
         "id": "tie-shape-130",
         "from": {
           "event": "chord-m21-57",
-          "note": "C5"
+          "note": "Ab4"
         },
         "to": {
           "event": "chord-m22-58",
-          "note": "C5"
+          "note": "Ab4"
         },
         "placement": "above"
       },

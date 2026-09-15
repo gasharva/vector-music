@@ -2087,11 +2087,15 @@
           <octave>5</octave>
         </pitch>
         <duration>60</duration>
+        <tie type="start" />
         <voice>2</voice>
         <type>half</type>
         <dot />
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <tied type="start" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2120,14 +2124,12 @@
         </pitch>
         <duration>60</duration>
         <tie type="start" />
-        <tie type="start" />
         <voice>2</voice>
         <type>half</type>
         <dot />
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <tied type="start" placement="below" />
           <tied type="start" placement="below" />
         </notations>
       </note>
@@ -2293,11 +2295,15 @@
           <octave>5</octave>
         </pitch>
         <duration>60</duration>
+        <tie type="stop" />
         <voice>2</voice>
         <type>half</type>
         <dot />
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <tied type="stop" placement="below" />
+        </notations>
       </note>
       <note>
         <chord />
@@ -2326,14 +2332,12 @@
         </pitch>
         <duration>60</duration>
         <tie type="stop" />
-        <tie type="stop" />
         <voice>2</voice>
         <type>half</type>
         <dot />
         <stem>down</stem>
         <staff>1</staff>
         <notations>
-          <tied type="stop" placement="below" />
           <tied type="stop" placement="below" />
         </notations>
       </note>
@@ -2597,14 +2601,12 @@
         </pitch>
         <duration>10</duration>
         <tie type="start" />
-        <tie type="start" />
         <voice>5</voice>
         <type>eighth</type>
         <accidental>natural</accidental>
         <stem>up</stem>
         <staff>2</staff>
         <notations>
-          <tied type="start" placement="above" />
           <tied type="start" placement="above" />
         </notations>
       </note>
@@ -2615,11 +2617,15 @@
           <octave>4</octave>
         </pitch>
         <duration>10</duration>
+        <tie type="start" />
         <voice>5</voice>
         <type>eighth</type>
         <accidental>natural</accidental>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <tied type="start" placement="above" />
+        </notations>
       </note>
       <note>
         <pitch>
@@ -2628,13 +2634,11 @@
         </pitch>
         <duration>40</duration>
         <tie type="stop" />
-        <tie type="stop" />
         <voice>5</voice>
         <type>half</type>
         <stem>up</stem>
         <staff>2</staff>
         <notations>
-          <tied type="stop" placement="above" />
           <tied type="stop" placement="above" />
         </notations>
       </note>
@@ -2645,10 +2649,14 @@
           <octave>4</octave>
         </pitch>
         <duration>40</duration>
+        <tie type="stop" />
         <voice>5</voice>
         <type>half</type>
         <stem>up</stem>
         <staff>2</staff>
+        <notations>
+          <tied type="stop" placement="above" />
+        </notations>
       </note>
       <backup>
         <duration>60</duration>
@@ -3747,13 +3755,11 @@
         </pitch>
         <duration>40</duration>
         <tie type="start" />
-        <tie type="start" />
         <voice>5</voice>
         <type>half</type>
         <stem>down</stem>
         <staff>2</staff>
         <notations>
-          <tied type="start" placement="above" />
           <tied type="start" placement="above" />
         </notations>
       </note>
@@ -3766,12 +3772,14 @@
         </pitch>
         <duration>40</duration>
         <tie type="stop" />
+        <tie type="start" />
         <voice>5</voice>
         <type>half</type>
         <stem>down</stem>
         <staff>2</staff>
         <notations>
           <tied type="stop" placement="above" />
+          <tied type="start" placement="above" />
         </notations>
       </note>
       <note>
@@ -3907,14 +3915,12 @@
         </pitch>
         <duration>60</duration>
         <tie type="stop" />
-        <tie type="stop" />
         <voice>5</voice>
         <type>half</type>
         <dot />
         <stem>down</stem>
         <staff>2</staff>
         <notations>
-          <tied type="stop" placement="above" />
           <tied type="stop" placement="above" />
         </notations>
       </note>
@@ -3926,11 +3932,15 @@
           <octave>4</octave>
         </pitch>
         <duration>60</duration>
+        <tie type="stop" />
         <voice>5</voice>
         <type>half</type>
         <dot />
         <stem>down</stem>
         <staff>2</staff>
+        <notations>
+          <tied type="stop" placement="above" />
+        </notations>
       </note>
       <note>
         <chord />
