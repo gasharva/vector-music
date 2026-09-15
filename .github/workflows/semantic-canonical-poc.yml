@@ -175,6 +175,23 @@ jobs:
           assert (returned["voice"], returned["at"]) == (1, "5/8"), returned
           assert (parallel["voice"], parallel["at"]) == (2, "1/2"), parallel
 
+          # Visual regression: m21 and m22 each contain three beamed eighth-note
+          # pairs in the upper staff. Every pair needs one begin and one end marker.
+          for measure_no in ("21", "22"):
+              measure = next(
+                  item for item in root.iter("measure") if item.get("number") == measure_no
+              )
+              upper = [note for note in measure.findall("note") if note.findtext("staff") == "1"]
+              assert len(upper) == 6, (measure_no, len(upper))
+              assert all(note.findtext("type") == "eighth" for note in upper), measure_no
+              begins = sum(
+                  1 for note in upper for beam in note.findall("beam") if beam.text == "begin"
+              )
+              ends = sum(
+                  1 for note in upper for beam in note.findall("beam") if beam.text == "end"
+              )
+              assert (begins, ends) == (3, 3), (measure_no, begins, ends)
+
           mxl = Path("artifacts/kancheli.semantic.mxl")
           with ZipFile(mxl) as archive:
               names = archive.namelist()
