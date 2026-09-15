@@ -4080,7 +4080,13 @@
                 "stem": "up"
               }
             }
-          ]
+          ],
+          "attributes": {
+            "time": {
+              "beats": 4,
+              "beatType": 4
+            }
+          }
         },
         {
           "number": 29,

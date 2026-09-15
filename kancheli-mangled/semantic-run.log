@@ -21,9 +21,9 @@ Downloading official Audiveris basic-classifier.zip...
 
 Semantic interpretation complete:
   measures   : 29
-  facts      : 1385
+  facts      : 1386
   clefs      : 10
-  times      : 1
+  times      : 2
   keys       : 1
   noteheads  : 315
   accidentals: 41

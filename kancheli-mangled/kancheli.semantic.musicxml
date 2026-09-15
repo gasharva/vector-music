@@ -4000,6 +4000,12 @@
       </note>
     </measure>
     <measure number="28">
+      <attributes>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+      </attributes>
       <note>
         <pitch>
           <step>C</step>
@@ -4174,16 +4180,16 @@
     <measure number="29">
       <note>
         <rest measure="yes" />
-        <duration>60</duration>
+        <duration>80</duration>
         <voice>1</voice>
         <staff>1</staff>
       </note>
       <backup>
-        <duration>60</duration>
+        <duration>80</duration>
       </backup>
       <note>
         <rest measure="yes" />
-        <duration>60</duration>
+        <duration>80</duration>
         <voice>5</voice>
         <staff>2</staff>
       </note>

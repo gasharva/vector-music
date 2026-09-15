@@ -5,29 +5,34 @@ ClefPass: recovered F4 m11 staff=2 main=shape-994.2 dots=shape-994.1,shape-994.3
 ClefPass: recovered F4 m18 staff=2 main=shape-990.2 dots=shape-990.1,shape-990.3
 ClefPass: recovered F4 m23 staff=2 main=shape-991.2 dots=shape-991.1,shape-991.3
 ClefPass: added 10 fact(s); total=10
-TimeSignaturePass: added 1 fact(s); total=11
-KeySignaturePass: added 1 fact(s); total=12
+TimeSignaturePass: m27 staff 1 has no clef fact; using measure start as the time-signature left boundary
+TimeSignaturePass: ignored later time-signature candidate in m27 staff 1: incomplete candidate: numerator glyphs=1, denominator glyphs=0
+TimeSignaturePass: m27 staff 2 has no clef fact; using measure start as the time-signature left boundary
+TimeSignaturePass: m28 staff 1 has no clef fact; using measure start as the time-signature left boundary
+TimeSignaturePass: m28 staff 2 has no clef fact; using measure start as the time-signature left boundary
+TimeSignaturePass: added 2 fact(s); total=12
+KeySignaturePass: added 1 fact(s); total=13
 NoteheadPass size profile: ellipses=424; small-dot cluster=98; notehead-size band=326; threshold=0.620sp; small-median=0.400sp; notehead-median=1.145sp
 NoteheadPass decisions: total=424; accepted=315; small-dots=98; off-grid=4; unsupported-ledger=7
-NoteheadPass: added 315 fact(s); total=327
+NoteheadPass: added 315 fact(s); total=328
 AccidentalPass decisions: total=83; accepted=41; key-signature=40; no-target=2
-AccidentalPass: added 41 fact(s); total=368
+AccidentalPass: added 41 fact(s); total=369
 PitchPass: added 315 pitch fact(s); local-explicit=41; local-inherited=38; key-only=236
-PitchPass: added 315 fact(s); total=683
+PitchPass: added 315 fact(s); total=684
 StemAttachmentPass decisions: candidates=300; accepted=190; unmatched=110; cross-staff=0; ambiguous-direction=0; noteheads-attached=310/315
-StemAttachmentPass: added 190 fact(s); total=873
+StemAttachmentPass: added 190 fact(s); total=874
 FlagAttachmentPass decisions: candidates=9; accepted=9; unmatched=0; ambiguous=0; stem-conflicts=0; levels=[1,1,1,1,1,1,1,1,1]
-FlagAttachmentPass: added 9 fact(s); total=882
+FlagAttachmentPass: added 9 fact(s); total=883
 BeamAttachmentPass decisions: candidates=52; accepted=52; hooks=1; recovered-compact-hooks=1; cross-staff=0; levels=[L1=45,L2=6,L3=1]
-BeamAttachmentPass: added 52 fact(s); total=934
+BeamAttachmentPass: added 52 fact(s); total=935
 TupletPass decisions: candidates=3; accepted=1; corrected-from-stem-count=0; unmatched=2
-TupletPass: added 1 fact(s); total=935
+TupletPass: added 1 fact(s); total=936
 DotAttachmentPass decisions: candidates=103; accepted-dots=70; attached-noteheads=70; rejected=33; dot-size-band=0.229..0.779sp
-DotAttachmentPass: added 70 fact(s); total=1005
+DotAttachmentPass: added 70 fact(s); total=1006
 DurationPass decisions: noteheads=315; types=[whole=5,half=100,quarter=45,eighth=143,16th=17,32nd=5]; dotted=70; tuplets=5; subdivided=165; filled-without-stem-fallback=0
-DurationPass: added 315 fact(s); total=1320
+DurationPass: added 315 fact(s); total=1321
 ChordPass: chords=65; stem-backed=64; stemless-whole=1; noteheads-in-chords=189
-ChordPass: added 65 fact(s); total=1385
+ChordPass: added 65 fact(s); total=1386
 CanonicalBuilder: m1 staff 1 clef=G2 from shape-987
 CanonicalBuilder: m1 staff 2 clef=F4 from shape-992.2
 CanonicalBuilder: m1 time=3/4
@@ -59,6 +64,7 @@ CanonicalBuilder: m24 raw events=7; projected-noteheads=11; chord-events=1; sing
 CanonicalBuilder: m25 raw events=7; projected-noteheads=8; chord-events=1; single-events=6
 CanonicalBuilder: m26 raw events=4; projected-noteheads=6; chord-events=2; single-events=2
 CanonicalBuilder: m27 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
+CanonicalBuilder: m28 time=4/4
 CanonicalBuilder: m28 raw events=3; projected-noteheads=14; chord-events=3; single-events=0
 CanonicalBuilder: raw-note-preview events=191; notes=315; chord-events=65; beam-relations=52; tuplet-relations=1
 
@@ -74,6 +80,7 @@ clef m11 staff=2 F4 x=254.78 confidence=72.0 % shape=shape-994.2; reason=Recover
 clef m18 staff=2 F4 x=254.78 confidence=72.0 % shape=shape-990.2; reason=Recovered F4 from unambiguous main-contour + two-dot geometry; dots=shape-990.1,shape-990.3; score=0.043; logical owner=staff-8+staff-pair-4-measure-1
 clef m23 staff=2 F4 x=254.78 confidence=72.0 % shape=shape-991.2; reason=Recovered F4 from unambiguous main-contour + two-dot geometry; dots=shape-991.1,shape-991.3; score=0.043; logical owner=staff-10+staff-pair-5-measure-1
 time m1 3/4 x=520.23..556.59; shapes=shape-1040,shape-1039,shape-1046,shape-1045; reason=Both staves independently read as 3/4; only common signatures are accepted.
+time m28 4/4 x=2276.44..2312.80; shapes=shape-1035,shape-1036,shape-1041,shape-1042; reason=Both staves independently read as 4/4; only common signatures are accepted.
 key m1 fifths=-4 kind=flat count=4 x=410.89..498.97; shapes=shape-1003,shape-1004,shape-1005,shape-1006,shape-1027,shape-1028,shape-1029,shape-1030; reason=Both staves independently match the canonical flat key-signature relative position sequence with 4 symbol(s); fifths=-4.
 notehead m1 staff=1 shape=shape-806 x=612.80 y=725.89 fill=hollow size=1.146sp staff-step=2 error=0.005 confidence=99.7 %; reason=size=1.146sp is above dot threshold=0.620sp; staff-step=2; grid-error=0.005; position is inside the staff or in the immediately adjacent staff space; fill=hollow
 notehead m1 staff=1 shape=shape-685 x=612.80 y=704.66 fill=filled size=1.145sp staff-step=0 error=0.004 confidence=99.7 %; reason=size=1.145sp is above dot threshold=0.620sp; staff-step=0; grid-error=0.004; position is inside the staff or in the immediately adjacent staff space; fill=filled
@@ -1481,5 +1488,6 @@ CanonicalBuilder: m24 raw events=7; projected-noteheads=11; chord-events=1; sing
 CanonicalBuilder: m25 raw events=7; projected-noteheads=8; chord-events=1; single-events=6
 CanonicalBuilder: m26 raw events=4; projected-noteheads=6; chord-events=2; single-events=2
 CanonicalBuilder: m27 raw events=6; projected-noteheads=7; chord-events=1; single-events=5
+CanonicalBuilder: m28 time=4/4
 CanonicalBuilder: m28 raw events=3; projected-noteheads=14; chord-events=3; single-events=0
 CanonicalBuilder: raw-note-preview events=191; notes=315; chord-events=65; beam-relations=52; tuplet-relations=1
