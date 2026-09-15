@@ -74,7 +74,7 @@ public sealed class TimeSignaturePass : ISemanticPass
             minX,
             maxX,
             $"Both staves independently read as {upper.Beats}/{upper.BeatType}; "
-                + $"only common signatures are accepted; no inference fallback is used.",
+                + $"only common signatures are accepted.",
             sources));
     }
 
@@ -90,10 +90,18 @@ public sealed class TimeSignaturePass : ISemanticPass
                 fact.MeasureNumber == measure.Number
                 && fact.Staff == staff.StaffNumber)
             .OrderBy(fact => fact.X)
-            .FirstOrDefault()
-            ?? throw new InvalidDataException(
-                $"Cannot read time signature in measure {measure.Number}, "
-                + $"staff {staff.StaffNumber}: no clef fact exists.");
+            .FirstOrDefault();
+
+        var leftBoundary = clef?.X ?? measure.XStart;
+        if (clef is null)
+        {
+            // Time candidates are already classifier-filtered to TIME_*/COMMON_TIME/CUT_TIME,
+            // so a missing clef fact need not prevent reading the signature itself. Keep the
+            // same narrow header window and let the two staves independently validate each other.
+            facts.AddTrace(
+                $"TimeSignaturePass: m{measure.Number} staff {staff.StaffNumber} "
+                + "has no clef fact; using measure start as the time-signature left boundary");
+        }
 
         var headerLimit = measure.XStart
             + (measure.XEnd - measure.XStart) * HeaderWidthFraction;
@@ -101,7 +109,7 @@ public sealed class TimeSignaturePass : ISemanticPass
         var candidates = allCandidates
             .Where(candidate =>
                 candidate.Staff == staff.StaffNumber
-                && candidate.CenterX > clef.X
+                && candidate.CenterX > leftBoundary
                 && candidate.CenterX <= headerLimit)
             .OrderBy(candidate => candidate.CenterX)
             .ThenBy(candidate => candidate.CenterY)
@@ -241,7 +249,7 @@ public sealed class TimeSignaturePass : ISemanticPass
             ShapeElement shape)
         {
             if (measure.Number != _measureNumber
-                || !_seen.Add(shape.ShapeId))
+                || !_seen.Add($"{measure.Number}:{staff.StaffNumber}:{shape.ShapeId}"))
             {
                 return;
             }
