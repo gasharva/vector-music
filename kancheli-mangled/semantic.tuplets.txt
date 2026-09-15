@@ -10,4 +10,4 @@ shape-1121: DIGIT_5; attached-tuplet; m2 staff=1; classifier=65.2 %; displayed=5
 
 REJECTED TUPLET CANDIDATES
 shape-55: TUPLET_SIX; no-nearby-primary-beam; m6 staff=1; classifier=85.2 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet/digit candidate has no compatible level-1 beam group in the same measure
-shape-54.2: TUPLET_SIX; no-nearby-primary-beam; m18 staff=1; classifier=85.2 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet/digit candidate has no compatible level-1 beam group in the same measure
+shape-54.2: TUPLET_SIX; no-nearby-primary-beam; m16 staff=1; classifier=85.2 %; displayed=6; ratio=-:-; corrected=False; beam=-; stems=[]; center-error=-sp; vertical-distance=-sp; confidence=0.0 %; classified tuplet/digit candidate has no compatible level-1 beam group in the same measure

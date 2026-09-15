@@ -20,13 +20,13 @@ Downloading official Audiveris basic-classifier.zip...
 18. Writing artifact index...
 
 Semantic interpretation complete:
-  measures   : 29
-  facts      : 1382
+  measures   : 26
+  facts      : 1384
   clefs      : 10
   times      : 2
   keys       : 1
   noteheads  : 310
-  accidentals: 41
+  accidentals: 43
   pitches    : 310
   stems      : 190
   flags      : 9
