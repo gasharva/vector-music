@@ -3,11 +3,14 @@ namespace SvgMusic.Semantics;
 public sealed class BeamAttachmentPass : ISemanticPass
 {
     private readonly BeamAttachmentAnalyzer _analyzer;
+    private readonly ResidualBeamHookRecovery _hookRecovery;
 
     public BeamAttachmentPass(
-        BeamAttachmentAnalyzer? analyzer = null)
+        BeamAttachmentAnalyzer? analyzer = null,
+        ResidualBeamHookRecovery? hookRecovery = null)
     {
         _analyzer = analyzer ?? new BeamAttachmentAnalyzer();
+        _hookRecovery = hookRecovery ?? new ResidualBeamHookRecovery();
     }
 
     public string Name => nameof(BeamAttachmentPass);
@@ -18,8 +21,9 @@ public sealed class BeamAttachmentPass : ISemanticPass
         SemanticDocument document,
         SemanticFacts facts)
     {
+        var recovery = _hookRecovery.Recover(document);
         var analysis = _analyzer.Analyze(
-            document,
+            recovery.Document,
             facts);
         LastAnalysis = analysis;
 
@@ -79,6 +83,7 @@ public sealed class BeamAttachmentPass : ISemanticPass
         facts.AddTrace(
             $"BeamAttachmentPass decisions: candidates={analysis.Decisions.Count}; "
             + $"accepted={analysis.Accepted.Count}; hooks={hooks}; "
+            + $"recovered-compact-hooks={recovery.RecoveredCount}; "
             + $"cross-staff={crossStaff}; levels=[{levelSummary}]");
     }
 }
