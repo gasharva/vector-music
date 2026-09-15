@@ -7,10 +7,10 @@ namespace SvgMusic.Semantics;
 ///
 /// This is a raw preview, not the final rhythm/voice reconstruction. Chord membership is
 /// supplied explicitly by ChordPass; the builder no longer guesses chords from geometry.
-/// Remaining noteheads become single-note pitched events. Within each staff we then serialize
-/// events from left to right using inferred durations, which is enough to inspect pitch,
-/// accidentals, durations and chord recognition in MuseScore while onset/voice/rest
-/// reconstruction is still missing.
+/// Remaining noteheads become single-note pitched events and RestPass facts become rest events.
+/// Within each provisional voice we serialize events from left to right using inferred durations,
+/// which is enough to inspect pitch, accidentals, durations, chords and rests in MuseScore while
+/// onset/voice reconstruction is still missing.
 /// </summary>
 public sealed class CanonicalNotationBuilder
 {
@@ -39,6 +39,7 @@ public sealed class CanonicalNotationBuilder
         var durations = facts.OfType<DurationFact>().ToArray();
         var stems = facts.OfType<StemAttachmentFact>().ToArray();
         var chords = facts.OfType<ChordFact>().ToArray();
+        var rests = facts.OfType<RestFact>().ToArray();
 
         if (noteheads.Length > 0 && durations.Length == 0)
         {
@@ -148,6 +149,7 @@ public sealed class CanonicalNotationBuilder
                 durationsByNotehead,
                 stems,
                 chords,
+                rests,
                 facts,
                 noteheadToEventId,
                 stemToEventId,
@@ -174,6 +176,7 @@ public sealed class CanonicalNotationBuilder
         facts.AddTrace(
             $"CanonicalBuilder: raw-note-preview events={measures.Sum(measure => measure.Events.Count)}; "
             + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
+            + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == "rest"))}; "
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tuplet-relations={tupletRelations.Count}");
 
@@ -200,6 +203,7 @@ public sealed class CanonicalNotationBuilder
         IReadOnlyDictionary<string, DurationFact> durationsByNotehead,
         IReadOnlyList<StemAttachmentFact> allStems,
         IReadOnlyList<ChordFact> allChords,
+        IReadOnlyList<RestFact> allRests,
         SemanticFacts facts,
         IDictionary<string, string> noteheadToEventId,
         IDictionary<string, string> stemToEventId,
@@ -214,8 +218,15 @@ public sealed class CanonicalNotationBuilder
             .ThenBy(note => note.Staff)
             .ThenBy(note => note.CenterY)
             .ToArray();
+        var measureRests = allRests
+            .Where(rest => rest.MeasureNumber == measure.Number)
+            .OrderBy(rest => rest.CenterX)
+            .ThenBy(rest => rest.Staff)
+            .ThenBy(rest => rest.CenterY)
+            .ThenBy(rest => rest.ShapeId, StringComparer.Ordinal)
+            .ToArray();
 
-        if (measureNoteheads.Length == 0)
+        if (measureNoteheads.Length == 0 && measureRests.Length == 0)
         {
             return [];
         }
@@ -327,6 +338,29 @@ public sealed class CanonicalNotationBuilder
             }
         }
 
+        foreach (var rest in measureRests)
+        {
+            var voice = rest.Staff;
+            var eventId = $"m{measure.Number}-rest-{rest.ShapeId}";
+            var restEvent = new CanonicalEvent
+            {
+                Id = eventId,
+                Type = "rest",
+                At = "0",
+                Staff = rest.Staff,
+                Voice = voice,
+                Duration = rest.Duration,
+                Notation = new EventNotation(
+                    NoteType: rest.NoteType)
+            };
+
+            drafts.Add(new RawEventDraft(
+                restEvent,
+                rest.CenterX,
+                voice,
+                null));
+        }
+
         var assigned = new List<CanonicalEvent>(drafts.Count);
 
         foreach (var voiceGroup in drafts
@@ -353,6 +387,7 @@ public sealed class CanonicalNotationBuilder
         facts.AddTrace(
             $"CanonicalBuilder: m{measure.Number} raw events={assigned.Count}; "
             + $"projected-noteheads={measureNoteheads.Length}; "
+            + $"rests={measureRests.Length}; "
             + $"chord-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) > 1)}; "
             + $"single-events={drafts.Count(draft => (draft.Event.Notes?.Count ?? 0) == 1)}");
 
