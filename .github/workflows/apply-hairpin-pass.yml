@@ -1,0 +1,45 @@
+name: Apply hairpin pass wiring
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/apply-hairpin-pass.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Apply hairpin wiring
+        run: python3 Tools/apply_hairpin_pass.py
+
+      - name: Run semantic unit tests
+        run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
+
+      - name: Commit permanent hairpin implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gasharva"
+          git config user.email "gasharva@users.noreply.github.com"
+          git rm Tools/apply_hairpin_pass.py .github/workflows/apply-hairpin-pass.yml
+          git add \
+            SemanticInterpreter/SemanticModels.cs \
+            SemanticInterpreter/MeasureSceneBuilder.cs \
+            SemanticInterpreter/SemanticPipeline.cs \
+            SemanticInterpreter/CanonicalNotationBuilder.cs \
+            SemanticInterpreter/Program.cs
+          git commit -m "Wire HairpinPass into semantic MusicXML"
+          git push origin HEAD:master
