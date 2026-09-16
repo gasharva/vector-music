@@ -7,10 +7,10 @@ mode=compound-dominant     => component rendering was impossible; one fallback c
 color-match=no             => shape has ownership, but fallback compound source used another color
 
 SUMMARY
-Stroke        total= 625 owned= 622 rendered= 622 exact-color= 622
+Stroke        total= 613 owned= 611 rendered= 611 exact-color= 611
 CurvedStroke  total=  39 owned=  37 rendered=  37 exact-color=  37
 EllipseLike   total= 419 owned= 409 rendered= 409 exact-color= 409
-ShapeInstance total= 272 owned= 213 rendered= 213 exact-color= 213
+ShapeInstance total= 269 owned= 210 rendered= 210 exact-color= 210
 
 DETAILS
 shape-1123   CurvedStroke  owned=yes staff-1+staff-pair-1-measure-1         g4 rendered=yes; mode=direct; displayed=staff-1+staff-pair-1-measure-1; color-match=yes; source=<path>
@@ -587,10 +587,8 @@ shape-1129.9 ShapeInstance owned=yes staff-3+staff-pair-2-measure-2         g4 r
 shape-1132   ShapeInstance owned=yes staff-7+staff-pair-4-measure-2         g2 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<path>
 shape-1135   ShapeInstance owned=yes staff-6+staff-pair-3-measure-4         g2 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<path>
 shape-1138.1 ShapeInstance owned=yes staff-9+staff-pair-5-measure-3         g3 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-3; color-match=yes; source=<path>
-shape-1139   ShapeInstance owned=yes staff-9+staff-pair-5-measure-3         g4 rendered=yes; mode=direct; displayed=staff-9+staff-pair-5-measure-3; color-match=yes; source=<polyline>
 shape-1140.1 ShapeInstance owned=yes staff-6+staff-pair-3-measure-5         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-5; color-match=yes; source=<path>
 shape-1142.1 ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<path>
-shape-1143   ShapeInstance owned=yes staff-6+staff-pair-3-measure-1         g2 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<polyline>
 shape-1144.1 ShapeInstance owned=yes staff-4+staff-pair-2-measure-2         g3 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<path>
 shape-1146.1 ShapeInstance owned=yes staff-8+staff-pair-4-measure-2         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<path>
 shape-1148.1 ShapeInstance owned=yes staff-8+staff-pair-4-measure-4         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<path>
@@ -599,7 +597,6 @@ shape-1152.1 ShapeInstance owned=yes staff-8+staff-pair-4-measure-1         g1 r
 shape-1154.1 ShapeInstance owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<path>
 shape-1156.1 ShapeInstance owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<path>
 shape-1158.1 ShapeInstance owned=yes staff-10+staff-pair-5-measure-3        g1 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<path>
-shape-1159   ShapeInstance owned=yes staff-10+staff-pair-5-measure-3        g2 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-3; color-match=yes; source=<polyline>
 shape-1233   ShapeInstance owned=no  rendered=no  source=<path>
 shape-1234   ShapeInstance owned=no  rendered=no  source=<path>
 shape-1235   ShapeInstance owned=no  rendered=no  source=<path>
@@ -811,20 +808,8 @@ shape-1119   Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 r
 shape-112    Stroke        owned=yes staff-10+staff-pair-5-measure-1        g1 rendered=yes; mode=neutral-layout; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<polyline>
 shape-1120   Stroke        owned=yes staff-8+staff-pair-4-measure-3         g1 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<path>
 shape-113    Stroke        owned=yes staff-4+staff-pair-2-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-4+staff-pair-2-measure-1; color-match=yes; source=<polyline>
-shape-1133   Stroke        owned=no  rendered=no  source=<polyline>
-shape-1134   Stroke        owned=yes staff-7+staff-pair-4-measure-2         g3 rendered=yes; mode=direct; displayed=staff-7+staff-pair-4-measure-2; color-match=yes; source=<polyline>
-shape-1136   Stroke        owned=yes staff-6+staff-pair-3-measure-4         g4 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<polyline>
-shape-1137   Stroke        owned=yes staff-6+staff-pair-3-measure-4         g3 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-4; color-match=yes; source=<polyline>
 shape-114    Stroke        owned=yes staff-2+staff-pair-1-measure-5         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-5; color-match=yes; source=<polyline>
-shape-1141   Stroke        owned=yes staff-6+staff-pair-3-measure-5         g3 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-5; color-match=yes; source=<polyline>
-shape-1145   Stroke        owned=yes staff-4+staff-pair-2-measure-2         g4 rendered=yes; mode=direct; displayed=staff-4+staff-pair-2-measure-2; color-match=yes; source=<polyline>
-shape-1147   Stroke        owned=yes staff-8+staff-pair-4-measure-2         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-2; color-match=yes; source=<polyline>
-shape-1149   Stroke        owned=yes staff-8+staff-pair-4-measure-4         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-4; color-match=yes; source=<polyline>
 shape-115    Stroke        owned=yes staff-6+staff-pair-3-measure-2         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<polyline>
-shape-1151   Stroke        owned=yes staff-8+staff-pair-4-measure-3         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-3; color-match=yes; source=<polyline>
-shape-1153   Stroke        owned=yes staff-8+staff-pair-4-measure-1         g3 rendered=yes; mode=direct; displayed=staff-8+staff-pair-4-measure-1; color-match=yes; source=<polyline>
-shape-1155   Stroke        owned=yes staff-6+staff-pair-3-measure-2         g3 rendered=yes; mode=direct; displayed=staff-6+staff-pair-3-measure-2; color-match=yes; source=<polyline>
-shape-1157   Stroke        owned=yes staff-10+staff-pair-5-measure-1        g3 rendered=yes; mode=direct; displayed=staff-10+staff-pair-5-measure-1; color-match=yes; source=<polyline>
 shape-116    Stroke        owned=yes staff-2+staff-pair-1-measure-4         g1 rendered=yes; mode=neutral-layout; displayed=staff-2+staff-pair-1-measure-4; color-match=yes; source=<polyline>
 shape-117    Stroke        owned=yes staff-6+staff-pair-3-measure-1         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-1; color-match=yes; source=<polyline>
 shape-118    Stroke        owned=yes staff-6+staff-pair-3-measure-5         g1 rendered=yes; mode=neutral-layout; displayed=staff-6+staff-pair-3-measure-5; color-match=yes; source=<polyline>
