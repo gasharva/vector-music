@@ -175,7 +175,7 @@ public sealed class SvgSourceMetadataAnnotator
 
     private static string BaseShapeId(string id)
     {
-        var separator = id.IndexOf('.', StringComparison.Ordinal);
+        var separator = id.IndexOf('.');
         return separator < 0 ? id : id[..separator];
     }
 
