@@ -32,13 +32,12 @@ jobs:
       - name: Build semantic interpreter
         run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
 
-      - name: Commit permanent grace-note implementation
+      - name: Commit verified grace-note code
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "gasharva"
           git config user.email "gasharva@users.noreply.github.com"
-          git rm .github/grace/apply_grace.py .github/workflows/apply-grace.yml
           git add \
             SemanticInterpreter/GraceNotePass.cs \
             SemanticInterpreter/SemanticPipeline.cs \
@@ -48,7 +47,6 @@ jobs:
             CanonicalNotation/CanonicalNotation.cs \
             CanonicalNotation/MusicXmlWriter.cs \
             CanonicalNotation/MusicXmlCanonicalizer.cs \
-            SemanticInterpreter.Tests/GraceNotePassTests.cs \
-            .github/workflows/semantic-canonical-poc.yml
-          git commit -m "Recognize reduced grace-note cluster"
+            SemanticInterpreter.Tests/GraceNotePassTests.cs
+          git commit -m "Recognize reduced grace-note cluster [skip ci]"
           git push origin HEAD:master
