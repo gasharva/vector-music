@@ -92,6 +92,43 @@ public sealed class ClassifiedSymbolPassTests
     }
 
     [Fact]
+    public void SplitMp_AllowsAdditionalSiblingFromSameSourceShape()
+    {
+        var mFragment = Symbol(
+            "shape-21.1",
+            "TREMOLO_3",
+            0.12,
+            x: 40,
+            y: 160,
+            width: 12);
+        var extraFragment = Symbol(
+            "shape-21.2",
+            "UNKNOWN",
+            0.05,
+            x: 47,
+            y: 180,
+            width: 3);
+        var pFragment = Symbol(
+            "shape-21.3",
+            "DYNAMICS_P",
+            0.99,
+            x: 54,
+            y: 160,
+            width: 10);
+        var document = Document([mFragment, extraFragment, pFragment]);
+        var facts = new SemanticFacts();
+        AddOnset(facts, "note", x: 52, at: "1/4");
+
+        new ClassifiedSymbolPass().Run(document, facts);
+
+        var dynamic = Assert.Single(facts.OfType<DynamicDirectionFact>());
+        Assert.Equal("mp", dynamic.Value);
+        Assert.Equal("DYNAMICS_MP", dynamic.ClassificationLabel);
+        Assert.Contains("shape-21.1", dynamic.SourceShapeIds);
+        Assert.Contains("shape-21.3", dynamic.SourceShapeIds);
+    }
+
+    [Fact]
     public void ShapeConsumedByEarlierPass_IsNotReinterpreted()
     {
         var symbol = Symbol("used", "MARCATO", 0.99, x: 50, y: 72);
