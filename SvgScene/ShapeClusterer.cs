@@ -19,6 +19,7 @@ public sealed class ShapeClusterer : IShapeClusterer
     private readonly IGeometryAnalyzer _geometryAnalyzer;
     private readonly IHairpinExtractor _hairpinExtractor;
     private readonly BracketSpannerExtractor _bracketSpannerExtractor;
+    private readonly VerticalZigZagExtractor _verticalZigZagExtractor;
     private readonly IArcExtractor _arcExtractor;
     private readonly IEllipseLikeExtractor _ellipseExtractor;
     private readonly ShapeDescriptorMatcher _descriptorMatcher;
@@ -35,11 +36,13 @@ public sealed class ShapeClusterer : IShapeClusterer
         IEllipseLikeExtractor? ellipseExtractor = null,
         IHairpinExtractor? hairpinExtractor = null,
         BracketSpannerExtractor? bracketSpannerExtractor = null,
+        VerticalZigZagExtractor? verticalZigZagExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
         _hairpinExtractor = hairpinExtractor ?? new HairpinExtractor();
         _bracketSpannerExtractor = bracketSpannerExtractor ?? new BracketSpannerExtractor();
+        _verticalZigZagExtractor = verticalZigZagExtractor ?? new VerticalZigZagExtractor();
         _arcExtractor = arcExtractor ?? new ArcExtractor();
         _ellipseExtractor = ellipseExtractor ?? new EllipseLikeExtractor();
         _descriptorMatcher = new ShapeDescriptorMatcher();
@@ -59,11 +62,24 @@ public sealed class ShapeClusterer : IShapeClusterer
         var curvedStrokes = new List<CurvedStroke>();
         var ellipses = new List<EllipseLike>();
         var hairpins = new List<HairpinPrimitive>();
+        var verticalZigZags = new List<VerticalZigZagPrimitive>();
 
         foreach (var shape in scene.Shapes)
         {
             if (consumedByBrackets.Contains(shape.Id))
                 continue;
+
+            // A regular vertical zigzag is much more specific than a generic arc,
+            // stroke or residual glyph. Give it first refusal before those broader
+            // geometric recognizers so arpeggio-like geometry never reaches the
+            // contour classifier merely because it is not a standard glyph shape.
+            if (_verticalZigZagExtractor.TryCreateVerticalZigZag(
+                shape,
+                out var verticalZigZag))
+            {
+                verticalZigZags.Add(verticalZigZag);
+                continue;
+            }
 
             // A very long, shallow hairpin can look almost straight to the generic
             // PCA stroke detector: its opening is tiny compared with its horizontal
@@ -117,7 +133,8 @@ public sealed class ShapeClusterer : IShapeClusterer
             ellipses)
         {
             Hairpins = hairpins,
-            BracketSpanners = bracketExtraction.Brackets
+            BracketSpanners = bracketExtraction.Brackets,
+            VerticalZigZags = verticalZigZags
         };
     }
 
