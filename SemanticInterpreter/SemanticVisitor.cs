@@ -54,6 +54,10 @@ public abstract class SemanticVisitor
                 VisitShape(measure, staff, shape);
                 break;
 
+            case BracketSpannerElement bracket:
+                VisitBracketSpanner(measure, staff, bracket);
+                break;
+
             default:
                 throw new NotSupportedException(
                     $"Unsupported semantic element type: {element.GetType().Name}");
@@ -85,6 +89,13 @@ public abstract class SemanticVisitor
         MeasureScene measure,
         StaffMeasureScene staff,
         ShapeElement shape)
+    {
+    }
+
+    protected virtual void VisitBracketSpanner(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        BracketSpannerElement bracket)
     {
     }
 }
