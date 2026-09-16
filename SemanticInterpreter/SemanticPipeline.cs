@@ -104,6 +104,21 @@ public sealed class SemanticPipeline
                 new MeasureEndOnsetRefinementPass());
         }
 
+        // Ottava semantics needs two already independent signals: a classified OTTAVA
+        // glyph and a generic bracket spanner. Run it only after rhythmic onsets have
+        // stabilized so geometric span endpoints can be projected onto musical time.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not OttavaPass))
+        {
+            var refinementIndex = materialized.FindLastIndex(pass => pass is MeasureEndOnsetRefinementPass);
+            var insertionIndex = refinementIndex >= 0
+                ? refinementIndex + 1
+                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new OttavaPass());
+        }
+
         // Curves are already extracted geometrically. SlurPass classifies their
         // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
