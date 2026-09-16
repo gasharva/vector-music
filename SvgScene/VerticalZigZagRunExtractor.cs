@@ -109,7 +109,10 @@ public sealed class VerticalZigZagRunExtractor
                     meanStep,
                     confidence,
                     run[0].Shape.SourceKind,
-                    run[0].Shape.SourceIndex));
+                    run[0].Shape.SourceIndex)
+                {
+                    SourceShapeIds = shapeIds
+                });
             }
         }
 
