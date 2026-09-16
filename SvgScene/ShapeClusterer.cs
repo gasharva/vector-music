@@ -57,21 +57,25 @@ public sealed class ShapeClusterer : IShapeClusterer
 
         foreach (var shape in scene.Shapes)
         {
-            if (_geometryAnalyzer.TryCreateStroke(
-                shape,
-                out var stroke))
-            {
-                strokes.Add(stroke);
-                continue;
-            }
-
-            // Hairpins are V-shaped open contours. Detect them before the generic
-            // curved-stroke extractor so a wedge cannot be reinterpreted as an arc.
+            // A very long, shallow hairpin can look almost straight to the generic
+            // PCA stroke detector: its opening is tiny compared with its horizontal
+            // span. Hairpin geometry is more specific than a generic stroke, so give
+            // it first refusal. The extractor itself is deliberately strict about
+            // requiring two straight branches, vertically separated endpoints and a
+            // single opposite apex, so ordinary staff/ledger/bar lines are rejected.
             if (_hairpinExtractor.TryCreateHairpin(
                 shape,
                 out var hairpin))
             {
                 hairpins.Add(hairpin);
+                continue;
+            }
+
+            if (_geometryAnalyzer.TryCreateStroke(
+                shape,
+                out var stroke))
+            {
+                strokes.Add(stroke);
                 continue;
             }
 
