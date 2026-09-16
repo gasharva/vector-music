@@ -171,6 +171,22 @@ public sealed record BracketSpannerPrimitive(
     IReadOnlyList<string> SourceShapeIds,
     LogicalOwnership? Ownership = null);
 
+/// <summary>
+/// A narrow, mostly vertical, oscillating geometric primitive. It intentionally
+/// carries no musical label: semantic code may later decide that it is an
+/// arpeggio or another notation mark.
+/// </summary>
+public sealed record VerticalZigZagPrimitive(
+    string ShapeId,
+    BoundsD Bounds,
+    int TurnCount,
+    double MeanAmplitude,
+    double MeanHalfWaveHeight,
+    double Confidence,
+    string SourceKind,
+    string? SourceIndex,
+    LogicalOwnership? Ownership = null);
+
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
     IReadOnlyList<ShapeInstance> Instances,
@@ -183,6 +199,9 @@ public sealed record NotationScene(
 
     public IReadOnlyList<BracketSpannerPrimitive> BracketSpanners { get; init; } =
         Array.Empty<BracketSpannerPrimitive>();
+
+    public IReadOnlyList<VerticalZigZagPrimitive> VerticalZigZags { get; init; } =
+        Array.Empty<VerticalZigZagPrimitive>();
 }
 
 public sealed record ShapeDescriptor(
