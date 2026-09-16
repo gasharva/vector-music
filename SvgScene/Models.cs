@@ -185,7 +185,11 @@ public sealed record VerticalZigZagPrimitive(
     double Confidence,
     string SourceKind,
     string? SourceIndex,
-    LogicalOwnership? Ownership = null);
+    LogicalOwnership? Ownership = null)
+{
+    public IReadOnlyList<string> SourceShapeIds { get; init; } =
+        Array.Empty<string>();
+}
 
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
