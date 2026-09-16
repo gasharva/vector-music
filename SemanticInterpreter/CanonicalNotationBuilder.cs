@@ -186,7 +186,7 @@ public sealed class CanonicalNotationBuilder
         facts.AddTrace(
             $"CanonicalBuilder: events={measures.Sum(measure => measure.Events.Count)}; "
             + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
-            + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == \"rest\"))}; "
+            + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == "rest"))}; "
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tie-relations={tieRelations.Count}; "
             + $"slur-relations={slurRelations.Count}; tuplet-relations={tupletRelations.Count}; "
