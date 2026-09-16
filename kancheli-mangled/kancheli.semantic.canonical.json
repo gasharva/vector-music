@@ -5100,7 +5100,15 @@
         "normal": 4
       }
     ],
-    "arpeggios": [],
+    "arpeggios": [
+      {
+        "id": "arpeggio-shape-169",
+        "events": [
+          "chord-m11-41",
+          "chord-m11-42"
+        ]
+      }
+    ],
     "hairpins": [
       {
         "id": "hairpin-1",

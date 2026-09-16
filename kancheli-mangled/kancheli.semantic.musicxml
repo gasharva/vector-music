@@ -2153,6 +2153,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start" placement="below" />
+          <arpeggiate number="1" />
         </notations>
       </note>
       <note>
@@ -2171,6 +2172,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start" placement="below" />
+          <arpeggiate number="1" />
         </notations>
       </note>
       <note>
@@ -2189,6 +2191,7 @@
         <staff>1</staff>
         <notations>
           <tied type="start" placement="below" />
+          <arpeggiate number="1" />
         </notations>
       </note>
       <backup>
@@ -2208,6 +2211,7 @@
         <staff>2</staff>
         <notations>
           <tied type="start" placement="above" />
+          <arpeggiate number="1" />
         </notations>
       </note>
       <note>
@@ -2226,6 +2230,7 @@
         <staff>2</staff>
         <notations>
           <tied type="start" placement="above" />
+          <arpeggiate number="1" />
         </notations>
       </note>
       <note>
@@ -2244,6 +2249,7 @@
         <staff>2</staff>
         <notations>
           <tied type="start" placement="below" />
+          <arpeggiate number="1" />
         </notations>
       </note>
     </measure>
