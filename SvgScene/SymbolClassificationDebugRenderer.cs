@@ -127,9 +127,12 @@ public sealed class SymbolClassificationDebugRenderer
             4.0 * unit,
             8.0 * unit);
 
-        var confidenceText = confidence.ToString(
-            "P0",
-            CultureInfo.InvariantCulture);
+        // Avoid culture-specific percent spacing (for example, InvariantCulture
+        // renders P0 as "92 %"). The diagnostic label should stay compact and
+        // predictable: TUPLET_5 92%.
+        var confidenceText = (confidence * 100.0).ToString(
+            "0",
+            CultureInfo.InvariantCulture) + "%";
         var label = $"{classLabel} {confidenceText}";
 
         group.Add(new XElement(
