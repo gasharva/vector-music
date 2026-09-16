@@ -1,10 +1,10 @@
 input=/home/runner/work/vector-music/vector-music/Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg
-geometry.shapes=1363
-notation.instances=270
+geometry.shapes=1367
+notation.instances=272
 notation.strokes=625
 notation.curves=39
-notation.ellipses=417
-ownership.assignments=1284
+notation.ellipses=419
+ownership.assignments=1281
 ownership.ledgerLadderCorrections=1
 semantic.measures=26
 semantic.facts=1826

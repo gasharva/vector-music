@@ -9,7 +9,7 @@
     <creator type="poet">Pastoso (sempre legato)</creator>
     <encoding>
       <software>MuseScore Studio 4.6.5</software>
-      <encoding-date>2026-09-15</encoding-date>
+      <encoding-date>2026-09-16</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="no"/>
@@ -4112,6 +4112,12 @@
         </direction>
       </measure>
     <measure number="22">
+      <direction placement="above">
+        <direction-type>
+          <coda/>
+          </direction-type>
+        <sound coda="codab"/>
+        </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -4277,6 +4283,9 @@
         </note>
       </measure>
     <measure number="23">
+      <barline location="left">
+        <ending number="1" type="start">1.</ending>
+        </barline>
       <direction placement="above">
         <direction-type>
           <words>loco</words>
@@ -4619,6 +4628,9 @@
         <stem>down</stem>
         <staff>2</staff>
         </note>
+      <barline location="right">
+        <ending number="1" type="stop"/>
+        </barline>
       </measure>
     <measure number="26">
       <attributes>
