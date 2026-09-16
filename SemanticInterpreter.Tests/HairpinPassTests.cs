@@ -23,7 +23,8 @@ public sealed class HairpinPassTests
             upperElements: []);
         var facts = new SemanticFacts();
         AddNote(facts, 1, 2, "start", 25, "1/8", "1/8");
-        AddNote(facts, 2, 2, "end", 150, "1/2", "1/8");
+        AddNote(facts, 2, 2, "before-end", 145, "1/2", "1/8");
+        AddNote(facts, 2, 2, "end-anchor", 170, "5/8", "1/8");
 
         var pass = new HairpinPass();
         pass.Run(document, facts);
