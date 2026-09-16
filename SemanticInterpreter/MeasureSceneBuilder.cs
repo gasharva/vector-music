@@ -165,6 +165,42 @@ public sealed class MeasureSceneBuilder
             });
         }
 
+        foreach (var hairpin in notation.Hairpins)
+        {
+            if (hairpin.Ownership is null)
+            {
+                continue;
+            }
+
+            result.Add(new HairpinElement
+            {
+                ShapeId = hairpin.ShapeId,
+                Bounds = BoundsD.FromPoints([
+                    hairpin.Apex,
+                    hairpin.OpenUpper,
+                    hairpin.OpenLower
+                ]),
+                Ownership = hairpin.Ownership,
+                Source = hairpin
+            });
+        }
+
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            if (zigZag.Ownership is null)
+            {
+                continue;
+            }
+
+            result.Add(new VerticalZigZagElement
+            {
+                ShapeId = zigZag.ShapeId,
+                Bounds = zigZag.Bounds,
+                Ownership = zigZag.Ownership,
+                Source = zigZag
+            });
+        }
+
         foreach (var instance in notation.Instances)
         {
             if (instance.Ownership is null
@@ -182,7 +218,50 @@ public sealed class MeasureSceneBuilder
             });
         }
 
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            if (bracket.Ownership is null)
+            {
+                continue;
+            }
+
+            result.Add(new BracketSpannerElement
+            {
+                ShapeId = bracket.Id,
+                Bounds = BracketBounds(bracket),
+                Ownership = bracket.Ownership,
+                Source = bracket
+            });
+        }
+
         return result;
+    }
+
+    private static BoundsD BracketBounds(BracketSpannerPrimitive bracket)
+    {
+        var points = new List<PointD>
+        {
+            bracket.Start,
+            bracket.End
+        };
+
+        if (bracket.LeftHookEnd is { } leftHook)
+        {
+            points.Add(leftHook);
+        }
+
+        if (bracket.RightHookEnd is { } rightHook)
+        {
+            points.Add(rightHook);
+        }
+
+        var raw = BoundsD.FromPoints(points);
+        var half = Math.Max(bracket.StrokeWidth / 2.0, 0.01);
+        return new BoundsD(
+            raw.MinX - half,
+            raw.MinY - half,
+            raw.MaxX + half,
+            raw.MaxY + half);
     }
 
     private static bool OwnershipTouches(

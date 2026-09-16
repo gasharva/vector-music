@@ -54,6 +54,18 @@ public abstract class SemanticVisitor
                 VisitShape(measure, staff, shape);
                 break;
 
+            case HairpinElement hairpin:
+                VisitHairpin(measure, staff, hairpin);
+                break;
+
+            case BracketSpannerElement bracket:
+                VisitBracketSpanner(measure, staff, bracket);
+                break;
+
+            case VerticalZigZagElement zigZag:
+                VisitVerticalZigZag(measure, staff, zigZag);
+                break;
+
             default:
                 throw new NotSupportedException(
                     $"Unsupported semantic element type: {element.GetType().Name}");
@@ -85,6 +97,27 @@ public abstract class SemanticVisitor
         MeasureScene measure,
         StaffMeasureScene staff,
         ShapeElement shape)
+    {
+    }
+
+    protected virtual void VisitHairpin(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        HairpinElement hairpin)
+    {
+    }
+
+    protected virtual void VisitBracketSpanner(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        BracketSpannerElement bracket)
+    {
+    }
+
+    protected virtual void VisitVerticalZigZag(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        VerticalZigZagElement zigZag)
     {
     }
 }

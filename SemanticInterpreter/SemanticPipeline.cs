@@ -104,6 +104,73 @@ public sealed class SemanticPipeline
                 new MeasureEndOnsetRefinementPass());
         }
 
+        // Ottava semantics needs two already independent signals: a classified OTTAVA
+        // glyph and a generic bracket spanner. Run it only after rhythmic onsets have
+        // stabilized so geometric span endpoints can be projected onto musical time.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not OttavaPass))
+        {
+            var refinementIndex = materialized.FindLastIndex(pass => pass is MeasureEndOnsetRefinementPass);
+            var insertionIndex = refinementIndex >= 0
+                ? refinementIndex + 1
+                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new OttavaPass());
+        }
+
+        // Pedal semantics mirrors ottava: a classified PEDAL_MARK plus a generic
+        // solid bracket becomes a timed span only after rhythmic onsets are stable.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not PedalPass))
+        {
+            var ottavaIndex = materialized.FindLastIndex(pass => pass is OttavaPass);
+            var refinementIndex = materialized.FindLastIndex(pass => pass is MeasureEndOnsetRefinementPass);
+            var insertionIndex = ottavaIndex >= 0
+                ? ottavaIndex + 1
+                : refinementIndex >= 0
+                    ? refinementIndex + 1
+                    : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new PedalPass());
+        }
+
+        // Hairpins are already proven geometrically by HairpinExtractor. Once onsets
+        // are stable, only their horizontal endpoints need projection onto musical time.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not HairpinPass))
+        {
+            var pedalIndex = materialized.FindLastIndex(pass => pass is PedalPass);
+            var ottavaIndex = materialized.FindLastIndex(pass => pass is OttavaPass);
+            var refinementIndex = materialized.FindLastIndex(pass => pass is MeasureEndOnsetRefinementPass);
+            var insertionIndex = pedalIndex >= 0
+                ? pedalIndex + 1
+                : ottavaIndex >= 0
+                    ? ottavaIndex + 1
+                    : refinementIndex >= 0
+                        ? refinementIndex + 1
+                        : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new HairpinPass());
+        }
+
+        // Vertical zigzags are already proven geometrically. ArpeggioPass only
+        // decides which already-built chord event(s) at one onset they span.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.Any(pass => pass is ChordPass)
+            && materialized.All(pass => pass is not ArpeggioPass))
+        {
+            var hairpinIndex = materialized.FindLastIndex(pass => pass is HairpinPass);
+            var insertionIndex = hairpinIndex >= 0
+                ? hairpinIndex + 1
+                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new ArpeggioPass());
+        }
+
         // Curves are already extracted geometrically. SlurPass classifies their
         // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
@@ -138,6 +205,14 @@ public sealed class SemanticPipeline
             materialized.Insert(
                 tieIndex + 1,
                 new TieSpatialRecoveryPass());
+        }
+
+        // Simple classifier leftovers run last, after every specialized pass has had
+        // a chance to claim its source shapes through SemanticFact.SourceShapeIds.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not ClassifiedSymbolPass))
+        {
+            materialized.Add(new ClassifiedSymbolPass());
         }
 
         _passes = materialized;

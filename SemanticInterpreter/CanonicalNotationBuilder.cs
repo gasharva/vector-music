@@ -158,6 +158,10 @@ public sealed class CanonicalNotationBuilder
                 stemToEventId,
                 eventX);
 
+            events.AddRange(BuildClassifiedDynamicEvents(
+                measure.Number,
+                facts));
+
             measures.Add(new Measure(
                 measure.Number,
                 events,
@@ -181,6 +185,13 @@ public sealed class CanonicalNotationBuilder
             facts,
             noteheadToEventId,
             eventX);
+        var arpeggioRelations = BuildArpeggioRelations(
+            facts,
+            noteheadToEventId,
+            eventX);
+        var hairpinRelations = BuildHairpinRelations(facts);
+        var pedalRelations = BuildPedalRelations(facts);
+        var octaveShiftRelations = BuildOctaveShiftRelations(facts);
 
         facts.AddTrace(
             $"CanonicalBuilder: events={measures.Sum(measure => measure.Events.Count)}; "
@@ -189,6 +200,9 @@ public sealed class CanonicalNotationBuilder
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tie-relations={tieRelations.Count}; "
             + $"slur-relations={slurRelations.Count}; tuplet-relations={tupletRelations.Count}; "
+            + $"arpeggios={arpeggioRelations.Count}; "
+            + $"hairpins={hairpinRelations.Count}; pedals={pedalRelations.Count}; "
+            + $"octave-shifts={octaveShiftRelations.Count}; "
             + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
         return new CanonicalNotation(
@@ -201,10 +215,10 @@ public sealed class CanonicalNotationBuilder
                 tieRelations,
                 slurRelations,
                 tupletRelations,
-                [],
-                [],
-                [],
-                []));
+                arpeggioRelations,
+                hairpinRelations,
+                pedalRelations,
+                octaveShiftRelations));
     }
 
     private static List<CanonicalEvent> BuildRawNoteEvents(
@@ -532,6 +546,14 @@ public sealed class CanonicalNotationBuilder
 
         var x = noteheads.Average(note => note.CenterX);
 
+        var classifiedMarks = facts
+            .OfType<ClassifiedNotationMarkFact>()
+            .Where(mark => noteheads.Any(note =>
+                note.ShapeId == mark.TargetNoteheadId))
+            .OrderBy(mark => mark.CenterX)
+            .ThenBy(mark => mark.ShapeId, StringComparer.Ordinal)
+            .ToArray();
+
         var notation = new EventNotation(
             NoteType: selectedDuration.NoteType,
             Dots: selectedDuration.Dots > 0
@@ -544,7 +566,16 @@ public sealed class CanonicalNotationBuilder
                     StemDirection.Up => "up",
                     StemDirection.Down => "down",
                     _ => null
-                });
+                },
+            Articulations: BuildClassifiedMarks(
+                classifiedMarks,
+                ClassifiedNotationFamily.Articulation),
+            Ornaments: BuildClassifiedMarks(
+                classifiedMarks,
+                ClassifiedNotationFamily.Ornament),
+            Fermatas: BuildClassifiedMarks(
+                classifiedMarks,
+                ClassifiedNotationFamily.Fermata));
 
         var ev = new CanonicalEvent
         {
@@ -564,6 +595,45 @@ public sealed class CanonicalNotationBuilder
             targetKind,
             targetId,
             stem?.StemShapeId);
+    }
+
+    private static List<NotationMark>? BuildClassifiedMarks(
+        IReadOnlyList<ClassifiedNotationMarkFact> marks,
+        ClassifiedNotationFamily family)
+    {
+        var result = marks
+            .Where(mark => mark.Family == family)
+            .Select(mark => new NotationMark(
+                mark.Type,
+                Placement: mark.Placement))
+            .Distinct()
+            .ToList();
+
+        return result.Count > 0
+            ? result
+            : null;
+    }
+
+    private static IEnumerable<CanonicalEvent> BuildClassifiedDynamicEvents(
+        int measureNumber,
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<DynamicDirectionFact>()
+            .Where(fact => fact.MeasureNumber == measureNumber)
+            .OrderBy(fact => Fraction.Parse(fact.At).Numerator
+                / (double)Fraction.Parse(fact.At).Denominator)
+            .ThenBy(fact => fact.CenterX)
+            .ThenBy(fact => fact.ShapeId, StringComparer.Ordinal)
+            .Select(fact => new CanonicalEvent
+            {
+                Id = $"m{measureNumber}-dynamic-{fact.ShapeId}",
+                Type = "dynamic",
+                At = fact.At,
+                Staff = fact.Staff,
+                Value = fact.Value,
+                Placement = fact.Placement
+            });
     }
 
     private static int ResolveCanonicalVoice(
@@ -715,6 +785,125 @@ public sealed class CanonicalNotationBuilder
         }
 
         return result;
+    }
+
+    private static List<ArpeggioRelation> BuildArpeggioRelations(
+        SemanticFacts facts,
+        IReadOnlyDictionary<string, string> noteheadToEventId,
+        IReadOnlyDictionary<string, double> eventX)
+    {
+        var result = new List<ArpeggioRelation>();
+
+        foreach (var arpeggio in facts
+                     .OfType<ArpeggioFact>()
+                     .OrderBy(fact => fact.MeasureNumber)
+                     .ThenBy(fact => fact.AnchorX)
+                     .ThenBy(fact => fact.ZigZagShapeId, StringComparer.Ordinal))
+        {
+            var events = arpeggio.NoteheadIds
+                .Where(noteheadToEventId.ContainsKey)
+                .Select(noteheadId => noteheadToEventId[noteheadId])
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(eventId => eventX.TryGetValue(eventId, out var x)
+                    ? x
+                    : double.MaxValue)
+                .ThenBy(eventId => eventId, StringComparer.Ordinal)
+                .ToList();
+
+            if (events.Count == 0)
+            {
+                continue;
+            }
+
+            result.Add(new ArpeggioRelation(
+                $"arpeggio-{arpeggio.ZigZagShapeId}",
+                events,
+                arpeggio.Direction));
+        }
+
+        return result;
+    }
+
+    private static List<SpanRelation> BuildHairpinRelations(
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<HairpinFact>()
+            .OrderBy(fact => fact.StartMeasureNumber)
+            .ThenBy(fact => Fraction.Parse(fact.StartAt).Numerator / (double)Fraction.Parse(fact.StartAt).Denominator)
+            .ThenBy(fact => fact.Staff)
+            .ThenBy(fact => fact.ShapeId, StringComparer.Ordinal)
+            .Select((fact, index) => new SpanRelation
+            {
+                Id = $"hairpin-{index + 1}",
+                Kind = "hairpin",
+                From = new TimeAnchor(
+                    fact.StartMeasureNumber,
+                    fact.StartAt,
+                    fact.Staff),
+                To = new TimeAnchor(
+                    fact.EndMeasureNumber,
+                    fact.EndAt,
+                    fact.Staff),
+                Type = fact.Type,
+                Placement = fact.Placement
+            })
+            .ToList();
+    }
+
+    private static List<SpanRelation> BuildPedalRelations(
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<PedalFact>()
+            .OrderBy(fact => fact.StartMeasureNumber)
+            .ThenBy(fact => Fraction.Parse(fact.StartAt).Numerator / (double)Fraction.Parse(fact.StartAt).Denominator)
+            .ThenBy(fact => fact.Staff)
+            .ThenBy(fact => fact.BracketId, StringComparer.Ordinal)
+            .Select((fact, index) => new SpanRelation
+            {
+                Id = $"pedal-{index + 1}",
+                Kind = "pedal",
+                From = new TimeAnchor(
+                    fact.StartMeasureNumber,
+                    fact.StartAt,
+                    fact.Staff),
+                To = new TimeAnchor(
+                    fact.EndMeasureNumber,
+                    fact.EndAt,
+                    fact.Staff),
+                Line = fact.Line,
+                StartMark = fact.StartMark,
+                Placement = fact.Placement
+            })
+            .ToList();
+    }
+
+    private static List<SpanRelation> BuildOctaveShiftRelations(
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<OttavaFact>()
+            .OrderBy(fact => fact.StartMeasureNumber)
+            .ThenBy(fact => fact.StartX)
+            .ThenBy(fact => fact.BracketId, StringComparer.Ordinal)
+            .Select((fact, index) => new SpanRelation
+            {
+                Id = $"octaveShift-{index + 1}",
+                Kind = "octaveShift",
+                From = new TimeAnchor(
+                    fact.StartMeasureNumber,
+                    fact.StartAt,
+                    fact.Staff),
+                To = new TimeAnchor(
+                    fact.EndMeasureNumber,
+                    fact.EndAt,
+                    fact.Staff),
+                Direction = fact.Direction,
+                Size = fact.Size,
+                Placement = fact.Placement
+            })
+            .ToList();
     }
 
     private static Accidental? ExplicitAccidental(PitchFact pitch)
