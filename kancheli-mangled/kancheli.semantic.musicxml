@@ -774,6 +774,12 @@
       </note>
     </measure>
     <measure number="7">
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="1" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -787,13 +793,6 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="1" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-50</offset>
-        <staff>2</staff>
-      </direction>
       <backup>
         <duration>60</duration>
       </backup>
@@ -2745,6 +2744,12 @@
       </note>
     </measure>
     <measure number="15">
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="4" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -2757,13 +2762,6 @@
         <stem>down</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="4" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-30</offset>
-        <staff>2</staff>
-      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -2929,6 +2927,12 @@
     </measure>
     <measure number="16">
       <print new-system="yes" />
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="5" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>A</step>
@@ -2942,13 +2946,6 @@
         <stem>down</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="5" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-30</offset>
-        <staff>2</staff>
-      </direction>
       <note>
         <rest />
         <duration>10</duration>
@@ -3089,6 +3086,12 @@
       </note>
     </measure>
     <measure number="17">
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="6" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <direction placement="above">
         <direction-type>
           <octave-shift type="down" number="2" size="8" />
@@ -3108,13 +3111,6 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="6" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-5</offset>
-        <staff>2</staff>
-      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -3326,6 +3322,12 @@
       </note>
     </measure>
     <measure number="18">
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="7" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -3339,13 +3341,6 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="7" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-5</offset>
-        <staff>2</staff>
-      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -3565,6 +3560,12 @@
       </note>
     </measure>
     <measure number="19">
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="8" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>B</step>
@@ -3578,13 +3579,6 @@
         <stem>down</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="8" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-50</offset>
-        <staff>2</staff>
-      </direction>
       <direction placement="below">
         <direction-type>
           <pedal type="stop" number="8" line="yes" sign="no" />
@@ -3761,6 +3755,12 @@
     </measure>
     <measure number="21">
       <print new-system="yes" />
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="9" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -3773,12 +3773,6 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="9" line="yes" sign="yes" />
-        </direction-type>
-        <staff>2</staff>
-      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -4175,6 +4169,12 @@
       </note>
     </measure>
     <measure number="23">
+      <direction placement="below">
+        <direction-type>
+          <pedal type="resume" number="10" line="yes" sign="yes" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -4202,13 +4202,6 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <pedal type="resume" number="10" line="yes" sign="yes" />
-        </direction-type>
-        <offset>-50</offset>
-        <staff>2</staff>
-      </direction>
       <direction placement="below">
         <direction-type>
           <pedal type="stop" number="10" line="yes" sign="no" />
