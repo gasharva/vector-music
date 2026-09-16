@@ -1,11 +1,14 @@
 using System.Globalization;
+using System.Text;
 using System.Xml.Linq;
 
 namespace SvgMusic.Scene;
 
 public sealed class SymbolClassificationDebugRenderer
 {
-    private const double MinimumConfidence = 0.75;
+    private const string ShapeOverlayColor = "#1976d2";
+    private const double GreenConfidence = 0.80;
+    private const double AmberConfidence = 0.60;
 
     public void Render(
         string input,
@@ -32,9 +35,11 @@ public sealed class SymbolClassificationDebugRenderer
         {
             var classification = instance.Classification;
 
+            // This diagnostic intentionally shows every winner emitted by the
+            // classifier. Semantic passes may later reject or reinterpret it, but
+            // hiding low-confidence or unfamiliar labels here makes classifier
+            // behaviour much harder to inspect visually.
             if (classification is null
-                || classification.Confidence < MinimumConfidence
-                || !TryStyle(classification.Label, out var style)
                 || !shapesById.TryGetValue(instance.ShapeId, out var shape))
             {
                 continue;
@@ -44,7 +49,7 @@ public sealed class SymbolClassificationDebugRenderer
                 group,
                 ns,
                 shape,
-                style.Color,
+                ShapeOverlayColor,
                 unit);
 
             foreach (var absorbedShapeId in instance.AbsorbedPrimitiveShapeIds
@@ -59,21 +64,18 @@ public sealed class SymbolClassificationDebugRenderer
                     group,
                     ns,
                     absorbedShape,
-                    style.Color,
+                    ShapeOverlayColor,
                     unit);
             }
 
-            if (style.DigitText is not null)
-            {
-                AddDigitLabel(
-                    group,
-                    ns,
-                    instance,
-                    style.DigitText,
-                    classification.Confidence,
-                    style.Color,
-                    unit);
-            }
+            AddClassificationLabel(
+                group,
+                ns,
+                instance,
+                HumanReadableLabel(classification.Label),
+                classification.Confidence,
+                ConfidenceColor(classification.Confidence),
+                unit);
         }
 
         root.Add(group);
@@ -100,32 +102,35 @@ public sealed class SymbolClassificationDebugRenderer
                 ns + "path",
                 new XAttribute("d", data),
                 new XAttribute("fill", contour.IsClosed ? color : "none"),
-                new XAttribute("fill-opacity", contour.IsClosed ? "0.72" : "0"),
+                new XAttribute("fill-opacity", contour.IsClosed ? "0.18" : "0"),
                 new XAttribute("stroke", color),
                 new XAttribute(
                     "stroke-width",
-                    F(Math.Max(unit, shape.StrokeWidth))),
+                    F(Math.Max(0.75 * unit, Math.Min(shape.StrokeWidth, 1.5 * unit)))),
                 new XAttribute("stroke-linecap", "round"),
                 new XAttribute("stroke-linejoin", "round"),
-                new XAttribute("opacity", "0.9")));
+                new XAttribute("opacity", "0.55")));
         }
     }
 
-    private static void AddDigitLabel(
+    private static void AddClassificationLabel(
         XElement group,
         XNamespace ns,
         ShapeInstance instance,
-        string digit,
+        string classLabel,
         double confidence,
-        string color,
+        string confidenceColor,
         double unit)
     {
         var fontSize = Math.Clamp(
-            Math.Max(instance.Width, instance.Height) * 0.24,
-            3.8 * unit,
-            7.0 * unit);
+            Math.Max(instance.Width, instance.Height) * 0.20,
+            4.0 * unit,
+            8.0 * unit);
 
-        var label = $"{digit} {confidence:P0}";
+        var confidenceText = confidence.ToString(
+            "P0",
+            CultureInfo.InvariantCulture);
+        var label = $"{classLabel} {confidenceText}";
 
         group.Add(new XElement(
             ns + "text",
@@ -134,12 +139,47 @@ public sealed class SymbolClassificationDebugRenderer
             new XAttribute("font-family", "Arial, sans-serif"),
             new XAttribute("font-size", F(fontSize)),
             new XAttribute("font-weight", "700"),
-            new XAttribute("fill", color),
+            new XAttribute("fill", confidenceColor),
             new XAttribute("stroke", "white"),
-            new XAttribute("stroke-width", F(0.7 * unit)),
+            new XAttribute("stroke-width", F(0.9 * unit)),
+            new XAttribute("stroke-linejoin", "round"),
             new XAttribute("paint-order", "stroke fill"),
             label));
     }
+
+    private static string HumanReadableLabel(string label)
+    {
+        if (string.IsNullOrWhiteSpace(label))
+        {
+            return "UNKNOWN";
+        }
+
+        var result = new StringBuilder(label.Length);
+        var previousWasSeparator = false;
+
+        foreach (var character in label.Trim())
+        {
+            if (char.IsLetterOrDigit(character))
+            {
+                result.Append(char.ToUpperInvariant(character));
+                previousWasSeparator = false;
+            }
+            else if (!previousWasSeparator && result.Length > 0)
+            {
+                result.Append('_');
+                previousWasSeparator = true;
+            }
+        }
+
+        return result.ToString().TrimEnd('_');
+    }
+
+    private static string ConfidenceColor(double confidence) =>
+        confidence >= GreenConfidence
+            ? "#1a7f37"
+            : confidence >= AmberConfidence
+                ? "#bf8700"
+                : "#cf222e";
 
     private static string BuildPathData(GeometricContour contour)
     {
@@ -157,96 +197,6 @@ public sealed class SymbolClassificationDebugRenderer
         }
 
         return data;
-    }
-
-    private static bool TryStyle(
-        string label,
-        out SymbolStyle style)
-    {
-        if (label is "G_CLEF" or "F_CLEF")
-        {
-            style = new SymbolStyle("#7b1fa2", null);
-            return true;
-        }
-
-        if (TryDigit(label, out var digit))
-        {
-            style = new SymbolStyle("#1565c0", digit);
-            return true;
-        }
-
-        if (label.Contains("REST", StringComparison.Ordinal))
-        {
-            style = new SymbolStyle("#2e7d32", null);
-            return true;
-        }
-
-        if (label.StartsWith("FLAG_1", StringComparison.Ordinal))
-        {
-            style = new SymbolStyle("#f9a825", null);
-            return true;
-        }
-
-        if (label.StartsWith("FLAG_2", StringComparison.Ordinal))
-        {
-            style = new SymbolStyle("#ef6c00", null);
-            return true;
-        }
-
-        if (label.Contains("FLAT", StringComparison.Ordinal)
-            || label.Contains("SHARP", StringComparison.Ordinal)
-            || label.Contains("NATURAL", StringComparison.Ordinal))
-        {
-            style = new SymbolStyle("#c62828", null);
-            return true;
-        }
-
-        style = default!;
-        return false;
-    }
-
-    private static bool TryDigit(
-        string label,
-        out string? digit)
-    {
-        const string timePrefix = "TIME_";
-        const string tupletPrefix = "TUPLET_";
-        const string digitPrefix = "DIGIT_";
-
-        string? suffix = null;
-
-        if (label.StartsWith(timePrefix, StringComparison.Ordinal))
-        {
-            suffix = label[timePrefix.Length..];
-        }
-        else if (label.StartsWith(tupletPrefix, StringComparison.Ordinal))
-        {
-            suffix = label[tupletPrefix.Length..];
-        }
-        else if (label.StartsWith(digitPrefix, StringComparison.Ordinal))
-        {
-            suffix = label[digitPrefix.Length..];
-        }
-
-        digit = suffix switch
-        {
-            "0" or "ZERO" => "0",
-            "1" or "ONE" => "1",
-            "2" or "TWO" => "2",
-            "3" or "THREE" => "3",
-            "4" or "FOUR" => "4",
-            "5" or "FIVE" => "5",
-            "6" or "SIX" => "6",
-            "7" or "SEVEN" => "7",
-            "8" or "EIGHT" => "8",
-            "9" or "NINE" => "9",
-            "10" or "TEN" => "10",
-            "11" or "ELEVEN" => "11",
-            "12" or "TWELVE" => "12",
-            _ => null
-        };
-
-        return digit is not null;
     }
 
     private static double DebugUnit(XElement root)
@@ -277,8 +227,4 @@ public sealed class SymbolClassificationDebugRenderer
 
     private static string F(double value) =>
         value.ToString("0.###", CultureInfo.InvariantCulture);
-
-    private sealed record SymbolStyle(
-        string Color,
-        string? DigitText);
 }
