@@ -18,7 +18,23 @@
       "Confidence": 0.9798497331803804,
       "SourceKind": "path",
       "SourceIndex": null,
-      "Ownership": null
+      "Ownership": null,
+      "SourceShapeIds": [
+        "shape-169",
+        "shape-168",
+        "shape-167",
+        "shape-166",
+        "shape-165",
+        "shape-164",
+        "shape-163",
+        "shape-162",
+        "shape-161",
+        "shape-160",
+        "shape-159",
+        "shape-158",
+        "shape-157",
+        "shape-156"
+      ]
     }
   ]
 }
