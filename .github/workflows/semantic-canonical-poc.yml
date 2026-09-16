@@ -89,6 +89,8 @@ jobs:
           grep -q '<pitch>' artifacts/kancheli.semantic.musicxml
           grep -q '<duration>' artifacts/kancheli.semantic.musicxml
           grep -q '^semantic.noteheads=' artifacts/semantic-summary.txt
+          grep -q '^semantic.graceNotes=2$' artifacts/semantic-summary.txt
+          grep -q '^canonical.graceEvents=2$' artifacts/semantic-summary.txt
           grep -q '^semantic.chords=' artifacts/semantic-summary.txt
           grep -q '^semantic.ties=' artifacts/semantic-summary.txt
           grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
@@ -96,12 +98,53 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
+          import json
           import xml.etree.ElementTree as ET
 
           xml_path = Path("artifacts/kancheli.semantic.musicxml")
           root = ET.parse(xml_path).getroot()
           assert root.tag == "score-partwise"
           assert sum(1 for _ in root.iter("note")) > 0
+
+          def grace_signature(doc_root):
+              result = []
+              for part in doc_root.findall("part"):
+                  for measure in part.findall("measure"):
+                      for note in measure.findall("note"):
+                          if note.find("grace") is None:
+                              continue
+                          pitch = note.find("pitch")
+                          result.append((
+                              part.get("id"),
+                              measure.get("number"),
+                              pitch.findtext("step"),
+                              int(pitch.findtext("alter") or 0),
+                              int(pitch.findtext("octave")),
+                              note.findtext("type")))
+              return result
+
+          source_root = ET.parse(
+              "Samples/kancheli-mimino/kancheli-mimino.musicxml").getroot()
+          source_grace = grace_signature(source_root)
+          generated_grace = grace_signature(root)
+          assert source_grace == [
+              ("P1", "15", "C", 0, 5, "16th"),
+              ("P1", "15", "B", -1, 4, "16th")
+          ]
+          assert generated_grace == source_grace
+
+          canonical = json.loads(Path(
+              "artifacts/kancheli.semantic.canonical.json").read_text())
+          grace_events = [
+              event
+              for part in canonical["parts"]
+              for measure in part["measures"]
+              for event in measure["events"]
+              if event.get("grace") is True
+          ]
+          assert len(grace_events) == 2
+          assert {event["at"] for event in grace_events} == {"1/4"}
+          assert all("duration" not in event for event in grace_events)
 
           with ZipFile("artifacts/kancheli.semantic.mxl") as archive:
               names = set(archive.namelist())
