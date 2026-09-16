@@ -46,7 +46,9 @@ public sealed record GeometricShape(
     double StrokeWidth = 0,
     IReadOnlyList<GeometricContour>? Contours = null,
     bool HasFill = false,
-    bool HasStroke = false)
+    bool HasStroke = false,
+    string? SourceClass = null,
+    string? StrokeDashArray = null)
 {
     public IReadOnlyList<GeometricContour> EffectiveContours =>
         Contours is { Count: > 0 }
@@ -142,6 +144,33 @@ public sealed record HairpinPrimitive(
     string? SourceIndex,
     LogicalOwnership? Ownership = null);
 
+public enum BracketHookDirection
+{
+    None,
+    Up,
+    Down
+}
+
+/// <summary>
+/// A generic horizontal bracket/spanner with zero, one or two short terminal
+/// hooks. It deliberately does not decide whether the engraving means pedal,
+/// ottava, volta, or another musical construct. Dashed versus solid stroke is
+/// retained as geometric/style evidence for later semantic passes.
+/// </summary>
+public sealed record BracketSpannerPrimitive(
+    string Id,
+    PointD Start,
+    PointD End,
+    PointD? LeftHookEnd,
+    PointD? RightHookEnd,
+    BracketHookDirection LeftHookDirection,
+    BracketHookDirection RightHookDirection,
+    bool IsDashed,
+    double StrokeWidth,
+    double Confidence,
+    IReadOnlyList<string> SourceShapeIds,
+    LogicalOwnership? Ownership = null);
+
 public sealed record NotationScene(
     IReadOnlyList<ShapePrototype> Prototypes,
     IReadOnlyList<ShapeInstance> Instances,
@@ -151,6 +180,9 @@ public sealed record NotationScene(
 {
     public IReadOnlyList<HairpinPrimitive> Hairpins { get; init; } =
         Array.Empty<HairpinPrimitive>();
+
+    public IReadOnlyList<BracketSpannerPrimitive> BracketSpanners { get; init; } =
+        Array.Empty<BracketSpannerPrimitive>();
 }
 
 public sealed record ShapeDescriptor(
