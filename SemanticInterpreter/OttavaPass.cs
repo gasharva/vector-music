@@ -47,10 +47,10 @@ public sealed record OttavaAnalysisResult(
 }
 
 /// <summary>
-/// Interprets a classified OTTAVA glyph together with a generic dashed bracket
-/// spanner. The scene parser remains music-agnostic: it only exposes the glyph,
-/// bracket geometry and logical ownership. This pass decides that the combination
-/// means an octave shift and projects its horizontal endpoints onto rhythmic time.
+/// Interprets a classified OTTAVA glyph together with a generic dashed bracket.
+/// Logical ownership supplies the staff/system hint, while the bracket's real X
+/// endpoints decide which measures it spans. This is important for outer-band
+/// objects whose ownership may conservatively collapse a long line into one measure.
 /// </summary>
 public sealed class OttavaPass : ISemanticPass
 {
@@ -59,6 +59,7 @@ public sealed class OttavaPass : ISemanticPass
     private const double MaximumGapInSpacings = 2.50;
     private const double MaximumVerticalDistanceInSpacings = 2.25;
     private const double OutsideStaffToleranceInSpacings = 0.10;
+    private const double CoordinateEpsilon = 0.01;
 
     public string Name => nameof(OttavaPass);
 
@@ -90,13 +91,35 @@ public sealed class OttavaPass : ISemanticPass
                 continue;
             }
 
-            if (!contexts.TryGetValue(source.Ownership!.Start, out var startContext)
-                || !contexts.TryGetValue(source.Ownership.End, out var endContext))
+            if (source.Ownership is null)
             {
                 decisions.Add(Reject(
                     source.Id,
                     "unmapped-ownership",
-                    $"{source.Id}: logical start/end cannot be mapped back to semantic measures"));
+                    $"{source.Id}: bracket has no logical ownership"));
+                continue;
+            }
+
+            var staffId = source.Ownership.Start.StaffId;
+            var startContext = ResolveContextAtX(
+                contexts,
+                staffId,
+                source.Start.X,
+                source.Ownership.Start,
+                preferLaterAtBoundary: true);
+            var endContext = ResolveContextAtX(
+                contexts,
+                staffId,
+                source.End.X,
+                source.Ownership.End,
+                preferLaterAtBoundary: false);
+
+            if (startContext is null || endContext is null)
+            {
+                decisions.Add(Reject(
+                    source.Id,
+                    "unmapped-ownership",
+                    $"{source.Id}: bracket X endpoints cannot be mapped to semantic measures"));
                 continue;
             }
 
@@ -136,11 +159,11 @@ public sealed class OttavaPass : ISemanticPass
 
             usedLabels.Add(match.Label.ShapeId);
 
-            var startAt = timing.ResolveAt(
+            var startAt = timing.ResolveStartAt(
                 startContext.MeasureNumber,
                 startContext.StaffNumber,
                 source.Start.X);
-            var endAt = timing.ResolveAt(
+            var endAt = timing.ResolveEndAt(
                 endContext.MeasureNumber,
                 endContext.StaffNumber,
                 source.End.X);
@@ -203,27 +226,63 @@ public sealed class OttavaPass : ISemanticPass
             + $"unmatched={decisions.Count(decision => decision.Decision == "no-ottava-label")}");
     }
 
-    private static IReadOnlyDictionary<LogicalCoordinate, CoordinateContext> BuildCoordinateContexts(
+    private static IReadOnlyList<CoordinateContext> BuildCoordinateContexts(
         SemanticDocument document)
     {
-        var result = new Dictionary<LogicalCoordinate, CoordinateContext>();
+        var result = new List<CoordinateContext>();
 
         foreach (var measure in document.Measures)
         {
             foreach (var staff in new[] { measure.Upper, measure.Lower })
             {
-                result[new LogicalCoordinate(staff.StaffId, measure.LayoutMeasureId)] =
-                    new CoordinateContext(
-                        measure.Number,
-                        staff.StaffNumber,
-                        staff.StaffBounds,
-                        staff.LineSpacing,
-                        measure.XStart,
-                        measure.XEnd);
+                result.Add(new CoordinateContext(
+                    new LogicalCoordinate(staff.StaffId, measure.LayoutMeasureId),
+                    measure.Number,
+                    staff.StaffNumber,
+                    staff.StaffBounds,
+                    staff.LineSpacing,
+                    measure.XStart,
+                    measure.XEnd));
             }
         }
 
         return result;
+    }
+
+    private static CoordinateContext? ResolveContextAtX(
+        IReadOnlyList<CoordinateContext> contexts,
+        string staffId,
+        double x,
+        LogicalCoordinate fallback,
+        bool preferLaterAtBoundary)
+    {
+        var matchingStaff = contexts
+            .Where(context => string.Equals(
+                context.Coordinate.StaffId,
+                staffId,
+                StringComparison.Ordinal))
+            .ToArray();
+
+        var containing = matchingStaff
+            .Where(context =>
+                x >= context.XStart - CoordinateEpsilon
+                && x <= context.XEnd + CoordinateEpsilon)
+            .ToArray();
+
+        if (containing.Length > 0)
+        {
+            return preferLaterAtBoundary
+                ? containing
+                    .OrderByDescending(context => context.XStart)
+                    .ThenBy(context => context.MeasureNumber)
+                    .First()
+                : containing
+                    .OrderBy(context => context.XEnd)
+                    .ThenByDescending(context => context.MeasureNumber)
+                    .First();
+        }
+
+        return contexts.FirstOrDefault(context => context.Coordinate == fallback);
     }
 
     private static IReadOnlyList<ShapeElement> CollectLabels(SemanticDocument document)
@@ -265,8 +324,8 @@ public sealed class OttavaPass : ISemanticPass
         return labels
             .Where(label => !usedLabels.Contains(label.ShapeId))
             .Where(label =>
-                label.Ownership.Start == bracket.Ownership!.Start
-                || label.Ownership.End == bracket.Ownership.Start)
+                label.Ownership.Start == context.Coordinate
+                || label.Ownership.End == context.Coordinate)
             .Select(label =>
             {
                 var gap = (bracket.Start.X - label.Bounds.MaxX) / spacing;
@@ -330,6 +389,7 @@ public sealed class OttavaPass : ISemanticPass
     }
 
     private sealed record CoordinateContext(
+        LogicalCoordinate Coordinate,
         int MeasureNumber,
         int StaffNumber,
         BoundsD StaffBounds,
@@ -388,7 +448,7 @@ public sealed class OttavaPass : ISemanticPass
                     StringComparer.Ordinal);
         }
 
-        public string ResolveAt(
+        public string ResolveStartAt(
             int measureNumber,
             int staff,
             double x)
@@ -417,6 +477,36 @@ public sealed class OttavaPass : ISemanticPass
                 .First()
                 .At
                 .ToString();
+        }
+
+        public string ResolveEndAt(
+            int measureNumber,
+            int staff,
+            double x)
+        {
+            var measureDuration = MeasureDuration(measureNumber);
+            var candidate = _onsets
+                .Where(onset =>
+                    onset.MeasureNumber == measureNumber
+                    && onset.Staff == staff
+                    && onset.AnchorX <= x + CoordinateEpsilon)
+                .OrderByDescending(onset => onset.AnchorX)
+                .ThenByDescending(onset => FractionValue(Fraction.Parse(onset.At)))
+                .FirstOrDefault();
+
+            if (candidate is null)
+            {
+                return ResolveStartAt(measureNumber, staff, x);
+            }
+
+            var end = Fraction.Parse(candidate.At) + Duration(candidate);
+            if (FractionValue(measureDuration) > 0
+                && FractionValue(end) > FractionValue(measureDuration))
+            {
+                end = measureDuration;
+            }
+
+            return end.ToString();
         }
 
         private Fraction MeasureDuration(int measureNumber)
