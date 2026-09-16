@@ -92,7 +92,8 @@ jobs:
           grep -q '^semantic.graceNotes=2$' artifacts/semantic-summary.txt
           grep -q '^canonical.graceEvents=2$' artifacts/semantic-summary.txt
           grep -q '^semantic.chords=' artifacts/semantic-summary.txt
-          grep -q '^semantic.ties=' artifacts/semantic-summary.txt
+          grep -q '^semantic.ties=3$' artifacts/semantic-summary.txt
+          grep -q '^semantic.slurs=12$' artifacts/semantic-summary.txt
           grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
 
           python3 - <<'PY'
@@ -145,6 +146,36 @@ jobs:
           assert len(grace_events) == 2
           assert {event["at"] for event in grace_events} == {"1/4"}
           assert all("duration" not in event for event in grace_events)
+
+          def measure(number):
+              return next(
+                  item
+                  for item in canonical["parts"][0]["measures"]
+                  if item["number"] == number)
+
+          def event_with_pitch(number, pitch):
+              return next(
+                  event
+                  for event in measure(number)["events"]
+                  if any(note.get("pitch") == pitch for note in event.get("notes", [])))
+
+          for number in (4, 12):
+              upper = event_with_pitch(number, "F4")
+              lower = event_with_pitch(number, "E4")
+              assert (upper["voice"], upper["at"]) == (1, "0")
+              assert (lower["voice"], lower["at"]) == (2, "0")
+
+          m20 = measure(20)
+          lower_rest = next(event for event in m20["events"] if event["type"] == "rest")
+          assert (lower_rest["staff"], lower_rest["at"]) == (2, "0")
+          upper_sustained = [
+              event
+              for event in m20["events"]
+              if event.get("notes")
+              and any(note.get("staff") == 1 for note in event["notes"])
+          ]
+          assert len(upper_sustained) == 2
+          assert all(event["at"] == "0" for event in upper_sustained)
 
           with ZipFile("artifacts/kancheli.semantic.mxl") as archive:
               names = set(archive.namelist())
