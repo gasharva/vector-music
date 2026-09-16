@@ -36,8 +36,10 @@ jobs:
           git config user.email "gasharva@users.noreply.github.com"
           git rm Tools/apply_arpeggio_wiring.py .github/workflows/apply-arpeggio-wiring.yml
           git add \
+            SemanticInterpreter/ArpeggioPass.cs \
             SemanticInterpreter/MeasureSceneBuilder.cs \
             SemanticInterpreter/SemanticPipeline.cs \
-            SemanticInterpreter/CanonicalNotationBuilder.cs
+            SemanticInterpreter/CanonicalNotationBuilder.cs \
+            SemanticInterpreter.Tests/ArpeggioPassTests.cs
           git commit -m "Project vertical zigzags as arpeggios"
           git push origin HEAD:master
