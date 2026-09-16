@@ -120,6 +120,83 @@ public sealed class LogicalOwnershipPrimitiveTests
                 && assignment.Ownership == ownership);
     }
 
+    [Fact]
+    public void BracketSpanner_InOuterBand_IsOwnedByGenerationFour()
+    {
+        var anchorBounds = new BoundsD(20, 85, 30, 105);
+        var anchorPoints = new[]
+        {
+            new PointD(20, 85),
+            new PointD(30, 105)
+        };
+        var geometry = new GeometricScene(
+        [
+            new GeometricShape(
+                "anchor",
+                "path",
+                anchorPoints,
+                anchorBounds)
+        ]);
+        var coordinate = new LogicalCoordinate("staff-upper", "m1");
+        var existingOwnership = new LogicalOwnershipScene(
+        [
+            new LogicalOwnershipAssignment(
+                "anchor",
+                "ShapeInstance",
+                new LogicalOwnership(
+                    coordinate,
+                    coordinate,
+                    1,
+                    null,
+                    0,
+                    "DirectIntersection"))
+        ]);
+        var anchor = new ShapeInstance(
+            "anchor",
+            "prototype-anchor",
+            anchorBounds.CenterX,
+            anchorBounds.CenterY,
+            anchorBounds.Width,
+            anchorBounds.Height,
+            "path",
+            null);
+        var bracket = new BracketSpannerPrimitive(
+            "bracket-outer",
+            new PointD(40, 90),
+            new PointD(80, 90),
+            null,
+            new PointD(80, 96),
+            BracketHookDirection.None,
+            BracketHookDirection.Down,
+            false,
+            1,
+            0.95,
+            ["outer-span-source"]);
+        var notation = EmptyNotation() with
+        {
+            Instances = [anchor],
+            BracketSpanners = [bracket]
+        };
+
+        var result = new FourthGenerationOuterBandAssigner().AssignAndApply(
+            geometry,
+            notation,
+            Layout(),
+            existingOwnership);
+
+        var ownership = Assert.Single(result.Scene.BracketSpanners).Ownership;
+        Assert.NotNull(ownership);
+        Assert.Equal(4, ownership.Generation);
+        Assert.Equal(coordinate, ownership.Start);
+        Assert.Equal(coordinate, ownership.End);
+        Assert.Contains(
+            result.Ownership.Assignments,
+            assignment =>
+                assignment.ShapeId == "outer-span-source"
+                && assignment.Kind == "BracketSpanner"
+                && assignment.Ownership == ownership);
+    }
+
     private static NotationScene EmptyNotation() =>
         new([], [], [], [], []);
 
