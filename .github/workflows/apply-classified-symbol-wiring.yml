@@ -39,6 +39,12 @@ jobs:
           git config user.name "gasharva"
           git config user.email "gasharva@users.noreply.github.com"
           git rm Tools/apply_classified_symbol_wiring.py .github/workflows/apply-classified-symbol-wiring.yml
-          git add SemanticInterpreter/ClassifiedSymbolPass.cs SemanticInterpreter/SemanticPipeline.cs SemanticInterpreter/CanonicalNotationBuilder.cs
+          git add \
+            SemanticInterpreter/ClassifiedSymbolPass.cs \
+            SemanticInterpreter/SemanticPipeline.cs \
+            SemanticInterpreter/CanonicalNotationBuilder.cs \
+            SemanticInterpreter/HairpinPass.cs \
+            SemanticInterpreter.Tests/HairpinPassTests.cs \
+            SemanticInterpreter.Tests/HairpinStaffResolutionTests.cs
           git commit -m "Project residual classified symbols into MusicXML"
           git push origin HEAD:master
