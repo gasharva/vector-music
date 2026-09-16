@@ -54,3 +54,8 @@ public sealed record ShapeElement : SemanticElement
     public required ShapeInstance Source { get; init; }
     public SymbolClassification? Classification => Source.Classification;
 }
+
+public sealed record BracketSpannerElement : SemanticElement
+{
+    public required BracketSpannerPrimitive Source { get; init; }
+}
