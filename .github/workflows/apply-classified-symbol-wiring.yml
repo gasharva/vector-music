@@ -43,8 +43,6 @@ jobs:
             SemanticInterpreter/ClassifiedSymbolPass.cs \
             SemanticInterpreter/SemanticPipeline.cs \
             SemanticInterpreter/CanonicalNotationBuilder.cs \
-            SemanticInterpreter/HairpinPass.cs \
-            SemanticInterpreter.Tests/HairpinPassTests.cs \
-            SemanticInterpreter.Tests/HairpinStaffResolutionTests.cs
+            SemanticInterpreter/HairpinPass.cs
           git commit -m "Project residual classified symbols into MusicXML"
           git push origin HEAD:master
