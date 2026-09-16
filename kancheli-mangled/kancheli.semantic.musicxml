@@ -33,13 +33,13 @@
           <line>4</line>
         </clef>
       </attributes>
-      <direction placement="above">
+      <direction placement="below">
         <direction-type>
           <dynamics>
             <pp />
           </dynamics>
         </direction-type>
-        <staff>2</staff>
+        <staff>1</staff>
       </direction>
       <note>
         <pitch>
@@ -4430,13 +4430,13 @@
       </note>
     </measure>
     <measure number="25">
-      <direction placement="above">
+      <direction placement="below">
         <direction-type>
           <dynamics>
             <ppp />
           </dynamics>
         </direction-type>
-        <staff>2</staff>
+        <staff>1</staff>
       </direction>
       <note>
         <pitch>
