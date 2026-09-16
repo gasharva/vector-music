@@ -83,7 +83,7 @@ public sealed class BeamAttachmentPass : ISemanticPass
         facts.AddTrace(
             $"BeamAttachmentPass decisions: candidates={analysis.Decisions.Count}; "
             + $"accepted={analysis.Accepted.Count}; hooks={hooks}; "
-            + $"recovered-compact-hooks={recovery.RecoveredCount}; "
+            + $"recovered-residual-beams={recovery.RecoveredCount}; "
             + $"cross-staff={crossStaff}; levels=[{levelSummary}]");
     }
 }

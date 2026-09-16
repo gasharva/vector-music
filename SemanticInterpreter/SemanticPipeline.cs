@@ -17,13 +17,127 @@ public sealed class SemanticPipeline
     {
         var materialized = passes.ToList();
 
-        // Duration is a terminal derived fact: once noteheads are part of a semantic
-        // pipeline, infer duration after the supplied attachment passes unless the
-        // caller already positioned DurationPass explicitly.
+        // Rest facts must exist before DotAttachmentPass: augmentation dots can
+        // belong to rests as well as noteheads. If callers do not position RestPass
+        // explicitly, insert it immediately before dots when possible.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not RestPass))
+        {
+            var dotIndex = materialized.FindIndex(pass => pass is DotAttachmentPass);
+            if (dotIndex >= 0)
+            {
+                materialized.Insert(dotIndex, new RestPass());
+            }
+            else
+            {
+                materialized.Add(new RestPass());
+            }
+        }
+
         if (materialized.Any(pass => pass is NoteheadPass)
             && materialized.All(pass => pass is not DurationPass))
         {
             materialized.Add(new DurationPass());
+        }
+
+        // ChordPass knows which visually separate heads are one rhythmic event. Use
+        // that fact to repair missed per-head augmentation dots before voices/onsets.
+        if (materialized.Any(pass => pass is ChordPass)
+            && materialized.All(pass => pass is not ChordDurationNormalizationPass))
+        {
+            var chordIndex = materialized.FindLastIndex(pass => pass is ChordPass);
+            materialized.Insert(
+                chordIndex + 1,
+                new ChordDurationNormalizationPass());
+        }
+
+        // Voice inference needs both pitched/chord facts and rests.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not VoicePass))
+        {
+            materialized.Add(new VoicePass());
+        }
+
+        // Some overlapping voices have no simultaneous x-position to trigger the
+        // primary VoicePass. Rhythmic overfill plus opposite stems can still prove
+        // that a provisional single voice must be split before onset reconstruction.
+        if (materialized.Any(pass => pass is VoicePass)
+            && materialized.All(pass => pass is not MeasureFitVoicePass))
+        {
+            var voiceIndex = materialized.FindLastIndex(pass => pass is VoicePass);
+            materialized.Insert(
+                voiceIndex + 1,
+                new MeasureFitVoicePass());
+        }
+
+        // Onsets consume duration, chord, rest and voice assignments and recover
+        // exact positions inside the measure.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not OnsetPass))
+        {
+            materialized.Add(new OnsetPass());
+        }
+
+        // Stem direction is local engraving evidence, not a permanent voice id.
+        // Refine rest-bridged pitch continuity and recompute onsets when necessary.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not VoiceContinuityPass))
+        {
+            var onsetIndex = materialized.FindLastIndex(pass => pass is OnsetPass);
+            materialized.Insert(
+                onsetIndex + 1,
+                new VoiceContinuityPass());
+        }
+
+        // A single secondary sustained event can have no exact cross-voice x anchor.
+        // After all voice refinements are stable, use the barline as an additional
+        // timing constraint when geometry clearly supports an end-of-measure fit.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not MeasureEndOnsetRefinementPass))
+        {
+            var continuityIndex = materialized.FindLastIndex(pass => pass is VoiceContinuityPass);
+            var insertionIndex = continuityIndex >= 0
+                ? continuityIndex + 1
+                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new MeasureEndOnsetRefinementPass());
+        }
+
+        // Curves are already extracted geometrically. SlurPass classifies their
+        // pitched endpoints first and deliberately reserves same-pitch arches.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not SlurPass))
+        {
+            var tieIndex = materialized.FindIndex(pass => pass is TiePass);
+            if (tieIndex >= 0)
+            {
+                materialized.Insert(tieIndex, new SlurPass());
+            }
+            else
+            {
+                materialized.Add(new SlurPass());
+            }
+        }
+
+        // TiePass consumes the same-pitch arc hypotheses after SlurPass has claimed
+        // genuine slurs, so one raw curve cannot become both relations.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not TiePass))
+        {
+            materialized.Add(new TiePass());
+        }
+
+        // Curves crossing a barline can be logically owned by only one of its two
+        // measures, and ledger curves can also sit in the neighbouring staff band.
+        // Recovery therefore uses global page geometry after the normal classifiers.
+        if (materialized.Any(pass => pass is TiePass)
+            && materialized.All(pass => pass is not TieSpatialRecoveryPass))
+        {
+            var tieIndex = materialized.FindLastIndex(pass => pass is TiePass);
+            materialized.Insert(
+                tieIndex + 1,
+                new TieSpatialRecoveryPass());
         }
 
         _passes = materialized;

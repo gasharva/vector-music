@@ -17,6 +17,7 @@ public sealed class ShapeClusterer : IShapeClusterer
 {
     private readonly double _distanceThreshold;
     private readonly IGeometryAnalyzer _geometryAnalyzer;
+    private readonly IHairpinExtractor _hairpinExtractor;
     private readonly IArcExtractor _arcExtractor;
     private readonly IEllipseLikeExtractor _ellipseExtractor;
     private readonly ShapeDescriptorMatcher _descriptorMatcher;
@@ -31,9 +32,11 @@ public sealed class ShapeClusterer : IShapeClusterer
         IGeometryAnalyzer? geometryAnalyzer = null,
         IArcExtractor? arcExtractor = null,
         IEllipseLikeExtractor? ellipseExtractor = null,
+        IHairpinExtractor? hairpinExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
+        _hairpinExtractor = hairpinExtractor ?? new HairpinExtractor();
         _arcExtractor = arcExtractor ?? new ArcExtractor();
         _ellipseExtractor = ellipseExtractor ?? new EllipseLikeExtractor();
         _descriptorMatcher = new ShapeDescriptorMatcher();
@@ -50,9 +53,24 @@ public sealed class ShapeClusterer : IShapeClusterer
         var strokes = new List<Stroke>();
         var curvedStrokes = new List<CurvedStroke>();
         var ellipses = new List<EllipseLike>();
+        var hairpins = new List<HairpinPrimitive>();
 
         foreach (var shape in scene.Shapes)
         {
+            // A very long, shallow hairpin can look almost straight to the generic
+            // PCA stroke detector: its opening is tiny compared with its horizontal
+            // span. Hairpin geometry is more specific than a generic stroke, so give
+            // it first refusal. The extractor itself is deliberately strict about
+            // requiring two straight branches, vertically separated endpoints and a
+            // single opposite apex, so ordinary staff/ledger/bar lines are rejected.
+            if (_hairpinExtractor.TryCreateHairpin(
+                shape,
+                out var hairpin))
+            {
+                hairpins.Add(hairpin);
+                continue;
+            }
+
             if (_geometryAnalyzer.TryCreateStroke(
                 shape,
                 out var stroke))
@@ -88,7 +106,10 @@ public sealed class ShapeClusterer : IShapeClusterer
             instances,
             strokes,
             curvedStrokes,
-            ellipses);
+            ellipses)
+        {
+            Hairpins = hairpins
+        };
     }
 
     private void AddResidualShape(

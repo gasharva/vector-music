@@ -7,17 +7,16 @@ public sealed record ResidualBeamHookRecoveryResult(
     int RecoveredCount);
 
 /// <summary>
-/// Beam hooks are much shorter than ordinary beams. Their filled rectangular
-/// contour can therefore fail the generic stroke extractor's elongation test
-/// and survive as a residual ShapeElement. Recover only the compact horizontal
-/// box geometry that has beam-like dimensions; BeamAttachmentAnalyzer still
-/// has to prove that the recovered stroke terminates at an accepted stem and
-/// that its per-stem rank makes musical sense.
+/// Filled beam rectangles can fail the generic stroke extractor and survive as
+/// residual ShapeElements. This happens both for compact hooks and for ordinary
+/// two-note beams. Recover horizontal beam-like boxes across that useful length
+/// range; BeamAttachmentAnalyzer still has to prove stem intersections, endpoint
+/// support and a musically valid beam level before accepting them.
 /// </summary>
 public sealed class ResidualBeamHookRecovery
 {
     private const double MinimumLengthInSpacings = 0.85;
-    private const double MaximumLengthInSpacings = 1.55;
+    private const double MaximumLengthInSpacings = 4.50;
     private const double MinimumThicknessInSpacings = 0.22;
     private const double MaximumThicknessInSpacings = 0.80;
     private const double MinimumAspectRatio = 1.75;
@@ -61,7 +60,7 @@ public sealed class ResidualBeamHookRecovery
         foreach (var shape in staff.Elements.OfType<ShapeElement>())
         {
             if (existingStrokeIds.Contains(shape.ShapeId)
-                || !IsCompactBeamBox(
+                || !IsResidualBeamBox(
                     shape.Bounds,
                     staff.LineSpacing))
             {
@@ -74,7 +73,7 @@ public sealed class ResidualBeamHookRecovery
                 new PointD(bounds.MinX, bounds.CenterY),
                 new PointD(bounds.MaxX, bounds.CenterY),
                 bounds.Height,
-                "residual-beam-hook",
+                "residual-beam",
                 shape.Source.SourceIndex,
                 shape.Ownership);
 
@@ -103,7 +102,7 @@ public sealed class ResidualBeamHookRecovery
         };
     }
 
-    private static bool IsCompactBeamBox(
+    private static bool IsResidualBeamBox(
         BoundsD bounds,
         double lineSpacing)
     {

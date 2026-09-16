@@ -388,6 +388,10 @@ File.WriteAllLines(
         $"semantic.durations={facts.OfType<DurationFact>().Count()}",
         $"semantic.chords={facts.OfType<ChordFact>().Count()}",
         $"semantic.chordNoteheads={facts.OfType<ChordFact>().Sum(chord => chord.NoteheadIds.Count)}",
+        $"semantic.ties={facts.OfType<TieFact>().Count()}",
+        $"semantic.slurs={facts.OfType<SlurFact>().Count()}",
+        $"canonical.ties={canonical.Relations.Ties.Count}",
+        $"canonical.slurs={canonical.Relations.Slurs.Count}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
         $"musicxml.path={Path.GetFullPath(musicXmlPath)}",
@@ -445,6 +449,8 @@ Console.WriteLine($"  dot targets: {facts.OfType<DotAttachmentFact>().Count()}")
 Console.WriteLine($"  augm. dots : {facts.OfType<DotAttachmentFact>().Sum(dot => dot.Count)}");
 Console.WriteLine($"  durations  : {facts.OfType<DurationFact>().Count()}");
 Console.WriteLine($"  chords     : {facts.OfType<ChordFact>().Count()}");
+Console.WriteLine($"  ties       : {facts.OfType<TieFact>().Count()}");
+Console.WriteLine($"  slurs      : {facts.OfType<SlurFact>().Count()}");
 Console.WriteLine($"  ownership ledger corrections: {ledgerLadderOwnership.Adjustments.Count}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
@@ -625,6 +631,24 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"staffs=[{string.Join(',', chord.Staffs)}] "
                     + $"noteheads=[{string.Join(',', chord.NoteheadIds)}] "
                     + $"confidence={chord.Confidence:P1}; reason={chord.Reason}";
+                break;
+
+            case TieFact tie:
+                yield return $"tie {tie.CurveShapeId} m{tie.StartMeasureNumber}->m{tie.EndMeasureNumber} "
+                    + $"staff={tie.Staff} pitch={tie.Pitch} "
+                    + $"noteheads={tie.FromNoteheadId}->{tie.ToNoteheadId} "
+                    + $"placement={tie.Placement ?? "unspecified"} "
+                    + $"distance={tie.StartDistanceInSpacings:F2}/{tie.EndDistanceInSpacings:F2}sp "
+                    + $"confidence={tie.Confidence:P1}; reason={tie.Reason}";
+                break;
+
+            case SlurFact slur:
+                yield return $"slur {slur.CurveShapeId} m{slur.StartMeasureNumber}->m{slur.EndMeasureNumber} "
+                    + $"staff={slur.StartStaff}->{slur.EndStaff} "
+                    + $"noteheads={slur.FromNoteheadId}->{slur.ToNoteheadId} "
+                    + $"placement={slur.Placement ?? "unspecified"} "
+                    + $"distance={slur.StartDistanceInSpacings:F2}/{slur.EndDistanceInSpacings:F2}sp "
+                    + $"confidence={slur.Confidence:P1}; reason={slur.Reason}";
                 break;
 
             default:

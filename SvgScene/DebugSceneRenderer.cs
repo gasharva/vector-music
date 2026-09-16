@@ -35,6 +35,11 @@ public sealed class DebugSceneRenderer
 
         Render(
             input,
+            Path.Combine(dir, name + ".hairpins.svg"),
+            (root, ns, unit) => AddHairpins(root, ns, scene, unit));
+
+        Render(
+            input,
             Path.Combine(dir, name + ".contours.svg"),
             (root, ns, unit) => AddContours(root, ns, scene, unit));
     }
@@ -161,6 +166,66 @@ public sealed class DebugSceneRenderer
                 new XAttribute("stroke", ellipse.IsHollow ? "#7b1fa2" : "#20a050"),
                 new XAttribute("stroke-width", F(1.35 * unit)),
                 new XAttribute("opacity", "0.86")));
+        }
+
+        root.Add(group);
+    }
+
+    private static void AddHairpins(
+        XElement root,
+        XNamespace ns,
+        NotationScene scene,
+        double unit)
+    {
+        const string wedgeColor = "#ff00ff";
+        const string apexColor = "#00e5ff";
+        var group = Group(ns, "debug-hairpins");
+
+        foreach (var hairpin in scene.Hairpins)
+        {
+            var pathData = $"M {F(hairpin.OpenUpper.X)} {F(hairpin.OpenUpper.Y)} "
+                + $"L {F(hairpin.Apex.X)} {F(hairpin.Apex.Y)} "
+                + $"L {F(hairpin.OpenLower.X)} {F(hairpin.OpenLower.Y)}";
+            var labelX = Math.Min(hairpin.Apex.X, hairpin.OpenUpper.X)
+                + Math.Abs(hairpin.OpenUpper.X - hairpin.Apex.X) * 0.50;
+            var labelY = Math.Min(
+                    hairpin.OpenUpper.Y,
+                    Math.Min(hairpin.OpenLower.Y, hairpin.Apex.Y))
+                - 3.5 * unit;
+            var label = hairpin.Kind == HairpinKind.Crescendo
+                ? "HP<"
+                : "HP>";
+
+            group.Add(
+                new XElement(
+                    ns + "path",
+                    new XAttribute("d", pathData),
+                    new XAttribute("fill", "none"),
+                    new XAttribute("stroke", wedgeColor),
+                    new XAttribute("stroke-width", F(3.2 * unit)),
+                    new XAttribute("stroke-linecap", "round"),
+                    new XAttribute("stroke-linejoin", "round"),
+                    new XAttribute("opacity", "0.92")),
+                new XElement(
+                    ns + "circle",
+                    new XAttribute("cx", F(hairpin.Apex.X)),
+                    new XAttribute("cy", F(hairpin.Apex.Y)),
+                    new XAttribute("r", F(3.0 * unit)),
+                    new XAttribute("fill", apexColor),
+                    new XAttribute("stroke", "#111111"),
+                    new XAttribute("stroke-width", F(0.8 * unit))),
+                new XElement(
+                    ns + "text",
+                    new XAttribute("x", F(labelX)),
+                    new XAttribute("y", F(labelY)),
+                    new XAttribute("font-family", "Arial, sans-serif"),
+                    new XAttribute("font-size", F(7.5 * unit)),
+                    new XAttribute("font-weight", "700"),
+                    new XAttribute("fill", wedgeColor),
+                    new XAttribute("stroke", "white"),
+                    new XAttribute("stroke-width", F(1.1 * unit)),
+                    new XAttribute("paint-order", "stroke fill"),
+                    $"{label} {hairpin.ShapeId}"));
         }
 
         root.Add(group);
