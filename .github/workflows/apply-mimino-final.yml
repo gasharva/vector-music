@@ -1,0 +1,47 @@
+name: Apply final Mimino fixes
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/apply-mimino-final.yml"
+      - ".github/mimino-final/apply.py"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Apply final Mimino patch
+        run: python3 .github/mimino-final/apply.py
+
+      - name: Run semantic unit tests
+        run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
+
+      - name: Build semantic interpreter
+        run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
+
+      - name: Commit verified code
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gasharva"
+          git config user.email "gasharva@users.noreply.github.com"
+          git add \
+            SemanticInterpreter/PedalPass.cs \
+            SemanticInterpreter/ClassifiedSymbolPass.cs \
+            SemanticInterpreter.Tests/PedalPassTests.cs \
+            SemanticInterpreter.Tests/ClassifiedSymbolPassTests.cs
+          git commit -m "Recover misplaced pedal and split mp dynamics [skip ci]"
+          git push origin HEAD:master
