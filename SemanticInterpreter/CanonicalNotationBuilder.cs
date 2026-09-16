@@ -158,6 +158,10 @@ public sealed class CanonicalNotationBuilder
                 stemToEventId,
                 eventX);
 
+            events.AddRange(BuildClassifiedDynamicEvents(
+                measure.Number,
+                facts));
+
             measures.Add(new Measure(
                 measure.Number,
                 events,
@@ -537,6 +541,14 @@ public sealed class CanonicalNotationBuilder
 
         var x = noteheads.Average(note => note.CenterX);
 
+        var classifiedMarks = facts
+            .OfType<ClassifiedNotationMarkFact>()
+            .Where(mark => noteheads.Any(note =>
+                note.ShapeId == mark.TargetNoteheadId))
+            .OrderBy(mark => mark.CenterX)
+            .ThenBy(mark => mark.ShapeId, StringComparer.Ordinal)
+            .ToArray();
+
         var notation = new EventNotation(
             NoteType: selectedDuration.NoteType,
             Dots: selectedDuration.Dots > 0
@@ -549,7 +561,16 @@ public sealed class CanonicalNotationBuilder
                     StemDirection.Up => "up",
                     StemDirection.Down => "down",
                     _ => null
-                });
+                },
+            Articulations: BuildClassifiedMarks(
+                classifiedMarks,
+                ClassifiedNotationFamily.Articulation),
+            Ornaments: BuildClassifiedMarks(
+                classifiedMarks,
+                ClassifiedNotationFamily.Ornament),
+            Fermatas: BuildClassifiedMarks(
+                classifiedMarks,
+                ClassifiedNotationFamily.Fermata));
 
         var ev = new CanonicalEvent
         {
@@ -569,6 +590,45 @@ public sealed class CanonicalNotationBuilder
             targetKind,
             targetId,
             stem?.StemShapeId);
+    }
+
+    private static List<NotationMark>? BuildClassifiedMarks(
+        IReadOnlyList<ClassifiedNotationMarkFact> marks,
+        ClassifiedNotationFamily family)
+    {
+        var result = marks
+            .Where(mark => mark.Family == family)
+            .Select(mark => new NotationMark(
+                mark.Type,
+                Placement: mark.Placement))
+            .Distinct()
+            .ToList();
+
+        return result.Count > 0
+            ? result
+            : null;
+    }
+
+    private static IEnumerable<CanonicalEvent> BuildClassifiedDynamicEvents(
+        int measureNumber,
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<DynamicDirectionFact>()
+            .Where(fact => fact.MeasureNumber == measureNumber)
+            .OrderBy(fact => Fraction.Parse(fact.At).Numerator
+                / (double)Fraction.Parse(fact.At).Denominator)
+            .ThenBy(fact => fact.CenterX)
+            .ThenBy(fact => fact.ShapeId, StringComparer.Ordinal)
+            .Select(fact => new CanonicalEvent
+            {
+                Id = $"m{measureNumber}-dynamic-{fact.ShapeId}",
+                Type = "dynamic",
+                At = fact.At,
+                Staff = fact.Staff,
+                Value = fact.Value,
+                Placement = fact.Placement
+            });
     }
 
     private static int ResolveCanonicalVoice(

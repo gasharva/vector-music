@@ -537,29 +537,10 @@ public sealed class HairpinPass : ISemanticPass
             int staff,
             double x)
         {
-            var measureDuration = MeasureDuration(measureNumber);
-            var candidate = _onsets
-                .Where(onset =>
-                    onset.MeasureNumber == measureNumber
-                    && onset.Staff == staff
-                    && onset.AnchorX <= x + CoordinateEpsilon)
-                .OrderByDescending(onset => onset.AnchorX)
-                .ThenByDescending(onset => HairpinPass.FractionValue(Fraction.Parse(onset.At)))
-                .FirstOrDefault();
-
-            if (candidate is null)
-            {
-                return ResolveStartAt(measureNumber, staff, x);
-            }
-
-            var end = Fraction.Parse(candidate.At) + Duration(candidate);
-            if (HairpinPass.FractionValue(measureDuration) > 0
-                && HairpinPass.FractionValue(end) > HairpinPass.FractionValue(measureDuration))
-            {
-                end = measureDuration;
-            }
-
-            return end.ToString();
+            // A wedge stop is engraved at the rhythmic position where the change
+            // stops. Snap to the nearest onset or measure boundary; do not add the
+            // previous note duration (that rule belongs to pedal-like spans).
+            return ResolveStartAt(measureNumber, staff, x);
         }
 
         private Fraction MeasureDuration(int measureNumber)

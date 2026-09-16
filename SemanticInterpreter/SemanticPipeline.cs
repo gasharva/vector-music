@@ -192,6 +192,14 @@ public sealed class SemanticPipeline
                 new TieSpatialRecoveryPass());
         }
 
+        // Simple classifier leftovers run last, after every specialized pass has had
+        // a chance to claim its source shapes through SemanticFact.SourceShapeIds.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not ClassifiedSymbolPass))
+        {
+            materialized.Add(new ClassifiedSymbolPass());
+        }
+
         _passes = materialized;
     }
 

@@ -1,3 +1,4 @@
+using SvgMusic.Canonical;
 using SvgMusic.Scene;
 
 namespace SvgMusic.Semantics;
