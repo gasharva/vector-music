@@ -30,6 +30,30 @@ public sealed class HairpinExtractorTests
     }
 
     [Fact]
+    public void LongShallowMuseScoreHairpin_WinsBeforeGenericStrokeExtraction()
+    {
+        // This is the actual hairpin below measures 7-8. Its 24px opening over
+        // an 863px span is shallow enough that the generic PCA stroke detector
+        // also considers it straight unless hairpins are given first refusal.
+        var shape = Shape(
+            "m7-hairpin",
+            [
+                new PointD(1832.38, 1802.76),
+                new PointD(968.99, 1790.54),
+                new PointD(1832.38, 1778.33)
+            ],
+            strokeWidth: 2.55,
+            sourceKind: "polyline");
+
+        var scene = new GeometricScene([shape]);
+        var notation = new ShapeClusterer().Cluster(scene);
+
+        var hairpin = Assert.Single(notation.Hairpins);
+        Assert.Equal(HairpinKind.Crescendo, hairpin.Kind);
+        Assert.Empty(notation.Strokes);
+    }
+
+    [Fact]
     public void FlattenedInternetSubpath_IsRecognizedAfterExistingSubpathSplit()
     {
         // Same geometry as the flattened internet SVG after SvgNormalizer and
