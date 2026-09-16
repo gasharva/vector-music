@@ -276,7 +276,7 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
 
     private static void ProjectDynamic(
         MeasureScene measure,
-        StaffMeasureScene staff,
+        StaffMeasureScene ownedStaff,
         ShapeElement element,
         string label,
         string value,
@@ -285,6 +285,13 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
         SemanticFacts facts,
         ICollection<ClassifiedSymbolDecision> decisions)
     {
+        // Directions engraved between the two piano staves are especially easy for
+        // generic ownership to assign to the wrong side. Ownership still identifies
+        // the correct measure/piano pair; the semantic staff is the nearest stave.
+        var staff = ResolveNearestStaff(
+            measure,
+            element.CenterY,
+            ownedStaff.StaffNumber);
         var anchor = onsets
             .Where(onset =>
                 onset.MeasureNumber == measure.Number
@@ -303,7 +310,7 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
                 staff.StaffNumber,
                 "no-rhythmic-anchor",
                 classificationConfidence,
-                $"{label} has no rhythmic onset on owned staff/measure"));
+                $"{label} has no rhythmic onset on resolved staff/measure"));
             return;
         }
 
@@ -325,7 +332,8 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
         var placement = PlacementAgainstStaff(element.CenterY, staff.StaffBounds);
         var reason =
             $"{element.ShapeId}: {label} {classificationConfidence:P0} -> dynamic {value}; "
-            + $"m{measure.Number}:{anchor.At}; staff={staff.StaffNumber}; placement={placement}; "
+            + $"m{measure.Number}:{anchor.At}; genericStaff={ownedStaff.StaffNumber}; "
+            + $"semanticStaff={staff.StaffNumber}; placement={placement}; "
             + $"dx={dx / Math.Max(staff.LineSpacing, 0.001):F2}sp";
 
         facts.Add(new DynamicDirectionFact(
@@ -431,6 +439,35 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
             null,
             confidence,
             reason);
+
+    private static StaffMeasureScene ResolveNearestStaff(
+        MeasureScene measure,
+        double y,
+        int ownedStaffNumber)
+    {
+        return new[] { measure.Upper, measure.Lower }
+            .OrderBy(staff => DistanceToStaff(y, staff.StaffBounds))
+            .ThenByDescending(staff => staff.StaffNumber == ownedStaffNumber)
+            .ThenBy(staff => staff.StaffNumber)
+            .First();
+    }
+
+    private static double DistanceToStaff(
+        double y,
+        BoundsD bounds)
+    {
+        if (y < bounds.MinY)
+        {
+            return bounds.MinY - y;
+        }
+
+        if (y > bounds.MaxY)
+        {
+            return y - bounds.MaxY;
+        }
+
+        return 0;
+    }
 
     private static string PlacementAgainstStaff(
         double y,
