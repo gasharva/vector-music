@@ -89,28 +89,20 @@ public sealed class PedalPass : ISemanticPass
                 continue;
             }
 
-            if (source.Ownership is null)
-            {
-                decisions.Add(Reject(
-                    source.Id,
-                    "unmapped-ownership",
-                    $"{source.Id}: bracket has no logical ownership"));
-                continue;
-            }
-
-            var staffId = source.Ownership.Start.StaffId;
-            var startContext = ResolveContextAtX(
+            var baselineY = (source.Start.Y + source.End.Y) / 2.0;
+            var startContext = ResolvePedalContextAtX(
                 contexts,
-                staffId,
                 source.Start.X,
-                source.Ownership.Start,
+                baselineY,
                 preferLaterAtBoundary: true);
-            var endContext = ResolveContextAtX(
-                contexts,
-                staffId,
-                source.End.X,
-                source.Ownership.End,
-                preferLaterAtBoundary: false);
+            var endContext = startContext is null
+                ? null
+                : ResolveContextAtX(
+                    contexts,
+                    startContext.Coordinate.StaffId,
+                    source.End.X,
+                    startContext.Coordinate,
+                    preferLaterAtBoundary: false);
 
             if (startContext is null || endContext is null)
             {
@@ -251,6 +243,55 @@ public sealed class PedalPass : ISemanticPass
         return result;
     }
 
+    private static CoordinateContext? ResolvePedalContextAtX(
+        IReadOnlyList<CoordinateContext> contexts,
+        double x,
+        double baselineY,
+        bool preferLaterAtBoundary)
+    {
+        var candidates = contexts
+            .Where(context => context.StaffNumber == 2)
+            .Where(context =>
+                x >= context.XStart - CoordinateEpsilon
+                && x <= context.XEnd + CoordinateEpsilon)
+            .Select(context => new
+            {
+                Context = context,
+                Gap = baselineY - context.StaffBounds.MaxY,
+                Tolerance = Math.Max(context.LineSpacing, 0.001)
+                    * OutsideStaffToleranceInSpacings
+            })
+            .ToArray();
+
+        // Prefer the closest lower stave physically above the pedal baseline. This
+        // recovers inter-system pedals whose generic owner leaked into the next row.
+        var belowStaff = candidates
+            .Where(candidate => candidate.Gap >= -candidate.Tolerance)
+            .OrderBy(candidate =>
+                candidate.Gap / Math.Max(candidate.Context.LineSpacing, 0.001))
+            .ThenBy(candidate => preferLaterAtBoundary
+                ? -candidate.Context.XStart
+                : candidate.Context.XEnd)
+            .ThenBy(candidate => candidate.Context.MeasureNumber)
+            .Select(candidate => candidate.Context)
+            .FirstOrDefault();
+
+        if (belowStaff is not null)
+        {
+            return belowStaff;
+        }
+
+        // Keep enough context for IsBelowStaff to reject genuinely above-staff
+        // brackets with the precise semantic reason instead of "unmapped".
+        return candidates
+            .OrderBy(candidate =>
+                Math.Abs(candidate.Gap)
+                / Math.Max(candidate.Context.LineSpacing, 0.001))
+            .ThenBy(candidate => candidate.Context.MeasureNumber)
+            .Select(candidate => candidate.Context)
+            .FirstOrDefault();
+    }
+
     private static CoordinateContext? ResolveContextAtX(
         IReadOnlyList<CoordinateContext> contexts,
         string staffId,
@@ -325,9 +366,10 @@ public sealed class PedalPass : ISemanticPass
 
         return labels
             .Where(label => !usedLabels.Contains(label.ShapeId))
-            .Where(label =>
-                label.Ownership.Start == context.Coordinate
-                || label.Ownership.End == context.Coordinate)
+            // PEDAL_MARK ownership can fail for exactly the same reason as the
+            // bracket: both live in the inter-system whitespace. Once the bracket
+            // has selected the lower stave geometrically, pair the glyph by its own
+            // x/y relation to the bracket rather than inherited ownership.
             .Select(label =>
             {
                 var gap = (bracket.Start.X - label.Bounds.MaxX) / spacing;

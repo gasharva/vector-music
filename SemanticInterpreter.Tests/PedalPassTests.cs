@@ -76,6 +76,34 @@ public sealed class PedalPassTests
     }
 
     [Fact]
+    public void PedalBelowFirstSystem_IgnoresWrongOwnershipInSystemBelow()
+    {
+        var wrongOwnership = new LogicalOwnership(
+            new LogicalCoordinate("lower-2", "m2"),
+            new LogicalCoordinate("lower-2", "m2"),
+            2,
+            "foreign-stem",
+            10,
+            "Proximity");
+        var misplacedElements = new SemanticElement[]
+        {
+            Label(wrongOwnership),
+            Bracket(wrongOwnership, endX: 98, dashed: false)
+        };
+        var document = TwoSystemDocument(misplacedElements);
+        var facts = TimingFacts(1, "note-1", 5, "3/4");
+
+        new PedalPass().Run(document, facts);
+
+        var pedal = Assert.Single(facts.OfType<PedalFact>());
+        Assert.Equal(1, pedal.StartMeasureNumber);
+        Assert.Equal(1, pedal.EndMeasureNumber);
+        Assert.Equal(2, pedal.Staff);
+        Assert.Equal("0", pedal.StartAt);
+        Assert.Equal("3/4", pedal.EndAt);
+    }
+
+    [Fact]
     public void PedalFact_ProjectsToCanonicalRelation_AndMusicXmlDirections()
     {
         var document = TwoMeasureDocument([]);
@@ -201,6 +229,51 @@ public sealed class PedalPassTests
         new([
             Measure(1, "m1", 0, 100, lowerElements),
             Measure(2, "m2", 100, 200, lowerElements)
+        ]);
+
+    private static SemanticDocument TwoSystemDocument(
+        IReadOnlyList<SemanticElement> wronglyOwnedElements) =>
+        new([
+            new MeasureScene(
+                1,
+                "system-1",
+                "pair-1",
+                "m1",
+                0,
+                100,
+                false,
+                new StaffMeasureScene(
+                    1,
+                    "upper-1",
+                    new BoundsD(0, 100, 100, 140),
+                    10,
+                    []),
+                new StaffMeasureScene(
+                    2,
+                    "lower-1",
+                    new BoundsD(0, 200, 100, 240),
+                    10,
+                    [])),
+            new MeasureScene(
+                2,
+                "system-2",
+                "pair-2",
+                "m2",
+                0,
+                100,
+                true,
+                new StaffMeasureScene(
+                    1,
+                    "upper-2",
+                    new BoundsD(0, 400, 100, 440),
+                    10,
+                    []),
+                new StaffMeasureScene(
+                    2,
+                    "lower-2",
+                    new BoundsD(0, 500, 100, 540),
+                    10,
+                    wronglyOwnedElements))
         ]);
 
     private static MeasureScene Measure(

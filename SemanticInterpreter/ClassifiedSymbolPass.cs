@@ -95,6 +95,16 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
             .ToHashSet(StringComparer.Ordinal);
         var noteheads = facts.OfType<NoteheadFact>().ToArray();
         var onsets = facts.OfType<OnsetFact>().ToArray();
+        var shapeGroups = document.Measures
+            .SelectMany(measure => new[] { measure.Upper, measure.Lower })
+            .SelectMany(staff => staff.Elements.OfType<ShapeElement>())
+            .GroupBy(shape => shape.ShapeId, StringComparer.Ordinal)
+            .Select(group => group.First())
+            .GroupBy(shape => BaseShapeId(shape.ShapeId), StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.OrderBy(shape => shape.CenterX).ToArray(),
+                StringComparer.Ordinal);
         var decisions = new List<ClassifiedSymbolDecision>();
         var seen = new HashSet<string>(StringComparer.Ordinal);
 
@@ -116,12 +126,24 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
 
                     var classification = element.Classification;
                     var label = NormalizeLabel(classification.Label);
-                    if (!TryMap(label, out var mapping))
+                    var effectiveConfidence = classification.Confidence;
+                    IReadOnlyList<string> sourceShapeIds = [element.ShapeId];
+
+                    if (!TryMap(label, out var mapping)
+                        && !TryComposeSplitDynamic(
+                            element,
+                            label,
+                            staff.LineSpacing,
+                            shapeGroups,
+                            out label,
+                            out mapping,
+                            out effectiveConfidence,
+                            out sourceShapeIds))
                     {
                         continue;
                     }
 
-                    if (classification.Confidence < MinimumConfidence)
+                    if (effectiveConfidence < MinimumConfidence)
                     {
                         decisions.Add(Reject(
                             element,
@@ -129,12 +151,12 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
                             measure.Number,
                             staff.StaffNumber,
                             "low-confidence",
-                            classification.Confidence,
-                            $"{label} confidence {classification.Confidence:P0} is below {MinimumConfidence:P0}"));
+                            effectiveConfidence,
+                            $"{label} confidence {effectiveConfidence:P0} is below {MinimumConfidence:P0}"));
                         continue;
                     }
 
-                    if (consumed.Contains(element.ShapeId))
+                    if (sourceShapeIds.Any(consumed.Contains))
                     {
                         decisions.Add(Reject(
                             element,
@@ -142,8 +164,8 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
                             measure.Number,
                             staff.StaffNumber,
                             "already-consumed",
-                            classification.Confidence,
-                            $"{element.ShapeId} is already referenced by an earlier semantic fact"));
+                            effectiveConfidence,
+                            $"{string.Join(",", sourceShapeIds)} includes geometry already referenced by an earlier semantic fact"));
                         continue;
                     }
 
@@ -155,7 +177,8 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
                             element,
                             label,
                             mapping.Value,
-                            classification.Confidence,
+                            effectiveConfidence,
+                            sourceShapeIds,
                             onsets,
                             facts,
                             decisions);
@@ -281,6 +304,7 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
         string label,
         string value,
         double classificationConfidence,
+        IReadOnlyList<string> sourceShapeIds,
         IReadOnlyList<OnsetFact> onsets,
         SemanticFacts facts,
         ICollection<ClassifiedSymbolDecision> decisions)
@@ -349,7 +373,7 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
             element.CenterY,
             classificationConfidence,
             reason,
-            [element.ShapeId]));
+            sourceShapeIds));
         decisions.Add(new ClassifiedSymbolDecision(
             element.ShapeId,
             label,
@@ -361,6 +385,80 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
             anchor.At,
             classificationConfidence,
             reason));
+    }
+
+    private static bool TryComposeSplitDynamic(
+        ShapeElement element,
+        string primaryLabel,
+        double lineSpacing,
+        IReadOnlyDictionary<string, ShapeElement[]> shapeGroups,
+        out string effectiveLabel,
+        out SymbolMapping mapping,
+        out double effectiveConfidence,
+        out IReadOnlyList<string> sourceShapeIds)
+    {
+        effectiveLabel = primaryLabel;
+        mapping = default;
+        effectiveConfidence = element.Classification?.Confidence ?? 0;
+        sourceShapeIds = [element.ShapeId];
+
+        // The Audiveris model has no reliable standalone M-dynamic component for
+        // split glyphs. MuseScore-style compound paths can therefore become an
+        // unrecognised left 'm' plus a very confident right DYNAMICS_P. Provenance
+        // from CompoundShapeSplitter gives both fragments the same shape-N prefix.
+        if (primaryLabel != "DYNAMICS_P"
+            || element.Classification is null
+            || element.Classification.Confidence < MinimumConfidence
+            || !shapeGroups.TryGetValue(BaseShapeId(element.ShapeId), out var siblings)
+            || siblings.Length != 2)
+        {
+            return false;
+        }
+
+        var spacing = Math.Max(lineSpacing, 0.001);
+        var left = siblings
+            .Where(candidate => candidate.ShapeId != element.ShapeId)
+            .Where(candidate => candidate.CenterX < element.CenterX)
+            .Where(candidate =>
+                element.CenterX - candidate.CenterX <= spacing * 2.0
+                && Math.Abs(element.CenterY - candidate.CenterY) <= spacing * 1.0)
+            .OrderBy(candidate => element.CenterX - candidate.CenterX)
+            .FirstOrDefault();
+
+        if (left?.Classification is null
+            || left.Classification.Confidence > 0.30)
+        {
+            return false;
+        }
+
+        var verticalOverlap = Math.Max(
+            0,
+            Math.Min(left.Bounds.MaxY, element.Bounds.MaxY)
+                - Math.Max(left.Bounds.MinY, element.Bounds.MinY));
+        var minimumHeight = Math.Max(
+            0.001,
+            Math.Min(left.Bounds.Height, element.Bounds.Height));
+        var broadEnough = left.Bounds.Width >= element.Bounds.Width * 0.55;
+
+        if (verticalOverlap / minimumHeight < 0.55 || !broadEnough)
+        {
+            return false;
+        }
+
+        effectiveLabel = "DYNAMICS_MP";
+        mapping = new SymbolMapping(SymbolFamily.Dynamic, "mp");
+        // Keep this conservative: provenance+geometry are strong evidence, but the
+        // classifier only proved the P component. Still high enough for the residual
+        // pass while remaining below a direct whole-glyph classification.
+        effectiveConfidence = Math.Min(element.Classification.Confidence, 0.92);
+        sourceShapeIds = [left.ShapeId, element.ShapeId];
+        return true;
+    }
+
+    private static string BaseShapeId(string shapeId)
+    {
+        var separator = shapeId.IndexOf('.');
+        return separator < 0 ? shapeId : shapeId[..separator];
     }
 
     private static bool TryMap(

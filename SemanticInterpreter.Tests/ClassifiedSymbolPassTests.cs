@@ -61,6 +61,37 @@ public sealed class ClassifiedSymbolPassTests
     }
 
     [Fact]
+    public void SplitMp_UsesLowConfidenceLeftSiblingFromSameSourceShape()
+    {
+        var mFragment = Symbol(
+            "shape-20.1",
+            "TREMOLO_3",
+            0.12,
+            x: 40,
+            y: 160,
+            width: 12);
+        var pFragment = Symbol(
+            "shape-20.2",
+            "DYNAMICS_P",
+            0.99,
+            x: 54,
+            y: 160,
+            width: 10);
+        var document = Document([mFragment, pFragment]);
+        var facts = new SemanticFacts();
+        AddOnset(facts, "note", x: 52, at: "1/4");
+
+        new ClassifiedSymbolPass().Run(document, facts);
+
+        var dynamic = Assert.Single(facts.OfType<DynamicDirectionFact>());
+        Assert.Equal("mp", dynamic.Value);
+        Assert.Equal("DYNAMICS_MP", dynamic.ClassificationLabel);
+        Assert.Equal("1/4", dynamic.At);
+        Assert.Contains("shape-20.1", dynamic.SourceShapeIds);
+        Assert.Contains("shape-20.2", dynamic.SourceShapeIds);
+    }
+
+    [Fact]
     public void ShapeConsumedByEarlierPass_IsNotReinterpreted()
     {
         var symbol = Symbol("used", "MARCATO", 0.99, x: 50, y: 72);
@@ -138,7 +169,8 @@ public sealed class ClassifiedSymbolPassTests
         string label,
         double confidence,
         double x,
-        double y)
+        double y,
+        double width = 10)
     {
         var ownership = new LogicalOwnership(
             new LogicalCoordinate("upper", "m1"),
@@ -155,9 +187,9 @@ public sealed class ClassifiedSymbolPassTests
         var source = new ShapeInstance(
             id,
             "prototype",
-            x - 5,
+            x - width / 2.0,
             y - 5,
-            10,
+            width,
             10,
             "path",
             null,
@@ -168,7 +200,7 @@ public sealed class ClassifiedSymbolPassTests
         return new ShapeElement
         {
             ShapeId = id,
-            Bounds = new BoundsD(x - 5, y - 5, x + 5, y + 5),
+            Bounds = new BoundsD(x - width / 2.0, y - 5, x + width / 2.0, y + 5),
             Ownership = ownership,
             Source = source
         };
