@@ -54,6 +54,10 @@ public abstract class SemanticVisitor
                 VisitShape(measure, staff, shape);
                 break;
 
+            case HairpinElement hairpin:
+                VisitHairpin(measure, staff, hairpin);
+                break;
+
             case BracketSpannerElement bracket:
                 VisitBracketSpanner(measure, staff, bracket);
                 break;
@@ -89,6 +93,13 @@ public abstract class SemanticVisitor
         MeasureScene measure,
         StaffMeasureScene staff,
         ShapeElement shape)
+    {
+    }
+
+    protected virtual void VisitHairpin(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        HairpinElement hairpin)
     {
     }
 
