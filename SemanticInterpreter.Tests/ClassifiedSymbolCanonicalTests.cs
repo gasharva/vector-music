@@ -47,7 +47,7 @@ public sealed class ClassifiedSymbolCanonicalTests
 
         var canonical = new CanonicalNotationBuilder().Build(document, facts, null, null);
         var measure = canonical.Parts.Single().Measures.Single();
-        var dynamic = Assert.Single(measure.Events.Where(ev => ev.Type == "dynamic"));
+        var dynamic = Assert.Single(measure.Events, ev => ev.Type == "dynamic");
 
         Assert.Equal("pp", dynamic.Value);
         Assert.Equal("0", dynamic.At);
@@ -55,8 +55,9 @@ public sealed class ClassifiedSymbolCanonicalTests
         Assert.Equal("below", dynamic.Placement);
 
         var xml = new MusicXmlWriter().Write(canonical);
-        var direction = Assert.Single(xml.Descendants("direction")
-            .Where(node => node.Descendants("pp").Any()));
+        var direction = Assert.Single(
+            xml.Descendants("direction"),
+            node => node.Descendants("pp").Any());
         Assert.Equal("below", direction.Attribute("placement")?.Value);
         Assert.Equal("1", direction.Element("staff")?.Value);
     }
