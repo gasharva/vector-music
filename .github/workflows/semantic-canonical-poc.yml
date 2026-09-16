@@ -10,7 +10,7 @@ on:
       - "SvgScene/**"
       - "AudiverisGlyphPoc/**"
       - "CanonicalNotation/**"
-      - "Samples/kancheli-almonds-mangled/**"
+      - "Samples/kancheli-mimino/**"
       - "Tools/**"
       - ".github/workflows/semantic-canonical-poc.yml"
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
       - name: Build semantic interpreter
         run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
 
-      - name: Interpret mangled Kancheli SVG
+      - name: Interpret Kancheli Mimino SVG
         shell: bash
         run: |
           set -euo pipefail
@@ -52,9 +52,9 @@ jobs:
             --configuration Release \
             --no-build \
             -- \
-            Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg \
+            Samples/kancheli-mimino/kancheli-mimino.svg \
             artifacts \
-            --title "When Almonds Blossomed - mangled" \
+            --title "YELLOW LEAVES (Mimino)" \
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
 
@@ -67,7 +67,7 @@ jobs:
             --project Tools/ZigZagDiagnostics/ZigZagDiagnostics.csproj \
             --configuration Release \
             -- \
-            Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg \
+            Samples/kancheli-mimino/kancheli-mimino.svg \
             artifacts/zigzag-scene.json \
             | tee artifacts/zigzag-parser.log
 
@@ -134,6 +134,7 @@ jobs:
             semantic.stems.svg
             semantic.beams.svg
             semantic.dots.svg
+            semantic.noteheads.txt
             zigzag-scene.json
           )
 
@@ -149,7 +150,7 @@ jobs:
       - name: Upload curated semantic artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: semantic-kancheli-mangled
+          name: semantic-kancheli-mimino
           path: publish/
           if-no-files-found: error
           retention-days: 30
@@ -160,6 +161,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: semantic-artifacts
           publish_dir: ./publish
-          destination_dir: kancheli-mangled
+          destination_dir: kancheli-mimino
           keep_files: false
-          commit_message: "Update semantic artifacts from ${{ github.sha }}"
+          commit_message: "Update Mimino semantic artifacts from ${{ github.sha }}"
