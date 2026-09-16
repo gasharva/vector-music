@@ -62,6 +62,10 @@ public abstract class SemanticVisitor
                 VisitBracketSpanner(measure, staff, bracket);
                 break;
 
+            case VerticalZigZagElement zigZag:
+                VisitVerticalZigZag(measure, staff, zigZag);
+                break;
+
             default:
                 throw new NotSupportedException(
                     $"Unsupported semantic element type: {element.GetType().Name}");
@@ -107,6 +111,13 @@ public abstract class SemanticVisitor
         MeasureScene measure,
         StaffMeasureScene staff,
         BracketSpannerElement bracket)
+    {
+    }
+
+    protected virtual void VisitVerticalZigZag(
+        MeasureScene measure,
+        StaffMeasureScene staff,
+        VerticalZigZagElement zigZag)
     {
     }
 }
