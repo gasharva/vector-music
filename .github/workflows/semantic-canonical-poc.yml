@@ -11,6 +11,7 @@ on:
       - "AudiverisGlyphPoc/**"
       - "CanonicalNotation/**"
       - "Samples/kancheli-almonds-mangled/**"
+      - "Tools/**"
       - ".github/workflows/semantic-canonical-poc.yml"
   workflow_dispatch:
 
@@ -58,6 +59,27 @@ jobs:
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
 
+      - name: Publish vertical zigzag diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dotnet run \
+            --project SvgScene/SvgScene.csproj \
+            --configuration Release \
+            --no-build \
+            -- \
+            Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg \
+            artifacts/zigzag-scene.json \
+            > artifacts/zigzag-parser.log
+
+          python3 Tools/publish_zigzag_diagnostics.py \
+            artifacts/zigzag-scene.json \
+            artifacts/source.svg \
+            artifacts
+
+          grep '^parser.verticalZigZags=' artifacts/semantic-summary.txt
+
       - name: Smoke-check raw MusicXML and MXL
         shell: bash
         run: |
@@ -71,6 +93,8 @@ jobs:
           grep -q '^semantic.chords=' artifacts/semantic-summary.txt
           grep -q '^semantic.ties=' artifacts/semantic-summary.txt
           grep -q '^canonical.ties=' artifacts/semantic-summary.txt
+          grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
+          test -f artifacts/parser.zigzags.svg
 
           python3 - <<'PY'
           from fractions import Fraction
@@ -164,7 +188,7 @@ jobs:
           returned = pitched_event(m16_events, "Ab5", "1/8")
           rest = next(
               event for event in m16_events
-              if event.get("type") == "rest" and event.get("staff") == 1
+              if event.get("type") == "rest" and event.get("staff") == "1"
           )
           parallel = next(
               event for event in m16_events
