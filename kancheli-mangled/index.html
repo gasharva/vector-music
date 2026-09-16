@@ -18,11 +18,11 @@
 <body>
   <h1>When Almonds Blossomed - mangled</h1>
   <div class="meta">Semantic interpreter run artifacts
-    <br>commit <code>2d989646dca108501bc611470e59da9c37b230ab</code>
+    <br>commit <code>32bb7efdf11930b4a244e57cbbbc8e1e804af215</code>
   </div>
   <div class="artifact primary">
     <a href="kancheli.semantic.mxl" download>Compressed MusicXML (.mxl)</a>
-    <p>Best choice for MuseScore; the browser should download it instead of displaying XML.</p>
+    <p>Primary end-to-end result for opening in MuseScore.</p>
   </div>
   <div class="artifact">
     <a href="kancheli.semantic.musicxml" download>MusicXML (.musicxml)</a>
@@ -30,103 +30,43 @@
   </div>
   <div class="artifact">
     <a href="kancheli.semantic.canonical.json" download>CanonicalNotation JSON</a>
-    <p>Canonical v0.3 produced by the semantic passes.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic-facts.txt" download>Semantic facts</a>
-    <p>Facts and evidence emitted by individual semantic passes.</p>
+    <p>Canonical representation produced by the semantic passes.</p>
   </div>
   <div class="artifact">
     <a href="semantic-summary.txt" download>Run summary</a>
-    <p>Counts and output paths from the semantic run.</p>
+    <p>Compact counts and important output paths from the semantic run.</p>
   </div>
   <div class="artifact">
     <a href="semantic-run.log" download>Run log</a>
     <p>Console trace from the semantic pipeline.</p>
   </div>
   <div class="artifact">
-    <a href="semantic.noteheads.svg">Detected noteheads (SVG)</a>
-    <p>Semantic NoteheadPass overlay: accepted filled noteheads are green, hollow noteheads blue, small-dot size cluster orange, off-grid ellipses gray.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.noteheads.txt" download>Notehead size ranking and decisions</a>
-    <p>All ellipse candidates ranked by normalized size with small-dot split, staff-grid alignment and final NoteheadPass decision.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.accidentals.svg">Detected local accidentals (SVG)</a>
-    <p>AccidentalPass overlay on top of notehead diagnostics: accepted accidentals are orange, explicit target noteheads have a solid orange ring, inherited targets a dashed orange ring.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.accidentals.txt" download>Accidental targets and propagation</a>
-    <p>Classifier candidates, logical anchor matching, explicit notehead target and all noteheads affected until the next accidental on the same staff-step or measure end.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.stems.svg">Detected stem attachments (SVG)</a>
-    <p>StemAttachmentPass overlay: accepted stems are magenta, cross-staff stems purple, attached noteheads are ringed, unmatched vertical candidates are faint gray dashed lines.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.stems.txt" download>Stem attachment decisions</a>
-    <p>Per-stem geometry, attached noteheads, inferred stem direction, cross-staff status and unmatched vertical stroke candidates.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.flags.svg">Detected flag attachments (SVG)</a>
-    <p>FlagAttachmentPass overlay on top of stem diagnostics: attached classifier flags are blue, their matched free stem tip is marked, rejected classified flags are dashed.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.flags.txt" download>Flag attachment decisions</a>
-    <p>Per-flag classifier label, level, matched stem free tip, geometric distances, ambiguity and rejected candidates.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.beams.svg">Detected beam attachments (SVG)</a>
-    <p>BeamAttachmentPass overlay: primary/secondary beam levels are colored separately, stem intersections are marked, free hook ends are hollow red, and cross-staff beams are purple.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.beams.txt" download>Beam attachment decisions</a>
-    <p>Beam-like stroke geometry, attached stems, inferred beam level, supported ends, hooks, cross-staff status and rejected candidates.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.tuplets.svg">Detected tuplets (SVG)</a>
-    <p>TupletPass overlay on top of beam diagnostics: classifier tuplet digits are attached to nearby primary beam groups; corrected classifier numbers are highlighted and annotated with the inferred actual:normal ratio.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.tuplets.txt" download>Tuplet decisions</a>
-    <p>Classifier tuplet candidates, matched beam groups, stem counts, actual:normal ratios and any classifier-number correction inferred from the rhythmic stem group.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.dots.svg">Detected augmentation dots (SVG)</a>
-    <p>DotAttachmentPass overlay on top of tuplet diagnostics: accepted augmentation dots and their target noteheads are pink; rejected small ellipse candidates are faint gray.</p>
-  </div>
-  <div class="artifact">
-    <a href="semantic.dots.txt" download>Augmentation-dot decisions</a>
-    <p>Small filled ellipse candidates, size band, target noteheads, horizontal/vertical geometry and rejected dot-like marks such as articulation dots.</p>
+    <a href="parser.classified-symbols.svg">Classified symbols (SVG)</a>
+    <p>Global classifier overlay for residual glyphs.</p>
   </div>
   <div class="artifact">
     <a href="parser.ownership.svg">Ownership coloring (SVG)</a>
-    <p>Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.</p>
+    <p>Final staff/measure ownership coloring; best visual oracle for placement mistakes.</p>
   </div>
   <div class="artifact">
-    <a href="parser.classified-symbols.svg">Classified symbols (SVG)</a>
-    <p>Audiveris symbol classifications overlaid on the original SVG.</p>
+    <a href="semantic.noteheads.svg">Noteheads (SVG)</a>
+    <p>Accepted and rejected notehead candidates.</p>
   </div>
   <div class="artifact">
-    <a href="parser.strokes.svg">Primitive strokes (SVG)</a>
-    <p>Straight strokes extracted by the SVG parser.</p>
+    <a href="semantic.accidentals.svg">Accidentals (SVG)</a>
+    <p>Local accidental recognition and target propagation.</p>
   </div>
   <div class="artifact">
-    <a href="parser.arcs.svg">Primitive arcs (SVG)</a>
-    <p>Curved strokes and slur-like primitives extracted by the SVG parser.</p>
+    <a href="semantic.stems.svg">Stems (SVG)</a>
+    <p>Stem attachment overlay, including cross-staff candidates.</p>
   </div>
   <div class="artifact">
-    <a href="parser.ellipses.svg">Ellipse-like primitives (SVG)</a>
-    <p>Filled and hollow ellipse-like primitives, including notehead candidates.</p>
+    <a href="semantic.beams.svg">Beams (SVG)</a>
+    <p>Beam groups and stem attachments.</p>
   </div>
   <div class="artifact">
-    <a href="parser.contours.svg">Clustered contours (SVG)</a>
-    <p>Remaining contour instances with prototype labels.</p>
-  </div>
-  <div class="artifact">
-    <a href="parser.ownership.render-diagnostics.txt" download>Ownership renderer diagnostics</a>
-    <p>Per-shape ownership/rendering diagnostics used to distinguish analyzer misses from visualization problems.</p>
+    <a href="semantic.dots.svg">Augmentation dots (SVG)</a>
+    <p>Detected augmentation dots and their notehead targets.</p>
   </div>
   <div class="artifact">
     <a href="source.svg">Source SVG</a>
@@ -134,7 +74,7 @@
   </div>
   <div class="artifact">
     <a href="source.musicxml" download>Reference source MusicXML</a>
-    <p>MuseScore source used as a visual and semantic oracle for this fixture.</p>
+    <p>MuseScore source used as a semantic oracle for the fixture.</p>
   </div>
 
   <!-- zigzag-diagnostics -->
