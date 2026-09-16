@@ -120,8 +120,22 @@
               ],
               "notation": {
                 "noteType": "quarter",
-                "stem": "up"
+                "stem": "up",
+                "articulations": [
+                  {
+                    "type": "strong-accent",
+                    "placement": "above"
+                  }
+                ]
               }
+            },
+            {
+              "id": "m1-dynamic-shape-1059",
+              "type": "dynamic",
+              "at": "0",
+              "staff": 2,
+              "value": "pp",
+              "placement": "above"
             }
           ],
           "attributes": {
@@ -1110,6 +1124,14 @@
                 "noteType": "eighth",
                 "stem": "up"
               }
+            },
+            {
+              "id": "m7-dynamic-shape-1060",
+              "type": "dynamic",
+              "at": "0",
+              "staff": 2,
+              "value": "pp",
+              "placement": "below"
             }
           ]
         },
@@ -2423,7 +2445,13 @@
               ],
               "notation": {
                 "noteType": "half",
-                "stem": "down"
+                "stem": "down",
+                "ornaments": [
+                  {
+                    "type": "inverted-mordent",
+                    "placement": "above"
+                  }
+                ]
               }
             },
             {
@@ -4047,6 +4075,14 @@
                 "noteType": "eighth",
                 "stem": "up"
               }
+            },
+            {
+              "id": "m25-dynamic-shape-1058",
+              "type": "dynamic",
+              "at": "0",
+              "staff": 2,
+              "value": "ppp",
+              "placement": "above"
             }
           ]
         },
@@ -5092,7 +5128,7 @@
         },
         "to": {
           "measure": 24,
-          "at": "3/4",
+          "at": "1/4",
           "staff": 1
         },
         "type": "crescendo",

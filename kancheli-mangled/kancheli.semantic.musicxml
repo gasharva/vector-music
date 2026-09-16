@@ -33,6 +33,14 @@
           <line>4</line>
         </clef>
       </attributes>
+      <direction placement="above">
+        <direction-type>
+          <dynamics>
+            <pp />
+          </dynamics>
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -81,6 +89,11 @@
         <type>quarter</type>
         <stem>up</stem>
         <staff>1</staff>
+        <notations>
+          <articulations>
+            <strong-accent placement="above" />
+          </articulations>
+        </notations>
       </note>
       <backup>
         <duration>60</duration>
@@ -774,6 +787,14 @@
       </note>
     </measure>
     <measure number="7">
+      <direction placement="below">
+        <direction-type>
+          <dynamics>
+            <pp />
+          </dynamics>
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <direction placement="below">
         <direction-type>
           <pedal type="resume" number="1" line="yes" sign="yes" />
@@ -2774,6 +2795,11 @@
         <accidental>natural</accidental>
         <stem>down</stem>
         <staff>1</staff>
+        <notations>
+          <ornaments>
+            <inverted-mordent placement="above" />
+          </ornaments>
+        </notations>
       </note>
       <note>
         <pitch>
@@ -4334,6 +4360,13 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge type="stop" number="2" />
+        </direction-type>
+        <offset>-20</offset>
+        <staff>1</staff>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -4346,12 +4379,6 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <wedge type="stop" number="2" />
-        </direction-type>
-        <staff>1</staff>
-      </direction>
       <backup>
         <duration>60</duration>
       </backup>
@@ -4403,6 +4430,14 @@
       </note>
     </measure>
     <measure number="25">
+      <direction placement="above">
+        <direction-type>
+          <dynamics>
+            <ppp />
+          </dynamics>
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
