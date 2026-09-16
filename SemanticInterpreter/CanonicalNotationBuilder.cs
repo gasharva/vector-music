@@ -181,6 +181,7 @@ public sealed class CanonicalNotationBuilder
             facts,
             noteheadToEventId,
             eventX);
+        var hairpinRelations = BuildHairpinRelations(facts);
         var pedalRelations = BuildPedalRelations(facts);
         var octaveShiftRelations = BuildOctaveShiftRelations(facts);
 
@@ -191,7 +192,8 @@ public sealed class CanonicalNotationBuilder
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tie-relations={tieRelations.Count}; "
             + $"slur-relations={slurRelations.Count}; tuplet-relations={tupletRelations.Count}; "
-            + $"pedals={pedalRelations.Count}; octave-shifts={octaveShiftRelations.Count}; "
+            + $"hairpins={hairpinRelations.Count}; pedals={pedalRelations.Count}; "
+            + $"octave-shifts={octaveShiftRelations.Count}; "
             + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
         return new CanonicalNotation(
@@ -205,7 +207,7 @@ public sealed class CanonicalNotationBuilder
                 slurRelations,
                 tupletRelations,
                 [],
-                [],
+                hairpinRelations,
                 pedalRelations,
                 octaveShiftRelations));
     }
@@ -718,6 +720,33 @@ public sealed class CanonicalNotationBuilder
         }
 
         return result;
+    }
+
+    private static List<SpanRelation> BuildHairpinRelations(
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<HairpinFact>()
+            .OrderBy(fact => fact.StartMeasureNumber)
+            .ThenBy(fact => Fraction.Parse(fact.StartAt).Numerator / (double)Fraction.Parse(fact.StartAt).Denominator)
+            .ThenBy(fact => fact.Staff)
+            .ThenBy(fact => fact.ShapeId, StringComparer.Ordinal)
+            .Select((fact, index) => new SpanRelation
+            {
+                Id = $"hairpin-{index + 1}",
+                Kind = "hairpin",
+                From = new TimeAnchor(
+                    fact.StartMeasureNumber,
+                    fact.StartAt,
+                    fact.Staff),
+                To = new TimeAnchor(
+                    fact.EndMeasureNumber,
+                    fact.EndAt,
+                    fact.Staff),
+                Type = fact.Type,
+                Placement = fact.Placement
+            })
+            .ToList();
     }
 
     private static List<SpanRelation> BuildPedalRelations(

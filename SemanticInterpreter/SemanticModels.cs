@@ -55,6 +55,11 @@ public sealed record ShapeElement : SemanticElement
     public SymbolClassification? Classification => Source.Classification;
 }
 
+public sealed record HairpinElement : SemanticElement
+{
+    public required HairpinPrimitive Source { get; init; }
+}
+
 public sealed record BracketSpannerElement : SemanticElement
 {
     public required BracketSpannerPrimitive Source { get; init; }

@@ -390,9 +390,11 @@ File.WriteAllLines(
         $"semantic.chordNoteheads={facts.OfType<ChordFact>().Sum(chord => chord.NoteheadIds.Count)}",
         $"semantic.ties={facts.OfType<TieFact>().Count()}",
         $"semantic.slurs={facts.OfType<SlurFact>().Count()}",
+        $"semantic.hairpins={facts.OfType<HairpinFact>().Count()}",
         $"semantic.pedals={facts.OfType<PedalFact>().Count()}",
         $"canonical.ties={canonical.Relations.Ties.Count}",
         $"canonical.slurs={canonical.Relations.Slurs.Count}",
+        $"canonical.hairpins={canonical.Relations.Hairpins.Count}",
         $"canonical.pedals={canonical.Relations.Pedals.Count}",
         $"canonical.measures={canonical.Parts.Single().Measures.Count}",
         $"canonical.path={Path.GetFullPath(canonicalPath)}",
@@ -453,6 +455,7 @@ Console.WriteLine($"  durations  : {facts.OfType<DurationFact>().Count()}");
 Console.WriteLine($"  chords     : {facts.OfType<ChordFact>().Count()}");
 Console.WriteLine($"  ties       : {facts.OfType<TieFact>().Count()}");
 Console.WriteLine($"  slurs      : {facts.OfType<SlurFact>().Count()}");
+Console.WriteLine($"  hairpins   : {facts.OfType<HairpinFact>().Count()}");
 Console.WriteLine($"  pedals     : {facts.OfType<PedalFact>().Count()}");
 Console.WriteLine($"  ownership ledger corrections: {ledgerLadderOwnership.Adjustments.Count}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");

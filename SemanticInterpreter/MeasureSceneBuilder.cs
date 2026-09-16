@@ -165,6 +165,26 @@ public sealed class MeasureSceneBuilder
             });
         }
 
+        foreach (var hairpin in notation.Hairpins)
+        {
+            if (hairpin.Ownership is null)
+            {
+                continue;
+            }
+
+            result.Add(new HairpinElement
+            {
+                ShapeId = hairpin.ShapeId,
+                Bounds = BoundsD.FromPoints([
+                    hairpin.Apex,
+                    hairpin.OpenUpper,
+                    hairpin.OpenLower
+                ]),
+                Ownership = hairpin.Ownership,
+                Source = hairpin
+            });
+        }
+
         foreach (var instance in notation.Instances)
         {
             if (instance.Ownership is null

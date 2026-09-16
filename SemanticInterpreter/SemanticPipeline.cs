@@ -136,6 +136,26 @@ public sealed class SemanticPipeline
                 new PedalPass());
         }
 
+        // Hairpins are already proven geometrically by HairpinExtractor. Once onsets
+        // are stable, only their horizontal endpoints need projection onto musical time.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not HairpinPass))
+        {
+            var pedalIndex = materialized.FindLastIndex(pass => pass is PedalPass);
+            var ottavaIndex = materialized.FindLastIndex(pass => pass is OttavaPass);
+            var refinementIndex = materialized.FindLastIndex(pass => pass is MeasureEndOnsetRefinementPass);
+            var insertionIndex = pedalIndex >= 0
+                ? pedalIndex + 1
+                : ottavaIndex >= 0
+                    ? ottavaIndex + 1
+                    : refinementIndex >= 0
+                        ? refinementIndex + 1
+                        : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new HairpinPass());
+        }
+
         // Curves are already extracted geometrically. SlurPass classifies their
         // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
