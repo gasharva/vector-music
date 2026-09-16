@@ -1,0 +1,43 @@
+name: Apply arpeggio wiring
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/apply-arpeggio-wiring.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Apply arpeggio wiring
+        run: python3 Tools/apply_arpeggio_wiring.py
+
+      - name: Run semantic unit tests
+        run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
+
+      - name: Commit permanent arpeggio implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "gasharva"
+          git config user.email "gasharva@users.noreply.github.com"
+          git rm Tools/apply_arpeggio_wiring.py .github/workflows/apply-arpeggio-wiring.yml
+          git add \
+            SemanticInterpreter/MeasureSceneBuilder.cs \
+            SemanticInterpreter/SemanticPipeline.cs \
+            SemanticInterpreter/CanonicalNotationBuilder.cs
+          git commit -m "Project vertical zigzags as arpeggios"
+          git push origin HEAD:master
