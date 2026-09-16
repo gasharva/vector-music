@@ -1,0 +1,235 @@
+name: Apply MusicXML ottava pitch compensation
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/patch-musicxml-ottava-pitch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch MusicXML writer and add regression test
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          writer = Path("CanonicalNotation/MusicXmlWriter.cs")
+          text = writer.read_text(encoding="utf-8")
+
+          old = '''    private int _divisions;
+              private Relations _relations = null!;'''
+          new = '''    private int _divisions;
+              private int _currentMeasureNumber;
+              private Relations _relations = null!;'''
+          assert old in text, "writer field insertion point not found"
+          text = text.replace(old, new, 1)
+
+          old = '''    private XElement WriteMeasure(Measure measure, bool firstMeasure)
+              {
+                  var mx = new XElement("measure", new XAttribute("number", measure.Number));'''
+          new = '''    private XElement WriteMeasure(Measure measure, bool firstMeasure)
+              {
+                  _currentMeasureNumber = measure.Number;
+                  var mx = new XElement("measure", new XAttribute("number", measure.Number));'''
+          assert old in text, "measure insertion point not found"
+          text = text.replace(old, new, 1)
+
+          old = '''            var (step, alter, octave) = ParsePitch(note.Pitch);
+                  var pitch = new XElement("pitch", new XElement("step", step));'''
+          new = '''            var (step, alter, octave) = ParsePitch(note.Pitch);
+                  octave += OctaveShiftPitchOffset(
+                      ev.At,
+                      note.Staff ?? ev.Staff ?? 1);
+                  var pitch = new XElement("pitch", new XElement("step", step));'''
+          assert old in text, "pitch insertion point not found"
+          text = text.replace(old, new, 1)
+
+          marker = '''    private long Units(string fractionText)'''
+          helper = '''    private int OctaveShiftPitchOffset(
+              string at,
+              int staff)
+          {
+              var position = Fraction.Parse(at);
+              var offset = 0;
+
+              foreach (var span in _relations.OctaveShifts)
+              {
+                  if (span.From.Staff != staff || span.To.Staff != staff)
+                  {
+                      continue;
+                  }
+
+                  if (ComparePosition(
+                          _currentMeasureNumber,
+                          position,
+                          span.From) < 0
+                      || ComparePosition(
+                          _currentMeasureNumber,
+                          position,
+                          span.To) >= 0)
+                  {
+                      continue;
+                  }
+
+                  var octaves = Math.Max(
+                      1,
+                      ((span.Size ?? 8) - 1) / 7);
+
+                  offset += span.Direction?.ToLowerInvariant() switch
+                  {
+                      "down" => octaves,
+                      "up" => -octaves,
+                      _ => 0
+                  };
+              }
+
+              return offset;
+          }
+
+          private static int ComparePosition(
+              int measure,
+              Fraction at,
+              TimeAnchor anchor)
+          {
+              var measureComparison = measure.CompareTo(anchor.Measure);
+              if (measureComparison != 0)
+              {
+                  return measureComparison;
+              }
+
+              var other = Fraction.Parse(anchor.At);
+              return (at.Numerator * other.Denominator)
+                  .CompareTo(other.Numerator * at.Denominator);
+          }
+
+'''
+          assert marker in text, "helper insertion point not found"
+          text = text.replace(marker, helper + marker, 1)
+          writer.write_text(text, encoding="utf-8")
+
+          test = Path("SemanticInterpreter.Tests/MusicXmlOttavaPitchTests.cs")
+          test.write_text('''using SvgMusic.Canonical;
+          using Xunit;
+
+          namespace SemanticInterpreter.Tests;
+
+          public sealed class MusicXmlOttavaPitchTests
+          {
+              [Fact]
+              public void Writer_CompensatesSerializedPitchInsideOctaveShift_WithoutChangingCanonicalPitch()
+              {
+                  var first = new CanonicalEvent
+                  {
+                      Id = "event-1",
+                      Type = "chord",
+                      At = "0",
+                      Voice = 1,
+                      Duration = "1/4",
+                      Notes =
+                      [
+                          new CanonicalNote("C4", 1),
+                          new CanonicalNote("E4", 2)
+                      ]
+                  };
+                  var atStop = new CanonicalEvent
+                  {
+                      Id = "event-2",
+                      Type = "chord",
+                      At = "1/4",
+                      Voice = 1,
+                      Duration = "1/4",
+                      Notes =
+                      [
+                          new CanonicalNote("D4", 1),
+                          new CanonicalNote("F4", 2)
+                      ]
+                  };
+                  var score = new CanonicalNotation(
+                      "canonical-notation",
+                      "0.3",
+                      new Metadata("Ottava test"),
+                      [
+                          new Part(
+                              "P1",
+                              "Piano",
+                              [new Measure(1, [first, atStop])])
+                      ],
+                      new Relations(
+                          [],
+                          [],
+                          [],
+                          [],
+                          [],
+                          [],
+                          [],
+                          [
+                              new SpanRelation
+                              {
+                                  Id = "octaveShift-1",
+                                  Kind = "octaveShift",
+                                  From = new TimeAnchor(1, "0", 1),
+                                  To = new TimeAnchor(1, "1/4", 1),
+                                  Direction = "down",
+                                  Size = 8,
+                                  Placement = "above"
+                              },
+                              new SpanRelation
+                              {
+                                  Id = "octaveShift-2",
+                                  Kind = "octaveShift",
+                                  From = new TimeAnchor(1, "0", 2),
+                                  To = new TimeAnchor(1, "1/4", 2),
+                                  Direction = "up",
+                                  Size = 8,
+                                  Placement = "below"
+                              }
+                          ]));
+
+                  var xml = new MusicXmlWriter().Write(score);
+                  var notes = xml.Descendants("note")
+                      .Where(note => note.Element("pitch") is not null)
+                      .ToArray();
+
+                  Assert.Equal("5", Octave(notes, "C", 1));
+                  Assert.Equal("3", Octave(notes, "E", 2));
+
+                  // The stop direction is emitted before notes at the same time,
+                  // so notes starting exactly at the stop anchor are no longer shifted.
+                  Assert.Equal("4", Octave(notes, "D", 1));
+                  Assert.Equal("4", Octave(notes, "F", 2));
+
+                  Assert.Equal("C4", first.Notes![0].Pitch);
+                  Assert.Equal("E4", first.Notes![1].Pitch);
+              }
+
+              private static string Octave(
+                  IReadOnlyList<System.Xml.Linq.XElement> notes,
+                  string step,
+                  int staff)
+              {
+                  var note = notes.Single(item =>
+                      item.Element("pitch")?.Element("step")?.Value == step
+                      && item.Element("staff")?.Value == staff.ToString());
+
+                  return note.Element("pitch")!.Element("octave")!.Value;
+              }
+          }
+          ''', encoding="utf-8")
+          PY
+
+          git rm .github/workflows/patch-musicxml-ottava-pitch.yml
+          git config user.name "gasharva"
+          git config user.email "gasharva@users.noreply.github.com"
+          git add CanonicalNotation/MusicXmlWriter.cs SemanticInterpreter.Tests/MusicXmlOttavaPitchTests.cs
+          git commit -m "Compensate MusicXML pitches under ottava"
+          git push origin HEAD:master
