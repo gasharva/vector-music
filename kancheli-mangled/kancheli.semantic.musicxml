@@ -2513,6 +2513,12 @@
       </note>
     </measure>
     <measure number="14">
+      <direction placement="below">
+        <direction-type>
+          <octave-shift type="up" number="1" size="8" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>D</step>
@@ -2553,6 +2559,13 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <octave-shift type="stop" number="1" size="8" />
+        </direction-type>
+        <offset>-10</offset>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -3014,6 +3027,12 @@
       </note>
     </measure>
     <measure number="17">
+      <direction placement="above">
+        <direction-type>
+          <octave-shift type="down" number="2" size="8" />
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <note>
         <pitch>
           <step>E</step>
@@ -3090,6 +3109,12 @@
         <staff>1</staff>
         <beam number="1">end</beam>
       </note>
+      <direction placement="above">
+        <direction-type>
+          <octave-shift type="stop" number="2" size="8" />
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <backup>
         <duration>60</duration>
       </backup>

@@ -5067,6 +5067,41 @@
     "arpeggios": [],
     "hairpins": [],
     "pedals": [],
-    "octaveShifts": []
+    "octaveShifts": [
+      {
+        "id": "octaveShift-1",
+        "kind": "octaveShift",
+        "from": {
+          "measure": 14,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 14,
+          "at": "1/4",
+          "staff": 2
+        },
+        "direction": "up",
+        "size": 8,
+        "placement": "below"
+      },
+      {
+        "id": "octaveShift-2",
+        "kind": "octaveShift",
+        "from": {
+          "measure": 17,
+          "at": "0",
+          "staff": 1
+        },
+        "to": {
+          "measure": 17,
+          "at": "3/4",
+          "staff": 1
+        },
+        "direction": "down",
+        "size": 8,
+        "placement": "above"
+      }
+    ]
   }
 }
