@@ -40,6 +40,11 @@ public sealed class DebugSceneRenderer
 
         Render(
             input,
+            Path.Combine(dir, name + ".brackets.svg"),
+            (root, ns, unit) => AddBracketSpanners(root, ns, scene, unit));
+
+        Render(
+            input,
             Path.Combine(dir, name + ".contours.svg"),
             (root, ns, unit) => AddContours(root, ns, scene, unit));
     }
@@ -230,6 +235,111 @@ public sealed class DebugSceneRenderer
 
         root.Add(group);
     }
+
+    private static void AddBracketSpanners(
+        XElement root,
+        XNamespace ns,
+        NotationScene scene,
+        double unit)
+    {
+        const string solidColor = "#ff6d00";
+        const string dashedColor = "#00c853";
+        const string hookMarkerColor = "#00b8d4";
+        var group = Group(ns, "debug-bracket-spanners");
+
+        foreach (var bracket in scene.BracketSpanners)
+        {
+            var color = bracket.IsDashed ? dashedColor : solidColor;
+            var pathData = $"M {F(bracket.Start.X)} {F(bracket.Start.Y)} "
+                + $"L {F(bracket.End.X)} {F(bracket.End.Y)}";
+
+            if (bracket.LeftHookEnd is PointD leftHook)
+            {
+                pathData += $" M {F(bracket.Start.X)} {F(bracket.Start.Y)} "
+                    + $"L {F(leftHook.X)} {F(leftHook.Y)}";
+            }
+
+            if (bracket.RightHookEnd is PointD rightHook)
+            {
+                pathData += $" M {F(bracket.End.X)} {F(bracket.End.Y)} "
+                    + $"L {F(rightHook.X)} {F(rightHook.Y)}";
+            }
+
+            var path = new XElement(
+                ns + "path",
+                new XAttribute("d", pathData),
+                new XAttribute("fill", "none"),
+                new XAttribute("stroke", color),
+                new XAttribute("stroke-width", F(3.3 * unit)),
+                new XAttribute("stroke-linecap", "round"),
+                new XAttribute("stroke-linejoin", "round"),
+                new XAttribute("opacity", "0.94"));
+
+            if (bracket.IsDashed)
+            {
+                path.Add(new XAttribute(
+                    "stroke-dasharray",
+                    $"{F(6.0 * unit)} {F(4.0 * unit)}"));
+            }
+
+            group.Add(path);
+
+            foreach (var hookEnd in new[]
+                     {
+                         bracket.LeftHookEnd,
+                         bracket.RightHookEnd
+                     }
+                     .Where(point => point is not null)
+                     .Select(point => point!.Value))
+            {
+                group.Add(new XElement(
+                    ns + "circle",
+                    new XAttribute("cx", F(hookEnd.X)),
+                    new XAttribute("cy", F(hookEnd.Y)),
+                    new XAttribute("r", F(2.7 * unit)),
+                    new XAttribute("fill", hookMarkerColor),
+                    new XAttribute("stroke", "#111111"),
+                    new XAttribute("stroke-width", F(0.75 * unit))));
+            }
+
+            var labelX = (bracket.Start.X + bracket.End.X) / 2.0;
+            var hookYs = new[]
+            {
+                bracket.Start.Y,
+                bracket.End.Y,
+                bracket.LeftHookEnd?.Y ?? bracket.Start.Y,
+                bracket.RightHookEnd?.Y ?? bracket.End.Y
+            };
+            var labelY = hookYs.Min() - 3.5 * unit;
+            var left = ShortHook(bracket.LeftHookDirection);
+            var right = ShortHook(bracket.RightHookDirection);
+            var pattern = bracket.IsDashed ? "BK~" : "BK";
+
+            group.Add(new XElement(
+                ns + "text",
+                new XAttribute("x", F(labelX)),
+                new XAttribute("y", F(labelY)),
+                new XAttribute("font-family", "Arial, sans-serif"),
+                new XAttribute("font-size", F(7.5 * unit)),
+                new XAttribute("font-weight", "700"),
+                new XAttribute("text-anchor", "middle"),
+                new XAttribute("fill", color),
+                new XAttribute("stroke", "white"),
+                new XAttribute("stroke-width", F(1.1 * unit)),
+                new XAttribute("paint-order", "stroke fill"),
+                $"{pattern} {left}-{right} {bracket.Id}"));
+        }
+
+        root.Add(group);
+    }
+
+    private static string ShortHook(BracketHookDirection direction) =>
+        direction switch
+        {
+            BracketHookDirection.Up => "U",
+            BracketHookDirection.Down => "D",
+            _ => "-"
+        };
 
     private static void AddContours(
         XElement root,
