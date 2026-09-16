@@ -23,7 +23,11 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Apply classified symbol wiring
-        run: python3 Tools/apply_classified_symbol_wiring.py
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i '1i using SvgMusic.Canonical;' SemanticInterpreter/ClassifiedSymbolPass.cs
+          python3 Tools/apply_classified_symbol_wiring.py
 
       - name: Run semantic unit tests
         run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
@@ -35,6 +39,6 @@ jobs:
           git config user.name "gasharva"
           git config user.email "gasharva@users.noreply.github.com"
           git rm Tools/apply_classified_symbol_wiring.py .github/workflows/apply-classified-symbol-wiring.yml
-          git add SemanticInterpreter/SemanticPipeline.cs SemanticInterpreter/CanonicalNotationBuilder.cs
+          git add SemanticInterpreter/ClassifiedSymbolPass.cs SemanticInterpreter/SemanticPipeline.cs SemanticInterpreter/CanonicalNotationBuilder.cs
           git commit -m "Project residual classified symbols into MusicXML"
           git push origin HEAD:master
