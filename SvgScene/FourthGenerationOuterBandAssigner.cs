@@ -76,6 +76,8 @@ public sealed class FourthGenerationOuterBandAssigner
             closureBands,
             assignments);
 
+        ExpandSourceAliases(notation, assignments);
+
         var scene = ApplyOwnership(
             notation,
             assignments);
@@ -92,6 +94,41 @@ public sealed class FourthGenerationOuterBandAssigner
                 .ToArray());
 
         return (scene, ownershipScene);
+    }
+
+    private static void ExpandSourceAliases(
+        NotationScene notation,
+        IDictionary<string, LogicalOwnership> assignments)
+    {
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            if (!assignments.TryGetValue(bracket.Id, out var ownership))
+            {
+                continue;
+            }
+
+            foreach (var sourceShapeId in bracket.SourceShapeIds)
+            {
+                assignments.TryAdd(sourceShapeId, ownership);
+            }
+        }
+
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            if (!assignments.TryGetValue(zigZag.ShapeId, out var ownership))
+            {
+                continue;
+            }
+
+            var sourceShapeIds = zigZag.SourceShapeIds.Count > 0
+                ? zigZag.SourceShapeIds
+                : [zigZag.ShapeId];
+
+            foreach (var sourceShapeId in sourceShapeIds)
+            {
+                assignments.TryAdd(sourceShapeId, ownership);
+            }
+        }
     }
 
     private static IReadOnlyList<OuterBand> BuildOuterBands(
@@ -489,6 +526,31 @@ public sealed class FourthGenerationOuterBandAssigner
             result[instance.ShapeId] = "ShapeInstance";
         }
 
+        foreach (var hairpin in notation.Hairpins)
+        {
+            result[hairpin.ShapeId] = "Hairpin";
+        }
+
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            result[bracket.Id] = "BracketSpanner";
+
+            foreach (var sourceShapeId in bracket.SourceShapeIds)
+            {
+                result[sourceShapeId] = "BracketSpanner";
+            }
+        }
+
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            result[zigZag.ShapeId] = "VerticalZigZag";
+
+            foreach (var sourceShapeId in zigZag.SourceShapeIds)
+            {
+                result[sourceShapeId] = "VerticalZigZag";
+            }
+        }
+
         return result;
     }
 
@@ -520,6 +582,24 @@ public sealed class FourthGenerationOuterBandAssigner
                 .Select(ellipse => ellipse with
                 {
                     Ownership = assignments.GetValueOrDefault(ellipse.ShapeId)
+                })
+                .ToArray(),
+            Hairpins = notation.Hairpins
+                .Select(hairpin => hairpin with
+                {
+                    Ownership = assignments.GetValueOrDefault(hairpin.ShapeId)
+                })
+                .ToArray(),
+            BracketSpanners = notation.BracketSpanners
+                .Select(bracket => bracket with
+                {
+                    Ownership = assignments.GetValueOrDefault(bracket.Id)
+                })
+                .ToArray(),
+            VerticalZigZags = notation.VerticalZigZags
+                .Select(zigZag => zigZag with
+                {
+                    Ownership = assignments.GetValueOrDefault(zigZag.ShapeId)
                 })
                 .ToArray()
         };
@@ -616,6 +696,84 @@ public sealed class FourthGenerationOuterBandAssigner
                     ellipse.Center,
                     ellipse.Center));
             }
+        }
+
+        foreach (var hairpin in notation.Hairpins)
+        {
+            var openMiddle = new PointD(
+                (hairpin.OpenUpper.X + hairpin.OpenLower.X) / 2.0,
+                (hairpin.OpenUpper.Y + hairpin.OpenLower.Y) / 2.0);
+            var points = new[]
+            {
+                hairpin.OpenUpper,
+                hairpin.Apex,
+                hairpin.OpenLower
+            };
+            var bounds = BoundsD.FromPoints(points);
+            var start = hairpin.Apex.X <= openMiddle.X
+                ? hairpin.Apex
+                : openMiddle;
+            var end = hairpin.Apex.X <= openMiddle.X
+                ? openMiddle
+                : hairpin.Apex;
+
+            if (!IsOversized(bounds))
+            {
+                result.Add(new OwnershipElement(
+                    hairpin.ShapeId,
+                    bounds,
+                    start,
+                    end));
+            }
+        }
+
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            var points = new List<PointD>();
+
+            if (bracket.LeftHookEnd is not null)
+            {
+                points.Add(bracket.LeftHookEnd.Value);
+            }
+
+            points.Add(bracket.Start);
+            points.Add(bracket.End);
+
+            if (bracket.RightHookEnd is not null)
+            {
+                points.Add(bracket.RightHookEnd.Value);
+            }
+
+            var half = Math.Max(bracket.StrokeWidth / 2.0, 0.01);
+            var raw = BoundsD.FromPoints(points);
+            var bounds = new BoundsD(
+                raw.MinX - half,
+                raw.MinY - half,
+                raw.MaxX + half,
+                raw.MaxY + half);
+
+            if (!IsOversized(bounds))
+            {
+                result.Add(new OwnershipElement(
+                    bracket.Id,
+                    bounds,
+                    bracket.Start,
+                    bracket.End));
+            }
+        }
+
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            if (IsOversized(zigZag.Bounds))
+            {
+                continue;
+            }
+
+            result.Add(new OwnershipElement(
+                zigZag.ShapeId,
+                zigZag.Bounds,
+                new PointD(zigZag.Bounds.CenterX, zigZag.Bounds.MinY),
+                new PointD(zigZag.Bounds.CenterX, zigZag.Bounds.MaxY)));
         }
 
         foreach (var instance in notation.Instances)
