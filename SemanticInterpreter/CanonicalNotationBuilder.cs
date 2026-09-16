@@ -185,6 +185,10 @@ public sealed class CanonicalNotationBuilder
             facts,
             noteheadToEventId,
             eventX);
+        var arpeggioRelations = BuildArpeggioRelations(
+            facts,
+            noteheadToEventId,
+            eventX);
         var hairpinRelations = BuildHairpinRelations(facts);
         var pedalRelations = BuildPedalRelations(facts);
         var octaveShiftRelations = BuildOctaveShiftRelations(facts);
@@ -196,6 +200,7 @@ public sealed class CanonicalNotationBuilder
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tie-relations={tieRelations.Count}; "
             + $"slur-relations={slurRelations.Count}; tuplet-relations={tupletRelations.Count}; "
+            + $"arpeggios={arpeggioRelations.Count}; "
             + $"hairpins={hairpinRelations.Count}; pedals={pedalRelations.Count}; "
             + $"octave-shifts={octaveShiftRelations.Count}; "
             + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
@@ -210,7 +215,7 @@ public sealed class CanonicalNotationBuilder
                 tieRelations,
                 slurRelations,
                 tupletRelations,
-                [],
+                arpeggioRelations,
                 hairpinRelations,
                 pedalRelations,
                 octaveShiftRelations));
@@ -777,6 +782,43 @@ public sealed class CanonicalNotationBuilder
                 events,
                 tuplet.ActualNotes,
                 tuplet.NormalNotes));
+        }
+
+        return result;
+    }
+
+    private static List<ArpeggioRelation> BuildArpeggioRelations(
+        SemanticFacts facts,
+        IReadOnlyDictionary<string, string> noteheadToEventId,
+        IReadOnlyDictionary<string, double> eventX)
+    {
+        var result = new List<ArpeggioRelation>();
+
+        foreach (var arpeggio in facts
+                     .OfType<ArpeggioFact>()
+                     .OrderBy(fact => fact.MeasureNumber)
+                     .ThenBy(fact => fact.AnchorX)
+                     .ThenBy(fact => fact.ZigZagShapeId, StringComparer.Ordinal))
+        {
+            var events = arpeggio.NoteheadIds
+                .Where(noteheadToEventId.ContainsKey)
+                .Select(noteheadId => noteheadToEventId[noteheadId])
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(eventId => eventX.TryGetValue(eventId, out var x)
+                    ? x
+                    : double.MaxValue)
+                .ThenBy(eventId => eventId, StringComparer.Ordinal)
+                .ToList();
+
+            if (events.Count == 0)
+            {
+                continue;
+            }
+
+            result.Add(new ArpeggioRelation(
+                $"arpeggio-{arpeggio.ZigZagShapeId}",
+                events,
+                arpeggio.Direction));
         }
 
         return result;

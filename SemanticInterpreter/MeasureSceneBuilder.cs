@@ -185,6 +185,22 @@ public sealed class MeasureSceneBuilder
             });
         }
 
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            if (zigZag.Ownership is null)
+            {
+                continue;
+            }
+
+            result.Add(new VerticalZigZagElement
+            {
+                ShapeId = zigZag.ShapeId,
+                Bounds = zigZag.Bounds,
+                Ownership = zigZag.Ownership,
+                Source = zigZag
+            });
+        }
+
         foreach (var instance in notation.Instances)
         {
             if (instance.Ownership is null

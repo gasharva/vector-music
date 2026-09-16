@@ -133,27 +133,34 @@ public sealed class ArpeggioPass : ISemanticPass
                 }
 
                 var seed = candidates[0];
-                var sameOnset = candidates
-                    .Where(candidate => string.Equals(
-                        candidate.Onset.At,
-                        seed.Onset.At,
-                        StringComparison.Ordinal))
+                var aligned = candidates
                     .Where(candidate =>
                         Math.Abs(candidate.Chord.AnchorX - seed.Chord.AnchorX)
                         <= spacing * MaximumChordColumnDeltaInSpacings)
-                    .OrderBy(candidate => candidate.Chord.AnchorX)
-                    .ThenBy(candidate => candidate.Chord.ChordId, StringComparer.Ordinal)
+                    .ToArray();
+                var distinctOnsets = aligned
+                    .Select(candidate => candidate.Onset.At)
+                    .Distinct(StringComparer.Ordinal)
                     .ToArray();
 
-                if (sameOnset.Length == 0)
+                if (distinctOnsets.Length > 1)
                 {
                     decisions.Add(Reject(
                         zigZag,
                         measure.Number,
-                        "no-onset-group",
-                        "nearby chord candidates do not form a rhythmic onset group"));
+                        "conflicting-onsets",
+                        $"aligned chord column contains conflicting onsets [{string.Join(',', distinctOnsets)}]"));
                     continue;
                 }
+
+                var sameOnset = aligned
+                    .Where(candidate => string.Equals(
+                        candidate.Onset.At,
+                        seed.Onset.At,
+                        StringComparison.Ordinal))
+                    .OrderBy(candidate => candidate.Chord.AnchorX)
+                    .ThenBy(candidate => candidate.Chord.ChordId, StringComparer.Ordinal)
+                    .ToArray();
 
                 var chordIds = sameOnset
                     .Select(candidate => candidate.Chord.ChordId)

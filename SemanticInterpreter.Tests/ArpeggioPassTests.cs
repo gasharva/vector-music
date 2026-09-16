@@ -59,7 +59,7 @@ public sealed class ArpeggioPassTests
     }
 
     [Fact]
-    public void NearbyChordsWithDifferentOnsets_AreNotMerged()
+    public void NearbyChordsWithDifferentOnsets_AreRejectedAsAmbiguous()
     {
         var zigZag = ZigZag(20, 24, 105, 245);
         var document = Document(zigZag);
@@ -80,12 +80,13 @@ public sealed class ArpeggioPassTests
             x: 32,
             ys: [215, 225, 235]);
 
-        new ArpeggioPass().Run(document, facts);
+        var pass = new ArpeggioPass();
+        pass.Run(document, facts);
 
-        var arpeggio = Assert.Single(facts.OfType<ArpeggioFact>());
-        Assert.Equal(["upper-chord"], arpeggio.ChordIds);
-        Assert.Equal([1], arpeggio.Staffs);
-        Assert.Equal(3, arpeggio.NoteheadIds.Count);
+        Assert.Empty(facts.OfType<ArpeggioFact>());
+        var decision = Assert.Single(pass.LastAnalysis!.Decisions);
+        Assert.False(decision.Accepted);
+        Assert.Equal("conflicting-onsets", decision.Decision);
     }
 
     [Fact]

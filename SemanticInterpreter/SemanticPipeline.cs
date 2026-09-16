@@ -156,6 +156,21 @@ public sealed class SemanticPipeline
                 new HairpinPass());
         }
 
+        // Vertical zigzags are already proven geometrically. ArpeggioPass only
+        // decides which already-built chord event(s) at one onset they span.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.Any(pass => pass is ChordPass)
+            && materialized.All(pass => pass is not ArpeggioPass))
+        {
+            var hairpinIndex = materialized.FindLastIndex(pass => pass is HairpinPass);
+            var insertionIndex = hairpinIndex >= 0
+                ? hairpinIndex + 1
+                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new ArpeggioPass());
+        }
+
         // Curves are already extracted geometrically. SlurPass classifies their
         // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
