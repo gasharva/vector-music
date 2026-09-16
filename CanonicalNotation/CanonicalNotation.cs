@@ -52,6 +52,7 @@ public sealed record CanonicalEvent
     public int? Staff { get; init; }
     public int? Voice { get; init; }
     public string? Duration { get; init; }
+    public bool? Grace { get; init; }
     public List<CanonicalNote>? Notes { get; init; }
     public EventNotation? Notation { get; init; }
     public string? Text { get; init; }

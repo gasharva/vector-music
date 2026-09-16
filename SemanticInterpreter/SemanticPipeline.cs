@@ -17,6 +17,16 @@ public sealed class SemanticPipeline
     {
         var materialized = passes.ToList();
 
+        // Grace heads are not a parallel note-recognition path. NoteheadPass first
+        // accepts every notehead; this pass only tags a reduced-size subcluster so
+        // pitch, stems, beams and accidentals keep using the normal facts.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not GraceNotePass))
+        {
+            var noteheadIndex = materialized.FindLastIndex(pass => pass is NoteheadPass);
+            materialized.Insert(noteheadIndex + 1, new GraceNotePass());
+        }
+
         // Rest facts must exist before DotAttachmentPass: augmentation dots can
         // belong to rests as well as noteheads. If callers do not position RestPass
         // explicitly, insert it immediately before dots when possible.

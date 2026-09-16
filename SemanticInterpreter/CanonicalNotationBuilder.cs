@@ -40,6 +40,10 @@ public sealed class CanonicalNotationBuilder
         var restDots = facts.OfType<RestDotAttachmentFact>().ToArray();
         var voices = facts.OfType<VoiceFact>().ToArray();
         var onsets = facts.OfType<OnsetFact>().ToArray();
+        var graceNoteheadIds = facts
+            .OfType<GraceNoteFact>()
+            .Select(grace => grace.NoteheadId)
+            .ToHashSet(StringComparer.Ordinal);
 
         if (noteheads.Length > 0 && durations.Length == 0)
         {
@@ -153,6 +157,7 @@ public sealed class CanonicalNotationBuilder
                 restDots,
                 voices,
                 onsets,
+                graceNoteheadIds,
                 facts,
                 noteheadToEventId,
                 stemToEventId,
@@ -203,6 +208,7 @@ public sealed class CanonicalNotationBuilder
             + $"arpeggios={arpeggioRelations.Count}; "
             + $"hairpins={hairpinRelations.Count}; pedals={pedalRelations.Count}; "
             + $"octave-shifts={octaveShiftRelations.Count}; "
+            + $"grace-events={measures.Sum(measure => measure.Events.Count(ev => ev.Grace == true))}; "
             + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
         return new CanonicalNotation(
@@ -232,6 +238,7 @@ public sealed class CanonicalNotationBuilder
         IReadOnlyList<RestDotAttachmentFact> allRestDots,
         IReadOnlyList<VoiceFact> allVoices,
         IReadOnlyList<OnsetFact> allOnsets,
+        IReadOnlySet<string> graceNoteheadIds,
         SemanticFacts facts,
         IDictionary<string, string> noteheadToEventId,
         IDictionary<string, string> stemToEventId,
@@ -356,6 +363,7 @@ public sealed class CanonicalNotationBuilder
                 chord.ChordId,
                 pitchesByNotehead,
                 durationsByNotehead,
+                graceNoteheadIds,
                 facts);
             drafts.Add(draft);
 
@@ -404,6 +412,7 @@ public sealed class CanonicalNotationBuilder
                 notehead.ShapeId,
                 pitchesByNotehead,
                 durationsByNotehead,
+                graceNoteheadIds,
                 facts));
             noteheadToEventId[notehead.ShapeId] = eventId;
 
@@ -510,6 +519,7 @@ public sealed class CanonicalNotationBuilder
         string targetId,
         IReadOnlyDictionary<string, PitchFact> pitchesByNotehead,
         IReadOnlyDictionary<string, DurationFact> durationsByNotehead,
+        IReadOnlySet<string> graceNoteheadIds,
         SemanticFacts facts)
     {
         var durationFacts = noteheads
@@ -545,6 +555,14 @@ public sealed class CanonicalNotationBuilder
             .ToList();
 
         var x = noteheads.Average(note => note.CenterX);
+        var graceCount = noteheads.Count(note => graceNoteheadIds.Contains(note.ShapeId));
+        var isGrace = graceCount > 0 && graceCount == noteheads.Count;
+        if (graceCount > 0 && !isGrace)
+        {
+            facts.AddTrace(
+                $"CanonicalBuilder: {eventId} mixes grace and metric noteheads; "
+                + "keeping the event metric");
+        }
 
         var classifiedMarks = facts
             .OfType<ClassifiedNotationMarkFact>()
@@ -583,7 +601,8 @@ public sealed class CanonicalNotationBuilder
             Type = "chord",
             At = "0",
             Voice = voice,
-            Duration = selectedDuration.EffectiveDuration,
+            Duration = isGrace ? null : selectedDuration.EffectiveDuration,
+            Grace = isGrace ? true : null,
             Notes = notes,
             Notation = notation
         };

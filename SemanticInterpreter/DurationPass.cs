@@ -43,6 +43,10 @@ public sealed class DurationPass : ISemanticPass
         var beams = facts.OfType<BeamAttachmentFact>().ToArray();
         var tuplets = facts.OfType<TupletFact>().ToArray();
         var dots = facts.OfType<DotAttachmentFact>().ToArray();
+        var graceNoteheadIds = facts
+            .OfType<GraceNoteFact>()
+            .Select(grace => grace.NoteheadId)
+            .ToHashSet(StringComparer.Ordinal);
 
         var decisions = new List<DurationFact>(noteheads.Length);
 
@@ -143,12 +147,16 @@ public sealed class DurationPass : ISemanticPass
                 .ThenBy(candidate => candidate.TupletShapeId, StringComparer.Ordinal)
                 .FirstOrDefault();
 
-            var effectiveDuration = tuplet is null
+            var nominalEffectiveDuration = tuplet is null
                 ? dottedDuration
                 : Multiply(
                     dottedDuration,
                     tuplet.NormalNotes,
                     tuplet.ActualNotes);
+            var isGrace = graceNoteheadIds.Contains(notehead.ShapeId);
+            var effectiveDuration = isGrace
+                ? Fraction.Zero
+                : nominalEffectiveDuration;
 
             var confidenceValues = new List<double>
             {
@@ -219,6 +227,9 @@ public sealed class DurationPass : ISemanticPass
             var tupletText = tuplet is null
                 ? "no tuplet scaling"
                 : $"tuplet={tuplet.ActualNotes}:{tuplet.NormalNotes}";
+            var graceText = isGrace
+                ? "grace note -> zero metrical duration"
+                : "metric note";
 
             decisions.Add(new DurationFact(
                 notehead.MeasureNumber,
@@ -233,7 +244,7 @@ public sealed class DurationPass : ISemanticPass
                 tuplet?.ActualNotes,
                 tuplet?.NormalNotes,
                 confidence,
-                $"{evidence}; {dotText}; {tupletText}; "
+                $"{evidence}; {dotText}; {tupletText}; {graceText}; "
                 + $"base={baseDuration}; effective={effectiveDuration}",
                 sourceShapeIds));
         }
@@ -254,6 +265,7 @@ public sealed class DurationPass : ISemanticPass
             + $"dotted={decisions.Count(decision => decision.Dots > 0)}; "
             + $"tuplets={decisions.Count(decision => decision.TupletActual is not null)}; "
             + $"subdivided={decisions.Count(decision => decision.SubdivisionLevel > 0)}; "
+            + $"grace={decisions.Count(decision => graceNoteheadIds.Contains(decision.NoteheadId))}; "
             + $"filled-without-stem-fallback={decisions.Count(decision => decision.Reason.Contains("quarter fallback", StringComparison.Ordinal))}");
     }
 

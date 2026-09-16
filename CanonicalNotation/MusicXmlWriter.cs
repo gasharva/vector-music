@@ -79,6 +79,14 @@ public sealed class MusicXmlWriter
             .Where(e => e.Type is "chord" or "rest")
             .ToList();
 
+        var eventOrder = measure.Events
+            .Select((ev, index) => (ev.Id, index))
+            .GroupBy(item => item.Id, StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.Min(item => item.index),
+                StringComparer.Ordinal);
+
         var streams = noteEvents
             .GroupBy(e => e.Voice ?? 1)
             .OrderBy(g => g.Key)
@@ -93,8 +101,7 @@ public sealed class MusicXmlWriter
             long cursor = 0;
             foreach (var ev in streams[streamIndex]
                          .OrderBy(e => Fraction.Parse(e.At).Numerator / (double)Fraction.Parse(e.At).Denominator)
-                         .ThenBy(EventStaff)
-                         .ThenBy(e => e.Id, StringComparer.Ordinal))
+                         .ThenBy(e => eventOrder.GetValueOrDefault(e.Id, int.MaxValue)))
             {
                 var at = Units(ev.At);
 
@@ -122,7 +129,9 @@ public sealed class MusicXmlWriter
                 foreach (var note in WriteEvent(ev))
                     mx.Add(note);
 
-                cursor = at + Units(ev.Duration ?? "0");
+                cursor = at + (ev.Grace == true
+                    ? 0
+                    : Units(ev.Duration ?? "0"));
             }
 
             if (streamIndex == 0)
@@ -212,6 +221,7 @@ public sealed class MusicXmlWriter
         int noteIndex)
     {
         var nx = new XElement("note");
+        if (ev.Grace == true) nx.Add(new XElement("grace"));
         if (chordContinuation) nx.Add(new XElement("chord"));
 
         if (note is null)
@@ -230,7 +240,8 @@ public sealed class MusicXmlWriter
             nx.Add(pitch);
         }
 
-        nx.Add(new XElement("duration", durationUnits));
+        if (ev.Grace != true)
+            nx.Add(new XElement("duration", durationUnits));
 
         if (note is not null)
         {

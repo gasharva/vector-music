@@ -89,6 +89,7 @@ public sealed class MusicXmlCanonicalizer
                     var staff = Int(node, "staff", 1);
                     var voice = Int(node, "voice", 1);
                     var isChordContinuation = node.Element("chord") is not null;
+                    var isGrace = node.Element("grace") is not null;
 
                     CanonicalEvent ev;
                     if (isChordContinuation && lastChordEvent is { Type: "chord", Notes: not null })
@@ -130,7 +131,9 @@ public sealed class MusicXmlCanonicalizer
                             ev = new CanonicalEvent
                             {
                                 Id = id, Type = "chord", At = at,
-                                Duration = duration, Voice = voice,
+                                Duration = isGrace ? null : duration,
+                                Grace = isGrace ? true : null,
+                                Voice = voice,
                                 Notes = [ReadPitch(node, staff)!], Notation = notation
                             };
                         }
