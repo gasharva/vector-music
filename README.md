@@ -29,8 +29,10 @@ This lets SVG recognition be tested against a stable notation-level ground truth
 
 The current Kancheli integration fixture is published after successful `master` workflow runs.
 
-- [Artifact index](https://github.com/gasharva/vector-music/blob/semantic-artifacts/kancheli-mangled/index.html) — compact human-oriented list of published results and visual diagnostics.
-- [Published artifact folder](https://github.com/gasharva/vector-music/tree/semantic-artifacts/kancheli-mangled) — direct access to generated MusicXML, canonical JSON and SVG overlays.
+- [Open rendered artifact index](https://raw.githack.com/gasharva/vector-music/semantic-artifacts/kancheli-mangled/index.html) — rendered HTML entry point with links to the published results and visual diagnostics.
+- [Published artifact folder](https://github.com/gasharva/vector-music/tree/semantic-artifacts/kancheli-mangled) — direct access to generated MusicXML, canonical JSON and SVG overlays in GitHub.
 - [Semantic interpreter workflow](https://github.com/gasharva/vector-music/actions/workflows/semantic-canonical-poc.yml) — latest runs, logs and downloadable workflow artifacts.
 
 The curated visual set currently includes classified symbols, ownership, vertical zigzags/arpeggio candidates, noteheads, accidentals, stems, beams and augmentation dots. Lower-level parser diagnostics are still generated locally when needed, but are intentionally not published in the stable artifact folder.
+
+> GitHub's normal `blob/.../index.html` view displays HTML source rather than rendering it. The rendered index link above uses raw.githack to serve the same files from the `semantic-artifacts` branch as static web content; relative links from the index to SVG/MXL/JSON artifacts remain usable.
