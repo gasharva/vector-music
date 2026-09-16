@@ -5088,15 +5088,15 @@
         "from": {
           "measure": 23,
           "at": "0",
-          "staff": 2
+          "staff": 1
         },
         "to": {
           "measure": 24,
           "at": "3/4",
-          "staff": 2
+          "staff": 1
         },
         "type": "crescendo",
-        "placement": "above"
+        "placement": "below"
       }
     ],
     "pedals": [

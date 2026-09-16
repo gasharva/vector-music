@@ -4182,11 +4182,11 @@
       </note>
     </measure>
     <measure number="23">
-      <direction placement="above">
+      <direction placement="below">
         <direction-type>
           <wedge type="crescendo" number="2" />
         </direction-type>
-        <staff>2</staff>
+        <staff>1</staff>
       </direction>
       <direction placement="below">
         <direction-type>
@@ -4346,11 +4346,11 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
-      <direction placement="above">
+      <direction placement="below">
         <direction-type>
           <wedge type="stop" number="2" />
         </direction-type>
-        <staff>2</staff>
+        <staff>1</staff>
       </direction>
       <backup>
         <duration>60</duration>
