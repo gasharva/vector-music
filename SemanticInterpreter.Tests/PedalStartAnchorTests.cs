@@ -31,7 +31,7 @@ public sealed class PedalStartAnchorTests
             ownership);
         var bracketSource = new BracketSpannerPrimitive(
             "pedal-line",
-            new PointD(55, 264),
+            new PointD(40, 264),
             new PointD(95, 264),
             null,
             new PointD(95, 254),
@@ -54,7 +54,7 @@ public sealed class PedalStartAnchorTests
             new BracketSpannerElement
             {
                 ShapeId = bracketSource.Id,
-                Bounds = new BoundsD(54.5, 253.5, 95.5, 264.5),
+                Bounds = new BoundsD(39.5, 253.5, 95.5, 264.5),
                 Ownership = ownership,
                 Source = bracketSource
             }
@@ -83,7 +83,7 @@ public sealed class PedalStartAnchorTests
         ]);
         var facts = new SemanticFacts();
         AddNote(facts, "first", x: 15, at: "0", duration: "1/8");
-        AddNote(facts, "second", x: 50, at: "1/8", duration: "5/8");
+        AddNote(facts, "second", x: 38, at: "1/8", duration: "5/8");
 
         new PedalPass().Run(document, facts);
 
