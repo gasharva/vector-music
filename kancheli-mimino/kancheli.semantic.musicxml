@@ -1683,14 +1683,14 @@
         <duration>12</duration>
       </backup>
       <forward>
-        <duration>2</duration>
+        <duration>4</duration>
       </forward>
       <note>
+        <grace />
         <pitch>
           <step>C</step>
           <octave>5</octave>
         </pitch>
-        <duration>1</duration>
         <voice>2</voice>
         <type>16th</type>
         <stem>down</stem>
@@ -1699,12 +1699,12 @@
         <beam number="2">begin</beam>
       </note>
       <note>
+        <grace />
         <pitch>
           <step>B</step>
           <alter>-1</alter>
           <octave>4</octave>
         </pitch>
-        <duration>1</duration>
         <voice>2</voice>
         <type>16th</type>
         <stem>down</stem>

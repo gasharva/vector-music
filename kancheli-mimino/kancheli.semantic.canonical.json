@@ -1696,9 +1696,9 @@
             {
               "id": "m15-shape-231",
               "type": "chord",
-              "at": "1/8",
+              "at": "1/4",
               "voice": 2,
-              "duration": "1/16",
+              "grace": true,
               "notes": [
                 {
                   "pitch": "C5",
@@ -1713,9 +1713,9 @@
             {
               "id": "m15-shape-230",
               "type": "chord",
-              "at": "3/16",
+              "at": "1/4",
               "voice": 2,
-              "duration": "1/16",
+              "grace": true,
               "notes": [
                 {
                   "pitch": "Bb4",
