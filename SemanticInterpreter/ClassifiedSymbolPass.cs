@@ -410,7 +410,7 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
             || element.Classification is null
             || element.Classification.Confidence < MinimumConfidence
             || !shapeGroups.TryGetValue(BaseShapeId(element.ShapeId), out var siblings)
-            || siblings.Length != 2)
+            || siblings.Length < 2)
         {
             return false;
         }
