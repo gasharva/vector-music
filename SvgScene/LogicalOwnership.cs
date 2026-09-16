@@ -26,6 +26,8 @@ public sealed record LogicalOwnershipScene(
 public sealed class LogicalOwnershipAnalyzer
 {
     private const double LedgerHalfHeightInSpacings = 0.25;
+    private const double InterstaffRestAmbiguityMarginInSpacings = 0.35;
+    private const double MinimumRestClassificationConfidence = 0.75;
 
     private static readonly IReadOnlyDictionary<string, double> DistanceThresholds =
         new Dictionary<string, double>(StringComparer.Ordinal)
@@ -58,6 +60,11 @@ public sealed class LogicalOwnershipAnalyzer
         PropagateGeneration(2, elements, assignments, boundaries, sourceInterline);
         PropagateGeneration(3, elements, assignments, boundaries, sourceInterline);
         AssignBetweenStaffBridges(elements, layout, assignments);
+        CorrectInterstaffRestOwnership(
+            geometry,
+            notation,
+            layout,
+            assignments);
 
         var scene = ApplyOwnership(notation, assignments);
         var ownershipScene = BuildOwnershipScene(
@@ -232,6 +239,125 @@ public sealed class LogicalOwnershipAnalyzer
                 bestDistance,
                 "Proximity");
         }
+    }
+
+    private static void CorrectInterstaffRestOwnership(
+        GeometricScene geometry,
+        NotationScene notation,
+        ScoreLayout layout,
+        IDictionary<string, LogicalOwnership> assignments)
+    {
+        var shapesById = geometry.Shapes.ToDictionary(
+            shape => shape.Id,
+            StringComparer.Ordinal);
+        var staffsById = layout.Staffs.ToDictionary(
+            staff => staff.Id,
+            StringComparer.Ordinal);
+
+        foreach (var instance in notation.Instances)
+        {
+            if (!IsStaffLocalRest(instance.Classification)
+                || !shapesById.TryGetValue(instance.ShapeId, out var shape))
+            {
+                continue;
+            }
+
+            foreach (var system in layout.Systems)
+            {
+                var corrected = false;
+
+                foreach (var pair in system.StaffPairs)
+                {
+                    var upper = staffsById[pair.UpperStaffId];
+                    var lower = staffsById[pair.LowerStaffId];
+                    var centerY = shape.Bounds.CenterY;
+
+                    if (centerY <= upper.Bounds.MaxY
+                        || centerY >= lower.Bounds.MinY)
+                    {
+                        continue;
+                    }
+
+                    var measure = pair.Measures.FirstOrDefault(candidate =>
+                        shape.Bounds.CenterX >= candidate.XStart
+                        && shape.Bounds.CenterX <= candidate.XEnd);
+                    if (measure is null)
+                    {
+                        continue;
+                    }
+
+                    var upperDistance = centerY - upper.Bounds.MaxY;
+                    var lowerDistance = lower.Bounds.MinY - centerY;
+                    var spacing = Math.Max(
+                        0.001,
+                        Math.Min(
+                            upper.AverageLineSpacing,
+                            lower.AverageLineSpacing));
+
+                    if (Math.Abs(upperDistance - lowerDistance)
+                        <= spacing * InterstaffRestAmbiguityMarginInSpacings)
+                    {
+                        continue;
+                    }
+
+                    var nearestStaff = lowerDistance < upperDistance
+                        ? lower
+                        : upper;
+                    var nearestDistance = Math.Min(
+                        upperDistance,
+                        lowerDistance);
+                    var coordinate = new LogicalCoordinate(
+                        nearestStaff.Id,
+                        measure.Id);
+
+                    if (assignments.TryGetValue(instance.ShapeId, out var existing)
+                        && existing.Start == coordinate
+                        && existing.End == coordinate)
+                    {
+                        corrected = true;
+                        break;
+                    }
+
+                    assignments[instance.ShapeId] = new LogicalOwnership(
+                        coordinate,
+                        coordinate,
+                        2,
+                        null,
+                        nearestDistance,
+                        "InterstaffRestNearestStaff");
+
+                    corrected = true;
+                    break;
+                }
+
+                if (corrected)
+                {
+                    break;
+                }
+            }
+        }
+    }
+
+    private static bool IsStaffLocalRest(SymbolClassification? classification)
+    {
+        if (classification is null
+            || classification.Confidence < MinimumRestClassificationConfidence)
+        {
+            return false;
+        }
+
+        return classification.Label is
+            "HW_REST_set"
+            or "WHOLE_REST"
+            or "HALF_REST"
+            or "QUARTER_REST"
+            or "EIGHTH_REST"
+            or "ONE_16TH_REST"
+            or "ONE_32ND_REST"
+            or "ONE_64TH_REST"
+            or "ONE_128TH_REST"
+            or "BREVE_REST"
+            or "LONG_REST";
     }
 
     private static void AssignBetweenStaffBridges(

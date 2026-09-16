@@ -226,6 +226,7 @@ public sealed class VoicePass : ISemanticPass
                 homeHeads.Min(notehead => notehead.CenterY),
                 homeHeads.Max(notehead => notehead.CenterY),
                 stem?.Direction,
+                stem is null ? null : (stem.StartX + stem.EndX) / 2.0,
                 chord.Confidence,
                 chord.SourceShapeIds));
         }
@@ -253,6 +254,7 @@ public sealed class VoicePass : ISemanticPass
                 notehead.CenterY,
                 notehead.CenterY,
                 stem?.Direction,
+                stem is null ? null : (stem.StartX + stem.EndX) / 2.0,
                 Math.Min(
                     notehead.Confidence,
                     stem?.Confidence ?? 1.0),
@@ -274,6 +276,7 @@ public sealed class VoicePass : ISemanticPass
                 rest.CenterX,
                 rest.CenterY,
                 rest.CenterY,
+                null,
                 null,
                 rest.Confidence,
                 rest.SourceShapeIds));
@@ -326,8 +329,14 @@ public sealed class VoicePass : ISemanticPass
                     continue;
                 }
 
-                if (Math.Abs(pitched[i].AnchorX - pitched[j].AnchorX)
-                    <= spacing * OppositeStemAlignmentInSpacings)
+                var noteheadAligned = Math.Abs(pitched[i].AnchorX - pitched[j].AnchorX)
+                    <= spacing * OppositeStemAlignmentInSpacings;
+                var stemAxesAligned = pitched[i].StemAnchorX is not null
+                    && pitched[j].StemAnchorX is not null
+                    && Math.Abs(pitched[i].StemAnchorX!.Value - pitched[j].StemAnchorX!.Value)
+                        <= spacing * OppositeStemAlignmentInSpacings;
+
+                if (noteheadAligned || stemAxesAligned)
                 {
                     return true;
                 }
@@ -622,6 +631,7 @@ public sealed class VoicePass : ISemanticPass
         double TopY,
         double BottomY,
         StemDirection? StemDirection,
+        double? StemAnchorX,
         double SourceConfidence,
         IReadOnlyList<string> SourceShapeIds)
     {

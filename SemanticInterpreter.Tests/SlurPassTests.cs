@@ -67,6 +67,42 @@ public sealed class SlurPassTests
     }
 
     [Fact]
+    public void SamePitchArc_WithInterveningRhythmicEvent_IsSlurNotTie()
+    {
+        const double spacing = 20;
+        var document = Document(
+            Curve(
+                "phrase-arc",
+                [
+                    new PointD(100, 160),
+                    new PointD(170, 125),
+                    new PointD(240, 160)
+                ],
+                spacing));
+        var facts = new SemanticFacts();
+        facts.Add(Notehead("left", 100, 160, 2, spacing));
+        facts.Add(Notehead("middle", 170, 150, 3, spacing));
+        facts.Add(Notehead("right", 240, 160, 2, spacing));
+        facts.Add(Pitch("left", "D4"));
+        facts.Add(Pitch("middle", "E4"));
+        facts.Add(Pitch("right", "D4"));
+        facts.Add(Duration("left", "1/4"));
+        facts.Add(Duration("middle", "1/4"));
+        facts.Add(Duration("right", "1/4"));
+        facts.Add(Onset("left", "0", 100));
+        facts.Add(Onset("middle", "1/4", 170));
+        facts.Add(Onset("right", "1/2", 240));
+
+        var pass = new SlurPass();
+        pass.Run(document, facts);
+
+        var slur = Assert.Single(facts.OfType<SlurFact>());
+        Assert.Equal("left", slur.FromNoteheadId);
+        Assert.Equal("right", slur.ToNoteheadId);
+        Assert.Equal("slur", Assert.Single(pass.LastAnalysis!.Decisions).Decision);
+    }
+
+    [Fact]
     public void VerticalParenthesisLikeCurve_IsRejectedBeforeEndpointMatching()
     {
         const double spacing = 20;
@@ -236,6 +272,45 @@ public sealed class SlurPassTests
             false,
             0.99,
             "test",
+            [noteheadId]);
+    }
+
+    private static DurationFact Duration(
+        string noteheadId,
+        string duration)
+    {
+        return new DurationFact(
+            1,
+            1,
+            noteheadId,
+            null,
+            duration,
+            duration,
+            "quarter",
+            0,
+            0,
+            null,
+            null,
+            0.99,
+            "test duration",
+            [noteheadId]);
+    }
+
+    private static OnsetFact Onset(
+        string noteheadId,
+        string at,
+        double x)
+    {
+        return new OnsetFact(
+            1,
+            1,
+            VoiceTargetKind.Notehead,
+            noteheadId,
+            1,
+            at,
+            x,
+            0.99,
+            "test onset",
             [noteheadId]);
     }
 

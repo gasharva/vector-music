@@ -1,3 +1,4 @@
+using SvgMusic.Canonical;
 using SvgMusic.Scene;
 
 namespace SvgMusic.Semantics;
@@ -117,6 +118,19 @@ public sealed class SlurPass : ISemanticPass
             .ToDictionary(
                 group => group.Key,
                 group => group.OrderByDescending(voice => voice.Confidence).First());
+        var onsetByTarget = facts
+            .OfType<OnsetFact>()
+            .GroupBy(onset => new VoiceKey(onset.TargetKind, onset.TargetId))
+            .ToDictionary(
+                group => group.Key,
+                group => group.OrderByDescending(onset => onset.Confidence).First());
+        var durationByNotehead = facts
+            .OfType<DurationFact>()
+            .GroupBy(duration => duration.NoteheadId, StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group.OrderByDescending(duration => duration.Confidence).First(),
+                StringComparer.Ordinal);
 
         var anchors = noteheads
             .Where(notehead => pitchByNotehead.ContainsKey(notehead.ShapeId))
@@ -134,13 +148,22 @@ public sealed class SlurPass : ISemanticPass
                     ? voice.LocalVoice
                     : 1;
 
+                onsetByTarget.TryGetValue(
+                    new VoiceKey(targetKind, targetId),
+                    out var onset);
+                durationByNotehead.TryGetValue(
+                    notehead.ShapeId,
+                    out var duration);
+
                 return new EndpointAnchor(
                     notehead,
                     pitchByNotehead[notehead.ShapeId],
                     stem,
                     targetKind,
                     targetId,
-                    localVoice);
+                    localVoice,
+                    onset,
+                    duration);
             })
             .ToArray();
 
@@ -279,6 +302,7 @@ public sealed class SlurPass : ISemanticPass
             requireSamePitch: false);
 
         if (bestTie is not null
+            && IsTieAdjacent(bestTie.Start.Anchor, bestTie.End.Anchor)
             && (bestSlur is null
                 ? bestTie.Score <= MaximumUnopposedTieScoreInSpacings
                 : bestTie.Score <= bestSlur.Score + TiePreferenceMarginInSpacings))
@@ -296,7 +320,8 @@ public sealed class SlurPass : ISemanticPass
 
         // A same-pitch pair can also win the ordinary geometric search exactly. Keep
         // the semantic boundary explicit even when the wide tie pass was unnecessary.
-        if (IsSamePitchVoice(bestSlur.Start.Anchor, bestSlur.End.Anchor))
+        if (IsSamePitchVoice(bestSlur.Start.Anchor, bestSlur.End.Anchor)
+            && IsTieAdjacent(bestSlur.Start.Anchor, bestSlur.End.Anchor))
         {
             return TieLike(curve, left, right, bestSlur);
         }
@@ -387,6 +412,39 @@ public sealed class SlurPass : ISemanticPass
         return string.Equals(first.Pitch.Pitch, second.Pitch.Pitch, StringComparison.Ordinal)
             && first.Notehead.Staff == second.Notehead.Staff
             && first.LocalVoice == second.LocalVoice;
+    }
+
+    private static bool IsTieAdjacent(
+        EndpointAnchor first,
+        EndpointAnchor second)
+    {
+        if (!IsSamePitchVoice(first, second))
+        {
+            return false;
+        }
+
+        // Keep the established cross-measure tie behaviour until absolute score
+        // timing is available. The ambiguity we can resolve exactly here is the
+        // same-measure case: a tie must connect consecutive rhythmic events.
+        if (first.Notehead.MeasureNumber != second.Notehead.MeasureNumber)
+        {
+            return true;
+        }
+
+        // Synthetic/unit callers may not have run DurationPass/OnsetPass yet.
+        // Preserve the previous geometry-only behaviour in that incomplete state.
+        if (first.Onset is null
+            || second.Onset is null
+            || first.Duration is null)
+        {
+            return true;
+        }
+
+        var expectedNextOnset = Fraction.Parse(first.Onset.At)
+            + Fraction.Parse(first.Duration.EffectiveDuration);
+        var actualNextOnset = Fraction.Parse(second.Onset.At);
+
+        return expectedNextOnset == actualNextOnset;
     }
 
     private static SlurDecision TieLike(
@@ -556,7 +614,9 @@ public sealed class SlurPass : ISemanticPass
         StemAttachmentFact? Stem,
         VoiceTargetKind TargetKind,
         string TargetId,
-        int LocalVoice);
+        int LocalVoice,
+        OnsetFact? Onset,
+        DurationFact? Duration);
 
     private sealed record EndpointChoice(
         EndpointAnchor Anchor,

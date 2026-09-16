@@ -46,6 +46,23 @@ public sealed class VoicePassTests
     }
 
     [Fact]
+    public void CollisionDisplacedOppositeNoteheads_UseAlignedStemAxesForPolyphony()
+    {
+        var facts = new SemanticFacts();
+        facts.Add(Notehead("upper", 90, 92, staff: 1));
+        facts.Add(Notehead("lower", 110, 108, staff: 1));
+        facts.Add(Stem("stem-up", "upper", StemDirection.Up, 100, staff: 1));
+        facts.Add(Stem("stem-down", "lower", StemDirection.Down, 100, staff: 1));
+
+        var pass = new VoicePass();
+        pass.Run(Document(), facts);
+
+        Assert.Equal(1, Voice(facts, VoiceTargetKind.Notehead, "upper").LocalVoice);
+        Assert.Equal(2, Voice(facts, VoiceTargetKind.Notehead, "lower").LocalVoice);
+        Assert.Contains((1, 1), pass.LastAnalysis!.PolyphonicStaffs);
+    }
+
+    [Fact]
     public void LowerStaff_UsesSameLocalConvention_UpOneDownTwo()
     {
         var facts = new SemanticFacts();

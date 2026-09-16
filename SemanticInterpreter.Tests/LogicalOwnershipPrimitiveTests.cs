@@ -75,6 +75,57 @@ public sealed class LogicalOwnershipPrimitiveTests
     }
 
     [Fact]
+    public void InterstaffRest_CloserToLowerStaff_DoesNotInheritUpperStemOwnership()
+    {
+        var restBounds = new BoundsD(48, 178, 52, 188);
+        var geometry = new GeometricScene(
+        [
+            new GeometricShape(
+                "rest",
+                "path",
+                [new PointD(48, 178), new PointD(52, 188)],
+                restBounds)
+        ]);
+        var upperStem = new Stroke(
+            "upper-stem",
+            new PointD(50, 130),
+            new PointD(50, 176),
+            1,
+            "path",
+            null);
+        var rest = new ShapeInstance(
+            "rest",
+            "rest-prototype",
+            restBounds.CenterX,
+            restBounds.CenterY,
+            restBounds.Width,
+            restBounds.Height,
+            "path",
+            null,
+            new SymbolClassification(
+                "QUARTER_REST",
+                0.97,
+                20,
+                []));
+        var notation = EmptyNotation() with
+        {
+            Strokes = [upperStem],
+            Instances = [rest]
+        };
+
+        var result = new LogicalOwnershipAnalyzer().AnalyzeAndApply(
+            geometry,
+            notation,
+            Layout());
+
+        var ownership = Assert.Single(result.Scene.Instances).Ownership;
+        Assert.NotNull(ownership);
+        Assert.Equal(new LogicalCoordinate("staff-lower", "m1"), ownership.Start);
+        Assert.Equal(ownership.Start, ownership.End);
+        Assert.Equal("InterstaffRestNearestStaff", ownership.Reason);
+    }
+
+    [Fact]
     public void BracketSpanner_AcrossMeasureBoundary_PreservesLogicalSpan()
     {
         var bracket = new BracketSpannerPrimitive(
