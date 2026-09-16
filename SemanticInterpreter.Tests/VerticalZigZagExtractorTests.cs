@@ -116,6 +116,61 @@ public sealed class VerticalZigZagExtractorTests
         Assert.Empty(notation.Prototypes);
     }
 
+    [Fact]
+    public void RepeatedAlignedGlyphTiles_AreAssembledIntoOneVerticalZigZagRun()
+    {
+        var shapes = Enumerable.Range(0, 9)
+            .Select(index => Tile($"tile-{index}", 100, 200 + index * 18.7))
+            .ToArray();
+
+        var notation = new ShapeClusterer().Cluster(new GeometricScene(shapes));
+
+        var primitive = Assert.Single(notation.VerticalZigZags);
+        Assert.Equal("tile-0", primitive.ShapeId);
+        Assert.True(primitive.Bounds.Height > primitive.Bounds.Width * 5);
+        Assert.Equal(8, primitive.TurnCount);
+        Assert.Empty(notation.Instances);
+        Assert.Empty(notation.Prototypes);
+    }
+
+    [Fact]
+    public void RepeatedGlyphsWithoutVerticalAlignment_AreNotAssembled()
+    {
+        var shapes = Enumerable.Range(0, 6)
+            .Select(index => Tile($"tile-{index}", 100 + index * 7, 200 + index * 18.7))
+            .ToArray();
+
+        var result = new VerticalZigZagRunExtractor().Extract(new GeometricScene(shapes));
+
+        Assert.Empty(result.ZigZags);
+        Assert.Empty(result.ConsumedShapeIds);
+    }
+
+    private static GeometricShape Tile(string id, double centerX, double centerY)
+    {
+        var points = new[]
+        {
+            new PointD(centerX - 5, centerY - 9),
+            new PointD(centerX - 1, centerY - 10),
+            new PointD(centerX + 4, centerY - 7),
+            new PointD(centerX + 6, centerY - 2),
+            new PointD(centerX + 3, centerY + 4),
+            new PointD(centerX + 1, centerY + 9),
+            new PointD(centerX - 4, centerY + 8),
+            new PointD(centerX - 6, centerY + 2),
+            new PointD(centerX - 5, centerY - 9)
+        };
+
+        return new GeometricShape(
+            id,
+            "path",
+            points,
+            BoundsD.FromPoints(points),
+            IsClosed: true,
+            HasFill: true,
+            HasStroke: false);
+    }
+
     private static GeometricShape Shape(
         string id,
         IReadOnlyList<PointD> points) =>
