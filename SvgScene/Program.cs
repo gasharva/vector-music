@@ -107,6 +107,7 @@ Console.WriteLine($"NotationScene contours      : {notation.Instances.Count}");
 Console.WriteLine($"NotationScene prototypes    : {notation.Prototypes.Count}");
 Console.WriteLine($"NotationScene strokes       : {notation.Strokes.Count}");
 Console.WriteLine($"NotationScene curved strokes: {notation.CurvedStrokes.Count}");
+Console.WriteLine($"NotationScene vertical zigzags: {notation.VerticalZigZags.Count}");
 Console.WriteLine(
     $"NotationScene ellipses      : {notation.Ellipses.Count} "
     + $"(hollow: {notation.Ellipses.Count(ellipse => ellipse.IsHollow)})");
@@ -164,6 +165,7 @@ var compact = new
     instances = notation.Instances,
     strokes = notation.Strokes,
     curvedStrokes = notation.CurvedStrokes,
+    verticalZigZags = notation.VerticalZigZags,
     ellipses = notation.Ellipses,
     logicalOwnership = logicalOwnership.Assignments
 };
