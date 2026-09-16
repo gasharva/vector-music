@@ -5065,7 +5065,40 @@
       }
     ],
     "arpeggios": [],
-    "hairpins": [],
+    "hairpins": [
+      {
+        "id": "hairpin-1",
+        "kind": "hairpin",
+        "from": {
+          "measure": 7,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 8,
+          "at": "5/8",
+          "staff": 2
+        },
+        "type": "crescendo",
+        "placement": "below"
+      },
+      {
+        "id": "hairpin-2",
+        "kind": "hairpin",
+        "from": {
+          "measure": 23,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 24,
+          "at": "3/4",
+          "staff": 2
+        },
+        "type": "crescendo",
+        "placement": "above"
+      }
+    ],
     "pedals": [
       {
         "id": "pedal-1",

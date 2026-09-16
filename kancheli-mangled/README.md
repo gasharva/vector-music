@@ -1,6 +1,6 @@
 # When Almonds Blossomed - mangled - artifacts
 
-Commit: `b0014709bd58a7c1aaba13a65095a07e3b1c6049`
+Commit: `e609ed0f9c6a5c7dcae9b80dbf222a61a3f6f240`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Primary end-to-end result for opening in MuseScore.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.

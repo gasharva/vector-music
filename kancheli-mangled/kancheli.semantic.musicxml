@@ -793,6 +793,13 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge type="crescendo" number="1" />
+        </direction-type>
+        <offset>-50</offset>
+        <staff>2</staff>
+      </direction>
       <backup>
         <duration>60</duration>
       </backup>
@@ -1345,6 +1352,12 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <wedge type="stop" number="1" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -4169,6 +4182,12 @@
       </note>
     </measure>
     <measure number="23">
+      <direction placement="above">
+        <direction-type>
+          <wedge type="crescendo" number="2" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <direction placement="below">
         <direction-type>
           <pedal type="resume" number="10" line="yes" sign="yes" />
@@ -4327,6 +4346,12 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
+      <direction placement="above">
+        <direction-type>
+          <wedge type="stop" number="2" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <backup>
         <duration>60</duration>
       </backup>
