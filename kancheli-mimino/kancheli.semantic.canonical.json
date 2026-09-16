@@ -370,8 +370,8 @@
             {
               "id": "m4-shape-229",
               "type": "chord",
-              "at": "3/4",
-              "voice": 1,
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -1321,8 +1321,8 @@
             {
               "id": "m12-shape-227",
               "type": "chord",
-              "at": "3/4",
-              "voice": 1,
+              "at": "0",
+              "voice": 2,
               "duration": "3/4",
               "notes": [
                 {
@@ -2219,8 +2219,8 @@
               "id": "m20-rest-shape-458",
               "type": "rest",
               "at": "0",
-              "staff": 1,
-              "voice": 2,
+              "staff": 2,
+              "voice": 5,
               "duration": "1/4",
               "notation": {
                 "noteType": "quarter"
@@ -2229,7 +2229,7 @@
             {
               "id": "m20-shape-196",
               "type": "chord",
-              "at": "1/4",
+              "at": "0",
               "voice": 1,
               "duration": "3/4",
               "notes": [
@@ -2250,7 +2250,7 @@
             {
               "id": "chord-m20-37",
               "type": "chord",
-              "at": "1/4",
+              "at": "0",
               "voice": 2,
               "duration": "3/4",
               "notes": [
@@ -2280,7 +2280,7 @@
               "id": "chord-m20-38",
               "type": "chord",
               "at": "0",
-              "voice": 5,
+              "voice": 6,
               "duration": "3/4",
               "notes": [
                 {
@@ -2301,7 +2301,7 @@
             {
               "id": "m20-shape-261",
               "type": "chord",
-              "at": "3/4",
+              "at": "1/4",
               "voice": 5,
               "duration": "1/4",
               "notes": [
@@ -2321,7 +2321,7 @@
             {
               "id": "m20-shape-260",
               "type": "chord",
-              "at": "1",
+              "at": "1/2",
               "voice": 5,
               "duration": "1/4",
               "notes": [
@@ -2485,18 +2485,6 @@
     ],
     "ties": [
       {
-        "id": "tie-shape-127",
-        "from": {
-          "event": "m5-shape-201",
-          "note": "F#4"
-        },
-        "to": {
-          "event": "chord-m5-9",
-          "note": "F#4"
-        },
-        "placement": "above"
-      },
-      {
         "id": "tie-shape-130",
         "from": {
           "event": "chord-m6-11",
@@ -2531,18 +2519,6 @@
           "note": "F4"
         },
         "placement": "above"
-      },
-      {
-        "id": "tie-shape-117",
-        "from": {
-          "event": "m13-shape-212",
-          "note": "F#4"
-        },
-        "to": {
-          "event": "chord-m13-26",
-          "note": "F#4"
-        },
-        "placement": "above"
       }
     ],
     "slurs": [
@@ -2562,6 +2538,12 @@
         "id": "slur-shape-120",
         "from": "chord-m3-6",
         "to": "m3-shape-216",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-127",
+        "from": "m5-shape-201",
+        "to": "chord-m5-9",
         "placement": "above"
       },
       {
@@ -2586,6 +2568,12 @@
         "id": "slur-shape-124",
         "from": "chord-m11-23",
         "to": "m11-shape-206",
+        "placement": "above"
+      },
+      {
+        "id": "slur-shape-117",
+        "from": "m13-shape-212",
+        "to": "chord-m13-26",
         "placement": "above"
       },
       {
@@ -2615,12 +2603,12 @@
         "kind": "hairpin",
         "from": {
           "measure": 4,
-          "at": "3/4",
+          "at": "0",
           "staff": 1
         },
         "to": {
           "measure": 4,
-          "at": "3/2",
+          "at": "3/4",
           "staff": 1
         },
         "type": "crescendo",
@@ -2631,12 +2619,12 @@
         "kind": "hairpin",
         "from": {
           "measure": 12,
-          "at": "3/4",
+          "at": "0",
           "staff": 1
         },
         "to": {
           "measure": 12,
-          "at": "3/2",
+          "at": "3/4",
           "staff": 1
         },
         "type": "crescendo",
