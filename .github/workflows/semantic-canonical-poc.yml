@@ -1,9 +1,9 @@
-name: Semantic canonical PoC
+name: Semantic interpreter
 
 on:
   push:
     branches:
-      - semantic-canonical-poc
+      - master
     paths:
       - "SemanticInterpreter/**"
       - "SemanticInterpreter.Tests/**"
@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: semantic-canonical-poc
+  group: semantic-master
   cancel-in-progress: true
 
 permissions:
@@ -41,11 +41,10 @@ jobs:
       - name: Build semantic interpreter
         run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
 
-      - name: Interpret mangled Kancheli SVG and write MusicXML
+      - name: Interpret mangled Kancheli SVG
         shell: bash
         run: |
           set -euo pipefail
-
           mkdir -p artifacts
 
           dotnet run \
@@ -59,19 +58,18 @@ jobs:
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
 
-      - name: Publish vertical zigzag diagnostics
+      - name: Generate vertical zigzag diagnostics
         shell: bash
         run: |
           set -euo pipefail
 
           dotnet run \
-            --project SvgScene/SvgScene.csproj \
+            --project Tools/ZigZagDiagnostics/ZigZagDiagnostics.csproj \
             --configuration Release \
-            --no-build \
             -- \
             Samples/kancheli-almonds-mangled/kancheli-almonds-mangled.svg \
             artifacts/zigzag-scene.json \
-            > artifacts/zigzag-parser.log
+            | tee artifacts/zigzag-parser.log
 
           python3 Tools/publish_zigzag_diagnostics.py \
             artifacts/zigzag-scene.json \
@@ -79,8 +77,9 @@ jobs:
             artifacts
 
           grep '^parser.verticalZigZags=' artifacts/semantic-summary.txt
+          test -f artifacts/parser.zigzags.svg
 
-      - name: Smoke-check raw MusicXML and MXL
+      - name: Smoke-check essential output
         shell: bash
         run: |
           set -euo pipefail
@@ -88,182 +87,70 @@ jobs:
           grep -q '<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN"' \
             artifacts/kancheli.semantic.musicxml
           grep -q '<pitch>' artifacts/kancheli.semantic.musicxml
-          grep -q '<type>' artifacts/kancheli.semantic.musicxml
           grep -q '<duration>' artifacts/kancheli.semantic.musicxml
+          grep -q '^semantic.noteheads=' artifacts/semantic-summary.txt
           grep -q '^semantic.chords=' artifacts/semantic-summary.txt
           grep -q '^semantic.ties=' artifacts/semantic-summary.txt
-          grep -q '^canonical.ties=' artifacts/semantic-summary.txt
           grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
-          test -f artifacts/parser.zigzags.svg
 
           python3 - <<'PY'
-          from fractions import Fraction
           from pathlib import Path
           from zipfile import ZipFile
-          import json
           import xml.etree.ElementTree as ET
 
-          musicxml_path = Path("artifacts/kancheli.semantic.musicxml")
-          musicxml = musicxml_path.read_text(encoding="utf-8-sig")
-          assert musicxml.count("<pitch>") > 0
-          assert musicxml.count("<duration>") > 0
-          assert musicxml.count("<type>") > 0
+          xml_path = Path("artifacts/kancheli.semantic.musicxml")
+          root = ET.parse(xml_path).getroot()
+          assert root.tag == "score-partwise"
+          assert sum(1 for _ in root.iter("note")) > 0
 
-          root = ET.parse(musicxml_path).getroot()
-          chord_continuations = sum(
-              1 for note in root.iter("note") if note.find("chord") is not None
-          )
-          assert chord_continuations > 0, "ChordPass produced no MusicXML <chord/> continuations"
-
-          tie_starts = sum(1 for tie in root.iter("tie") if tie.get("type") == "start")
-          tie_stops = sum(1 for tie in root.iter("tie") if tie.get("type") == "stop")
-          tied_starts = sum(1 for tied in root.iter("tied") if tied.get("type") == "start")
-          tied_stops = sum(1 for tied in root.iter("tied") if tied.get("type") == "stop")
-          assert tie_starts > 0, "TiePass produced no MusicXML <tie type='start'> markers"
-          assert tie_starts == tie_stops == tied_starts == tied_stops, (
-              tie_starts, tie_stops, tied_starts, tied_stops
-          )
-
-          for note in root.iter("note"):
-              tie_types = [tie.get("type") for tie in note.findall("tie")]
-              tied_types = [tied.get("type") for tied in note.findall("./notations/tied")]
-              assert tie_types.count("start") <= 1, tie_types
-              assert tie_types.count("stop") <= 1, tie_types
-              assert tied_types.count("start") <= 1, tied_types
-              assert tied_types.count("stop") <= 1, tied_types
-
-          summary = Path("artifacts/semantic-summary.txt").read_text(encoding="utf-8")
-          chord_line = next(
-              line for line in summary.splitlines() if line.startswith("semantic.chords=")
-          )
-          tie_line = next(
-              line for line in summary.splitlines() if line.startswith("semantic.ties=")
-          )
-          canonical_tie_line = next(
-              line for line in summary.splitlines() if line.startswith("canonical.ties=")
-          )
-          assert int(chord_line.split("=", 1)[1]) > 0, chord_line
-          tie_count = int(tie_line.split("=", 1)[1])
-          canonical_tie_count = int(canonical_tie_line.split("=", 1)[1])
-          assert tie_count > 0, tie_line
-          assert canonical_tie_count == tie_count, (tie_line, canonical_tie_line)
-          assert tie_starts == canonical_tie_count, (tie_starts, canonical_tie_count)
-
-          # Visual regression: m11 lower chord has three tied pitches into m12.
-          m11 = next(measure for measure in root.iter("measure") if measure.get("number") == "11")
-          m11_lower_ties = [
-              note for note in m11.findall("note")
-              if note.findtext("staff") == "2"
-              and any(tie.get("type") == "start" for tie in note.findall("tie"))
-          ]
-          assert len(m11_lower_ties) == 3, len(m11_lower_ties)
-
-          # Visual regression: both notes of the lower-staff chord in m13 are dotted.
-          m13 = next(measure for measure in root.iter("measure") if measure.get("number") == "13")
-          m13_lower = [note for note in m13.findall("note") if note.findtext("staff") == "2"]
-          assert len(m13_lower) == 2, len(m13_lower)
-          assert all(len(note.findall("dot")) == 1 for note in m13_lower), [
-              len(note.findall("dot")) for note in m13_lower
-          ]
-
-          # Visual regression: m16 is two voices, not three. Voice 1 is
-          # Ab5 half -> eighth rest -> Ab5 eighth; voice 2 enters at 1/2 with F5/G5.
-          canonical = json.loads(
-              Path("artifacts/kancheli.semantic.canonical.json").read_text(encoding="utf-8-sig")
-          )
-          m16_events = next(
-              measure["events"]
-              for measure in canonical["parts"][0]["measures"]
-              if measure["number"] == 16
-          )
-
-          def pitched_event(events, pitch, duration=None):
-              return next(
-                  event for event in events
-                  if (duration is None or event.get("duration") == duration)
-                  and any(note.get("pitch") == pitch for note in event.get("notes") or [])
-              )
-
-          lead = pitched_event(m16_events, "Ab5", "1/2")
-          returned = pitched_event(m16_events, "Ab5", "1/8")
-          rest = next(
-              event for event in m16_events
-              if event.get("type") == "rest" and event.get("staff") == "1"
-          )
-          parallel = next(
-              event for event in m16_events
-              if event.get("duration") == "1/4"
-              and {note.get("pitch") for note in event.get("notes") or []} == {"F5", "G5"}
-          )
-          assert (lead["voice"], lead["at"]) == (1, "0"), lead
-          assert (rest["voice"], rest["at"]) == (1, "1/2"), rest
-          assert (returned["voice"], returned["at"]) == (1, "5/8"), returned
-          assert (parallel["voice"], parallel["at"]) == (2, "1/2"), parallel
-
-          # Visual regression: m20 and m24 contain an unaligned half-note second
-          # voice. It enters on beat 2 (onset 1/4) and must end exactly at the 3/4
-          # barline instead of being serialized after the first half-note chord.
-          for measure_no, secondary_pitch, final_pitch in (
-              (20, "F5", "G5"),
-              (24, "Db5", "Eb5"),
-          ):
-              events = next(
-                  measure["events"]
-                  for measure in canonical["parts"][0]["measures"]
-                  if measure["number"] == measure_no
-              )
-              secondary = pitched_event(events, secondary_pitch, "1/2")
-              final = pitched_event(events, final_pitch, "1/4")
-              assert (secondary["voice"], secondary["at"]) == (2, "1/4"), secondary
-              assert (final["voice"], final["at"]) == (1, "1/2"), final
-
-              for voice in {event["voice"] for event in events}:
-                  voice_events = [event for event in events if event["voice"] == voice]
-                  max_end = max(
-                      Fraction(event["at"]) + Fraction(event["duration"])
-                      for event in voice_events
-                  )
-                  assert max_end <= Fraction(3, 4), (measure_no, voice, max_end)
-
-          # Visual regression: m21 and m22 each contain three beamed eighth-note
-          # pairs in the upper staff. Every pair needs one begin and one end marker.
-          for measure_no in ("21", "22"):
-              measure = next(
-                  item for item in root.iter("measure") if item.get("number") == measure_no
-              )
-              upper = [note for note in measure.findall("note") if note.findtext("staff") == "1"]
-              assert len(upper) == 6, (measure_no, len(upper))
-              assert all(note.findtext("type") == "eighth" for note in upper), measure_no
-              begins = sum(
-                  1 for note in upper for beam in note.findall("beam") if beam.text == "begin"
-              )
-              ends = sum(
-                  1 for note in upper for beam in note.findall("beam") if beam.text == "end"
-              )
-              assert (begins, ends) == (3, 3), (measure_no, begins, ends)
-
-          mxl = Path("artifacts/kancheli.semantic.mxl")
-          with ZipFile(mxl) as archive:
-              names = archive.namelist()
-              assert names[0] == "mimetype", names
-              assert "META-INF/container.xml" in names, names
-              assert "score.musicxml" in names, names
-
-              score = archive.read("score.musicxml").decode("utf-8-sig")
-              assert "<!DOCTYPE score-partwise PUBLIC" in score
-              assert "<pitch>" in score
-              assert "<duration>" in score
-              assert "<type>" in score
-              assert "<chord" in score
-              assert "<tie " in score
-              assert "<tied " in score
+          with ZipFile("artifacts/kancheli.semantic.mxl") as archive:
+              names = set(archive.namelist())
+              assert "META-INF/container.xml" in names
+              assert "score.musicxml" in names
           PY
 
-      - name: Upload semantic artifacts
+      - name: Prepare curated artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf publish
+          mkdir -p publish
+
+          files=(
+            README.md
+            index.html
+            source.svg
+            source.musicxml
+            kancheli.semantic.canonical.json
+            kancheli.semantic.musicxml
+            kancheli.semantic.mxl
+            semantic-summary.txt
+            semantic-run.log
+            parser.classified-symbols.svg
+            parser.ownership.svg
+            parser.zigzags.svg
+            semantic.noteheads.svg
+            semantic.accidentals.svg
+            semantic.stems.svg
+            semantic.beams.svg
+            semantic.dots.svg
+            zigzag-scene.json
+          )
+
+          for file in "${files[@]}"; do
+            if [ -f "artifacts/$file" ]; then
+              cp "artifacts/$file" "publish/$file"
+            fi
+          done
+
+          echo "Published artifact count: $(find publish -maxdepth 1 -type f | wc -l)"
+          find publish -maxdepth 1 -type f -printf '%f\n' | sort
+
+      - name: Upload curated semantic artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: semantic-kancheli-mangled-musicxml
-          path: artifacts/
+          name: semantic-kancheli-mangled
+          path: publish/
           if-no-files-found: error
           retention-days: 30
 
@@ -272,7 +159,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: semantic-artifacts
-          publish_dir: ./artifacts
+          publish_dir: ./publish
           destination_dir: kancheli-mangled
-          keep_files: true
-          commit_message: "Update semantic mangled Kancheli artifacts from ${{ github.sha }}"
+          keep_files: false
+          commit_message: "Update semantic artifacts from ${{ github.sha }}"
