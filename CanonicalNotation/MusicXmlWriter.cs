@@ -11,6 +11,7 @@ public sealed class MusicXmlWriter
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private int _divisions;
+    private int _currentMeasureNumber;
     private Relations _relations = null!;
 
     public XDocument Write(CanonicalNotation score)
@@ -54,6 +55,7 @@ public sealed class MusicXmlWriter
 
     private XElement WriteMeasure(Measure measure, bool firstMeasure)
     {
+        _currentMeasureNumber = measure.Number;
         var mx = new XElement("measure", new XAttribute("number", measure.Number));
 
         if (measure.Layout is not null)
@@ -219,6 +221,9 @@ public sealed class MusicXmlWriter
         else
         {
             var (step, alter, octave) = ParsePitch(note.Pitch);
+            octave += OctaveShiftPitchOffset(
+                ev.At,
+                note.Staff ?? ev.Staff ?? 1);
             var pitch = new XElement("pitch", new XElement("step", step));
             if (alter != 0) pitch.Add(new XElement("alter", alter));
             pitch.Add(new XElement("octave", octave));
@@ -530,6 +535,63 @@ public sealed class MusicXmlWriter
             var a = _relations.Arpeggios[i];
             if (a.Events.Contains(eventId)) yield return (i + 1, a.Direction);
         }
+    }
+
+    private int OctaveShiftPitchOffset(
+        string at,
+        int staff)
+    {
+        var position = Fraction.Parse(at);
+        var offset = 0;
+
+        foreach (var span in _relations.OctaveShifts)
+        {
+            if (span.From.Staff != staff || span.To.Staff != staff)
+            {
+                continue;
+            }
+
+            if (ComparePosition(
+                    _currentMeasureNumber,
+                    position,
+                    span.From) < 0
+                || ComparePosition(
+                    _currentMeasureNumber,
+                    position,
+                    span.To) >= 0)
+            {
+                continue;
+            }
+
+            var octaves = Math.Max(
+                1,
+                ((span.Size ?? 8) - 1) / 7);
+
+            offset += span.Direction?.ToLowerInvariant() switch
+            {
+                "down" => octaves,
+                "up" => -octaves,
+                _ => 0
+            };
+        }
+
+        return offset;
+    }
+
+    private static int ComparePosition(
+        int measure,
+        Fraction at,
+        TimeAnchor anchor)
+    {
+        var measureComparison = measure.CompareTo(anchor.Measure);
+        if (measureComparison != 0)
+        {
+            return measureComparison;
+        }
+
+        var other = Fraction.Parse(anchor.At);
+        return (at.Numerator * other.Denominator)
+            .CompareTo(other.Numerator * at.Denominator);
     }
 
     private long Units(string fractionText)
