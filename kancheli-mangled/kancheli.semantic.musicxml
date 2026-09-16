@@ -2559,13 +2559,6 @@
         <stem>up</stem>
         <staff>1</staff>
       </note>
-      <direction placement="below">
-        <direction-type>
-          <octave-shift type="stop" number="1" size="8" />
-        </direction-type>
-        <offset>-10</offset>
-        <staff>2</staff>
-      </direction>
       <note>
         <pitch>
           <step>C</step>
@@ -2602,6 +2595,12 @@
         <staff>1</staff>
         <beam number="1">end</beam>
       </note>
+      <direction placement="below">
+        <direction-type>
+          <octave-shift type="stop" number="1" size="8" />
+        </direction-type>
+        <staff>2</staff>
+      </direction>
       <backup>
         <duration>60</duration>
       </backup>
@@ -3109,12 +3108,6 @@
         <staff>1</staff>
         <beam number="1">end</beam>
       </note>
-      <direction placement="above">
-        <direction-type>
-          <octave-shift type="stop" number="2" size="8" />
-        </direction-type>
-        <staff>1</staff>
-      </direction>
       <backup>
         <duration>60</duration>
       </backup>
@@ -3496,6 +3489,12 @@
         <stem>down</stem>
         <staff>1</staff>
       </note>
+      <direction placement="above">
+        <direction-type>
+          <octave-shift type="stop" number="2" size="8" />
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <backup>
         <duration>60</duration>
       </backup>
