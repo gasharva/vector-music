@@ -19,6 +19,7 @@ public sealed class ShapeClusterer : IShapeClusterer
     private readonly IGeometryAnalyzer _geometryAnalyzer;
     private readonly IHairpinExtractor _hairpinExtractor;
     private readonly BracketSpannerExtractor _bracketSpannerExtractor;
+    private readonly VerticalZigZagRunExtractor _verticalZigZagRunExtractor;
     private readonly VerticalZigZagExtractor _verticalZigZagExtractor;
     private readonly IArcExtractor _arcExtractor;
     private readonly IEllipseLikeExtractor _ellipseExtractor;
@@ -37,11 +38,13 @@ public sealed class ShapeClusterer : IShapeClusterer
         IHairpinExtractor? hairpinExtractor = null,
         BracketSpannerExtractor? bracketSpannerExtractor = null,
         VerticalZigZagExtractor? verticalZigZagExtractor = null,
+        VerticalZigZagRunExtractor? verticalZigZagRunExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
         _hairpinExtractor = hairpinExtractor ?? new HairpinExtractor();
         _bracketSpannerExtractor = bracketSpannerExtractor ?? new BracketSpannerExtractor();
+        _verticalZigZagRunExtractor = verticalZigZagRunExtractor ?? new VerticalZigZagRunExtractor();
         _verticalZigZagExtractor = verticalZigZagExtractor ?? new VerticalZigZagExtractor();
         _arcExtractor = arcExtractor ?? new ArcExtractor();
         _ellipseExtractor = ellipseExtractor ?? new EllipseLikeExtractor();
@@ -56,23 +59,26 @@ public sealed class ShapeClusterer : IShapeClusterer
 
         var bracketExtraction = _bracketSpannerExtractor.Extract(scene);
         var consumedByBrackets = bracketExtraction.ConsumedShapeIds;
+        var zigZagRunExtraction = _verticalZigZagRunExtractor.Extract(scene);
+        var consumedByZigZagRuns = zigZagRunExtraction.ConsumedShapeIds;
         var prototypes = new List<ShapePrototype>();
         var instances = new List<ShapeInstance>();
         var strokes = new List<Stroke>();
         var curvedStrokes = new List<CurvedStroke>();
         var ellipses = new List<EllipseLike>();
         var hairpins = new List<HairpinPrimitive>();
-        var verticalZigZags = new List<VerticalZigZagPrimitive>();
+        var verticalZigZags = new List<VerticalZigZagPrimitive>(zigZagRunExtraction.ZigZags);
 
         foreach (var shape in scene.Shapes)
         {
-            if (consumedByBrackets.Contains(shape.Id))
+            if (consumedByBrackets.Contains(shape.Id)
+                || consumedByZigZagRuns.Contains(shape.Id))
+            {
                 continue;
+            }
 
-            // A regular vertical zigzag is much more specific than a generic arc,
-            // stroke or residual glyph. Give it first refusal before those broader
-            // geometric recognizers so arpeggio-like geometry never reaches the
-            // contour classifier merely because it is not a standard glyph shape.
+            // Some producers emit one continuous wavy path instead of repeated
+            // glyph tiles. Keep the single-shape detector as a complementary path.
             if (_verticalZigZagExtractor.TryCreateVerticalZigZag(
                 shape,
                 out var verticalZigZag))
