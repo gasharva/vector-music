@@ -43,7 +43,7 @@ public sealed class ArtifactIndexWriter
             new(
                 compressedMusicXmlFileName,
                 "Compressed MusicXML (.mxl)",
-                "Best choice for MuseScore; the browser should download it instead of displaying XML.",
+                "Primary end-to-end result for opening in MuseScore.",
                 true),
             new(
                 musicXmlFileName,
@@ -53,17 +53,12 @@ public sealed class ArtifactIndexWriter
             new(
                 canonicalFileName,
                 "CanonicalNotation JSON",
-                "Canonical v0.3 produced by the semantic passes.",
-                true),
-            new(
-                factsFileName,
-                "Semantic facts",
-                "Facts and evidence emitted by individual semantic passes.",
+                "Canonical representation produced by the semantic passes.",
                 true),
             new(
                 summaryFileName,
                 "Run summary",
-                "Counts and output paths from the semantic run.",
+                "Compact counts and important output paths from the semantic run.",
                 true),
             new(
                 runLogFileName,
@@ -72,173 +67,64 @@ public sealed class ArtifactIndexWriter
                 true)
         };
 
+        // Keep the index deliberately small. The interpreter may still generate
+        // deeper diagnostics locally, but the published artifact page should focus
+        // on the visual layers we routinely inspect while developing the parser.
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
-            "semantic.noteheads.svg",
-            "Detected noteheads (SVG)",
-            "Semantic NoteheadPass overlay: accepted filled noteheads are green, hollow noteheads blue, small-dot size cluster orange, off-grid ellipses gray.",
+            "parser.classified-symbols.svg",
+            "Classified symbols (SVG)",
+            "Global classifier overlay for residual glyphs.",
             false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.noteheads.txt",
-            "Notehead size ranking and decisions",
-            "All ellipse candidates ranked by normalized size with small-dot split, staff-grid alignment and final NoteheadPass decision.",
-            true);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.accidentals.svg",
-            "Detected local accidentals (SVG)",
-            "AccidentalPass overlay on top of notehead diagnostics: accepted accidentals are orange, explicit target noteheads have a solid orange ring, inherited targets a dashed orange ring.",
-            false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.accidentals.txt",
-            "Accidental targets and propagation",
-            "Classifier candidates, logical anchor matching, explicit notehead target and all noteheads affected until the next accidental on the same staff-step or measure end.",
-            true);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.stems.svg",
-            "Detected stem attachments (SVG)",
-            "StemAttachmentPass overlay: accepted stems are magenta, cross-staff stems purple, attached noteheads are ringed, unmatched vertical candidates are faint gray dashed lines.",
-            false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.stems.txt",
-            "Stem attachment decisions",
-            "Per-stem geometry, attached noteheads, inferred stem direction, cross-staff status and unmatched vertical stroke candidates.",
-            true);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.flags.svg",
-            "Detected flag attachments (SVG)",
-            "FlagAttachmentPass overlay on top of stem diagnostics: attached classifier flags are blue, their matched free stem tip is marked, rejected classified flags are dashed.",
-            false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.flags.txt",
-            "Flag attachment decisions",
-            "Per-flag classifier label, level, matched stem free tip, geometric distances, ambiguity and rejected candidates.",
-            true);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.beams.svg",
-            "Detected beam attachments (SVG)",
-            "BeamAttachmentPass overlay: primary/secondary beam levels are colored separately, stem intersections are marked, free hook ends are hollow red, and cross-staff beams are purple.",
-            false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.beams.txt",
-            "Beam attachment decisions",
-            "Beam-like stroke geometry, attached stems, inferred beam level, supported ends, hooks, cross-staff status and rejected candidates.",
-            true);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.tuplets.svg",
-            "Detected tuplets (SVG)",
-            "TupletPass overlay on top of beam diagnostics: classifier tuplet digits are attached to nearby primary beam groups; corrected classifier numbers are highlighted and annotated with the inferred actual:normal ratio.",
-            false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.tuplets.txt",
-            "Tuplet decisions",
-            "Classifier tuplet candidates, matched beam groups, stem counts, actual:normal ratios and any classifier-number correction inferred from the rhythmic stem group.",
-            true);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.dots.svg",
-            "Detected augmentation dots (SVG)",
-            "DotAttachmentPass overlay on top of tuplet diagnostics: accepted augmentation dots and their target noteheads are pink; rejected small ellipse candidates are faint gray.",
-            false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "semantic.dots.txt",
-            "Augmentation-dot decisions",
-            "Small filled ellipse candidates, size band, target noteheads, horizontal/vertical geometry and rejected dot-like marks such as articulation dots.",
-            true);
 
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
             "parser.ownership.svg",
             "Ownership coloring (SVG)",
-            "Final staff+measure ownership coloring after G1-G4. Best visual oracle for semantic ownership.",
+            "Final staff/measure ownership coloring; best visual oracle for placement mistakes.",
             false);
 
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
-            "parser.classified-symbols.svg",
-            "Classified symbols (SVG)",
-            "Audiveris symbol classifications overlaid on the original SVG.",
+            "semantic.noteheads.svg",
+            "Noteheads (SVG)",
+            "Accepted and rejected notehead candidates.",
             false);
 
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
-            "parser.strokes.svg",
-            "Primitive strokes (SVG)",
-            "Straight strokes extracted by the SVG parser.",
+            "semantic.accidentals.svg",
+            "Accidentals (SVG)",
+            "Local accidental recognition and target propagation.",
             false);
 
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
-            "parser.arcs.svg",
-            "Primitive arcs (SVG)",
-            "Curved strokes and slur-like primitives extracted by the SVG parser.",
+            "semantic.stems.svg",
+            "Stems (SVG)",
+            "Stem attachment overlay, including cross-staff candidates.",
             false);
 
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
-            "parser.ellipses.svg",
-            "Ellipse-like primitives (SVG)",
-            "Filled and hollow ellipse-like primitives, including notehead candidates.",
+            "semantic.beams.svg",
+            "Beams (SVG)",
+            "Beam groups and stem attachments.",
             false);
 
         AddOptionalArtifact(
             artifacts,
             outputDirectory,
-            "parser.contours.svg",
-            "Clustered contours (SVG)",
-            "Remaining contour instances with prototype labels.",
+            "semantic.dots.svg",
+            "Augmentation dots (SVG)",
+            "Detected augmentation dots and their notehead targets.",
             false);
-
-        AddOptionalArtifact(
-            artifacts,
-            outputDirectory,
-            "parser.ownership.render-diagnostics.txt",
-            "Ownership renderer diagnostics",
-            "Per-shape ownership/rendering diagnostics used to distinguish analyzer misses from visualization problems.",
-            true);
 
         artifacts.Add(new ArtifactLink(
             sourceSvgFileName,
@@ -251,7 +137,7 @@ public sealed class ArtifactIndexWriter
             artifacts.Add(new ArtifactLink(
                 sourceMusicXmlFileName,
                 "Reference source MusicXML",
-                "MuseScore source used as a visual and semantic oracle for this fixture.",
+                "MuseScore source used as a semantic oracle for the fixture.",
                 true));
         }
 
@@ -392,10 +278,8 @@ public sealed class ArtifactIndexWriter
             new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
     }
 
-    private static string Encode(string value)
-    {
-        return WebUtility.HtmlEncode(value);
-    }
+    private static string Encode(string value) =>
+        WebUtility.HtmlEncode(value);
 
     private sealed record ArtifactLink(
         string FileName,
