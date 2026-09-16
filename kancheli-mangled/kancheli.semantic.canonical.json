@@ -5066,7 +5066,178 @@
     ],
     "arpeggios": [],
     "hairpins": [],
-    "pedals": [],
+    "pedals": [
+      {
+        "id": "pedal-1",
+        "kind": "pedal",
+        "from": {
+          "measure": 7,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 8,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-2",
+        "kind": "pedal",
+        "from": {
+          "measure": 11,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 11,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-3",
+        "kind": "pedal",
+        "from": {
+          "measure": 12,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 12,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-4",
+        "kind": "pedal",
+        "from": {
+          "measure": 15,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 15,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-5",
+        "kind": "pedal",
+        "from": {
+          "measure": 16,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 16,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-6",
+        "kind": "pedal",
+        "from": {
+          "measure": 17,
+          "at": "1/16",
+          "staff": 2
+        },
+        "to": {
+          "measure": 17,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-7",
+        "kind": "pedal",
+        "from": {
+          "measure": 18,
+          "at": "1/16",
+          "staff": 2
+        },
+        "to": {
+          "measure": 18,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-8",
+        "kind": "pedal",
+        "from": {
+          "measure": 19,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 19,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-9",
+        "kind": "pedal",
+        "from": {
+          "measure": 21,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 21,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-10",
+        "kind": "pedal",
+        "from": {
+          "measure": 23,
+          "at": "1/8",
+          "staff": 2
+        },
+        "to": {
+          "measure": 23,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      }
+    ],
     "octaveShifts": [
       {
         "id": "octaveShift-1",
