@@ -53,6 +53,52 @@ public sealed class TimeSignaturePassTests
     }
 
     [Fact]
+    public void NoisyExtraTimeDigits_SelectSupportedAlignedSignature()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(1, 1, "upper-real-3", "TIME_THREE", new BoundsD(40, 115, 50, 125)),
+                    TimeShape(1, 1, "upper-real-4", "TIME_FOUR", new BoundsD(40, 155, 50, 165)),
+                    TimeShape(1, 1, "upper-noise-6a", "TIME_SIX", new BoundsD(80, 115, 90, 125)),
+                    TimeShape(1, 1, "upper-noise-4", "TIME_FOUR", new BoundsD(100, 115, 110, 125)),
+                    TimeShape(1, 1, "upper-noise-6b", "TIME_SIX", new BoundsD(120, 115, 130, 125))
+                ],
+                [
+                    TimeShape(1, 2, "lower-real-3", "TIME_THREE", new BoundsD(40, 235, 50, 245)),
+                    TimeShape(1, 2, "lower-real-4", "TIME_FOUR", new BoundsD(40, 275, 50, 285))
+                ])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass().Run(document, facts);
+
+        var signature = Assert.Single(facts.OfType<TimeSignatureFact>());
+        Assert.Equal(3, signature.Beats);
+        Assert.Equal(4, signature.BeatType);
+        Assert.Equal(
+            new[]
+            {
+                "lower-real-3",
+                "lower-real-4",
+                "upper-real-3",
+                "upper-real-4"
+            },
+            signature.SourceShapeIds.OrderBy(id => id, StringComparer.Ordinal).ToArray());
+        Assert.DoesNotContain(
+            signature.SourceShapeIds,
+            id => id.Contains("noise", StringComparison.Ordinal));
+        Assert.Contains(
+            facts.Trace,
+            line => line.Contains(
+                "selected 3/4 from 2 of 5 TIME_* glyphs",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void LaterPartialTimeLikeGlyphs_AreIgnoredInsteadOfBreakingPipeline()
     {
         var document = new SemanticDocument(
