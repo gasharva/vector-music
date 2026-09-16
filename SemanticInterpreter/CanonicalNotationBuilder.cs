@@ -181,14 +181,16 @@ public sealed class CanonicalNotationBuilder
             facts,
             noteheadToEventId,
             eventX);
+        var octaveShiftRelations = BuildOctaveShiftRelations(facts);
 
         facts.AddTrace(
             $"CanonicalBuilder: events={measures.Sum(measure => measure.Events.Count)}; "
             + $"notes={measures.Sum(measure => measure.Events.Sum(ev => ev.Notes?.Count ?? 0))}; "
-            + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == "rest"))}; "
+            + $"rests={measures.Sum(measure => measure.Events.Count(ev => ev.Type == \"rest\"))}; "
             + $"chord-events={measures.Sum(measure => measure.Events.Count(ev => (ev.Notes?.Count ?? 0) > 1))}; "
             + $"beam-relations={beamRelations.Count}; tie-relations={tieRelations.Count}; "
             + $"slur-relations={slurRelations.Count}; tuplet-relations={tupletRelations.Count}; "
+            + $"octave-shifts={octaveShiftRelations.Count}; "
             + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
         return new CanonicalNotation(
@@ -204,7 +206,7 @@ public sealed class CanonicalNotationBuilder
                 [],
                 [],
                 [],
-                []));
+                octaveShiftRelations));
     }
 
     private static List<CanonicalEvent> BuildRawNoteEvents(
@@ -715,6 +717,33 @@ public sealed class CanonicalNotationBuilder
         }
 
         return result;
+    }
+
+    private static List<SpanRelation> BuildOctaveShiftRelations(
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<OttavaFact>()
+            .OrderBy(fact => fact.StartMeasureNumber)
+            .ThenBy(fact => fact.StartX)
+            .ThenBy(fact => fact.BracketId, StringComparer.Ordinal)
+            .Select((fact, index) => new SpanRelation
+            {
+                Id = $"octaveShift-{index + 1}",
+                Kind = "octaveShift",
+                From = new TimeAnchor(
+                    fact.StartMeasureNumber,
+                    fact.StartAt,
+                    fact.Staff),
+                To = new TimeAnchor(
+                    fact.EndMeasureNumber,
+                    fact.EndAt,
+                    fact.Staff),
+                Direction = fact.Direction,
+                Size = fact.Size,
+                Placement = fact.Placement
+            })
+            .ToList();
     }
 
     private static Accidental? ExplicitAccidental(PitchFact pitch)
