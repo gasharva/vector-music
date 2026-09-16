@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YELLOW LEAVES (Mimino) - artifacts</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.45; }
+    h1 { margin-bottom: 0.25rem; }
+    .meta { color: #666; margin-bottom: 2rem; }
+    .artifact { border: 1px solid #ddd; border-radius: 10px; padding: 14px 16px; margin: 12px 0; }
+    .artifact.primary { border-width: 2px; }
+    .artifact a { font-size: 1.05rem; font-weight: 650; }
+    .artifact p { margin: 0.4rem 0 0; color: #555; }
+    code { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <h1>YELLOW LEAVES (Mimino)</h1>
+  <div class="meta">Semantic interpreter run artifacts
+    <br>commit <code>e707b532571e43d4d9991e2142f308f9b7769267</code>
+  </div>
+  <div class="artifact primary">
+    <a href="kancheli.semantic.mxl" download>Compressed MusicXML (.mxl)</a>
+    <p>Primary end-to-end result for opening in MuseScore.</p>
+  </div>
+  <div class="artifact">
+    <a href="kancheli.semantic.musicxml" download>MusicXML (.musicxml)</a>
+    <p>Generated MusicXML before compression.</p>
+  </div>
+  <div class="artifact">
+    <a href="kancheli.semantic.canonical.json" download>CanonicalNotation JSON</a>
+    <p>Canonical representation produced by the semantic passes.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic-summary.txt" download>Run summary</a>
+    <p>Compact counts and important output paths from the semantic run.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic-run.log" download>Run log</a>
+    <p>Console trace from the semantic pipeline.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.classified-symbols.svg">Classified symbols (SVG)</a>
+    <p>Global classifier overlay for residual glyphs.</p>
+  </div>
+  <div class="artifact">
+    <a href="parser.ownership.svg">Ownership coloring (SVG)</a>
+    <p>Final staff/measure ownership coloring; best visual oracle for placement mistakes.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.noteheads.svg">Noteheads (SVG)</a>
+    <p>Accepted and rejected notehead candidates.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.accidentals.svg">Accidentals (SVG)</a>
+    <p>Local accidental recognition and target propagation.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.stems.svg">Stems (SVG)</a>
+    <p>Stem attachment overlay, including cross-staff candidates.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.beams.svg">Beams (SVG)</a>
+    <p>Beam groups and stem attachments.</p>
+  </div>
+  <div class="artifact">
+    <a href="semantic.dots.svg">Augmentation dots (SVG)</a>
+    <p>Detected augmentation dots and their notehead targets.</p>
+  </div>
+  <div class="artifact">
+    <a href="source.svg">Source SVG</a>
+    <p>Exact SVG input used for this run.</p>
+  </div>
+  <div class="artifact">
+    <a href="source.musicxml" download>Reference source MusicXML</a>
+    <p>MuseScore source used as a semantic oracle for the fixture.</p>
+  </div>
+
+  <!-- zigzag-diagnostics -->
+  <section style="margin-top:2rem">
+    <h2>Vertical zigzag diagnostics</h2>
+    <p>Detected geometric vertical zigzags: <strong>0</strong>.</p>
+    <p><a href="parser.zigzags.svg">Open parser.zigzags.svg</a> &mdash; magenta boxes mark candidates removed before generic glyph classification.</p>
+    <p><a href="zigzag-scene.json">Open zigzag-scene.json</a> &mdash; raw primitive geometry and confidence.</p>
+  </section>
+</body>
+</html>
