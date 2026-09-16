@@ -41,14 +41,16 @@ public sealed class HairpinStaffResolutionTests
         ]);
         var facts = new SemanticFacts();
 
-        // Upper staff: the intended hairpin ends at 1/2.
+        // Upper staff: the intended rhythmic boundary at the wedge tip is 1/2.
         AddNote(facts, 1, 1, "u-start", 20, "0", "1/4");
-        AddNote(facts, 2, 1, "u-end", 150, "1/4", "1/4");
+        AddNote(facts, 2, 1, "u-before", 130, "0", "1/2");
+        AddNote(facts, 2, 1, "u-anchor", 170, "1/2", "1/4");
 
-        // Lower staff deliberately resolves to a different end time. If the pass
-        // blindly trusts generic ownership this test would produce 3/4 on staff 2.
+        // Lower staff deliberately has a different boundary at the same X. If the
+        // pass blindly trusts generic ownership this produces 3/4 on staff 2.
         AddNote(facts, 1, 2, "l-start", 20, "0", "1/4");
-        AddNote(facts, 2, 2, "l-end", 150, "1/2", "1/4");
+        AddNote(facts, 2, 2, "l-before", 130, "0", "3/4");
+        AddNote(facts, 2, 2, "l-anchor", 170, "3/4", "1/8");
 
         new HairpinPass().Run(document, facts);
 
