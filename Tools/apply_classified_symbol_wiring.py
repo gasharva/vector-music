@@ -50,26 +50,3 @@ old_end = """        public string ResolveEndAt(\n            int measureNumber,
 new_end = """        public string ResolveEndAt(\n            int measureNumber,\n            int staff,\n            double x)\n        {\n            // A wedge stop is engraved at the rhythmic position where the change\n            // stops. Snap to the nearest onset or measure boundary; do not add the\n            // previous note duration (that rule belongs to pedal-like spans).\n            return ResolveStartAt(measureNumber, staff, x);\n        }\n"""
 hairpin = replace_once(hairpin, old_end, new_end, "Hairpin end onset anchor")
 hairpin_path.write_text(hairpin, encoding="utf-8")
-
-hairpin_tests_path = Path("SemanticInterpreter.Tests/HairpinPassTests.cs")
-hairpin_tests = hairpin_tests_path.read_text(encoding="utf-8")
-hairpin_tests = replace_once(
-    hairpin_tests,
-    '        AddNote(facts, 2, 2, "end", 150, "1/2", "1/8");\n',
-    '        AddNote(facts, 2, 2, "end", 170, "5/8", "1/8");\n',
-    "Hairpin cross-measure onset fixture")
-hairpin_tests_path.write_text(hairpin_tests, encoding="utf-8")
-
-staff_tests_path = Path("SemanticInterpreter.Tests/HairpinStaffResolutionTests.cs")
-staff_tests = staff_tests_path.read_text(encoding="utf-8")
-staff_tests = replace_once(
-    staff_tests,
-    '        AddNote(facts, 2, 1, "u-end", 150, "1/4", "1/4");\n',
-    '        AddNote(facts, 2, 1, "u-end", 170, "1/2", "1/4");\n',
-    "Hairpin upper staff stop fixture")
-staff_tests = replace_once(
-    staff_tests,
-    '        AddNote(facts, 2, 2, "l-end", 150, "1/2", "1/4");\n',
-    '        AddNote(facts, 2, 2, "l-end", 170, "3/4", "1/4");\n',
-    "Hairpin lower staff distractor fixture")
-staff_tests_path.write_text(staff_tests, encoding="utf-8")
