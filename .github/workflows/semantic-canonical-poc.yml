@@ -94,6 +94,8 @@ jobs:
           grep -q '^semantic.chords=' artifacts/semantic-summary.txt
           grep -q '^semantic.ties=3$' artifacts/semantic-summary.txt
           grep -q '^semantic.slurs=12$' artifacts/semantic-summary.txt
+          grep -q '^semantic.pedals=4$' artifacts/semantic-summary.txt
+          grep -q '^canonical.pedals=4$' artifacts/semantic-summary.txt
           grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
 
           python3 - <<'PY'
@@ -124,6 +126,19 @@ jobs:
                               note.findtext("type")))
               return result
 
+          def dynamic_signature(doc_root):
+              result = []
+              for part in doc_root.findall("part"):
+                  for measure in part.findall("measure"):
+                      for direction in measure.findall("direction"):
+                          dynamics = direction.find("direction-type/dynamics")
+                          if dynamics is None or len(dynamics) == 0:
+                              continue
+                          result.append((
+                              int(measure.get("number")),
+                              dynamics[0].tag))
+              return result
+
           source_root = ET.parse(
               "Samples/kancheli-mimino/kancheli-mimino.musicxml").getroot()
           source_grace = grace_signature(source_root)
@@ -133,6 +148,16 @@ jobs:
               ("P1", "15", "B", -1, 4, "16th")
           ]
           assert generated_grace == source_grace
+
+          source_dynamics = dynamic_signature(source_root)
+          generated_dynamics = dynamic_signature(root)
+          assert source_dynamics == [
+              (4, "mp"),
+              (5, "pp"),
+              (12, "mp"),
+              (13, "pp")
+          ]
+          assert generated_dynamics == source_dynamics
 
           canonical = json.loads(Path(
               "artifacts/kancheli.semantic.canonical.json").read_text())
@@ -146,6 +171,14 @@ jobs:
           assert len(grace_events) == 2
           assert {event["at"] for event in grace_events} == {"1/4"}
           assert all("duration" not in event for event in grace_events)
+
+          pedals = canonical["relations"]["pedals"]
+          assert len(pedals) == 4
+          assert [pedal["from"]["measure"] for pedal in pedals] == [4, 8, 12, 16]
+          assert all(pedal["from"]["staff"] == 2 for pedal in pedals)
+          assert all(pedal["to"]["staff"] == 2 for pedal in pedals)
+          assert all(pedal["from"]["at"] == "0" for pedal in pedals)
+          assert all(pedal["to"]["at"] == "3/4" for pedal in pedals)
 
           def measure(number):
               return next(
