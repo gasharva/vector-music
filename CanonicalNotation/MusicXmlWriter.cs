@@ -443,7 +443,10 @@ public sealed class MusicXmlWriter
             "hairpin" => new XElement("wedge",
                 new XAttribute("type", span.Type ?? "crescendo"),
                 new XAttribute("number", SpanNumber(span))),
-            "pedal" => Pedal("start", span),
+            "pedal" => Pedal(
+                span.StartMark == true ? "resume" : "start",
+                span,
+                span.StartMark == true),
             "octaveShift" => new XElement("octave-shift",
                 new XAttribute("type", span.Direction ?? "up"),
                 new XAttribute("number", SpanNumber(span)),
@@ -459,7 +462,7 @@ public sealed class MusicXmlWriter
             "hairpin" => new XElement("wedge",
                 new XAttribute("type", "stop"),
                 new XAttribute("number", SpanNumber(span))),
-            "pedal" => Pedal("stop", span),
+            "pedal" => Pedal("stop", span, false),
             "octaveShift" => new XElement("octave-shift",
                 new XAttribute("type", "stop"),
                 new XAttribute("number", SpanNumber(span)),
@@ -468,12 +471,15 @@ public sealed class MusicXmlWriter
         };
     }
 
-    private static XElement Pedal(string type, SpanRelation span)
+    private static XElement Pedal(
+        string type,
+        SpanRelation span,
+        bool sign)
     {
         var px = new XElement("pedal", new XAttribute("type", type));
         px.SetAttributeValue("number", SpanNumber(span));
         SetYesNo(px, "line", span.Line);
-        SetYesNo(px, "sign", span.StartMark);
+        SetYesNo(px, "sign", sign);
         return px;
     }
 

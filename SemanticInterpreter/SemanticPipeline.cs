@@ -119,6 +119,23 @@ public sealed class SemanticPipeline
                 new OttavaPass());
         }
 
+        // Pedal semantics mirrors ottava: a classified PEDAL_MARK plus a generic
+        // solid bracket becomes a timed span only after rhythmic onsets are stable.
+        if (materialized.Any(pass => pass is OnsetPass)
+            && materialized.All(pass => pass is not PedalPass))
+        {
+            var ottavaIndex = materialized.FindLastIndex(pass => pass is OttavaPass);
+            var refinementIndex = materialized.FindLastIndex(pass => pass is MeasureEndOnsetRefinementPass);
+            var insertionIndex = ottavaIndex >= 0
+                ? ottavaIndex + 1
+                : refinementIndex >= 0
+                    ? refinementIndex + 1
+                    : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            materialized.Insert(
+                insertionIndex,
+                new PedalPass());
+        }
+
         // Curves are already extracted geometrically. SlurPass classifies their
         // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
