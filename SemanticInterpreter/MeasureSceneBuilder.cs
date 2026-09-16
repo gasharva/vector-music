@@ -182,7 +182,50 @@ public sealed class MeasureSceneBuilder
             });
         }
 
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            if (bracket.Ownership is null)
+            {
+                continue;
+            }
+
+            result.Add(new BracketSpannerElement
+            {
+                ShapeId = bracket.Id,
+                Bounds = BracketBounds(bracket),
+                Ownership = bracket.Ownership,
+                Source = bracket
+            });
+        }
+
         return result;
+    }
+
+    private static BoundsD BracketBounds(BracketSpannerPrimitive bracket)
+    {
+        var points = new List<PointD>
+        {
+            bracket.Start,
+            bracket.End
+        };
+
+        if (bracket.LeftHookEnd is { } leftHook)
+        {
+            points.Add(leftHook);
+        }
+
+        if (bracket.RightHookEnd is { } rightHook)
+        {
+            points.Add(rightHook);
+        }
+
+        var raw = BoundsD.FromPoints(points);
+        var half = Math.Max(bracket.StrokeWidth / 2.0, 0.01);
+        return new BoundsD(
+            raw.MinX - half,
+            raw.MinY - half,
+            raw.MaxX + half,
+            raw.MaxY + half);
     }
 
     private static bool OwnershipTouches(
