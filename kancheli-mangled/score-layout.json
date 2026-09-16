@@ -1,0 +1,3194 @@
+{
+  "Systems": [
+    {
+      "Id": "system-1",
+      "Bounds": {
+        "MinX": 318.798,
+        "MinY": 704.699,
+        "MaxX": 2764.6,
+        "MaxY": 1039.18,
+        "Width": 2445.8019999999997,
+        "Height": 334.4810000000001,
+        "CenterX": 1541.699,
+        "CenterY": 871.9395
+      },
+      "StaffPairs": [
+        {
+          "Id": "staff-pair-1",
+          "UpperStaffId": "staff-1",
+          "LowerStaffId": "staff-2",
+          "Bounds": {
+            "MinX": 318.798,
+            "MinY": 704.699,
+            "MaxX": 2764.6,
+            "MaxY": 1039.18,
+            "Width": 2445.8019999999997,
+            "Height": 334.4810000000001,
+            "CenterX": 1541.699,
+            "CenterY": 871.9395
+          },
+          "Measures": [
+            {
+              "Id": "staff-pair-1-measure-1",
+              "XStart": 320.71,
+              "XEnd": 989.197,
+              "LeftBoundary": {
+                "X": 320.71,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-88",
+                  "shape-95"
+                ]
+              },
+              "RightBoundary": {
+                "X": 989.197,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-124",
+                  "shape-90"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-1-measure-2",
+              "XStart": 989.197,
+              "XEnd": 1547.63,
+              "LeftBoundary": {
+                "X": 989.197,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-124",
+                  "shape-90"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1547.63,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-103",
+                  "shape-81"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-1-measure-3",
+              "XStart": 1547.63,
+              "XEnd": 1966.23,
+              "LeftBoundary": {
+                "X": 1547.63,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-103",
+                  "shape-81"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1966.23,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-111",
+                  "shape-68"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-1-measure-4",
+              "XStart": 1966.23,
+              "XEnd": 2336.41,
+              "LeftBoundary": {
+                "X": 1966.23,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-111",
+                  "shape-68"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2336.41,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-116",
+                  "shape-62"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-1-measure-5",
+              "XStart": 2336.41,
+              "XEnd": 2762.69,
+              "LeftBoundary": {
+                "X": 2336.41,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-116",
+                  "shape-62"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2762.69,
+                "UpperY": 704.699,
+                "LowerY": 1039.18,
+                "StrokeIds": [
+                  "shape-114",
+                  "shape-64"
+                ]
+              }
+            }
+          ],
+          "Boundaries": [
+            {
+              "X": 320.71,
+              "UpperY": 704.699,
+              "LowerY": 1039.18,
+              "StrokeIds": [
+                "shape-88",
+                "shape-95"
+              ]
+            },
+            {
+              "X": 989.197,
+              "UpperY": 704.699,
+              "LowerY": 1039.18,
+              "StrokeIds": [
+                "shape-124",
+                "shape-90"
+              ]
+            },
+            {
+              "X": 1547.63,
+              "UpperY": 704.699,
+              "LowerY": 1039.18,
+              "StrokeIds": [
+                "shape-103",
+                "shape-81"
+              ]
+            },
+            {
+              "X": 1966.23,
+              "UpperY": 704.699,
+              "LowerY": 1039.18,
+              "StrokeIds": [
+                "shape-111",
+                "shape-68"
+              ]
+            },
+            {
+              "X": 2336.41,
+              "UpperY": 704.699,
+              "LowerY": 1039.18,
+              "StrokeIds": [
+                "shape-116",
+                "shape-62"
+              ]
+            },
+            {
+              "X": 2762.69,
+              "UpperY": 704.699,
+              "LowerY": 1039.18,
+              "StrokeIds": [
+                "shape-114",
+                "shape-64"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "system-2",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 1410.8,
+        "MaxX": 2764.6,
+        "MaxY": 1752.59,
+        "Width": 2552.002,
+        "Height": 341.78999999999996,
+        "CenterX": 1488.599,
+        "CenterY": 1581.695
+      },
+      "StaffPairs": [
+        {
+          "Id": "staff-pair-2",
+          "UpperStaffId": "staff-3",
+          "LowerStaffId": "staff-4",
+          "Bounds": {
+            "MinX": 212.598,
+            "MinY": 1410.8,
+            "MaxX": 2764.6,
+            "MaxY": 1752.59,
+            "Width": 2552.002,
+            "Height": 341.78999999999996,
+            "CenterX": 1488.599,
+            "CenterY": 1581.695
+          },
+          "Measures": [
+            {
+              "Id": "staff-pair-2-measure-1",
+              "XStart": 214.51,
+              "XEnd": 855.349,
+              "LeftBoundary": {
+                "X": 214.51,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-113",
+                  "shape-65"
+                ]
+              },
+              "RightBoundary": {
+                "X": 855.349,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-123",
+                  "shape-78"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-2-measure-2",
+              "XStart": 855.349,
+              "XEnd": 1368.21,
+              "LeftBoundary": {
+                "X": 855.349,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-123",
+                  "shape-78"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1368.21,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-120",
+                  "shape-89"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-2-measure-3",
+              "XStart": 1368.21,
+              "XEnd": 1948.94,
+              "LeftBoundary": {
+                "X": 1368.21,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-120",
+                  "shape-89"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1948.94,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-105",
+                  "shape-71"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-2-measure-4",
+              "XStart": 1948.94,
+              "XEnd": 2385.1,
+              "LeftBoundary": {
+                "X": 1948.94,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-105",
+                  "shape-71"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2385.1,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-108",
+                  "shape-59"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-2-measure-5",
+              "XStart": 2385.1,
+              "XEnd": 2762.69,
+              "LeftBoundary": {
+                "X": 2385.1,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-108",
+                  "shape-59"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2762.69,
+                "UpperY": 1410.8,
+                "LowerY": 1752.59,
+                "StrokeIds": [
+                  "shape-107",
+                  "shape-86"
+                ]
+              }
+            }
+          ],
+          "Boundaries": [
+            {
+              "X": 214.51,
+              "UpperY": 1410.8,
+              "LowerY": 1752.59,
+              "StrokeIds": [
+                "shape-113",
+                "shape-65"
+              ]
+            },
+            {
+              "X": 855.349,
+              "UpperY": 1410.8,
+              "LowerY": 1752.59,
+              "StrokeIds": [
+                "shape-123",
+                "shape-78"
+              ]
+            },
+            {
+              "X": 1368.21,
+              "UpperY": 1410.8,
+              "LowerY": 1752.59,
+              "StrokeIds": [
+                "shape-120",
+                "shape-89"
+              ]
+            },
+            {
+              "X": 1948.94,
+              "UpperY": 1410.8,
+              "LowerY": 1752.59,
+              "StrokeIds": [
+                "shape-105",
+                "shape-71"
+              ]
+            },
+            {
+              "X": 2385.1,
+              "UpperY": 1410.8,
+              "LowerY": 1752.59,
+              "StrokeIds": [
+                "shape-108",
+                "shape-59"
+              ]
+            },
+            {
+              "X": 2762.69,
+              "UpperY": 1410.8,
+              "LowerY": 1752.59,
+              "StrokeIds": [
+                "shape-107",
+                "shape-86"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "system-3",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 2124.21,
+        "MaxX": 2764.6,
+        "MaxY": 2432.19,
+        "Width": 2552.002,
+        "Height": 307.98,
+        "CenterX": 1488.599,
+        "CenterY": 2278.2
+      },
+      "StaffPairs": [
+        {
+          "Id": "staff-pair-3",
+          "UpperStaffId": "staff-5",
+          "LowerStaffId": "staff-6",
+          "Bounds": {
+            "MinX": 212.598,
+            "MinY": 2124.21,
+            "MaxX": 2764.6,
+            "MaxY": 2432.19,
+            "Width": 2552.002,
+            "Height": 307.98,
+            "CenterX": 1488.599,
+            "CenterY": 2278.2
+          },
+          "Measures": [
+            {
+              "Id": "staff-pair-3-measure-1",
+              "XStart": 214.51,
+              "XEnd": 842.26,
+              "LeftBoundary": {
+                "X": 214.51,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-117",
+                  "shape-61"
+                ]
+              },
+              "RightBoundary": {
+                "X": 842.26,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-119",
+                  "shape-60"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-3-measure-2",
+              "XStart": 842.26,
+              "XEnd": 1414.41,
+              "LeftBoundary": {
+                "X": 842.26,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-119",
+                  "shape-60"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1414.41,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-115",
+                  "shape-74"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-3-measure-3",
+              "XStart": 1414.41,
+              "XEnd": 1810.88,
+              "LeftBoundary": {
+                "X": 1414.41,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-115",
+                  "shape-74"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1810.88,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-125",
+                  "shape-58"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-3-measure-4",
+              "XStart": 1810.88,
+              "XEnd": 2271.56,
+              "LeftBoundary": {
+                "X": 1810.88,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-125",
+                  "shape-58"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2271.56,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-73",
+                  "shape-93"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-3-measure-5",
+              "XStart": 2271.56,
+              "XEnd": 2762.69,
+              "LeftBoundary": {
+                "X": 2271.56,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-73",
+                  "shape-93"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2762.69,
+                "UpperY": 2124.21,
+                "LowerY": 2432.19,
+                "StrokeIds": [
+                  "shape-118",
+                  "shape-79"
+                ]
+              }
+            }
+          ],
+          "Boundaries": [
+            {
+              "X": 214.51,
+              "UpperY": 2124.21,
+              "LowerY": 2432.19,
+              "StrokeIds": [
+                "shape-117",
+                "shape-61"
+              ]
+            },
+            {
+              "X": 842.26,
+              "UpperY": 2124.21,
+              "LowerY": 2432.19,
+              "StrokeIds": [
+                "shape-119",
+                "shape-60"
+              ]
+            },
+            {
+              "X": 1414.41,
+              "UpperY": 2124.21,
+              "LowerY": 2432.19,
+              "StrokeIds": [
+                "shape-115",
+                "shape-74"
+              ]
+            },
+            {
+              "X": 1810.88,
+              "UpperY": 2124.21,
+              "LowerY": 2432.19,
+              "StrokeIds": [
+                "shape-125",
+                "shape-58"
+              ]
+            },
+            {
+              "X": 2271.56,
+              "UpperY": 2124.21,
+              "LowerY": 2432.19,
+              "StrokeIds": [
+                "shape-73",
+                "shape-93"
+              ]
+            },
+            {
+              "X": 2762.69,
+              "UpperY": 2124.21,
+              "LowerY": 2432.19,
+              "StrokeIds": [
+                "shape-118",
+                "shape-79"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "system-4",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 2803.81,
+        "MaxX": 2764.6,
+        "MaxY": 3123.99,
+        "Width": 2552.002,
+        "Height": 320.17999999999984,
+        "CenterX": 1488.599,
+        "CenterY": 2963.8999999999996
+      },
+      "StaffPairs": [
+        {
+          "Id": "staff-pair-4",
+          "UpperStaffId": "staff-7",
+          "LowerStaffId": "staff-8",
+          "Bounds": {
+            "MinX": 212.598,
+            "MinY": 2803.81,
+            "MaxX": 2764.6,
+            "MaxY": 3123.99,
+            "Width": 2552.002,
+            "Height": 320.17999999999984,
+            "CenterX": 1488.599,
+            "CenterY": 2963.8999999999996
+          },
+          "Measures": [
+            {
+              "Id": "staff-pair-4-measure-1",
+              "XStart": 214.51,
+              "XEnd": 891.476,
+              "LeftBoundary": {
+                "X": 214.51,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-121",
+                  "shape-69"
+                ]
+              },
+              "RightBoundary": {
+                "X": 891.476,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-70",
+                  "shape-94"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-4-measure-2",
+              "XStart": 891.476,
+              "XEnd": 1428.97,
+              "LeftBoundary": {
+                "X": 891.476,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-70",
+                  "shape-94"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1428.97,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-66",
+                  "shape-96"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-4-measure-3",
+              "XStart": 1428.97,
+              "XEnd": 1966.47,
+              "LeftBoundary": {
+                "X": 1428.97,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-66",
+                  "shape-96"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1966.47,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-102",
+                  "shape-63"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-4-measure-4",
+              "XStart": 1966.47,
+              "XEnd": 2431.57,
+              "LeftBoundary": {
+                "X": 1966.47,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-102",
+                  "shape-63"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2431.57,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-72",
+                  "shape-92"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-4-measure-5",
+              "XStart": 2431.57,
+              "XEnd": 2762.69,
+              "LeftBoundary": {
+                "X": 2431.57,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-72",
+                  "shape-92"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2762.69,
+                "UpperY": 2803.81,
+                "LowerY": 3123.99,
+                "StrokeIds": [
+                  "shape-110",
+                  "shape-75"
+                ]
+              }
+            }
+          ],
+          "Boundaries": [
+            {
+              "X": 214.51,
+              "UpperY": 2803.81,
+              "LowerY": 3123.99,
+              "StrokeIds": [
+                "shape-121",
+                "shape-69"
+              ]
+            },
+            {
+              "X": 891.476,
+              "UpperY": 2803.81,
+              "LowerY": 3123.99,
+              "StrokeIds": [
+                "shape-70",
+                "shape-94"
+              ]
+            },
+            {
+              "X": 1428.97,
+              "UpperY": 2803.81,
+              "LowerY": 3123.99,
+              "StrokeIds": [
+                "shape-66",
+                "shape-96"
+              ]
+            },
+            {
+              "X": 1966.47,
+              "UpperY": 2803.81,
+              "LowerY": 3123.99,
+              "StrokeIds": [
+                "shape-102",
+                "shape-63"
+              ]
+            },
+            {
+              "X": 2431.57,
+              "UpperY": 2803.81,
+              "LowerY": 3123.99,
+              "StrokeIds": [
+                "shape-72",
+                "shape-92"
+              ]
+            },
+            {
+              "X": 2762.69,
+              "UpperY": 2803.81,
+              "LowerY": 3123.99,
+              "StrokeIds": [
+                "shape-110",
+                "shape-75"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "system-5",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 3495.61,
+        "MaxX": 2764.6,
+        "MaxY": 3847.12,
+        "Width": 2552.002,
+        "Height": 351.50999999999976,
+        "CenterX": 1488.599,
+        "CenterY": 3671.365
+      },
+      "StaffPairs": [
+        {
+          "Id": "staff-pair-5",
+          "UpperStaffId": "staff-9",
+          "LowerStaffId": "staff-10",
+          "Bounds": {
+            "MinX": 212.598,
+            "MinY": 3495.61,
+            "MaxX": 2764.6,
+            "MaxY": 3847.12,
+            "Width": 2552.002,
+            "Height": 351.50999999999976,
+            "CenterX": 1488.599,
+            "CenterY": 3671.365
+          },
+          "Measures": [
+            {
+              "Id": "staff-pair-5-measure-1",
+              "XStart": 214.51,
+              "XEnd": 879.756,
+              "LeftBoundary": {
+                "X": 214.51,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-122",
+                  "shape-80"
+                ]
+              },
+              "RightBoundary": {
+                "X": 879.756,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-112",
+                  "shape-67"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-5-measure-2",
+              "XStart": 879.756,
+              "XEnd": 1276.32,
+              "LeftBoundary": {
+                "X": 879.756,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-112",
+                  "shape-67"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1276.32,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-109",
+                  "shape-77"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-5-measure-3",
+              "XStart": 1276.32,
+              "XEnd": 1661.95,
+              "LeftBoundary": {
+                "X": 1276.32,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-109",
+                  "shape-77"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1661.95,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-106",
+                  "shape-87"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-5-measure-4",
+              "XStart": 1661.95,
+              "XEnd": 1918.59,
+              "LeftBoundary": {
+                "X": 1661.95,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-106",
+                  "shape-87"
+                ]
+              },
+              "RightBoundary": {
+                "X": 1918.59,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-104",
+                  "shape-76"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-5-measure-5",
+              "XStart": 1918.59,
+              "XEnd": 2261.14,
+              "LeftBoundary": {
+                "X": 1918.59,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-104",
+                  "shape-76"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2261.14,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-101",
+                  "shape-91"
+                ]
+              }
+            },
+            {
+              "Id": "staff-pair-5-measure-6",
+              "XStart": 2261.14,
+              "XEnd": 2750.955,
+              "LeftBoundary": {
+                "X": 2261.14,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-101",
+                  "shape-91"
+                ]
+              },
+              "RightBoundary": {
+                "X": 2750.955,
+                "UpperY": 3495.61,
+                "LowerY": 3847.12,
+                "StrokeIds": [
+                  "shape-100",
+                  "shape-84",
+                  "shape-85",
+                  "shape-99"
+                ]
+              }
+            }
+          ],
+          "Boundaries": [
+            {
+              "X": 214.51,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-122",
+                "shape-80"
+              ]
+            },
+            {
+              "X": 879.756,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-112",
+                "shape-67"
+              ]
+            },
+            {
+              "X": 1276.32,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-109",
+                "shape-77"
+              ]
+            },
+            {
+              "X": 1661.95,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-106",
+                "shape-87"
+              ]
+            },
+            {
+              "X": 1918.59,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-104",
+                "shape-76"
+              ]
+            },
+            {
+              "X": 2261.14,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-101",
+                "shape-91"
+              ]
+            },
+            {
+              "X": 2750.955,
+              "UpperY": 3495.61,
+              "LowerY": 3847.12,
+              "StrokeIds": [
+                "shape-100",
+                "shape-84",
+                "shape-85",
+                "shape-99"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "Staffs": [
+    {
+      "Id": "staff-1",
+      "SystemId": "system-1",
+      "Bounds": {
+        "MinX": 318.798,
+        "MinY": 704.699,
+        "MaxX": 2764.6,
+        "MaxY": 789.659,
+        "Width": 2445.8019999999997,
+        "Height": 84.96000000000004,
+        "CenterX": 1541.699,
+        "CenterY": 747.179
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 704.699,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-1"
+        },
+        {
+          "Index": 1,
+          "Y": 725.939,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-2"
+        },
+        {
+          "Index": 2,
+          "Y": 747.179,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-3"
+        },
+        {
+          "Index": 3,
+          "Y": 768.419,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-4"
+        },
+        {
+          "Index": 4,
+          "Y": 789.659,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-5"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": []
+    },
+    {
+      "Id": "staff-2",
+      "SystemId": "system-1",
+      "Bounds": {
+        "MinX": 318.798,
+        "MinY": 954.216,
+        "MaxX": 2764.6,
+        "MaxY": 1039.18,
+        "Width": 2445.8019999999997,
+        "Height": 84.96400000000006,
+        "CenterX": 1541.699,
+        "CenterY": 996.6980000000001
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 954.216,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-6"
+        },
+        {
+          "Index": 1,
+          "Y": 975.456,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-7"
+        },
+        {
+          "Index": 2,
+          "Y": 996.696,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-8"
+        },
+        {
+          "Index": 3,
+          "Y": 1017.94,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-9"
+        },
+        {
+          "Index": 4,
+          "Y": 1039.18,
+          "XStart": 318.798,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-10"
+        }
+      ],
+      "AverageLineSpacing": 21.241000000000014,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 932.976,
+          "Segments": [
+            {
+              "XStart": 592.051,
+              "XEnd": 633.668,
+              "StrokeId": "shape-321"
+            },
+            {
+              "XStart": 1036.12,
+              "XEnd": 1077.74,
+              "StrokeId": "shape-348"
+            },
+            {
+              "XStart": 1569.09,
+              "XEnd": 1636.19,
+              "StrokeId": "shape-380"
+            },
+            {
+              "XStart": 1997.49,
+              "XEnd": 2039.11,
+              "StrokeId": "shape-405"
+            },
+            {
+              "XStart": 2373.19,
+              "XEnd": 2414.81,
+              "StrokeId": "shape-422"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 911.7360000000001,
+          "Segments": [
+            {
+              "XStart": 592.051,
+              "XEnd": 633.668,
+              "StrokeId": "shape-320"
+            },
+            {
+              "XStart": 1036.12,
+              "XEnd": 1077.74,
+              "StrokeId": "shape-347"
+            },
+            {
+              "XStart": 1569.09,
+              "XEnd": 1636.19,
+              "StrokeId": "shape-379"
+            },
+            {
+              "XStart": 1997.49,
+              "XEnd": 2039.11,
+              "StrokeId": "shape-404"
+            },
+            {
+              "XStart": 2373.19,
+              "XEnd": 2414.81,
+              "StrokeId": "shape-446"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 890.496,
+          "Segments": [
+            {
+              "XStart": 592.051,
+              "XEnd": 633.668,
+              "StrokeId": "shape-319"
+            },
+            {
+              "XStart": 1036.12,
+              "XEnd": 1077.74,
+              "StrokeId": "shape-346"
+            },
+            {
+              "XStart": 2373.19,
+              "XEnd": 2414.81,
+              "StrokeId": "shape-421"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 4,
+          "Y": 869.256,
+          "Segments": [
+            {
+              "XStart": 592.051,
+              "XEnd": 633.668,
+              "StrokeId": "shape-318"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-3",
+      "SystemId": "system-2",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 1410.8,
+        "MaxX": 2764.6,
+        "MaxY": 1495.76,
+        "Width": 2552.002,
+        "Height": 84.96000000000004,
+        "CenterX": 1488.599,
+        "CenterY": 1453.28
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 1410.8,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-11"
+        },
+        {
+          "Index": 1,
+          "Y": 1432.04,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-12"
+        },
+        {
+          "Index": 2,
+          "Y": 1453.28,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-13"
+        },
+        {
+          "Index": 3,
+          "Y": 1474.52,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-14"
+        },
+        {
+          "Index": 4,
+          "Y": 1495.76,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-15"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 1389.5599999999997,
+          "Segments": [
+            {
+              "XStart": 2421.89,
+              "XEnd": 2463.5,
+              "StrokeId": "shape-214"
+            },
+            {
+              "XStart": 1985.73,
+              "XEnd": 2027.35,
+              "StrokeId": "shape-215"
+            },
+            {
+              "XStart": 2259.04,
+              "XEnd": 2300.66,
+              "StrokeId": "shape-225"
+            },
+            {
+              "XStart": 2499.98,
+              "XEnd": 2541.59,
+              "StrokeId": "shape-277"
+            },
+            {
+              "XStart": 2141.91,
+              "XEnd": 2183.53,
+              "StrokeId": "shape-291"
+            },
+            {
+              "XStart": 2578.07,
+              "XEnd": 2619.68,
+              "StrokeId": "shape-299"
+            },
+            {
+              "XStart": 2063.82,
+              "XEnd": 2105.44,
+              "StrokeId": "shape-303"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 1368.32,
+          "Segments": [
+            {
+              "XStart": 2063.82,
+              "XEnd": 2105.44,
+              "StrokeId": "shape-255"
+            },
+            {
+              "XStart": 2499.98,
+              "XEnd": 2541.59,
+              "StrokeId": "shape-275"
+            },
+            {
+              "XStart": 2141.91,
+              "XEnd": 2183.53,
+              "StrokeId": "shape-292"
+            },
+            {
+              "XStart": 2578.07,
+              "XEnd": 2619.68,
+              "StrokeId": "shape-298"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-4",
+      "SystemId": "system-2",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 1667.63,
+        "MaxX": 2764.6,
+        "MaxY": 1752.59,
+        "Width": 2552.002,
+        "Height": 84.95999999999981,
+        "CenterX": 1488.599,
+        "CenterY": 1710.1100000000001
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 1667.63,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-16"
+        },
+        {
+          "Index": 1,
+          "Y": 1688.87,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-17"
+        },
+        {
+          "Index": 2,
+          "Y": 1710.11,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-18"
+        },
+        {
+          "Index": 3,
+          "Y": 1731.35,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-19"
+        },
+        {
+          "Index": 4,
+          "Y": 1752.59,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-20"
+        }
+      ],
+      "AverageLineSpacing": 21.239999999999952,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 1646.3899999999996,
+          "Segments": [
+            {
+              "XStart": 961.981,
+              "XEnd": 1003.6,
+              "StrokeId": "shape-313"
+            },
+            {
+              "XStart": 1040.07,
+              "XEnd": 1081.69,
+              "StrokeId": "shape-324"
+            },
+            {
+              "XStart": 1118.16,
+              "XEnd": 1185.27,
+              "StrokeId": "shape-332"
+            },
+            {
+              "XStart": 1196.25,
+              "XEnd": 1263.36,
+              "StrokeId": "shape-342"
+            },
+            {
+              "XStart": 1274.34,
+              "XEnd": 1341.45,
+              "StrokeId": "shape-356"
+            },
+            {
+              "XStart": 1424.23,
+              "XEnd": 1491.32,
+              "StrokeId": "shape-368"
+            },
+            {
+              "XStart": 1502.32,
+              "XEnd": 1569.41,
+              "StrokeId": "shape-384"
+            },
+            {
+              "XStart": 1580.41,
+              "XEnd": 1647.5,
+              "StrokeId": "shape-398"
+            },
+            {
+              "XStart": 1660.76,
+              "XEnd": 1727.86,
+              "StrokeId": "shape-415"
+            },
+            {
+              "XStart": 1738.85,
+              "XEnd": 1805.95,
+              "StrokeId": "shape-426"
+            },
+            {
+              "XStart": 1829.6,
+              "XEnd": 1896.69,
+              "StrokeId": "shape-429"
+            },
+            {
+              "XStart": 1985.73,
+              "XEnd": 2027.35,
+              "StrokeId": "shape-430"
+            },
+            {
+              "XStart": 2116.43,
+              "XEnd": 2183.53,
+              "StrokeId": "shape-433"
+            },
+            {
+              "XStart": 2421.89,
+              "XEnd": 2463.5,
+              "StrokeId": "shape-436"
+            },
+            {
+              "XStart": 463.669,
+              "XEnd": 505.286,
+              "StrokeId": "shape-450"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 1625.1499999999999,
+          "Segments": [
+            {
+              "XStart": 1118.16,
+              "XEnd": 1185.27,
+              "StrokeId": "shape-331"
+            },
+            {
+              "XStart": 1196.25,
+              "XEnd": 1263.36,
+              "StrokeId": "shape-341"
+            },
+            {
+              "XStart": 1274.34,
+              "XEnd": 1341.45,
+              "StrokeId": "shape-355"
+            },
+            {
+              "XStart": 1424.23,
+              "XEnd": 1491.32,
+              "StrokeId": "shape-367"
+            },
+            {
+              "XStart": 1502.32,
+              "XEnd": 1569.41,
+              "StrokeId": "shape-383"
+            },
+            {
+              "XStart": 1580.41,
+              "XEnd": 1647.5,
+              "StrokeId": "shape-397"
+            },
+            {
+              "XStart": 1660.76,
+              "XEnd": 1727.86,
+              "StrokeId": "shape-414"
+            },
+            {
+              "XStart": 1738.85,
+              "XEnd": 1805.95,
+              "StrokeId": "shape-425"
+            },
+            {
+              "XStart": 1829.6,
+              "XEnd": 1896.69,
+              "StrokeId": "shape-428"
+            },
+            {
+              "XStart": 2116.43,
+              "XEnd": 2183.53,
+              "StrokeId": "shape-432"
+            },
+            {
+              "XStart": 2421.89,
+              "XEnd": 2463.5,
+              "StrokeId": "shape-435"
+            },
+            {
+              "XStart": 463.669,
+              "XEnd": 505.286,
+              "StrokeId": "shape-449"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 1603.91,
+          "Segments": [
+            {
+              "XStart": 1299.83,
+              "XEnd": 1341.45,
+              "StrokeId": "shape-354"
+            },
+            {
+              "XStart": 1449.7,
+              "XEnd": 1491.32,
+              "StrokeId": "shape-366"
+            },
+            {
+              "XStart": 1527.79,
+              "XEnd": 1569.41,
+              "StrokeId": "shape-382"
+            },
+            {
+              "XStart": 1605.88,
+              "XEnd": 1647.5,
+              "StrokeId": "shape-396"
+            },
+            {
+              "XStart": 1686.24,
+              "XEnd": 1727.86,
+              "StrokeId": "shape-413"
+            },
+            {
+              "XStart": 1764.33,
+              "XEnd": 1805.95,
+              "StrokeId": "shape-424"
+            },
+            {
+              "XStart": 1829.6,
+              "XEnd": 1896.69,
+              "StrokeId": "shape-427"
+            },
+            {
+              "XStart": 2141.91,
+              "XEnd": 2183.53,
+              "StrokeId": "shape-431"
+            },
+            {
+              "XStart": 2421.89,
+              "XEnd": 2463.5,
+              "StrokeId": "shape-434"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-5",
+      "SystemId": "system-3",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 2124.21,
+        "MaxX": 2764.6,
+        "MaxY": 2209.17,
+        "Width": 2552.002,
+        "Height": 84.96000000000004,
+        "CenterX": 1488.599,
+        "CenterY": 2166.69
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 2124.21,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-21"
+        },
+        {
+          "Index": 1,
+          "Y": 2145.45,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-22"
+        },
+        {
+          "Index": 2,
+          "Y": 2166.69,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-23"
+        },
+        {
+          "Index": 3,
+          "Y": 2187.93,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-24"
+        },
+        {
+          "Index": 4,
+          "Y": 2209.17,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-25"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 2102.9700000000007,
+          "Segments": [
+            {
+              "XStart": 2113.26,
+              "XEnd": 2154.88,
+              "StrokeId": "shape-217"
+            },
+            {
+              "XStart": 2187.95,
+              "XEnd": 2229.57,
+              "StrokeId": "shape-218"
+            },
+            {
+              "XStart": 1841.55,
+              "XEnd": 1908.66,
+              "StrokeId": "shape-219"
+            },
+            {
+              "XStart": 2305.62,
+              "XEnd": 2347.24,
+              "StrokeId": "shape-220"
+            },
+            {
+              "XStart": 1435.87,
+              "XEnd": 1477.48,
+              "StrokeId": "shape-221"
+            },
+            {
+              "XStart": 2679.08,
+              "XEnd": 2720.7,
+              "StrokeId": "shape-222"
+            },
+            {
+              "XStart": 1346.02,
+              "XEnd": 1387.64,
+              "StrokeId": "shape-223"
+            },
+            {
+              "XStart": 1296.23,
+              "XEnd": 1337.85,
+              "StrokeId": "shape-227"
+            },
+            {
+              "XStart": 459.885,
+              "XEnd": 501.502,
+              "StrokeId": "shape-228"
+            },
+            {
+              "XStart": 1232.06,
+              "XEnd": 1273.67,
+              "StrokeId": "shape-230"
+            },
+            {
+              "XStart": 1166.78,
+              "XEnd": 1208.4,
+              "StrokeId": "shape-241"
+            },
+            {
+              "XStart": 534.576,
+              "XEnd": 576.193,
+              "StrokeId": "shape-248"
+            },
+            {
+              "XStart": 609.267,
+              "XEnd": 650.884,
+              "StrokeId": "shape-252"
+            },
+            {
+              "XStart": 721.303,
+              "XEnd": 762.92,
+              "StrokeId": "shape-256"
+            },
+            {
+              "XStart": 872.925,
+              "XEnd": 914.542,
+              "StrokeId": "shape-263"
+            },
+            {
+              "XStart": 1727.27,
+              "XEnd": 1768.89,
+              "StrokeId": "shape-274"
+            },
+            {
+              "XStart": 2038.57,
+              "XEnd": 2080.19,
+              "StrokeId": "shape-276"
+            },
+            {
+              "XStart": 1652.58,
+              "XEnd": 1694.2,
+              "StrokeId": "shape-280"
+            },
+            {
+              "XStart": 947.616,
+              "XEnd": 989.233,
+              "StrokeId": "shape-290"
+            },
+            {
+              "XStart": 1577.89,
+              "XEnd": 1619.51,
+              "StrokeId": "shape-295"
+            },
+            {
+              "XStart": 1022.31,
+              "XEnd": 1063.92,
+              "StrokeId": "shape-296"
+            },
+            {
+              "XStart": 1116.99,
+              "XEnd": 1158.61,
+              "StrokeId": "shape-302"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 2081.73,
+          "Segments": [
+            {
+              "XStart": 1577.89,
+              "XEnd": 1619.51,
+              "StrokeId": "shape-216"
+            },
+            {
+              "XStart": 1346.02,
+              "XEnd": 1387.64,
+              "StrokeId": "shape-226"
+            },
+            {
+              "XStart": 1296.23,
+              "XEnd": 1337.85,
+              "StrokeId": "shape-229"
+            },
+            {
+              "XStart": 1232.06,
+              "XEnd": 1273.67,
+              "StrokeId": "shape-232"
+            },
+            {
+              "XStart": 1727.27,
+              "XEnd": 1768.89,
+              "StrokeId": "shape-239"
+            },
+            {
+              "XStart": 1166.78,
+              "XEnd": 1208.4,
+              "StrokeId": "shape-242"
+            },
+            {
+              "XStart": 534.576,
+              "XEnd": 576.193,
+              "StrokeId": "shape-247"
+            },
+            {
+              "XStart": 609.267,
+              "XEnd": 650.884,
+              "StrokeId": "shape-251"
+            },
+            {
+              "XStart": 1652.58,
+              "XEnd": 1694.2,
+              "StrokeId": "shape-261"
+            },
+            {
+              "XStart": 1841.55,
+              "XEnd": 1908.66,
+              "StrokeId": "shape-278"
+            },
+            {
+              "XStart": 2113.26,
+              "XEnd": 2154.88,
+              "StrokeId": "shape-279"
+            },
+            {
+              "XStart": 2038.57,
+              "XEnd": 2080.19,
+              "StrokeId": "shape-285"
+            },
+            {
+              "XStart": 947.616,
+              "XEnd": 989.233,
+              "StrokeId": "shape-289"
+            },
+            {
+              "XStart": 1022.31,
+              "XEnd": 1063.92,
+              "StrokeId": "shape-294"
+            },
+            {
+              "XStart": 1116.99,
+              "XEnd": 1158.61,
+              "StrokeId": "shape-301"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 2060.49,
+          "Segments": [
+            {
+              "XStart": 1166.78,
+              "XEnd": 1208.4,
+              "StrokeId": "shape-243"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-6",
+      "SystemId": "system-3",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 2347.23,
+        "MaxX": 2764.6,
+        "MaxY": 2432.19,
+        "Width": 2552.002,
+        "Height": 84.96000000000004,
+        "CenterX": 1488.599,
+        "CenterY": 2389.71
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 2347.23,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-26"
+        },
+        {
+          "Index": 1,
+          "Y": 2368.47,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-27"
+        },
+        {
+          "Index": 2,
+          "Y": 2389.71,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-28"
+        },
+        {
+          "Index": 3,
+          "Y": 2410.95,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-29"
+        },
+        {
+          "Index": 4,
+          "Y": 2432.19,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-30"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 2325.99,
+          "Segments": [
+            {
+              "XStart": 459.885,
+              "XEnd": 501.502,
+              "StrokeId": "shape-438"
+            },
+            {
+              "XStart": 872.925,
+              "XEnd": 914.542,
+              "StrokeId": "shape-440"
+            },
+            {
+              "XStart": 1435.87,
+              "XEnd": 1477.48,
+              "StrokeId": "shape-445"
+            },
+            {
+              "XStart": 1921.86,
+              "XEnd": 1988.97,
+              "StrokeId": "shape-448"
+            },
+            {
+              "XStart": 1996.55,
+              "XEnd": 2063.66,
+              "StrokeId": "shape-452"
+            },
+            {
+              "XStart": 2380.32,
+              "XEnd": 2421.93,
+              "StrokeId": "shape-453"
+            },
+            {
+              "XStart": 2455.01,
+              "XEnd": 2496.62,
+              "StrokeId": "shape-456"
+            },
+            {
+              "XStart": 2529.7,
+              "XEnd": 2571.31,
+              "StrokeId": "shape-459"
+            },
+            {
+              "XStart": 2578.91,
+              "XEnd": 2646,
+              "StrokeId": "shape-462"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 2304.75,
+          "Segments": [
+            {
+              "XStart": 459.885,
+              "XEnd": 501.502,
+              "StrokeId": "shape-437"
+            },
+            {
+              "XStart": 872.925,
+              "XEnd": 914.542,
+              "StrokeId": "shape-439"
+            },
+            {
+              "XStart": 1435.87,
+              "XEnd": 1477.48,
+              "StrokeId": "shape-444"
+            },
+            {
+              "XStart": 1947.35,
+              "XEnd": 1988.97,
+              "StrokeId": "shape-447"
+            },
+            {
+              "XStart": 2022.04,
+              "XEnd": 2063.66,
+              "StrokeId": "shape-451"
+            },
+            {
+              "XStart": 2455.01,
+              "XEnd": 2496.62,
+              "StrokeId": "shape-455"
+            },
+            {
+              "XStart": 2529.7,
+              "XEnd": 2571.31,
+              "StrokeId": "shape-458"
+            },
+            {
+              "XStart": 2578.91,
+              "XEnd": 2646,
+              "StrokeId": "shape-461"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 2283.51,
+          "Segments": [
+            {
+              "XStart": 1435.87,
+              "XEnd": 1477.48,
+              "StrokeId": "shape-443"
+            },
+            {
+              "XStart": 2455.01,
+              "XEnd": 2496.62,
+              "StrokeId": "shape-454"
+            },
+            {
+              "XStart": 2529.7,
+              "XEnd": 2571.31,
+              "StrokeId": "shape-457"
+            },
+            {
+              "XStart": 2578.91,
+              "XEnd": 2646,
+              "StrokeId": "shape-460"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 4,
+          "Y": 2262.27,
+          "Segments": [
+            {
+              "XStart": 1435.87,
+              "XEnd": 1477.48,
+              "StrokeId": "shape-442"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 5,
+          "Y": 2241.03,
+          "Segments": [
+            {
+              "XStart": 1435.87,
+              "XEnd": 1477.48,
+              "StrokeId": "shape-441"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-7",
+      "SystemId": "system-4",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 2803.81,
+        "MaxX": 2764.6,
+        "MaxY": 2888.77,
+        "Width": 2552.002,
+        "Height": 84.96000000000004,
+        "CenterX": 1488.599,
+        "CenterY": 2846.29
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 2803.81,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-31"
+        },
+        {
+          "Index": 1,
+          "Y": 2825.05,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-32"
+        },
+        {
+          "Index": 2,
+          "Y": 2846.29,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-33"
+        },
+        {
+          "Index": 3,
+          "Y": 2867.53,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-34"
+        },
+        {
+          "Index": 4,
+          "Y": 2888.77,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-35"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 2782.57,
+          "Segments": [
+            {
+              "XStart": 1987.92,
+              "XEnd": 2029.54,
+              "StrokeId": "shape-224"
+            },
+            {
+              "XStart": 1885.1,
+              "XEnd": 1926.71,
+              "StrokeId": "shape-231"
+            },
+            {
+              "XStart": 1812.64,
+              "XEnd": 1854.26,
+              "StrokeId": "shape-233"
+            },
+            {
+              "XStart": 1740.19,
+              "XEnd": 1781.81,
+              "StrokeId": "shape-234"
+            },
+            {
+              "XStart": 1667.74,
+              "XEnd": 1709.35,
+              "StrokeId": "shape-235"
+            },
+            {
+              "XStart": 1450.43,
+              "XEnd": 1492.04,
+              "StrokeId": "shape-238"
+            },
+            {
+              "XStart": 1347.6,
+              "XEnd": 1389.22,
+              "StrokeId": "shape-245"
+            },
+            {
+              "XStart": 1275.15,
+              "XEnd": 1316.76,
+              "StrokeId": "shape-249"
+            },
+            {
+              "XStart": 1202.69,
+              "XEnd": 1244.31,
+              "StrokeId": "shape-254"
+            },
+            {
+              "XStart": 1130.24,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-264"
+            },
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-267"
+            },
+            {
+              "XStart": 1547.03,
+              "XEnd": 1588.65,
+              "StrokeId": "shape-268"
+            },
+            {
+              "XStart": 912.928,
+              "XEnd": 954.545,
+              "StrokeId": "shape-270"
+            },
+            {
+              "XStart": 810.101,
+              "XEnd": 851.718,
+              "StrokeId": "shape-284"
+            },
+            {
+              "XStart": 447.831,
+              "XEnd": 489.449,
+              "StrokeId": "shape-287"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 2761.33,
+          "Segments": [
+            {
+              "XStart": 1667.74,
+              "XEnd": 1709.35,
+              "StrokeId": "shape-236"
+            },
+            {
+              "XStart": 1547.03,
+              "XEnd": 1588.65,
+              "StrokeId": "shape-237"
+            },
+            {
+              "XStart": 1450.43,
+              "XEnd": 1492.04,
+              "StrokeId": "shape-240"
+            },
+            {
+              "XStart": 1347.6,
+              "XEnd": 1389.22,
+              "StrokeId": "shape-246"
+            },
+            {
+              "XStart": 1275.15,
+              "XEnd": 1316.76,
+              "StrokeId": "shape-250"
+            },
+            {
+              "XStart": 1202.69,
+              "XEnd": 1244.31,
+              "StrokeId": "shape-257"
+            },
+            {
+              "XStart": 1130.24,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-265"
+            },
+            {
+              "XStart": 912.928,
+              "XEnd": 954.545,
+              "StrokeId": "shape-271"
+            },
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-304"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 2740.09,
+          "Segments": [
+            {
+              "XStart": 1275.15,
+              "XEnd": 1316.76,
+              "StrokeId": "shape-253"
+            },
+            {
+              "XStart": 1202.69,
+              "XEnd": 1244.31,
+              "StrokeId": "shape-262"
+            },
+            {
+              "XStart": 1130.24,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-266"
+            },
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-269"
+            },
+            {
+              "XStart": 912.928,
+              "XEnd": 954.545,
+              "StrokeId": "shape-272"
+            }
+          ]
+        },
+        {
+          "Direction": "below",
+          "Step": 1,
+          "Y": 2911.59,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-360"
+            }
+          ]
+        },
+        {
+          "Direction": "below",
+          "Step": 2,
+          "Y": 2932.83,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-361"
+            }
+          ]
+        },
+        {
+          "Direction": "below",
+          "Step": 3,
+          "Y": 2954.07,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-362"
+            }
+          ]
+        },
+        {
+          "Direction": "below",
+          "Step": 4,
+          "Y": 2975.31,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-363"
+            }
+          ]
+        },
+        {
+          "Direction": "below",
+          "Step": 5,
+          "Y": 2996.55,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-364"
+            }
+          ]
+        },
+        {
+          "Direction": "below",
+          "Step": 6,
+          "Y": 3017.79,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-365"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-8",
+      "SystemId": "system-4",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 3039.03,
+        "MaxX": 2764.6,
+        "MaxY": 3123.99,
+        "Width": 2552.002,
+        "Height": 84.95999999999958,
+        "CenterX": 1488.599,
+        "CenterY": 3081.51
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 3039.03,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-36"
+        },
+        {
+          "Index": 1,
+          "Y": 3060.27,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-37"
+        },
+        {
+          "Index": 2,
+          "Y": 3081.51,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-38"
+        },
+        {
+          "Index": 3,
+          "Y": 3102.75,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-39"
+        },
+        {
+          "Index": 4,
+          "Y": 3123.99,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-40"
+        }
+      ],
+      "AverageLineSpacing": 21.239999999999895,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 3017.495277777778,
+          "Segments": [
+            {
+              "XStart": 961.231,
+              "XEnd": 1002.85,
+              "StrokeId": "shape-305"
+            },
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-309"
+            },
+            {
+              "XStart": 1057.84,
+              "XEnd": 1099.45,
+              "StrokeId": "shape-314"
+            },
+            {
+              "XStart": 1104.76,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-322"
+            },
+            {
+              "XStart": 1498.73,
+              "XEnd": 1540.35,
+              "StrokeId": "shape-323"
+            },
+            {
+              "XStart": 1547.03,
+              "XEnd": 1588.65,
+              "StrokeId": "shape-327"
+            },
+            {
+              "XStart": 1595.33,
+              "XEnd": 1636.95,
+              "StrokeId": "shape-330"
+            },
+            {
+              "XStart": 1642.26,
+              "XEnd": 1709.35,
+              "StrokeId": "shape-336"
+            },
+            {
+              "XStart": 2060.38,
+              "XEnd": 2102,
+              "StrokeId": "shape-338"
+            },
+            {
+              "XStart": 2132.83,
+              "XEnd": 2174.45,
+              "StrokeId": "shape-344"
+            },
+            {
+              "XStart": 2205.29,
+              "XEnd": 2246.9,
+              "StrokeId": "shape-351"
+            },
+            {
+              "XStart": 2277.74,
+              "XEnd": 2319.36,
+              "StrokeId": "shape-359"
+            },
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-365"
+            },
+            {
+              "XStart": 2482.07,
+              "XEnd": 2523.68,
+              "StrokeId": "shape-372"
+            },
+            {
+              "XStart": 592.739,
+              "XEnd": 634.356,
+              "StrokeId": "shape-463"
+            },
+            {
+              "XStart": 665.193,
+              "XEnd": 706.81,
+              "StrokeId": "shape-464"
+            },
+            {
+              "XStart": 737.647,
+              "XEnd": 779.264,
+              "StrokeId": "shape-469"
+            },
+            {
+              "XStart": 479.59429777529664,
+              "XEnd": 555.6417022247034,
+              "StrokeId": "shape-1114"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 2996.55,
+          "Segments": [
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-308"
+            },
+            {
+              "XStart": 1057.84,
+              "XEnd": 1099.45,
+              "StrokeId": "shape-312"
+            },
+            {
+              "XStart": 1104.76,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-317"
+            },
+            {
+              "XStart": 1547.03,
+              "XEnd": 1588.65,
+              "StrokeId": "shape-326"
+            },
+            {
+              "XStart": 1595.33,
+              "XEnd": 1636.95,
+              "StrokeId": "shape-329"
+            },
+            {
+              "XStart": 1642.26,
+              "XEnd": 1709.35,
+              "StrokeId": "shape-335"
+            },
+            {
+              "XStart": 2060.38,
+              "XEnd": 2102,
+              "StrokeId": "shape-337"
+            },
+            {
+              "XStart": 2132.83,
+              "XEnd": 2174.45,
+              "StrokeId": "shape-343"
+            },
+            {
+              "XStart": 2205.29,
+              "XEnd": 2246.9,
+              "StrokeId": "shape-350"
+            },
+            {
+              "XStart": 2277.74,
+              "XEnd": 2319.36,
+              "StrokeId": "shape-358"
+            },
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-364"
+            },
+            {
+              "XStart": 2482.07,
+              "XEnd": 2523.68,
+              "StrokeId": "shape-371"
+            },
+            {
+              "XStart": 737.647,
+              "XEnd": 779.264,
+              "StrokeId": "shape-468"
+            },
+            {
+              "XStart": 961.231,
+              "XEnd": 1002.85,
+              "StrokeId": "shape-470"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 2975.310000000001,
+          "Segments": [
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-307"
+            },
+            {
+              "XStart": 1057.84,
+              "XEnd": 1099.45,
+              "StrokeId": "shape-311"
+            },
+            {
+              "XStart": 1104.76,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-316"
+            },
+            {
+              "XStart": 1547.03,
+              "XEnd": 1588.65,
+              "StrokeId": "shape-325"
+            },
+            {
+              "XStart": 1595.33,
+              "XEnd": 1636.95,
+              "StrokeId": "shape-328"
+            },
+            {
+              "XStart": 1642.26,
+              "XEnd": 1709.35,
+              "StrokeId": "shape-334"
+            },
+            {
+              "XStart": 2132.83,
+              "XEnd": 2174.45,
+              "StrokeId": "shape-340"
+            },
+            {
+              "XStart": 2205.29,
+              "XEnd": 2246.9,
+              "StrokeId": "shape-349"
+            },
+            {
+              "XStart": 2277.74,
+              "XEnd": 2319.36,
+              "StrokeId": "shape-357"
+            },
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-363"
+            },
+            {
+              "XStart": 2482.07,
+              "XEnd": 2523.68,
+              "StrokeId": "shape-370"
+            },
+            {
+              "XStart": 737.647,
+              "XEnd": 779.264,
+              "StrokeId": "shape-467"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 4,
+          "Y": 2954.07,
+          "Segments": [
+            {
+              "XStart": 1009.53,
+              "XEnd": 1051.15,
+              "StrokeId": "shape-306"
+            },
+            {
+              "XStart": 1057.84,
+              "XEnd": 1099.45,
+              "StrokeId": "shape-310"
+            },
+            {
+              "XStart": 1104.76,
+              "XEnd": 1171.85,
+              "StrokeId": "shape-315"
+            },
+            {
+              "XStart": 1667.74,
+              "XEnd": 1709.35,
+              "StrokeId": "shape-333"
+            },
+            {
+              "XStart": 2132.83,
+              "XEnd": 2174.45,
+              "StrokeId": "shape-339"
+            },
+            {
+              "XStart": 2205.29,
+              "XEnd": 2246.9,
+              "StrokeId": "shape-345"
+            },
+            {
+              "XStart": 2277.74,
+              "XEnd": 2319.36,
+              "StrokeId": "shape-353"
+            },
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-362"
+            },
+            {
+              "XStart": 2482.07,
+              "XEnd": 2523.68,
+              "StrokeId": "shape-369"
+            },
+            {
+              "XStart": 737.647,
+              "XEnd": 779.264,
+              "StrokeId": "shape-466"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 5,
+          "Y": 2932.83,
+          "Segments": [
+            {
+              "XStart": 2277.74,
+              "XEnd": 2319.36,
+              "StrokeId": "shape-352"
+            },
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-361"
+            },
+            {
+              "XStart": 737.647,
+              "XEnd": 779.264,
+              "StrokeId": "shape-465"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 6,
+          "Y": 2911.59,
+          "Segments": [
+            {
+              "XStart": 2350.19,
+              "XEnd": 2391.81,
+              "StrokeId": "shape-360"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-9",
+      "SystemId": "system-5",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 3495.61,
+        "MaxX": 2764.6,
+        "MaxY": 3580.57,
+        "Width": 2552.002,
+        "Height": 84.96000000000004,
+        "CenterX": 1488.599,
+        "CenterY": 3538.09
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 3495.61,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-41"
+        },
+        {
+          "Index": 1,
+          "Y": 3516.85,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-42"
+        },
+        {
+          "Index": 2,
+          "Y": 3538.09,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-43"
+        },
+        {
+          "Index": 3,
+          "Y": 3559.33,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-44"
+        },
+        {
+          "Index": 4,
+          "Y": 3580.57,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-45"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 3474.3699999999994,
+          "Segments": [
+            {
+              "XStart": 523.298,
+              "XEnd": 564.915,
+              "StrokeId": "shape-244"
+            },
+            {
+              "XStart": 642.627,
+              "XEnd": 684.244,
+              "StrokeId": "shape-260"
+            },
+            {
+              "XStart": 926.683,
+              "XEnd": 968.3,
+              "StrokeId": "shape-273"
+            },
+            {
+              "XStart": 438.871,
+              "XEnd": 480.488,
+              "StrokeId": "shape-281"
+            },
+            {
+              "XStart": 982.933,
+              "XEnd": 1024.55,
+              "StrokeId": "shape-283"
+            },
+            {
+              "XStart": 698.877,
+              "XEnd": 740.494,
+              "StrokeId": "shape-286"
+            },
+            {
+              "XStart": 1039.18,
+              "XEnd": 1080.8,
+              "StrokeId": "shape-293"
+            },
+            {
+              "XStart": 755.126,
+              "XEnd": 796.744,
+              "StrokeId": "shape-297"
+            },
+            {
+              "XStart": 811.376,
+              "XEnd": 852.993,
+              "StrokeId": "shape-300"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 3453.13,
+          "Segments": [
+            {
+              "XStart": 438.871,
+              "XEnd": 480.488,
+              "StrokeId": "shape-213"
+            },
+            {
+              "XStart": 523.298,
+              "XEnd": 564.915,
+              "StrokeId": "shape-258"
+            },
+            {
+              "XStart": 642.627,
+              "XEnd": 684.244,
+              "StrokeId": "shape-259"
+            },
+            {
+              "XStart": 698.877,
+              "XEnd": 740.494,
+              "StrokeId": "shape-282"
+            },
+            {
+              "XStart": 755.126,
+              "XEnd": 796.744,
+              "StrokeId": "shape-288"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "staff-10",
+      "SystemId": "system-5",
+      "Bounds": {
+        "MinX": 212.598,
+        "MinY": 3762.16,
+        "MaxX": 2764.6,
+        "MaxY": 3847.12,
+        "Width": 2552.002,
+        "Height": 84.96000000000004,
+        "CenterX": 1488.599,
+        "CenterY": 3804.64
+      },
+      "Lines": [
+        {
+          "Index": 0,
+          "Y": 3762.16,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-46"
+        },
+        {
+          "Index": 1,
+          "Y": 3783.4,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-47"
+        },
+        {
+          "Index": 2,
+          "Y": 3804.64,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-48"
+        },
+        {
+          "Index": 3,
+          "Y": 3825.88,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-49"
+        },
+        {
+          "Index": 4,
+          "Y": 3847.12,
+          "XStart": 212.598,
+          "XEnd": 2764.6,
+          "StrokeId": "shape-50"
+        }
+      ],
+      "AverageLineSpacing": 21.24000000000001,
+      "LedgerLevels": [
+        {
+          "Direction": "above",
+          "Step": 1,
+          "Y": 3740.9199999999987,
+          "Segments": [
+            {
+              "XStart": 476.371,
+              "XEnd": 517.988,
+              "StrokeId": "shape-373"
+            },
+            {
+              "XStart": 523.298,
+              "XEnd": 564.915,
+              "StrokeId": "shape-376"
+            },
+            {
+              "XStart": 570.225,
+              "XEnd": 611.842,
+              "StrokeId": "shape-381"
+            },
+            {
+              "XStart": 617.152,
+              "XEnd": 684.244,
+              "StrokeId": "shape-388"
+            },
+            {
+              "XStart": 901.208,
+              "XEnd": 968.3,
+              "StrokeId": "shape-392"
+            },
+            {
+              "XStart": 1361.71,
+              "XEnd": 1403.33,
+              "StrokeId": "shape-393"
+            },
+            {
+              "XStart": 1417.96,
+              "XEnd": 1459.58,
+              "StrokeId": "shape-395"
+            },
+            {
+              "XStart": 1481.07,
+              "XEnd": 1522.69,
+              "StrokeId": "shape-401"
+            },
+            {
+              "XStart": 1537.32,
+              "XEnd": 1578.94,
+              "StrokeId": "shape-407"
+            },
+            {
+              "XStart": 1593.57,
+              "XEnd": 1635.19,
+              "StrokeId": "shape-412"
+            },
+            {
+              "XStart": 1698.74,
+              "XEnd": 1740.35,
+              "StrokeId": "shape-418"
+            },
+            {
+              "XStart": 1961.49,
+              "XEnd": 2003.1,
+              "StrokeId": "shape-423"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 2,
+          "Y": 3719.6799999999994,
+          "Segments": [
+            {
+              "XStart": 523.298,
+              "XEnd": 564.915,
+              "StrokeId": "shape-375"
+            },
+            {
+              "XStart": 570.225,
+              "XEnd": 611.842,
+              "StrokeId": "shape-378"
+            },
+            {
+              "XStart": 617.152,
+              "XEnd": 684.244,
+              "StrokeId": "shape-387"
+            },
+            {
+              "XStart": 901.208,
+              "XEnd": 968.3,
+              "StrokeId": "shape-391"
+            },
+            {
+              "XStart": 1417.96,
+              "XEnd": 1459.58,
+              "StrokeId": "shape-394"
+            },
+            {
+              "XStart": 1481.07,
+              "XEnd": 1522.69,
+              "StrokeId": "shape-400"
+            },
+            {
+              "XStart": 1537.32,
+              "XEnd": 1578.94,
+              "StrokeId": "shape-406"
+            },
+            {
+              "XStart": 1593.57,
+              "XEnd": 1635.19,
+              "StrokeId": "shape-411"
+            },
+            {
+              "XStart": 1698.74,
+              "XEnd": 1740.35,
+              "StrokeId": "shape-417"
+            },
+            {
+              "XStart": 1961.49,
+              "XEnd": 2003.1,
+              "StrokeId": "shape-420"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 3,
+          "Y": 3698.44,
+          "Segments": [
+            {
+              "XStart": 523.298,
+              "XEnd": 564.915,
+              "StrokeId": "shape-374"
+            },
+            {
+              "XStart": 570.225,
+              "XEnd": 611.842,
+              "StrokeId": "shape-377"
+            },
+            {
+              "XStart": 617.152,
+              "XEnd": 684.244,
+              "StrokeId": "shape-386"
+            },
+            {
+              "XStart": 901.208,
+              "XEnd": 968.3,
+              "StrokeId": "shape-390"
+            },
+            {
+              "XStart": 1481.07,
+              "XEnd": 1522.69,
+              "StrokeId": "shape-399"
+            },
+            {
+              "XStart": 1537.32,
+              "XEnd": 1578.94,
+              "StrokeId": "shape-403"
+            },
+            {
+              "XStart": 1593.57,
+              "XEnd": 1635.19,
+              "StrokeId": "shape-410"
+            },
+            {
+              "XStart": 1698.74,
+              "XEnd": 1740.35,
+              "StrokeId": "shape-416"
+            },
+            {
+              "XStart": 1961.49,
+              "XEnd": 2003.1,
+              "StrokeId": "shape-419"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 4,
+          "Y": 3677.2,
+          "Segments": [
+            {
+              "XStart": 642.627,
+              "XEnd": 684.244,
+              "StrokeId": "shape-385"
+            },
+            {
+              "XStart": 926.683,
+              "XEnd": 968.3,
+              "StrokeId": "shape-389"
+            },
+            {
+              "XStart": 1537.32,
+              "XEnd": 1578.94,
+              "StrokeId": "shape-402"
+            },
+            {
+              "XStart": 1593.57,
+              "XEnd": 1635.19,
+              "StrokeId": "shape-409"
+            }
+          ]
+        },
+        {
+          "Direction": "above",
+          "Step": 5,
+          "Y": 3655.96,
+          "Segments": [
+            {
+              "XStart": 1593.57,
+              "XEnd": 1635.19,
+              "StrokeId": "shape-408"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

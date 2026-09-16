@@ -52,3 +52,6 @@ parser.contours=/home/runner/work/vector-music/vector-music/artifacts/parser.con
 parser.classified=/home/runner/work/vector-music/vector-music/artifacts/parser.classified-symbols.svg
 parser.ownership=/home/runner/work/vector-music/vector-music/artifacts/parser.ownership.svg
 parser.ownershipDiagnostics=/home/runner/work/vector-music/vector-music/artifacts/parser.ownership.render-diagnostics.txt
+parser.verticalZigZags=1
+parser.zigzags=/home/runner/work/vector-music/vector-music/artifacts/parser.zigzags.svg
+parser.zigzagScene=/home/runner/work/vector-music/vector-music/artifacts/zigzag-scene.json

@@ -31,3 +31,9 @@ Commit: `2d989646dca108501bc611470e59da9c37b230ab`
 - [Ownership renderer diagnostics](parser.ownership.render-diagnostics.txt) — Per-shape ownership/rendering diagnostics used to distinguish analyzer misses from visualization problems.
 - [Source SVG](source.svg) — Exact SVG input used for this run.
 - [Reference source MusicXML](source.musicxml) — MuseScore source used as a visual and semantic oracle for this fixture.
+## Vertical zigzag diagnostics
+
+Detected geometric vertical zigzags: **1**.
+
+- [parser.zigzags.svg](parser.zigzags.svg) — visual overlay of detected candidates.
+- [zigzag-scene.json](zigzag-scene.json) — raw primitive geometry and confidence.
