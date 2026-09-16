@@ -33,7 +33,10 @@ public sealed class LogicalOwnershipAnalyzer
             ["Stroke"] = 0.75,
             ["EllipseLike"] = 0.90,
             ["ShapeInstance"] = 1.40,
-            ["CurvedStroke"] = 1.80
+            ["VerticalZigZag"] = 1.40,
+            ["CurvedStroke"] = 1.80,
+            ["Hairpin"] = 1.80,
+            ["BracketSpanner"] = 1.80
         };
 
     public (NotationScene Scene, LogicalOwnershipScene Ownership) AnalyzeAndApply(
@@ -57,16 +60,76 @@ public sealed class LogicalOwnershipAnalyzer
         AssignBetweenStaffBridges(elements, layout, assignments);
 
         var scene = ApplyOwnership(notation, assignments);
-        var ownershipScene = new LogicalOwnershipScene(
-            elements
-                .Where(element => assignments.ContainsKey(element.ShapeId))
-                .Select(element => new LogicalOwnershipAssignment(
-                    element.ShapeId,
-                    element.Kind,
-                    assignments[element.ShapeId]))
-                .ToArray());
+        var ownershipScene = BuildOwnershipScene(
+            notation,
+            elements,
+            assignments);
 
         return (scene, ownershipScene);
+    }
+
+    private static LogicalOwnershipScene BuildOwnershipScene(
+        NotationScene notation,
+        IReadOnlyList<OwnershipElement> elements,
+        IReadOnlyDictionary<string, LogicalOwnership> assignments)
+    {
+        var result = new Dictionary<string, LogicalOwnershipAssignment>(
+            StringComparer.Ordinal);
+
+        foreach (var element in elements)
+        {
+            if (!assignments.TryGetValue(element.ShapeId, out var ownership))
+            {
+                continue;
+            }
+
+            result[element.ShapeId] = new LogicalOwnershipAssignment(
+                element.ShapeId,
+                element.Kind,
+                ownership);
+        }
+
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            if (!assignments.TryGetValue(bracket.Id, out var ownership))
+            {
+                continue;
+            }
+
+            foreach (var sourceShapeId in bracket.SourceShapeIds)
+            {
+                result.TryAdd(
+                    sourceShapeId,
+                    new LogicalOwnershipAssignment(
+                        sourceShapeId,
+                        "BracketSpanner",
+                        ownership));
+            }
+        }
+
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            if (!assignments.TryGetValue(zigZag.ShapeId, out var ownership))
+            {
+                continue;
+            }
+
+            var sourceShapeIds = zigZag.SourceShapeIds.Count > 0
+                ? zigZag.SourceShapeIds
+                : [zigZag.ShapeId];
+
+            foreach (var sourceShapeId in sourceShapeIds)
+            {
+                result.TryAdd(
+                    sourceShapeId,
+                    new LogicalOwnershipAssignment(
+                        sourceShapeId,
+                        "VerticalZigZag",
+                        ownership));
+            }
+        }
+
+        return new LogicalOwnershipScene(result.Values.ToArray());
     }
 
     private static void AssignFirstGeneration(
@@ -268,6 +331,24 @@ public sealed class LogicalOwnershipAnalyzer
                 {
                     Ownership = assignments.GetValueOrDefault(ellipse.ShapeId)
                 })
+                .ToArray(),
+            Hairpins = notation.Hairpins
+                .Select(hairpin => hairpin with
+                {
+                    Ownership = assignments.GetValueOrDefault(hairpin.ShapeId)
+                })
+                .ToArray(),
+            BracketSpanners = notation.BracketSpanners
+                .Select(bracket => bracket with
+                {
+                    Ownership = assignments.GetValueOrDefault(bracket.Id)
+                })
+                .ToArray(),
+            VerticalZigZags = notation.VerticalZigZags
+                .Select(zigZag => zigZag with
+                {
+                    Ownership = assignments.GetValueOrDefault(zigZag.ShapeId)
+                })
                 .ToArray()
         };
     }
@@ -454,6 +535,102 @@ public sealed class LogicalOwnershipAnalyzer
                 points,
                 ellipse.Center,
                 ellipse.Center));
+        }
+
+        foreach (var hairpin in notation.Hairpins)
+        {
+            var points = new[]
+            {
+                hairpin.OpenUpper,
+                hairpin.Apex,
+                hairpin.OpenLower
+            };
+            var bounds = BoundsD.FromPoints(points);
+
+            if (IsOversized(bounds))
+            {
+                continue;
+            }
+
+            var openMiddle = new PointD(
+                (hairpin.OpenUpper.X + hairpin.OpenLower.X) / 2.0,
+                (hairpin.OpenUpper.Y + hairpin.OpenLower.Y) / 2.0);
+            var start = hairpin.Apex.X <= openMiddle.X
+                ? hairpin.Apex
+                : openMiddle;
+            var end = hairpin.Apex.X <= openMiddle.X
+                ? openMiddle
+                : hairpin.Apex;
+
+            result.Add(new OwnershipElement(
+                hairpin.ShapeId,
+                "Hairpin",
+                bounds,
+                points,
+                start,
+                end));
+        }
+
+        foreach (var bracket in notation.BracketSpanners)
+        {
+            var points = new List<PointD>();
+
+            if (bracket.LeftHookEnd is not null)
+            {
+                points.Add(bracket.LeftHookEnd.Value);
+            }
+
+            points.Add(bracket.Start);
+            points.Add(bracket.End);
+
+            if (bracket.RightHookEnd is not null)
+            {
+                points.Add(bracket.RightHookEnd.Value);
+            }
+
+            var half = Math.Max(bracket.StrokeWidth / 2.0, 0.01);
+            var raw = BoundsD.FromPoints(points);
+            var bounds = new BoundsD(
+                raw.MinX - half,
+                raw.MinY - half,
+                raw.MaxX + half,
+                raw.MaxY + half);
+
+            if (IsOversized(bounds))
+            {
+                continue;
+            }
+
+            result.Add(new OwnershipElement(
+                bracket.Id,
+                "BracketSpanner",
+                bounds,
+                points,
+                bracket.Start,
+                bracket.End));
+        }
+
+        foreach (var zigZag in notation.VerticalZigZags)
+        {
+            if (IsOversized(zigZag.Bounds))
+            {
+                continue;
+            }
+
+            var start = new PointD(
+                zigZag.Bounds.CenterX,
+                zigZag.Bounds.MinY);
+            var end = new PointD(
+                zigZag.Bounds.CenterX,
+                zigZag.Bounds.MaxY);
+
+            result.Add(new OwnershipElement(
+                zigZag.ShapeId,
+                "VerticalZigZag",
+                zigZag.Bounds,
+                [start, end],
+                start,
+                end));
         }
 
         foreach (var instance in notation.Instances)
