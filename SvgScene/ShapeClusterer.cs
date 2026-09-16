@@ -18,6 +18,7 @@ public sealed class ShapeClusterer : IShapeClusterer
     private readonly double _distanceThreshold;
     private readonly IGeometryAnalyzer _geometryAnalyzer;
     private readonly IHairpinExtractor _hairpinExtractor;
+    private readonly BracketSpannerExtractor _bracketSpannerExtractor;
     private readonly IArcExtractor _arcExtractor;
     private readonly IEllipseLikeExtractor _ellipseExtractor;
     private readonly ShapeDescriptorMatcher _descriptorMatcher;
@@ -33,10 +34,12 @@ public sealed class ShapeClusterer : IShapeClusterer
         IArcExtractor? arcExtractor = null,
         IEllipseLikeExtractor? ellipseExtractor = null,
         IHairpinExtractor? hairpinExtractor = null,
+        BracketSpannerExtractor? bracketSpannerExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
         _hairpinExtractor = hairpinExtractor ?? new HairpinExtractor();
+        _bracketSpannerExtractor = bracketSpannerExtractor ?? new BracketSpannerExtractor();
         _arcExtractor = arcExtractor ?? new ArcExtractor();
         _ellipseExtractor = ellipseExtractor ?? new EllipseLikeExtractor();
         _descriptorMatcher = new ShapeDescriptorMatcher();
@@ -48,6 +51,8 @@ public sealed class ShapeClusterer : IShapeClusterer
         _geometryAnalyzer.ClearDiagnostics();
         _arcExtractor.ClearDiagnostics();
 
+        var bracketExtraction = _bracketSpannerExtractor.Extract(scene);
+        var consumedByBrackets = bracketExtraction.ConsumedShapeIds;
         var prototypes = new List<ShapePrototype>();
         var instances = new List<ShapeInstance>();
         var strokes = new List<Stroke>();
@@ -57,6 +62,9 @@ public sealed class ShapeClusterer : IShapeClusterer
 
         foreach (var shape in scene.Shapes)
         {
+            if (consumedByBrackets.Contains(shape.Id))
+                continue;
+
             // A very long, shallow hairpin can look almost straight to the generic
             // PCA stroke detector: its opening is tiny compared with its horizontal
             // span. Hairpin geometry is more specific than a generic stroke, so give
@@ -108,7 +116,8 @@ public sealed class ShapeClusterer : IShapeClusterer
             curvedStrokes,
             ellipses)
         {
-            Hairpins = hairpins
+            Hairpins = hairpins,
+            BracketSpanners = bracketExtraction.Brackets
         };
     }
 
