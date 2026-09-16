@@ -104,20 +104,41 @@ public sealed class HairpinPass : ISemanticPass
                 continue;
             }
 
-            var staffId = source.Ownership.Start.StaffId;
             var startX = LeftX(source);
             var endX = RightX(source);
+            var musicalStaff = ResolveMusicalStaffContext(
+                contexts,
+                source,
+                startX);
+
+            if (musicalStaff is null)
+            {
+                decisions.Add(Reject(
+                    source.ShapeId,
+                    "unmapped-staff",
+                    source.Confidence,
+                    $"{source.ShapeId}: cannot resolve a musical staff inside the owned piano pair"));
+                continue;
+            }
+
+            var staffId = musicalStaff.Coordinate.StaffId;
+            var startFallback = new LogicalCoordinate(
+                staffId,
+                source.Ownership.Start.MeasureId);
+            var endFallback = new LogicalCoordinate(
+                staffId,
+                source.Ownership.End.MeasureId);
             var startContext = ResolveContextAtX(
                 contexts,
                 staffId,
                 startX,
-                source.Ownership.Start,
+                startFallback,
                 preferLaterAtBoundary: true);
             var endContext = ResolveContextAtX(
                 contexts,
                 staffId,
                 endX,
-                source.Ownership.End,
+                endFallback,
                 preferLaterAtBoundary: false);
 
             if (startContext is null || endContext is null)
@@ -171,7 +192,8 @@ public sealed class HairpinPass : ISemanticPass
             var placement = ResolvePlacement(source, startContext);
             var reason =
                 $"{source.ShapeId}: geometric {type} ({source.Confidence:P0}); "
-                + $"ownership={staffId}; placement={placement}; "
+                + $"genericOwnership={source.Ownership.Start.StaffId}; "
+                + $"semanticStaff={staffId}/{startContext.StaffNumber}; placement={placement}; "
                 + $"x={startX:F2}->{endX:F2}; "
                 + $"m{startContext.MeasureNumber}:{startAt} -> m{endContext.MeasureNumber}:{endAt}";
 
@@ -232,6 +254,8 @@ public sealed class HairpinPass : ISemanticPass
             foreach (var staff in new[] { measure.Upper, measure.Lower })
             {
                 result.Add(new CoordinateContext(
+                    measure.SystemId,
+                    measure.PairId,
                     new LogicalCoordinate(staff.StaffId, measure.LayoutMeasureId),
                     measure.Number,
                     staff.StaffNumber,
@@ -242,6 +266,57 @@ public sealed class HairpinPass : ISemanticPass
         }
 
         return result;
+    }
+
+    private static CoordinateContext? ResolveMusicalStaffContext(
+        IReadOnlyList<CoordinateContext> contexts,
+        HairpinPrimitive source,
+        double x)
+    {
+        var ownership = source.Ownership!;
+        var ownershipContext = contexts.FirstOrDefault(context =>
+            context.Coordinate == ownership.Start);
+
+        if (ownershipContext is null)
+        {
+            return null;
+        }
+
+        var y = CenterY(source);
+        var candidates = contexts
+            .Where(context =>
+                string.Equals(
+                    context.SystemId,
+                    ownershipContext.SystemId,
+                    StringComparison.Ordinal)
+                && string.Equals(
+                    context.PairId,
+                    ownershipContext.PairId,
+                    StringComparison.Ordinal)
+                && x >= context.XStart - CoordinateEpsilon
+                && x <= context.XEnd + CoordinateEpsilon)
+            .GroupBy(
+                context => context.Coordinate.StaffId,
+                StringComparer.Ordinal)
+            .Select(group => group
+                .OrderByDescending(context => context.XStart)
+                .ThenBy(context => context.MeasureNumber)
+                .First())
+            .ToArray();
+
+        if (candidates.Length == 0)
+        {
+            return ownershipContext;
+        }
+
+        return candidates
+            .OrderBy(context => DistanceToStaff(y, context.StaffBounds))
+            .ThenByDescending(context => string.Equals(
+                context.Coordinate.StaffId,
+                ownership.Start.StaffId,
+                StringComparison.Ordinal))
+            .ThenBy(context => context.StaffNumber)
+            .First();
     }
 
     private static CoordinateContext? ResolveContextAtX(
@@ -290,12 +365,34 @@ public sealed class HairpinPass : ISemanticPass
             (source.OpenUpper.X + source.OpenLower.X) / 2.0,
             (source.OpenUpper.Y + source.OpenLower.Y) / 2.0);
 
+    private static double CenterY(HairpinPrimitive source)
+    {
+        var openMiddle = OpenMiddle(source);
+        return (source.Apex.Y + openMiddle.Y) / 2.0;
+    }
+
+    private static double DistanceToStaff(
+        double y,
+        BoundsD bounds)
+    {
+        if (y < bounds.MinY)
+        {
+            return bounds.MinY - y;
+        }
+
+        if (y > bounds.MaxY)
+        {
+            return y - bounds.MaxY;
+        }
+
+        return 0;
+    }
+
     private static string ResolvePlacement(
         HairpinPrimitive source,
         CoordinateContext context)
     {
-        var openMiddle = OpenMiddle(source);
-        var y = (source.Apex.Y + openMiddle.Y) / 2.0;
+        var y = CenterY(source);
 
         if (y <= context.StaffBounds.MinY)
         {
@@ -350,6 +447,8 @@ public sealed class HairpinPass : ISemanticPass
         value.Numerator / (double)value.Denominator;
 
     private sealed record CoordinateContext(
+        string SystemId,
+        string PairId,
         LogicalCoordinate Coordinate,
         int MeasureNumber,
         int StaffNumber,
