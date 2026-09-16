@@ -156,10 +156,13 @@ public sealed class PedalPass : ISemanticPass
 
             usedLabels.Add(match.Label.ShapeId);
 
+            // The PEDAL_MARK itself is the musical down-point. The horizontal
+            // continuation line starts to its right and can already be closer to the
+            // next note, so using the line start would shift the pedal onset late.
             var startAt = timing.ResolveStartAt(
                 startContext.MeasureNumber,
                 startContext.StaffNumber,
-                source.Start.X);
+                match.Label.CenterX);
             var endAt = timing.ResolveEndAt(
                 endContext.MeasureNumber,
                 endContext.StaffNumber,
