@@ -256,6 +256,36 @@ public sealed class SemanticFacts
 
     public void Add(SemanticFact fact)
     {
+        if (fact is DynamicDirectionFact incoming)
+        {
+            var duplicateIndex = _items.FindIndex(item =>
+                item is DynamicDirectionFact existing
+                && existing.MeasureNumber == incoming.MeasureNumber
+                && existing.Staff == incoming.Staff
+                && string.Equals(existing.At, incoming.At, StringComparison.Ordinal)
+                && string.Equals(existing.Value, incoming.Value, StringComparison.Ordinal));
+
+            if (duplicateIndex >= 0)
+            {
+                var existing = (DynamicDirectionFact)_items[duplicateIndex];
+                if (incoming.Confidence > existing.Confidence)
+                {
+                    _items[duplicateIndex] = incoming;
+                    AddTrace(
+                        $"Dynamic dedup: replaced {existing.ShapeId} with {incoming.ShapeId} "
+                        + $"for m{incoming.MeasureNumber}/s{incoming.Staff}@{incoming.At} {incoming.Value}");
+                }
+                else
+                {
+                    AddTrace(
+                        $"Dynamic dedup: kept {existing.ShapeId}; ignored {incoming.ShapeId} "
+                        + $"for m{incoming.MeasureNumber}/s{incoming.Staff}@{incoming.At} {incoming.Value}");
+                }
+
+                return;
+            }
+        }
+
         _items.Add(fact);
     }
 
