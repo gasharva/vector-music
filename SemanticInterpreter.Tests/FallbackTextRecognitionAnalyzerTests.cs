@@ -6,49 +6,22 @@ namespace SemanticInterpreter.Tests;
 public sealed class FallbackTextRecognitionAnalyzerTests
 {
     [Fact]
-    public void Analyze_BuildsGreedyMaximalTrainFromPoorGlyphsOnly()
+    public void Analyze_PoorGlyphActivatesWholeHorizontalRowIncludingConfidentNeighbours()
     {
         var geometry = new GeometricScene([
-            Shape("bad-a", 0, 0, 5, 10),
-            Shape("confident-middle", 7, 0, 12, 10),
-            Shape("bad-b", 14, 0, 19, 10),
-            Shape("bad-c", 28, 0, 33, 10)
+            Shape("bad-y", 0, 0, 5, 10),
+            Shape("bad-e", 7, 1, 12, 11),
+            Shape("primitive-stem", 14, 0, 16, 10),
+            Shape("primitive-oval", 18, 1, 23, 11),
+            Shape("confident-marcato", 25, 0, 30, 10)
         ]);
         var notation = Notation(
-            ("bad-a", Poor()),
-            ("confident-middle", Clear("SHARP")),
-            ("bad-b", Poor()),
-            ("bad-c", Poor()));
-        var recognizer = new RecordingRecognizer("ABC", 0.98);
-
-        var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
-            geometry,
-            notation,
-            Layout(10));
-
-        var observation = Assert.Single(analysis.Observations);
-        Assert.Equal(TextCandidateKind.HorizontalRun, observation.Kind);
-        Assert.Equal(["bad-a", "bad-b", "bad-c"], observation.SourceShapeIds);
-        Assert.DoesNotContain("confident-middle", observation.SourceShapeIds);
-        Assert.Equal("ABC", observation.Recognition?.Text);
-
-        var candidate = Assert.Single(recognizer.Candidates);
-        Assert.Equal(["bad-a", "bad-b", "bad-c"], candidate.SourceShapeIds);
-    }
-
-    [Fact]
-    public void Analyze_AllowsGapOfTwoAverageGlyphWidths()
-    {
-        var geometry = new GeometricScene([
-            Shape("a", 0, 0, 5, 10),
-            Shape("b", 15, 0, 20, 10),
-            Shape("c", 30, 0, 35, 10)
-        ]);
-        var notation = Notation(
-            ("a", Poor()),
-            ("b", Poor()),
-            ("c", Poor()));
-        var recognizer = new RecordingRecognizer("abc", 0.99);
+            ("bad-y", Poor()),
+            ("bad-e", Poor()),
+            ("primitive-stem", Clear("STEM")),
+            ("primitive-oval", Clear("NOTEHEAD_BLACK")),
+            ("confident-marcato", Clear("MARCATO")));
+        var recognizer = new RecordingRecognizer("YELLOW", 0.99);
 
         var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
             geometry,
@@ -57,22 +30,27 @@ public sealed class FallbackTextRecognitionAnalyzerTests
 
         var train = Assert.Single(analysis.Observations);
         Assert.Equal(TextCandidateKind.HorizontalRun, train.Kind);
-        Assert.Equal(["a", "b", "c"], train.SourceShapeIds);
+        Assert.Equal(
+            ["bad-y", "bad-e", "primitive-stem", "primitive-oval", "confident-marcato"],
+            train.SourceShapeIds);
+        Assert.Equal("YELLOW", train.Recognition?.Text);
     }
 
     [Fact]
-    public void Analyze_EmitsSingletonOnlyWhenGlyphWasNotConsumedByLargerTrain()
+    public void Analyze_SplitsActivatedRowAtGapOverTwoAverageWidths_AndOcrsEveryPiece()
     {
         var geometry = new GeometricScene([
-            Shape("a", 0, 0, 5, 10),
-            Shape("b", 12, 0, 17, 10),
-            Shape("lonely", 100, 0, 105, 10)
+            Shape("seed", 0, 0, 5, 10),
+            Shape("left-good", 7, 0, 12, 10),
+            Shape("right-good-a", 30, 0, 35, 10),
+            Shape("right-good-b", 37, 0, 42, 10)
         ]);
         var notation = Notation(
-            ("a", Poor()),
-            ("b", Poor()),
-            ("lonely", Poor()));
-        var recognizer = new RecordingRecognizer("text", 0.95);
+            ("seed", Poor()),
+            ("left-good", Clear("SHARP")),
+            ("right-good-a", Clear("FLAT")),
+            ("right-good-b", Clear("MARCATO")));
+        var recognizer = new RecordingRecognizer("text", 0.98);
 
         var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
             geometry,
@@ -80,31 +58,66 @@ public sealed class FallbackTextRecognitionAnalyzerTests
             Layout(10));
 
         Assert.Equal(2, analysis.Observations.Count);
-
-        var train = Assert.Single(
+        Assert.Contains(
             analysis.Observations,
-            item => item.Kind == TextCandidateKind.HorizontalRun);
-        Assert.Equal(["a", "b"], train.SourceShapeIds);
-
-        var singleton = Assert.Single(
+            item => item.SourceShapeIds.SequenceEqual(["seed", "left-good"]));
+        Assert.Contains(
             analysis.Observations,
-            item => item.Kind == TextCandidateKind.Prototype);
-        Assert.Equal(["lonely"], singleton.SourceShapeIds);
-
-        var allShapeIds = analysis.Observations
-            .SelectMany(item => item.SourceShapeIds)
-            .ToArray();
-        Assert.Equal(3, allShapeIds.Length);
-        Assert.Equal(3, allShapeIds.Distinct(StringComparer.Ordinal).Count());
+            item => item.SourceShapeIds.SequenceEqual(["right-good-a", "right-good-b"]));
+        Assert.Equal(2, recognizer.Candidates.Count);
     }
 
     [Fact]
-    public void Analyze_DoesNotRunOcrForConfidentMusicGlyph()
+    public void Analyze_AllowsVerticalJitterWhenBuildingActivatedRow()
     {
         var geometry = new GeometricScene([
-            Shape("music", 0, 0, 5, 10)
+            Shape("seed", 0, 0, 5, 10),
+            Shape("jittered", 7, 6, 12, 16)
         ]);
-        var notation = Notation(("music", Clear("SHARP")));
+        var notation = Notation(
+            ("seed", Poor()),
+            ("jittered", Clear("SHARP")));
+        var recognizer = new RecordingRecognizer("ye", 0.95);
+
+        var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
+            geometry,
+            notation,
+            Layout(10));
+
+        var train = Assert.Single(analysis.Observations);
+        Assert.Equal(TextCandidateKind.HorizontalRun, train.Kind);
+        Assert.Equal(["seed", "jittered"], train.SourceShapeIds);
+    }
+
+    [Fact]
+    public void Analyze_EmitsSingletonWhenActivatedPieceContainsOneGlyph()
+    {
+        var geometry = new GeometricScene([
+            Shape("seed", 20, 10, 25, 20)
+        ]);
+        var notation = Notation(("seed", Poor()));
+        var recognizer = new RecordingRecognizer("x", 0.91);
+
+        var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
+            geometry,
+            notation,
+            Layout(10));
+
+        var singleton = Assert.Single(analysis.Observations);
+        Assert.Equal(TextCandidateKind.Prototype, singleton.Kind);
+        Assert.Equal(["seed"], singleton.SourceShapeIds);
+    }
+
+    [Fact]
+    public void Analyze_DoesNotRunOcrWhenThereIsNoPoorSeed()
+    {
+        var geometry = new GeometricScene([
+            Shape("music", 0, 0, 5, 10),
+            Shape("neighbour", 7, 0, 12, 10)
+        ]);
+        var notation = Notation(
+            ("music", Clear("SHARP")),
+            ("neighbour", Clear("FLAT")));
         var recognizer = new RecordingRecognizer("ignored", 0.99);
 
         var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
@@ -117,17 +130,17 @@ public sealed class FallbackTextRecognitionAnalyzerTests
     }
 
     [Fact]
-    public void Analyze_DoesNotJoinPoorGlyphsFromDifferentRows()
+    public void Analyze_DoesNotPullGlyphsFromDifferentRows()
     {
         var geometry = new GeometricScene([
-            Shape("a", 0, 0, 5, 10),
-            Shape("b", 8, 0, 13, 10),
+            Shape("seed", 0, 0, 5, 10),
+            Shape("same-row", 8, 0, 13, 10),
             Shape("other-row", 16, 40, 21, 50)
         ]);
         var notation = Notation(
-            ("a", Poor()),
-            ("b", Poor()),
-            ("other-row", Poor()));
+            ("seed", Poor()),
+            ("same-row", Clear("SHARP")),
+            ("other-row", Clear("FLAT")));
         var recognizer = new RecordingRecognizer("x", 0.90);
 
         var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
@@ -135,19 +148,13 @@ public sealed class FallbackTextRecognitionAnalyzerTests
             notation,
             Layout(10));
 
-        Assert.Equal(2, analysis.Observations.Count);
-        Assert.Contains(
-            analysis.Observations,
-            item => item.Kind == TextCandidateKind.HorizontalRun
-                && item.SourceShapeIds.SequenceEqual(["a", "b"]));
-        Assert.Contains(
-            analysis.Observations,
-            item => item.Kind == TextCandidateKind.Prototype
-                && item.SourceShapeIds.SequenceEqual(["other-row"]));
+        var train = Assert.Single(analysis.Observations);
+        Assert.Equal(["seed", "same-row"], train.SourceShapeIds);
+        Assert.DoesNotContain("other-row", train.SourceShapeIds);
     }
 
     [Fact]
-    public void Analyze_DoesNotUseGiantPoorGlyphAsTrainWagon()
+    public void Analyze_DoesNotPullGiantStaffLineIntoActivatedRow()
     {
         var geometry = new GeometricScene([
             Shape("seed", 0, 0, 5, 10),
@@ -155,7 +162,7 @@ public sealed class FallbackTextRecognitionAnalyzerTests
         ]);
         var notation = Notation(
             ("seed", Poor()),
-            ("staff-line", Poor()));
+            ("staff-line", Clear("LEDGER")));
         var recognizer = new RecordingRecognizer("x", 0.90);
 
         var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
@@ -169,23 +176,24 @@ public sealed class FallbackTextRecognitionAnalyzerTests
     }
 
     [Fact]
-    public void Analyze_TreatsConfidentClutterAsPoorRecognition()
+    public void Analyze_TreatsConfidentClutterAsPoorRecognitionSeed()
     {
         var geometry = new GeometricScene([
-            Shape("clutter", 0, 0, 5, 10)
+            Shape("clutter", 0, 0, 5, 10),
+            Shape("good-neighbour", 7, 0, 12, 10)
         ]);
-        var notation = Notation((
-            "clutter",
-            new SymbolClassification("CLUTTER", 0.99, 30, [])));
-        var recognizer = new RecordingRecognizer("A", 0.99);
+        var notation = Notation(
+            ("clutter", new SymbolClassification("CLUTTER", 0.99, 30, [])),
+            ("good-neighbour", Clear("SHARP")));
+        var recognizer = new RecordingRecognizer("AB", 0.99);
 
         var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
             geometry,
             notation,
             Layout(10));
 
-        var single = Assert.Single(analysis.Observations);
-        Assert.Equal(["clutter"], single.SourceShapeIds);
+        var train = Assert.Single(analysis.Observations);
+        Assert.Equal(["clutter", "good-neighbour"], train.SourceShapeIds);
     }
 
     private static SymbolClassification Poor() =>
