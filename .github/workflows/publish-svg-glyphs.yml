@@ -1,0 +1,87 @@
+name: Publish SvgScene prototype SVGs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "SvgScene/**"
+      - "Samples/kancheli-mimino/**"
+      - ".github/workflows/publish-svg-glyphs.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: publish-svg-glyphs
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish-glyphs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build SvgScene
+        run: dotnet build SvgScene/SvgScene.csproj --configuration Release
+
+      - name: Export unique prototype SVGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/glyphs-svg publish
+          mkdir -p artifacts publish
+
+          dotnet run \
+            --project SvgScene/SvgScene.csproj \
+            --configuration Release \
+            --no-build \
+            -- \
+            Samples/kancheli-mimino/kancheli-mimino.svg \
+            artifacts/glyph-scene.json \
+            --classify-symbols \
+            --export-glyphs-svg artifacts/glyphs-svg \
+            | tee artifacts/glyph-svg-export.log
+
+          test -f artifacts/glyphs-svg/manifest.json
+          test -f artifacts/glyphs-svg/index.html
+
+          glyph_count="$(find artifacts/glyphs-svg -maxdepth 1 -type f -name '*.svg' | wc -l)"
+          echo "Unique SVG glyph prototypes: $glyph_count"
+          test "$glyph_count" -gt 0
+
+          (
+            cd artifacts
+            zip -qr glyphs-svg.zip glyphs-svg
+          )
+          test -s artifacts/glyphs-svg.zip
+
+          cp -R artifacts/glyphs-svg publish/glyphs-svg
+          cp artifacts/glyphs-svg.zip publish/glyphs-svg.zip
+          cp artifacts/glyph-svg-export.log publish/glyph-svg-export.log
+
+      - name: Upload downloadable workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: svgscene-kancheli-prototype-svgs
+          path: publish/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish into semantic-artifacts branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: semantic-artifacts
+          publish_dir: ./publish
+          destination_dir: kancheli-mimino
+          keep_files: true
+          commit_message: "Update Mimino SvgScene prototype SVGs from ${{ github.sha }}"
