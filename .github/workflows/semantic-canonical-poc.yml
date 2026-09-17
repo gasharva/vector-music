@@ -58,6 +58,35 @@ jobs:
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
 
+      - name: Export unique SvgScene prototype SVGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/glyphs-svg
+
+          dotnet run \
+            --project SvgScene/SvgScene.csproj \
+            --configuration Release \
+            -- \
+            Samples/kancheli-mimino/kancheli-mimino.svg \
+            artifacts/glyph-scene.json \
+            --classify-symbols \
+            --export-glyphs-svg artifacts/glyphs-svg \
+            | tee artifacts/glyph-svg-export.log
+
+          test -f artifacts/glyphs-svg/manifest.json
+          test -f artifacts/glyphs-svg/index.html
+
+          glyph_count="$(find artifacts/glyphs-svg -maxdepth 1 -type f -name '*.svg' | wc -l)"
+          echo "Unique SVG glyph prototypes: $glyph_count"
+          test "$glyph_count" -gt 0
+
+          (
+            cd artifacts
+            zip -qr glyphs-svg.zip glyphs-svg
+          )
+          test -s artifacts/glyphs-svg.zip
+
       - name: Generate vertical zigzag diagnostics
         shell: bash
         run: |
@@ -243,6 +272,8 @@ jobs:
             semantic.dots.svg
             semantic.noteheads.txt
             zigzag-scene.json
+            glyph-svg-export.log
+            glyphs-svg.zip
           )
 
           for file in "${files[@]}"; do
@@ -251,7 +282,25 @@ jobs:
             fi
           done
 
-          echo "Published artifact count: $(find publish -maxdepth 1 -type f | wc -l)"
+          cp -R artifacts/glyphs-svg publish/glyphs-svg
+
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("publish/index.html")
+          if path.exists():
+              html = path.read_text()
+              links = (
+                  '<p><strong>SvgScene vector glyphs:</strong> '
+                  '<a href="glyphs-svg/index.html">browse prototypes</a> · '
+                  '<a href="glyphs-svg.zip">download ZIP</a></p>'
+              )
+              if "glyphs-svg/index.html" not in html:
+                  html = html.replace("</body>", links + "\n</body>")
+                  path.write_text(html)
+          PY
+
+          echo "Published top-level artifact count: $(find publish -maxdepth 1 -type f | wc -l)"
+          echo "Published SVG glyph count: $(find publish/glyphs-svg -maxdepth 1 -type f -name '*.svg' | wc -l)"
           find publish -maxdepth 1 -type f -printf '%f\n' | sort
 
       - name: Upload curated semantic artifacts
