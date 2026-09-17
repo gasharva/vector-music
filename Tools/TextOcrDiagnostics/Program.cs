@@ -41,38 +41,49 @@ else
 
 try
 {
-    Console.WriteLine("Recognizing prototype glyphs and horizontal text runs...");
-    var analysis = new TextRecognitionAnalyzer(recognizer).Analyze(
+    Console.WriteLine("OCR-probing raw glyphs, then recognizing uncertain horizontal runs...");
+    var analysis = new RawTextRecognitionAnalyzer(recognizer).Analyze(
         geometry,
-        notation,
         layout);
 
-    var prototypeCount = analysis.Observations.Count(item =>
-        item.Kind == TextCandidateKind.Prototype);
-    var runCount = analysis.Observations.Count(item =>
-        item.Kind == TextCandidateKind.HorizontalRun);
-    var recognizedPrototypeCount = analysis.Recognized.Count(item =>
-        item.Kind == TextCandidateKind.Prototype);
-    var recognizedRunCount = analysis.Recognized.Count(item =>
-        item.Kind == TextCandidateKind.HorizontalRun);
+    var rawGlyphObservations = analysis.Observations
+        .Where(item => item.Kind == TextCandidateKind.Prototype)
+        .ToArray();
+    var runObservations = analysis.Observations
+        .Where(item => item.Kind == TextCandidateKind.HorizontalRun)
+        .ToArray();
+    var uncertainRawGlyphs = rawGlyphObservations
+        .Where(item => RawTextRecognitionAnalyzer.IsUncertainSingleton(item.Recognition))
+        .ToArray();
+    var recognizedRuns = runObservations
+        .Where(item => !string.IsNullOrWhiteSpace(item.Recognition?.Text))
+        .ToArray();
 
     var jsonPath = Path.Combine(outputDirectory, "parser.ocr.json");
     var svgPath = Path.Combine(outputDirectory, "parser.ocr.svg");
+    var runsSvgPath = Path.Combine(outputDirectory, "parser.ocr.runs.svg");
+
+    // Keep JSON useful rather than gigantic: retain every run plus only the raw
+    // singleton probes that actually triggered the uncertainty rule.
+    var reportObservations = uncertainRawGlyphs
+        .Concat(runObservations)
+        .ToArray();
 
     var report = new
     {
         Engine = useOcr ? "PP-OCRv5-Latin" : "disabled",
+        ClearSingletonConfidence = RawTextRecognitionAnalyzer.ClearSingletonConfidence,
         Summary = new
         {
-            PrototypeObservations = prototypeCount,
-            HorizontalRuns = runCount,
-            RecognizedPrototypes = recognizedPrototypeCount,
-            RecognizedRuns = recognizedRunCount
+            RawGlyphsProbed = rawGlyphObservations.Length,
+            UncertainRawGlyphs = uncertainRawGlyphs.Length,
+            HorizontalRuns = runObservations.Length,
+            RecognizedRuns = recognizedRuns.Length
         },
-        Observations = analysis.Observations.Select(item => new
+        Observations = reportObservations.Select(item => new
         {
             item.Id,
-            Kind = item.Kind.ToString(),
+            Kind = item.Kind == TextCandidateKind.HorizontalRun ? "HorizontalRun" : "RawGlyph",
             Bounds = new
             {
                 MinX = Math.Round(item.Bounds.MinX, 3),
@@ -81,7 +92,6 @@ try
                 MaxY = Math.Round(item.Bounds.MaxY, 3)
             },
             item.SourceShapeIds,
-            item.PrototypeId,
             Recognition = item.Recognition is null
                 ? null
                 : new
@@ -102,17 +112,25 @@ try
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             }));
 
-    new TextRecognitionDebugRenderer().Render(
+    var renderer = new TextRecognitionDebugRenderer();
+    renderer.Render(
         input,
         analysis,
         svgPath);
 
-    Console.WriteLine($"Prototype observations : {prototypeCount}");
-    Console.WriteLine($"Horizontal runs        : {runCount}");
-    Console.WriteLine($"Recognized prototypes  : {recognizedPrototypeCount}");
-    Console.WriteLine($"Recognized runs        : {recognizedRunCount}");
-    Console.WriteLine($"JSON: {jsonPath}");
-    Console.WriteLine($"SVG : {svgPath}");
+    var runsOnly = new TextRecognitionAnalysisResult(runObservations);
+    renderer.Render(
+        input,
+        runsOnly,
+        runsSvgPath);
+
+    Console.WriteLine($"Raw glyphs OCR-probed : {rawGlyphObservations.Length}");
+    Console.WriteLine($"Uncertain raw glyphs  : {uncertainRawGlyphs.Length}");
+    Console.WriteLine($"Horizontal runs       : {runObservations.Length}");
+    Console.WriteLine($"Recognized runs       : {recognizedRuns.Length}");
+    Console.WriteLine($"JSON     : {jsonPath}");
+    Console.WriteLine($"SVG all  : {svgPath}");
+    Console.WriteLine($"SVG runs : {runsSvgPath}");
 }
 finally
 {
