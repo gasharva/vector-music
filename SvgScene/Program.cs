@@ -6,18 +6,24 @@ if (args.Length == 0)
     Console.Error.WriteLine(
         "Usage: dotnet run -- <input.svg> [notation-scene.json] "
         + "[--debug] [--verbose-json] [--export-glyphs <directory>] "
+        + "[--export-glyphs-svg <directory>] "
         + "[--classify-symbols] [--model <basic-classifier.zip>]");
     return 2;
 }
 
 var input = args[0];
 var exportGlyphsIndex = FindOption(args, "--export-glyphs");
+var exportGlyphsSvgIndex = FindOption(args, "--export-glyphs-svg");
 var modelIndex = FindOption(args, "--model");
 
 var exportGlyphsDirectory = ReadOptionValue(
     args,
     exportGlyphsIndex,
     "--export-glyphs");
+var exportGlyphsSvgDirectory = ReadOptionValue(
+    args,
+    exportGlyphsSvgIndex,
+    "--export-glyphs-svg");
 var modelPath = ReadOptionValue(
     args,
     modelIndex,
@@ -30,6 +36,7 @@ var positional = args
         var actualIndex = index + 1;
 
         if (actualIndex == exportGlyphsIndex + 1
+            || actualIndex == exportGlyphsSvgIndex + 1
             || actualIndex == modelIndex + 1)
         {
             return false;
@@ -252,6 +259,18 @@ if (exportGlyphsDirectory is not null)
     Console.WriteLine(
         $"Raster interline: source={manifest.SourceInterline:F3}; "
         + "targets=20/30/40px");
+}
+
+if (exportGlyphsSvgDirectory is not null)
+{
+    var manifest = new PrototypeSvgExporter().Export(
+        geometry,
+        notation,
+        exportGlyphsSvgDirectory);
+
+    Console.WriteLine(
+        $"Exported vector glyph prototypes: {manifest.Glyphs.Count} "
+        + $"to {Path.GetFullPath(exportGlyphsSvgDirectory)}");
 }
 
 if (verbose)
