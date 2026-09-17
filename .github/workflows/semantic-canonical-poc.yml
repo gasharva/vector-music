@@ -38,8 +38,10 @@ jobs:
       - name: Run semantic unit tests
         run: dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
 
-      - name: Build semantic interpreter
-        run: dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
+      - name: Build semantic interpreter and OCR diagnostics
+        run: |
+          dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
+          dotnet build Tools/TextOcrDiagnostics/TextOcrDiagnostics.csproj --configuration Release
 
       - name: Interpret Kancheli Mimino SVG
         shell: bash
@@ -57,6 +59,26 @@ jobs:
             --title "YELLOW LEAVES (Mimino)" \
             --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
+
+      - name: Generate OCR text diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dotnet run \
+            --project Tools/TextOcrDiagnostics/TextOcrDiagnostics.csproj \
+            --configuration Release \
+            --no-build \
+            -- \
+            Samples/kancheli-mimino/kancheli-mimino.svg \
+            artifacts \
+            | tee artifacts/ocr-run.log
+
+          test -f artifacts/parser.ocr.json
+          test -f artifacts/parser.ocr.svg
+          test -f artifacts/parser.ocr.runs.svg
+          grep -q 'Raw glyphs OCR-probed' artifacts/ocr-run.log
+          grep -q 'Horizontal runs' artifacts/ocr-run.log
 
       - name: Export unique SvgScene prototype SVGs
         shell: bash
@@ -126,6 +148,7 @@ jobs:
           grep -q '^semantic.pedals=4$' artifacts/semantic-summary.txt
           grep -q '^canonical.pedals=4$' artifacts/semantic-summary.txt
           grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
+          test -f artifacts/parser.ocr.runs.svg
 
           python3 - <<'PY'
           from pathlib import Path
@@ -186,7 +209,9 @@ jobs:
               (12, "mp"),
               (13, "pp")
           ]
-          assert generated_dynamics == source_dynamics
+          assert generated_dynamics == source_dynamics, (
+              source_dynamics,
+              generated_dynamics)
 
           canonical = json.loads(Path(
               "artifacts/kancheli.semantic.canonical.json").read_text())
@@ -265,6 +290,10 @@ jobs:
             parser.classified-symbols.svg
             parser.ownership.svg
             parser.zigzags.svg
+            parser.ocr.svg
+            parser.ocr.runs.svg
+            parser.ocr.json
+            ocr-run.log
             semantic.noteheads.svg
             semantic.accidentals.svg
             semantic.stems.svg
@@ -290,11 +319,15 @@ jobs:
           if path.exists():
               html = path.read_text()
               links = (
+                  '<p><strong>OCR diagnostics:</strong> '
+                  '<a href="parser.ocr.runs.svg">recognized text runs</a> · '
+                  '<a href="parser.ocr.svg">all OCR boxes</a> · '
+                  '<a href="parser.ocr.json">JSON</a></p>'
                   '<p><strong>SvgScene vector glyphs:</strong> '
                   '<a href="glyphs-svg/index.html">browse prototypes</a> · '
                   '<a href="glyphs-svg.zip">download ZIP</a></p>'
               )
-              if "glyphs-svg/index.html" not in html:
+              if "parser.ocr.runs.svg" not in html:
                   html = html.replace("</body>", links + "\n</body>")
                   path.write_text(html)
           PY
