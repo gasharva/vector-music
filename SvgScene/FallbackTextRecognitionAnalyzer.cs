@@ -221,7 +221,9 @@ public sealed class FallbackHorizontalTextTrainBuilder
             }
         }
 
-        return rows;
+        return rows
+            .Select(row => (IReadOnlyList<GeometricShape>)row)
+            .ToArray();
     }
 
     private static IEnumerable<IReadOnlyList<GeometricShape>> SplitAtLargeHorizontalGaps(
