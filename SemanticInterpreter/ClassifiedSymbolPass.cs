@@ -418,6 +418,10 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
         var spacing = Math.Max(lineSpacing, 0.001);
         var left = siblings
             .Where(candidate => candidate.ShapeId != element.ShapeId)
+            // A reconstructed .whole glyph is a classification alternative, not a
+            // letter fragment. Let direct whole-glyph semantics handle it; the split
+            // fallback must reason only over the original component glyphs.
+            .Where(candidate => !candidate.ShapeId.EndsWith(".whole", StringComparison.Ordinal))
             .Where(candidate => candidate.CenterX < element.CenterX)
             .Where(candidate =>
                 element.CenterX - candidate.CenterX <= spacing * 2.0
