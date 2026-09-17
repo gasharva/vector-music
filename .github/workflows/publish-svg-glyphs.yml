@@ -1,4 +1,4 @@
-name: Publish SvgScene prototype SVGs
+name: Publish SvgScene prototype SVGs and OCR
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "SvgScene/**"
+      - "Tools/TextOcrDiagnostics/**"
       - "Samples/kancheli-mimino/**"
       - ".github/workflows/publish-svg-glyphs.yml"
   workflow_dispatch:
@@ -30,8 +31,10 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Build SvgScene
-        run: dotnet build SvgScene/SvgScene.csproj --configuration Release
+      - name: Build SvgScene and OCR diagnostics
+        run: |
+          dotnet build SvgScene/SvgScene.csproj --configuration Release
+          dotnet build Tools/TextOcrDiagnostics/TextOcrDiagnostics.csproj --configuration Release
 
       - name: Export unique prototype SVGs
         shell: bash
@@ -68,10 +71,32 @@ jobs:
           cp artifacts/glyphs-svg.zip publish/glyphs-svg.zip
           cp artifacts/glyph-svg-export.log publish/glyph-svg-export.log
 
+      - name: Generate OCR text diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dotnet run \
+            --project Tools/TextOcrDiagnostics/TextOcrDiagnostics.csproj \
+            --configuration Release \
+            --no-build \
+            -- \
+            Samples/kancheli-mimino/kancheli-mimino.svg \
+            artifacts \
+            | tee artifacts/ocr-run.log
+
+          test -f artifacts/parser.ocr.svg
+          test -f artifacts/parser.ocr.json
+          grep -q 'Horizontal runs' artifacts/ocr-run.log
+
+          cp artifacts/parser.ocr.svg publish/parser.ocr.svg
+          cp artifacts/parser.ocr.json publish/parser.ocr.json
+          cp artifacts/ocr-run.log publish/ocr-run.log
+
       - name: Upload downloadable workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: svgscene-kancheli-prototype-svgs
+          name: svgscene-kancheli-prototype-svgs-and-ocr
           path: publish/
           if-no-files-found: error
           retention-days: 30
@@ -84,4 +109,4 @@ jobs:
           publish_dir: ./publish
           destination_dir: kancheli-mimino
           keep_files: true
-          commit_message: "Update Mimino SvgScene prototype SVGs from ${{ github.sha }}"
+          commit_message: "Update Mimino SvgScene glyphs and OCR diagnostics from ${{ github.sha }}"
