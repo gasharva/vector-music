@@ -15,15 +15,31 @@ public sealed class RapidOcrTextRecognizer : ITextRecognizer, IDisposable
     private readonly string _workingDirectory;
     private bool _disposed;
 
-    public RapidOcrTextRecognizer()
+    public RapidOcrTextRecognizer(string? modelDirectory = null)
     {
         _workingDirectory = Path.Combine(
             Path.GetTempPath(),
             "vector-music-ocr-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(_workingDirectory);
 
+        var modelRoot = modelDirectory is null
+            ? Path.Combine(AppContext.BaseDirectory, "models", "v5")
+            : Path.GetFullPath(modelDirectory);
+        var preset = RapidOcrModelSet.PPOCRv5Latin with
+        {
+            DetModelPath = Path.Combine(modelRoot, "ch_PP-OCRv5_mobile_det.onnx"),
+            ClsModelPath = Path.Combine(modelRoot, "ch_PP-LCNet_x0_25_textline_ori_cls_mobile.onnx"),
+            RecModelPath = Path.Combine(modelRoot, "latin_PP-OCRv5_rec_mobile_infer.onnx"),
+            KeysPath = Path.Combine(modelRoot, "ppocrv5_latin_dict.txt")
+        };
+
+        EnsureModelExists(preset.DetModelPath, "detector");
+        EnsureModelExists(preset.ClsModelPath, "angle classifier");
+        EnsureModelExists(preset.RecModelPath, "recognizer");
+        EnsureModelExists(preset.KeysPath, "dictionary");
+
         _ocr = new RapidOcr();
-        _ocr.InitModels(RapidOcrModelSet.PPOCRv5Latin);
+        _ocr.InitModels(preset);
     }
 
     public TextRecognition? Recognize(TextRecognitionCandidate candidate)
@@ -88,6 +104,16 @@ public sealed class RapidOcrTextRecognizer : ITextRecognizer, IDisposable
         catch
         {
             // Temporary OCR files are best-effort cleanup only.
+        }
+    }
+
+    private static void EnsureModelExists(string path, string role)
+    {
+        if (!File.Exists(path))
+        {
+            throw new FileNotFoundException(
+                $"PP-OCRv5 {role} model is missing next to the executable: '{path}'.",
+                path);
         }
     }
 
