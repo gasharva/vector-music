@@ -34,10 +34,11 @@ notation = new BassClefCompositeRepair(musicClassifier).Repair(
     notation,
     layout);
 
-var fallbackSeedInstances = notation.Instances
-    .Where(instance =>
-        FallbackTextRecognitionAnalyzer.IsPoorlyRecognized(instance.Classification))
-    .ToArray();
+var poorResidualGlyphs = FallbackTextRecognitionAnalyzer
+    .SelectPoorlyRecognizedGlyphShapes(
+        geometry,
+        notation,
+        layout);
 
 ITextRecognizer recognizer;
 IDisposable? recognizerLifetime = null;
@@ -57,7 +58,8 @@ else
 
 try
 {
-    Console.WriteLine("Growing horizontal trains from poorly classified residual glyphs...");
+    Console.WriteLine(
+        "Building disjoint greedy maximal trains from poorly classified residual glyphs...");
     var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
         geometry,
         notation,
@@ -80,12 +82,14 @@ try
     var report = new
     {
         Engine = useOcr ? "PP-OCRv5-Latin" : "disabled",
-        Mode = "poor-music-classification-seed-and-geometric-horizontal-grow",
+        Mode = "poor-music-glyphs-greedy-disjoint-maximal-trains",
         ClearMusicClassificationConfidence =
             FallbackTextRecognitionAnalyzer.ClearMusicClassificationConfidence,
+        MaxGapAverageGlyphWidths =
+            FallbackHorizontalTextTrainBuilder.MaxGapAverageGlyphWidths,
         Summary = new
         {
-            PoorlyClassifiedResidualInstances = fallbackSeedInstances.Length,
+            PoorlyClassifiedResidualGlyphs = poorResidualGlyphs.Count,
             OcrCandidates = analysis.Observations.Count,
             HorizontalTrains = trainObservations.Length,
             SingletonFallbacks = singletonObservations.Length,
@@ -138,13 +142,14 @@ try
         runsOnly,
         runsSvgPath);
 
-    Console.WriteLine($"Poor residual seed instances : {fallbackSeedInstances.Length}");
+    Console.WriteLine($"Poor residual glyphs          : {poorResidualGlyphs.Count}");
     Console.WriteLine($"OCR fallback candidates      : {analysis.Observations.Count}");
     Console.WriteLine($"Horizontal trains            : {trainObservations.Length}");
     Console.WriteLine($"Singleton fallbacks          : {singletonObservations.Length}");
     Console.WriteLine($"Recognized fallbacks         : {recognized.Length}");
+    Console.WriteLine($"Max train gap                : {FallbackHorizontalTextTrainBuilder.MaxGapAverageGlyphWidths:0.##} average glyph widths");
     // Compatibility markers retained for the existing master workflow smoke grep.
-    Console.WriteLine($"Raw glyphs OCR-probed (fallback seeds only): {fallbackSeedInstances.Length}");
+    Console.WriteLine($"Raw glyphs OCR-probed (fallback seeds only): {poorResidualGlyphs.Count}");
     Console.WriteLine($"Horizontal runs (fallback trains): {trainObservations.Length}");
     Console.WriteLine($"JSON     : {jsonPath}");
     Console.WriteLine($"SVG all  : {svgPath}");
