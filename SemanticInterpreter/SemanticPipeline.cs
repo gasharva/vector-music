@@ -13,6 +13,12 @@ public sealed class SemanticPipeline
 {
     private readonly IReadOnlyList<ISemanticPass> _passes;
 
+    public ClassifiedSymbolAnalysisResult? LastClassifiedSymbolAnalysis =>
+        _passes
+            .OfType<ClassifiedSymbolPass>()
+            .SingleOrDefault()
+            ?.LastAnalysis;
+
     public SemanticPipeline(IEnumerable<ISemanticPass> passes)
     {
         var materialized = passes.ToList();
