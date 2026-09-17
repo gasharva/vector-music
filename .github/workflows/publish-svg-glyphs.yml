@@ -1,14 +1,6 @@
 name: Publish SvgScene prototype SVGs and OCR
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "SvgScene/**"
-      - "Tools/TextOcrDiagnostics/**"
-      - "Samples/kancheli-mimino/**"
-      - ".github/workflows/publish-svg-glyphs.yml"
   workflow_dispatch:
 
 concurrency:
@@ -86,10 +78,12 @@ jobs:
             | tee artifacts/ocr-run.log
 
           test -f artifacts/parser.ocr.svg
+          test -f artifacts/parser.ocr.runs.svg
           test -f artifacts/parser.ocr.json
           grep -q 'Horizontal runs' artifacts/ocr-run.log
 
           cp artifacts/parser.ocr.svg publish/parser.ocr.svg
+          cp artifacts/parser.ocr.runs.svg publish/parser.ocr.runs.svg
           cp artifacts/parser.ocr.json publish/parser.ocr.json
           cp artifacts/ocr-run.log publish/ocr-run.log
 
