@@ -56,18 +56,15 @@ public sealed class NullTextRecognizer : ITextRecognizer
 
 public sealed class TextRecognitionAnalyzer
 {
-    private const double MaxAtomWidthInSpacings = 8.0;
-    private const double MaxAtomHeightInSpacings = 5.0;
-    private const double MaxHorizontalGapInSpacings = 0.90;
-    private const double MaxNegativeGapInSpacings = 0.15;
-    private const double MinimumVerticalOverlap = 0.35;
-    private const double MaxRunWidthInSpacings = 18.0;
-
     private readonly ITextRecognizer _recognizer;
+    private readonly RawHorizontalTextRunBuilder _runBuilder;
 
-    public TextRecognitionAnalyzer(ITextRecognizer recognizer)
+    public TextRecognitionAnalyzer(
+        ITextRecognizer recognizer,
+        RawHorizontalTextRunBuilder? runBuilder = null)
     {
         _recognizer = recognizer;
+        _runBuilder = runBuilder ?? new RawHorizontalTextRunBuilder();
     }
 
     public TextRecognitionAnalysisResult Analyze(
@@ -84,11 +81,14 @@ public sealed class TextRecognitionAnalyzer
                 group => group.Key,
                 group => group.ToArray(),
                 StringComparer.Ordinal);
+        var singletonRecognitions = new Dictionary<string, TextRecognition?>(
+            StringComparer.Ordinal);
         var observations = new List<TextRecognitionObservation>();
 
-        // Recognize each reusable prototype once, then project the result to every
-        // spatial instance of that prototype. This keeps OCR cost independent from
-        // repeated notation glyphs while preserving page-level diagnostics.
+        // Recognize each reusable residual/compound prototype once, then project the
+        // result to its page instances. Primitive extraction may have removed other
+        // shapes from NotationScene; that is deliberate. Raw run grouping below works
+        // from GeometricScene and treats such shapes as uncertain singleton glyphs.
         foreach (var prototype in notation.Prototypes)
         {
             if (!shapesById.TryGetValue(prototype.RepresentativeShapeId, out var shape))
@@ -114,6 +114,8 @@ public sealed class TextRecognitionAnalyzer
                     continue;
                 }
 
+                singletonRecognitions[instance.ShapeId] = recognition;
+
                 observations.Add(new TextRecognitionObservation(
                     $"prototype:{prototype.Id}@{instance.ShapeId}",
                     TextCandidateKind.Prototype,
@@ -126,10 +128,14 @@ public sealed class TextRecognitionAnalyzer
             }
         }
 
-        foreach (var candidate in BuildHorizontalRuns(
+        // Horizontal text runs deliberately ignore primitive/music-symbol decisions.
+        // They are built from raw geometric glyphs, subject only to geometric size,
+        // neighbourhood and the requirement that at least one member was not clearly
+        // recognized as an isolated OCR glyph.
+        foreach (var candidate in _runBuilder.Build(
                      geometry,
-                     notation,
-                     layout))
+                     layout,
+                     singletonRecognitions))
         {
             observations.Add(new TextRecognitionObservation(
                 candidate.Id,
@@ -143,40 +149,54 @@ public sealed class TextRecognitionAnalyzer
         return new TextRecognitionAnalysisResult(observations);
     }
 
+    // Compatibility entry point for diagnostics/tests that used the previous helper.
+    // Notation is intentionally ignored: raw geometry is the source of text atoms.
     public static IReadOnlyList<TextRecognitionCandidate> BuildHorizontalRuns(
         GeometricScene geometry,
         NotationScene notation,
         ScoreLayout layout)
     {
-        var shapesById = geometry.Shapes.ToDictionary(
-            shape => shape.Id,
-            StringComparer.Ordinal);
+        _ = notation;
+        return new RawHorizontalTextRunBuilder().Build(
+            geometry,
+            layout,
+            new Dictionary<string, TextRecognition?>(StringComparer.Ordinal));
+    }
+}
+
+/// <summary>
+/// Builds horizontal OCR candidates from raw geometry rather than residual notation.
+/// Primitive extraction, semantic ownership and music-symbol labels are intentionally
+/// ignored. The only semantic gate is singleton OCR uncertainty.
+/// </summary>
+public sealed class RawHorizontalTextRunBuilder
+{
+    private const double MaxAtomWidthInSpacings = 8.0;
+    private const double MaxAtomHeightInSpacings = 5.0;
+    private const double MaxHorizontalGapInSpacings = 0.90;
+    private const double MaxNegativeGapInSpacings = 0.15;
+    private const double MinimumVerticalOverlap = 0.35;
+    private const double MaxRunWidthInSpacings = 18.0;
+    private const double ClearSingletonConfidence = 0.90;
+
+    public IReadOnlyList<TextRecognitionCandidate> Build(
+        GeometricScene geometry,
+        ScoreLayout layout,
+        IReadOnlyDictionary<string, TextRecognition?> singletonRecognitions)
+    {
         var spacing = Math.Max(
             0.001,
             GlyphRasterizer.ResolveSourceInterline(layout));
 
-        // Whole compound hypotheses supersede their split pieces for OCR grouping.
-        // This lets "mp" or "Ped." remain one atom while still allowing neighbouring
-        // atoms to join into a larger word such as "Yellow".
-        var absorbed = notation.Instances
-            .Where(instance => instance.AbsorbedPrimitiveShapeIds is { Count: > 0 })
-            .SelectMany(instance => instance.AbsorbedPrimitiveShapeIds!)
-            .ToHashSet(StringComparer.Ordinal);
-
-        var atoms = notation.Instances
-            .Where(instance => !absorbed.Contains(instance.ShapeId))
-            .Select(instance =>
-            {
-                shapesById.TryGetValue(instance.ShapeId, out var shape);
-                return shape is null ? null : new TextAtom(instance, shape);
-            })
-            .Where(atom => atom is not null)
-            .Select(atom => atom!)
-            .Where(atom =>
-                atom.Shape.Bounds.Width > 0
-                && atom.Shape.Bounds.Height > 0
-                && atom.Shape.Bounds.Width <= spacing * MaxAtomWidthInSpacings
-                && atom.Shape.Bounds.Height <= spacing * MaxAtomHeightInSpacings)
+        var atoms = SelectPreferredGlyphShapes(geometry.Shapes)
+            .Where(shape =>
+                shape.Bounds.Width > 0
+                && shape.Bounds.Height > 0
+                && shape.Bounds.Width <= spacing * MaxAtomWidthInSpacings
+                && shape.Bounds.Height <= spacing * MaxAtomHeightInSpacings)
+            .Select(shape => new TextAtom(
+                shape,
+                TryGetRecognition(singletonRecognitions, shape.Id)))
             .OrderBy(atom => atom.Shape.Bounds.MinX)
             .ThenBy(atom => atom.Shape.Bounds.MinY)
             .ToArray();
@@ -217,7 +237,8 @@ public sealed class TextRecognitionAnalyzer
                 var leftBounds = atoms[left].Shape.Bounds;
                 var rightBounds = atoms[right].Shape.Bounds;
 
-                if (rightBounds.MinX - leftBounds.MaxX > spacing * MaxHorizontalGapInSpacings)
+                if (rightBounds.MinX - leftBounds.MaxX
+                    > spacing * MaxHorizontalGapInSpacings)
                 {
                     break;
                 }
@@ -239,6 +260,7 @@ public sealed class TextRecognitionAnalyzer
                          .ThenBy(atom => atom.Shape.Bounds.MinY)
                          .ToArray())
                      .Where(group => group.Length >= 2)
+                     .Where(group => group.Any(atom => IsUncertain(atom.Recognition)))
                      .OrderBy(group => group[0].Shape.Bounds.MinY)
                      .ThenBy(group => group[0].Shape.Bounds.MinX))
         {
@@ -252,13 +274,52 @@ public sealed class TextRecognitionAnalyzer
 
             runIndex++;
             result.Add(TextRecognitionCandidateSvg.Create(
-                $"run:{runIndex}",
+                $"raw-run:{runIndex}",
                 TextCandidateKind.HorizontalRun,
                 shapes));
         }
 
         return result;
     }
+
+    private static IEnumerable<GeometricShape> SelectPreferredGlyphShapes(
+        IReadOnlyList<GeometricShape> shapes)
+    {
+        // ScenePipeline may append a reconstructed `<base>.whole` candidate for an
+        // original SVG path that CompoundShapeSplitter had split into disconnected
+        // contours. For text this is exactly the glyph-level representation we want,
+        // so prefer the whole and suppress its numbered parts to avoid duplicates.
+        var wholeBases = shapes
+            .Select(shape => TryGetWholeBaseId(shape.Id))
+            .Where(baseId => baseId is not null)
+            .Select(baseId => baseId!)
+            .ToHashSet(StringComparer.Ordinal);
+
+        foreach (var shape in shapes)
+        {
+            var splitBaseId = TryGetSplitBaseId(shape.Id);
+            if (splitBaseId is not null && wholeBases.Contains(splitBaseId))
+            {
+                continue;
+            }
+
+            yield return shape;
+        }
+    }
+
+    private static TextRecognition? TryGetRecognition(
+        IReadOnlyDictionary<string, TextRecognition?> recognitions,
+        string shapeId)
+    {
+        return recognitions.TryGetValue(shapeId, out var recognition)
+            ? recognition
+            : null;
+    }
+
+    private static bool IsUncertain(TextRecognition? recognition) =>
+        recognition is null
+        || string.IsNullOrWhiteSpace(recognition.Text)
+        || recognition.Confidence < ClearSingletonConfidence;
 
     private static bool AreTextNeighbours(
         BoundsD first,
@@ -301,9 +362,30 @@ public sealed class TextRecognitionAnalyzer
             materialized.Max(item => item.MaxY));
     }
 
+    private static string? TryGetWholeBaseId(string shapeId)
+    {
+        const string suffix = ".whole";
+        return shapeId.EndsWith(suffix, StringComparison.Ordinal)
+            ? shapeId[..^suffix.Length]
+            : null;
+    }
+
+    private static string? TryGetSplitBaseId(string shapeId)
+    {
+        var separator = shapeId.LastIndexOf('.');
+        if (separator <= 0
+            || separator == shapeId.Length - 1
+            || !int.TryParse(shapeId[(separator + 1)..], out _))
+        {
+            return null;
+        }
+
+        return shapeId[..separator];
+    }
+
     private sealed record TextAtom(
-        ShapeInstance Instance,
-        GeometricShape Shape);
+        GeometricShape Shape,
+        TextRecognition? Recognition);
 }
 
 public static class TextRecognitionCandidateSvg
