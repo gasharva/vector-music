@@ -1,177 +1,33 @@
 {
   "Engine": "PP-OCRv5-Latin",
+  "ClearSingletonConfidence": 0.9,
   "Summary": {
-    "PrototypeObservations": 151,
-    "HorizontalRuns": 77,
-    "RecognizedPrototypes": 114,
-    "RecognizedRuns": 70
+    "RawGlyphsProbed": 370,
+    "UncertainRawGlyphs": 287,
+    "HorizontalRuns": 76,
+    "RecognizedRuns": 69
   },
   "Observations": [
     {
-      "Id": "prototype:prototype-1@shape-51.1",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-51.5",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1125.9,
-        "MinY": 143.764,
-        "MaxX": 1190.58,
-        "MaxY": 223.732
+        "MinX": 1365.04,
+        "MinY": 142.092,
+        "MaxX": 1435.78,
+        "MaxY": 225.404
       },
       "SourceShapeIds": [
-        "shape-51.1"
+        "shape-51.5"
       ],
-      "PrototypeId": "prototype-1",
       "Recognition": {
-        "Text": "Y",
-        "Confidence": 0.9955
+        "Text": "0",
+        "Confidence": 0.883009
       }
     },
     {
-      "Id": "prototype:prototype-2@shape-51.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1197.61,
-        "MinY": 143.764,
-        "MaxX": 1247.61,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-51.2"
-      ],
-      "PrototypeId": "prototype-2",
-      "Recognition": {
-        "Text": "E",
-        "Confidence": 0.96348
-      }
-    },
-    {
-      "Id": "prototype:prototype-2@shape-52.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1629.61,
-        "MinY": 143.764,
-        "MaxX": 1679.61,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-52.2"
-      ],
-      "PrototypeId": "prototype-2",
-      "Recognition": {
-        "Text": "E",
-        "Confidence": 0.96348
-      }
-    },
-    {
-      "Id": "prototype:prototype-2@shape-52.5",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1821.61,
-        "MinY": 143.764,
-        "MaxX": 1871.61,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-52.5"
-      ],
-      "PrototypeId": "prototype-2",
-      "Recognition": {
-        "Text": "E",
-        "Confidence": 0.96348
-      }
-    },
-    {
-      "Id": "prototype:prototype-3@shape-51.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1259.61,
-        "MinY": 143.764,
-        "MaxX": 1305.97,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-51.3"
-      ],
-      "PrototypeId": "prototype-3",
-      "Recognition": {
-        "Text": "L",
-        "Confidence": 0.998456
-      }
-    },
-    {
-      "Id": "prototype:prototype-3@shape-51.4",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1314.61,
-        "MinY": 143.764,
-        "MaxX": 1360.97,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-51.4"
-      ],
-      "PrototypeId": "prototype-3",
-      "Recognition": {
-        "Text": "L",
-        "Confidence": 0.998456
-      }
-    },
-    {
-      "Id": "prototype:prototype-3@shape-52.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1574.61,
-        "MinY": 143.764,
-        "MaxX": 1620.97,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-52.1"
-      ],
-      "PrototypeId": "prototype-3",
-      "Recognition": {
-        "Text": "L",
-        "Confidence": 0.998456
-      }
-    },
-    {
-      "Id": "prototype:prototype-4@shape-51.6",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1440.89,
-        "MinY": 143.764,
-        "MaxX": 1537.31,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-51.6"
-      ],
-      "PrototypeId": "prototype-4",
-      "Recognition": {
-        "Text": "W",
-        "Confidence": 0.978876
-      }
-    },
-    {
-      "Id": "prototype:prototype-5@shape-52.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1682.97,
-        "MinY": 143.764,
-        "MaxX": 1750,
-        "MaxY": 223.732
-      },
-      "SourceShapeIds": [
-        "shape-52.3"
-      ],
-      "PrototypeId": "prototype-5",
-      "Recognition": {
-        "Text": "A",
-        "Confidence": 0.996436
-      }
-    },
-    {
-      "Id": "prototype:prototype-6@shape-52.4",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-52.4",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 1747.06,
         "MinY": 143.764,
@@ -181,475 +37,83 @@
       "SourceShapeIds": [
         "shape-52.4"
       ],
-      "PrototypeId": "prototype-6",
       "Recognition": {
         "Text": "V",
         "Confidence": 0.570334
       }
     },
     {
-      "Id": "prototype:prototype-7@shape-52.6",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-56.4",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1879.64,
-        "MinY": 142.31,
-        "MaxX": 1934.04,
-        "MaxY": 225.185
-      },
-      "SourceShapeIds": [
-        "shape-52.6"
-      ],
-      "PrototypeId": "prototype-7",
-      "Recognition": {
-        "Text": "S",
-        "Confidence": 0.974373
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-53.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2383.36,
-        "MinY": 349.365,
-        "MaxX": 2388.59,
-        "MaxY": 354.115
-      },
-      "SourceShapeIds": [
-        "shape-53.3"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.829516
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-54.9",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2627.36,
-        "MinY": 349.365,
-        "MaxX": 2632.59,
-        "MaxY": 354.115
-      },
-      "SourceShapeIds": [
-        "shape-54.9"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.829516
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-59.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1577.34,
-        "MinY": 286.23,
-        "MaxX": 1584.65,
-        "MaxY": 292.887
-      },
-      "SourceShapeIds": [
-        "shape-59.3"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.829516
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-60.5",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1768.34,
-        "MinY": 286.23,
-        "MaxX": 1775.65,
-        "MaxY": 292.887
-      },
-      "SourceShapeIds": [
-        "shape-60.5"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.829516
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-60.8",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1843.34,
-        "MinY": 286.23,
-        "MaxX": 1850.65,
-        "MaxY": 292.887
-      },
-      "SourceShapeIds": [
-        "shape-60.8"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.829516
-      }
-    },
-    {
-      "Id": "prototype:prototype-9@shape-53.4",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2391.4,
-        "MinY": 358.694,
-        "MaxX": 2416.01,
-        "MaxY": 396.022
-      },
-      "SourceShapeIds": [
-        "shape-53.4"
-      ],
-      "PrototypeId": "prototype-9",
-      "Recognition": {
-        "Text": "y",
-        "Confidence": 0.989447
-      }
-    },
-    {
-      "Id": "prototype:prototype-10@shape-53.5",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2417.69,
-        "MinY": 358.022,
-        "MaxX": 2439.39,
-        "MaxY": 386.709
-      },
-      "SourceShapeIds": [
-        "shape-53.5"
-      ],
-      "PrototypeId": "prototype-10",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.99866
-      }
-    },
-    {
-      "Id": "prototype:prototype-10@shape-54.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2483.69,
-        "MinY": 358.022,
-        "MaxX": 2505.39,
-        "MaxY": 386.709
-      },
-      "SourceShapeIds": [
-        "shape-54.2"
-      ],
-      "PrototypeId": "prototype-10",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.99866
-      }
-    },
-    {
-      "Id": "prototype:prototype-10@shape-56.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1134.98,
-        "MinY": 298.355,
-        "MaxX": 1165.37,
-        "MaxY": 338.527
-      },
-      "SourceShapeIds": [
-        "shape-56.3"
-      ],
-      "PrototypeId": "prototype-10",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.99866
-      }
-    },
-    {
-      "Id": "prototype:prototype-11@shape-54.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2458.95,
-        "MinY": 349.6,
-        "MaxX": 2485.44,
-        "MaxY": 385.959
-      },
-      "SourceShapeIds": [
-        "shape-54.1"
-      ],
-      "PrototypeId": "prototype-11",
-      "Recognition": {
-        "Text": "K",
-        "Confidence": 0.997269
-      }
-    },
-    {
-      "Id": "prototype:prototype-12@shape-54.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2511.59,
-        "MinY": 357.928,
-        "MaxX": 2533.01,
-        "MaxY": 385.959
-      },
-      "SourceShapeIds": [
-        "shape-54.3"
-      ],
-      "PrototypeId": "prototype-12",
-      "Recognition": {
-        "Text": "n",
-        "Confidence": 0.957053
-      }
-    },
-    {
-      "Id": "prototype:prototype-12@shape-60.9",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1859.65,
-        "MinY": 298.23,
-        "MaxX": 1889.65,
-        "MaxY": 337.465
-      },
-      "SourceShapeIds": [
-        "shape-60.9"
-      ],
-      "PrototypeId": "prototype-12",
-      "Recognition": {
-        "Text": "n",
-        "Confidence": 0.957053
-      }
-    },
-    {
-      "Id": "prototype:prototype-13@shape-54.5",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2562.59,
-        "MinY": 347.975,
-        "MaxX": 2584.01,
-        "MaxY": 385.959
-      },
-      "SourceShapeIds": [
-        "shape-54.5"
-      ],
-      "PrototypeId": "prototype-13",
-      "Recognition": {
-        "Text": "h",
-        "Confidence": 0.936399
-      }
-    },
-    {
-      "Id": "prototype:prototype-13@shape-58.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1461.65,
+        "MinX": 1174.78,
         "MinY": 284.277,
-        "MaxX": 1491.65,
+        "MaxX": 1181.22,
         "MaxY": 337.465
       },
       "SourceShapeIds": [
-        "shape-58.2"
+        "shape-56.4"
       ],
-      "PrototypeId": "prototype-13",
       "Recognition": {
-        "Text": "h",
-        "Confidence": 0.936399
+        "Text": "I",
+        "Confidence": 0.726635
       }
     },
     {
-      "Id": "prototype:prototype-14@shape-54.6",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-60.2",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 2588.7,
-        "MinY": 357.928,
-        "MaxX": 2612.26,
-        "MaxY": 386.6
+        "MinX": 1685.89,
+        "MinY": 284.277,
+        "MaxX": 1693.34,
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
-        "shape-54.6"
-      ],
-      "PrototypeId": "prototype-14",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.993527
-      }
+        "shape-60.2"
+      ]
     },
     {
-      "Id": "prototype:prototype-14@shape-56.6",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-60.1",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1219.01,
-        "MinY": 298.23,
-        "MaxX": 1252,
-        "MaxY": 338.355
+        "MinX": 1698.75,
+        "MinY": 284.277,
+        "MaxX": 1706.2,
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
-        "shape-56.6"
-      ],
-      "PrototypeId": "prototype-14",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.993527
-      }
+        "shape-60.1"
+      ]
     },
     {
-      "Id": "prototype:prototype-14@shape-58.3",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-60.12",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1498.01,
-        "MinY": 298.23,
-        "MaxX": 1531,
-        "MaxY": 338.355
+        "MinX": 1935.89,
+        "MinY": 284.277,
+        "MaxX": 1943.34,
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
-        "shape-58.3"
-      ],
-      "PrototypeId": "prototype-14",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.993527
-      }
+        "shape-60.12"
+      ]
     },
     {
-      "Id": "prototype:prototype-15@shape-55.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-60.11",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 2672.78,
-        "MinY": 349.49,
-        "MaxX": 2690.51,
-        "MaxY": 385.959
+        "MinX": 1948.75,
+        "MinY": 284.277,
+        "MaxX": 1956.2,
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
-        "shape-55.2"
-      ],
-      "PrototypeId": "prototype-15"
+        "shape-60.11"
+      ]
     },
     {
-      "Id": "prototype:prototype-15@shape-55.9",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2852.78,
-        "MinY": 349.49,
-        "MaxX": 2870.51,
-        "MaxY": 385.959
-      },
-      "SourceShapeIds": [
-        "shape-55.9"
-      ],
-      "PrototypeId": "prototype-15"
-    },
-    {
-      "Id": "prototype:prototype-16@shape-55.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2695.9,
-        "MinY": 348.881,
-        "MaxX": 2719.48,
-        "MaxY": 386.662
-      },
-      "SourceShapeIds": [
-        "shape-55.3"
-      ],
-      "PrototypeId": "prototype-16",
-      "Recognition": {
-        "Text": "9",
-        "Confidence": 0.999571
-      }
-    },
-    {
-      "Id": "prototype:prototype-16@shape-55.10",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2875.9,
-        "MinY": 348.881,
-        "MaxX": 2899.48,
-        "MaxY": 386.662
-      },
-      "SourceShapeIds": [
-        "shape-55.10"
-      ],
-      "PrototypeId": "prototype-16",
-      "Recognition": {
-        "Text": "9",
-        "Confidence": 0.999571
-      }
-    },
-    {
-      "Id": "prototype:prototype-17@shape-55.4",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2723.64,
-        "MinY": 348.85,
-        "MaxX": 2745.73,
-        "MaxY": 386.709
-      },
-      "SourceShapeIds": [
-        "shape-55.4"
-      ],
-      "PrototypeId": "prototype-17",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.99975
-      }
-    },
-    {
-      "Id": "prototype:prototype-18@shape-55.5",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2751.29,
-        "MinY": 349.6,
-        "MaxX": 2772.95,
-        "MaxY": 386.709
-      },
-      "SourceShapeIds": [
-        "shape-55.5"
-      ],
-      "PrototypeId": "prototype-18",
-      "Recognition": {
-        "Text": "5",
-        "Confidence": 0.998729
-      }
-    },
-    {
-      "Id": "prototype:prototype-19@shape-55.6",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2777.47,
-        "MinY": 367.85,
-        "MaxX": 2791.23,
-        "MaxY": 372.256
-      },
-      "SourceShapeIds": [
-        "shape-55.6"
-      ],
-      "PrototypeId": "prototype-19",
-      "Recognition": {
-        "Text": "-",
-        "Confidence": 0.721789
-      }
-    },
-    {
-      "Id": "prototype:prototype-20@shape-55.7",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2795.92,
-        "MinY": 348.85,
-        "MaxX": 2818.36,
-        "MaxY": 385.959
-      },
-      "SourceShapeIds": [
-        "shape-55.7"
-      ],
-      "PrototypeId": "prototype-20",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.999669
-      }
-    },
-    {
-      "Id": "prototype:prototype-21@shape-56.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-56.2",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 1100.2,
         "MinY": 299.293,
@@ -659,621 +123,541 @@
       "SourceShapeIds": [
         "shape-56.2"
       ],
-      "PrototypeId": "prototype-21",
       "Recognition": {
         "Text": "V",
         "Confidence": 0.806031
       }
     },
     {
-      "Id": "prototype:prototype-22@shape-56.5",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-60.4",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1188.29,
-        "MinY": 298.355,
-        "MaxX": 1215.9,
-        "MaxY": 338.387
-      },
-      "SourceShapeIds": [
-        "shape-56.5"
-      ],
-      "PrototypeId": "prototype-22",
-      "Recognition": {
-        "Text": "S",
-        "Confidence": 0.964688
-      }
-    },
-    {
-      "Id": "prototype:prototype-23@shape-57.4",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1361.65,
-        "MinY": 298.23,
-        "MaxX": 1411.42,
+        "MinX": 1768.78,
+        "MinY": 299.293,
+        "MaxX": 1775.22,
         "MaxY": 337.465
       },
       "SourceShapeIds": [
-        "shape-57.4"
-      ],
-      "PrototypeId": "prototype-23",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.994494
-      }
+        "shape-60.4"
+      ]
     },
     {
-      "Id": "prototype:prototype-23@shape-59.5",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-60.7",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1609.65,
-        "MinY": 298.23,
-        "MaxX": 1659.42,
+        "MinX": 1843.78,
+        "MinY": 299.293,
+        "MaxX": 1850.22,
         "MaxY": 337.465
       },
       "SourceShapeIds": [
-        "shape-59.5"
+        "shape-60.7"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-54.7",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2616.69,
+        "MinY": 347.975,
+        "MaxX": 2621.28,
+        "MaxY": 385.959
+      },
+      "SourceShapeIds": [
+        "shape-54.7"
       ],
-      "PrototypeId": "prototype-23",
       "Recognition": {
-        "Text": "m",
-        "Confidence": 0.994494
+        "Text": "I",
+        "Confidence": 0.629873
       }
     },
     {
-      "Id": "prototype:prototype-23@shape-60.6",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-55.8",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1784.65,
-        "MinY": 298.23,
-        "MaxX": 1834.42,
-        "MaxY": 337.465
+        "MinX": 2822.29,
+        "MinY": 348.881,
+        "MaxX": 2845.53,
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
-        "shape-60.6"
+        "shape-55.8"
       ],
-      "PrototypeId": "prototype-23",
       "Recognition": {
-        "Text": "m",
-        "Confidence": 0.994494
+        "Text": "0",
+        "Confidence": 0.801926
       }
     },
     {
-      "Id": "prototype:prototype-24@shape-58.1",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-54.9",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1434.72,
-        "MinY": 288.308,
-        "MaxX": 1457.31,
-        "MaxY": 338.215
+        "MinX": 2627.36,
+        "MinY": 349.365,
+        "MaxX": 2632.59,
+        "MaxY": 354.115
       },
       "SourceShapeIds": [
-        "shape-58.1"
+        "shape-54.9"
       ],
-      "PrototypeId": "prototype-24",
       "Recognition": {
-        "Text": "c",
-        "Confidence": 0.543521
+        "Text": "\u25A0",
+        "Confidence": 0.829516
       }
     },
     {
-      "Id": "prototype:prototype-25@shape-60.1",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-55.2",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1698.75,
-        "MinY": 284.277,
-        "MaxX": 1706.2,
-        "MaxY": 304.074
+        "MinX": 2672.78,
+        "MinY": 349.49,
+        "MaxX": 2690.51,
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
-        "shape-60.1"
-      ],
-      "PrototypeId": "prototype-25"
+        "shape-55.2"
+      ]
     },
     {
-      "Id": "prototype:prototype-25@shape-60.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-55.9",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1685.89,
-        "MinY": 284.277,
-        "MaxX": 1693.34,
-        "MaxY": 304.074
+        "MinX": 2852.78,
+        "MinY": 349.49,
+        "MaxX": 2870.51,
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
-        "shape-60.2"
-      ],
-      "PrototypeId": "prototype-25"
+        "shape-55.9"
+      ]
     },
     {
-      "Id": "prototype:prototype-25@shape-60.11",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-54.8",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1948.75,
-        "MinY": 284.277,
-        "MaxX": 1956.2,
-        "MaxY": 304.074
+        "MinX": 2627.69,
+        "MinY": 358.694,
+        "MaxX": 2632.28,
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
-        "shape-60.11"
+        "shape-54.8"
       ],
-      "PrototypeId": "prototype-25"
-    },
-    {
-      "Id": "prototype:prototype-25@shape-60.12",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1935.89,
-        "MinY": 284.277,
-        "MaxX": 1943.34,
-        "MaxY": 304.074
-      },
-      "SourceShapeIds": [
-        "shape-60.12"
-      ],
-      "PrototypeId": "prototype-25"
-    },
-    {
-      "Id": "prototype:prototype-26@shape-60.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1715.15,
-        "MinY": 286.574,
-        "MaxX": 1758.78,
-        "MaxY": 337.465
-      },
-      "SourceShapeIds": [
-        "shape-60.3"
-      ],
-      "PrototypeId": "prototype-26",
       "Recognition": {
-        "Text": "M",
-        "Confidence": 0.991472
+        "Text": "\u2013",
+        "Confidence": 0.530265
       }
     },
     {
-      "Id": "prototype:prototype-27@shape-61.1",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-55.6",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 142.357,
-        "MinY": 3064.99,
-        "MaxX": 165.185,
-        "MaxY": 3108.75
+        "MinX": 2777.47,
+        "MinY": 367.85,
+        "MaxX": 2791.23,
+        "MaxY": 372.256
       },
       "SourceShapeIds": [
-        "shape-61.1"
+        "shape-55.6"
       ],
-      "PrototypeId": "prototype-27"
-    },
-    {
-      "Id": "prototype:prototype-27@shape-63.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 2398.24,
-        "MaxX": 165.185,
-        "MaxY": 2442
-      },
-      "SourceShapeIds": [
-        "shape-63.1"
-      ],
-      "PrototypeId": "prototype-27"
-    },
-    {
-      "Id": "prototype:prototype-28@shape-61.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 174.217,
-        "MinY": 3065.13,
-        "MaxX": 208.592,
-        "MaxY": 3108.75
-      },
-      "SourceShapeIds": [
-        "shape-61.2"
-      ],
-      "PrototypeId": "prototype-28",
       "Recognition": {
-        "Text": "7",
-        "Confidence": 0.998205
+        "Text": "-",
+        "Confidence": 0.721789
       }
     },
     {
-      "Id": "prototype:prototype-29@shape-62",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-482",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 143.701,
-        "MinY": 1118.05,
-        "MaxX": 178.357,
-        "MaxY": 1162.58
+        "MinX": 783.013,
+        "MinY": 462.425,
+        "MaxX": 830.295,
+        "MaxY": 534.237
       },
       "SourceShapeIds": [
-        "shape-62"
+        "shape-482"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-480.7",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 661.138,
+        "MinY": 478.534,
+        "MaxX": 672.998,
+        "MaxY": 490.394
+      },
+      "SourceShapeIds": [
+        "shape-480.7"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-480.9",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 680.982,
+        "MinY": 478.534,
+        "MaxX": 702.076,
+        "MaxY": 527.909
+      },
+      "SourceShapeIds": [
+        "shape-480.9"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-481",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 763.31,
+        "MinY": 478.597,
+        "MaxX": 779.591,
+        "MaxY": 536.144
+      },
+      "SourceShapeIds": [
+        "shape-481"
       ],
-      "PrototypeId": "prototype-29",
       "Recognition": {
-        "Text": "5",
-        "Confidence": 0.998398
+        "Text": "(",
+        "Confidence": 0.7488
       }
     },
     {
-      "Id": "prototype:prototype-30@shape-63.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-483.1",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 171.951,
-        "MinY": 2397.47,
-        "MaxX": 204.75,
-        "MaxY": 2442.91
+        "MinX": 853.326,
+        "MinY": 501.503,
+        "MaxX": 887.091,
+        "MaxY": 506.878
       },
       "SourceShapeIds": [
-        "shape-63.2"
+        "shape-483.1"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-483.2",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 853.326,
+        "MinY": 515.05,
+        "MaxX": 887.091,
+        "MaxY": 520.409
+      },
+      "SourceShapeIds": [
+        "shape-483.2"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-468",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1113.83,
+        "MinY": 541.832,
+        "MaxX": 1266.11,
+        "MaxY": 562.636
+      },
+      "SourceShapeIds": [
+        "shape-468"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-128",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 732.021,
+        "MinY": 554.264,
+        "MaxX": 791.096,
+        "MaxY": 583.489
+      },
+      "SourceShapeIds": [
+        "shape-128"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-466",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 571.583,
+        "MinY": 562.622,
+        "MaxX": 723.861,
+        "MaxY": 583.426
+      },
+      "SourceShapeIds": [
+        "shape-466"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-469",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1235.61,
+        "MinY": 568.164,
+        "MaxX": 1266.11,
+        "MaxY": 583.426
+      },
+      "SourceShapeIds": [
+        "shape-469"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-467",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 693.369,
+        "MinY": 583.412,
+        "MaxX": 723.861,
+        "MaxY": 598.674
+      },
+      "SourceShapeIds": [
+        "shape-467"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-500",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1163.71,
+        "MinY": 605.595,
+        "MaxX": 1174.798,
+        "MaxY": 616.683
+      },
+      "SourceShapeIds": [
+        "shape-500"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-312",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1113.83,
+        "MinY": 610.359,
+        "MaxX": 1149.866,
+        "MaxY": 639.743
+      },
+      "SourceShapeIds": [
+        "shape-312"
       ],
-      "PrototypeId": "prototype-30",
       "Recognition": {
-        "Text": "3",
-        "Confidence": 0.999763
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-31@shape-64",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-322",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 147.42,
-        "MinY": 1783.92,
-        "MaxX": 178.139,
-        "MaxY": 1829.27
+        "MinX": 1670.59,
+        "MinY": 610.359,
+        "MaxX": 1706.626,
+        "MaxY": 639.743
       },
       "SourceShapeIds": [
-        "shape-64"
+        "shape-322"
       ],
-      "PrototypeId": "prototype-31",
       "Recognition": {
-        "Text": "9",
-        "Confidence": 0.999432
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-132",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-309",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1054.18,
-        "MinY": 574.774,
-        "MaxX": 1076.685,
-        "MaxY": 644.507
+        "MinX": 766.304,
+        "MinY": 624.219,
+        "MaxX": 802.34,
+        "MaxY": 653.603
       },
       "SourceShapeIds": [
-        "shape-132"
+        "shape-309"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.660788
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-133",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-310",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1486.89,
-        "MinY": 1889.075,
-        "MaxX": 1509.395,
-        "MaxY": 1958.808
+        "MinX": 1080.84,
+        "MinY": 624.219,
+        "MaxX": 1116.876,
+        "MaxY": 653.603
       },
       "SourceShapeIds": [
-        "shape-133"
+        "shape-310"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-134",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-319",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1102.3,
-        "MinY": 1222.325,
-        "MaxX": 1124.805,
-        "MaxY": 1292.058
+        "MinX": 1230.07,
+        "MinY": 624.219,
+        "MaxX": 1266.106,
+        "MaxY": 653.603
       },
       "SourceShapeIds": [
-        "shape-134"
+        "shape-319"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-135",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-321",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 880.692,
-        "MinY": 1889.075,
-        "MaxX": 903.197,
-        "MaxY": 1958.808
+        "MinX": 1637.6,
+        "MinY": 624.219,
+        "MaxX": 1673.636,
+        "MaxY": 653.603
       },
       "SourceShapeIds": [
-        "shape-135"
+        "shape-321"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-137",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-330",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1087.77,
-        "MinY": 2502.655,
-        "MaxX": 1110.275,
-        "MaxY": 2572.388
+        "MinX": 1814.18,
+        "MinY": 624.219,
+        "MaxX": 1850.216,
+        "MaxY": 653.603
       },
       "SourceShapeIds": [
-        "shape-137"
+        "shape-330"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-138",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-502",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1610.94,
-        "MinY": 574.774,
-        "MaxX": 1633.445,
-        "MaxY": 644.507
+        "MinX": 1163.71,
+        "MinY": 633.315,
+        "MaxX": 1174.798,
+        "MaxY": 644.403
       },
       "SourceShapeIds": [
-        "shape-138"
+        "shape-502"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-320",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1308.55,
+        "MinY": 638.079,
+        "MaxX": 1344.586,
+        "MaxY": 667.463
+      },
+      "SourceShapeIds": [
+        "shape-320"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.660788
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-139",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-331",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 1524.99,
-        "MinY": 2502.655,
-        "MaxX": 1547.495,
-        "MaxY": 2572.388
+        "MinX": 1990.76,
+        "MinY": 638.079,
+        "MaxX": 2026.796,
+        "MaxY": 667.463
       },
       "SourceShapeIds": [
-        "shape-139"
+        "shape-331"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-140",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-308",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 2238.79,
-        "MinY": 3169.405,
-        "MaxX": 2261.295,
-        "MaxY": 3239.138
+        "MinX": 687.825,
+        "MinY": 651.939,
+        "MaxX": 723.861,
+        "MaxY": 681.323
       },
       "SourceShapeIds": [
-        "shape-140"
+        "shape-308"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-144",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-332",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 934.748,
-        "MinY": 3224.845,
-        "MaxX": 957.253,
-        "MaxY": 3294.578
+        "MinX": 2206.98,
+        "MinY": 651.939,
+        "MaxX": 2243.016,
+        "MaxY": 681.323
       },
       "SourceShapeIds": [
-        "shape-144"
+        "shape-332"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.660788
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-146",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-497",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 282.706,
-        "MinY": 3224.845,
-        "MaxX": 305.211,
-        "MaxY": 3294.578
+        "MinX": 2289.83,
+        "MinY": 661.035,
+        "MaxX": 2300.918,
+        "MaxY": 672.123
       },
       "SourceShapeIds": [
-        "shape-146"
+        "shape-497"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-353",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2239.95,
+        "MinY": 665.799,
+        "MaxX": 2275.986,
+        "MaxY": 695.183
+      },
+      "SourceShapeIds": [
+        "shape-353"
       ],
-      "PrototypeId": "prototype-32",
       "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
+        "Text": "0",
+        "Confidence": 0.660788
       }
     },
     {
-      "Id": "prototype:prototype-32@shape-147",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2238.79,
-        "MinY": 3266.425,
-        "MaxX": 2261.295,
-        "MaxY": 3336.158
-      },
-      "SourceShapeIds": [
-        "shape-147"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-149",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2657.03,
-        "MinY": 1450.945,
-        "MaxX": 2679.535,
-        "MaxY": 1520.678
-      },
-      "SourceShapeIds": [
-        "shape-149"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-150",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1040.46,
-        "MinY": 1450.945,
-        "MaxX": 1062.965,
-        "MaxY": 1520.678
-      },
-      "SourceShapeIds": [
-        "shape-150"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-151",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 964.946,
-        "MinY": 3504.695,
-        "MaxX": 987.451,
-        "MaxY": 3574.428
-      },
-      "SourceShapeIds": [
-        "shape-151"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-152",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 312.903,
-        "MinY": 3449.255,
-        "MaxX": 335.408,
-        "MaxY": 3518.988
-      },
-      "SourceShapeIds": [
-        "shape-152"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-153",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1551.85,
-        "MinY": 1450.945,
-        "MaxX": 1574.355,
-        "MaxY": 1520.678
-      },
-      "SourceShapeIds": [
-        "shape-153"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-154",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1524.99,
-        "MinY": 2731.275,
-        "MaxX": 1547.495,
-        "MaxY": 2801.008
-      },
-      "SourceShapeIds": [
-        "shape-154"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.98714
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-136",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 282.706,
-        "MinY": 1277.089,
-        "MaxX": 309.768,
-        "MaxY": 1351.05
-      },
-      "SourceShapeIds": [
-        "shape-136"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.890056
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-141",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 282.706,
-        "MinY": 2557.419,
-        "MaxX": 309.768,
-        "MaxY": 2631.38
-      },
-      "SourceShapeIds": [
-        "shape-141"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.890056
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-142",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-142",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 1596.42,
         "MinY": 671.118,
@@ -1283,15 +667,1703 @@
       "SourceShapeIds": [
         "shape-142"
       ],
-      "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
         "Confidence": 0.890056
       }
     },
     {
-      "Id": "prototype:prototype-33@shape-143",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-506",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 588.475,
+        "MinY": 688.755,
+        "MaxX": 599.563,
+        "MaxY": 699.843
+      },
+      "SourceShapeIds": [
+        "shape-506"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-519",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2289.83,
+        "MinY": 688.755,
+        "MaxX": 2300.918,
+        "MaxY": 699.843
+      },
+      "SourceShapeIds": [
+        "shape-519"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-294",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 693.519,
+        "MaxX": 574.632,
+        "MaxY": 722.903
+      },
+      "SourceShapeIds": [
+        "shape-294"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-375",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1637.6,
+        "MinY": 693.519,
+        "MaxX": 1673.636,
+        "MaxY": 722.903
+      },
+      "SourceShapeIds": [
+        "shape-375"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-525",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 588.475,
+        "MinY": 716.475,
+        "MaxX": 599.563,
+        "MaxY": 727.563
+      },
+      "SourceShapeIds": [
+        "shape-525"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-514",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1687.48,
+        "MinY": 716.475,
+        "MaxX": 1698.568,
+        "MaxY": 727.563
+      },
+      "SourceShapeIds": [
+        "shape-514"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-361",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 721.239,
+        "MaxX": 574.632,
+        "MaxY": 750.623
+      },
+      "SourceShapeIds": [
+        "shape-361"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-460.whole",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2771.33,
+        "MinY": 730.964,
+        "MaxX": 2849.37,
+        "MaxY": 778.245
+      },
+      "SourceShapeIds": [
+        "shape-460.whole"
+      ],
+      "Recognition": {
+        "Text": "du",
+        "Confidence": 0.773281
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-359",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 505.627,
+        "MinY": 735.099,
+        "MaxX": 541.663,
+        "MaxY": 764.483
+      },
+      "SourceShapeIds": [
+        "shape-359"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-533",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 588.475,
+        "MinY": 744.195,
+        "MaxX": 599.563,
+        "MaxY": 755.283
+      },
+      "SourceShapeIds": [
+        "shape-533"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-357",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 748.959,
+        "MaxX": 574.632,
+        "MaxY": 778.343
+      },
+      "SourceShapeIds": [
+        "shape-357"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-528",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 588.475,
+        "MinY": 771.915,
+        "MaxX": 599.563,
+        "MaxY": 783.003
+      },
+      "SourceShapeIds": [
+        "shape-528"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-390",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1080.84,
+        "MinY": 792.064,
+        "MaxX": 1116.876,
+        "MaxY": 821.448
+      },
+      "SourceShapeIds": [
+        "shape-390"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-401",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2795.57,
+        "MinY": 792.064,
+        "MaxX": 2831.606,
+        "MaxY": 821.448
+      },
+      "SourceShapeIds": [
+        "shape-401"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-559",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1130.72,
+        "MinY": 801.16,
+        "MaxX": 1141.808,
+        "MaxY": 812.248
+      },
+      "SourceShapeIds": [
+        "shape-559"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-400",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2677.85,
+        "MinY": 833.644,
+        "MaxX": 2713.886,
+        "MaxY": 863.028
+      },
+      "SourceShapeIds": [
+        "shape-400"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-394",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1637.6,
+        "MinY": 847.504,
+        "MaxX": 1673.636,
+        "MaxY": 876.888
+      },
+      "SourceShapeIds": [
+        "shape-394"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-555",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1687.48,
+        "MinY": 856.6,
+        "MaxX": 1698.568,
+        "MaxY": 867.688
+      },
+      "SourceShapeIds": [
+        "shape-555"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-399",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2560.13,
+        "MinY": 861.364,
+        "MaxX": 2596.166,
+        "MaxY": 890.748
+      },
+      "SourceShapeIds": [
+        "shape-399"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-388",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1080.84,
+        "MinY": 875.224,
+        "MaxX": 1116.876,
+        "MaxY": 904.608
+      },
+      "SourceShapeIds": [
+        "shape-388"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-398",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2442.41,
+        "MinY": 875.224,
+        "MaxX": 2478.446,
+        "MaxY": 904.608
+      },
+      "SourceShapeIds": [
+        "shape-398"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-535",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1130.72,
+        "MinY": 884.32,
+        "MaxX": 1141.808,
+        "MaxY": 895.408
+      },
+      "SourceShapeIds": [
+        "shape-535"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-385",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 902.944,
+        "MaxX": 574.632,
+        "MaxY": 932.328
+      },
+      "SourceShapeIds": [
+        "shape-385"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-549",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 588.475,
+        "MinY": 912.04,
+        "MaxX": 599.563,
+        "MaxY": 923.128
+      },
+      "SourceShapeIds": [
+        "shape-549"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-405",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1637.6,
+        "MinY": 930.664,
+        "MaxX": 1673.636,
+        "MaxY": 960.048
+      },
+      "SourceShapeIds": [
+        "shape-405"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-397",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2324.7,
+        "MinY": 930.664,
+        "MaxX": 2360.736,
+        "MaxY": 960.048
+      },
+      "SourceShapeIds": [
+        "shape-397"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-557",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1687.48,
+        "MinY": 939.76,
+        "MaxX": 1698.568,
+        "MaxY": 950.848
+      },
+      "SourceShapeIds": [
+        "shape-557"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-378",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 958.384,
+        "MaxX": 574.632,
+        "MaxY": 987.768
+      },
+      "SourceShapeIds": [
+        "shape-378"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-552",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 588.475,
+        "MinY": 967.48,
+        "MaxX": 599.563,
+        "MaxY": 978.568
+      },
+      "SourceShapeIds": [
+        "shape-552"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-396",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2206.98,
+        "MinY": 986.1,
+        "MaxX": 2243.016,
+        "MaxY": 1015.484
+      },
+      "SourceShapeIds": [
+        "shape-396"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-121",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 976.553,
+        "MinY": 1125.381,
+        "MaxX": 1162.09,
+        "MaxY": 1158.6
+      },
+      "SourceShapeIds": [
+        "shape-121"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-472",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 970.87,
+        "MinY": 1161.67,
+        "MaxX": 1167.77,
+        "MaxY": 1182.47
+      },
+      "SourceShapeIds": [
+        "shape-472"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-473",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1137.28,
+        "MinY": 1188.32,
+        "MaxX": 1167.77,
+        "MaxY": 1203.26
+      },
+      "SourceShapeIds": [
+        "shape-473"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-122",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1819.34,
+        "MinY": 1190.887,
+        "MaxX": 1993.79,
+        "MaxY": 1230.97
+      },
+      "SourceShapeIds": [
+        "shape-122"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-457",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1581.29,
+        "MinY": 1200.357,
+        "MaxX": 1607.347,
+        "MaxY": 1281.542
+      },
+      "SourceShapeIds": [
+        "shape-457"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-293",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1244.05,
+        "MaxX": 973.919,
+        "MaxY": 1273.434
+      },
+      "SourceShapeIds": [
+        "shape-293"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-496",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 987.762,
+        "MinY": 1253.146,
+        "MaxX": 998.85,
+        "MaxY": 1264.234
+      },
+      "SourceShapeIds": [
+        "shape-496"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-295",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1131.74,
+        "MinY": 1257.91,
+        "MaxX": 1167.776,
+        "MaxY": 1287.294
+      },
+      "SourceShapeIds": [
+        "shape-295"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-296",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1217.9,
+        "MinY": 1257.91,
+        "MaxX": 1253.936,
+        "MaxY": 1287.294
+      },
+      "SourceShapeIds": [
+        "shape-296"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-292",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 704.389,
+        "MinY": 1271.77,
+        "MaxX": 740.425,
+        "MaxY": 1301.154
+      },
+      "SourceShapeIds": [
+        "shape-292"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-339",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2202.49,
+        "MinY": 1271.77,
+        "MaxX": 2238.526,
+        "MaxY": 1301.154
+      },
+      "SourceShapeIds": [
+        "shape-339"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-136",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 282.706,
+        "MinY": 1277.089,
+        "MaxX": 309.768,
+        "MaxY": 1351.05
+      },
+      "SourceShapeIds": [
+        "shape-136"
+      ],
+      "Recognition": {
+        "Text": "#",
+        "Confidence": 0.890056
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-290",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 510.535,
+        "MinY": 1285.63,
+        "MaxX": 546.571,
+        "MaxY": 1315.014
+      },
+      "SourceShapeIds": [
+        "shape-290"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-344",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1969,
+        "MinY": 1285.63,
+        "MaxX": 2005.036,
+        "MaxY": 1315.014
+      },
+      "SourceShapeIds": [
+        "shape-344"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-335",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2752.42,
+        "MinY": 1285.63,
+        "MaxX": 2788.456,
+        "MaxY": 1315.014
+      },
+      "SourceShapeIds": [
+        "shape-335"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-289",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1299.49,
+        "MaxX": 352.716,
+        "MaxY": 1328.874
+      },
+      "SourceShapeIds": [
+        "shape-289"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-291",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 704.389,
+        "MinY": 1299.49,
+        "MaxX": 740.425,
+        "MaxY": 1328.874
+      },
+      "SourceShapeIds": [
+        "shape-291"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-345",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1775.14,
+        "MinY": 1299.49,
+        "MaxX": 1811.176,
+        "MaxY": 1328.874
+      },
+      "SourceShapeIds": [
+        "shape-345"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-336",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2719.43,
+        "MinY": 1299.49,
+        "MaxX": 2755.466,
+        "MaxY": 1328.874
+      },
+      "SourceShapeIds": [
+        "shape-336"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-526",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1631.16,
+        "MinY": 1308.586,
+        "MaxX": 1642.248,
+        "MaxY": 1319.674
+      },
+      "SourceShapeIds": [
+        "shape-526"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-325",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 510.535,
+        "MinY": 1313.35,
+        "MaxX": 546.571,
+        "MaxY": 1342.734
+      },
+      "SourceShapeIds": [
+        "shape-325"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-356",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1581.29,
+        "MinY": 1313.35,
+        "MaxX": 1617.326,
+        "MaxY": 1342.734
+      },
+      "SourceShapeIds": [
+        "shape-356"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-340",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2202.49,
+        "MinY": 1313.35,
+        "MaxX": 2238.526,
+        "MaxY": 1342.734
+      },
+      "SourceShapeIds": [
+        "shape-340"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-365",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1327.21,
+        "MaxX": 973.919,
+        "MaxY": 1356.594
+      },
+      "SourceShapeIds": [
+        "shape-365"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-354",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1548.32,
+        "MinY": 1327.21,
+        "MaxX": 1584.356,
+        "MaxY": 1356.594
+      },
+      "SourceShapeIds": [
+        "shape-354"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-515",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 987.762,
+        "MinY": 1336.306,
+        "MaxX": 998.85,
+        "MaxY": 1347.394
+      },
+      "SourceShapeIds": [
+        "shape-515"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-532",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1631.16,
+        "MinY": 1336.306,
+        "MaxX": 1642.248,
+        "MaxY": 1347.394
+      },
+      "SourceShapeIds": [
+        "shape-532"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-355",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1341.07,
+        "MaxX": 352.716,
+        "MaxY": 1370.454
+      },
+      "SourceShapeIds": [
+        "shape-355"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-341",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2202.49,
+        "MinY": 1341.07,
+        "MaxX": 2238.526,
+        "MaxY": 1370.454
+      },
+      "SourceShapeIds": [
+        "shape-341"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-527",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 366.559,
+        "MinY": 1364.026,
+        "MaxX": 377.647,
+        "MaxY": 1375.114
+      },
+      "SourceShapeIds": [
+        "shape-527"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-287",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1100.11,
+        "MinY": 1409.746,
+        "MaxX": 1132.161,
+        "MaxY": 1501.672
+      },
+      "SourceShapeIds": [
+        "shape-287"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-131",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1123.06,
+        "MinY": 1460.168,
+        "MaxX": 1245.34,
+        "MaxY": 1480.83
+      },
+      "SourceShapeIds": [
+        "shape-131"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-459",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1464.683,
+        "MaxX": 968.496,
+        "MaxY": 1515.584
+      },
+      "SourceShapeIds": [
+        "shape-459"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-420",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2719.43,
+        "MinY": 1472.67,
+        "MaxX": 2755.466,
+        "MaxY": 1502.054
+      },
+      "SourceShapeIds": [
+        "shape-420"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-130",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1141.67,
+        "MinY": 1476.188,
+        "MaxX": 1235.3,
+        "MaxY": 1494.69
+      },
+      "SourceShapeIds": [
+        "shape-130"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-413",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1100.11,
+        "MinY": 1486.53,
+        "MaxX": 1136.146,
+        "MaxY": 1515.914
+      },
+      "SourceShapeIds": [
+        "shape-413"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-418",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1250.88,
+        "MinY": 1486.53,
+        "MaxX": 1286.916,
+        "MaxY": 1515.914
+      },
+      "SourceShapeIds": [
+        "shape-418"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-389",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1581.29,
+        "MinY": 1486.53,
+        "MaxX": 1617.326,
+        "MaxY": 1515.914
+      },
+      "SourceShapeIds": [
+        "shape-389"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-421",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2686.46,
+        "MinY": 1486.53,
+        "MaxX": 2722.496,
+        "MaxY": 1515.914
+      },
+      "SourceShapeIds": [
+        "shape-421"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-538",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 366.559,
+        "MinY": 1495.626,
+        "MaxX": 377.647,
+        "MaxY": 1506.714
+      },
+      "SourceShapeIds": [
+        "shape-538"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-534",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1631.16,
+        "MinY": 1495.626,
+        "MaxX": 1642.248,
+        "MaxY": 1506.714
+      },
+      "SourceShapeIds": [
+        "shape-534"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-386",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1500.39,
+        "MaxX": 352.716,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-386"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-408",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1067.12,
+        "MinY": 1500.39,
+        "MaxX": 1103.156,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-408"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-416",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1217.9,
+        "MinY": 1500.39,
+        "MaxX": 1253.936,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-416"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-380",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2590.2,
+        "MinY": 1500.39,
+        "MaxX": 2626.236,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-380"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-381",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2460.96,
+        "MinY": 1514.25,
+        "MaxX": 2496.996,
+        "MaxY": 1543.634
+      },
+      "SourceShapeIds": [
+        "shape-381"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-439",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1528.11,
+        "MaxX": 973.919,
+        "MaxY": 1557.494
+      },
+      "SourceShapeIds": [
+        "shape-439"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-542",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 366.559,
+        "MinY": 1551.066,
+        "MaxX": 377.647,
+        "MaxY": 1562.154
+      },
+      "SourceShapeIds": [
+        "shape-542"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-565",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 987.762,
+        "MinY": 1551.066,
+        "MaxX": 998.85,
+        "MaxY": 1562.154
+      },
+      "SourceShapeIds": [
+        "shape-565"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-384",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1555.83,
+        "MaxX": 352.716,
+        "MaxY": 1585.214
+      },
+      "SourceShapeIds": [
+        "shape-384"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-387",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1581.29,
+        "MinY": 1569.69,
+        "MaxX": 1617.326,
+        "MaxY": 1599.074
+      },
+      "SourceShapeIds": [
+        "shape-387"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-392",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2331.73,
+        "MinY": 1569.69,
+        "MaxX": 2367.766,
+        "MaxY": 1599.074
+      },
+      "SourceShapeIds": [
+        "shape-392"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-536",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1631.16,
+        "MinY": 1578.786,
+        "MaxX": 1642.248,
+        "MaxY": 1589.874
+      },
+      "SourceShapeIds": [
+        "shape-536"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-436",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1611.27,
+        "MaxX": 973.919,
+        "MaxY": 1640.654
+      },
+      "SourceShapeIds": [
+        "shape-436"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-417",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2202.49,
+        "MinY": 1625.13,
+        "MaxX": 2238.526,
+        "MaxY": 1654.514
+      },
+      "SourceShapeIds": [
+        "shape-417"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-564",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 987.762,
+        "MinY": 1634.226,
+        "MaxX": 998.85,
+        "MaxY": 1645.314
+      },
+      "SourceShapeIds": [
+        "shape-564"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-490.whole",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2188.63,
+        "MinY": 1674.66,
+        "MaxX": 2297.52,
+        "MaxY": 1736.26
+      },
+      "SourceShapeIds": [
+        "shape-490.whole"
+      ],
+      "Recognition": {
+        "Text": "Ped.",
+        "Confidence": 0.829987
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-470",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 940.342,
+        "MinY": 1856.14,
+        "MaxX": 1107.6,
+        "MaxY": 1876.94
+      },
+      "SourceShapeIds": [
+        "shape-470"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-285",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 512.867,
+        "MinY": 1882.526,
+        "MaxX": 543.81,
+        "MaxY": 1974.782
+      },
+      "SourceShapeIds": [
+        "shape-285"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-471",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1077.1,
+        "MinY": 1882.59,
+        "MaxX": 1107.6,
+        "MaxY": 1897.73
+      },
+      "SourceShapeIds": [
+        "shape-471"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-455",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 315.675,
+        "MinY": 1888.953,
+        "MaxX": 346.288,
+        "MaxY": 1939.854
+      },
+      "SourceShapeIds": [
+        "shape-455"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-499",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 360.131,
+        "MinY": 1892.176,
+        "MaxX": 371.219,
+        "MaxY": 1903.264
+      },
+      "SourceShapeIds": [
+        "shape-499"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-495",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 990.221,
+        "MinY": 1919.896,
+        "MaxX": 1001.309,
+        "MaxY": 1930.984
+      },
+      "SourceShapeIds": [
+        "shape-495"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-302",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 940.342,
+        "MinY": 1924.66,
+        "MaxX": 976.378,
+        "MaxY": 1954.044
+      },
+      "SourceShapeIds": [
+        "shape-302"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-298",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1546.54,
+        "MinY": 1924.66,
+        "MaxX": 1582.576,
+        "MaxY": 1954.044
+      },
+      "SourceShapeIds": [
+        "shape-298"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-305",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 566.236,
+        "MinY": 1938.52,
+        "MaxX": 602.272,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-305"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-303",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 907.356,
+        "MinY": 1938.52,
+        "MaxX": 943.392,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-303"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-299",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1071.56,
+        "MinY": 1938.52,
+        "MaxX": 1107.596,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-299"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-297",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 1938.52,
+        "MaxX": 1549.586,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-297"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-300",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1707.85,
+        "MinY": 1938.52,
+        "MaxX": 1743.886,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-300"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-507",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 990.221,
+        "MinY": 1947.616,
+        "MaxX": 1001.309,
+        "MaxY": 1958.704
+      },
+      "SourceShapeIds": [
+        "shape-507"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-129",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 521.461,
+        "MinY": 1948.45,
+        "MaxX": 560.692,
+        "MaxY": 1960.54
+      },
+      "SourceShapeIds": [
+        "shape-129"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-313",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1157.92,
+        "MinY": 1952.38,
+        "MaxX": 1193.956,
+        "MaxY": 1981.764
+      },
+      "SourceShapeIds": [
+        "shape-313"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-301",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1902.15,
+        "MinY": 1952.38,
+        "MaxX": 1938.186,
+        "MaxY": 1981.764
+      },
+      "SourceShapeIds": [
+        "shape-301"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-307",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 479.881,
+        "MinY": 1966.24,
+        "MaxX": 515.917,
+        "MaxY": 1995.624
+      },
+      "SourceShapeIds": [
+        "shape-307"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-306",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 566.236,
+        "MinY": 1966.24,
+        "MaxX": 602.272,
+        "MaxY": 1995.624
+      },
+      "SourceShapeIds": [
+        "shape-306"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-304",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2136.09,
+        "MinY": 1966.24,
+        "MaxX": 2172.126,
+        "MaxY": 1995.624
+      },
+      "SourceShapeIds": [
+        "shape-304"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-505",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2218.94,
+        "MinY": 1975.336,
+        "MaxX": 2230.028,
+        "MaxY": 1986.424
+      },
+      "SourceShapeIds": [
+        "shape-505"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-377",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2169.06,
+        "MinY": 1980.1,
+        "MaxX": 2205.096,
+        "MaxY": 2009.484
+      },
+      "SourceShapeIds": [
+        "shape-377"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-143",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 1472.37,
         "MinY": 1985.419,
@@ -1301,15 +2373,1442 @@
       "SourceShapeIds": [
         "shape-143"
       ],
-      "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
         "Confidence": 0.890056
       }
     },
     {
-      "Id": "prototype:prototype-33@shape-145",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-530",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2218.94,
+        "MinY": 2003.056,
+        "MaxX": 2230.028,
+        "MaxY": 2014.144
+      },
+      "SourceShapeIds": [
+        "shape-530"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-371",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 315.675,
+        "MinY": 2007.82,
+        "MaxX": 351.711,
+        "MaxY": 2037.204
+      },
+      "SourceShapeIds": [
+        "shape-371"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-349",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 2007.82,
+        "MaxX": 1549.586,
+        "MaxY": 2037.204
+      },
+      "SourceShapeIds": [
+        "shape-349"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-462.whole",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2759.52,
+        "MinY": 2011.29,
+        "MaxX": 2837.55,
+        "MaxY": 2058.57
+      },
+      "SourceShapeIds": [
+        "shape-462.whole"
+      ],
+      "Recognition": {
+        "Text": "du",
+        "Confidence": 0.772109
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-513",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 365.554,
+        "MinY": 2030.776,
+        "MaxX": 376.642,
+        "MaxY": 2041.864
+      },
+      "SourceShapeIds": [
+        "shape-513"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-511",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1563.43,
+        "MinY": 2030.776,
+        "MaxX": 1574.518,
+        "MaxY": 2041.864
+      },
+      "SourceShapeIds": [
+        "shape-511"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-412",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 907.356,
+        "MinY": 2072.39,
+        "MaxX": 943.392,
+        "MaxY": 2101.774
+      },
+      "SourceShapeIds": [
+        "shape-412"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-414",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2783.76,
+        "MinY": 2072.39,
+        "MaxX": 2819.796,
+        "MaxY": 2101.774
+      },
+      "SourceShapeIds": [
+        "shape-414"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-554",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 957.234,
+        "MinY": 2081.486,
+        "MaxX": 968.322,
+        "MaxY": 2092.574
+      },
+      "SourceShapeIds": [
+        "shape-554"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-545",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 365.554,
+        "MinY": 2109.206,
+        "MaxX": 376.642,
+        "MaxY": 2120.294
+      },
+      "SourceShapeIds": [
+        "shape-545"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-404",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 315.675,
+        "MinY": 2113.97,
+        "MaxX": 351.711,
+        "MaxY": 2143.354
+      },
+      "SourceShapeIds": [
+        "shape-404"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-415",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2654.22,
+        "MinY": 2113.97,
+        "MaxX": 2690.256,
+        "MaxY": 2143.354
+      },
+      "SourceShapeIds": [
+        "shape-415"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-435",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 282.706,
+        "MinY": 2127.83,
+        "MaxX": 318.742,
+        "MaxY": 2157.214
+      },
+      "SourceShapeIds": [
+        "shape-435"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-379",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 2127.83,
+        "MaxX": 1549.586,
+        "MaxY": 2157.214
+      },
+      "SourceShapeIds": [
+        "shape-379"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-547",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 365.554,
+        "MinY": 2136.926,
+        "MaxX": 376.642,
+        "MaxY": 2148.014
+      },
+      "SourceShapeIds": [
+        "shape-547"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-562",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1563.43,
+        "MinY": 2136.926,
+        "MaxX": 1574.518,
+        "MaxY": 2148.014
+      },
+      "SourceShapeIds": [
+        "shape-562"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-423",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 315.675,
+        "MinY": 2141.69,
+        "MaxX": 351.711,
+        "MaxY": 2171.074
+      },
+      "SourceShapeIds": [
+        "shape-423"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-422",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2524.69,
+        "MinY": 2141.69,
+        "MaxX": 2560.726,
+        "MaxY": 2171.074
+      },
+      "SourceShapeIds": [
+        "shape-422"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-419",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 907.356,
+        "MinY": 2155.55,
+        "MaxX": 943.392,
+        "MaxY": 2184.934
+      },
+      "SourceShapeIds": [
+        "shape-419"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-424",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2395.16,
+        "MinY": 2155.55,
+        "MaxX": 2431.196,
+        "MaxY": 2184.934
+      },
+      "SourceShapeIds": [
+        "shape-424"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-560",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 365.554,
+        "MinY": 2164.646,
+        "MaxX": 376.642,
+        "MaxY": 2175.734
+      },
+      "SourceShapeIds": [
+        "shape-560"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-543",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 957.234,
+        "MinY": 2164.646,
+        "MaxX": 968.322,
+        "MaxY": 2175.734
+      },
+      "SourceShapeIds": [
+        "shape-543"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-433",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 2210.99,
+        "MaxX": 1549.586,
+        "MaxY": 2240.374
+      },
+      "SourceShapeIds": [
+        "shape-433"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-427",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2265.62,
+        "MinY": 2210.99,
+        "MaxX": 2301.656,
+        "MaxY": 2240.374
+      },
+      "SourceShapeIds": [
+        "shape-427"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-550",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1563.43,
+        "MinY": 2220.086,
+        "MaxX": 1574.518,
+        "MaxY": 2231.174
+      },
+      "SourceShapeIds": [
+        "shape-550"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-431",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2136.09,
+        "MinY": 2266.43,
+        "MaxX": 2172.126,
+        "MaxY": 2295.814
+      },
+      "SourceShapeIds": [
+        "shape-431"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-126",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 988.641,
+        "MinY": 2413.899,
+        "MaxX": 1147.56,
+        "MaxY": 2438.92
+      },
+      "SourceShapeIds": [
+        "shape-126"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-464",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 982.958,
+        "MinY": 2442,
+        "MaxX": 1153.24,
+        "MaxY": 2462.8
+      },
+      "SourceShapeIds": [
+        "shape-464"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-465",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1122.75,
+        "MinY": 2468.48,
+        "MaxX": 1153.24,
+        "MaxY": 2483.59
+      },
+      "SourceShapeIds": [
+        "shape-465"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-318",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2524.38,
+        "MaxX": 986.008,
+        "MaxY": 2553.764
+      },
+      "SourceShapeIds": [
+        "shape-318"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-351",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1681.09,
+        "MinY": 2528.772,
+        "MaxX": 1706.315,
+        "MaxY": 2549.341
+      },
+      "SourceShapeIds": [
+        "shape-351"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.744126
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-494",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 999.85,
+        "MinY": 2533.476,
+        "MaxX": 1010.938,
+        "MaxY": 2544.564
+      },
+      "SourceShapeIds": [
+        "shape-494"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-323",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1117.21,
+        "MinY": 2538.24,
+        "MaxX": 1153.246,
+        "MaxY": 2567.624
+      },
+      "SourceShapeIds": [
+        "shape-323"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-324",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1205.15,
+        "MinY": 2538.24,
+        "MaxX": 1241.186,
+        "MaxY": 2567.624
+      },
+      "SourceShapeIds": [
+        "shape-324"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-327",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1554.42,
+        "MinY": 2538.24,
+        "MaxX": 1590.456,
+        "MaxY": 2567.624
+      },
+      "SourceShapeIds": [
+        "shape-327"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-350",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1714.62,
+        "MinY": 2542.632,
+        "MaxX": 1739.845,
+        "MaxY": 2563.201
+      },
+      "SourceShapeIds": [
+        "shape-350"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.744126
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-317",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 712.448,
+        "MinY": 2552.1,
+        "MaxX": 748.484,
+        "MaxY": 2581.484
+      },
+      "SourceShapeIds": [
+        "shape-317"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-328",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1752.31,
+        "MinY": 2552.1,
+        "MaxX": 1788.346,
+        "MaxY": 2581.484
+      },
+      "SourceShapeIds": [
+        "shape-328"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-141",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 282.706,
+        "MinY": 2557.419,
+        "MaxX": 309.768,
+        "MaxY": 2631.38
+      },
+      "SourceShapeIds": [
+        "shape-141"
+      ],
+      "Recognition": {
+        "Text": "#",
+        "Confidence": 0.890056
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-315",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 514.564,
+        "MinY": 2565.96,
+        "MaxX": 550.6,
+        "MaxY": 2595.344
+      },
+      "SourceShapeIds": [
+        "shape-315"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-333",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1950.19,
+        "MinY": 2565.96,
+        "MaxX": 1986.226,
+        "MaxY": 2595.344
+      },
+      "SourceShapeIds": [
+        "shape-333"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-311",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2579.82,
+        "MaxX": 352.716,
+        "MaxY": 2609.204
+      },
+      "SourceShapeIds": [
+        "shape-311"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-316",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 712.448,
+        "MinY": 2579.82,
+        "MaxX": 748.484,
+        "MaxY": 2609.204
+      },
+      "SourceShapeIds": [
+        "shape-316"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-334",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2187.71,
+        "MinY": 2579.82,
+        "MaxX": 2223.746,
+        "MaxY": 2609.204
+      },
+      "SourceShapeIds": [
+        "shape-334"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-475",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1681.09,
+        "MinY": 2581.9,
+        "MaxX": 1716.75,
+        "MaxY": 2598.71
+      },
+      "SourceShapeIds": [
+        "shape-475"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-498",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2237.59,
+        "MinY": 2588.916,
+        "MaxX": 2248.678,
+        "MaxY": 2600.004
+      },
+      "SourceShapeIds": [
+        "shape-498"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-314",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 514.564,
+        "MinY": 2593.68,
+        "MaxX": 550.6,
+        "MaxY": 2623.064
+      },
+      "SourceShapeIds": [
+        "shape-314"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-329",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1950.19,
+        "MinY": 2593.68,
+        "MaxX": 1986.226,
+        "MaxY": 2623.064
+      },
+      "SourceShapeIds": [
+        "shape-329"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-474",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1681.09,
+        "MinY": 2596.45,
+        "MaxX": 1716.75,
+        "MaxY": 2613.26
+      },
+      "SourceShapeIds": [
+        "shape-474"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-372",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2607.54,
+        "MaxX": 986.008,
+        "MaxY": 2636.924
+      },
+      "SourceShapeIds": [
+        "shape-372"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-326",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1554.42,
+        "MinY": 2607.54,
+        "MaxX": 1590.456,
+        "MaxY": 2636.924
+      },
+      "SourceShapeIds": [
+        "shape-326"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-524",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 999.85,
+        "MinY": 2616.636,
+        "MaxX": 1010.938,
+        "MaxY": 2627.724
+      },
+      "SourceShapeIds": [
+        "shape-524"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-376",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2621.4,
+        "MaxX": 352.716,
+        "MaxY": 2650.784
+      },
+      "SourceShapeIds": [
+        "shape-376"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-364",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1752.31,
+        "MinY": 2621.4,
+        "MaxX": 1788.346,
+        "MaxY": 2650.784
+      },
+      "SourceShapeIds": [
+        "shape-364"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-531",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 366.559,
+        "MinY": 2644.356,
+        "MaxX": 377.647,
+        "MaxY": 2655.444
+      },
+      "SourceShapeIds": [
+        "shape-531"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-410",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1554.42,
+        "MinY": 2766.86,
+        "MaxX": 1590.456,
+        "MaxY": 2796.244
+      },
+      "SourceShapeIds": [
+        "shape-410"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-537",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 366.559,
+        "MinY": 2775.956,
+        "MaxX": 377.647,
+        "MaxY": 2787.044
+      },
+      "SourceShapeIds": [
+        "shape-537"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-539",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1604.3,
+        "MinY": 2775.956,
+        "MaxX": 1615.388,
+        "MaxY": 2787.044
+      },
+      "SourceShapeIds": [
+        "shape-539"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-411",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2780.72,
+        "MaxX": 352.716,
+        "MaxY": 2810.104
+      },
+      "SourceShapeIds": [
+        "shape-411"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-432",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2583.48,
+        "MinY": 2780.72,
+        "MaxX": 2619.516,
+        "MaxY": 2810.104
+      },
+      "SourceShapeIds": [
+        "shape-432"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-430",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2451.56,
+        "MinY": 2794.58,
+        "MaxX": 2487.596,
+        "MaxY": 2823.964
+      },
+      "SourceShapeIds": [
+        "shape-430"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-561",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 999.85,
+        "MinY": 2803.676,
+        "MaxX": 1010.938,
+        "MaxY": 2814.764
+      },
+      "SourceShapeIds": [
+        "shape-561"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-391",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2808.44,
+        "MaxX": 986.008,
+        "MaxY": 2837.824
+      },
+      "SourceShapeIds": [
+        "shape-391"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-434",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2715.4,
+        "MinY": 2808.44,
+        "MaxX": 2751.436,
+        "MaxY": 2837.824
+      },
+      "SourceShapeIds": [
+        "shape-434"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-541",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 366.559,
+        "MinY": 2831.396,
+        "MaxX": 377.647,
+        "MaxY": 2842.484
+      },
+      "SourceShapeIds": [
+        "shape-541"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-403",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2836.16,
+        "MaxX": 352.716,
+        "MaxY": 2865.544
+      },
+      "SourceShapeIds": [
+        "shape-403"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-409",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1554.42,
+        "MinY": 2850.02,
+        "MaxX": 1590.456,
+        "MaxY": 2879.404
+      },
+      "SourceShapeIds": [
+        "shape-409"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-428",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2319.64,
+        "MinY": 2850.02,
+        "MaxX": 2355.676,
+        "MaxY": 2879.404
+      },
+      "SourceShapeIds": [
+        "shape-428"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-540",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1604.3,
+        "MinY": 2859.116,
+        "MaxX": 1615.388,
+        "MaxY": 2870.204
+      },
+      "SourceShapeIds": [
+        "shape-540"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-548",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 999.85,
+        "MinY": 2886.836,
+        "MaxX": 1010.938,
+        "MaxY": 2897.924
+      },
+      "SourceShapeIds": [
+        "shape-548"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-402",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2891.6,
+        "MaxX": 986.008,
+        "MaxY": 2920.984
+      },
+      "SourceShapeIds": [
+        "shape-402"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-425",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2187.71,
+        "MinY": 2905.46,
+        "MaxX": 2223.746,
+        "MaxY": 2934.844
+      },
+      "SourceShapeIds": [
+        "shape-425"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-492.whole",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2173.85,
+        "MinY": 2954.99,
+        "MaxX": 2282.75,
+        "MaxY": 3016.59
+      },
+      "SourceShapeIds": [
+        "shape-492.whole"
+      ],
+      "Recognition": {
+        "Text": "Ped.",
+        "Confidence": 0.851202
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-284",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 547.829,
+        "MinY": 3100.486,
+        "MaxX": 578.772,
+        "MaxY": 3192.742
+      },
+      "SourceShapeIds": [
+        "shape-284"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-286",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1199.87,
+        "MinY": 3100.486,
+        "MaxX": 1230.813,
+        "MaxY": 3192.742
+      },
+      "SourceShapeIds": [
+        "shape-286"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-346",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3163.41,
+        "MaxX": 1639.456,
+        "MaxY": 3192.794
+      },
+      "SourceShapeIds": [
+        "shape-346"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-456",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 342.339,
+        "MinY": 3169.283,
+        "MaxX": 372.952,
+        "MaxY": 3220.184
+      },
+      "SourceShapeIds": [
+        "shape-456"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-454",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 994.381,
+        "MinY": 3169.283,
+        "MaxX": 1024.994,
+        "MaxY": 3220.184
+      },
+      "SourceShapeIds": [
+        "shape-454"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-503",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 386.794,
+        "MinY": 3172.506,
+        "MaxX": 397.882,
+        "MaxY": 3183.594
+      },
+      "SourceShapeIds": [
+        "shape-503"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-504",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1038.84,
+        "MinY": 3172.506,
+        "MaxX": 1049.928,
+        "MaxY": 3183.594
+      },
+      "SourceShapeIds": [
+        "shape-504"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-337",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 514.842,
+        "MinY": 3177.27,
+        "MaxX": 550.878,
+        "MaxY": 3206.654
+      },
+      "SourceShapeIds": [
+        "shape-337"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-338",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 605.562,
+        "MinY": 3177.27,
+        "MaxX": 641.598,
+        "MaxY": 3206.654
+      },
+      "SourceShapeIds": [
+        "shape-338"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-342",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1166.88,
+        "MinY": 3177.27,
+        "MaxX": 1202.916,
+        "MaxY": 3206.654
+      },
+      "SourceShapeIds": [
+        "shape-342"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-343",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1257.6,
+        "MinY": 3177.27,
+        "MaxX": 1293.636,
+        "MaxY": 3206.654
+      },
+      "SourceShapeIds": [
+        "shape-343"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-352",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1636.39,
+        "MinY": 3177.27,
+        "MaxX": 1672.426,
+        "MaxY": 3206.654
+      },
+      "SourceShapeIds": [
+        "shape-352"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-347",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1807.54,
+        "MinY": 3177.27,
+        "MaxX": 1843.576,
+        "MaxY": 3206.654
+      },
+      "SourceShapeIds": [
+        "shape-347"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-358",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3191.13,
+        "MaxX": 1639.456,
+        "MaxY": 3220.514
+      },
+      "SourceShapeIds": [
+        "shape-358"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-348",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2011.66,
+        "MinY": 3191.13,
+        "MaxX": 2047.696,
+        "MaxY": 3220.514
+      },
+      "SourceShapeIds": [
+        "shape-348"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.870738
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-510",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1686.27,
+        "MinY": 3200.226,
+        "MaxX": 1697.358,
+        "MaxY": 3211.314
+      },
+      "SourceShapeIds": [
+        "shape-510"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-521",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1686.27,
+        "MinY": 3200.226,
+        "MaxX": 1697.358,
+        "MaxY": 3211.314
+      },
+      "SourceShapeIds": [
+        "shape-521"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-501",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2325.31,
+        "MinY": 3200.226,
+        "MaxX": 2336.398,
+        "MaxY": 3211.314
+      },
+      "SourceShapeIds": [
+        "shape-501"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-288",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3204.99,
+        "MaxX": 2311.466,
+        "MaxY": 3234.374
+      },
+      "SourceShapeIds": [
+        "shape-288"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-145",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 1602.42,
         "MinY": 3224.169,
@@ -1319,15 +3818,404 @@
       "SourceShapeIds": [
         "shape-145"
       ],
-      "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
         "Confidence": 0.890056
       }
     },
     {
-      "Id": "prototype:prototype-33@shape-148",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-374",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1636.39,
+        "MinY": 3246.57,
+        "MaxX": 1672.426,
+        "MaxY": 3275.954
+      },
+      "SourceShapeIds": [
+        "shape-374"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-366",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3246.57,
+        "MaxX": 2311.466,
+        "MaxY": 3275.954
+      },
+      "SourceShapeIds": [
+        "shape-366"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-508",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 392.217,
+        "MinY": 3255.666,
+        "MaxX": 403.305,
+        "MaxY": 3266.754
+      },
+      "SourceShapeIds": [
+        "shape-508"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-529",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1044.26,
+        "MinY": 3255.666,
+        "MaxX": 1055.348,
+        "MaxY": 3266.754
+      },
+      "SourceShapeIds": [
+        "shape-529"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-517",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1686.27,
+        "MinY": 3255.666,
+        "MaxX": 1697.358,
+        "MaxY": 3266.754
+      },
+      "SourceShapeIds": [
+        "shape-517"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-523",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2325.31,
+        "MinY": 3255.666,
+        "MaxX": 2336.398,
+        "MaxY": 3266.754
+      },
+      "SourceShapeIds": [
+        "shape-523"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-362",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 342.339,
+        "MinY": 3260.43,
+        "MaxX": 378.375,
+        "MaxY": 3289.814
+      },
+      "SourceShapeIds": [
+        "shape-362"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-373",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 994.381,
+        "MinY": 3260.43,
+        "MaxX": 1030.417,
+        "MaxY": 3289.814
+      },
+      "SourceShapeIds": [
+        "shape-373"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-360",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 309.369,
+        "MinY": 3274.29,
+        "MaxX": 345.405,
+        "MaxY": 3303.674
+      },
+      "SourceShapeIds": [
+        "shape-360"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-370",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 961.411,
+        "MinY": 3274.29,
+        "MaxX": 997.447,
+        "MaxY": 3303.674
+      },
+      "SourceShapeIds": [
+        "shape-370"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-367",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3274.29,
+        "MaxX": 2311.466,
+        "MaxY": 3303.674
+      },
+      "SourceShapeIds": [
+        "shape-367"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-512",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 392.217,
+        "MinY": 3283.386,
+        "MaxX": 403.305,
+        "MaxY": 3294.474
+      },
+      "SourceShapeIds": [
+        "shape-512"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-509",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1044.26,
+        "MinY": 3283.386,
+        "MaxX": 1055.348,
+        "MaxY": 3294.474
+      },
+      "SourceShapeIds": [
+        "shape-509"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-522",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2325.31,
+        "MinY": 3283.386,
+        "MaxX": 2336.398,
+        "MaxY": 3294.474
+      },
+      "SourceShapeIds": [
+        "shape-522"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-369",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 994.381,
+        "MinY": 3288.15,
+        "MaxX": 1030.417,
+        "MaxY": 3317.534
+      },
+      "SourceShapeIds": [
+        "shape-369"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-368",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3302.01,
+        "MaxX": 2311.466,
+        "MaxY": 3331.394
+      },
+      "SourceShapeIds": [
+        "shape-368"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-518",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1044.26,
+        "MinY": 3311.106,
+        "MaxX": 1055.348,
+        "MaxY": 3322.194
+      },
+      "SourceShapeIds": [
+        "shape-518"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-520",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2325.31,
+        "MinY": 3311.106,
+        "MaxX": 2336.398,
+        "MaxY": 3322.194
+      },
+      "SourceShapeIds": [
+        "shape-520"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-363",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 994.381,
+        "MinY": 3329.73,
+        "MaxX": 1030.417,
+        "MaxY": 3359.114
+      },
+      "SourceShapeIds": [
+        "shape-363"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-516",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1044.26,
+        "MinY": 3338.826,
+        "MaxX": 1055.348,
+        "MaxY": 3349.914
+      },
+      "SourceShapeIds": [
+        "shape-516"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-458",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3399.567,
+        "MaxX": 2301.487,
+        "MaxY": 3480.752
+      },
+      "SourceShapeIds": [
+        "shape-458"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-558",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1653.3,
+        "MinY": 3466.216,
+        "MaxX": 1664.388,
+        "MaxY": 3477.304
+      },
+      "SourceShapeIds": [
+        "shape-558"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-393",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3470.98,
+        "MaxX": 1639.456,
+        "MaxY": 3500.364
+      },
+      "SourceShapeIds": [
+        "shape-393"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-426",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 342.339,
+        "MinY": 3484.84,
+        "MaxX": 378.375,
+        "MaxY": 3514.224
+      },
+      "SourceShapeIds": [
+        "shape-426"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-553",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 392.217,
+        "MinY": 3493.936,
+        "MaxX": 403.305,
+        "MaxY": 3505.024
+      },
+      "SourceShapeIds": [
+        "shape-553"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-438",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3498.7,
+        "MaxX": 2311.466,
+        "MaxY": 3528.084
+      },
+      "SourceShapeIds": [
+        "shape-438"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-148",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 2445.57,
         "MinY": 3504.019,
@@ -1337,1293 +4225,207 @@
       "SourceShapeIds": [
         "shape-148"
       ],
-      "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
         "Confidence": 0.890056
       }
     },
     {
-      "Id": "prototype:prototype-34@shape-284",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-382",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 547.829,
-        "MinY": 3100.486,
-        "MaxX": 578.772,
-        "MaxY": 3192.742
+        "MinX": 2683.67,
+        "MinY": 3512.56,
+        "MaxX": 2719.706,
+        "MaxY": 3541.944
       },
       "SourceShapeIds": [
-        "shape-284"
+        "shape-382"
       ],
-      "PrototypeId": "prototype-34"
-    },
-    {
-      "Id": "prototype:prototype-34@shape-285",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 512.867,
-        "MinY": 1882.526,
-        "MaxX": 543.81,
-        "MaxY": 1974.782
-      },
-      "SourceShapeIds": [
-        "shape-285"
-      ],
-      "PrototypeId": "prototype-34"
-    },
-    {
-      "Id": "prototype:prototype-34@shape-286",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1199.87,
-        "MinY": 3100.486,
-        "MaxX": 1230.813,
-        "MaxY": 3192.742
-      },
-      "SourceShapeIds": [
-        "shape-286"
-      ],
-      "PrototypeId": "prototype-34"
-    },
-    {
-      "Id": "prototype:prototype-35@shape-287",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1100.11,
-        "MinY": 1409.746,
-        "MaxX": 1132.161,
-        "MaxY": 1501.672
-      },
-      "SourceShapeIds": [
-        "shape-287"
-      ],
-      "PrototypeId": "prototype-35"
-    },
-    {
-      "Id": "prototype:prototype-36@shape-440",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 1843.718,
-        "MaxX": 238.475,
-        "MaxY": 2040.877
-      },
-      "SourceShapeIds": [
-        "shape-440"
-      ],
-      "PrototypeId": "prototype-36"
-    },
-    {
-      "Id": "prototype:prototype-36@shape-441",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 1176.968,
-        "MaxX": 238.475,
-        "MaxY": 1374.127
-      },
-      "SourceShapeIds": [
-        "shape-441"
-      ],
-      "PrototypeId": "prototype-36"
-    },
-    {
-      "Id": "prototype:prototype-36@shape-442",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 306.112,
-        "MinY": 529.417,
-        "MaxX": 377.075,
-        "MaxY": 726.576
-      },
-      "SourceShapeIds": [
-        "shape-442"
-      ],
-      "PrototypeId": "prototype-36"
-    },
-    {
-      "Id": "prototype:prototype-36@shape-443",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2457.298,
-        "MaxX": 238.475,
-        "MaxY": 2654.457
-      },
-      "SourceShapeIds": [
-        "shape-443"
-      ],
-      "PrototypeId": "prototype-36"
-    },
-    {
-      "Id": "prototype:prototype-36@shape-444",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 3124.048,
-        "MaxX": 238.475,
-        "MaxY": 3321.207
-      },
-      "SourceShapeIds": [
-        "shape-444"
-      ],
-      "PrototypeId": "prototype-36"
-    },
-    {
-      "Id": "prototype:prototype-37@shape-445.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 306.112,
-        "MinY": 848.18,
-        "MaxX": 364.653,
-        "MaxY": 944.42
-      },
-      "SourceShapeIds": [
-        "shape-445.2"
-      ],
-      "PrototypeId": "prototype-37",
       "Recognition": {
-        "Text": "2",
-        "Confidence": 0.974845
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-37@shape-446.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-563",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 167.512,
-        "MinY": 1514.926,
-        "MaxX": 226.053,
-        "MaxY": 1611.166
+        "MinX": 2325.31,
+        "MinY": 3521.656,
+        "MaxX": 2336.398,
+        "MaxY": 3532.744
       },
       "SourceShapeIds": [
-        "shape-446.2"
+        "shape-563"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-383",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 2479.55,
+        "MinY": 3526.42,
+        "MaxX": 2515.586,
+        "MaxY": 3555.804
+      },
+      "SourceShapeIds": [
+        "shape-383"
       ],
-      "PrototypeId": "prototype-37",
       "Recognition": {
-        "Text": "2",
-        "Confidence": 0.974845
+        "Text": "0",
+        "Confidence": 0.870738
       }
     },
     {
-      "Id": "prototype:prototype-37@shape-447.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2128.506,
-        "MaxX": 226.053,
-        "MaxY": 2224.746
-      },
-      "SourceShapeIds": [
-        "shape-447.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.974845
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-448.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 3513.236,
-        "MaxX": 226.053,
-        "MaxY": 3609.476
-      },
-      "SourceShapeIds": [
-        "shape-448.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.974845
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-449.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2795.256,
-        "MaxX": 226.053,
-        "MaxY": 2891.496
-      },
-      "SourceShapeIds": [
-        "shape-449.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.974845
-      }
-    },
-    {
-      "Id": "prototype:prototype-38@shape-450",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 411.933,
-        "MinY": 570.772,
-        "MaxX": 450.637,
-        "MaxY": 624.896
-      },
-      "SourceShapeIds": [
-        "shape-450"
-      ],
-      "PrototypeId": "prototype-38",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.999169
-      }
-    },
-    {
-      "Id": "prototype:prototype-38@shape-452",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 411.933,
-        "MinY": 849.496,
-        "MaxX": 450.637,
-        "MaxY": 903.62
-      },
-      "SourceShapeIds": [
-        "shape-452"
-      ],
-      "PrototypeId": "prototype-38",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.999169
-      }
-    },
-    {
-      "Id": "prototype:prototype-39@shape-451",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 407.463,
-        "MinY": 625.103,
-        "MaxX": 454.916,
-        "MaxY": 680.214
-      },
-      "SourceShapeIds": [
-        "shape-451"
-      ],
-      "PrototypeId": "prototype-39",
-      "Recognition": {
-        "Text": "4",
-        "Confidence": 0.999965
-      }
-    },
-    {
-      "Id": "prototype:prototype-39@shape-453",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 407.463,
-        "MinY": 903.828,
-        "MaxX": 454.916,
-        "MaxY": 958.939
-      },
-      "SourceShapeIds": [
-        "shape-453"
-      ],
-      "PrototypeId": "prototype-39",
-      "Recognition": {
-        "Text": "4",
-        "Confidence": 0.999965
-      }
-    },
-    {
-      "Id": "prototype:prototype-40@shape-454",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-406",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 994.381,
-        "MinY": 3169.283,
-        "MaxX": 1024.994,
-        "MaxY": 3220.184
+        "MinY": 3540.28,
+        "MaxX": 1030.417,
+        "MaxY": 3569.664
       },
       "SourceShapeIds": [
-        "shape-454"
+        "shape-406"
       ],
-      "PrototypeId": "prototype-40"
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
     },
     {
-      "Id": "prototype:prototype-40@shape-455",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-546",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 315.675,
-        "MinY": 1888.953,
-        "MaxX": 346.288,
-        "MaxY": 1939.854
+        "MinX": 1044.26,
+        "MinY": 3549.376,
+        "MaxX": 1055.348,
+        "MaxY": 3560.464
       },
       "SourceShapeIds": [
-        "shape-455"
-      ],
-      "PrototypeId": "prototype-40"
+        "shape-546"
+      ]
     },
     {
-      "Id": "prototype:prototype-40@shape-456",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-556",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1653.3,
+        "MinY": 3549.376,
+        "MaxX": 1664.388,
+        "MaxY": 3560.464
+      },
+      "SourceShapeIds": [
+        "shape-556"
+      ]
+    },
+    {
+      "Id": "raw-glyph:shape-395",
+      "Kind": "RawGlyph",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3554.14,
+        "MaxX": 1639.456,
+        "MaxY": 3583.524
+      },
+      "SourceShapeIds": [
+        "shape-395"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
+    },
+    {
+      "Id": "raw-glyph:shape-429",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 342.339,
-        "MinY": 3169.283,
-        "MaxX": 372.952,
-        "MaxY": 3220.184
+        "MinY": 3568,
+        "MaxX": 378.375,
+        "MaxY": 3597.384
       },
       "SourceShapeIds": [
-        "shape-456"
+        "shape-429"
       ],
-      "PrototypeId": "prototype-40"
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.660788
+      }
     },
     {
-      "Id": "prototype:prototype-40@shape-459",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-551",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 937.883,
-        "MinY": 1464.683,
-        "MaxX": 968.496,
-        "MaxY": 1515.584
+        "MinX": 392.217,
+        "MinY": 3577.096,
+        "MaxX": 403.305,
+        "MaxY": 3588.184
       },
       "SourceShapeIds": [
-        "shape-459"
-      ],
-      "PrototypeId": "prototype-40"
+        "shape-551"
+      ]
     },
     {
-      "Id": "prototype:prototype-41@shape-457",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1581.29,
-        "MinY": 1200.357,
-        "MaxX": 1607.347,
-        "MaxY": 1281.542
-      },
-      "SourceShapeIds": [
-        "shape-457"
-      ],
-      "PrototypeId": "prototype-41"
-    },
-    {
-      "Id": "prototype:prototype-41@shape-458",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-437",
+      "Kind": "RawGlyph",
       "Bounds": {
         "MinX": 2275.43,
-        "MinY": 3399.567,
-        "MaxX": 2301.487,
-        "MaxY": 3480.752
+        "MinY": 3609.58,
+        "MaxX": 2311.466,
+        "MaxY": 3638.964
       },
       "SourceShapeIds": [
-        "shape-458"
+        "shape-437"
       ],
-      "PrototypeId": "prototype-41"
-    },
-    {
-      "Id": "prototype:prototype-42@shape-460.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2803.63,
-        "MinY": 730.964,
-        "MaxX": 2849.37,
-        "MaxY": 778.245
-      },
-      "SourceShapeIds": [
-        "shape-460.1"
-      ],
-      "PrototypeId": "prototype-42",
       "Recognition": {
-        "Text": "p",
-        "Confidence": 0.923992
+        "Text": "0",
+        "Confidence": 0.660788
       }
     },
     {
-      "Id": "prototype:prototype-42@shape-462.1",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-407",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 2791.82,
-        "MinY": 2011.29,
-        "MaxX": 2837.55,
-        "MaxY": 2058.57
+        "MinX": 994.381,
+        "MinY": 3623.44,
+        "MaxX": 1030.417,
+        "MaxY": 3652.824
       },
       "SourceShapeIds": [
-        "shape-462.1"
+        "shape-407"
       ],
-      "PrototypeId": "prototype-42",
       "Recognition": {
-        "Text": "p",
-        "Confidence": 0.923992
+        "Text": "0",
+        "Confidence": 0.660788
       }
     },
     {
-      "Id": "prototype:prototype-43@shape-460.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-544",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 2771.33,
-        "MinY": 732.292,
-        "MaxX": 2813.63,
-        "MaxY": 760.37
+        "MinX": 1044.26,
+        "MinY": 3632.536,
+        "MaxX": 1055.348,
+        "MaxY": 3643.624
       },
       "SourceShapeIds": [
-        "shape-460.2"
-      ],
-      "PrototypeId": "prototype-43",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.997244
-      }
+        "shape-544"
+      ]
     },
     {
-      "Id": "prototype:prototype-43@shape-462.2",
-      "Kind": "Prototype",
+      "Id": "raw-glyph:shape-566",
+      "Kind": "RawGlyph",
       "Bounds": {
-        "MinX": 2759.52,
-        "MinY": 2012.62,
-        "MaxX": 2801.82,
-        "MaxY": 2040.7
+        "MinX": 2325.31,
+        "MinY": 3632.536,
+        "MaxX": 2336.398,
+        "MaxY": 3643.624
       },
       "SourceShapeIds": [
-        "shape-462.2"
-      ],
-      "PrototypeId": "prototype-43",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.997244
-      }
-    },
-    {
-      "Id": "prototype:prototype-44@shape-461",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 284.449,
-        "MinY": 1439.07,
-        "MaxX": 366.136,
-        "MaxY": 1486.35
-      },
-      "SourceShapeIds": [
-        "shape-461"
-      ],
-      "PrototypeId": "prototype-44",
-      "Recognition": {
-        "Text": "dd",
-        "Confidence": 0.986973
-      }
-    },
-    {
-      "Id": "prototype:prototype-44@shape-463",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 284.449,
-        "MinY": 2719.4,
-        "MaxX": 366.136,
-        "MaxY": 2766.68
-      },
-      "SourceShapeIds": [
-        "shape-463"
-      ],
-      "PrototypeId": "prototype-44",
-      "Recognition": {
-        "Text": "dd",
-        "Confidence": 0.986973
-      }
-    },
-    {
-      "Id": "prototype:prototype-45@shape-465",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1122.75,
-        "MinY": 2468.48,
-        "MaxX": 1153.24,
-        "MaxY": 2483.59
-      },
-      "SourceShapeIds": [
-        "shape-465"
-      ],
-      "PrototypeId": "prototype-45"
-    },
-    {
-      "Id": "prototype:prototype-45@shape-469",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1235.61,
-        "MinY": 568.164,
-        "MaxX": 1266.11,
-        "MaxY": 583.426
-      },
-      "SourceShapeIds": [
-        "shape-469"
-      ],
-      "PrototypeId": "prototype-45"
-    },
-    {
-      "Id": "prototype:prototype-45@shape-471",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1077.1,
-        "MinY": 1882.59,
-        "MaxX": 1107.6,
-        "MaxY": 1897.73
-      },
-      "SourceShapeIds": [
-        "shape-471"
-      ],
-      "PrototypeId": "prototype-45"
-    },
-    {
-      "Id": "prototype:prototype-45@shape-473",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1137.28,
-        "MinY": 1188.32,
-        "MaxX": 1167.77,
-        "MaxY": 1203.26
-      },
-      "SourceShapeIds": [
-        "shape-473"
-      ],
-      "PrototypeId": "prototype-45"
-    },
-    {
-      "Id": "prototype:prototype-46@shape-467",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 693.369,
-        "MinY": 583.412,
-        "MaxX": 723.861,
-        "MaxY": 598.674
-      },
-      "SourceShapeIds": [
-        "shape-467"
-      ],
-      "PrototypeId": "prototype-46"
-    },
-    {
-      "Id": "prototype:prototype-47@shape-474",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1681.09,
-        "MinY": 2596.45,
-        "MaxX": 1716.75,
-        "MaxY": 2613.26
-      },
-      "SourceShapeIds": [
-        "shape-474"
-      ],
-      "PrototypeId": "prototype-47"
-    },
-    {
-      "Id": "prototype:prototype-47@shape-475",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1681.09,
-        "MinY": 2581.9,
-        "MaxX": 1716.75,
-        "MaxY": 2598.71
-      },
-      "SourceShapeIds": [
-        "shape-475"
-      ],
-      "PrototypeId": "prototype-47"
-    },
-    {
-      "Id": "prototype:prototype-48@shape-480.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 406.591,
-        "MinY": 478.534,
-        "MaxX": 452.341,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-480.1"
-      ],
-      "PrototypeId": "prototype-48",
-      "Recognition": {
-        "Text": "C",
-        "Confidence": 0.99929
-      }
-    },
-    {
-      "Id": "prototype:prototype-49@shape-480.2",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 457.31,
-        "MinY": 495.206,
-        "MaxX": 494.904,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-480.2"
-      ],
-      "PrototypeId": "prototype-49",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.999602
-      }
-    },
-    {
-      "Id": "prototype:prototype-49@shape-480.5",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 573.31,
-        "MinY": 495.206,
-        "MaxX": 610.904,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-480.5"
-      ],
-      "PrototypeId": "prototype-49",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.999602
-      }
-    },
-    {
-      "Id": "prototype:prototype-50@shape-480.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 497.248,
-        "MinY": 495.206,
-        "MaxX": 540.654,
-        "MaxY": 527.909
-      },
-      "SourceShapeIds": [
-        "shape-480.3"
-      ],
-      "PrototypeId": "prototype-50",
-      "Recognition": {
-        "Text": "n",
-        "Confidence": 0.990893
-      }
-    },
-    {
-      "Id": "prototype:prototype-51@shape-480.4",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 543.451,
-        "MinY": 482.956,
-        "MaxX": 569.045,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-480.4"
-      ],
-      "PrototypeId": "prototype-51",
-      "Recognition": {
-        "Text": "t",
-        "Confidence": 0.998951
-      }
-    },
-    {
-      "Id": "prototype:prototype-52@shape-480.6",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 611.904,
-        "MinY": 478.534,
-        "MaxX": 652.904,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-480.6"
-      ],
-      "PrototypeId": "prototype-52",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.960847
-      }
-    },
-    {
-      "Id": "prototype:prototype-53@shape-480.8",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 656.779,
-        "MinY": 496.222,
-        "MaxX": 677.748,
-        "MaxY": 527.909
-      },
-      "SourceShapeIds": [
-        "shape-480.8"
-      ],
-      "PrototypeId": "prototype-53",
-      "Recognition": {
-        "Text": "1",
-        "Confidence": 0.989025
-      }
-    },
-    {
-      "Id": "prototype:prototype-54@shape-480.9",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 680.982,
-        "MinY": 478.534,
-        "MaxX": 702.076,
-        "MaxY": 527.909
-      },
-      "SourceShapeIds": [
-        "shape-480.9"
-      ],
-      "PrototypeId": "prototype-54"
-    },
-    {
-      "Id": "prototype:prototype-55@shape-480.10",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 706.045,
-        "MinY": 495.206,
-        "MaxX": 740.091,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-480.10"
-      ],
-      "PrototypeId": "prototype-55",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.997385
-      }
-    },
-    {
-      "Id": "prototype:prototype-56@shape-482",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 783.013,
-        "MinY": 462.425,
-        "MaxX": 830.295,
-        "MaxY": 534.237
-      },
-      "SourceShapeIds": [
-        "shape-482"
-      ],
-      "PrototypeId": "prototype-56"
-    },
-    {
-      "Id": "prototype:prototype-57@shape-483.3",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 912.716,
-        "MinY": 480.737,
-        "MaxX": 944.482,
-        "MaxY": 528.909
-      },
-      "SourceShapeIds": [
-        "shape-483.3"
-      ],
-      "PrototypeId": "prototype-57",
-      "Recognition": {
-        "Text": "6",
-        "Confidence": 0.998092
-      }
-    },
-    {
-      "Id": "prototype:prototype-58@shape-483.4",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 949.248,
-        "MinY": 480.737,
-        "MaxX": 980.732,
-        "MaxY": 527.909
-      },
-      "SourceShapeIds": [
-        "shape-483.4"
-      ],
-      "PrototypeId": "prototype-58",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.999923
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-486.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2122.23,
-        "MinY": 2377.22,
-        "MaxX": 2219.68,
-        "MaxY": 2438.82
-      },
-      "SourceShapeIds": [
-        "shape-486.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.74327
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-488.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2193.12,
-        "MinY": 1096.89,
-        "MaxX": 2290.57,
-        "MaxY": 1158.49
-      },
-      "SourceShapeIds": [
-        "shape-488.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.74327
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-490.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2188.63,
-        "MinY": 1674.66,
-        "MaxX": 2286.08,
-        "MaxY": 1736.26
-      },
-      "SourceShapeIds": [
-        "shape-490.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.74327
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-492.1",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2173.85,
-        "MinY": 2954.99,
-        "MaxX": 2271.31,
-        "MaxY": 3016.59
-      },
-      "SourceShapeIds": [
-        "shape-492.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.74327
-      }
-    },
-    {
-      "Id": "prototype:prototype-60@shape-567",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 106.881,
-        "MinY": 2499.483,
-        "MaxX": 131.968,
-        "MaxY": 2904.345
-      },
-      "SourceShapeIds": [
-        "shape-567"
-      ],
-      "PrototypeId": "prototype-60"
-    },
-    {
-      "Id": "prototype:prototype-60@shape-568",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 245.481,
-        "MinY": 571.507,
-        "MaxX": 270.568,
-        "MaxY": 957.358
-      },
-      "SourceShapeIds": [
-        "shape-568"
-      ],
-      "PrototypeId": "prototype-60"
-    },
-    {
-      "Id": "prototype:prototype-60@shape-569",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 106.881,
-        "MinY": 1885.638,
-        "MaxX": 131.968,
-        "MaxY": 2237.841
-      },
-      "SourceShapeIds": [
-        "shape-569"
-      ],
-      "PrototypeId": "prototype-60"
-    },
-    {
-      "Id": "prototype:prototype-60@shape-570",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 106.881,
-        "MinY": 3166.489,
-        "MaxX": 131.968,
-        "MaxY": 3622.087
-      },
-      "SourceShapeIds": [
-        "shape-570"
-      ],
-      "PrototypeId": "prototype-60"
-    },
-    {
-      "Id": "prototype:prototype-60@shape-571",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 106.881,
-        "MinY": 1219.153,
-        "MaxX": 131.968,
-        "MaxY": 1624.015
-      },
-      "SourceShapeIds": [
-        "shape-571"
-      ],
-      "PrototypeId": "prototype-60"
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-445@shape-445.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 306.112,
-        "MinY": 848.18,
-        "MaxX": 379.743,
-        "MaxY": 944.42
-      },
-      "SourceShapeIds": [
-        "shape-445.whole",
-        "shape-445.1",
-        "shape-445.2",
-        "shape-445.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-445",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.992286
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-446@shape-446.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 1514.926,
-        "MaxX": 241.143,
-        "MaxY": 1611.166
-      },
-      "SourceShapeIds": [
-        "shape-446.whole",
-        "shape-446.1",
-        "shape-446.2",
-        "shape-446.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-446",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.992286
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-447@shape-447.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2128.506,
-        "MaxX": 241.143,
-        "MaxY": 2224.746
-      },
-      "SourceShapeIds": [
-        "shape-447.whole",
-        "shape-447.1",
-        "shape-447.2",
-        "shape-447.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-447",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.992286
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-448@shape-448.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 3513.236,
-        "MaxX": 241.143,
-        "MaxY": 3609.476
-      },
-      "SourceShapeIds": [
-        "shape-448.whole",
-        "shape-448.1",
-        "shape-448.2",
-        "shape-448.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-448",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.992286
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-449@shape-449.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2795.256,
-        "MaxX": 241.143,
-        "MaxY": 2891.496
-      },
-      "SourceShapeIds": [
-        "shape-449.whole",
-        "shape-449.1",
-        "shape-449.2",
-        "shape-449.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-449",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.992286
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-460@shape-460.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2771.33,
-        "MinY": 730.964,
-        "MaxX": 2849.37,
-        "MaxY": 778.245
-      },
-      "SourceShapeIds": [
-        "shape-460.whole",
-        "shape-460.1",
-        "shape-460.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-460",
-      "Recognition": {
-        "Text": "du",
-        "Confidence": 0.773281
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-462@shape-462.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2759.52,
-        "MinY": 2011.29,
-        "MaxX": 2837.55,
-        "MaxY": 2058.57
-      },
-      "SourceShapeIds": [
-        "shape-462.whole",
-        "shape-462.1",
-        "shape-462.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-462",
-      "Recognition": {
-        "Text": "du",
-        "Confidence": 0.772109
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-486@shape-486.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2122.23,
-        "MinY": 2377.22,
-        "MaxX": 2231.12,
-        "MaxY": 2438.82
-      },
-      "SourceShapeIds": [
-        "shape-486.whole",
-        "shape-486.1",
-        "shape-486.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-486",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.912829
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-488@shape-488.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2193.12,
-        "MinY": 1096.89,
-        "MaxX": 2302.01,
-        "MaxY": 1158.49
-      },
-      "SourceShapeIds": [
-        "shape-488.whole",
-        "shape-488.1",
-        "shape-488.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-488",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.912903
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-490@shape-490.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2188.63,
-        "MinY": 1674.66,
-        "MaxX": 2297.52,
-        "MaxY": 1736.26
-      },
-      "SourceShapeIds": [
-        "shape-490.whole",
-        "shape-490.1",
-        "shape-490.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-490",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.829987
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-492@shape-492.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2173.85,
-        "MinY": 2954.99,
-        "MaxX": 2282.75,
-        "MaxY": 3016.59
-      },
-      "SourceShapeIds": [
-        "shape-492.whole",
-        "shape-492.1",
-        "shape-492.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-492",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.851203
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-53@shape-53.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 2348.87,
-        "MinY": 348.944,
-        "MaxX": 2439.39,
-        "MaxY": 396.022
-      },
-      "SourceShapeIds": [
-        "shape-53.whole",
-        "shape-53.1",
-        "shape-53.2",
-        "shape-53.3",
-        "shape-53.4",
-        "shape-53.5"
-      ],
-      "PrototypeId": "compound-prototype-shape-53",
-      "Recognition": {
-        "Text": "Giya",
-        "Confidence": 0.999635
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-57@shape-57.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1272.98,
-        "MinY": 283.933,
-        "MaxX": 1411.42,
-        "MaxY": 338.527
-      },
-      "SourceShapeIds": [
-        "shape-57.whole",
-        "shape-57.1",
-        "shape-57.2",
-        "shape-57.3",
-        "shape-57.4"
-      ],
-      "PrototypeId": "compound-prototype-shape-57",
-      "Recognition": {
-        "Text": "from",
-        "Confidence": 0.999832
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-58@shape-58.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1434.72,
-        "MinY": 284.277,
-        "MaxX": 1531,
-        "MaxY": 338.355
-      },
-      "SourceShapeIds": [
-        "shape-58.whole",
-        "shape-58.1",
-        "shape-58.2",
-        "shape-58.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-58",
-      "Recognition": {
-        "Text": "the",
-        "Confidence": 0.999392
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-59@shape-59.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 1551.98,
-        "MinY": 283.933,
-        "MaxX": 1659.42,
-        "MaxY": 337.465
-      },
-      "SourceShapeIds": [
-        "shape-59.whole",
-        "shape-59.1",
-        "shape-59.2",
-        "shape-59.3",
-        "shape-59.4",
-        "shape-59.5"
-      ],
-      "PrototypeId": "compound-prototype-shape-59",
-      "Recognition": {
-        "Text": "film",
-        "Confidence": 0.998098
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-61@shape-61.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 3064.99,
-        "MaxX": 208.592,
-        "MaxY": 3108.75
-      },
-      "SourceShapeIds": [
-        "shape-61.whole",
-        "shape-61.1",
-        "shape-61.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-61",
-      "Recognition": {
-        "Text": "17",
-        "Confidence": 0.999875
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-63@shape-63.whole",
-      "Kind": "Prototype",
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 2397.47,
-        "MaxX": 204.75,
-        "MaxY": 2442.91
-      },
-      "SourceShapeIds": [
-        "shape-63.whole",
-        "shape-63.1",
-        "shape-63.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-63",
-      "Recognition": {
-        "Text": "13",
-        "Confidence": 0.999954
-      }
+        "shape-566"
+      ]
     },
     {
       "Id": "raw-run:1",
@@ -2751,25 +4553,6 @@
       "Id": "raw-run:7",
       "Kind": "HorizontalRun",
       "Bounds": {
-        "MinX": 912.716,
-        "MinY": 478.597,
-        "MaxX": 1003.81,
-        "MaxY": 536.144
-      },
-      "SourceShapeIds": [
-        "shape-483.3",
-        "shape-483.4",
-        "shape-483.5"
-      ],
-      "Recognition": {
-        "Text": "62)",
-        "Confidence": 0.999778
-      }
-    },
-    {
-      "Id": "raw-run:8",
-      "Kind": "HorizontalRun",
-      "Bounds": {
         "MinX": 571.583,
         "MinY": 554.264,
         "MaxX": 791.096,
@@ -2785,7 +4568,7 @@
       }
     },
     {
-      "Id": "raw-run:9",
+      "Id": "raw-run:8",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1080.84,
@@ -2801,11 +4584,11 @@
       ],
       "Recognition": {
         "Text": "0:",
-        "Confidence": 0.655886
+        "Confidence": 0.655885
       }
     },
     {
-      "Id": "raw-run:10",
+      "Id": "raw-run:9",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1637.6,
@@ -2819,7 +4602,7 @@
       ]
     },
     {
-      "Id": "raw-run:11",
+      "Id": "raw-run:10",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2206.98,
@@ -2839,7 +4622,7 @@
       }
     },
     {
-      "Id": "raw-run:12",
+      "Id": "raw-run:11",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1596.42,
@@ -2858,7 +4641,7 @@
       }
     },
     {
-      "Id": "raw-run:13",
+      "Id": "raw-run:12",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 505.627,
@@ -2878,7 +4661,7 @@
       ]
     },
     {
-      "Id": "raw-run:14",
+      "Id": "raw-run:13",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1080.84,
@@ -2896,7 +4679,7 @@
       }
     },
     {
-      "Id": "raw-run:15",
+      "Id": "raw-run:14",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1637.6,
@@ -2914,7 +4697,7 @@
       }
     },
     {
-      "Id": "raw-run:16",
+      "Id": "raw-run:15",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1080.84,
@@ -2932,7 +4715,7 @@
       }
     },
     {
-      "Id": "raw-run:17",
+      "Id": "raw-run:16",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 538.596,
@@ -2946,11 +4729,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962388
+        "Confidence": 0.962387
       }
     },
     {
-      "Id": "raw-run:18",
+      "Id": "raw-run:17",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1637.6,
@@ -2968,7 +4751,7 @@
       }
     },
     {
-      "Id": "raw-run:19",
+      "Id": "raw-run:18",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 538.596,
@@ -2982,11 +4765,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962388
+        "Confidence": 0.962387
       }
     },
     {
-      "Id": "raw-run:20",
+      "Id": "raw-run:19",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1102.3,
@@ -3004,7 +4787,7 @@
       }
     },
     {
-      "Id": "raw-run:21",
+      "Id": "raw-run:20",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 937.883,
@@ -3022,7 +4805,7 @@
       }
     },
     {
-      "Id": "raw-run:22",
+      "Id": "raw-run:21",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 282.706,
@@ -3040,7 +4823,7 @@
       }
     },
     {
-      "Id": "raw-run:23",
+      "Id": "raw-run:22",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2719.43,
@@ -3054,7 +4837,7 @@
       ]
     },
     {
-      "Id": "raw-run:24",
+      "Id": "raw-run:23",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 937.883,
@@ -3068,11 +4851,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962388
+        "Confidence": 0.962387
       }
     },
     {
-      "Id": "raw-run:25",
+      "Id": "raw-run:24",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1548.32,
@@ -3092,7 +4875,7 @@
       }
     },
     {
-      "Id": "raw-run:26",
+      "Id": "raw-run:25",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 316.68,
@@ -3106,11 +4889,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
-      "Id": "raw-run:27",
+      "Id": "raw-run:26",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1551.85,
@@ -3129,7 +4912,7 @@
       }
     },
     {
-      "Id": "raw-run:28",
+      "Id": "raw-run:27",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2657.03,
@@ -3144,11 +4927,11 @@
       ],
       "Recognition": {
         "Text": "bo",
-        "Confidence": 0.795597
+        "Confidence": 0.795596
       }
     },
     {
-      "Id": "raw-run:29",
+      "Id": "raw-run:28",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 316.68,
@@ -3166,7 +4949,7 @@
       }
     },
     {
-      "Id": "raw-run:30",
+      "Id": "raw-run:29",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1067.12,
@@ -3180,7 +4963,7 @@
       ]
     },
     {
-      "Id": "raw-run:31",
+      "Id": "raw-run:30",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1217.9,
@@ -3198,7 +4981,7 @@
       }
     },
     {
-      "Id": "raw-run:32",
+      "Id": "raw-run:31",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 937.883,
@@ -3212,11 +4995,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
-      "Id": "raw-run:33",
+      "Id": "raw-run:32",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 316.68,
@@ -3234,7 +5017,7 @@
       }
     },
     {
-      "Id": "raw-run:34",
+      "Id": "raw-run:33",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1581.29,
@@ -3248,11 +5031,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962271
+        "Confidence": 0.96227
       }
     },
     {
-      "Id": "raw-run:35",
+      "Id": "raw-run:34",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 937.883,
@@ -3266,11 +5049,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
-      "Id": "raw-run:36",
+      "Id": "raw-run:35",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 907.356,
@@ -3290,7 +5073,7 @@
       }
     },
     {
-      "Id": "raw-run:37",
+      "Id": "raw-run:36",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1513.55,
@@ -3304,7 +5087,7 @@
       ]
     },
     {
-      "Id": "raw-run:38",
+      "Id": "raw-run:37",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 521.461,
@@ -3322,7 +5105,7 @@
       }
     },
     {
-      "Id": "raw-run:39",
+      "Id": "raw-run:38",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2136.09,
@@ -3342,7 +5125,7 @@
       }
     },
     {
-      "Id": "raw-run:40",
+      "Id": "raw-run:39",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1472.37,
@@ -3361,7 +5144,7 @@
       }
     },
     {
-      "Id": "raw-run:41",
+      "Id": "raw-run:40",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 315.675,
@@ -3375,11 +5158,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
-      "Id": "raw-run:42",
+      "Id": "raw-run:41",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 907.356,
@@ -3393,11 +5176,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962497
+        "Confidence": 0.962496
       }
     },
     {
-      "Id": "raw-run:43",
+      "Id": "raw-run:42",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 282.706,
@@ -3419,7 +5202,7 @@
       }
     },
     {
-      "Id": "raw-run:44",
+      "Id": "raw-run:43",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1513.55,
@@ -3437,7 +5220,7 @@
       }
     },
     {
-      "Id": "raw-run:45",
+      "Id": "raw-run:44",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 907.356,
@@ -3451,11 +5234,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962497
+        "Confidence": 0.962496
       }
     },
     {
-      "Id": "raw-run:46",
+      "Id": "raw-run:45",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1513.55,
@@ -3473,7 +5256,7 @@
       }
     },
     {
-      "Id": "raw-run:47",
+      "Id": "raw-run:46",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1087.77,
@@ -3491,7 +5274,7 @@
       }
     },
     {
-      "Id": "raw-run:48",
+      "Id": "raw-run:47",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1524.99,
@@ -3509,7 +5292,7 @@
       }
     },
     {
-      "Id": "raw-run:49",
+      "Id": "raw-run:48",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 949.972,
@@ -3523,11 +5306,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.841263
+        "Confidence": 0.841262
       }
     },
     {
-      "Id": "raw-run:50",
+      "Id": "raw-run:49",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1714.62,
@@ -3545,7 +5328,7 @@
       }
     },
     {
-      "Id": "raw-run:51",
+      "Id": "raw-run:50",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 282.706,
@@ -3563,7 +5346,7 @@
       }
     },
     {
-      "Id": "raw-run:52",
+      "Id": "raw-run:51",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2187.71,
@@ -3581,7 +5364,7 @@
       }
     },
     {
-      "Id": "raw-run:53",
+      "Id": "raw-run:52",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 949.972,
@@ -3595,11 +5378,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962497
+        "Confidence": 0.962496
       }
     },
     {
-      "Id": "raw-run:54",
+      "Id": "raw-run:53",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 316.68,
@@ -3613,11 +5396,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
-      "Id": "raw-run:55",
+      "Id": "raw-run:54",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1524.99,
@@ -3636,7 +5419,7 @@
       }
     },
     {
-      "Id": "raw-run:56",
+      "Id": "raw-run:55",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 316.68,
@@ -3654,7 +5437,7 @@
       }
     },
     {
-      "Id": "raw-run:57",
+      "Id": "raw-run:56",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 949.972,
@@ -3672,7 +5455,7 @@
       }
     },
     {
-      "Id": "raw-run:58",
+      "Id": "raw-run:57",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 316.68,
@@ -3690,7 +5473,7 @@
       }
     },
     {
-      "Id": "raw-run:59",
+      "Id": "raw-run:58",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1554.42,
@@ -3708,7 +5491,7 @@
       }
     },
     {
-      "Id": "raw-run:60",
+      "Id": "raw-run:59",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 949.972,
@@ -3726,7 +5509,7 @@
       }
     },
     {
-      "Id": "raw-run:61",
+      "Id": "raw-run:60",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1603.42,
@@ -3747,7 +5530,7 @@
       }
     },
     {
-      "Id": "raw-run:62",
+      "Id": "raw-run:61",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2238.79,
@@ -3766,7 +5549,7 @@
       }
     },
     {
-      "Id": "raw-run:63",
+      "Id": "raw-run:62",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1602.42,
@@ -3785,7 +5568,7 @@
       }
     },
     {
-      "Id": "raw-run:64",
+      "Id": "raw-run:63",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2275.43,
@@ -3803,7 +5586,7 @@
       }
     },
     {
-      "Id": "raw-run:65",
+      "Id": "raw-run:64",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2238.79,
@@ -3824,7 +5607,7 @@
       }
     },
     {
-      "Id": "raw-run:66",
+      "Id": "raw-run:65",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 309.369,
@@ -3844,7 +5627,7 @@
       }
     },
     {
-      "Id": "raw-run:67",
+      "Id": "raw-run:66",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 961.411,
@@ -3866,7 +5649,7 @@
       }
     },
     {
-      "Id": "raw-run:68",
+      "Id": "raw-run:67",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 994.381,
@@ -3880,11 +5663,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962388
+        "Confidence": 0.962387
       }
     },
     {
-      "Id": "raw-run:69",
+      "Id": "raw-run:68",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 312.903,
@@ -3903,7 +5686,7 @@
       }
     },
     {
-      "Id": "raw-run:70",
+      "Id": "raw-run:69",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1603.42,
@@ -3917,11 +5700,11 @@
       ],
       "Recognition": {
         "Text": "0",
-        "Confidence": 0.663357
+        "Confidence": 0.663358
       }
     },
     {
-      "Id": "raw-run:71",
+      "Id": "raw-run:70",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2275.43,
@@ -3939,7 +5722,7 @@
       }
     },
     {
-      "Id": "raw-run:72",
+      "Id": "raw-run:71",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2445.57,
@@ -3953,11 +5736,11 @@
       ],
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.729871
+        "Confidence": 0.729872
       }
     },
     {
-      "Id": "raw-run:73",
+      "Id": "raw-run:72",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 964.946,
@@ -3976,7 +5759,7 @@
       }
     },
     {
-      "Id": "raw-run:74",
+      "Id": "raw-run:73",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1603.42,
@@ -3990,11 +5773,11 @@
       ],
       "Recognition": {
         "Text": "0",
-        "Confidence": 0.663357
+        "Confidence": 0.663358
       }
     },
     {
-      "Id": "raw-run:75",
+      "Id": "raw-run:74",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 342.339,
@@ -4008,11 +5791,11 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962497
+        "Confidence": 0.962496
       }
     },
     {
-      "Id": "raw-run:76",
+      "Id": "raw-run:75",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2275.43,
@@ -4030,7 +5813,7 @@
       }
     },
     {
-      "Id": "raw-run:77",
+      "Id": "raw-run:76",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 994.381,
@@ -4044,7 +5827,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962388
+        "Confidence": 0.962387
       }
     }
   ]

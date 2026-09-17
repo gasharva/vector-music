@@ -1,9 +1,10 @@
 Building current SvgScene...
 Loading PP-OCRv5 Latin...
-Recognizing prototype glyphs and horizontal text runs...
-Prototype observations : 151
-Horizontal runs        : 77
-Recognized prototypes  : 114
-Recognized runs        : 70
-JSON: /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.json
-SVG : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.svg
+OCR-probing raw glyphs, then recognizing uncertain horizontal runs...
+Raw glyphs OCR-probed : 370
+Uncertain raw glyphs  : 287
+Horizontal runs       : 76
+Recognized runs       : 69
+JSON     : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.json
+SVG all  : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.svg
+SVG runs : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.runs.svg
