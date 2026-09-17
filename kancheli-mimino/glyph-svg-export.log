@@ -1,0 +1,137 @@
+Using launch settings from SvgScene/Properties/launchSettings.json...
+Classifying contour prototypes with Audiveris BasicClassifier...
+Downloading official Audiveris basic-classifier.zip...
+[bass-clef-repair] CANDIDATE prototype-37 main=shape-445.2 dots=shape-545,shape-547
+[bass-clef-repair] RESULT    prototype-37 label=EIGHTH_REST confidence=47.7 % interline=20
+[bass-clef-repair] REJECT    prototype-37 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE prototype-44 main=shape-461 dots=shape-545,shape-547
+[bass-clef-repair] RESULT    prototype-44 label=STACCATISSIMO confidence=36.4 % interline=20
+[bass-clef-repair] REJECT    prototype-44 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE prototype-59 main=shape-486.1 dots=shape-505,shape-530
+[bass-clef-repair] RESULT    prototype-59 label=METRO_HALF confidence=60.1 % interline=40
+[bass-clef-repair] REJECT    prototype-59 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-445 main=shape-445.whole dots=shape-508,shape-512
+[bass-clef-repair] RESULT    compound-prototype-shape-445 label=EIGHTH_REST confidence=63.5 % interline=20
+[bass-clef-repair] REJECT    compound-prototype-shape-445 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-488 main=shape-488.whole dots=shape-523,shape-522
+[bass-clef-repair] RESULT    compound-prototype-shape-488 label=STACCATISSIMO confidence=30.6 % interline=20
+[bass-clef-repair] REJECT    compound-prototype-shape-488 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-490 main=shape-490.whole dots=shape-523,shape-522
+[bass-clef-repair] RESULT    compound-prototype-shape-490 label=STACCATISSIMO confidence=80.4 % interline=30
+[bass-clef-repair] REJECT    compound-prototype-shape-490 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-492 main=shape-492.whole dots=shape-497,shape-519
+[bass-clef-repair] RESULT    compound-prototype-shape-492 label=METRO_HALF confidence=18.5 % interline=20
+[bass-clef-repair] REJECT    compound-prototype-shape-492 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-58 main=shape-58.whole dots=shape-298,shape-297
+[bass-clef-repair] RESULT    compound-prototype-shape-58 label=EIGHTH_REST confidence=35.8 % interline=40
+[bass-clef-repair] REJECT    compound-prototype-shape-58 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-61 main=shape-61.whole dots=shape-446.1,shape-446.3
+[bass-clef-repair] RESULT    compound-prototype-shape-61 label=METRO_HALF confidence=23.7 % interline=20
+[bass-clef-repair] REJECT    compound-prototype-shape-61 composite is not a confident F_CLEF
+[bass-clef-repair] CANDIDATE compound-prototype-shape-63 main=shape-63.whole dots=shape-446.1,shape-446.3
+[bass-clef-repair] RESULT    compound-prototype-shape-63 label=METRO_HALF confidence=53.0 % interline=20
+[bass-clef-repair] REJECT    compound-prototype-shape-63 composite is not a confident F_CLEF
+[bass-clef-repair] SUMMARY   absorbedEllipses=0; remainingEllipses=246
+Classified prototypes        : 77
+Confident prototypes >= 0.75: 37
+GeometricScene shapes       : 677
+NotationScene contours      : 151
+NotationScene prototypes    : 77
+NotationScene strokes       : 250
+NotationScene curved strokes: 24
+NotationScene vertical zigzags: 0
+NotationScene ellipses      : 246 (hollow: 82)
+ScoreLayout staffs          : 10
+ScoreLayout systems         : 5
+ScoreLayout measures        : 20
+Logical ownership assigned  : 600
+  generation 1              : 525
+  generation 2              : 47
+  generation 3              : 15
+  generation 4              : 13
+  coordinate spans          : 93
+  prototype-1: 1 instances; representative=shape-51.1; class=ACCENT 23.0 % @30px
+  prototype-2: 3 instances; representative=shape-51.2; class=DIGIT_2 35.0 % @30px
+  prototype-3: 3 instances; representative=shape-51.3; class=DYNAMICS_FZ 11.5 % @30px
+  prototype-4: 1 instances; representative=shape-51.6; class=DYNAMICS_MF 35.9 % @20px
+  prototype-5: 1 instances; representative=shape-52.3; class=ACCENT 36.6 % @40px
+  prototype-6: 1 instances; representative=shape-52.4; class=ROMAN_V 57.4 % @40px
+  prototype-7: 1 instances; representative=shape-52.6; class=DIGIT_2 11.5 % @40px
+  prototype-8: 5 instances; representative=shape-53.3; class=DOT_set 96.9 % @40px
+  prototype-9: 1 instances; representative=shape-53.4; class=ACCENT 20.5 % @40px
+  prototype-10: 3 instances; representative=shape-53.5; class=PLUCK_A 84.3 % @20px
+  prototype-11: 1 instances; representative=shape-54.1; class=ROMAN_X 8.1 % @20px
+  prototype-12: 2 instances; representative=shape-54.3; class=FLAT 11.2 % @20px
+  prototype-13: 2 instances; representative=shape-54.5; class=MARCATO 6.5 % @30px
+  prototype-14: 3 instances; representative=shape-54.6; class=TIME_SIX 80.9 % @40px
+  prototype-15: 2 instances; representative=shape-55.2; class=DIGIT_1 59.8 % @20px
+  prototype-16: 2 instances; representative=shape-55.3; class=TUPLET_SIX 69.1 % @40px
+  prototype-17: 1 instances; representative=shape-55.4; class=DIGIT_3 37.3 % @20px
+  prototype-18: 1 instances; representative=shape-55.5; class=DIGIT_5 71.5 % @30px
+  prototype-19: 1 instances; representative=shape-55.6; class=HW_REST_set 16.4 % @40px
+  prototype-20: 1 instances; representative=shape-55.7; class=DIGIT_2 96.0 % @40px
+  prototype-21: 1 instances; representative=shape-56.2; class=TIME_TWO 68.4 % @30px
+  prototype-22: 1 instances; representative=shape-56.5; class=DIGIT_2 42.7 % @20px
+  prototype-23: 3 instances; representative=shape-57.4; class=PLUCK_M 91.8 % @30px
+  prototype-24: 1 instances; representative=shape-58.1; class=QUARTER_REST 22.5 % @30px
+  prototype-25: 4 instances; representative=shape-60.1; class=STACCATISSIMO 59.9 % @30px
+  prototype-26: 1 instances; representative=shape-60.3; class=TIME_EIGHT 5.5 % @40px
+  prototype-27: 2 instances; representative=shape-61.1; class=DIGIT_1 49.6 % @30px
+  prototype-28: 1 instances; representative=shape-61.2; class=CLUTTER 57.7 % @40px
+  prototype-29: 1 instances; representative=shape-62; class=TUPLET_THREE 44.6 % @40px
+  prototype-30: 1 instances; representative=shape-63.2; class=TUPLET_THREE 98.5 % @30px
+  prototype-31: 1 instances; representative=shape-64; class=TUPLET_SIX 48.5 % @40px
+  prototype-32: 17 instances; representative=shape-132; class=FLAT 99.8 % @30px
+  prototype-33: 6 instances; representative=shape-136; class=SHARP 99.6 % @30px
+  prototype-34: 3 instances; representative=shape-284; class=FLAG_2 92.9 % @30px
+  prototype-35: 1 instances; representative=shape-287; class=FLAG_1 99.8 % @40px
+  prototype-36: 5 instances; representative=shape-440; class=G_CLEF 99.9 % @20px
+  prototype-37: 5 instances; representative=shape-445.2; class=F_CLEF 27.6 % @40px
+  prototype-38: 2 instances; representative=shape-450; class=TIME_THREE 91.3 % @40px
+  prototype-39: 2 instances; representative=shape-451; class=TIME_FOUR 89.1 % @40px
+  prototype-40: 4 instances; representative=shape-454; class=EIGHTH_REST 98.0 % @40px
+  prototype-41: 2 instances; representative=shape-457; class=QUARTER_REST 97.3 % @30px
+  prototype-42: 2 instances; representative=shape-460.1; class=DYNAMICS_P 99.1 % @40px
+  prototype-43: 2 instances; representative=shape-460.2; class=TREMOLO_3 12.4 % @40px
+  prototype-44: 2 instances; representative=shape-461; class=DYNAMICS_PP 96.3 % @30px
+  prototype-45: 4 instances; representative=shape-465; class=HW_REST_set 98.5 % @30px
+  prototype-46: 1 instances; representative=shape-467; class=HW_REST_set 98.1 % @30px
+  prototype-47: 2 instances; representative=shape-474; class=HW_REST_set 95.4 % @20px
+  prototype-48: 1 instances; representative=shape-480.1; class=COMMON_TIME 69.8 % @30px
+  prototype-49: 2 instances; representative=shape-480.2; class=TIME_SIX 99.1 % @20px
+  prototype-50: 1 instances; representative=shape-480.3; class=PLAYING_HALF_OPEN 20.5 % @20px
+  prototype-51: 1 instances; representative=shape-480.4; class=TIME_FOUR 78.1 % @40px
+  prototype-52: 1 instances; representative=shape-480.6; class=TIME_TWO 62.5 % @20px
+  prototype-53: 1 instances; representative=shape-480.8; class=DIGIT_1 56.8 % @30px
+  prototype-54: 1 instances; representative=shape-480.9; class=DIGIT_1 41.7 % @40px
+  prototype-55: 1 instances; representative=shape-480.10; class=TIME_SIX 50.0 % @40px
+  prototype-56: 1 instances; representative=shape-482; class=EIGHTH_set 89.4 % @20px
+  prototype-57: 1 instances; representative=shape-483.3; class=TUPLET_SIX 73.2 % @20px
+  prototype-58: 1 instances; representative=shape-483.4; class=DIGIT_2 88.5 % @40px
+  prototype-59: 4 instances; representative=shape-486.1; class=PEDAL_MARK 94.6 % @20px
+  prototype-60: 5 instances; representative=shape-567; class=ARPEGGIATO 13.1 % @40px
+  compound-prototype-shape-445: 1 instances; representative=shape-445.whole; class=F_CLEF 98.6 % @30px
+  compound-prototype-shape-446: 1 instances; representative=shape-446.whole; class=F_CLEF 98.6 % @30px
+  compound-prototype-shape-447: 1 instances; representative=shape-447.whole; class=F_CLEF 98.6 % @30px
+  compound-prototype-shape-448: 1 instances; representative=shape-448.whole; class=F_CLEF 98.6 % @30px
+  compound-prototype-shape-449: 1 instances; representative=shape-449.whole; class=F_CLEF 98.6 % @30px
+  compound-prototype-shape-460: 1 instances; representative=shape-460.whole; class=DYNAMICS_MP 98.6 % @40px
+  compound-prototype-shape-462: 1 instances; representative=shape-462.whole; class=DYNAMICS_MP 98.5 % @40px
+  compound-prototype-shape-486: 1 instances; representative=shape-486.whole; class=PEDAL_MARK 99.1 % @20px
+  compound-prototype-shape-488: 1 instances; representative=shape-488.whole; class=PEDAL_MARK 99.1 % @20px
+  compound-prototype-shape-490: 1 instances; representative=shape-490.whole; class=PEDAL_MARK 99.1 % @20px
+  compound-prototype-shape-492: 1 instances; representative=shape-492.whole; class=PEDAL_MARK 99.1 % @20px
+  compound-prototype-shape-53: 1 instances; representative=shape-53.whole; class=CLUTTER 32.6 % @20px
+  compound-prototype-shape-57: 1 instances; representative=shape-57.whole; class=CLUTTER 99.3 % @20px
+  compound-prototype-shape-58: 1 instances; representative=shape-58.whole; class=HW_REST_set 9.0 % @20px
+  compound-prototype-shape-59: 1 instances; representative=shape-59.whole; class=PEDAL_MARK 12.1 % @30px
+  compound-prototype-shape-61: 1 instances; representative=shape-61.whole; class=DYNAMICS_PP 15.9 % @30px
+  compound-prototype-shape-63: 1 instances; representative=shape-63.whole; class=ROMAN_VI 28.3 % @40px
+Written compact JSON: /home/runner/work/vector-music/vector-music/artifacts/glyph-scene.json
+Written score layout JSON: /home/runner/work/vector-music/vector-music/artifacts/score-layout.json
+Written logical ownership JSON: /home/runner/work/vector-music/vector-music/artifacts/kancheli-mimino.ownership.json
+Written logical ownership log: /home/runner/work/vector-music/vector-music/artifacts/kancheli-mimino.ownership.txt
+Written logical ownership SVG: /home/runner/work/vector-music/vector-music/artifacts/kancheli-mimino.ownership.svg
+Written classified symbols SVG: /home/runner/work/vector-music/vector-music/artifacts/kancheli-mimino.classified-symbols.svg
+Written bass clef repair log: /home/runner/work/vector-music/vector-music/artifacts/kancheli-mimino.bass-clef-repair.txt
+Exported vector glyph prototypes: 77 to /home/runner/work/vector-music/vector-music/artifacts/glyphs-svg
