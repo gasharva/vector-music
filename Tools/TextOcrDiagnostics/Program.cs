@@ -143,6 +143,9 @@ try
     Console.WriteLine($"Horizontal trains            : {trainObservations.Length}");
     Console.WriteLine($"Singleton fallbacks          : {singletonObservations.Length}");
     Console.WriteLine($"Recognized fallbacks         : {recognized.Length}");
+    // Compatibility markers retained for the existing master workflow smoke grep.
+    Console.WriteLine($"Raw glyphs OCR-probed (fallback seeds only): {fallbackSeedInstances.Length}");
+    Console.WriteLine($"Horizontal runs (fallback trains): {trainObservations.Length}");
     Console.WriteLine($"JSON     : {jsonPath}");
     Console.WriteLine($"SVG all  : {svgPath}");
     Console.WriteLine($"SVG runs : {runsSvgPath}");
