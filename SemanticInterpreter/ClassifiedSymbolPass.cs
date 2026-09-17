@@ -309,56 +309,84 @@ public sealed class ClassifiedSymbolPass : ISemanticPass
         SemanticFacts facts,
         ICollection<ClassifiedSymbolDecision> decisions)
     {
-        // Directions engraved between the two piano staves are especially easy for
-        // generic ownership to assign to the wrong side. Ownership still identifies
-        // the correct measure/piano pair; the semantic staff is the nearest stave.
-        var staff = ResolveNearestStaff(
-            measure,
-            element.CenterY,
-            ownedStaff.StaffNumber);
-        var anchor = onsets
+        // Piano dynamics are commonly engraved in the inter-staff gap. Generic
+        // ownership is still useful for choosing the measure, but choosing a staff
+        // from Y first is unsafe: the visually nearest staff may have no onset at the
+        // dynamic's horizontal position. Resolve musical time from both staves first.
+        var staffs = new[] { measure.Upper, measure.Lower }
+            .ToDictionary(staff => staff.StaffNumber);
+        var candidates = onsets
             .Where(onset =>
                 onset.MeasureNumber == measure.Number
-                && onset.Staff == staff.StaffNumber)
-            .OrderBy(onset => Math.Abs(onset.AnchorX - element.CenterX))
-            .ThenBy(onset => FractionValue(Fraction.Parse(onset.At)))
-            .ThenBy(onset => onset.TargetId, StringComparer.Ordinal)
-            .FirstOrDefault();
+                && staffs.ContainsKey(onset.Staff))
+            .Select(onset =>
+            {
+                var staff = staffs[onset.Staff];
+                var spacing = Math.Max(staff.LineSpacing, 0.001);
+                var dx = Math.Abs(onset.AnchorX - element.CenterX);
 
-        if (anchor is null)
+                return new
+                {
+                    Onset = onset,
+                    Staff = staff,
+                    Dx = dx,
+                    DxInSpacings = dx / spacing,
+                    VerticalDistanceInSpacings =
+                        DistanceToStaff(element.CenterY, staff.StaffBounds) / spacing
+                };
+            })
+            .ToArray();
+
+        if (candidates.Length == 0)
         {
             decisions.Add(Reject(
                 element,
                 label,
                 measure.Number,
-                staff.StaffNumber,
+                ownedStaff.StaffNumber,
                 "no-rhythmic-anchor",
                 classificationConfidence,
-                $"{label} has no rhythmic onset on resolved staff/measure"));
+                $"{label} has no rhythmic onset in owned piano measure"));
             return;
         }
 
-        var dx = Math.Abs(anchor.AnchorX - element.CenterX);
-        var maxDx = Math.Max(1.0, staff.LineSpacing * MaximumDynamicDxInSpacings);
-        if (dx > maxDx)
+        var anchorCandidate = candidates
+            .Where(candidate => candidate.DxInSpacings <= MaximumDynamicDxInSpacings)
+            .OrderBy(candidate => candidate.DxInSpacings)
+            .ThenBy(candidate => candidate.VerticalDistanceInSpacings)
+            .ThenByDescending(candidate => candidate.Staff.StaffNumber == ownedStaff.StaffNumber)
+            .ThenBy(candidate => FractionValue(Fraction.Parse(candidate.Onset.At)))
+            .ThenBy(candidate => candidate.Onset.TargetId, StringComparer.Ordinal)
+            .FirstOrDefault();
+
+        if (anchorCandidate is null)
         {
+            var nearest = candidates
+                .OrderBy(candidate => candidate.DxInSpacings)
+                .ThenBy(candidate => candidate.VerticalDistanceInSpacings)
+                .ThenBy(candidate => candidate.Onset.TargetId, StringComparer.Ordinal)
+                .First();
+
             decisions.Add(Reject(
                 element,
                 label,
                 measure.Number,
-                staff.StaffNumber,
+                nearest.Staff.StaffNumber,
                 "dynamic-anchor-too-far",
                 classificationConfidence,
-                $"{label} nearest onset is {dx / Math.Max(staff.LineSpacing, 0.001):F2} spacings away in X"));
+                $"{label} nearest onset across both staves is {nearest.DxInSpacings:F2} spacings away in X"));
             return;
         }
 
+        var staff = anchorCandidate.Staff;
+        var anchor = anchorCandidate.Onset;
+        var dx = anchorCandidate.Dx;
         var placement = PlacementAgainstStaff(element.CenterY, staff.StaffBounds);
         var reason =
             $"{element.ShapeId}: {label} {classificationConfidence:P0} -> dynamic {value}; "
             + $"m{measure.Number}:{anchor.At}; genericStaff={ownedStaff.StaffNumber}; "
             + $"semanticStaff={staff.StaffNumber}; placement={placement}; "
-            + $"dx={dx / Math.Max(staff.LineSpacing, 0.001):F2}sp";
+            + $"dx={anchorCandidate.DxInSpacings:F2}sp";
 
         facts.Add(new DynamicDirectionFact(
             measure.Number,
