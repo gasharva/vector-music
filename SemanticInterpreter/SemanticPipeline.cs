@@ -246,6 +246,22 @@ public sealed class SemanticPipeline
 
             facts.AddTrace(
                 $"{pass.Name}: added {added} fact(s); total={facts.Items.Count}");
+
+            if (pass is ClassifiedSymbolPass classified
+                && classified.LastAnalysis is not null)
+            {
+                foreach (var decision in classified.LastAnalysis.Decisions)
+                {
+                    var line =
+                        $"ClassifiedSymbol decision: shape={decision.ShapeId}; "
+                        + $"label={decision.Label}; accepted={decision.Accepted}; "
+                        + $"decision={decision.Decision}; m={decision.MeasureNumber}; "
+                        + $"staff={decision.Staff}; at={decision.At ?? "-"}; "
+                        + $"confidence={decision.Confidence:P1}; reason={decision.Reason}";
+                    facts.AddTrace(line);
+                    Console.WriteLine(line);
+                }
+            }
         }
 
         return facts;
