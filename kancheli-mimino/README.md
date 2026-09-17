@@ -1,6 +1,6 @@
 # YELLOW LEAVES (Mimino) - artifacts
 
-Commit: `87c74f91729a2779e48dd2888d3cd8807add8fb4`
+Commit: `1977ddaea52915c3ddd7294b1780aef96a2849fa`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Primary end-to-end result for opening in MuseScore.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.

@@ -1,14 +1,15 @@
 Building the existing non-OCR SvgScene...
 Running the existing Audiveris symbol classifier before OCR fallback...
 Loading PP-OCRv5 Latin for residual fallback only...
-Growing horizontal trains from poorly classified residual glyphs...
-Poor residual seed instances : 62
-OCR fallback candidates      : 28
-Horizontal trains            : 22
-Singleton fallbacks          : 6
-Recognized fallbacks         : 26
-Raw glyphs OCR-probed (fallback seeds only): 62
-Horizontal runs (fallback trains): 22
+Building disjoint greedy maximal trains from poorly classified residual glyphs...
+Poor residual glyphs          : 51
+OCR fallback candidates      : 21
+Horizontal trains            : 10
+Singleton fallbacks          : 11
+Recognized fallbacks         : 20
+Max train gap                : 2 average glyph widths
+Raw glyphs OCR-probed (fallback seeds only): 51
+Horizontal runs (fallback trains): 10
 JSON     : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.json
 SVG all  : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.svg
 SVG runs : /home/runner/work/vector-music/vector-music/artifacts/parser.ocr.runs.svg

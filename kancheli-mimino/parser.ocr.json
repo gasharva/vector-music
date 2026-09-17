@@ -1,47 +1,31 @@
 {
   "Engine": "PP-OCRv5-Latin",
-  "Mode": "poor-music-classification-seed-and-geometric-horizontal-grow",
+  "Mode": "poor-music-glyphs-greedy-disjoint-maximal-trains",
   "ClearMusicClassificationConfidence": 0.75,
+  "MaxGapAverageGlyphWidths": 2,
   "Summary": {
-    "PoorlyClassifiedResidualInstances": 62,
-    "OcrCandidates": 28,
-    "HorizontalTrains": 22,
-    "SingletonFallbacks": 6,
-    "RecognizedFallbacks": 26
+    "PoorlyClassifiedResidualGlyphs": 51,
+    "OcrCandidates": 21,
+    "HorizontalTrains": 10,
+    "SingletonFallbacks": 11,
+    "RecognizedFallbacks": 20
   },
   "Observations": [
     {
-      "Id": "fallback-train:2",
+      "Id": "fallback-train:4",
       "Kind": "HorizontalTrain",
       "Bounds": {
         "MinX": 1125.9,
-        "MinY": 142.092,
-        "MaxX": 1537.31,
-        "MaxY": 225.404
+        "MinY": 142.31,
+        "MaxX": 1934.04,
+        "MaxY": 225.185
       },
       "SourceShapeIds": [
         "shape-51.1",
         "shape-51.2",
         "shape-51.3",
         "shape-51.4",
-        "shape-51.5",
-        "shape-51.6"
-      ],
-      "Recognition": {
-        "Text": "YELLOW",
-        "Confidence": 0.999882
-      }
-    },
-    {
-      "Id": "fallback-train:1",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 1574.61,
-        "MinY": 142.31,
-        "MaxX": 1934.04,
-        "MaxY": 225.185
-      },
-      "SourceShapeIds": [
+        "shape-51.6",
         "shape-52.1",
         "shape-52.2",
         "shape-52.3",
@@ -50,37 +34,64 @@
         "shape-52.6"
       ],
       "Recognition": {
-        "Text": "LEAVES",
-        "Confidence": 0.998947
+        "Text": "YELL W LEAVES",
+        "Confidence": 0.968984
       }
     },
     {
-      "Id": "fallback-train:10",
+      "Id": "fallback-train:5",
       "Kind": "HorizontalTrain",
       "Bounds": {
-        "MinX": 1076.69,
-        "MinY": 283.933,
-        "MaxX": 1531,
-        "MaxY": 351.543
+        "MinX": 1434.72,
+        "MinY": 284.277,
+        "MaxX": 1491.65,
+        "MaxY": 338.215
       },
       "SourceShapeIds": [
-        "shape-56.1",
-        "shape-56.2",
-        "shape-56.3",
-        "shape-56.4",
-        "shape-56.5",
-        "shape-56.6",
-        "shape-57.1",
-        "shape-57.2",
-        "shape-57.3",
-        "shape-57.4",
         "shape-58.1",
-        "shape-58.2",
-        "shape-58.3"
+        "shape-58.2"
       ],
       "Recognition": {
-        "Text": "(valse from the",
-        "Confidence": 0.999801
+        "Text": "th",
+        "Confidence": 0.999393
+      }
+    },
+    {
+      "Id": "fallback-train:6",
+      "Kind": "HorizontalTrain",
+      "Bounds": {
+        "MinX": 1685.89,
+        "MinY": 284.277,
+        "MaxX": 1758.78,
+        "MaxY": 337.465
+      },
+      "SourceShapeIds": [
+        "shape-60.2",
+        "shape-60.1",
+        "shape-60.3"
+      ],
+      "Recognition": {
+        "Text": "\u0022M",
+        "Confidence": 0.975239
+      }
+    },
+    {
+      "Id": "fallback-train:7",
+      "Kind": "HorizontalTrain",
+      "Bounds": {
+        "MinX": 1859.65,
+        "MinY": 284.277,
+        "MaxX": 1956.2,
+        "MaxY": 337.465
+      },
+      "SourceShapeIds": [
+        "shape-60.9",
+        "shape-60.12",
+        "shape-60.11"
+      ],
+      "Recognition": {
+        "Text": "I n",
+        "Confidence": 0.741729
       }
     },
     {
@@ -88,296 +99,115 @@
       "Kind": "HorizontalTrain",
       "Bounds": {
         "MinX": 1100.2,
-        "MinY": 283.933,
-        "MaxX": 1584.22,
-        "MaxY": 338.527
+        "MinY": 298.355,
+        "MaxX": 1215.9,
+        "MaxY": 338.387
       },
       "SourceShapeIds": [
         "shape-56.2",
-        "shape-56.3",
-        "shape-56.4",
-        "shape-56.5",
-        "shape-56.6",
-        "shape-57.whole",
-        "shape-58.1",
-        "shape-58.2",
-        "shape-58.3",
-        "shape-59.1",
-        "shape-59.2"
+        "shape-56.5"
       ],
       "Recognition": {
-        "Text": "valse from the fi",
-        "Confidence": 0.997167
+        "Text": "S",
+        "Confidence": 0.980182
       }
-    },
-    {
-      "Id": "fallback-train:4",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 1174.78,
-        "MinY": 283.933,
-        "MaxX": 1659.42,
-        "MaxY": 338.527
-      },
-      "SourceShapeIds": [
-        "shape-56.4",
-        "shape-56.5",
-        "shape-56.6",
-        "shape-57.1",
-        "shape-57.2",
-        "shape-57.3",
-        "shape-57.4",
-        "shape-58.1",
-        "shape-58.2",
-        "shape-58.3",
-        "shape-59.whole"
-      ],
-      "Recognition": {
-        "Text": "Ise from the film",
-        "Confidence": 0.944852
-      }
-    },
-    {
-      "Id": "fallback-train:5",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 1174.78,
-        "MinY": 283.933,
-        "MaxX": 1659.42,
-        "MaxY": 338.527
-      },
-      "SourceShapeIds": [
-        "shape-56.4",
-        "shape-56.5",
-        "shape-56.6",
-        "shape-57.1",
-        "shape-57.2",
-        "shape-57.3",
-        "shape-57.4",
-        "shape-58.whole",
-        "shape-59.1",
-        "shape-59.2",
-        "shape-59.4",
-        "shape-59.5"
-      ],
-      "Recognition": {
-        "Text": "Ise from the film",
-        "Confidence": 0.95242
-      }
-    },
-    {
-      "Id": "fallback-train:6",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 1174.78,
-        "MinY": 283.933,
-        "MaxX": 1659.42,
-        "MaxY": 338.527
-      },
-      "SourceShapeIds": [
-        "shape-56.4",
-        "shape-56.5",
-        "shape-56.6",
-        "shape-57.1",
-        "shape-57.2",
-        "shape-57.3",
-        "shape-57.4",
-        "shape-58.1",
-        "shape-58.2",
-        "shape-58.3",
-        "shape-59.1",
-        "shape-59.2",
-        "shape-59.4",
-        "shape-59.5"
-      ],
-      "Recognition": {
-        "Text": "Ise from the film",
-        "Confidence": 0.952442
-      }
-    },
-    {
-      "Id": "fallback-train:7",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 1685.89,
-        "MinY": 284.277,
-        "MaxX": 1706.2,
-        "MaxY": 304.074
-      },
-      "SourceShapeIds": [
-        "shape-60.2",
-        "shape-60.1"
-      ]
     },
     {
       "Id": "fallback-train:8",
       "Kind": "HorizontalTrain",
       "Bounds": {
-        "MinX": 1935.89,
-        "MinY": 284.277,
-        "MaxX": 1956.2,
-        "MaxY": 304.074
+        "MinX": 2391.4,
+        "MinY": 347.975,
+        "MaxX": 2584.01,
+        "MaxY": 396.022
       },
       "SourceShapeIds": [
-        "shape-60.12",
-        "shape-60.11"
-      ]
+        "shape-53.4",
+        "shape-54.1",
+        "shape-54.3",
+        "shape-54.5"
+      ],
+      "Recognition": {
+        "Text": "y Knh",
+        "Confidence": 0.922889
+      }
     },
     {
       "Id": "fallback-train:9",
       "Kind": "HorizontalTrain",
       "Bounds": {
-        "MinX": 1715.15,
-        "MinY": 286.574,
-        "MaxX": 1930.06,
-        "MaxY": 338.527
+        "MinX": 2672.78,
+        "MinY": 348.85,
+        "MaxX": 2791.23,
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
-        "shape-60.3",
-        "shape-60.4",
-        "shape-60.6",
-        "shape-60.7",
-        "shape-60.9",
-        "shape-60.10"
-      ],
-      "Recognition": {
-        "Text": "Mimino",
-        "Confidence": 0.998021
-      }
-    },
-    {
-      "Id": "fallback-train:11",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 2348.87,
-        "MinY": 347.975,
-        "MaxX": 2632.59,
-        "MaxY": 396.022
-      },
-      "SourceShapeIds": [
-        "shape-53.1",
-        "shape-53.2",
-        "shape-53.4",
-        "shape-53.5",
-        "shape-54.1",
-        "shape-54.2",
-        "shape-54.3",
-        "shape-54.4",
-        "shape-54.5",
-        "shape-54.6",
-        "shape-54.7",
-        "shape-54.9"
-      ],
-      "Recognition": {
-        "Text": "Giya Kanchel",
-        "Confidence": 0.972441
-      }
-    },
-    {
-      "Id": "fallback-train:13",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 2348.87,
-        "MinY": 347.975,
-        "MaxX": 2632.59,
-        "MaxY": 396.022
-      },
-      "SourceShapeIds": [
-        "shape-53.whole",
-        "shape-54.1",
-        "shape-54.2",
-        "shape-54.3",
-        "shape-54.4",
-        "shape-54.5",
-        "shape-54.6",
-        "shape-54.7",
-        "shape-54.9"
-      ],
-      "Recognition": {
-        "Text": "Giya Kanchel",
-        "Confidence": 0.997542
-      }
-    },
-    {
-      "Id": "fallback-train:12",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 2458.95,
-        "MinY": 347.975,
-        "MaxX": 2917.76,
-        "MaxY": 396.022
-      },
-      "SourceShapeIds": [
-        "shape-54.1",
-        "shape-54.2",
-        "shape-54.3",
-        "shape-54.4",
-        "shape-54.5",
-        "shape-54.6",
-        "shape-54.7",
-        "shape-54.8",
-        "shape-55.1",
         "shape-55.2",
         "shape-55.3",
         "shape-55.4",
         "shape-55.5",
-        "shape-55.6",
-        "shape-55.7",
-        "shape-55.8",
-        "shape-55.9",
-        "shape-55.10",
-        "shape-55.11"
+        "shape-55.6"
       ],
       "Recognition": {
-        "Text": "Kancheli (1935-2019)",
-        "Confidence": 0.990729
+        "Text": "1935-",
+        "Confidence": 0.999933
       }
     },
     {
-      "Id": "fallback-train:14",
+      "Id": "fallback-train:10",
+      "Kind": "HorizontalTrain",
+      "Bounds": {
+        "MinX": 2852.78,
+        "MinY": 348.881,
+        "MaxX": 2899.48,
+        "MaxY": 386.662
+      },
+      "SourceShapeIds": [
+        "shape-55.9",
+        "shape-55.10"
+      ],
+      "Recognition": {
+        "Text": "19",
+        "Confidence": 0.999923
+      }
+    },
+    {
+      "Id": "fallback-train:2",
       "Kind": "HorizontalTrain",
       "Bounds": {
         "MinX": 406.591,
-        "MinY": 462.425,
-        "MaxX": 887.091,
-        "MaxY": 536.144
+        "MinY": 478.534,
+        "MaxX": 740.091,
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.1",
-        "shape-480.2",
         "shape-480.3",
-        "shape-480.4",
-        "shape-480.5",
         "shape-480.6",
         "shape-480.8",
         "shape-480.9",
-        "shape-480.10",
-        "shape-481",
-        "shape-482",
-        "shape-483.1"
+        "shape-480.10"
       ],
       "Recognition": {
-        "Text": "Cantabile (",
-        "Confidence": 0.868285
+        "Text": "Cn bile",
+        "Confidence": 0.974167
       }
     },
     {
-      "Id": "fallback-train:15",
-      "Kind": "HorizontalTrain",
+      "Id": "fallback-glyph:shape-483.3",
+      "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 912.716,
-        "MinY": 478.597,
-        "MaxX": 1003.81,
-        "MaxY": 536.144
+        "MinY": 480.737,
+        "MaxX": 944.482,
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
-        "shape-483.3",
-        "shape-483.4",
-        "shape-483.5"
+        "shape-483.3"
       ],
       "Recognition": {
-        "Text": "62)",
-        "Confidence": 0.999778
+        "Text": "6",
+        "Confidence": 0.998092
       }
     },
     {
@@ -398,21 +228,20 @@
       }
     },
     {
-      "Id": "fallback-train:16",
-      "Kind": "HorizontalTrain",
+      "Id": "fallback-glyph:shape-445.2",
+      "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 306.112,
         "MinY": 848.18,
-        "MaxX": 379.743,
+        "MaxX": 364.653,
         "MaxY": 944.42
       },
       "SourceShapeIds": [
-        "shape-445.2",
-        "shape-445.3"
+        "shape-445.2"
       ],
       "Recognition": {
-        "Text": "2.",
-        "Confidence": 0.98643
+        "Text": "2",
+        "Confidence": 0.974845
       }
     },
     {
@@ -433,21 +262,20 @@
       }
     },
     {
-      "Id": "fallback-train:17",
-      "Kind": "HorizontalTrain",
+      "Id": "fallback-glyph:shape-446.2",
+      "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 167.512,
         "MinY": 1514.926,
-        "MaxX": 241.143,
+        "MaxX": 226.053,
         "MaxY": 1611.166
       },
       "SourceShapeIds": [
-        "shape-446.2",
-        "shape-446.3"
+        "shape-446.2"
       ],
       "Recognition": {
-        "Text": "2.",
-        "Confidence": 0.98643
+        "Text": "2",
+        "Confidence": 0.974845
       }
     },
     {
@@ -485,95 +313,54 @@
       }
     },
     {
-      "Id": "fallback-train:18",
-      "Kind": "HorizontalTrain",
+      "Id": "fallback-glyph:shape-447.2",
+      "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 167.512,
         "MinY": 2128.506,
-        "MaxX": 241.143,
+        "MaxX": 226.053,
         "MaxY": 2224.746
       },
       "SourceShapeIds": [
-        "shape-447.2",
-        "shape-447.3"
+        "shape-447.2"
       ],
       "Recognition": {
-        "Text": "2.",
-        "Confidence": 0.98643
+        "Text": "2",
+        "Confidence": 0.974845
       }
     },
     {
-      "Id": "fallback-glyph:shape-63.whole",
+      "Id": "fallback-glyph:shape-63.1",
       "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 142.357,
-        "MinY": 2397.47,
-        "MaxX": 204.75,
-        "MaxY": 2442.91
+        "MinY": 2398.24,
+        "MaxX": 165.185,
+        "MaxY": 2442
       },
       "SourceShapeIds": [
-        "shape-63.whole"
-      ],
-      "Recognition": {
-        "Text": "13",
-        "Confidence": 0.999954
-      }
+        "shape-63.1"
+      ]
     },
     {
-      "Id": "fallback-train:19",
-      "Kind": "HorizontalTrain",
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 2397.47,
-        "MaxX": 204.75,
-        "MaxY": 2442.91
-      },
-      "SourceShapeIds": [
-        "shape-63.1",
-        "shape-63.2"
-      ],
-      "Recognition": {
-        "Text": "13",
-        "Confidence": 0.999954
-      }
-    },
-    {
-      "Id": "fallback-train:20",
-      "Kind": "HorizontalTrain",
+      "Id": "fallback-glyph:shape-449.2",
+      "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 167.512,
         "MinY": 2795.256,
-        "MaxX": 241.143,
+        "MaxX": 226.053,
         "MaxY": 2891.496
       },
       "SourceShapeIds": [
-        "shape-449.2",
-        "shape-449.3"
+        "shape-449.2"
       ],
       "Recognition": {
-        "Text": "2.",
-        "Confidence": 0.98643
+        "Text": "2",
+        "Confidence": 0.974845
       }
     },
     {
-      "Id": "fallback-glyph:shape-61.whole",
-      "Kind": "SingletonFallback",
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 3064.99,
-        "MaxX": 208.592,
-        "MaxY": 3108.75
-      },
-      "SourceShapeIds": [
-        "shape-61.whole"
-      ],
-      "Recognition": {
-        "Text": "17",
-        "Confidence": 0.999875
-      }
-    },
-    {
-      "Id": "fallback-train:21",
+      "Id": "fallback-train:1",
       "Kind": "HorizontalTrain",
       "Bounds": {
         "MinX": 142.357,
@@ -591,21 +378,20 @@
       }
     },
     {
-      "Id": "fallback-train:22",
-      "Kind": "HorizontalTrain",
+      "Id": "fallback-glyph:shape-448.2",
+      "Kind": "SingletonFallback",
       "Bounds": {
         "MinX": 167.512,
         "MinY": 3513.236,
-        "MaxX": 241.143,
+        "MaxX": 226.053,
         "MaxY": 3609.476
       },
       "SourceShapeIds": [
-        "shape-448.2",
-        "shape-448.3"
+        "shape-448.2"
       ],
       "Recognition": {
-        "Text": "2.",
-        "Confidence": 0.98643
+        "Text": "2",
+        "Confidence": 0.974845
       }
     }
   ]
