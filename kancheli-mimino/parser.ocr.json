@@ -1,17 +1,20 @@
 {
+  "Engine": "PP-OCRv5-Latin",
+  "Summary": {
+    "PrototypeObservations": 151,
+    "HorizontalRuns": 10,
+    "RecognizedPrototypes": 114,
+    "RecognizedRuns": 8
+  },
   "Observations": [
     {
       "Id": "prototype:prototype-1@shape-51.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1125.9,
         "MinY": 143.764,
         "MaxX": 1190.58,
-        "MaxY": 223.732,
-        "Width": 64.67999999999984,
-        "Height": 79.96799999999999,
-        "CenterX": 1158.24,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-51.1"
@@ -19,22 +22,17 @@
       "PrototypeId": "prototype-1",
       "Recognition": {
         "Text": "Y",
-        "Confidence": 0.9954997897148132,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.9955
       }
     },
     {
       "Id": "prototype:prototype-2@shape-51.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1197.61,
         "MinY": 143.764,
         "MaxX": 1247.61,
-        "MaxY": 223.732,
-        "Width": 50,
-        "Height": 79.96799999999999,
-        "CenterX": 1222.61,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-51.2"
@@ -42,22 +40,17 @@
       "PrototypeId": "prototype-2",
       "Recognition": {
         "Text": "E",
-        "Confidence": 0.9634795784950256,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.96348
       }
     },
     {
       "Id": "prototype:prototype-2@shape-52.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1629.61,
         "MinY": 143.764,
         "MaxX": 1679.61,
-        "MaxY": 223.732,
-        "Width": 50,
-        "Height": 79.96799999999999,
-        "CenterX": 1654.61,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-52.2"
@@ -65,22 +58,17 @@
       "PrototypeId": "prototype-2",
       "Recognition": {
         "Text": "E",
-        "Confidence": 0.9634795784950256,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.96348
       }
     },
     {
       "Id": "prototype:prototype-2@shape-52.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1821.61,
         "MinY": 143.764,
         "MaxX": 1871.61,
-        "MaxY": 223.732,
-        "Width": 50,
-        "Height": 79.96799999999999,
-        "CenterX": 1846.61,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-52.5"
@@ -88,22 +76,17 @@
       "PrototypeId": "prototype-2",
       "Recognition": {
         "Text": "E",
-        "Confidence": 0.9634795784950256,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.96348
       }
     },
     {
       "Id": "prototype:prototype-3@shape-51.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1259.61,
         "MinY": 143.764,
         "MaxX": 1305.97,
-        "MaxY": 223.732,
-        "Width": 46.36000000000013,
-        "Height": 79.96799999999999,
-        "CenterX": 1282.79,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-51.3"
@@ -111,22 +94,17 @@
       "PrototypeId": "prototype-3",
       "Recognition": {
         "Text": "L",
-        "Confidence": 0.9984563589096069,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998456
       }
     },
     {
       "Id": "prototype:prototype-3@shape-51.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1314.61,
         "MinY": 143.764,
         "MaxX": 1360.97,
-        "MaxY": 223.732,
-        "Width": 46.36000000000013,
-        "Height": 79.96799999999999,
-        "CenterX": 1337.79,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-51.4"
@@ -134,22 +112,17 @@
       "PrototypeId": "prototype-3",
       "Recognition": {
         "Text": "L",
-        "Confidence": 0.9984563589096069,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998456
       }
     },
     {
       "Id": "prototype:prototype-3@shape-52.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1574.61,
         "MinY": 143.764,
         "MaxX": 1620.97,
-        "MaxY": 223.732,
-        "Width": 46.36000000000013,
-        "Height": 79.96799999999999,
-        "CenterX": 1597.79,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-52.1"
@@ -157,22 +130,17 @@
       "PrototypeId": "prototype-3",
       "Recognition": {
         "Text": "L",
-        "Confidence": 0.9984563589096069,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998456
       }
     },
     {
       "Id": "prototype:prototype-4@shape-51.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1440.89,
         "MinY": 143.764,
         "MaxX": 1537.31,
-        "MaxY": 223.732,
-        "Width": 96.41999999999985,
-        "Height": 79.96799999999999,
-        "CenterX": 1489.1,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-51.6"
@@ -180,22 +148,17 @@
       "PrototypeId": "prototype-4",
       "Recognition": {
         "Text": "W",
-        "Confidence": 0.978875994682312,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.978876
       }
     },
     {
       "Id": "prototype:prototype-5@shape-52.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1682.97,
         "MinY": 143.764,
         "MaxX": 1750,
-        "MaxY": 223.732,
-        "Width": 67.02999999999997,
-        "Height": 79.96799999999999,
-        "CenterX": 1716.4850000000001,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-52.3"
@@ -203,22 +166,17 @@
       "PrototypeId": "prototype-5",
       "Recognition": {
         "Text": "A",
-        "Confidence": 0.996435284614563,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.996435
       }
     },
     {
       "Id": "prototype:prototype-6@shape-52.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1747.06,
         "MinY": 143.764,
         "MaxX": 1813.56,
-        "MaxY": 223.732,
-        "Width": 66.5,
-        "Height": 79.96799999999999,
-        "CenterX": 1780.31,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-52.4"
@@ -226,22 +184,17 @@
       "PrototypeId": "prototype-6",
       "Recognition": {
         "Text": "V",
-        "Confidence": 0.5703343749046326,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.570334
       }
     },
     {
       "Id": "prototype:prototype-7@shape-52.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1879.64,
         "MinY": 142.31,
         "MaxX": 1934.04,
-        "MaxY": 225.185,
-        "Width": 54.399999999999864,
-        "Height": 82.875,
-        "CenterX": 1906.8400000000001,
-        "CenterY": 183.7475
+        "MaxY": 225.185
       },
       "SourceShapeIds": [
         "shape-52.6"
@@ -249,22 +202,17 @@
       "PrototypeId": "prototype-7",
       "Recognition": {
         "Text": "S",
-        "Confidence": 0.9743722081184387,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.974372
       }
     },
     {
       "Id": "prototype:prototype-8@shape-53.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2383.36,
         "MinY": 349.365,
         "MaxX": 2388.59,
-        "MaxY": 354.115,
-        "Width": 5.230000000000018,
-        "Height": 4.75,
-        "CenterX": 2385.9750000000004,
-        "CenterY": 351.74
+        "MaxY": 354.115
       },
       "SourceShapeIds": [
         "shape-53.3"
@@ -272,22 +220,17 @@
       "PrototypeId": "prototype-8",
       "Recognition": {
         "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.829516
       }
     },
     {
       "Id": "prototype:prototype-8@shape-54.9",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2627.36,
         "MinY": 349.365,
         "MaxX": 2632.59,
-        "MaxY": 354.115,
-        "Width": 5.230000000000018,
-        "Height": 4.75,
-        "CenterX": 2629.9750000000004,
-        "CenterY": 351.74
+        "MaxY": 354.115
       },
       "SourceShapeIds": [
         "shape-54.9"
@@ -295,22 +238,17 @@
       "PrototypeId": "prototype-8",
       "Recognition": {
         "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.829516
       }
     },
     {
       "Id": "prototype:prototype-8@shape-59.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1577.34,
         "MinY": 286.23,
         "MaxX": 1584.65,
-        "MaxY": 292.887,
-        "Width": 7.310000000000173,
-        "Height": 6.656999999999982,
-        "CenterX": 1580.995,
-        "CenterY": 289.5585
+        "MaxY": 292.887
       },
       "SourceShapeIds": [
         "shape-59.3"
@@ -318,22 +256,17 @@
       "PrototypeId": "prototype-8",
       "Recognition": {
         "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.829516
       }
     },
     {
       "Id": "prototype:prototype-8@shape-60.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1768.34,
         "MinY": 286.23,
         "MaxX": 1775.65,
-        "MaxY": 292.887,
-        "Width": 7.310000000000173,
-        "Height": 6.656999999999982,
-        "CenterX": 1771.995,
-        "CenterY": 289.5585
+        "MaxY": 292.887
       },
       "SourceShapeIds": [
         "shape-60.5"
@@ -341,22 +274,17 @@
       "PrototypeId": "prototype-8",
       "Recognition": {
         "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.829516
       }
     },
     {
       "Id": "prototype:prototype-8@shape-60.8",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1843.34,
         "MinY": 286.23,
         "MaxX": 1850.65,
-        "MaxY": 292.887,
-        "Width": 7.310000000000173,
-        "Height": 6.656999999999982,
-        "CenterX": 1846.995,
-        "CenterY": 289.5585
+        "MaxY": 292.887
       },
       "SourceShapeIds": [
         "shape-60.8"
@@ -364,22 +292,17 @@
       "PrototypeId": "prototype-8",
       "Recognition": {
         "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.829516
       }
     },
     {
       "Id": "prototype:prototype-9@shape-53.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2391.4,
         "MinY": 358.694,
         "MaxX": 2416.01,
-        "MaxY": 396.022,
-        "Width": 24.610000000000127,
-        "Height": 37.327999999999975,
-        "CenterX": 2403.705,
-        "CenterY": 377.358
+        "MaxY": 396.022
       },
       "SourceShapeIds": [
         "shape-53.4"
@@ -387,22 +310,17 @@
       "PrototypeId": "prototype-9",
       "Recognition": {
         "Text": "y",
-        "Confidence": 0.9894471168518066,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.989447
       }
     },
     {
       "Id": "prototype:prototype-10@shape-53.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2417.69,
         "MinY": 358.022,
         "MaxX": 2439.39,
-        "MaxY": 386.709,
-        "Width": 21.699999999999818,
-        "Height": 28.687000000000012,
-        "CenterX": 2428.54,
-        "CenterY": 372.3655
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
         "shape-53.5"
@@ -410,22 +328,17 @@
       "PrototypeId": "prototype-10",
       "Recognition": {
         "Text": "a",
-        "Confidence": 0.9986603260040283,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.99866
       }
     },
     {
       "Id": "prototype:prototype-10@shape-54.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2483.69,
         "MinY": 358.022,
         "MaxX": 2505.39,
-        "MaxY": 386.709,
-        "Width": 21.699999999999818,
-        "Height": 28.687000000000012,
-        "CenterX": 2494.54,
-        "CenterY": 372.3655
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
         "shape-54.2"
@@ -433,22 +346,17 @@
       "PrototypeId": "prototype-10",
       "Recognition": {
         "Text": "a",
-        "Confidence": 0.9986603260040283,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.99866
       }
     },
     {
       "Id": "prototype:prototype-10@shape-56.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1134.98,
         "MinY": 298.355,
         "MaxX": 1165.37,
-        "MaxY": 338.527,
-        "Width": 30.389999999999873,
-        "Height": 40.17199999999997,
-        "CenterX": 1150.175,
-        "CenterY": 318.44100000000003
+        "MaxY": 338.527
       },
       "SourceShapeIds": [
         "shape-56.3"
@@ -456,22 +364,17 @@
       "PrototypeId": "prototype-10",
       "Recognition": {
         "Text": "a",
-        "Confidence": 0.9986603260040283,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.99866
       }
     },
     {
       "Id": "prototype:prototype-11@shape-54.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2458.95,
         "MinY": 349.6,
         "MaxX": 2485.44,
-        "MaxY": 385.959,
-        "Width": 26.490000000000236,
-        "Height": 36.35899999999998,
-        "CenterX": 2472.1949999999997,
-        "CenterY": 367.7795
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
         "shape-54.1"
@@ -479,22 +382,17 @@
       "PrototypeId": "prototype-11",
       "Recognition": {
         "Text": "K",
-        "Confidence": 0.9972684383392334,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.997268
       }
     },
     {
       "Id": "prototype:prototype-12@shape-54.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2511.59,
         "MinY": 357.928,
         "MaxX": 2533.01,
-        "MaxY": 385.959,
-        "Width": 21.420000000000073,
-        "Height": 28.031000000000006,
-        "CenterX": 2522.3,
-        "CenterY": 371.9435
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
         "shape-54.3"
@@ -502,22 +400,17 @@
       "PrototypeId": "prototype-12",
       "Recognition": {
         "Text": "n",
-        "Confidence": 0.9570537805557251,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.957054
       }
     },
     {
       "Id": "prototype:prototype-12@shape-60.9",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1859.65,
         "MinY": 298.23,
         "MaxX": 1889.65,
-        "MaxY": 337.465,
-        "Width": 30,
-        "Height": 39.23499999999996,
-        "CenterX": 1874.65,
-        "CenterY": 317.84749999999997
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-60.9"
@@ -525,22 +418,17 @@
       "PrototypeId": "prototype-12",
       "Recognition": {
         "Text": "n",
-        "Confidence": 0.9570537805557251,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.957054
       }
     },
     {
       "Id": "prototype:prototype-13@shape-54.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2562.59,
         "MinY": 347.975,
         "MaxX": 2584.01,
-        "MaxY": 385.959,
-        "Width": 21.420000000000073,
-        "Height": 37.98399999999998,
-        "CenterX": 2573.3,
-        "CenterY": 366.967
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
         "shape-54.5"
@@ -548,22 +436,17 @@
       "PrototypeId": "prototype-13",
       "Recognition": {
         "Text": "h",
-        "Confidence": 0.936399519443512,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.9364
       }
     },
     {
       "Id": "prototype:prototype-13@shape-58.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1461.65,
         "MinY": 284.277,
         "MaxX": 1491.65,
-        "MaxY": 337.465,
-        "Width": 30,
-        "Height": 53.18799999999999,
-        "CenterX": 1476.65,
-        "CenterY": 310.871
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-58.2"
@@ -571,22 +454,17 @@
       "PrototypeId": "prototype-13",
       "Recognition": {
         "Text": "h",
-        "Confidence": 0.936399519443512,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.9364
       }
     },
     {
       "Id": "prototype:prototype-14@shape-54.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2588.7,
         "MinY": 357.928,
         "MaxX": 2612.26,
-        "MaxY": 386.6,
-        "Width": 23.5600000000004,
-        "Height": 28.672000000000025,
-        "CenterX": 2600.48,
-        "CenterY": 372.264
+        "MaxY": 386.6
       },
       "SourceShapeIds": [
         "shape-54.6"
@@ -594,22 +472,17 @@
       "PrototypeId": "prototype-14",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.9935263395309448,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.993526
       }
     },
     {
       "Id": "prototype:prototype-14@shape-56.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1219.01,
         "MinY": 298.23,
         "MaxX": 1252,
-        "MaxY": 338.355,
-        "Width": 32.99000000000001,
-        "Height": 40.125,
-        "CenterX": 1235.505,
-        "CenterY": 318.2925
+        "MaxY": 338.355
       },
       "SourceShapeIds": [
         "shape-56.6"
@@ -617,22 +490,17 @@
       "PrototypeId": "prototype-14",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.9935263395309448,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.993526
       }
     },
     {
       "Id": "prototype:prototype-14@shape-58.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1498.01,
         "MinY": 298.23,
         "MaxX": 1531,
-        "MaxY": 338.355,
-        "Width": 32.99000000000001,
-        "Height": 40.125,
-        "CenterX": 1514.505,
-        "CenterY": 318.2925
+        "MaxY": 338.355
       },
       "SourceShapeIds": [
         "shape-58.3"
@@ -640,60 +508,45 @@
       "PrototypeId": "prototype-14",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.9935263395309448,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.993526
       }
     },
     {
       "Id": "prototype:prototype-15@shape-55.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2672.78,
         "MinY": 349.49,
         "MaxX": 2690.51,
-        "MaxY": 385.959,
-        "Width": 17.730000000000018,
-        "Height": 36.468999999999994,
-        "CenterX": 2681.6450000000004,
-        "CenterY": 367.72450000000003
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
         "shape-55.2"
       ],
-      "PrototypeId": "prototype-15",
-      "Recognition": null
+      "PrototypeId": "prototype-15"
     },
     {
       "Id": "prototype:prototype-15@shape-55.9",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2852.78,
         "MinY": 349.49,
         "MaxX": 2870.51,
-        "MaxY": 385.959,
-        "Width": 17.730000000000018,
-        "Height": 36.468999999999994,
-        "CenterX": 2861.6450000000004,
-        "CenterY": 367.72450000000003
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
         "shape-55.9"
       ],
-      "PrototypeId": "prototype-15",
-      "Recognition": null
+      "PrototypeId": "prototype-15"
     },
     {
       "Id": "prototype:prototype-16@shape-55.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2695.9,
         "MinY": 348.881,
         "MaxX": 2719.48,
-        "MaxY": 386.662,
-        "Width": 23.579999999999927,
-        "Height": 37.781000000000006,
-        "CenterX": 2707.69,
-        "CenterY": 367.77149999999995
+        "MaxY": 386.662
       },
       "SourceShapeIds": [
         "shape-55.3"
@@ -701,22 +554,17 @@
       "PrototypeId": "prototype-16",
       "Recognition": {
         "Text": "9",
-        "Confidence": 0.9995712637901306,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999571
       }
     },
     {
       "Id": "prototype:prototype-16@shape-55.10",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2875.9,
         "MinY": 348.881,
         "MaxX": 2899.48,
-        "MaxY": 386.662,
-        "Width": 23.579999999999927,
-        "Height": 37.781000000000006,
-        "CenterX": 2887.69,
-        "CenterY": 367.77149999999995
+        "MaxY": 386.662
       },
       "SourceShapeIds": [
         "shape-55.10"
@@ -724,22 +572,17 @@
       "PrototypeId": "prototype-16",
       "Recognition": {
         "Text": "9",
-        "Confidence": 0.9995712637901306,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999571
       }
     },
     {
       "Id": "prototype:prototype-17@shape-55.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2723.64,
         "MinY": 348.85,
         "MaxX": 2745.73,
-        "MaxY": 386.709,
-        "Width": 22.090000000000146,
-        "Height": 37.85899999999998,
-        "CenterX": 2734.685,
-        "CenterY": 367.7795
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
         "shape-55.4"
@@ -747,22 +590,17 @@
       "PrototypeId": "prototype-17",
       "Recognition": {
         "Text": "3",
-        "Confidence": 0.9997499585151672,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.99975
       }
     },
     {
       "Id": "prototype:prototype-18@shape-55.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2751.29,
         "MinY": 349.6,
         "MaxX": 2772.95,
-        "MaxY": 386.709,
-        "Width": 21.659999999999854,
-        "Height": 37.10899999999998,
-        "CenterX": 2762.12,
-        "CenterY": 368.1545
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
         "shape-55.5"
@@ -770,22 +608,17 @@
       "PrototypeId": "prototype-18",
       "Recognition": {
         "Text": "5",
-        "Confidence": 0.9987284541130066,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998728
       }
     },
     {
       "Id": "prototype:prototype-19@shape-55.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2777.47,
         "MinY": 367.85,
         "MaxX": 2791.23,
-        "MaxY": 372.256,
-        "Width": 13.760000000000218,
-        "Height": 4.405999999999949,
-        "CenterX": 2784.35,
-        "CenterY": 370.053
+        "MaxY": 372.256
       },
       "SourceShapeIds": [
         "shape-55.6"
@@ -793,22 +626,17 @@
       "PrototypeId": "prototype-19",
       "Recognition": {
         "Text": "-",
-        "Confidence": 0.7217889428138733,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.721789
       }
     },
     {
       "Id": "prototype:prototype-20@shape-55.7",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2795.92,
         "MinY": 348.85,
         "MaxX": 2818.36,
-        "MaxY": 385.959,
-        "Width": 22.440000000000055,
-        "Height": 37.10899999999998,
-        "CenterX": 2807.1400000000003,
-        "CenterY": 367.4045
+        "MaxY": 385.959
       },
       "SourceShapeIds": [
         "shape-55.7"
@@ -816,22 +644,17 @@
       "PrototypeId": "prototype-20",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9996687173843384,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999669
       }
     },
     {
       "Id": "prototype:prototype-21@shape-56.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1100.2,
         "MinY": 299.293,
         "MaxX": 1134.65,
-        "MaxY": 337.465,
-        "Width": 34.450000000000045,
-        "Height": 38.17199999999997,
-        "CenterX": 1117.4250000000002,
-        "CenterY": 318.379
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-56.2"
@@ -839,22 +662,17 @@
       "PrototypeId": "prototype-21",
       "Recognition": {
         "Text": "V",
-        "Confidence": 0.8060309290885925,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.806031
       }
     },
     {
       "Id": "prototype:prototype-22@shape-56.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1188.29,
         "MinY": 298.355,
         "MaxX": 1215.9,
-        "MaxY": 338.387,
-        "Width": 27.610000000000127,
-        "Height": 40.03199999999998,
-        "CenterX": 1202.095,
-        "CenterY": 318.371
+        "MaxY": 338.387
       },
       "SourceShapeIds": [
         "shape-56.5"
@@ -862,22 +680,17 @@
       "PrototypeId": "prototype-22",
       "Recognition": {
         "Text": "S",
-        "Confidence": 0.9646875262260437,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.964688
       }
     },
     {
       "Id": "prototype:prototype-23@shape-57.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1361.65,
         "MinY": 298.23,
         "MaxX": 1411.42,
-        "MaxY": 337.465,
-        "Width": 49.76999999999998,
-        "Height": 39.23499999999996,
-        "CenterX": 1386.535,
-        "CenterY": 317.84749999999997
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-57.4"
@@ -885,22 +698,17 @@
       "PrototypeId": "prototype-23",
       "Recognition": {
         "Text": "m",
-        "Confidence": 0.9944943785667419,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.994494
       }
     },
     {
       "Id": "prototype:prototype-23@shape-59.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1609.65,
         "MinY": 298.23,
         "MaxX": 1659.42,
-        "MaxY": 337.465,
-        "Width": 49.76999999999998,
-        "Height": 39.23499999999996,
-        "CenterX": 1634.535,
-        "CenterY": 317.84749999999997
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-59.5"
@@ -908,22 +716,17 @@
       "PrototypeId": "prototype-23",
       "Recognition": {
         "Text": "m",
-        "Confidence": 0.9944943785667419,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.994494
       }
     },
     {
       "Id": "prototype:prototype-23@shape-60.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1784.65,
         "MinY": 298.23,
         "MaxX": 1834.42,
-        "MaxY": 337.465,
-        "Width": 49.76999999999998,
-        "Height": 39.23499999999996,
-        "CenterX": 1809.535,
-        "CenterY": 317.84749999999997
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-60.6"
@@ -931,22 +734,17 @@
       "PrototypeId": "prototype-23",
       "Recognition": {
         "Text": "m",
-        "Confidence": 0.9944943785667419,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.994494
       }
     },
     {
       "Id": "prototype:prototype-24@shape-58.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1434.72,
         "MinY": 288.308,
         "MaxX": 1457.31,
-        "MaxY": 338.215,
-        "Width": 22.589999999999918,
-        "Height": 49.90699999999998,
-        "CenterX": 1446.0149999999999,
-        "CenterY": 313.26149999999996
+        "MaxY": 338.215
       },
       "SourceShapeIds": [
         "shape-58.1"
@@ -954,98 +752,73 @@
       "PrototypeId": "prototype-24",
       "Recognition": {
         "Text": "c",
-        "Confidence": 0.543520987033844,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.543521
       }
     },
     {
       "Id": "prototype:prototype-25@shape-60.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1698.75,
         "MinY": 284.277,
         "MaxX": 1706.2,
-        "MaxY": 304.074,
-        "Width": 7.4500000000000455,
-        "Height": 19.797000000000025,
-        "CenterX": 1702.475,
-        "CenterY": 294.1755
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
         "shape-60.1"
       ],
-      "PrototypeId": "prototype-25",
-      "Recognition": null
+      "PrototypeId": "prototype-25"
     },
     {
       "Id": "prototype:prototype-25@shape-60.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1685.89,
         "MinY": 284.277,
         "MaxX": 1693.34,
-        "MaxY": 304.074,
-        "Width": 7.449999999999818,
-        "Height": 19.797000000000025,
-        "CenterX": 1689.615,
-        "CenterY": 294.1755
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
         "shape-60.2"
       ],
-      "PrototypeId": "prototype-25",
-      "Recognition": null
+      "PrototypeId": "prototype-25"
     },
     {
       "Id": "prototype:prototype-25@shape-60.11",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1948.75,
         "MinY": 284.277,
         "MaxX": 1956.2,
-        "MaxY": 304.074,
-        "Width": 7.4500000000000455,
-        "Height": 19.797000000000025,
-        "CenterX": 1952.475,
-        "CenterY": 294.1755
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
         "shape-60.11"
       ],
-      "PrototypeId": "prototype-25",
-      "Recognition": null
+      "PrototypeId": "prototype-25"
     },
     {
       "Id": "prototype:prototype-25@shape-60.12",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1935.89,
         "MinY": 284.277,
         "MaxX": 1943.34,
-        "MaxY": 304.074,
-        "Width": 7.449999999999818,
-        "Height": 19.797000000000025,
-        "CenterX": 1939.615,
-        "CenterY": 294.1755
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
         "shape-60.12"
       ],
-      "PrototypeId": "prototype-25",
-      "Recognition": null
+      "PrototypeId": "prototype-25"
     },
     {
       "Id": "prototype:prototype-26@shape-60.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1715.15,
         "MinY": 286.574,
         "MaxX": 1758.78,
-        "MaxY": 337.465,
-        "Width": 43.62999999999988,
-        "Height": 50.89099999999996,
-        "CenterX": 1736.9650000000001,
-        "CenterY": 312.0195
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-60.3"
@@ -1053,60 +826,45 @@
       "PrototypeId": "prototype-26",
       "Recognition": {
         "Text": "M",
-        "Confidence": 0.9914718270301819,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.991472
       }
     },
     {
       "Id": "prototype:prototype-27@shape-61.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 142.357,
         "MinY": 3064.99,
         "MaxX": 165.185,
-        "MaxY": 3108.75,
-        "Width": 22.828000000000003,
-        "Height": 43.76000000000022,
-        "CenterX": 153.77100000000002,
-        "CenterY": 3086.87
+        "MaxY": 3108.75
       },
       "SourceShapeIds": [
         "shape-61.1"
       ],
-      "PrototypeId": "prototype-27",
-      "Recognition": null
+      "PrototypeId": "prototype-27"
     },
     {
       "Id": "prototype:prototype-27@shape-63.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 142.357,
         "MinY": 2398.24,
         "MaxX": 165.185,
-        "MaxY": 2442,
-        "Width": 22.828000000000003,
-        "Height": 43.76000000000022,
-        "CenterX": 153.77100000000002,
-        "CenterY": 2420.12
+        "MaxY": 2442
       },
       "SourceShapeIds": [
         "shape-63.1"
       ],
-      "PrototypeId": "prototype-27",
-      "Recognition": null
+      "PrototypeId": "prototype-27"
     },
     {
       "Id": "prototype:prototype-28@shape-61.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 174.217,
         "MinY": 3065.13,
         "MaxX": 208.592,
-        "MaxY": 3108.75,
-        "Width": 34.375,
-        "Height": 43.61999999999989,
-        "CenterX": 191.4045,
-        "CenterY": 3086.94
+        "MaxY": 3108.75
       },
       "SourceShapeIds": [
         "shape-61.2"
@@ -1114,22 +872,17 @@
       "PrototypeId": "prototype-28",
       "Recognition": {
         "Text": "7",
-        "Confidence": 0.9982054233551025,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998205
       }
     },
     {
       "Id": "prototype:prototype-29@shape-62",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 143.701,
         "MinY": 1118.05,
         "MaxX": 178.357,
-        "MaxY": 1162.58,
-        "Width": 34.656000000000006,
-        "Height": 44.52999999999997,
-        "CenterX": 161.029,
-        "CenterY": 1140.315
+        "MaxY": 1162.58
       },
       "SourceShapeIds": [
         "shape-62"
@@ -1137,22 +890,17 @@
       "PrototypeId": "prototype-29",
       "Recognition": {
         "Text": "5",
-        "Confidence": 0.9983977675437927,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998398
       }
     },
     {
       "Id": "prototype:prototype-30@shape-63.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 171.951,
         "MinY": 2397.47,
         "MaxX": 204.75,
-        "MaxY": 2442.91,
-        "Width": 32.79900000000001,
-        "Height": 45.440000000000055,
-        "CenterX": 188.3505,
-        "CenterY": 2420.1899999999996
+        "MaxY": 2442.91
       },
       "SourceShapeIds": [
         "shape-63.2"
@@ -1160,22 +908,17 @@
       "PrototypeId": "prototype-30",
       "Recognition": {
         "Text": "3",
-        "Confidence": 0.9997627139091492,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999763
       }
     },
     {
       "Id": "prototype:prototype-31@shape-64",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 147.42,
         "MinY": 1783.92,
         "MaxX": 178.139,
-        "MaxY": 1829.27,
-        "Width": 30.719000000000023,
-        "Height": 45.34999999999991,
-        "CenterX": 162.77949999999998,
-        "CenterY": 1806.595
+        "MaxY": 1829.27
       },
       "SourceShapeIds": [
         "shape-64"
@@ -1183,22 +926,17 @@
       "PrototypeId": "prototype-31",
       "Recognition": {
         "Text": "9",
-        "Confidence": 0.9994319081306458,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999432
       }
     },
     {
       "Id": "prototype:prototype-32@shape-132",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1054.18,
-        "MinY": 574.77379728,
-        "MaxX": 1076.68520272,
-        "MaxY": 644.5070054400001,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1065.43260136,
-        "CenterY": 609.64040136
+        "MinY": 574.774,
+        "MaxX": 1076.685,
+        "MaxY": 644.507
       },
       "SourceShapeIds": [
         "shape-132"
@@ -1206,22 +944,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-133",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1486.89,
-        "MinY": 1889.07479728,
-        "MaxX": 1509.39520272,
-        "MaxY": 1958.80800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1498.14260136,
-        "CenterY": 1923.9414013599999
+        "MinY": 1889.075,
+        "MaxX": 1509.395,
+        "MaxY": 1958.808
       },
       "SourceShapeIds": [
         "shape-133"
@@ -1229,22 +962,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-134",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1102.3,
-        "MinY": 1222.32479728,
-        "MaxX": 1124.80520272,
-        "MaxY": 1292.05800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1113.55260136,
-        "CenterY": 1257.1914013599999
+        "MinY": 1222.325,
+        "MaxX": 1124.805,
+        "MaxY": 1292.058
       },
       "SourceShapeIds": [
         "shape-134"
@@ -1252,22 +980,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-135",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 880.692,
-        "MinY": 1889.07479728,
-        "MaxX": 903.19720272,
-        "MaxY": 1958.80800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 891.94460136,
-        "CenterY": 1923.9414013599999
+        "MinY": 1889.075,
+        "MaxX": 903.197,
+        "MaxY": 1958.808
       },
       "SourceShapeIds": [
         "shape-135"
@@ -1275,22 +998,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-137",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1087.77,
-        "MinY": 2502.65479728,
-        "MaxX": 1110.27520272,
-        "MaxY": 2572.38800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 1099.02260136,
-        "CenterY": 2537.52140136
+        "MinY": 2502.655,
+        "MaxX": 1110.275,
+        "MaxY": 2572.388
       },
       "SourceShapeIds": [
         "shape-137"
@@ -1298,22 +1016,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-138",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1610.94,
-        "MinY": 574.77379728,
-        "MaxX": 1633.44520272,
-        "MaxY": 644.5070054400001,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1622.19260136,
-        "CenterY": 609.64040136
+        "MinY": 574.774,
+        "MaxX": 1633.445,
+        "MaxY": 644.507
       },
       "SourceShapeIds": [
         "shape-138"
@@ -1321,22 +1034,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-139",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1524.99,
-        "MinY": 2502.65479728,
-        "MaxX": 1547.49520272,
-        "MaxY": 2572.38800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 1536.24260136,
-        "CenterY": 2537.52140136
+        "MinY": 2502.655,
+        "MaxX": 1547.495,
+        "MaxY": 2572.388
       },
       "SourceShapeIds": [
         "shape-139"
@@ -1344,22 +1052,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-140",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2238.79,
-        "MinY": 3169.40479728,
-        "MaxX": 2261.29520272,
-        "MaxY": 3239.13800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 2250.04260136,
-        "CenterY": 3204.27140136
+        "MinY": 3169.405,
+        "MaxX": 2261.295,
+        "MaxY": 3239.138
       },
       "SourceShapeIds": [
         "shape-140"
@@ -1367,22 +1070,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-144",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 934.748,
-        "MinY": 3224.84479728,
-        "MaxX": 957.25320272,
-        "MaxY": 3294.57800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 946.00060136,
-        "CenterY": 3259.7114013600003
+        "MinY": 3224.845,
+        "MaxX": 957.253,
+        "MaxY": 3294.578
       },
       "SourceShapeIds": [
         "shape-144"
@@ -1390,22 +1088,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-146",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 282.706,
-        "MinY": 3224.84479728,
-        "MaxX": 305.21120272,
-        "MaxY": 3294.57800544,
-        "Width": 22.50520272,
-        "Height": 69.73320816000023,
-        "CenterX": 293.95860136,
-        "CenterY": 3259.7114013600003
+        "MinY": 3224.845,
+        "MaxX": 305.211,
+        "MaxY": 3294.578
       },
       "SourceShapeIds": [
         "shape-146"
@@ -1413,22 +1106,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-147",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2238.79,
-        "MinY": 3266.42479728,
-        "MaxX": 2261.29520272,
-        "MaxY": 3336.15800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 2250.04260136,
-        "CenterY": 3301.2914013600002
+        "MinY": 3266.425,
+        "MaxX": 2261.295,
+        "MaxY": 3336.158
       },
       "SourceShapeIds": [
         "shape-147"
@@ -1436,22 +1124,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-149",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2657.03,
-        "MinY": 1450.94479728,
-        "MaxX": 2679.53520272,
-        "MaxY": 1520.67800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 2668.28260136,
-        "CenterY": 1485.8114013600002
+        "MinY": 1450.945,
+        "MaxX": 2679.535,
+        "MaxY": 1520.678
       },
       "SourceShapeIds": [
         "shape-149"
@@ -1459,22 +1142,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-150",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1040.46,
-        "MinY": 1450.94479728,
-        "MaxX": 1062.96520272,
-        "MaxY": 1520.67800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1051.71260136,
-        "CenterY": 1485.8114013600002
+        "MinY": 1450.945,
+        "MaxX": 1062.965,
+        "MaxY": 1520.678
       },
       "SourceShapeIds": [
         "shape-150"
@@ -1482,22 +1160,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-151",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 964.946,
-        "MinY": 3504.69479728,
-        "MaxX": 987.4512027200001,
-        "MaxY": 3574.42800544,
-        "Width": 22.505202720000057,
-        "Height": 69.73320816000023,
-        "CenterX": 976.1986013600001,
-        "CenterY": 3539.5614013599998
+        "MinY": 3504.695,
+        "MaxX": 987.451,
+        "MaxY": 3574.428
       },
       "SourceShapeIds": [
         "shape-151"
@@ -1505,22 +1178,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-152",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 312.903,
-        "MinY": 3449.25479728,
-        "MaxX": 335.40820272,
-        "MaxY": 3518.98800544,
-        "Width": 22.50520272,
-        "Height": 69.73320816000023,
-        "CenterX": 324.15560136,
-        "CenterY": 3484.12140136
+        "MinY": 3449.255,
+        "MaxX": 335.408,
+        "MaxY": 3518.988
       },
       "SourceShapeIds": [
         "shape-152"
@@ -1528,22 +1196,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-153",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1551.85,
-        "MinY": 1450.94479728,
-        "MaxX": 1574.3552027199999,
-        "MaxY": 1520.67800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1563.1026013599999,
-        "CenterY": 1485.8114013600002
+        "MinY": 1450.945,
+        "MaxX": 1574.355,
+        "MaxY": 1520.678
       },
       "SourceShapeIds": [
         "shape-153"
@@ -1551,22 +1214,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-32@shape-154",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1524.99,
-        "MinY": 2731.27479728,
-        "MaxX": 1547.49520272,
-        "MaxY": 2801.00800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 1536.24260136,
-        "CenterY": 2766.1414013599997
+        "MinY": 2731.275,
+        "MaxX": 1547.495,
+        "MaxY": 2801.008
       },
       "SourceShapeIds": [
         "shape-154"
@@ -1574,22 +1232,17 @@
       "PrototypeId": "prototype-32",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.98714
       }
     },
     {
       "Id": "prototype:prototype-33@shape-136",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 282.706,
-        "MinY": 1277.0890945600001,
-        "MaxX": 309.76770544000004,
-        "MaxY": 1351.0496027200002,
-        "Width": 27.061705440000026,
-        "Height": 73.96050816000002,
-        "CenterX": 296.23685272,
-        "CenterY": 1314.06934864
+        "MinY": 1277.089,
+        "MaxX": 309.768,
+        "MaxY": 1351.05
       },
       "SourceShapeIds": [
         "shape-136"
@@ -1597,22 +1250,17 @@
       "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.890056
       }
     },
     {
       "Id": "prototype:prototype-33@shape-141",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 282.706,
-        "MinY": 2557.41909456,
-        "MaxX": 309.76770544000004,
-        "MaxY": 2631.37960272,
-        "Width": 27.061705440000026,
-        "Height": 73.96050816000024,
-        "CenterX": 296.23685272,
-        "CenterY": 2594.39934864
+        "MinY": 2557.419,
+        "MaxX": 309.768,
+        "MaxY": 2631.38
       },
       "SourceShapeIds": [
         "shape-141"
@@ -1620,22 +1268,17 @@
       "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.890056
       }
     },
     {
       "Id": "prototype:prototype-33@shape-142",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1596.42,
-        "MinY": 671.11809456,
-        "MaxX": 1623.48170544,
-        "MaxY": 745.0786027199999,
-        "Width": 27.06170543999997,
-        "Height": 73.9605081599999,
-        "CenterX": 1609.95085272,
-        "CenterY": 708.09834864
+        "MinY": 671.118,
+        "MaxX": 1623.482,
+        "MaxY": 745.079
       },
       "SourceShapeIds": [
         "shape-142"
@@ -1643,22 +1286,17 @@
       "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.890056
       }
     },
     {
       "Id": "prototype:prototype-33@shape-143",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1472.37,
-        "MinY": 1985.41909456,
-        "MaxX": 1499.4317054399999,
-        "MaxY": 2059.37960272,
-        "Width": 27.06170543999997,
-        "Height": 73.96050816000002,
-        "CenterX": 1485.9008527199999,
-        "CenterY": 2022.39934864
+        "MinY": 1985.419,
+        "MaxX": 1499.432,
+        "MaxY": 2059.38
       },
       "SourceShapeIds": [
         "shape-143"
@@ -1666,22 +1304,17 @@
       "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.890056
       }
     },
     {
       "Id": "prototype:prototype-33@shape-145",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1602.42,
-        "MinY": 3224.16909456,
-        "MaxX": 1629.48170544,
-        "MaxY": 3298.12960272,
-        "Width": 27.06170543999997,
-        "Height": 73.96050816000024,
-        "CenterX": 1615.95085272,
-        "CenterY": 3261.14934864
+        "MinY": 3224.169,
+        "MaxX": 1629.482,
+        "MaxY": 3298.13
       },
       "SourceShapeIds": [
         "shape-145"
@@ -1689,22 +1322,17 @@
       "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.890056
       }
     },
     {
       "Id": "prototype:prototype-33@shape-148",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2445.57,
-        "MinY": 3504.0190945599998,
-        "MaxX": 2472.63170544,
-        "MaxY": 3577.97960272,
-        "Width": 27.06170543999997,
-        "Height": 73.96050816000024,
-        "CenterX": 2459.10085272,
-        "CenterY": 3540.99934864
+        "MinY": 3504.019,
+        "MaxX": 2472.632,
+        "MaxY": 3577.98
       },
       "SourceShapeIds": [
         "shape-148"
@@ -1712,193 +1340,143 @@
       "PrototypeId": "prototype-33",
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.890056
       }
     },
     {
       "Id": "prototype:prototype-34@shape-284",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 547.829,
-        "MinY": 3100.485969456,
-        "MaxX": 578.7715054399999,
-        "MaxY": 3192.7416000000003,
-        "Width": 30.94250543999999,
-        "Height": 92.25563054400027,
-        "CenterX": 563.3002527199999,
-        "CenterY": 3146.613784728
+        "MinY": 3100.486,
+        "MaxX": 578.772,
+        "MaxY": 3192.742
       },
       "SourceShapeIds": [
         "shape-284"
       ],
-      "PrototypeId": "prototype-34",
-      "Recognition": null
+      "PrototypeId": "prototype-34"
     },
     {
       "Id": "prototype:prototype-34@shape-285",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 512.867,
-        "MinY": 1882.525969456,
-        "MaxX": 543.80950544,
-        "MaxY": 1974.7815999999998,
-        "Width": 30.94250543999999,
-        "Height": 92.25563054399981,
-        "CenterX": 528.3382527199999,
-        "CenterY": 1928.653784728
+        "MinY": 1882.526,
+        "MaxX": 543.81,
+        "MaxY": 1974.782
       },
       "SourceShapeIds": [
         "shape-285"
       ],
-      "PrototypeId": "prototype-34",
-      "Recognition": null
+      "PrototypeId": "prototype-34"
     },
     {
       "Id": "prototype:prototype-34@shape-286",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1199.87,
-        "MinY": 3100.485969456,
-        "MaxX": 1230.81250544,
-        "MaxY": 3192.7416000000003,
-        "Width": 30.942505440000104,
-        "Height": 92.25563054400027,
-        "CenterX": 1215.3412527199998,
-        "CenterY": 3146.613784728
+        "MinY": 3100.486,
+        "MaxX": 1230.813,
+        "MaxY": 3192.742
       },
       "SourceShapeIds": [
         "shape-286"
       ],
-      "PrototypeId": "prototype-34",
-      "Recognition": null
+      "PrototypeId": "prototype-34"
     },
     {
       "Id": "prototype:prototype-35@shape-287",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1100.11,
-        "MinY": 1409.745969456,
-        "MaxX": 1132.16130544,
-        "MaxY": 1501.67239728,
-        "Width": 32.05130544000008,
-        "Height": 91.92642782400003,
-        "CenterX": 1116.13565272,
-        "CenterY": 1455.7091833680001
+        "MinY": 1409.746,
+        "MaxX": 1132.161,
+        "MaxY": 1501.672
       },
       "SourceShapeIds": [
         "shape-287"
       ],
-      "PrototypeId": "prototype-35",
-      "Recognition": null
+      "PrototypeId": "prototype-35"
     },
     {
       "Id": "prototype:prototype-36@shape-440",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 1843.7181136,
-        "MaxX": 238.4752,
-        "MaxY": 2040.87650272,
-        "Width": 70.9632,
-        "Height": 197.15838912000004,
-        "CenterX": 202.99360000000001,
-        "CenterY": 1942.2973081599998
+        "MinY": 1843.718,
+        "MaxX": 238.475,
+        "MaxY": 2040.877
       },
       "SourceShapeIds": [
         "shape-440"
       ],
-      "PrototypeId": "prototype-36",
-      "Recognition": null
+      "PrototypeId": "prototype-36"
     },
     {
       "Id": "prototype:prototype-36@shape-441",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 1176.9681136,
-        "MaxX": 238.4752,
-        "MaxY": 1374.12650272,
-        "Width": 70.9632,
-        "Height": 197.15838912000004,
-        "CenterX": 202.99360000000001,
-        "CenterY": 1275.5473081599998
+        "MinY": 1176.968,
+        "MaxX": 238.475,
+        "MaxY": 1374.127
       },
       "SourceShapeIds": [
         "shape-441"
       ],
-      "PrototypeId": "prototype-36",
-      "Recognition": null
+      "PrototypeId": "prototype-36"
     },
     {
       "Id": "prototype:prototype-36@shape-442",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 306.112,
-        "MinY": 529.4171136,
-        "MaxX": 377.0752,
-        "MaxY": 726.57550272,
-        "Width": 70.96319999999997,
-        "Height": 197.15838912000004,
-        "CenterX": 341.59360000000004,
-        "CenterY": 627.99630816
+        "MinY": 529.417,
+        "MaxX": 377.075,
+        "MaxY": 726.576
       },
       "SourceShapeIds": [
         "shape-442"
       ],
-      "PrototypeId": "prototype-36",
-      "Recognition": null
+      "PrototypeId": "prototype-36"
     },
     {
       "Id": "prototype:prototype-36@shape-443",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 2457.2981136,
-        "MaxX": 238.4752,
-        "MaxY": 2654.45650272,
-        "Width": 70.9632,
-        "Height": 197.15838912000027,
-        "CenterX": 202.99360000000001,
-        "CenterY": 2555.87730816
+        "MinY": 2457.298,
+        "MaxX": 238.475,
+        "MaxY": 2654.457
       },
       "SourceShapeIds": [
         "shape-443"
       ],
-      "PrototypeId": "prototype-36",
-      "Recognition": null
+      "PrototypeId": "prototype-36"
     },
     {
       "Id": "prototype:prototype-36@shape-444",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 3124.0481136,
-        "MaxX": 238.4752,
-        "MaxY": 3321.20650272,
-        "Width": 70.9632,
-        "Height": 197.15838912000027,
-        "CenterX": 202.99360000000001,
-        "CenterY": 3222.62730816
+        "MinY": 3124.048,
+        "MaxX": 238.475,
+        "MaxY": 3321.207
       },
       "SourceShapeIds": [
         "shape-444"
       ],
-      "PrototypeId": "prototype-36",
-      "Recognition": null
+      "PrototypeId": "prototype-36"
     },
     {
       "Id": "prototype:prototype-37@shape-445.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 306.112,
-        "MinY": 848.1799945600001,
-        "MaxX": 364.65320272,
-        "MaxY": 944.42039728,
-        "Width": 58.54120272,
-        "Height": 96.2404027199999,
-        "CenterX": 335.38260136,
-        "CenterY": 896.3001959200001
+        "MinY": 848.18,
+        "MaxX": 364.653,
+        "MaxY": 944.42
       },
       "SourceShapeIds": [
         "shape-445.2"
@@ -1906,22 +1484,17 @@
       "PrototypeId": "prototype-37",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.974845
       }
     },
     {
       "Id": "prototype:prototype-37@shape-446.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 1514.92599456,
-        "MaxX": 226.05320272,
-        "MaxY": 1611.16639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 1563.04619592
+        "MinY": 1514.926,
+        "MaxX": 226.053,
+        "MaxY": 1611.166
       },
       "SourceShapeIds": [
         "shape-446.2"
@@ -1929,22 +1502,17 @@
       "PrototypeId": "prototype-37",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.974845
       }
     },
     {
       "Id": "prototype:prototype-37@shape-447.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 2128.50599456,
-        "MaxX": 226.05320272,
-        "MaxY": 2224.74639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 2176.62619592
+        "MinY": 2128.506,
+        "MaxX": 226.053,
+        "MaxY": 2224.746
       },
       "SourceShapeIds": [
         "shape-447.2"
@@ -1952,22 +1520,17 @@
       "PrototypeId": "prototype-37",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.974845
       }
     },
     {
       "Id": "prototype:prototype-37@shape-448.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 3513.23599456,
-        "MaxX": 226.05320272,
-        "MaxY": 3609.47639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 3561.35619592
+        "MinY": 3513.236,
+        "MaxX": 226.053,
+        "MaxY": 3609.476
       },
       "SourceShapeIds": [
         "shape-448.2"
@@ -1975,22 +1538,17 @@
       "PrototypeId": "prototype-37",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.974845
       }
     },
     {
       "Id": "prototype:prototype-37@shape-449.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 2795.25599456,
-        "MaxX": 226.05320272,
-        "MaxY": 2891.49639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 2843.37619592
+        "MinY": 2795.256,
+        "MaxX": 226.053,
+        "MaxY": 2891.496
       },
       "SourceShapeIds": [
         "shape-449.2"
@@ -1998,22 +1556,17 @@
       "PrototypeId": "prototype-37",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.974845
       }
     },
     {
       "Id": "prototype:prototype-38@shape-450",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 411.9332,
-        "MinY": 570.77229456,
-        "MaxX": 450.63730544,
-        "MaxY": 624.8957054399999,
-        "Width": 38.70410543999998,
-        "Height": 54.12341087999994,
-        "CenterX": 431.28525272,
-        "CenterY": 597.834
+        "MinX": 411.933,
+        "MinY": 570.772,
+        "MaxX": 450.637,
+        "MaxY": 624.896
       },
       "SourceShapeIds": [
         "shape-450"
@@ -2021,22 +1574,17 @@
       "PrototypeId": "prototype-38",
       "Recognition": {
         "Text": "3",
-        "Confidence": 0.9991689920425415,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999169
       }
     },
     {
       "Id": "prototype:prototype-38@shape-452",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 411.9332,
-        "MinY": 849.49629456,
-        "MaxX": 450.63730544,
-        "MaxY": 903.61970544,
-        "Width": 38.70410543999998,
-        "Height": 54.12341087999994,
-        "CenterX": 431.28525272,
-        "CenterY": 876.558
+        "MinX": 411.933,
+        "MinY": 849.496,
+        "MaxX": 450.637,
+        "MaxY": 903.62
       },
       "SourceShapeIds": [
         "shape-452"
@@ -2044,22 +1592,17 @@
       "PrototypeId": "prototype-38",
       "Recognition": {
         "Text": "3",
-        "Confidence": 0.9991689920425415,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999169
       }
     },
     {
       "Id": "prototype:prototype-39@shape-451",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 407.46325,
-        "MinY": 625.1028945600001,
-        "MaxX": 454.91639728,
-        "MaxY": 680.2138027200001,
-        "Width": 47.453147279999996,
-        "Height": 55.11090816000001,
-        "CenterX": 431.18982364,
-        "CenterY": 652.6583486400001
+        "MinX": 407.463,
+        "MinY": 625.103,
+        "MaxX": 454.916,
+        "MaxY": 680.214
       },
       "SourceShapeIds": [
         "shape-451"
@@ -2067,22 +1610,17 @@
       "PrototypeId": "prototype-39",
       "Recognition": {
         "Text": "4",
-        "Confidence": 0.9999651908874512,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999965
       }
     },
     {
       "Id": "prototype:prototype-39@shape-453",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 407.46325,
-        "MinY": 903.82789456,
-        "MaxX": 454.91639728,
-        "MaxY": 958.93880272,
-        "Width": 47.453147279999996,
-        "Height": 55.11090816000001,
-        "CenterX": 431.18982364,
-        "CenterY": 931.38334864
+        "MinX": 407.463,
+        "MinY": 903.828,
+        "MaxX": 454.916,
+        "MaxY": 958.939
       },
       "SourceShapeIds": [
         "shape-453"
@@ -2090,136 +1628,101 @@
       "PrototypeId": "prototype-39",
       "Recognition": {
         "Text": "4",
-        "Confidence": 0.9999651908874512,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999965
       }
     },
     {
       "Id": "prototype:prototype-40@shape-454",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 994.381,
-        "MinY": 3169.28349456,
-        "MaxX": 1024.99430272,
-        "MaxY": 3220.1843999999996,
-        "Width": 30.61330271999998,
-        "Height": 50.90090543999986,
-        "CenterX": 1009.68765136,
-        "CenterY": 3194.7339472799995
+        "MinY": 3169.283,
+        "MaxX": 1024.994,
+        "MaxY": 3220.184
       },
       "SourceShapeIds": [
         "shape-454"
       ],
-      "PrototypeId": "prototype-40",
-      "Recognition": null
+      "PrototypeId": "prototype-40"
     },
     {
       "Id": "prototype:prototype-40@shape-455",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 315.675,
-        "MinY": 1888.9534945599999,
-        "MaxX": 346.28830272,
-        "MaxY": 1939.8544,
-        "Width": 30.61330271999998,
-        "Height": 50.90090544000009,
-        "CenterX": 330.98165136,
-        "CenterY": 1914.40394728
+        "MinY": 1888.953,
+        "MaxX": 346.288,
+        "MaxY": 1939.854
       },
       "SourceShapeIds": [
         "shape-455"
       ],
-      "PrototypeId": "prototype-40",
-      "Recognition": null
+      "PrototypeId": "prototype-40"
     },
     {
       "Id": "prototype:prototype-40@shape-456",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 342.339,
-        "MinY": 3169.28349456,
-        "MaxX": 372.95230272,
-        "MaxY": 3220.1843999999996,
-        "Width": 30.61330271999998,
-        "Height": 50.90090543999986,
-        "CenterX": 357.64565136,
-        "CenterY": 3194.7339472799995
+        "MinY": 3169.283,
+        "MaxX": 372.952,
+        "MaxY": 3220.184
       },
       "SourceShapeIds": [
         "shape-456"
       ],
-      "PrototypeId": "prototype-40",
-      "Recognition": null
+      "PrototypeId": "prototype-40"
     },
     {
       "Id": "prototype:prototype-40@shape-459",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 937.883,
-        "MinY": 1464.6834945599999,
-        "MaxX": 968.49630272,
-        "MaxY": 1515.5844,
-        "Width": 30.61330271999998,
-        "Height": 50.90090544000009,
-        "CenterX": 953.18965136,
-        "CenterY": 1490.13394728
+        "MinY": 1464.683,
+        "MaxX": 968.496,
+        "MaxY": 1515.584
       },
       "SourceShapeIds": [
         "shape-459"
       ],
-      "PrototypeId": "prototype-40",
-      "Recognition": null
+      "PrototypeId": "prototype-40"
     },
     {
       "Id": "prototype:prototype-41@shape-457",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1581.29,
-        "MinY": 1200.35669728,
-        "MaxX": 1607.3468,
-        "MaxY": 1281.5417027199999,
-        "Width": 26.056800000000067,
-        "Height": 81.18500543999994,
-        "CenterX": 1594.3184,
-        "CenterY": 1240.9492
+        "MinY": 1200.357,
+        "MaxX": 1607.347,
+        "MaxY": 1281.542
       },
       "SourceShapeIds": [
         "shape-457"
       ],
-      "PrototypeId": "prototype-41",
-      "Recognition": null
+      "PrototypeId": "prototype-41"
     },
     {
       "Id": "prototype:prototype-41@shape-458",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2275.43,
-        "MinY": 3399.56669728,
-        "MaxX": 2301.4867999999997,
-        "MaxY": 3480.75170272,
-        "Width": 26.05679999999984,
-        "Height": 81.18500544000017,
-        "CenterX": 2288.4583999999995,
-        "CenterY": 3440.1592
+        "MinY": 3399.567,
+        "MaxX": 2301.487,
+        "MaxY": 3480.752
       },
       "SourceShapeIds": [
         "shape-458"
       ],
-      "PrototypeId": "prototype-41",
-      "Recognition": null
+      "PrototypeId": "prototype-41"
     },
     {
       "Id": "prototype:prototype-42@shape-460.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2803.63,
         "MinY": 730.964,
         "MaxX": 2849.37,
-        "MaxY": 778.245,
-        "Width": 45.73999999999978,
-        "Height": 47.28099999999995,
-        "CenterX": 2826.5,
-        "CenterY": 754.6045
+        "MaxY": 778.245
       },
       "SourceShapeIds": [
         "shape-460.1"
@@ -2227,22 +1730,17 @@
       "PrototypeId": "prototype-42",
       "Recognition": {
         "Text": "p",
-        "Confidence": 0.9239914417266846,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.923991
       }
     },
     {
       "Id": "prototype:prototype-42@shape-462.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2791.82,
         "MinY": 2011.29,
         "MaxX": 2837.55,
-        "MaxY": 2058.57,
-        "Width": 45.73000000000002,
-        "Height": 47.2800000000002,
-        "CenterX": 2814.6850000000004,
-        "CenterY": 2034.93
+        "MaxY": 2058.57
       },
       "SourceShapeIds": [
         "shape-462.1"
@@ -2250,22 +1748,17 @@
       "PrototypeId": "prototype-42",
       "Recognition": {
         "Text": "p",
-        "Confidence": 0.9239914417266846,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.923991
       }
     },
     {
       "Id": "prototype:prototype-43@shape-460.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2771.33,
         "MinY": 732.292,
         "MaxX": 2813.63,
-        "MaxY": 760.37,
-        "Width": 42.30000000000018,
-        "Height": 28.077999999999975,
-        "CenterX": 2792.48,
-        "CenterY": 746.331
+        "MaxY": 760.37
       },
       "SourceShapeIds": [
         "shape-460.2"
@@ -2273,22 +1766,17 @@
       "PrototypeId": "prototype-43",
       "Recognition": {
         "Text": "m",
-        "Confidence": 0.9972436428070068,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.997244
       }
     },
     {
       "Id": "prototype:prototype-43@shape-462.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2759.52,
         "MinY": 2012.62,
         "MaxX": 2801.82,
-        "MaxY": 2040.7,
-        "Width": 42.30000000000018,
-        "Height": 28.080000000000155,
-        "CenterX": 2780.67,
-        "CenterY": 2026.6599999999999
+        "MaxY": 2040.7
       },
       "SourceShapeIds": [
         "shape-462.2"
@@ -2296,22 +1784,17 @@
       "PrototypeId": "prototype-43",
       "Recognition": {
         "Text": "m",
-        "Confidence": 0.9972436428070068,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.997244
       }
     },
     {
       "Id": "prototype:prototype-44@shape-461",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 284.449,
         "MinY": 1439.07,
         "MaxX": 366.136,
-        "MaxY": 1486.35,
-        "Width": 81.68700000000001,
-        "Height": 47.27999999999997,
-        "CenterX": 325.2925,
-        "CenterY": 1462.71
+        "MaxY": 1486.35
       },
       "SourceShapeIds": [
         "shape-461"
@@ -2319,22 +1802,17 @@
       "PrototypeId": "prototype-44",
       "Recognition": {
         "Text": "dd",
-        "Confidence": 0.9869732856750488,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.986973
       }
     },
     {
       "Id": "prototype:prototype-44@shape-463",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 284.449,
         "MinY": 2719.4,
         "MaxX": 366.136,
-        "MaxY": 2766.68,
-        "Width": 81.68700000000001,
-        "Height": 47.279999999999745,
-        "CenterX": 325.2925,
-        "CenterY": 2743.04
+        "MaxY": 2766.68
       },
       "SourceShapeIds": [
         "shape-463"
@@ -2342,155 +1820,115 @@
       "PrototypeId": "prototype-44",
       "Recognition": {
         "Text": "dd",
-        "Confidence": 0.9869732856750488,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.986973
       }
     },
     {
       "Id": "prototype:prototype-45@shape-465",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1122.75,
         "MinY": 2468.48,
         "MaxX": 1153.24,
-        "MaxY": 2483.59,
-        "Width": 30.49000000000001,
-        "Height": 15.110000000000127,
-        "CenterX": 1137.995,
-        "CenterY": 2476.035
+        "MaxY": 2483.59
       },
       "SourceShapeIds": [
         "shape-465"
       ],
-      "PrototypeId": "prototype-45",
-      "Recognition": null
+      "PrototypeId": "prototype-45"
     },
     {
       "Id": "prototype:prototype-45@shape-469",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1235.61,
         "MinY": 568.164,
         "MaxX": 1266.11,
-        "MaxY": 583.426,
-        "Width": 30.5,
-        "Height": 15.262000000000057,
-        "CenterX": 1250.86,
-        "CenterY": 575.7950000000001
+        "MaxY": 583.426
       },
       "SourceShapeIds": [
         "shape-469"
       ],
-      "PrototypeId": "prototype-45",
-      "Recognition": null
+      "PrototypeId": "prototype-45"
     },
     {
       "Id": "prototype:prototype-45@shape-471",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1077.1,
         "MinY": 1882.59,
         "MaxX": 1107.6,
-        "MaxY": 1897.73,
-        "Width": 30.5,
-        "Height": 15.1400000000001,
-        "CenterX": 1092.35,
-        "CenterY": 1890.1599999999999
+        "MaxY": 1897.73
       },
       "SourceShapeIds": [
         "shape-471"
       ],
-      "PrototypeId": "prototype-45",
-      "Recognition": null
+      "PrototypeId": "prototype-45"
     },
     {
       "Id": "prototype:prototype-45@shape-473",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1137.28,
         "MinY": 1188.32,
         "MaxX": 1167.77,
-        "MaxY": 1203.26,
-        "Width": 30.49000000000001,
-        "Height": 14.940000000000055,
-        "CenterX": 1152.525,
-        "CenterY": 1195.79
+        "MaxY": 1203.26
       },
       "SourceShapeIds": [
         "shape-473"
       ],
-      "PrototypeId": "prototype-45",
-      "Recognition": null
+      "PrototypeId": "prototype-45"
     },
     {
       "Id": "prototype:prototype-46@shape-467",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 693.369,
         "MinY": 583.412,
         "MaxX": 723.861,
-        "MaxY": 598.674,
-        "Width": 30.491999999999962,
-        "Height": 15.261999999999944,
-        "CenterX": 708.615,
-        "CenterY": 591.043
+        "MaxY": 598.674
       },
       "SourceShapeIds": [
         "shape-467"
       ],
-      "PrototypeId": "prototype-46",
-      "Recognition": null
+      "PrototypeId": "prototype-46"
     },
     {
       "Id": "prototype:prototype-47@shape-474",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1681.09,
         "MinY": 2596.45,
         "MaxX": 1716.75,
-        "MaxY": 2613.26,
-        "Width": 35.66000000000008,
-        "Height": 16.8100000000004,
-        "CenterX": 1698.92,
-        "CenterY": 2604.855
+        "MaxY": 2613.26
       },
       "SourceShapeIds": [
         "shape-474"
       ],
-      "PrototypeId": "prototype-47",
-      "Recognition": null
+      "PrototypeId": "prototype-47"
     },
     {
       "Id": "prototype:prototype-47@shape-475",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1681.09,
         "MinY": 2581.9,
         "MaxX": 1716.75,
-        "MaxY": 2598.71,
-        "Width": 35.66000000000008,
-        "Height": 16.809999999999945,
-        "CenterX": 1698.92,
-        "CenterY": 2590.3050000000003
+        "MaxY": 2598.71
       },
       "SourceShapeIds": [
         "shape-475"
       ],
-      "PrototypeId": "prototype-47",
-      "Recognition": null
+      "PrototypeId": "prototype-47"
     },
     {
       "Id": "prototype:prototype-48@shape-480.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 406.591,
         "MinY": 478.534,
         "MaxX": 452.341,
-        "MaxY": 528.909,
-        "Width": 45.75,
-        "Height": 50.375,
-        "CenterX": 429.466,
-        "CenterY": 503.7215
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.1"
@@ -2498,22 +1936,17 @@
       "PrototypeId": "prototype-48",
       "Recognition": {
         "Text": "C",
-        "Confidence": 0.9992897510528564,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.99929
       }
     },
     {
       "Id": "prototype:prototype-49@shape-480.2",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 457.31,
         "MinY": 495.206,
         "MaxX": 494.904,
-        "MaxY": 528.909,
-        "Width": 37.593999999999994,
-        "Height": 33.702999999999975,
-        "CenterX": 476.10699999999997,
-        "CenterY": 512.0575
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.2"
@@ -2521,22 +1954,17 @@
       "PrototypeId": "prototype-49",
       "Recognition": {
         "Text": "a",
-        "Confidence": 0.9996021389961243,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999602
       }
     },
     {
       "Id": "prototype:prototype-49@shape-480.5",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 573.31,
         "MinY": 495.206,
         "MaxX": 610.904,
-        "MaxY": 528.909,
-        "Width": 37.59400000000005,
-        "Height": 33.702999999999975,
-        "CenterX": 592.107,
-        "CenterY": 512.0575
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.5"
@@ -2544,22 +1972,17 @@
       "PrototypeId": "prototype-49",
       "Recognition": {
         "Text": "a",
-        "Confidence": 0.9996021389961243,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999602
       }
     },
     {
       "Id": "prototype:prototype-50@shape-480.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 497.248,
         "MinY": 495.206,
         "MaxX": 540.654,
-        "MaxY": 527.909,
-        "Width": 43.406000000000006,
-        "Height": 32.702999999999975,
-        "CenterX": 518.951,
-        "CenterY": 511.5575
+        "MaxY": 527.909
       },
       "SourceShapeIds": [
         "shape-480.3"
@@ -2567,22 +1990,17 @@
       "PrototypeId": "prototype-50",
       "Recognition": {
         "Text": "n",
-        "Confidence": 0.9908930063247681,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.990893
       }
     },
     {
       "Id": "prototype:prototype-51@shape-480.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 543.451,
         "MinY": 482.956,
         "MaxX": 569.045,
-        "MaxY": 528.909,
-        "Width": 25.593999999999937,
-        "Height": 45.952999999999975,
-        "CenterX": 556.248,
-        "CenterY": 505.9325
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.4"
@@ -2590,22 +2008,17 @@
       "PrototypeId": "prototype-51",
       "Recognition": {
         "Text": "t",
-        "Confidence": 0.9989514350891113,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998951
       }
     },
     {
       "Id": "prototype:prototype-52@shape-480.6",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 611.904,
         "MinY": 478.534,
         "MaxX": 652.904,
-        "MaxY": 528.909,
-        "Width": 41,
-        "Height": 50.375,
-        "CenterX": 632.404,
-        "CenterY": 503.7215
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.6"
@@ -2613,22 +2026,17 @@
       "PrototypeId": "prototype-52",
       "Recognition": {
         "Text": "b",
-        "Confidence": 0.9608470797538757,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.960847
       }
     },
     {
       "Id": "prototype:prototype-53@shape-480.8",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 656.779,
         "MinY": 496.222,
         "MaxX": 677.748,
-        "MaxY": 527.909,
-        "Width": 20.96900000000005,
-        "Height": 31.687000000000012,
-        "CenterX": 667.2635,
-        "CenterY": 512.0654999999999
+        "MaxY": 527.909
       },
       "SourceShapeIds": [
         "shape-480.8"
@@ -2636,41 +2044,31 @@
       "PrototypeId": "prototype-53",
       "Recognition": {
         "Text": "1",
-        "Confidence": 0.9890246987342834,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.989025
       }
     },
     {
       "Id": "prototype:prototype-54@shape-480.9",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 680.982,
         "MinY": 478.534,
         "MaxX": 702.076,
-        "MaxY": 527.909,
-        "Width": 21.09400000000005,
-        "Height": 49.375,
-        "CenterX": 691.529,
-        "CenterY": 503.2215
+        "MaxY": 527.909
       },
       "SourceShapeIds": [
         "shape-480.9"
       ],
-      "PrototypeId": "prototype-54",
-      "Recognition": null
+      "PrototypeId": "prototype-54"
     },
     {
       "Id": "prototype:prototype-55@shape-480.10",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 706.045,
         "MinY": 495.206,
         "MaxX": 740.091,
-        "MaxY": 528.909,
-        "Width": 34.04600000000005,
-        "Height": 33.702999999999975,
-        "CenterX": 723.068,
-        "CenterY": 512.0575
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.10"
@@ -2678,41 +2076,31 @@
       "PrototypeId": "prototype-55",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.9973849654197693,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.997385
       }
     },
     {
       "Id": "prototype:prototype-56@shape-482",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 783.013,
         "MinY": 462.425,
         "MaxX": 830.295,
-        "MaxY": 534.237,
-        "Width": 47.281999999999925,
-        "Height": 71.81199999999995,
-        "CenterX": 806.654,
-        "CenterY": 498.331
+        "MaxY": 534.237
       },
       "SourceShapeIds": [
         "shape-482"
       ],
-      "PrototypeId": "prototype-56",
-      "Recognition": null
+      "PrototypeId": "prototype-56"
     },
     {
       "Id": "prototype:prototype-57@shape-483.3",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 912.716,
         "MinY": 480.737,
         "MaxX": 944.482,
-        "MaxY": 528.909,
-        "Width": 31.765999999999963,
-        "Height": 48.17199999999997,
-        "CenterX": 928.5989999999999,
-        "CenterY": 504.823
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-483.3"
@@ -2720,22 +2108,17 @@
       "PrototypeId": "prototype-57",
       "Recognition": {
         "Text": "6",
-        "Confidence": 0.9980918765068054,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998092
       }
     },
     {
       "Id": "prototype:prototype-58@shape-483.4",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 949.248,
         "MinY": 480.737,
         "MaxX": 980.732,
-        "MaxY": 527.909,
-        "Width": 31.483999999999924,
-        "Height": 47.17199999999997,
-        "CenterX": 964.99,
-        "CenterY": 504.323
+        "MaxY": 527.909
       },
       "SourceShapeIds": [
         "shape-483.4"
@@ -2743,22 +2126,17 @@
       "PrototypeId": "prototype-58",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.9999223947525024,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999922
       }
     },
     {
       "Id": "prototype:prototype-59@shape-486.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2122.23,
         "MinY": 2377.22,
         "MaxX": 2219.68,
-        "MaxY": 2438.82,
-        "Width": 97.44999999999982,
-        "Height": 61.600000000000364,
-        "CenterX": 2170.955,
-        "CenterY": 2408.02
+        "MaxY": 2438.82
       },
       "SourceShapeIds": [
         "shape-486.1"
@@ -2766,22 +2144,17 @@
       "PrototypeId": "prototype-59",
       "Recognition": {
         "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.74327
       }
     },
     {
       "Id": "prototype:prototype-59@shape-488.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2193.12,
         "MinY": 1096.89,
         "MaxX": 2290.57,
-        "MaxY": 1158.49,
-        "Width": 97.45000000000027,
-        "Height": 61.59999999999991,
-        "CenterX": 2241.8450000000003,
-        "CenterY": 1127.69
+        "MaxY": 1158.49
       },
       "SourceShapeIds": [
         "shape-488.1"
@@ -2789,22 +2162,17 @@
       "PrototypeId": "prototype-59",
       "Recognition": {
         "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.74327
       }
     },
     {
       "Id": "prototype:prototype-59@shape-490.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2188.63,
         "MinY": 1674.66,
         "MaxX": 2286.08,
-        "MaxY": 1736.26,
-        "Width": 97.44999999999982,
-        "Height": 61.59999999999991,
-        "CenterX": 2237.355,
-        "CenterY": 1705.46
+        "MaxY": 1736.26
       },
       "SourceShapeIds": [
         "shape-490.1"
@@ -2812,22 +2180,17 @@
       "PrototypeId": "prototype-59",
       "Recognition": {
         "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.74327
       }
     },
     {
       "Id": "prototype:prototype-59@shape-492.1",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2173.85,
         "MinY": 2954.99,
         "MaxX": 2271.31,
-        "MaxY": 3016.59,
-        "Width": 97.46000000000004,
-        "Height": 61.600000000000364,
-        "CenterX": 2222.58,
-        "CenterY": 2985.79
+        "MaxY": 3016.59
       },
       "SourceShapeIds": [
         "shape-492.1"
@@ -2835,117 +2198,87 @@
       "PrototypeId": "prototype-59",
       "Recognition": {
         "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.74327
       }
     },
     {
       "Id": "prototype:prototype-60@shape-567",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 106.88148125,
-        "MinY": 2499.483005,
-        "MaxX": 131.967860722,
-        "MaxY": 2904.344704348144,
-        "Width": 25.08637947200002,
-        "Height": 404.86169934814416,
-        "CenterX": 119.424670986,
-        "CenterY": 2701.9138546740724
+        "MinX": 106.881,
+        "MinY": 2499.483,
+        "MaxX": 131.968,
+        "MaxY": 2904.345
       },
       "SourceShapeIds": [
         "shape-567"
       ],
-      "PrototypeId": "prototype-60",
-      "Recognition": null
+      "PrototypeId": "prototype-60"
     },
     {
       "Id": "prototype:prototype-60@shape-568",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 245.48148125,
-        "MinY": 571.507025,
-        "MaxX": 270.567860722,
-        "MaxY": 957.3577014282226,
-        "Width": 25.086379471999976,
-        "Height": 385.85067642822264,
-        "CenterX": 258.024670986,
-        "CenterY": 764.4323632141113
+        "MinX": 245.481,
+        "MinY": 571.507,
+        "MaxX": 270.568,
+        "MaxY": 957.358
       },
       "SourceShapeIds": [
         "shape-568"
       ],
-      "PrototypeId": "prototype-60",
-      "Recognition": null
+      "PrototypeId": "prototype-60"
     },
     {
       "Id": "prototype:prototype-60@shape-569",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 106.88148125,
-        "MinY": 1885.6381499999998,
-        "MaxX": 131.967860722,
-        "MaxY": 2237.8412173583984,
-        "Width": 25.08637947200002,
-        "Height": 352.2030673583986,
-        "CenterX": 119.424670986,
-        "CenterY": 2061.739683679199
+        "MinX": 106.881,
+        "MinY": 1885.638,
+        "MaxX": 131.968,
+        "MaxY": 2237.841
       },
       "SourceShapeIds": [
         "shape-569"
       ],
-      "PrototypeId": "prototype-60",
-      "Recognition": null
+      "PrototypeId": "prototype-60"
     },
     {
       "Id": "prototype:prototype-60@shape-570",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 106.88148125,
-        "MinY": 3166.4891549999998,
-        "MaxX": 131.967860722,
-        "MaxY": 3622.0871902612303,
-        "Width": 25.08637947200002,
-        "Height": 455.5980352612305,
-        "CenterX": 119.424670986,
-        "CenterY": 3394.288172630615
+        "MinX": 106.881,
+        "MinY": 3166.489,
+        "MaxX": 131.968,
+        "MaxY": 3622.087
       },
       "SourceShapeIds": [
         "shape-570"
       ],
-      "PrototypeId": "prototype-60",
-      "Recognition": null
+      "PrototypeId": "prototype-60"
     },
     {
       "Id": "prototype:prototype-60@shape-571",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
-        "MinX": 106.88148125,
-        "MinY": 1219.1530050000001,
-        "MaxX": 131.967860722,
-        "MaxY": 1624.0147043481445,
-        "Width": 25.08637947200002,
-        "Height": 404.8616993481444,
-        "CenterX": 119.424670986,
-        "CenterY": 1421.5838546740724
+        "MinX": 106.881,
+        "MinY": 1219.153,
+        "MaxX": 131.968,
+        "MaxY": 1624.015
       },
       "SourceShapeIds": [
         "shape-571"
       ],
-      "PrototypeId": "prototype-60",
-      "Recognition": null
+      "PrototypeId": "prototype-60"
     },
     {
       "Id": "prototype:compound-prototype-shape-445@shape-445.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 306.112,
-        "MinY": 848.1799945600001,
-        "MaxX": 379.74330544000003,
-        "MaxY": 944.42039728,
-        "Width": 73.63130544,
-        "Height": 96.2404027199999,
-        "CenterX": 342.92765272,
-        "CenterY": 896.3001959200001
+        "MinY": 848.18,
+        "MaxX": 379.743,
+        "MaxY": 944.42
       },
       "SourceShapeIds": [
         "shape-445.whole",
@@ -2956,22 +2289,17 @@
       "PrototypeId": "compound-prototype-shape-445",
       "Recognition": {
         "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.992286
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-446@shape-446.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 1514.92599456,
-        "MaxX": 241.14330544,
-        "MaxY": 1611.16639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 1563.04619592
+        "MinY": 1514.926,
+        "MaxX": 241.143,
+        "MaxY": 1611.166
       },
       "SourceShapeIds": [
         "shape-446.whole",
@@ -2982,22 +2310,17 @@
       "PrototypeId": "compound-prototype-shape-446",
       "Recognition": {
         "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.992286
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-447@shape-447.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 2128.50599456,
-        "MaxX": 241.14330544,
-        "MaxY": 2224.74639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 2176.62619592
+        "MinY": 2128.506,
+        "MaxX": 241.143,
+        "MaxY": 2224.746
       },
       "SourceShapeIds": [
         "shape-447.whole",
@@ -3008,22 +2331,17 @@
       "PrototypeId": "compound-prototype-shape-447",
       "Recognition": {
         "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.992286
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-448@shape-448.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 3513.23599456,
-        "MaxX": 241.14330544,
-        "MaxY": 3609.47639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 3561.35619592
+        "MinY": 3513.236,
+        "MaxX": 241.143,
+        "MaxY": 3609.476
       },
       "SourceShapeIds": [
         "shape-448.whole",
@@ -3034,22 +2352,17 @@
       "PrototypeId": "compound-prototype-shape-448",
       "Recognition": {
         "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.992286
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-449@shape-449.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 167.512,
-        "MinY": 2795.25599456,
-        "MaxX": 241.14330544,
-        "MaxY": 2891.49639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 2843.37619592
+        "MinY": 2795.256,
+        "MaxX": 241.143,
+        "MaxY": 2891.496
       },
       "SourceShapeIds": [
         "shape-449.whole",
@@ -3060,22 +2373,17 @@
       "PrototypeId": "compound-prototype-shape-449",
       "Recognition": {
         "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.992286
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-460@shape-460.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2771.33,
         "MinY": 730.964,
         "MaxX": 2849.37,
-        "MaxY": 778.245,
-        "Width": 78.03999999999996,
-        "Height": 47.28099999999995,
-        "CenterX": 2810.35,
-        "CenterY": 754.6045
+        "MaxY": 778.245
       },
       "SourceShapeIds": [
         "shape-460.whole",
@@ -3085,22 +2393,17 @@
       "PrototypeId": "compound-prototype-shape-460",
       "Recognition": {
         "Text": "du",
-        "Confidence": 0.7732808589935303,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.773281
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-462@shape-462.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2759.52,
         "MinY": 2011.29,
         "MaxX": 2837.55,
-        "MaxY": 2058.57,
-        "Width": 78.0300000000002,
-        "Height": 47.2800000000002,
-        "CenterX": 2798.535,
-        "CenterY": 2034.93
+        "MaxY": 2058.57
       },
       "SourceShapeIds": [
         "shape-462.whole",
@@ -3110,22 +2413,17 @@
       "PrototypeId": "compound-prototype-shape-462",
       "Recognition": {
         "Text": "du",
-        "Confidence": 0.7721089720726013,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.772109
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-486@shape-486.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2122.23,
         "MinY": 2377.22,
         "MaxX": 2231.12,
-        "MaxY": 2438.82,
-        "Width": 108.88999999999987,
-        "Height": 61.600000000000364,
-        "CenterX": 2176.675,
-        "CenterY": 2408.02
+        "MaxY": 2438.82
       },
       "SourceShapeIds": [
         "shape-486.whole",
@@ -3135,22 +2433,17 @@
       "PrototypeId": "compound-prototype-shape-486",
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.9128289222717285,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.912829
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-488@shape-488.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2193.12,
         "MinY": 1096.89,
         "MaxX": 2302.01,
-        "MaxY": 1158.49,
-        "Width": 108.89000000000033,
-        "Height": 61.59999999999991,
-        "CenterX": 2247.565,
-        "CenterY": 1127.69
+        "MaxY": 1158.49
       },
       "SourceShapeIds": [
         "shape-488.whole",
@@ -3160,22 +2453,17 @@
       "PrototypeId": "compound-prototype-shape-488",
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.912903368473053,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.912903
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-490@shape-490.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2188.63,
         "MinY": 1674.66,
         "MaxX": 2297.52,
-        "MaxY": 1736.26,
-        "Width": 108.88999999999987,
-        "Height": 61.59999999999991,
-        "CenterX": 2243.075,
-        "CenterY": 1705.46
+        "MaxY": 1736.26
       },
       "SourceShapeIds": [
         "shape-490.whole",
@@ -3185,22 +2473,17 @@
       "PrototypeId": "compound-prototype-shape-490",
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.829987108707428,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.829987
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-492@shape-492.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2173.85,
         "MinY": 2954.99,
         "MaxX": 2282.75,
-        "MaxY": 3016.59,
-        "Width": 108.90000000000009,
-        "Height": 61.600000000000364,
-        "CenterX": 2228.3,
-        "CenterY": 2985.79
+        "MaxY": 3016.59
       },
       "SourceShapeIds": [
         "shape-492.whole",
@@ -3210,22 +2493,17 @@
       "PrototypeId": "compound-prototype-shape-492",
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.8512024879455566,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.851202
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-53@shape-53.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 2348.87,
         "MinY": 348.944,
         "MaxX": 2439.39,
-        "MaxY": 396.022,
-        "Width": 90.51999999999998,
-        "Height": 47.077999999999975,
-        "CenterX": 2394.13,
-        "CenterY": 372.483
+        "MaxY": 396.022
       },
       "SourceShapeIds": [
         "shape-53.whole",
@@ -3238,22 +2516,17 @@
       "PrototypeId": "compound-prototype-shape-53",
       "Recognition": {
         "Text": "Giya",
-        "Confidence": 0.9996346831321716,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999635
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-57@shape-57.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1272.98,
         "MinY": 283.933,
         "MaxX": 1411.42,
-        "MaxY": 338.527,
-        "Width": 138.44000000000005,
-        "Height": 54.593999999999994,
-        "CenterX": 1342.2,
-        "CenterY": 311.23
+        "MaxY": 338.527
       },
       "SourceShapeIds": [
         "shape-57.whole",
@@ -3265,22 +2538,17 @@
       "PrototypeId": "compound-prototype-shape-57",
       "Recognition": {
         "Text": "from",
-        "Confidence": 0.9998317956924438,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999832
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-58@shape-58.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1434.72,
         "MinY": 284.277,
         "MaxX": 1531,
-        "MaxY": 338.355,
-        "Width": 96.27999999999997,
-        "Height": 54.07800000000003,
-        "CenterX": 1482.8600000000001,
-        "CenterY": 311.31600000000003
+        "MaxY": 338.355
       },
       "SourceShapeIds": [
         "shape-58.whole",
@@ -3291,22 +2559,17 @@
       "PrototypeId": "compound-prototype-shape-58",
       "Recognition": {
         "Text": "the",
-        "Confidence": 0.9993922114372253,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999392
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-59@shape-59.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 1551.98,
         "MinY": 283.933,
         "MaxX": 1659.42,
-        "MaxY": 337.465,
-        "Width": 107.44000000000005,
-        "Height": 53.53199999999998,
-        "CenterX": 1605.7,
-        "CenterY": 310.69899999999996
+        "MaxY": 337.465
       },
       "SourceShapeIds": [
         "shape-59.whole",
@@ -3319,22 +2582,17 @@
       "PrototypeId": "compound-prototype-shape-59",
       "Recognition": {
         "Text": "film",
-        "Confidence": 0.9980977177619934,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998098
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-61@shape-61.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 142.357,
         "MinY": 3064.99,
         "MaxX": 208.592,
-        "MaxY": 3108.75,
-        "Width": 66.23500000000001,
-        "Height": 43.76000000000022,
-        "CenterX": 175.4745,
-        "CenterY": 3086.87
+        "MaxY": 3108.75
       },
       "SourceShapeIds": [
         "shape-61.whole",
@@ -3344,22 +2602,17 @@
       "PrototypeId": "compound-prototype-shape-61",
       "Recognition": {
         "Text": "17",
-        "Confidence": 0.9998754262924194,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999875
       }
     },
     {
       "Id": "prototype:compound-prototype-shape-63@shape-63.whole",
-      "Kind": 0,
+      "Kind": "Prototype",
       "Bounds": {
         "MinX": 142.357,
         "MinY": 2397.47,
         "MaxX": 204.75,
-        "MaxY": 2442.91,
-        "Width": 62.393,
-        "Height": 45.440000000000055,
-        "CenterX": 173.55349999999999,
-        "CenterY": 2420.1899999999996
+        "MaxY": 2442.91
       },
       "SourceShapeIds": [
         "shape-63.whole",
@@ -3369,22 +2622,17 @@
       "PrototypeId": "compound-prototype-shape-63",
       "Recognition": {
         "Text": "13",
-        "Confidence": 0.9999536871910095,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999954
       }
     },
     {
       "Id": "run:1",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1125.9,
         "MinY": 143.764,
         "MaxX": 1360.97,
-        "MaxY": 223.732,
-        "Width": 235.06999999999994,
-        "Height": 79.96799999999999,
-        "CenterX": 1243.435,
-        "CenterY": 183.748
+        "MaxY": 223.732
       },
       "SourceShapeIds": [
         "shape-51.1",
@@ -3392,25 +2640,19 @@
         "shape-51.3",
         "shape-51.4"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "YELL",
-        "Confidence": 0.9998767971992493,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999877
       }
     },
     {
       "Id": "run:2",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1574.61,
         "MinY": 142.31,
         "MaxX": 1934.04,
-        "MaxY": 225.185,
-        "Width": 359.43000000000006,
-        "Height": 82.875,
-        "CenterX": 1754.3249999999998,
-        "CenterY": 183.7475
+        "MaxY": 225.185
       },
       "SourceShapeIds": [
         "shape-52.1",
@@ -3420,89 +2662,65 @@
         "shape-52.5",
         "shape-52.6"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "LEAVES",
-        "Confidence": 0.9989473819732666,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998947
       }
     },
     {
       "Id": "run:3",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1685.89,
         "MinY": 284.277,
         "MaxX": 1706.2,
-        "MaxY": 304.074,
-        "Width": 20.309999999999945,
-        "Height": 19.797000000000025,
-        "CenterX": 1696.045,
-        "CenterY": 294.1755
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
         "shape-60.2",
         "shape-60.1"
-      ],
-      "PrototypeId": null,
-      "Recognition": null
+      ]
     },
     {
       "Id": "run:4",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1935.89,
         "MinY": 284.277,
         "MaxX": 1956.2,
-        "MaxY": 304.074,
-        "Width": 20.309999999999945,
-        "Height": 19.797000000000025,
-        "CenterX": 1946.045,
-        "CenterY": 294.1755
+        "MaxY": 304.074
       },
       "SourceShapeIds": [
         "shape-60.12",
         "shape-60.11"
-      ],
-      "PrototypeId": null,
-      "Recognition": null
+      ]
     },
     {
       "Id": "run:5",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2562.59,
         "MinY": 347.975,
         "MaxX": 2612.26,
-        "MaxY": 386.6,
-        "Width": 49.67000000000007,
-        "Height": 38.625,
-        "CenterX": 2587.425,
-        "CenterY": 367.2875
+        "MaxY": 386.6
       },
       "SourceShapeIds": [
         "shape-54.5",
         "shape-54.6"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "he",
-        "Confidence": 0.9982116222381592,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.998212
       }
     },
     {
       "Id": "run:6",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2348.87,
         "MinY": 348.944,
         "MaxX": 2533.01,
-        "MaxY": 396.022,
-        "Width": 184.14000000000033,
-        "Height": 47.077999999999975,
-        "CenterX": 2440.94,
-        "CenterY": 372.483
+        "MaxY": 396.022
       },
       "SourceShapeIds": [
         "shape-53.whole",
@@ -3510,25 +2728,19 @@
         "shape-54.2",
         "shape-54.3"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "Giya Kan",
-        "Confidence": 0.9998458623886108,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999846
       }
     },
     {
       "Id": "run:7",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2672.78,
         "MinY": 348.85,
         "MaxX": 2818.36,
-        "MaxY": 386.709,
-        "Width": 145.57999999999993,
-        "Height": 37.85899999999998,
-        "CenterX": 2745.57,
-        "CenterY": 367.7795
+        "MaxY": 386.709
       },
       "SourceShapeIds": [
         "shape-55.2",
@@ -3538,49 +2750,37 @@
         "shape-55.6",
         "shape-55.7"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "1935-2",
-        "Confidence": 0.9999619126319885,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999962
       }
     },
     {
       "Id": "run:8",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 2852.78,
         "MinY": 348.881,
         "MaxX": 2899.48,
-        "MaxY": 386.662,
-        "Width": 46.69999999999982,
-        "Height": 37.781000000000006,
-        "CenterX": 2876.13,
-        "CenterY": 367.77149999999995
+        "MaxY": 386.662
       },
       "SourceShapeIds": [
         "shape-55.9",
         "shape-55.10"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "19",
-        "Confidence": 0.9999226331710815,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999923
       }
     },
     {
       "Id": "run:9",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 406.591,
         "MinY": 478.534,
         "MaxX": 740.091,
-        "MaxY": 528.909,
-        "Width": 333.5,
-        "Height": 50.375,
-        "CenterX": 573.341,
-        "CenterY": 503.7215
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-480.1",
@@ -3593,2918 +2793,27 @@
         "shape-480.9",
         "shape-480.10"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "Cantabile",
-        "Confidence": 0.995585024356842,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.995585
       }
     },
     {
       "Id": "run:10",
-      "Kind": 1,
+      "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 912.716,
         "MinY": 480.737,
         "MaxX": 980.732,
-        "MaxY": 528.909,
-        "Width": 68.01599999999996,
-        "Height": 48.17199999999997,
-        "CenterX": 946.7239999999999,
-        "CenterY": 504.823
+        "MaxY": 528.909
       },
       "SourceShapeIds": [
         "shape-483.3",
         "shape-483.4"
       ],
-      "PrototypeId": null,
       "Recognition": {
         "Text": "62",
-        "Confidence": 0.9998357892036438,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    }
-  ],
-  "Recognized": [
-    {
-      "Id": "prototype:prototype-1@shape-51.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1125.9,
-        "MinY": 143.764,
-        "MaxX": 1190.58,
-        "MaxY": 223.732,
-        "Width": 64.67999999999984,
-        "Height": 79.96799999999999,
-        "CenterX": 1158.24,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-51.1"
-      ],
-      "PrototypeId": "prototype-1",
-      "Recognition": {
-        "Text": "Y",
-        "Confidence": 0.9954997897148132,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-2@shape-51.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1197.61,
-        "MinY": 143.764,
-        "MaxX": 1247.61,
-        "MaxY": 223.732,
-        "Width": 50,
-        "Height": 79.96799999999999,
-        "CenterX": 1222.61,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-51.2"
-      ],
-      "PrototypeId": "prototype-2",
-      "Recognition": {
-        "Text": "E",
-        "Confidence": 0.9634795784950256,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-2@shape-52.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1629.61,
-        "MinY": 143.764,
-        "MaxX": 1679.61,
-        "MaxY": 223.732,
-        "Width": 50,
-        "Height": 79.96799999999999,
-        "CenterX": 1654.61,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-52.2"
-      ],
-      "PrototypeId": "prototype-2",
-      "Recognition": {
-        "Text": "E",
-        "Confidence": 0.9634795784950256,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-2@shape-52.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1821.61,
-        "MinY": 143.764,
-        "MaxX": 1871.61,
-        "MaxY": 223.732,
-        "Width": 50,
-        "Height": 79.96799999999999,
-        "CenterX": 1846.61,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-52.5"
-      ],
-      "PrototypeId": "prototype-2",
-      "Recognition": {
-        "Text": "E",
-        "Confidence": 0.9634795784950256,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-3@shape-51.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1259.61,
-        "MinY": 143.764,
-        "MaxX": 1305.97,
-        "MaxY": 223.732,
-        "Width": 46.36000000000013,
-        "Height": 79.96799999999999,
-        "CenterX": 1282.79,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-51.3"
-      ],
-      "PrototypeId": "prototype-3",
-      "Recognition": {
-        "Text": "L",
-        "Confidence": 0.9984563589096069,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-3@shape-51.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1314.61,
-        "MinY": 143.764,
-        "MaxX": 1360.97,
-        "MaxY": 223.732,
-        "Width": 46.36000000000013,
-        "Height": 79.96799999999999,
-        "CenterX": 1337.79,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-51.4"
-      ],
-      "PrototypeId": "prototype-3",
-      "Recognition": {
-        "Text": "L",
-        "Confidence": 0.9984563589096069,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-3@shape-52.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1574.61,
-        "MinY": 143.764,
-        "MaxX": 1620.97,
-        "MaxY": 223.732,
-        "Width": 46.36000000000013,
-        "Height": 79.96799999999999,
-        "CenterX": 1597.79,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-52.1"
-      ],
-      "PrototypeId": "prototype-3",
-      "Recognition": {
-        "Text": "L",
-        "Confidence": 0.9984563589096069,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-4@shape-51.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1440.89,
-        "MinY": 143.764,
-        "MaxX": 1537.31,
-        "MaxY": 223.732,
-        "Width": 96.41999999999985,
-        "Height": 79.96799999999999,
-        "CenterX": 1489.1,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-51.6"
-      ],
-      "PrototypeId": "prototype-4",
-      "Recognition": {
-        "Text": "W",
-        "Confidence": 0.978875994682312,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-5@shape-52.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1682.97,
-        "MinY": 143.764,
-        "MaxX": 1750,
-        "MaxY": 223.732,
-        "Width": 67.02999999999997,
-        "Height": 79.96799999999999,
-        "CenterX": 1716.4850000000001,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-52.3"
-      ],
-      "PrototypeId": "prototype-5",
-      "Recognition": {
-        "Text": "A",
-        "Confidence": 0.996435284614563,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-6@shape-52.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1747.06,
-        "MinY": 143.764,
-        "MaxX": 1813.56,
-        "MaxY": 223.732,
-        "Width": 66.5,
-        "Height": 79.96799999999999,
-        "CenterX": 1780.31,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-52.4"
-      ],
-      "PrototypeId": "prototype-6",
-      "Recognition": {
-        "Text": "V",
-        "Confidence": 0.5703343749046326,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-7@shape-52.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1879.64,
-        "MinY": 142.31,
-        "MaxX": 1934.04,
-        "MaxY": 225.185,
-        "Width": 54.399999999999864,
-        "Height": 82.875,
-        "CenterX": 1906.8400000000001,
-        "CenterY": 183.7475
-      },
-      "SourceShapeIds": [
-        "shape-52.6"
-      ],
-      "PrototypeId": "prototype-7",
-      "Recognition": {
-        "Text": "S",
-        "Confidence": 0.9743722081184387,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-53.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2383.36,
-        "MinY": 349.365,
-        "MaxX": 2388.59,
-        "MaxY": 354.115,
-        "Width": 5.230000000000018,
-        "Height": 4.75,
-        "CenterX": 2385.9750000000004,
-        "CenterY": 351.74
-      },
-      "SourceShapeIds": [
-        "shape-53.3"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-54.9",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2627.36,
-        "MinY": 349.365,
-        "MaxX": 2632.59,
-        "MaxY": 354.115,
-        "Width": 5.230000000000018,
-        "Height": 4.75,
-        "CenterX": 2629.9750000000004,
-        "CenterY": 351.74
-      },
-      "SourceShapeIds": [
-        "shape-54.9"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-59.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1577.34,
-        "MinY": 286.23,
-        "MaxX": 1584.65,
-        "MaxY": 292.887,
-        "Width": 7.310000000000173,
-        "Height": 6.656999999999982,
-        "CenterX": 1580.995,
-        "CenterY": 289.5585
-      },
-      "SourceShapeIds": [
-        "shape-59.3"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-60.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1768.34,
-        "MinY": 286.23,
-        "MaxX": 1775.65,
-        "MaxY": 292.887,
-        "Width": 7.310000000000173,
-        "Height": 6.656999999999982,
-        "CenterX": 1771.995,
-        "CenterY": 289.5585
-      },
-      "SourceShapeIds": [
-        "shape-60.5"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-8@shape-60.8",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1843.34,
-        "MinY": 286.23,
-        "MaxX": 1850.65,
-        "MaxY": 292.887,
-        "Width": 7.310000000000173,
-        "Height": 6.656999999999982,
-        "CenterX": 1846.995,
-        "CenterY": 289.5585
-      },
-      "SourceShapeIds": [
-        "shape-60.8"
-      ],
-      "PrototypeId": "prototype-8",
-      "Recognition": {
-        "Text": "\u25A0",
-        "Confidence": 0.8295163512229919,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-9@shape-53.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2391.4,
-        "MinY": 358.694,
-        "MaxX": 2416.01,
-        "MaxY": 396.022,
-        "Width": 24.610000000000127,
-        "Height": 37.327999999999975,
-        "CenterX": 2403.705,
-        "CenterY": 377.358
-      },
-      "SourceShapeIds": [
-        "shape-53.4"
-      ],
-      "PrototypeId": "prototype-9",
-      "Recognition": {
-        "Text": "y",
-        "Confidence": 0.9894471168518066,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-10@shape-53.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2417.69,
-        "MinY": 358.022,
-        "MaxX": 2439.39,
-        "MaxY": 386.709,
-        "Width": 21.699999999999818,
-        "Height": 28.687000000000012,
-        "CenterX": 2428.54,
-        "CenterY": 372.3655
-      },
-      "SourceShapeIds": [
-        "shape-53.5"
-      ],
-      "PrototypeId": "prototype-10",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.9986603260040283,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-10@shape-54.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2483.69,
-        "MinY": 358.022,
-        "MaxX": 2505.39,
-        "MaxY": 386.709,
-        "Width": 21.699999999999818,
-        "Height": 28.687000000000012,
-        "CenterX": 2494.54,
-        "CenterY": 372.3655
-      },
-      "SourceShapeIds": [
-        "shape-54.2"
-      ],
-      "PrototypeId": "prototype-10",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.9986603260040283,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-10@shape-56.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1134.98,
-        "MinY": 298.355,
-        "MaxX": 1165.37,
-        "MaxY": 338.527,
-        "Width": 30.389999999999873,
-        "Height": 40.17199999999997,
-        "CenterX": 1150.175,
-        "CenterY": 318.44100000000003
-      },
-      "SourceShapeIds": [
-        "shape-56.3"
-      ],
-      "PrototypeId": "prototype-10",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.9986603260040283,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-11@shape-54.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2458.95,
-        "MinY": 349.6,
-        "MaxX": 2485.44,
-        "MaxY": 385.959,
-        "Width": 26.490000000000236,
-        "Height": 36.35899999999998,
-        "CenterX": 2472.1949999999997,
-        "CenterY": 367.7795
-      },
-      "SourceShapeIds": [
-        "shape-54.1"
-      ],
-      "PrototypeId": "prototype-11",
-      "Recognition": {
-        "Text": "K",
-        "Confidence": 0.9972684383392334,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-12@shape-54.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2511.59,
-        "MinY": 357.928,
-        "MaxX": 2533.01,
-        "MaxY": 385.959,
-        "Width": 21.420000000000073,
-        "Height": 28.031000000000006,
-        "CenterX": 2522.3,
-        "CenterY": 371.9435
-      },
-      "SourceShapeIds": [
-        "shape-54.3"
-      ],
-      "PrototypeId": "prototype-12",
-      "Recognition": {
-        "Text": "n",
-        "Confidence": 0.9570537805557251,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-12@shape-60.9",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1859.65,
-        "MinY": 298.23,
-        "MaxX": 1889.65,
-        "MaxY": 337.465,
-        "Width": 30,
-        "Height": 39.23499999999996,
-        "CenterX": 1874.65,
-        "CenterY": 317.84749999999997
-      },
-      "SourceShapeIds": [
-        "shape-60.9"
-      ],
-      "PrototypeId": "prototype-12",
-      "Recognition": {
-        "Text": "n",
-        "Confidence": 0.9570537805557251,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-13@shape-54.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2562.59,
-        "MinY": 347.975,
-        "MaxX": 2584.01,
-        "MaxY": 385.959,
-        "Width": 21.420000000000073,
-        "Height": 37.98399999999998,
-        "CenterX": 2573.3,
-        "CenterY": 366.967
-      },
-      "SourceShapeIds": [
-        "shape-54.5"
-      ],
-      "PrototypeId": "prototype-13",
-      "Recognition": {
-        "Text": "h",
-        "Confidence": 0.936399519443512,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-13@shape-58.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1461.65,
-        "MinY": 284.277,
-        "MaxX": 1491.65,
-        "MaxY": 337.465,
-        "Width": 30,
-        "Height": 53.18799999999999,
-        "CenterX": 1476.65,
-        "CenterY": 310.871
-      },
-      "SourceShapeIds": [
-        "shape-58.2"
-      ],
-      "PrototypeId": "prototype-13",
-      "Recognition": {
-        "Text": "h",
-        "Confidence": 0.936399519443512,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-14@shape-54.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2588.7,
-        "MinY": 357.928,
-        "MaxX": 2612.26,
-        "MaxY": 386.6,
-        "Width": 23.5600000000004,
-        "Height": 28.672000000000025,
-        "CenterX": 2600.48,
-        "CenterY": 372.264
-      },
-      "SourceShapeIds": [
-        "shape-54.6"
-      ],
-      "PrototypeId": "prototype-14",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.9935263395309448,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-14@shape-56.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1219.01,
-        "MinY": 298.23,
-        "MaxX": 1252,
-        "MaxY": 338.355,
-        "Width": 32.99000000000001,
-        "Height": 40.125,
-        "CenterX": 1235.505,
-        "CenterY": 318.2925
-      },
-      "SourceShapeIds": [
-        "shape-56.6"
-      ],
-      "PrototypeId": "prototype-14",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.9935263395309448,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-14@shape-58.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1498.01,
-        "MinY": 298.23,
-        "MaxX": 1531,
-        "MaxY": 338.355,
-        "Width": 32.99000000000001,
-        "Height": 40.125,
-        "CenterX": 1514.505,
-        "CenterY": 318.2925
-      },
-      "SourceShapeIds": [
-        "shape-58.3"
-      ],
-      "PrototypeId": "prototype-14",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.9935263395309448,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-16@shape-55.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2695.9,
-        "MinY": 348.881,
-        "MaxX": 2719.48,
-        "MaxY": 386.662,
-        "Width": 23.579999999999927,
-        "Height": 37.781000000000006,
-        "CenterX": 2707.69,
-        "CenterY": 367.77149999999995
-      },
-      "SourceShapeIds": [
-        "shape-55.3"
-      ],
-      "PrototypeId": "prototype-16",
-      "Recognition": {
-        "Text": "9",
-        "Confidence": 0.9995712637901306,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-16@shape-55.10",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2875.9,
-        "MinY": 348.881,
-        "MaxX": 2899.48,
-        "MaxY": 386.662,
-        "Width": 23.579999999999927,
-        "Height": 37.781000000000006,
-        "CenterX": 2887.69,
-        "CenterY": 367.77149999999995
-      },
-      "SourceShapeIds": [
-        "shape-55.10"
-      ],
-      "PrototypeId": "prototype-16",
-      "Recognition": {
-        "Text": "9",
-        "Confidence": 0.9995712637901306,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-17@shape-55.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2723.64,
-        "MinY": 348.85,
-        "MaxX": 2745.73,
-        "MaxY": 386.709,
-        "Width": 22.090000000000146,
-        "Height": 37.85899999999998,
-        "CenterX": 2734.685,
-        "CenterY": 367.7795
-      },
-      "SourceShapeIds": [
-        "shape-55.4"
-      ],
-      "PrototypeId": "prototype-17",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.9997499585151672,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-18@shape-55.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2751.29,
-        "MinY": 349.6,
-        "MaxX": 2772.95,
-        "MaxY": 386.709,
-        "Width": 21.659999999999854,
-        "Height": 37.10899999999998,
-        "CenterX": 2762.12,
-        "CenterY": 368.1545
-      },
-      "SourceShapeIds": [
-        "shape-55.5"
-      ],
-      "PrototypeId": "prototype-18",
-      "Recognition": {
-        "Text": "5",
-        "Confidence": 0.9987284541130066,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-19@shape-55.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2777.47,
-        "MinY": 367.85,
-        "MaxX": 2791.23,
-        "MaxY": 372.256,
-        "Width": 13.760000000000218,
-        "Height": 4.405999999999949,
-        "CenterX": 2784.35,
-        "CenterY": 370.053
-      },
-      "SourceShapeIds": [
-        "shape-55.6"
-      ],
-      "PrototypeId": "prototype-19",
-      "Recognition": {
-        "Text": "-",
-        "Confidence": 0.7217889428138733,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-20@shape-55.7",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2795.92,
-        "MinY": 348.85,
-        "MaxX": 2818.36,
-        "MaxY": 385.959,
-        "Width": 22.440000000000055,
-        "Height": 37.10899999999998,
-        "CenterX": 2807.1400000000003,
-        "CenterY": 367.4045
-      },
-      "SourceShapeIds": [
-        "shape-55.7"
-      ],
-      "PrototypeId": "prototype-20",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9996687173843384,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-21@shape-56.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1100.2,
-        "MinY": 299.293,
-        "MaxX": 1134.65,
-        "MaxY": 337.465,
-        "Width": 34.450000000000045,
-        "Height": 38.17199999999997,
-        "CenterX": 1117.4250000000002,
-        "CenterY": 318.379
-      },
-      "SourceShapeIds": [
-        "shape-56.2"
-      ],
-      "PrototypeId": "prototype-21",
-      "Recognition": {
-        "Text": "V",
-        "Confidence": 0.8060309290885925,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-22@shape-56.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1188.29,
-        "MinY": 298.355,
-        "MaxX": 1215.9,
-        "MaxY": 338.387,
-        "Width": 27.610000000000127,
-        "Height": 40.03199999999998,
-        "CenterX": 1202.095,
-        "CenterY": 318.371
-      },
-      "SourceShapeIds": [
-        "shape-56.5"
-      ],
-      "PrototypeId": "prototype-22",
-      "Recognition": {
-        "Text": "S",
-        "Confidence": 0.9646875262260437,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-23@shape-57.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1361.65,
-        "MinY": 298.23,
-        "MaxX": 1411.42,
-        "MaxY": 337.465,
-        "Width": 49.76999999999998,
-        "Height": 39.23499999999996,
-        "CenterX": 1386.535,
-        "CenterY": 317.84749999999997
-      },
-      "SourceShapeIds": [
-        "shape-57.4"
-      ],
-      "PrototypeId": "prototype-23",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.9944943785667419,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-23@shape-59.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1609.65,
-        "MinY": 298.23,
-        "MaxX": 1659.42,
-        "MaxY": 337.465,
-        "Width": 49.76999999999998,
-        "Height": 39.23499999999996,
-        "CenterX": 1634.535,
-        "CenterY": 317.84749999999997
-      },
-      "SourceShapeIds": [
-        "shape-59.5"
-      ],
-      "PrototypeId": "prototype-23",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.9944943785667419,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-23@shape-60.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1784.65,
-        "MinY": 298.23,
-        "MaxX": 1834.42,
-        "MaxY": 337.465,
-        "Width": 49.76999999999998,
-        "Height": 39.23499999999996,
-        "CenterX": 1809.535,
-        "CenterY": 317.84749999999997
-      },
-      "SourceShapeIds": [
-        "shape-60.6"
-      ],
-      "PrototypeId": "prototype-23",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.9944943785667419,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-24@shape-58.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1434.72,
-        "MinY": 288.308,
-        "MaxX": 1457.31,
-        "MaxY": 338.215,
-        "Width": 22.589999999999918,
-        "Height": 49.90699999999998,
-        "CenterX": 1446.0149999999999,
-        "CenterY": 313.26149999999996
-      },
-      "SourceShapeIds": [
-        "shape-58.1"
-      ],
-      "PrototypeId": "prototype-24",
-      "Recognition": {
-        "Text": "c",
-        "Confidence": 0.543520987033844,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-26@shape-60.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1715.15,
-        "MinY": 286.574,
-        "MaxX": 1758.78,
-        "MaxY": 337.465,
-        "Width": 43.62999999999988,
-        "Height": 50.89099999999996,
-        "CenterX": 1736.9650000000001,
-        "CenterY": 312.0195
-      },
-      "SourceShapeIds": [
-        "shape-60.3"
-      ],
-      "PrototypeId": "prototype-26",
-      "Recognition": {
-        "Text": "M",
-        "Confidence": 0.9914718270301819,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-28@shape-61.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 174.217,
-        "MinY": 3065.13,
-        "MaxX": 208.592,
-        "MaxY": 3108.75,
-        "Width": 34.375,
-        "Height": 43.61999999999989,
-        "CenterX": 191.4045,
-        "CenterY": 3086.94
-      },
-      "SourceShapeIds": [
-        "shape-61.2"
-      ],
-      "PrototypeId": "prototype-28",
-      "Recognition": {
-        "Text": "7",
-        "Confidence": 0.9982054233551025,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-29@shape-62",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 143.701,
-        "MinY": 1118.05,
-        "MaxX": 178.357,
-        "MaxY": 1162.58,
-        "Width": 34.656000000000006,
-        "Height": 44.52999999999997,
-        "CenterX": 161.029,
-        "CenterY": 1140.315
-      },
-      "SourceShapeIds": [
-        "shape-62"
-      ],
-      "PrototypeId": "prototype-29",
-      "Recognition": {
-        "Text": "5",
-        "Confidence": 0.9983977675437927,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-30@shape-63.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 171.951,
-        "MinY": 2397.47,
-        "MaxX": 204.75,
-        "MaxY": 2442.91,
-        "Width": 32.79900000000001,
-        "Height": 45.440000000000055,
-        "CenterX": 188.3505,
-        "CenterY": 2420.1899999999996
-      },
-      "SourceShapeIds": [
-        "shape-63.2"
-      ],
-      "PrototypeId": "prototype-30",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.9997627139091492,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-31@shape-64",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 147.42,
-        "MinY": 1783.92,
-        "MaxX": 178.139,
-        "MaxY": 1829.27,
-        "Width": 30.719000000000023,
-        "Height": 45.34999999999991,
-        "CenterX": 162.77949999999998,
-        "CenterY": 1806.595
-      },
-      "SourceShapeIds": [
-        "shape-64"
-      ],
-      "PrototypeId": "prototype-31",
-      "Recognition": {
-        "Text": "9",
-        "Confidence": 0.9994319081306458,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-132",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1054.18,
-        "MinY": 574.77379728,
-        "MaxX": 1076.68520272,
-        "MaxY": 644.5070054400001,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1065.43260136,
-        "CenterY": 609.64040136
-      },
-      "SourceShapeIds": [
-        "shape-132"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-133",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1486.89,
-        "MinY": 1889.07479728,
-        "MaxX": 1509.39520272,
-        "MaxY": 1958.80800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1498.14260136,
-        "CenterY": 1923.9414013599999
-      },
-      "SourceShapeIds": [
-        "shape-133"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-134",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1102.3,
-        "MinY": 1222.32479728,
-        "MaxX": 1124.80520272,
-        "MaxY": 1292.05800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1113.55260136,
-        "CenterY": 1257.1914013599999
-      },
-      "SourceShapeIds": [
-        "shape-134"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-135",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 880.692,
-        "MinY": 1889.07479728,
-        "MaxX": 903.19720272,
-        "MaxY": 1958.80800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 891.94460136,
-        "CenterY": 1923.9414013599999
-      },
-      "SourceShapeIds": [
-        "shape-135"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-137",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1087.77,
-        "MinY": 2502.65479728,
-        "MaxX": 1110.27520272,
-        "MaxY": 2572.38800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 1099.02260136,
-        "CenterY": 2537.52140136
-      },
-      "SourceShapeIds": [
-        "shape-137"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-138",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1610.94,
-        "MinY": 574.77379728,
-        "MaxX": 1633.44520272,
-        "MaxY": 644.5070054400001,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1622.19260136,
-        "CenterY": 609.64040136
-      },
-      "SourceShapeIds": [
-        "shape-138"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-139",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1524.99,
-        "MinY": 2502.65479728,
-        "MaxX": 1547.49520272,
-        "MaxY": 2572.38800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 1536.24260136,
-        "CenterY": 2537.52140136
-      },
-      "SourceShapeIds": [
-        "shape-139"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-140",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2238.79,
-        "MinY": 3169.40479728,
-        "MaxX": 2261.29520272,
-        "MaxY": 3239.13800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 2250.04260136,
-        "CenterY": 3204.27140136
-      },
-      "SourceShapeIds": [
-        "shape-140"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-144",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 934.748,
-        "MinY": 3224.84479728,
-        "MaxX": 957.25320272,
-        "MaxY": 3294.57800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 946.00060136,
-        "CenterY": 3259.7114013600003
-      },
-      "SourceShapeIds": [
-        "shape-144"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-146",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 282.706,
-        "MinY": 3224.84479728,
-        "MaxX": 305.21120272,
-        "MaxY": 3294.57800544,
-        "Width": 22.50520272,
-        "Height": 69.73320816000023,
-        "CenterX": 293.95860136,
-        "CenterY": 3259.7114013600003
-      },
-      "SourceShapeIds": [
-        "shape-146"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-147",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2238.79,
-        "MinY": 3266.42479728,
-        "MaxX": 2261.29520272,
-        "MaxY": 3336.15800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 2250.04260136,
-        "CenterY": 3301.2914013600002
-      },
-      "SourceShapeIds": [
-        "shape-147"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-149",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2657.03,
-        "MinY": 1450.94479728,
-        "MaxX": 2679.53520272,
-        "MaxY": 1520.67800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 2668.28260136,
-        "CenterY": 1485.8114013600002
-      },
-      "SourceShapeIds": [
-        "shape-149"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-150",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1040.46,
-        "MinY": 1450.94479728,
-        "MaxX": 1062.96520272,
-        "MaxY": 1520.67800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1051.71260136,
-        "CenterY": 1485.8114013600002
-      },
-      "SourceShapeIds": [
-        "shape-150"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-151",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 964.946,
-        "MinY": 3504.69479728,
-        "MaxX": 987.4512027200001,
-        "MaxY": 3574.42800544,
-        "Width": 22.505202720000057,
-        "Height": 69.73320816000023,
-        "CenterX": 976.1986013600001,
-        "CenterY": 3539.5614013599998
-      },
-      "SourceShapeIds": [
-        "shape-151"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-152",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 312.903,
-        "MinY": 3449.25479728,
-        "MaxX": 335.40820272,
-        "MaxY": 3518.98800544,
-        "Width": 22.50520272,
-        "Height": 69.73320816000023,
-        "CenterX": 324.15560136,
-        "CenterY": 3484.12140136
-      },
-      "SourceShapeIds": [
-        "shape-152"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-153",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1551.85,
-        "MinY": 1450.94479728,
-        "MaxX": 1574.3552027199999,
-        "MaxY": 1520.67800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816,
-        "CenterX": 1563.1026013599999,
-        "CenterY": 1485.8114013600002
-      },
-      "SourceShapeIds": [
-        "shape-153"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-32@shape-154",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1524.99,
-        "MinY": 2731.27479728,
-        "MaxX": 1547.49520272,
-        "MaxY": 2801.00800544,
-        "Width": 22.505202719999943,
-        "Height": 69.73320816000023,
-        "CenterX": 1536.24260136,
-        "CenterY": 2766.1414013599997
-      },
-      "SourceShapeIds": [
-        "shape-154"
-      ],
-      "PrototypeId": "prototype-32",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9871399998664856,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-136",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 282.706,
-        "MinY": 1277.0890945600001,
-        "MaxX": 309.76770544000004,
-        "MaxY": 1351.0496027200002,
-        "Width": 27.061705440000026,
-        "Height": 73.96050816000002,
-        "CenterX": 296.23685272,
-        "CenterY": 1314.06934864
-      },
-      "SourceShapeIds": [
-        "shape-136"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-141",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 282.706,
-        "MinY": 2557.41909456,
-        "MaxX": 309.76770544000004,
-        "MaxY": 2631.37960272,
-        "Width": 27.061705440000026,
-        "Height": 73.96050816000024,
-        "CenterX": 296.23685272,
-        "CenterY": 2594.39934864
-      },
-      "SourceShapeIds": [
-        "shape-141"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-142",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1596.42,
-        "MinY": 671.11809456,
-        "MaxX": 1623.48170544,
-        "MaxY": 745.0786027199999,
-        "Width": 27.06170543999997,
-        "Height": 73.9605081599999,
-        "CenterX": 1609.95085272,
-        "CenterY": 708.09834864
-      },
-      "SourceShapeIds": [
-        "shape-142"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-143",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1472.37,
-        "MinY": 1985.41909456,
-        "MaxX": 1499.4317054399999,
-        "MaxY": 2059.37960272,
-        "Width": 27.06170543999997,
-        "Height": 73.96050816000002,
-        "CenterX": 1485.9008527199999,
-        "CenterY": 2022.39934864
-      },
-      "SourceShapeIds": [
-        "shape-143"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-145",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1602.42,
-        "MinY": 3224.16909456,
-        "MaxX": 1629.48170544,
-        "MaxY": 3298.12960272,
-        "Width": 27.06170543999997,
-        "Height": 73.96050816000024,
-        "CenterX": 1615.95085272,
-        "CenterY": 3261.14934864
-      },
-      "SourceShapeIds": [
-        "shape-145"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-33@shape-148",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2445.57,
-        "MinY": 3504.0190945599998,
-        "MaxX": 2472.63170544,
-        "MaxY": 3577.97960272,
-        "Width": 27.06170543999997,
-        "Height": 73.96050816000024,
-        "CenterX": 2459.10085272,
-        "CenterY": 3540.99934864
-      },
-      "SourceShapeIds": [
-        "shape-148"
-      ],
-      "PrototypeId": "prototype-33",
-      "Recognition": {
-        "Text": "#",
-        "Confidence": 0.8900557160377502,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-445.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 306.112,
-        "MinY": 848.1799945600001,
-        "MaxX": 364.65320272,
-        "MaxY": 944.42039728,
-        "Width": 58.54120272,
-        "Height": 96.2404027199999,
-        "CenterX": 335.38260136,
-        "CenterY": 896.3001959200001
-      },
-      "SourceShapeIds": [
-        "shape-445.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-446.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 1514.92599456,
-        "MaxX": 226.05320272,
-        "MaxY": 1611.16639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 1563.04619592
-      },
-      "SourceShapeIds": [
-        "shape-446.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-447.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2128.50599456,
-        "MaxX": 226.05320272,
-        "MaxY": 2224.74639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 2176.62619592
-      },
-      "SourceShapeIds": [
-        "shape-447.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-448.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 3513.23599456,
-        "MaxX": 226.05320272,
-        "MaxY": 3609.47639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 3561.35619592
-      },
-      "SourceShapeIds": [
-        "shape-448.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-37@shape-449.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2795.25599456,
-        "MaxX": 226.05320272,
-        "MaxY": 2891.49639728,
-        "Width": 58.54120272,
-        "Height": 96.24040272000002,
-        "CenterX": 196.78260136,
-        "CenterY": 2843.37619592
-      },
-      "SourceShapeIds": [
-        "shape-449.2"
-      ],
-      "PrototypeId": "prototype-37",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9748449325561523,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-38@shape-450",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 411.9332,
-        "MinY": 570.77229456,
-        "MaxX": 450.63730544,
-        "MaxY": 624.8957054399999,
-        "Width": 38.70410543999998,
-        "Height": 54.12341087999994,
-        "CenterX": 431.28525272,
-        "CenterY": 597.834
-      },
-      "SourceShapeIds": [
-        "shape-450"
-      ],
-      "PrototypeId": "prototype-38",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.9991689920425415,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-38@shape-452",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 411.9332,
-        "MinY": 849.49629456,
-        "MaxX": 450.63730544,
-        "MaxY": 903.61970544,
-        "Width": 38.70410543999998,
-        "Height": 54.12341087999994,
-        "CenterX": 431.28525272,
-        "CenterY": 876.558
-      },
-      "SourceShapeIds": [
-        "shape-452"
-      ],
-      "PrototypeId": "prototype-38",
-      "Recognition": {
-        "Text": "3",
-        "Confidence": 0.9991689920425415,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-39@shape-451",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 407.46325,
-        "MinY": 625.1028945600001,
-        "MaxX": 454.91639728,
-        "MaxY": 680.2138027200001,
-        "Width": 47.453147279999996,
-        "Height": 55.11090816000001,
-        "CenterX": 431.18982364,
-        "CenterY": 652.6583486400001
-      },
-      "SourceShapeIds": [
-        "shape-451"
-      ],
-      "PrototypeId": "prototype-39",
-      "Recognition": {
-        "Text": "4",
-        "Confidence": 0.9999651908874512,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-39@shape-453",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 407.46325,
-        "MinY": 903.82789456,
-        "MaxX": 454.91639728,
-        "MaxY": 958.93880272,
-        "Width": 47.453147279999996,
-        "Height": 55.11090816000001,
-        "CenterX": 431.18982364,
-        "CenterY": 931.38334864
-      },
-      "SourceShapeIds": [
-        "shape-453"
-      ],
-      "PrototypeId": "prototype-39",
-      "Recognition": {
-        "Text": "4",
-        "Confidence": 0.9999651908874512,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-42@shape-460.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2803.63,
-        "MinY": 730.964,
-        "MaxX": 2849.37,
-        "MaxY": 778.245,
-        "Width": 45.73999999999978,
-        "Height": 47.28099999999995,
-        "CenterX": 2826.5,
-        "CenterY": 754.6045
-      },
-      "SourceShapeIds": [
-        "shape-460.1"
-      ],
-      "PrototypeId": "prototype-42",
-      "Recognition": {
-        "Text": "p",
-        "Confidence": 0.9239914417266846,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-42@shape-462.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2791.82,
-        "MinY": 2011.29,
-        "MaxX": 2837.55,
-        "MaxY": 2058.57,
-        "Width": 45.73000000000002,
-        "Height": 47.2800000000002,
-        "CenterX": 2814.6850000000004,
-        "CenterY": 2034.93
-      },
-      "SourceShapeIds": [
-        "shape-462.1"
-      ],
-      "PrototypeId": "prototype-42",
-      "Recognition": {
-        "Text": "p",
-        "Confidence": 0.9239914417266846,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-43@shape-460.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2771.33,
-        "MinY": 732.292,
-        "MaxX": 2813.63,
-        "MaxY": 760.37,
-        "Width": 42.30000000000018,
-        "Height": 28.077999999999975,
-        "CenterX": 2792.48,
-        "CenterY": 746.331
-      },
-      "SourceShapeIds": [
-        "shape-460.2"
-      ],
-      "PrototypeId": "prototype-43",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.9972436428070068,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-43@shape-462.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2759.52,
-        "MinY": 2012.62,
-        "MaxX": 2801.82,
-        "MaxY": 2040.7,
-        "Width": 42.30000000000018,
-        "Height": 28.080000000000155,
-        "CenterX": 2780.67,
-        "CenterY": 2026.6599999999999
-      },
-      "SourceShapeIds": [
-        "shape-462.2"
-      ],
-      "PrototypeId": "prototype-43",
-      "Recognition": {
-        "Text": "m",
-        "Confidence": 0.9972436428070068,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-44@shape-461",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 284.449,
-        "MinY": 1439.07,
-        "MaxX": 366.136,
-        "MaxY": 1486.35,
-        "Width": 81.68700000000001,
-        "Height": 47.27999999999997,
-        "CenterX": 325.2925,
-        "CenterY": 1462.71
-      },
-      "SourceShapeIds": [
-        "shape-461"
-      ],
-      "PrototypeId": "prototype-44",
-      "Recognition": {
-        "Text": "dd",
-        "Confidence": 0.9869732856750488,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-44@shape-463",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 284.449,
-        "MinY": 2719.4,
-        "MaxX": 366.136,
-        "MaxY": 2766.68,
-        "Width": 81.68700000000001,
-        "Height": 47.279999999999745,
-        "CenterX": 325.2925,
-        "CenterY": 2743.04
-      },
-      "SourceShapeIds": [
-        "shape-463"
-      ],
-      "PrototypeId": "prototype-44",
-      "Recognition": {
-        "Text": "dd",
-        "Confidence": 0.9869732856750488,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-48@shape-480.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 406.591,
-        "MinY": 478.534,
-        "MaxX": 452.341,
-        "MaxY": 528.909,
-        "Width": 45.75,
-        "Height": 50.375,
-        "CenterX": 429.466,
-        "CenterY": 503.7215
-      },
-      "SourceShapeIds": [
-        "shape-480.1"
-      ],
-      "PrototypeId": "prototype-48",
-      "Recognition": {
-        "Text": "C",
-        "Confidence": 0.9992897510528564,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-49@shape-480.2",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 457.31,
-        "MinY": 495.206,
-        "MaxX": 494.904,
-        "MaxY": 528.909,
-        "Width": 37.593999999999994,
-        "Height": 33.702999999999975,
-        "CenterX": 476.10699999999997,
-        "CenterY": 512.0575
-      },
-      "SourceShapeIds": [
-        "shape-480.2"
-      ],
-      "PrototypeId": "prototype-49",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.9996021389961243,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-49@shape-480.5",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 573.31,
-        "MinY": 495.206,
-        "MaxX": 610.904,
-        "MaxY": 528.909,
-        "Width": 37.59400000000005,
-        "Height": 33.702999999999975,
-        "CenterX": 592.107,
-        "CenterY": 512.0575
-      },
-      "SourceShapeIds": [
-        "shape-480.5"
-      ],
-      "PrototypeId": "prototype-49",
-      "Recognition": {
-        "Text": "a",
-        "Confidence": 0.9996021389961243,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-50@shape-480.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 497.248,
-        "MinY": 495.206,
-        "MaxX": 540.654,
-        "MaxY": 527.909,
-        "Width": 43.406000000000006,
-        "Height": 32.702999999999975,
-        "CenterX": 518.951,
-        "CenterY": 511.5575
-      },
-      "SourceShapeIds": [
-        "shape-480.3"
-      ],
-      "PrototypeId": "prototype-50",
-      "Recognition": {
-        "Text": "n",
-        "Confidence": 0.9908930063247681,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-51@shape-480.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 543.451,
-        "MinY": 482.956,
-        "MaxX": 569.045,
-        "MaxY": 528.909,
-        "Width": 25.593999999999937,
-        "Height": 45.952999999999975,
-        "CenterX": 556.248,
-        "CenterY": 505.9325
-      },
-      "SourceShapeIds": [
-        "shape-480.4"
-      ],
-      "PrototypeId": "prototype-51",
-      "Recognition": {
-        "Text": "t",
-        "Confidence": 0.9989514350891113,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-52@shape-480.6",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 611.904,
-        "MinY": 478.534,
-        "MaxX": 652.904,
-        "MaxY": 528.909,
-        "Width": 41,
-        "Height": 50.375,
-        "CenterX": 632.404,
-        "CenterY": 503.7215
-      },
-      "SourceShapeIds": [
-        "shape-480.6"
-      ],
-      "PrototypeId": "prototype-52",
-      "Recognition": {
-        "Text": "b",
-        "Confidence": 0.9608470797538757,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-53@shape-480.8",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 656.779,
-        "MinY": 496.222,
-        "MaxX": 677.748,
-        "MaxY": 527.909,
-        "Width": 20.96900000000005,
-        "Height": 31.687000000000012,
-        "CenterX": 667.2635,
-        "CenterY": 512.0654999999999
-      },
-      "SourceShapeIds": [
-        "shape-480.8"
-      ],
-      "PrototypeId": "prototype-53",
-      "Recognition": {
-        "Text": "1",
-        "Confidence": 0.9890246987342834,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-55@shape-480.10",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 706.045,
-        "MinY": 495.206,
-        "MaxX": 740.091,
-        "MaxY": 528.909,
-        "Width": 34.04600000000005,
-        "Height": 33.702999999999975,
-        "CenterX": 723.068,
-        "CenterY": 512.0575
-      },
-      "SourceShapeIds": [
-        "shape-480.10"
-      ],
-      "PrototypeId": "prototype-55",
-      "Recognition": {
-        "Text": "e",
-        "Confidence": 0.9973849654197693,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-57@shape-483.3",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 912.716,
-        "MinY": 480.737,
-        "MaxX": 944.482,
-        "MaxY": 528.909,
-        "Width": 31.765999999999963,
-        "Height": 48.17199999999997,
-        "CenterX": 928.5989999999999,
-        "CenterY": 504.823
-      },
-      "SourceShapeIds": [
-        "shape-483.3"
-      ],
-      "PrototypeId": "prototype-57",
-      "Recognition": {
-        "Text": "6",
-        "Confidence": 0.9980918765068054,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-58@shape-483.4",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 949.248,
-        "MinY": 480.737,
-        "MaxX": 980.732,
-        "MaxY": 527.909,
-        "Width": 31.483999999999924,
-        "Height": 47.17199999999997,
-        "CenterX": 964.99,
-        "CenterY": 504.323
-      },
-      "SourceShapeIds": [
-        "shape-483.4"
-      ],
-      "PrototypeId": "prototype-58",
-      "Recognition": {
-        "Text": "2",
-        "Confidence": 0.9999223947525024,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-486.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2122.23,
-        "MinY": 2377.22,
-        "MaxX": 2219.68,
-        "MaxY": 2438.82,
-        "Width": 97.44999999999982,
-        "Height": 61.600000000000364,
-        "CenterX": 2170.955,
-        "CenterY": 2408.02
-      },
-      "SourceShapeIds": [
-        "shape-486.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-488.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2193.12,
-        "MinY": 1096.89,
-        "MaxX": 2290.57,
-        "MaxY": 1158.49,
-        "Width": 97.45000000000027,
-        "Height": 61.59999999999991,
-        "CenterX": 2241.8450000000003,
-        "CenterY": 1127.69
-      },
-      "SourceShapeIds": [
-        "shape-488.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-490.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2188.63,
-        "MinY": 1674.66,
-        "MaxX": 2286.08,
-        "MaxY": 1736.26,
-        "Width": 97.44999999999982,
-        "Height": 61.59999999999991,
-        "CenterX": 2237.355,
-        "CenterY": 1705.46
-      },
-      "SourceShapeIds": [
-        "shape-490.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:prototype-59@shape-492.1",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2173.85,
-        "MinY": 2954.99,
-        "MaxX": 2271.31,
-        "MaxY": 3016.59,
-        "Width": 97.46000000000004,
-        "Height": 61.600000000000364,
-        "CenterX": 2222.58,
-        "CenterY": 2985.79
-      },
-      "SourceShapeIds": [
-        "shape-492.1"
-      ],
-      "PrototypeId": "prototype-59",
-      "Recognition": {
-        "Text": "Ded",
-        "Confidence": 0.7432698011398315,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-445@shape-445.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 306.112,
-        "MinY": 848.1799945600001,
-        "MaxX": 379.74330544000003,
-        "MaxY": 944.42039728,
-        "Width": 73.63130544,
-        "Height": 96.2404027199999,
-        "CenterX": 342.92765272,
-        "CenterY": 896.3001959200001
-      },
-      "SourceShapeIds": [
-        "shape-445.whole",
-        "shape-445.1",
-        "shape-445.2",
-        "shape-445.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-445",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-446@shape-446.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 1514.92599456,
-        "MaxX": 241.14330544,
-        "MaxY": 1611.16639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 1563.04619592
-      },
-      "SourceShapeIds": [
-        "shape-446.whole",
-        "shape-446.1",
-        "shape-446.2",
-        "shape-446.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-446",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-447@shape-447.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2128.50599456,
-        "MaxX": 241.14330544,
-        "MaxY": 2224.74639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 2176.62619592
-      },
-      "SourceShapeIds": [
-        "shape-447.whole",
-        "shape-447.1",
-        "shape-447.2",
-        "shape-447.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-447",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-448@shape-448.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 3513.23599456,
-        "MaxX": 241.14330544,
-        "MaxY": 3609.47639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 3561.35619592
-      },
-      "SourceShapeIds": [
-        "shape-448.whole",
-        "shape-448.1",
-        "shape-448.2",
-        "shape-448.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-448",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-449@shape-449.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 167.512,
-        "MinY": 2795.25599456,
-        "MaxX": 241.14330544,
-        "MaxY": 2891.49639728,
-        "Width": 73.63130544,
-        "Height": 96.24040272000002,
-        "CenterX": 204.32765272,
-        "CenterY": 2843.37619592
-      },
-      "SourceShapeIds": [
-        "shape-449.whole",
-        "shape-449.1",
-        "shape-449.2",
-        "shape-449.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-449",
-      "Recognition": {
-        "Text": "2:",
-        "Confidence": 0.9922857284545898,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-460@shape-460.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2771.33,
-        "MinY": 730.964,
-        "MaxX": 2849.37,
-        "MaxY": 778.245,
-        "Width": 78.03999999999996,
-        "Height": 47.28099999999995,
-        "CenterX": 2810.35,
-        "CenterY": 754.6045
-      },
-      "SourceShapeIds": [
-        "shape-460.whole",
-        "shape-460.1",
-        "shape-460.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-460",
-      "Recognition": {
-        "Text": "du",
-        "Confidence": 0.7732808589935303,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-462@shape-462.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2759.52,
-        "MinY": 2011.29,
-        "MaxX": 2837.55,
-        "MaxY": 2058.57,
-        "Width": 78.0300000000002,
-        "Height": 47.2800000000002,
-        "CenterX": 2798.535,
-        "CenterY": 2034.93
-      },
-      "SourceShapeIds": [
-        "shape-462.whole",
-        "shape-462.1",
-        "shape-462.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-462",
-      "Recognition": {
-        "Text": "du",
-        "Confidence": 0.7721089720726013,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-486@shape-486.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2122.23,
-        "MinY": 2377.22,
-        "MaxX": 2231.12,
-        "MaxY": 2438.82,
-        "Width": 108.88999999999987,
-        "Height": 61.600000000000364,
-        "CenterX": 2176.675,
-        "CenterY": 2408.02
-      },
-      "SourceShapeIds": [
-        "shape-486.whole",
-        "shape-486.1",
-        "shape-486.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-486",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.9128289222717285,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-488@shape-488.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2193.12,
-        "MinY": 1096.89,
-        "MaxX": 2302.01,
-        "MaxY": 1158.49,
-        "Width": 108.89000000000033,
-        "Height": 61.59999999999991,
-        "CenterX": 2247.565,
-        "CenterY": 1127.69
-      },
-      "SourceShapeIds": [
-        "shape-488.whole",
-        "shape-488.1",
-        "shape-488.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-488",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.912903368473053,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-490@shape-490.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2188.63,
-        "MinY": 1674.66,
-        "MaxX": 2297.52,
-        "MaxY": 1736.26,
-        "Width": 108.88999999999987,
-        "Height": 61.59999999999991,
-        "CenterX": 2243.075,
-        "CenterY": 1705.46
-      },
-      "SourceShapeIds": [
-        "shape-490.whole",
-        "shape-490.1",
-        "shape-490.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-490",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.829987108707428,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-492@shape-492.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2173.85,
-        "MinY": 2954.99,
-        "MaxX": 2282.75,
-        "MaxY": 3016.59,
-        "Width": 108.90000000000009,
-        "Height": 61.600000000000364,
-        "CenterX": 2228.3,
-        "CenterY": 2985.79
-      },
-      "SourceShapeIds": [
-        "shape-492.whole",
-        "shape-492.1",
-        "shape-492.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-492",
-      "Recognition": {
-        "Text": "Ped.",
-        "Confidence": 0.8512024879455566,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-53@shape-53.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 2348.87,
-        "MinY": 348.944,
-        "MaxX": 2439.39,
-        "MaxY": 396.022,
-        "Width": 90.51999999999998,
-        "Height": 47.077999999999975,
-        "CenterX": 2394.13,
-        "CenterY": 372.483
-      },
-      "SourceShapeIds": [
-        "shape-53.whole",
-        "shape-53.1",
-        "shape-53.2",
-        "shape-53.3",
-        "shape-53.4",
-        "shape-53.5"
-      ],
-      "PrototypeId": "compound-prototype-shape-53",
-      "Recognition": {
-        "Text": "Giya",
-        "Confidence": 0.9996346831321716,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-57@shape-57.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1272.98,
-        "MinY": 283.933,
-        "MaxX": 1411.42,
-        "MaxY": 338.527,
-        "Width": 138.44000000000005,
-        "Height": 54.593999999999994,
-        "CenterX": 1342.2,
-        "CenterY": 311.23
-      },
-      "SourceShapeIds": [
-        "shape-57.whole",
-        "shape-57.1",
-        "shape-57.2",
-        "shape-57.3",
-        "shape-57.4"
-      ],
-      "PrototypeId": "compound-prototype-shape-57",
-      "Recognition": {
-        "Text": "from",
-        "Confidence": 0.9998317956924438,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-58@shape-58.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1434.72,
-        "MinY": 284.277,
-        "MaxX": 1531,
-        "MaxY": 338.355,
-        "Width": 96.27999999999997,
-        "Height": 54.07800000000003,
-        "CenterX": 1482.8600000000001,
-        "CenterY": 311.31600000000003
-      },
-      "SourceShapeIds": [
-        "shape-58.whole",
-        "shape-58.1",
-        "shape-58.2",
-        "shape-58.3"
-      ],
-      "PrototypeId": "compound-prototype-shape-58",
-      "Recognition": {
-        "Text": "the",
-        "Confidence": 0.9993922114372253,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-59@shape-59.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 1551.98,
-        "MinY": 283.933,
-        "MaxX": 1659.42,
-        "MaxY": 337.465,
-        "Width": 107.44000000000005,
-        "Height": 53.53199999999998,
-        "CenterX": 1605.7,
-        "CenterY": 310.69899999999996
-      },
-      "SourceShapeIds": [
-        "shape-59.whole",
-        "shape-59.1",
-        "shape-59.2",
-        "shape-59.3",
-        "shape-59.4",
-        "shape-59.5"
-      ],
-      "PrototypeId": "compound-prototype-shape-59",
-      "Recognition": {
-        "Text": "film",
-        "Confidence": 0.9980977177619934,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-61@shape-61.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 3064.99,
-        "MaxX": 208.592,
-        "MaxY": 3108.75,
-        "Width": 66.23500000000001,
-        "Height": 43.76000000000022,
-        "CenterX": 175.4745,
-        "CenterY": 3086.87
-      },
-      "SourceShapeIds": [
-        "shape-61.whole",
-        "shape-61.1",
-        "shape-61.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-61",
-      "Recognition": {
-        "Text": "17",
-        "Confidence": 0.9998754262924194,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "prototype:compound-prototype-shape-63@shape-63.whole",
-      "Kind": 0,
-      "Bounds": {
-        "MinX": 142.357,
-        "MinY": 2397.47,
-        "MaxX": 204.75,
-        "MaxY": 2442.91,
-        "Width": 62.393,
-        "Height": 45.440000000000055,
-        "CenterX": 173.55349999999999,
-        "CenterY": 2420.1899999999996
-      },
-      "SourceShapeIds": [
-        "shape-63.whole",
-        "shape-63.1",
-        "shape-63.2"
-      ],
-      "PrototypeId": "compound-prototype-shape-63",
-      "Recognition": {
-        "Text": "13",
-        "Confidence": 0.9999536871910095,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:1",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 1125.9,
-        "MinY": 143.764,
-        "MaxX": 1360.97,
-        "MaxY": 223.732,
-        "Width": 235.06999999999994,
-        "Height": 79.96799999999999,
-        "CenterX": 1243.435,
-        "CenterY": 183.748
-      },
-      "SourceShapeIds": [
-        "shape-51.1",
-        "shape-51.2",
-        "shape-51.3",
-        "shape-51.4"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "YELL",
-        "Confidence": 0.9998767971992493,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:2",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 1574.61,
-        "MinY": 142.31,
-        "MaxX": 1934.04,
-        "MaxY": 225.185,
-        "Width": 359.43000000000006,
-        "Height": 82.875,
-        "CenterX": 1754.3249999999998,
-        "CenterY": 183.7475
-      },
-      "SourceShapeIds": [
-        "shape-52.1",
-        "shape-52.2",
-        "shape-52.3",
-        "shape-52.4",
-        "shape-52.5",
-        "shape-52.6"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "LEAVES",
-        "Confidence": 0.9989473819732666,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:5",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 2562.59,
-        "MinY": 347.975,
-        "MaxX": 2612.26,
-        "MaxY": 386.6,
-        "Width": 49.67000000000007,
-        "Height": 38.625,
-        "CenterX": 2587.425,
-        "CenterY": 367.2875
-      },
-      "SourceShapeIds": [
-        "shape-54.5",
-        "shape-54.6"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "he",
-        "Confidence": 0.9982116222381592,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:6",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 2348.87,
-        "MinY": 348.944,
-        "MaxX": 2533.01,
-        "MaxY": 396.022,
-        "Width": 184.14000000000033,
-        "Height": 47.077999999999975,
-        "CenterX": 2440.94,
-        "CenterY": 372.483
-      },
-      "SourceShapeIds": [
-        "shape-53.whole",
-        "shape-54.1",
-        "shape-54.2",
-        "shape-54.3"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "Giya Kan",
-        "Confidence": 0.9998458623886108,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:7",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 2672.78,
-        "MinY": 348.85,
-        "MaxX": 2818.36,
-        "MaxY": 386.709,
-        "Width": 145.57999999999993,
-        "Height": 37.85899999999998,
-        "CenterX": 2745.57,
-        "CenterY": 367.7795
-      },
-      "SourceShapeIds": [
-        "shape-55.2",
-        "shape-55.3",
-        "shape-55.4",
-        "shape-55.5",
-        "shape-55.6",
-        "shape-55.7"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "1935-2",
-        "Confidence": 0.9999619126319885,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:8",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 2852.78,
-        "MinY": 348.881,
-        "MaxX": 2899.48,
-        "MaxY": 386.662,
-        "Width": 46.69999999999982,
-        "Height": 37.781000000000006,
-        "CenterX": 2876.13,
-        "CenterY": 367.77149999999995
-      },
-      "SourceShapeIds": [
-        "shape-55.9",
-        "shape-55.10"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "19",
-        "Confidence": 0.9999226331710815,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:9",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 406.591,
-        "MinY": 478.534,
-        "MaxX": 740.091,
-        "MaxY": 528.909,
-        "Width": 333.5,
-        "Height": 50.375,
-        "CenterX": 573.341,
-        "CenterY": 503.7215
-      },
-      "SourceShapeIds": [
-        "shape-480.1",
-        "shape-480.2",
-        "shape-480.3",
-        "shape-480.4",
-        "shape-480.5",
-        "shape-480.6",
-        "shape-480.8",
-        "shape-480.9",
-        "shape-480.10"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "Cantabile",
-        "Confidence": 0.995585024356842,
-        "Engine": "PP-OCRv5-Latin"
-      }
-    },
-    {
-      "Id": "run:10",
-      "Kind": 1,
-      "Bounds": {
-        "MinX": 912.716,
-        "MinY": 480.737,
-        "MaxX": 980.732,
-        "MaxY": 528.909,
-        "Width": 68.01599999999996,
-        "Height": 48.17199999999997,
-        "CenterX": 946.7239999999999,
-        "CenterY": 504.823
-      },
-      "SourceShapeIds": [
-        "shape-483.3",
-        "shape-483.4"
-      ],
-      "PrototypeId": null,
-      "Recognition": {
-        "Text": "62",
-        "Confidence": 0.9998357892036438,
-        "Engine": "PP-OCRv5-Latin"
+        "Confidence": 0.999836
       }
     }
   ]
