@@ -21,25 +21,44 @@ public sealed class TextRecognitionDebugRenderer
         var ns = root.Name.Namespace;
         var unit = DebugUnit(root);
 
+        var recognized = analysis.Observations
+            .Where(item => !string.IsNullOrWhiteSpace(item.Recognition?.Text))
+            .OrderBy(item => item.Kind)
+            .ThenBy(item => item.Bounds.MinY)
+            .ThenBy(item => item.Bounds.MinX)
+            .ToArray();
+
+        var recognizedRuns = recognized
+            .Where(item => item.Kind == TextCandidateKind.HorizontalRun)
+            .ToArray();
+
+        var primaryLabels = recognized
+            .Where(item =>
+                item.Kind == TextCandidateKind.HorizontalRun
+                || IsCompoundPrototype(item))
+            .Where(item =>
+                item.Kind == TextCandidateKind.HorizontalRun
+                || !recognizedRuns.Any(run => SharesSourceShape(run, item)))
+            .OrderBy(item => item.Bounds.MinY)
+            .ThenBy(item => item.Bounds.MinX)
+            .ToArray();
+
         var group = new XElement(
             ns + "g",
-            new XAttribute("id", "debug-ocr-text"),
-            new XAttribute("pointer-events", "none"));
+            new XAttribute("id", "debug-ocr-text"));
 
-        foreach (var observation in analysis.Observations
-                     .Where(item => !string.IsNullOrWhiteSpace(item.Recognition?.Text))
-                     .OrderBy(item => item.Kind)
-                     .ThenBy(item => item.Bounds.MinY)
-                     .ThenBy(item => item.Bounds.MinX))
+        foreach (var observation in recognized)
         {
-            AddObservation(group, ns, observation, unit);
+            AddObservationBox(group, ns, observation, unit);
         }
+
+        AddPrimaryLabels(group, ns, primaryLabels, unit);
 
         root.Add(group);
         document.Save(output, SaveOptions.DisableFormatting);
     }
 
-    private static void AddObservation(
+    private static void AddObservationBox(
         XElement group,
         XNamespace ns,
         TextRecognitionObservation observation,
@@ -47,15 +66,21 @@ public sealed class TextRecognitionDebugRenderer
     {
         var recognition = observation.Recognition!;
         var bounds = observation.Bounds;
-        var boxColor = observation.Kind == TextCandidateKind.HorizontalRun
-            ? RunColor
-            : PrototypeColor;
-        var strokeWidth = observation.Kind == TextCandidateKind.HorizontalRun
-            ? 1.8 * unit
-            : 1.0 * unit;
-        var dash = observation.Kind == TextCandidateKind.HorizontalRun
-            ? null
-            : "3 2";
+        var isRun = observation.Kind == TextCandidateKind.HorizontalRun;
+        var isCompound = IsCompoundPrototype(observation);
+        var boxColor = isRun ? RunColor : PrototypeColor;
+        var strokeWidth = isRun
+            ? 1.7 * unit
+            : isCompound
+                ? 1.1 * unit
+                : 0.55 * unit;
+        var dash = isRun ? null : isCompound ? "5 2" : "2 2";
+        var opacity = isRun ? 0.90 : isCompound ? 0.72 : 0.38;
+        var fillOpacity = isRun ? 0.08 : isCompound ? 0.035 : 0.0;
+
+        var tooltip = $"{KindLabel(observation)}: {recognition.Text} "
+            + $"({recognition.Confidence * 100.0:0.0}%)"
+            + $" | {string.Join(", ", observation.SourceShapeIds)}";
 
         var rect = new XElement(
             ns + "rect",
@@ -64,10 +89,12 @@ public sealed class TextRecognitionDebugRenderer
             new XAttribute("width", F(Math.Max(bounds.Width, unit))),
             new XAttribute("height", F(Math.Max(bounds.Height, unit))),
             new XAttribute("fill", boxColor),
-            new XAttribute("fill-opacity", observation.Kind == TextCandidateKind.HorizontalRun ? "0.10" : "0.04"),
+            new XAttribute("fill-opacity", F(fillOpacity)),
             new XAttribute("stroke", boxColor),
             new XAttribute("stroke-width", F(strokeWidth)),
-            new XAttribute("opacity", "0.9"));
+            new XAttribute("opacity", F(opacity)),
+            new XAttribute("pointer-events", "all"),
+            new XElement(ns + "title", tooltip));
 
         if (dash is not null)
         {
@@ -75,35 +102,162 @@ public sealed class TextRecognitionDebugRenderer
         }
 
         group.Add(rect);
-
-        var confidenceText = (recognition.Confidence * 100.0).ToString(
-            "0",
-            CultureInfo.InvariantCulture) + "%";
-        var prefix = observation.Kind == TextCandidateKind.HorizontalRun
-            ? "OCR RUN"
-            : "OCR";
-        var label = $"{prefix}: {recognition.Text} {confidenceText}";
-        var fontSize = Math.Clamp(
-            Math.Max(bounds.Height * 0.30, 4.5 * unit),
-            4.5 * unit,
-            9.0 * unit);
-        var x = bounds.MinX;
-        var y = Math.Max(fontSize, bounds.MinY - 1.2 * unit);
-
-        group.Add(new XElement(
-            ns + "text",
-            new XAttribute("x", F(x)),
-            new XAttribute("y", F(y)),
-            new XAttribute("font-family", "Arial, sans-serif"),
-            new XAttribute("font-size", F(fontSize)),
-            new XAttribute("font-weight", observation.Kind == TextCandidateKind.HorizontalRun ? "700" : "600"),
-            new XAttribute("fill", ConfidenceColor(recognition.Confidence)),
-            new XAttribute("stroke", "white"),
-            new XAttribute("stroke-width", F(0.9 * unit)),
-            new XAttribute("stroke-linejoin", "round"),
-            new XAttribute("paint-order", "stroke fill"),
-            label));
     }
+
+    private static void AddPrimaryLabels(
+        XElement group,
+        XNamespace ns,
+        IReadOnlyList<TextRecognitionObservation> observations,
+        double unit)
+    {
+        var placed = new List<LabelBox>();
+
+        foreach (var observation in observations)
+        {
+            var recognition = observation.Recognition!;
+            var bounds = observation.Bounds;
+            var isRun = observation.Kind == TextCandidateKind.HorizontalRun;
+            var borderColor = isRun ? RunColor : PrototypeColor;
+            var confidenceText = (recognition.Confidence * 100.0).ToString(
+                "0",
+                CultureInfo.InvariantCulture) + "%";
+            var label = $"{recognition.Text} · {confidenceText}";
+            var fontSize = isRun ? 4.8 * unit : 4.2 * unit;
+            var paddingX = 1.8 * unit;
+            var paddingY = 1.1 * unit;
+            var labelWidth = Math.Max(
+                18.0 * unit,
+                label.Length * fontSize * 0.61 + 2 * paddingX);
+            var labelHeight = fontSize + 2 * paddingY;
+            var position = FindLabelPosition(
+                bounds,
+                labelWidth,
+                labelHeight,
+                unit,
+                placed);
+
+            placed.Add(position);
+
+            var anchorX = Math.Clamp(
+                bounds.CenterX,
+                position.X,
+                position.X + position.Width);
+            var anchorY = position.Y > bounds.CenterY
+                ? position.Y
+                : position.Y + position.Height;
+            var sourceY = position.Y > bounds.CenterY
+                ? bounds.MaxY
+                : bounds.MinY;
+
+            group.Add(new XElement(
+                ns + "line",
+                new XAttribute("x1", F(bounds.CenterX)),
+                new XAttribute("y1", F(sourceY)),
+                new XAttribute("x2", F(anchorX)),
+                new XAttribute("y2", F(anchorY)),
+                new XAttribute("stroke", borderColor),
+                new XAttribute("stroke-width", F(0.55 * unit)),
+                new XAttribute("opacity", "0.72"),
+                new XAttribute("pointer-events", "none")));
+
+            group.Add(new XElement(
+                ns + "rect",
+                new XAttribute("x", F(position.X)),
+                new XAttribute("y", F(position.Y)),
+                new XAttribute("width", F(position.Width)),
+                new XAttribute("height", F(position.Height)),
+                new XAttribute("rx", F(1.2 * unit)),
+                new XAttribute("fill", "white"),
+                new XAttribute("fill-opacity", "0.94"),
+                new XAttribute("stroke", borderColor),
+                new XAttribute("stroke-width", F(0.7 * unit)),
+                new XAttribute("pointer-events", "none")));
+
+            group.Add(new XElement(
+                ns + "text",
+                new XAttribute("x", F(position.X + paddingX)),
+                new XAttribute("y", F(position.Y + paddingY + fontSize * 0.82)),
+                new XAttribute("font-family", "Arial, sans-serif"),
+                new XAttribute("font-size", F(fontSize)),
+                new XAttribute("font-weight", isRun ? "700" : "600"),
+                new XAttribute("fill", ConfidenceColor(recognition.Confidence)),
+                new XAttribute("pointer-events", "none"),
+                label));
+        }
+    }
+
+    private static LabelBox FindLabelPosition(
+        BoundsD bounds,
+        double width,
+        double height,
+        double unit,
+        IReadOnlyList<LabelBox> placed)
+    {
+        var gap = 1.8 * unit;
+        var laneGap = 0.9 * unit;
+
+        for (var lane = 0; lane < 5; lane++)
+        {
+            var candidate = new LabelBox(
+                bounds.MinX,
+                bounds.MinY - gap - height - lane * (height + laneGap),
+                width,
+                height);
+
+            if (candidate.Y >= 0 && !placed.Any(item => Intersects(candidate, item, unit)))
+            {
+                return candidate;
+            }
+        }
+
+        for (var lane = 0; lane < 5; lane++)
+        {
+            var candidate = new LabelBox(
+                bounds.MinX,
+                bounds.MaxY + gap + lane * (height + laneGap),
+                width,
+                height);
+
+            if (!placed.Any(item => Intersects(candidate, item, unit)))
+            {
+                return candidate;
+            }
+        }
+
+        return new LabelBox(
+            bounds.MinX,
+            Math.Max(0, bounds.MinY - gap - height),
+            width,
+            height);
+    }
+
+    private static bool Intersects(LabelBox first, LabelBox second, double unit)
+    {
+        var margin = 0.8 * unit;
+        return first.X < second.X + second.Width + margin
+            && first.X + first.Width + margin > second.X
+            && first.Y < second.Y + second.Height + margin
+            && first.Y + first.Height + margin > second.Y;
+    }
+
+    private static bool IsCompoundPrototype(TextRecognitionObservation observation) =>
+        observation.Kind == TextCandidateKind.Prototype
+        && observation.SourceShapeIds.Count > 1;
+
+    private static bool SharesSourceShape(
+        TextRecognitionObservation first,
+        TextRecognitionObservation second)
+    {
+        var firstIds = first.SourceShapeIds.ToHashSet(StringComparer.Ordinal);
+        return second.SourceShapeIds.Any(firstIds.Contains);
+    }
+
+    private static string KindLabel(TextRecognitionObservation observation) =>
+        observation.Kind == TextCandidateKind.HorizontalRun
+            ? "OCR RUN"
+            : IsCompoundPrototype(observation)
+                ? "OCR COMPOUND"
+                : "OCR GLYPH";
 
     private static string ConfidenceColor(double confidence) =>
         confidence >= GreenConfidence
@@ -140,4 +294,10 @@ public sealed class TextRecognitionDebugRenderer
 
     private static string F(double value) =>
         value.ToString("0.###", CultureInfo.InvariantCulture);
+
+    private sealed record LabelBox(
+        double X,
+        double Y,
+        double Width,
+        double Height);
 }
