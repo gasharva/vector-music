@@ -13,7 +13,8 @@ public sealed class TextRecognitionDebugRenderer
     public void Render(
         string input,
         TextRecognitionAnalysisResult analysis,
-        string output)
+        string output,
+        bool labelSingletons = false)
     {
         var document = XDocument.Load(input, LoadOptions.PreserveWhitespace);
         var root = document.Root
@@ -34,7 +35,8 @@ public sealed class TextRecognitionDebugRenderer
 
         var primaryLabels = recognized
             .Where(item =>
-                item.Kind == TextCandidateKind.HorizontalRun
+                labelSingletons
+                || item.Kind == TextCandidateKind.HorizontalRun
                 || IsCompoundPrototype(item))
             .Where(item =>
                 item.Kind == TextCandidateKind.HorizontalRun
