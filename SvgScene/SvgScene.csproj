@@ -11,4 +11,10 @@
     <ProjectReference Include="../AudiverisGlyphPoc/AudiverisGlyphPoc.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RapidOcrNet" Version="4.2.0" />
+    <PackageReference Include="Svg.Skia" Version="5.2.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.148.0" />
+  </ItemGroup>
+
 </Project>
