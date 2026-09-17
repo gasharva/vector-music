@@ -16,19 +16,35 @@ var useOcr = !args.Any(argument =>
 
 Directory.CreateDirectory(outputDirectory);
 
-Console.WriteLine("Building current SvgScene...");
+Console.WriteLine("Building the existing non-OCR SvgScene...");
 var pipeline = new ScenePipeline(
     new SvgNormalizer(),
     new ShapeClusterer());
 var (geometry, notation) = pipeline.Run(input);
 var layout = new ScoreLayoutAnalyzer().Analyze(notation);
 
+Console.WriteLine("Running the existing Audiveris symbol classifier before OCR fallback...");
+var musicClassifier = await AudiverisSymbolClassifier.CreateAsync();
+notation = new PrototypeSymbolClassifier(musicClassifier).Classify(
+    geometry,
+    notation,
+    layout);
+notation = new BassClefCompositeRepair(musicClassifier).Repair(
+    geometry,
+    notation,
+    layout);
+
+var fallbackSeedInstances = notation.Instances
+    .Where(instance =>
+        FallbackTextRecognitionAnalyzer.IsPoorlyRecognized(instance.Classification))
+    .ToArray();
+
 ITextRecognizer recognizer;
 IDisposable? recognizerLifetime = null;
 
 if (useOcr)
 {
-    Console.WriteLine("Loading PP-OCRv5 Latin...");
+    Console.WriteLine("Loading PP-OCRv5 Latin for residual fallback only...");
     var rapidOcr = new RapidOcrTextRecognizer();
     recognizer = rapidOcr;
     recognizerLifetime = rapidOcr;
@@ -41,21 +57,19 @@ else
 
 try
 {
-    Console.WriteLine("OCR-probing raw glyphs, then recognizing uncertain horizontal runs...");
-    var analysis = new RawTextRecognitionAnalyzer(recognizer).Analyze(
+    Console.WriteLine("Growing horizontal trains from poorly classified residual glyphs...");
+    var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
         geometry,
+        notation,
         layout);
 
-    var rawGlyphObservations = analysis.Observations
-        .Where(item => item.Kind == TextCandidateKind.Prototype)
-        .ToArray();
-    var runObservations = analysis.Observations
+    var trainObservations = analysis.Observations
         .Where(item => item.Kind == TextCandidateKind.HorizontalRun)
         .ToArray();
-    var uncertainRawGlyphs = rawGlyphObservations
-        .Where(item => RawTextRecognitionAnalyzer.IsUncertainSingleton(item.Recognition))
+    var singletonObservations = analysis.Observations
+        .Where(item => item.Kind == TextCandidateKind.Prototype)
         .ToArray();
-    var recognizedRuns = runObservations
+    var recognized = analysis.Observations
         .Where(item => !string.IsNullOrWhiteSpace(item.Recognition?.Text))
         .ToArray();
 
@@ -63,27 +77,26 @@ try
     var svgPath = Path.Combine(outputDirectory, "parser.ocr.svg");
     var runsSvgPath = Path.Combine(outputDirectory, "parser.ocr.runs.svg");
 
-    // Keep JSON useful rather than gigantic: retain every run plus only the raw
-    // singleton probes that actually triggered the uncertainty rule.
-    var reportObservations = uncertainRawGlyphs
-        .Concat(runObservations)
-        .ToArray();
-
     var report = new
     {
         Engine = useOcr ? "PP-OCRv5-Latin" : "disabled",
-        ClearSingletonConfidence = RawTextRecognitionAnalyzer.ClearSingletonConfidence,
+        Mode = "poor-music-classification-seed-and-geometric-horizontal-grow",
+        ClearMusicClassificationConfidence =
+            FallbackTextRecognitionAnalyzer.ClearMusicClassificationConfidence,
         Summary = new
         {
-            RawGlyphsProbed = rawGlyphObservations.Length,
-            UncertainRawGlyphs = uncertainRawGlyphs.Length,
-            HorizontalRuns = runObservations.Length,
-            RecognizedRuns = recognizedRuns.Length
+            PoorlyClassifiedResidualInstances = fallbackSeedInstances.Length,
+            OcrCandidates = analysis.Observations.Count,
+            HorizontalTrains = trainObservations.Length,
+            SingletonFallbacks = singletonObservations.Length,
+            RecognizedFallbacks = recognized.Length
         },
-        Observations = reportObservations.Select(item => new
+        Observations = analysis.Observations.Select(item => new
         {
             item.Id,
-            Kind = item.Kind == TextCandidateKind.HorizontalRun ? "HorizontalRun" : "RawGlyph",
+            Kind = item.Kind == TextCandidateKind.HorizontalRun
+                ? "HorizontalTrain"
+                : "SingletonFallback",
             Bounds = new
             {
                 MinX = Math.Round(item.Bounds.MinX, 3),
@@ -116,18 +129,20 @@ try
     renderer.Render(
         input,
         analysis,
-        svgPath);
+        svgPath,
+        labelSingletons: true);
 
-    var runsOnly = new TextRecognitionAnalysisResult(runObservations);
+    var runsOnly = new TextRecognitionAnalysisResult(trainObservations);
     renderer.Render(
         input,
         runsOnly,
         runsSvgPath);
 
-    Console.WriteLine($"Raw glyphs OCR-probed : {rawGlyphObservations.Length}");
-    Console.WriteLine($"Uncertain raw glyphs  : {uncertainRawGlyphs.Length}");
-    Console.WriteLine($"Horizontal runs       : {runObservations.Length}");
-    Console.WriteLine($"Recognized runs       : {recognizedRuns.Length}");
+    Console.WriteLine($"Poor residual seed instances : {fallbackSeedInstances.Length}");
+    Console.WriteLine($"OCR fallback candidates      : {analysis.Observations.Count}");
+    Console.WriteLine($"Horizontal trains            : {trainObservations.Length}");
+    Console.WriteLine($"Singleton fallbacks          : {singletonObservations.Length}");
+    Console.WriteLine($"Recognized fallbacks         : {recognized.Length}");
     Console.WriteLine($"JSON     : {jsonPath}");
     Console.WriteLine($"SVG all  : {svgPath}");
     Console.WriteLine($"SVG runs : {runsSvgPath}");
