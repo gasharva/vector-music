@@ -7,6 +7,13 @@ Downloading official Audiveris basic-classifier.zip...
 5. Writing SVG parser diagnostics...
 6. Building measure-oriented semantic scene...
 7. Running granular semantic passes...
+ClassifiedSymbol decision: shape=shape-460.whole; label=DYNAMICS_MP; accepted=True; decision=dynamic; m=4; staff=2; at=5/8; confidence=98.6 %; reason=shape-460.whole: DYNAMICS_MP 99 % -> dynamic mp; m4:5/8; genericStaff=2; semanticStaff=2; placement=above; dx=0.11sp
+ClassifiedSymbol decision: shape=shape-460.1; label=DYNAMICS_MP; accepted=True; decision=dynamic; m=4; staff=2; at=5/8; confidence=92.0 %; reason=shape-460.1: DYNAMICS_MP 92 % -> dynamic mp; m4:5/8; genericStaff=2; semanticStaff=2; placement=above; dx=0.47sp
+ClassifiedSymbol decision: shape=shape-461; label=DYNAMICS_PP; accepted=True; decision=dynamic; m=5; staff=1; at=0; confidence=96.3 %; reason=shape-461: DYNAMICS_PP 96 % -> dynamic pp; m5:0; genericStaff=2; semanticStaff=1; placement=below; dx=0.34sp
+ClassifiedSymbol decision: shape=shape-462.whole; label=DYNAMICS_MP; accepted=True; decision=dynamic; m=12; staff=2; at=5/8; confidence=98.5 %; reason=shape-462.whole: DYNAMICS_MP 99 % -> dynamic mp; m12:5/8; genericStaff=1; semanticStaff=2; placement=above; dx=0.11sp
+ClassifiedSymbol decision: shape=shape-462.1; label=DYNAMICS_MP; accepted=True; decision=dynamic; m=12; staff=2; at=5/8; confidence=92.0 %; reason=shape-462.1: DYNAMICS_MP 92 % -> dynamic mp; m12:5/8; genericStaff=1; semanticStaff=2; placement=above; dx=0.47sp
+ClassifiedSymbol decision: shape=shape-463; label=DYNAMICS_PP; accepted=True; decision=dynamic; m=13; staff=1; at=0; confidence=96.3 %; reason=shape-463: DYNAMICS_PP 96 % -> dynamic pp; m13:0; genericStaff=2; semanticStaff=1; placement=below; dx=0.34sp
+ClassifiedSymbol decision: shape=shape-61.whole; label=DYNAMICS_PP; accepted=False; decision=low-confidence; m=17; staff=1; at=-; confidence=15.9 %; reason=DYNAMICS_PP confidence 16 % is below 90 %
 8. Writing notehead diagnostics...
 9. Writing accidental diagnostics...
 10. Writing stem attachment diagnostics...
@@ -21,7 +28,7 @@ Downloading official Audiveris basic-classifier.zip...
 
 Semantic interpretation complete:
   measures   : 20
-  facts      : 985
+  facts      : 988
   clefs      : 10
   times      : 1
   keys       : 1
@@ -39,7 +46,7 @@ Semantic interpretation complete:
   ties       : 3
   slurs      : 12
   hairpins   : 2
-  pedals     : 3
+  pedals     : 4
   ownership ledger corrections: 0
   canonical  : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.canonical.json
   MusicXML   : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.musicxml

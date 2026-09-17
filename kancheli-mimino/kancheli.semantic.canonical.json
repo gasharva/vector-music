@@ -469,6 +469,14 @@
                 "noteType": "eighth",
                 "stem": "down"
               }
+            },
+            {
+              "id": "m4-dynamic-shape-460.whole",
+              "type": "dynamic",
+              "at": "5/8",
+              "staff": 2,
+              "value": "mp",
+              "placement": "above"
             }
           ]
         },
@@ -581,9 +589,9 @@
               "id": "m5-dynamic-shape-461",
               "type": "dynamic",
               "at": "0",
-              "staff": 2,
+              "staff": 1,
               "value": "pp",
-              "placement": "above"
+              "placement": "below"
             }
           ],
           "layout": {
@@ -1420,6 +1428,14 @@
                 "noteType": "eighth",
                 "stem": "down"
               }
+            },
+            {
+              "id": "m12-dynamic-shape-462.whole",
+              "type": "dynamic",
+              "at": "5/8",
+              "staff": 2,
+              "value": "mp",
+              "placement": "above"
             }
           ]
         },
@@ -1532,9 +1548,9 @@
               "id": "m13-dynamic-shape-463",
               "type": "dynamic",
               "at": "0",
-              "staff": 2,
+              "staff": 1,
               "value": "pp",
-              "placement": "above"
+              "placement": "below"
             }
           ],
           "layout": {
@@ -2636,6 +2652,23 @@
         "id": "pedal-1",
         "kind": "pedal",
         "from": {
+          "measure": 4,
+          "at": "0",
+          "staff": 2
+        },
+        "to": {
+          "measure": 4,
+          "at": "3/4",
+          "staff": 2
+        },
+        "line": true,
+        "startMark": true,
+        "placement": "below"
+      },
+      {
+        "id": "pedal-2",
+        "kind": "pedal",
+        "from": {
           "measure": 8,
           "at": "0",
           "staff": 2
@@ -2650,7 +2683,7 @@
         "placement": "below"
       },
       {
-        "id": "pedal-2",
+        "id": "pedal-3",
         "kind": "pedal",
         "from": {
           "measure": 12,
@@ -2667,7 +2700,7 @@
         "placement": "below"
       },
       {
-        "id": "pedal-3",
+        "id": "pedal-4",
         "kind": "pedal",
         "from": {
           "measure": 16,
