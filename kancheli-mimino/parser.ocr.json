@@ -2,9 +2,9 @@
   "Engine": "PP-OCRv5-Latin",
   "Summary": {
     "PrototypeObservations": 151,
-    "HorizontalRuns": 10,
+    "HorizontalRuns": 77,
     "RecognizedPrototypes": 114,
-    "RecognizedRuns": 8
+    "RecognizedRuns": 70
   },
   "Observations": [
     {
@@ -166,7 +166,7 @@
       "PrototypeId": "prototype-5",
       "Recognition": {
         "Text": "A",
-        "Confidence": 0.996435
+        "Confidence": 0.996436
       }
     },
     {
@@ -202,7 +202,7 @@
       "PrototypeId": "prototype-7",
       "Recognition": {
         "Text": "S",
-        "Confidence": 0.974372
+        "Confidence": 0.974373
       }
     },
     {
@@ -382,7 +382,7 @@
       "PrototypeId": "prototype-11",
       "Recognition": {
         "Text": "K",
-        "Confidence": 0.997268
+        "Confidence": 0.997269
       }
     },
     {
@@ -400,7 +400,7 @@
       "PrototypeId": "prototype-12",
       "Recognition": {
         "Text": "n",
-        "Confidence": 0.957054
+        "Confidence": 0.957053
       }
     },
     {
@@ -418,7 +418,7 @@
       "PrototypeId": "prototype-12",
       "Recognition": {
         "Text": "n",
-        "Confidence": 0.957054
+        "Confidence": 0.957053
       }
     },
     {
@@ -436,7 +436,7 @@
       "PrototypeId": "prototype-13",
       "Recognition": {
         "Text": "h",
-        "Confidence": 0.9364
+        "Confidence": 0.936399
       }
     },
     {
@@ -454,7 +454,7 @@
       "PrototypeId": "prototype-13",
       "Recognition": {
         "Text": "h",
-        "Confidence": 0.9364
+        "Confidence": 0.936399
       }
     },
     {
@@ -472,7 +472,7 @@
       "PrototypeId": "prototype-14",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.993526
+        "Confidence": 0.993527
       }
     },
     {
@@ -490,7 +490,7 @@
       "PrototypeId": "prototype-14",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.993526
+        "Confidence": 0.993527
       }
     },
     {
@@ -508,7 +508,7 @@
       "PrototypeId": "prototype-14",
       "Recognition": {
         "Text": "e",
-        "Confidence": 0.993526
+        "Confidence": 0.993527
       }
     },
     {
@@ -608,7 +608,7 @@
       "PrototypeId": "prototype-18",
       "Recognition": {
         "Text": "5",
-        "Confidence": 0.998728
+        "Confidence": 0.998729
       }
     },
     {
@@ -1730,7 +1730,7 @@
       "PrototypeId": "prototype-42",
       "Recognition": {
         "Text": "p",
-        "Confidence": 0.923991
+        "Confidence": 0.923992
       }
     },
     {
@@ -1748,7 +1748,7 @@
       "PrototypeId": "prototype-42",
       "Recognition": {
         "Text": "p",
-        "Confidence": 0.923991
+        "Confidence": 0.923992
       }
     },
     {
@@ -2126,7 +2126,7 @@
       "PrototypeId": "prototype-58",
       "Recognition": {
         "Text": "2",
-        "Confidence": 0.999922
+        "Confidence": 0.999923
       }
     },
     {
@@ -2493,7 +2493,7 @@
       "PrototypeId": "compound-prototype-shape-492",
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.851202
+        "Confidence": 0.851203
       }
     },
     {
@@ -2626,27 +2626,29 @@
       }
     },
     {
-      "Id": "run:1",
+      "Id": "raw-run:1",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1125.9,
-        "MinY": 143.764,
-        "MaxX": 1360.97,
-        "MaxY": 223.732
+        "MinY": 142.092,
+        "MaxX": 1537.31,
+        "MaxY": 225.404
       },
       "SourceShapeIds": [
         "shape-51.1",
         "shape-51.2",
         "shape-51.3",
-        "shape-51.4"
+        "shape-51.4",
+        "shape-51.5",
+        "shape-51.6"
       ],
       "Recognition": {
-        "Text": "YELL",
-        "Confidence": 0.999877
+        "Text": "YELLOW",
+        "Confidence": 0.999882
       }
     },
     {
-      "Id": "run:2",
+      "Id": "raw-run:2",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1574.61,
@@ -2668,7 +2670,7 @@
       }
     },
     {
-      "Id": "run:3",
+      "Id": "raw-run:3",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1685.89,
@@ -2682,7 +2684,7 @@
       ]
     },
     {
-      "Id": "run:4",
+      "Id": "raw-run:4",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 1935.89,
@@ -2696,91 +2698,35 @@
       ]
     },
     {
-      "Id": "run:5",
+      "Id": "raw-run:5",
       "Kind": "HorizontalRun",
       "Bounds": {
-        "MinX": 2562.59,
-        "MinY": 347.975,
-        "MaxX": 2612.26,
-        "MaxY": 386.6
+        "MinX": 1715.15,
+        "MinY": 286.574,
+        "MaxX": 1930.06,
+        "MaxY": 338.527
       },
       "SourceShapeIds": [
-        "shape-54.5",
-        "shape-54.6"
+        "shape-60.3",
+        "shape-60.4",
+        "shape-60.6",
+        "shape-60.7",
+        "shape-60.9",
+        "shape-60.10"
       ],
       "Recognition": {
-        "Text": "he",
-        "Confidence": 0.998212
+        "Text": "Mimino",
+        "Confidence": 0.998021
       }
     },
     {
-      "Id": "run:6",
-      "Kind": "HorizontalRun",
-      "Bounds": {
-        "MinX": 2348.87,
-        "MinY": 348.944,
-        "MaxX": 2533.01,
-        "MaxY": 396.022
-      },
-      "SourceShapeIds": [
-        "shape-53.whole",
-        "shape-54.1",
-        "shape-54.2",
-        "shape-54.3"
-      ],
-      "Recognition": {
-        "Text": "Giya Kan",
-        "Confidence": 0.999846
-      }
-    },
-    {
-      "Id": "run:7",
-      "Kind": "HorizontalRun",
-      "Bounds": {
-        "MinX": 2672.78,
-        "MinY": 348.85,
-        "MaxX": 2818.36,
-        "MaxY": 386.709
-      },
-      "SourceShapeIds": [
-        "shape-55.2",
-        "shape-55.3",
-        "shape-55.4",
-        "shape-55.5",
-        "shape-55.6",
-        "shape-55.7"
-      ],
-      "Recognition": {
-        "Text": "1935-2",
-        "Confidence": 0.999962
-      }
-    },
-    {
-      "Id": "run:8",
-      "Kind": "HorizontalRun",
-      "Bounds": {
-        "MinX": 2852.78,
-        "MinY": 348.881,
-        "MaxX": 2899.48,
-        "MaxY": 386.662
-      },
-      "SourceShapeIds": [
-        "shape-55.9",
-        "shape-55.10"
-      ],
-      "Recognition": {
-        "Text": "19",
-        "Confidence": 0.999923
-      }
-    },
-    {
-      "Id": "run:9",
+      "Id": "raw-run:6",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 406.591,
-        "MinY": 478.534,
-        "MaxX": 740.091,
-        "MaxY": 528.909
+        "MinY": 462.425,
+        "MaxX": 887.091,
+        "MaxY": 536.144
       },
       "SourceShapeIds": [
         "shape-480.1",
@@ -2791,29 +2737,1314 @@
         "shape-480.6",
         "shape-480.8",
         "shape-480.9",
-        "shape-480.10"
+        "shape-480.10",
+        "shape-481",
+        "shape-482",
+        "shape-483.1"
       ],
       "Recognition": {
-        "Text": "Cantabile",
-        "Confidence": 0.995585
+        "Text": "Cantabile (",
+        "Confidence": 0.868285
       }
     },
     {
-      "Id": "run:10",
+      "Id": "raw-run:7",
       "Kind": "HorizontalRun",
       "Bounds": {
         "MinX": 912.716,
-        "MinY": 480.737,
-        "MaxX": 980.732,
-        "MaxY": 528.909
+        "MinY": 478.597,
+        "MaxX": 1003.81,
+        "MaxY": 536.144
       },
       "SourceShapeIds": [
         "shape-483.3",
-        "shape-483.4"
+        "shape-483.4",
+        "shape-483.5"
       ],
       "Recognition": {
-        "Text": "62",
-        "Confidence": 0.999836
+        "Text": "62)",
+        "Confidence": 0.999778
+      }
+    },
+    {
+      "Id": "raw-run:8",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 571.583,
+        "MinY": 554.264,
+        "MaxX": 791.096,
+        "MaxY": 583.489
+      },
+      "SourceShapeIds": [
+        "shape-466",
+        "shape-128"
+      ],
+      "Recognition": {
+        "Text": "C",
+        "Confidence": 0.511492
+      }
+    },
+    {
+      "Id": "raw-run:9",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1080.84,
+        "MinY": 605.595,
+        "MaxX": 1174.798,
+        "MaxY": 653.603
+      },
+      "SourceShapeIds": [
+        "shape-310",
+        "shape-312",
+        "shape-500",
+        "shape-502"
+      ],
+      "Recognition": {
+        "Text": "0:",
+        "Confidence": 0.655886
+      }
+    },
+    {
+      "Id": "raw-run:10",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1637.6,
+        "MinY": 610.359,
+        "MaxX": 1706.626,
+        "MaxY": 653.603
+      },
+      "SourceShapeIds": [
+        "shape-321",
+        "shape-322"
+      ]
+    },
+    {
+      "Id": "raw-run:11",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2206.98,
+        "MinY": 651.939,
+        "MaxX": 2300.918,
+        "MaxY": 699.843
+      },
+      "SourceShapeIds": [
+        "shape-332",
+        "shape-353",
+        "shape-497",
+        "shape-519"
+      ],
+      "Recognition": {
+        "Text": "00.",
+        "Confidence": 0.850505
+      }
+    },
+    {
+      "Id": "raw-run:12",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1596.42,
+        "MinY": 671.118,
+        "MaxX": 1698.568,
+        "MaxY": 745.079
+      },
+      "SourceShapeIds": [
+        "shape-142",
+        "shape-375",
+        "shape-514"
+      ],
+      "Recognition": {
+        "Text": "#O.",
+        "Confidence": 0.784208
+      }
+    },
+    {
+      "Id": "raw-run:13",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 505.627,
+        "MinY": 688.755,
+        "MaxX": 599.563,
+        "MaxY": 783.003
+      },
+      "SourceShapeIds": [
+        "shape-359",
+        "shape-294",
+        "shape-361",
+        "shape-357",
+        "shape-506",
+        "shape-525",
+        "shape-533",
+        "shape-528"
+      ]
+    },
+    {
+      "Id": "raw-run:14",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1080.84,
+        "MinY": 792.064,
+        "MaxX": 1141.808,
+        "MaxY": 821.448
+      },
+      "SourceShapeIds": [
+        "shape-390",
+        "shape-559"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:15",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1637.6,
+        "MinY": 847.504,
+        "MaxX": 1698.568,
+        "MaxY": 876.888
+      },
+      "SourceShapeIds": [
+        "shape-394",
+        "shape-555"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:16",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1080.84,
+        "MinY": 875.224,
+        "MaxX": 1141.808,
+        "MaxY": 904.608
+      },
+      "SourceShapeIds": [
+        "shape-388",
+        "shape-535"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:17",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 902.944,
+        "MaxX": 599.563,
+        "MaxY": 932.328
+      },
+      "SourceShapeIds": [
+        "shape-385",
+        "shape-549"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962388
+      }
+    },
+    {
+      "Id": "raw-run:18",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1637.6,
+        "MinY": 930.664,
+        "MaxX": 1698.568,
+        "MaxY": 960.048
+      },
+      "SourceShapeIds": [
+        "shape-405",
+        "shape-557"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:19",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 538.596,
+        "MinY": 958.384,
+        "MaxX": 599.563,
+        "MaxY": 987.768
+      },
+      "SourceShapeIds": [
+        "shape-378",
+        "shape-552"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962388
+      }
+    },
+    {
+      "Id": "raw-run:20",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1102.3,
+        "MinY": 1222.325,
+        "MaxX": 1167.776,
+        "MaxY": 1292.058
+      },
+      "SourceShapeIds": [
+        "shape-134",
+        "shape-295"
+      ],
+      "Recognition": {
+        "Text": "b.",
+        "Confidence": 0.947204
+      }
+    },
+    {
+      "Id": "raw-run:21",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1244.05,
+        "MaxX": 998.85,
+        "MaxY": 1273.434
+      },
+      "SourceShapeIds": [
+        "shape-293",
+        "shape-496"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.842263
+      }
+    },
+    {
+      "Id": "raw-run:22",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 282.706,
+        "MinY": 1277.089,
+        "MaxX": 352.716,
+        "MaxY": 1351.05
+      },
+      "SourceShapeIds": [
+        "shape-136",
+        "shape-289"
+      ],
+      "Recognition": {
+        "Text": "#",
+        "Confidence": 0.728104
+      }
+    },
+    {
+      "Id": "raw-run:23",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2719.43,
+        "MinY": 1285.63,
+        "MaxX": 2788.456,
+        "MaxY": 1328.874
+      },
+      "SourceShapeIds": [
+        "shape-336",
+        "shape-335"
+      ]
+    },
+    {
+      "Id": "raw-run:24",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1327.21,
+        "MaxX": 998.85,
+        "MaxY": 1356.594
+      },
+      "SourceShapeIds": [
+        "shape-365",
+        "shape-515"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962388
+      }
+    },
+    {
+      "Id": "raw-run:25",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1548.32,
+        "MinY": 1308.586,
+        "MaxX": 1642.248,
+        "MaxY": 1356.594
+      },
+      "SourceShapeIds": [
+        "shape-354",
+        "shape-356",
+        "shape-526",
+        "shape-532"
+      ],
+      "Recognition": {
+        "Text": "0:",
+        "Confidence": 0.738297
+      }
+    },
+    {
+      "Id": "raw-run:26",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1341.07,
+        "MaxX": 377.647,
+        "MaxY": 1375.114
+      },
+      "SourceShapeIds": [
+        "shape-355",
+        "shape-527"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991929
+      }
+    },
+    {
+      "Id": "raw-run:27",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1551.85,
+        "MinY": 1450.945,
+        "MaxX": 1642.248,
+        "MaxY": 1520.678
+      },
+      "SourceShapeIds": [
+        "shape-153",
+        "shape-389",
+        "shape-534"
+      ],
+      "Recognition": {
+        "Text": "bo.",
+        "Confidence": 0.991216
+      }
+    },
+    {
+      "Id": "raw-run:28",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2657.03,
+        "MinY": 1450.945,
+        "MaxX": 2755.466,
+        "MaxY": 1520.678
+      },
+      "SourceShapeIds": [
+        "shape-149",
+        "shape-421",
+        "shape-420"
+      ],
+      "Recognition": {
+        "Text": "bo",
+        "Confidence": 0.795597
+      }
+    },
+    {
+      "Id": "raw-run:29",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1495.626,
+        "MaxX": 377.647,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-386",
+        "shape-538"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.644982
+      }
+    },
+    {
+      "Id": "raw-run:30",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1067.12,
+        "MinY": 1486.53,
+        "MaxX": 1136.146,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-408",
+        "shape-413"
+      ]
+    },
+    {
+      "Id": "raw-run:31",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1217.9,
+        "MinY": 1486.53,
+        "MaxX": 1286.916,
+        "MaxY": 1529.774
+      },
+      "SourceShapeIds": [
+        "shape-416",
+        "shape-418"
+      ],
+      "Recognition": {
+        "Text": "8",
+        "Confidence": 0.713302
+      }
+    },
+    {
+      "Id": "raw-run:32",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1528.11,
+        "MaxX": 998.85,
+        "MaxY": 1562.154
+      },
+      "SourceShapeIds": [
+        "shape-439",
+        "shape-565"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991929
+      }
+    },
+    {
+      "Id": "raw-run:33",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 1551.066,
+        "MaxX": 377.647,
+        "MaxY": 1585.214
+      },
+      "SourceShapeIds": [
+        "shape-384",
+        "shape-542"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.644982
+      }
+    },
+    {
+      "Id": "raw-run:34",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1581.29,
+        "MinY": 1569.69,
+        "MaxX": 1642.248,
+        "MaxY": 1599.074
+      },
+      "SourceShapeIds": [
+        "shape-387",
+        "shape-536"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962271
+      }
+    },
+    {
+      "Id": "raw-run:35",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 937.883,
+        "MinY": 1611.27,
+        "MaxX": 998.85,
+        "MaxY": 1645.314
+      },
+      "SourceShapeIds": [
+        "shape-436",
+        "shape-564"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991929
+      }
+    },
+    {
+      "Id": "raw-run:36",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 907.356,
+        "MinY": 1919.896,
+        "MaxX": 1001.309,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-303",
+        "shape-302",
+        "shape-495",
+        "shape-507"
+      ],
+      "Recognition": {
+        "Text": "0:",
+        "Confidence": 0.653502
+      }
+    },
+    {
+      "Id": "raw-run:37",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 1924.66,
+        "MaxX": 1582.576,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-297",
+        "shape-298"
+      ]
+    },
+    {
+      "Id": "raw-run:38",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 521.461,
+        "MinY": 1938.52,
+        "MaxX": 602.272,
+        "MaxY": 1967.904
+      },
+      "SourceShapeIds": [
+        "shape-129",
+        "shape-305"
+      ],
+      "Recognition": {
+        "Text": "-0",
+        "Confidence": 0.557227
+      }
+    },
+    {
+      "Id": "raw-run:39",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2136.09,
+        "MinY": 1966.24,
+        "MaxX": 2230.028,
+        "MaxY": 2014.144
+      },
+      "SourceShapeIds": [
+        "shape-304",
+        "shape-377",
+        "shape-505",
+        "shape-530"
+      ],
+      "Recognition": {
+        "Text": "00.",
+        "Confidence": 0.850505
+      }
+    },
+    {
+      "Id": "raw-run:40",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1472.37,
+        "MinY": 1985.419,
+        "MaxX": 1574.518,
+        "MaxY": 2059.38
+      },
+      "SourceShapeIds": [
+        "shape-143",
+        "shape-349",
+        "shape-511"
+      ],
+      "Recognition": {
+        "Text": "#O.",
+        "Confidence": 0.784208
+      }
+    },
+    {
+      "Id": "raw-run:41",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 315.675,
+        "MinY": 2007.82,
+        "MaxX": 376.642,
+        "MaxY": 2041.864
+      },
+      "SourceShapeIds": [
+        "shape-371",
+        "shape-513"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991929
+      }
+    },
+    {
+      "Id": "raw-run:42",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 907.356,
+        "MinY": 2072.39,
+        "MaxX": 968.322,
+        "MaxY": 2101.774
+      },
+      "SourceShapeIds": [
+        "shape-412",
+        "shape-554"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962497
+      }
+    },
+    {
+      "Id": "raw-run:43",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 282.706,
+        "MinY": 2109.206,
+        "MaxX": 376.642,
+        "MaxY": 2175.734
+      },
+      "SourceShapeIds": [
+        "shape-435",
+        "shape-404",
+        "shape-423",
+        "shape-545",
+        "shape-547",
+        "shape-560"
+      ],
+      "Recognition": {
+        "Text": "8:",
+        "Confidence": 0.919643
+      }
+    },
+    {
+      "Id": "raw-run:44",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 2127.83,
+        "MaxX": 1574.518,
+        "MaxY": 2157.214
+      },
+      "SourceShapeIds": [
+        "shape-379",
+        "shape-562"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:45",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 907.356,
+        "MinY": 2155.55,
+        "MaxX": 968.322,
+        "MaxY": 2184.934
+      },
+      "SourceShapeIds": [
+        "shape-419",
+        "shape-543"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962497
+      }
+    },
+    {
+      "Id": "raw-run:46",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1513.55,
+        "MinY": 2210.99,
+        "MaxX": 1574.518,
+        "MaxY": 2240.374
+      },
+      "SourceShapeIds": [
+        "shape-433",
+        "shape-550"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:47",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1087.77,
+        "MinY": 2502.655,
+        "MaxX": 1153.246,
+        "MaxY": 2572.388
+      },
+      "SourceShapeIds": [
+        "shape-137",
+        "shape-323"
+      ],
+      "Recognition": {
+        "Text": "b.",
+        "Confidence": 0.947204
+      }
+    },
+    {
+      "Id": "raw-run:48",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1524.99,
+        "MinY": 2502.655,
+        "MaxX": 1590.456,
+        "MaxY": 2572.388
+      },
+      "SourceShapeIds": [
+        "shape-139",
+        "shape-327"
+      ],
+      "Recognition": {
+        "Text": "b.",
+        "Confidence": 0.946981
+      }
+    },
+    {
+      "Id": "raw-run:49",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2524.38,
+        "MaxX": 1010.938,
+        "MaxY": 2553.764
+      },
+      "SourceShapeIds": [
+        "shape-318",
+        "shape-494"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.841263
+      }
+    },
+    {
+      "Id": "raw-run:50",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1714.62,
+        "MinY": 2542.632,
+        "MaxX": 1788.346,
+        "MaxY": 2581.484
+      },
+      "SourceShapeIds": [
+        "shape-350",
+        "shape-328"
+      ],
+      "Recognition": {
+        "Text": "\u2026",
+        "Confidence": 0.800928
+      }
+    },
+    {
+      "Id": "raw-run:51",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 282.706,
+        "MinY": 2557.419,
+        "MaxX": 352.716,
+        "MaxY": 2631.38
+      },
+      "SourceShapeIds": [
+        "shape-141",
+        "shape-311"
+      ],
+      "Recognition": {
+        "Text": "#",
+        "Confidence": 0.728104
+      }
+    },
+    {
+      "Id": "raw-run:52",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2187.71,
+        "MinY": 2579.82,
+        "MaxX": 2248.678,
+        "MaxY": 2609.204
+      },
+      "SourceShapeIds": [
+        "shape-334",
+        "shape-498"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:53",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2607.54,
+        "MaxX": 1010.938,
+        "MaxY": 2636.924
+      },
+      "SourceShapeIds": [
+        "shape-372",
+        "shape-524"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962497
+      }
+    },
+    {
+      "Id": "raw-run:54",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2621.4,
+        "MaxX": 377.647,
+        "MaxY": 2655.444
+      },
+      "SourceShapeIds": [
+        "shape-376",
+        "shape-531"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991929
+      }
+    },
+    {
+      "Id": "raw-run:55",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1524.99,
+        "MinY": 2731.275,
+        "MaxX": 1615.388,
+        "MaxY": 2801.008
+      },
+      "SourceShapeIds": [
+        "shape-154",
+        "shape-410",
+        "shape-539"
+      ],
+      "Recognition": {
+        "Text": "bo.",
+        "Confidence": 0.991255
+      }
+    },
+    {
+      "Id": "raw-run:56",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2775.956,
+        "MaxX": 377.647,
+        "MaxY": 2810.104
+      },
+      "SourceShapeIds": [
+        "shape-411",
+        "shape-537"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.644982
+      }
+    },
+    {
+      "Id": "raw-run:57",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2803.676,
+        "MaxX": 1010.938,
+        "MaxY": 2837.824
+      },
+      "SourceShapeIds": [
+        "shape-391",
+        "shape-561"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.663714
+      }
+    },
+    {
+      "Id": "raw-run:58",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 316.68,
+        "MinY": 2831.396,
+        "MaxX": 377.647,
+        "MaxY": 2865.544
+      },
+      "SourceShapeIds": [
+        "shape-403",
+        "shape-541"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.644982
+      }
+    },
+    {
+      "Id": "raw-run:59",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1554.42,
+        "MinY": 2850.02,
+        "MaxX": 1615.388,
+        "MaxY": 2879.404
+      },
+      "SourceShapeIds": [
+        "shape-409",
+        "shape-540"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:60",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 949.972,
+        "MinY": 2886.836,
+        "MaxX": 1010.938,
+        "MaxY": 2920.984
+      },
+      "SourceShapeIds": [
+        "shape-402",
+        "shape-548"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.663714
+      }
+    },
+    {
+      "Id": "raw-run:61",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3163.41,
+        "MaxX": 1697.358,
+        "MaxY": 3220.514
+      },
+      "SourceShapeIds": [
+        "shape-346",
+        "shape-358",
+        "shape-352",
+        "shape-510",
+        "shape-521"
+      ],
+      "Recognition": {
+        "Text": "8.",
+        "Confidence": 0.973611
+      }
+    },
+    {
+      "Id": "raw-run:62",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2238.79,
+        "MinY": 3169.405,
+        "MaxX": 2336.398,
+        "MaxY": 3239.138
+      },
+      "SourceShapeIds": [
+        "shape-140",
+        "shape-288",
+        "shape-501"
+      ],
+      "Recognition": {
+        "Text": "bo.",
+        "Confidence": 0.957795
+      }
+    },
+    {
+      "Id": "raw-run:63",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1602.42,
+        "MinY": 3224.169,
+        "MaxX": 1697.358,
+        "MaxY": 3298.13
+      },
+      "SourceShapeIds": [
+        "shape-145",
+        "shape-374",
+        "shape-517"
+      ],
+      "Recognition": {
+        "Text": "#O.",
+        "Confidence": 0.903043
+      }
+    },
+    {
+      "Id": "raw-run:64",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3246.57,
+        "MaxX": 2336.398,
+        "MaxY": 3275.954
+      },
+      "SourceShapeIds": [
+        "shape-366",
+        "shape-523"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962146
+      }
+    },
+    {
+      "Id": "raw-run:65",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2238.79,
+        "MinY": 3266.425,
+        "MaxX": 2336.398,
+        "MaxY": 3336.158
+      },
+      "SourceShapeIds": [
+        "shape-147",
+        "shape-367",
+        "shape-368",
+        "shape-522",
+        "shape-520"
+      ],
+      "Recognition": {
+        "Text": "b8:",
+        "Confidence": 0.99671
+      }
+    },
+    {
+      "Id": "raw-run:66",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 309.369,
+        "MinY": 3255.666,
+        "MaxX": 403.305,
+        "MaxY": 3303.674
+      },
+      "SourceShapeIds": [
+        "shape-360",
+        "shape-362",
+        "shape-508",
+        "shape-512"
+      ],
+      "Recognition": {
+        "Text": "8:",
+        "Confidence": 0.761018
+      }
+    },
+    {
+      "Id": "raw-run:67",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 961.411,
+        "MinY": 3255.666,
+        "MaxX": 1055.348,
+        "MaxY": 3322.194
+      },
+      "SourceShapeIds": [
+        "shape-370",
+        "shape-373",
+        "shape-369",
+        "shape-529",
+        "shape-509",
+        "shape-518"
+      ],
+      "Recognition": {
+        "Text": "8:",
+        "Confidence": 0.9178
+      }
+    },
+    {
+      "Id": "raw-run:68",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 994.381,
+        "MinY": 3329.73,
+        "MaxX": 1055.348,
+        "MaxY": 3359.114
+      },
+      "SourceShapeIds": [
+        "shape-363",
+        "shape-516"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962388
+      }
+    },
+    {
+      "Id": "raw-run:69",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 312.903,
+        "MinY": 3449.255,
+        "MaxX": 403.305,
+        "MaxY": 3518.988
+      },
+      "SourceShapeIds": [
+        "shape-152",
+        "shape-426",
+        "shape-553"
+      ],
+      "Recognition": {
+        "Text": "bo.",
+        "Confidence": 0.990542
+      }
+    },
+    {
+      "Id": "raw-run:70",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3466.216,
+        "MaxX": 1664.388,
+        "MaxY": 3500.364
+      },
+      "SourceShapeIds": [
+        "shape-393",
+        "shape-558"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.663357
+      }
+    },
+    {
+      "Id": "raw-run:71",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3498.7,
+        "MaxX": 2336.398,
+        "MaxY": 3532.744
+      },
+      "SourceShapeIds": [
+        "shape-438",
+        "shape-563"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991934
+      }
+    },
+    {
+      "Id": "raw-run:72",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2445.57,
+        "MinY": 3504.019,
+        "MaxX": 2515.586,
+        "MaxY": 3577.98
+      },
+      "SourceShapeIds": [
+        "shape-148",
+        "shape-383"
+      ],
+      "Recognition": {
+        "Text": "#",
+        "Confidence": 0.729871
+      }
+    },
+    {
+      "Id": "raw-run:73",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 964.946,
+        "MinY": 3504.695,
+        "MaxX": 1055.348,
+        "MaxY": 3574.428
+      },
+      "SourceShapeIds": [
+        "shape-151",
+        "shape-406",
+        "shape-546"
+      ],
+      "Recognition": {
+        "Text": "bo.",
+        "Confidence": 0.990517
+      }
+    },
+    {
+      "Id": "raw-run:74",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 1603.42,
+        "MinY": 3549.376,
+        "MaxX": 1664.388,
+        "MaxY": 3583.524
+      },
+      "SourceShapeIds": [
+        "shape-395",
+        "shape-556"
+      ],
+      "Recognition": {
+        "Text": "0",
+        "Confidence": 0.663357
+      }
+    },
+    {
+      "Id": "raw-run:75",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 342.339,
+        "MinY": 3568,
+        "MaxX": 403.305,
+        "MaxY": 3597.384
+      },
+      "SourceShapeIds": [
+        "shape-429",
+        "shape-551"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962497
+      }
+    },
+    {
+      "Id": "raw-run:76",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 2275.43,
+        "MinY": 3609.58,
+        "MaxX": 2336.398,
+        "MaxY": 3643.624
+      },
+      "SourceShapeIds": [
+        "shape-437",
+        "shape-566"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.991934
+      }
+    },
+    {
+      "Id": "raw-run:77",
+      "Kind": "HorizontalRun",
+      "Bounds": {
+        "MinX": 994.381,
+        "MinY": 3623.44,
+        "MaxX": 1055.348,
+        "MaxY": 3652.824
+      },
+      "SourceShapeIds": [
+        "shape-407",
+        "shape-544"
+      ],
+      "Recognition": {
+        "Text": "0.",
+        "Confidence": 0.962388
       }
     }
   ]
