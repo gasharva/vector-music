@@ -26,6 +26,13 @@ public sealed class ScenePipeline
         geometry = _metadataAnnotator.Annotate(svgFile, geometry);
         var notation = _clusterer.Cluster(geometry);
 
+        // Primitive extraction intentionally sees only split geometry. Once layout is
+        // known, add small reconstructed whole-path alternatives exclusively for
+        // symbol classification/ownership/semantic selection.
+        var layout = new ScoreLayoutAnalyzer().Analyze(notation);
+        (geometry, notation) = new CompoundClassificationHypothesisBuilder()
+            .Augment(geometry, notation, layout);
+
         return (geometry, notation);
     }
 }
