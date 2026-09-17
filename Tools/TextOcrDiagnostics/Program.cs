@@ -59,7 +59,7 @@ else
 try
 {
     Console.WriteLine(
-        "Building disjoint greedy maximal trains from poorly classified residual glyphs...");
+        "Expanding poor glyph seeds to complete horizontal rows, then splitting at large gaps...");
     var analysis = new FallbackTextRecognitionAnalyzer(recognizer).Analyze(
         geometry,
         notation,
@@ -82,7 +82,7 @@ try
     var report = new
     {
         Engine = useOcr ? "PP-OCRv5-Latin" : "disabled",
-        Mode = "poor-music-glyphs-greedy-disjoint-maximal-trains",
+        Mode = "poor-glyph-seeded-full-horizontal-row-gap-segmentation",
         ClearMusicClassificationConfidence =
             FallbackTextRecognitionAnalyzer.ClearMusicClassificationConfidence,
         MaxGapAverageGlyphWidths =
@@ -142,12 +142,12 @@ try
         runsOnly,
         runsSvgPath);
 
-    Console.WriteLine($"Poor residual glyphs          : {poorResidualGlyphs.Count}");
-    Console.WriteLine($"OCR fallback candidates      : {analysis.Observations.Count}");
-    Console.WriteLine($"Horizontal trains            : {trainObservations.Length}");
+    Console.WriteLine($"Poor residual glyph seeds     : {poorResidualGlyphs.Count}");
+    Console.WriteLine($"OCR fallback segments        : {analysis.Observations.Count}");
+    Console.WriteLine($"Horizontal segments          : {trainObservations.Length}");
     Console.WriteLine($"Singleton fallbacks          : {singletonObservations.Length}");
     Console.WriteLine($"Recognized fallbacks         : {recognized.Length}");
-    Console.WriteLine($"Max train gap                : {FallbackHorizontalTextTrainBuilder.MaxGapAverageGlyphWidths:0.##} average glyph widths");
+    Console.WriteLine($"Row split gap                : {FallbackHorizontalTextTrainBuilder.MaxGapAverageGlyphWidths:0.##} average glyph widths");
     // Compatibility markers retained for the existing master workflow smoke grep.
     Console.WriteLine($"Raw glyphs OCR-probed (fallback seeds only): {poorResidualGlyphs.Count}");
     Console.WriteLine($"Horizontal runs (fallback trains): {trainObservations.Length}");
