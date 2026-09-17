@@ -2,9 +2,9 @@ namespace SvgMusic.Scene;
 
 /// <summary>
 /// OCR fallback that runs only after the existing music-symbol classifier has had
-/// its chance. Only residual glyphs that the normal classifier did not recognize
-/// confidently are considered. They are partitioned into disjoint greedy maximal
-/// horizontal trains and only those trains (or remaining singletons) are sent to OCR.
+/// its chance. Poorly classified residual glyphs are used only as seeds that activate
+/// a horizontal row. OCR then sees complete geometric glyph segments from that row,
+/// regardless of how the normal parser interpreted the neighbouring glyphs.
 /// </summary>
 public sealed class FallbackTextRecognitionAnalyzer
 {
@@ -32,7 +32,7 @@ public sealed class FallbackTextRecognitionAnalyzer
             layout);
 
         var observations = _trainBuilder
-            .Build(poorGlyphs, layout)
+            .Build(geometry, poorGlyphs, layout)
             .Select(candidate => new TextRecognitionObservation(
                 candidate.Id,
                 candidate.Kind,
@@ -63,8 +63,7 @@ public sealed class FallbackTextRecognitionAnalyzer
             .Where(shape => shape is not null)
             .Select(shape => shape!)
             // `.whole` entries are classification-only alternatives added by
-            // ScenePipeline and duplicate the same ink already present in their
-            // split glyphs. They are not independent OCR wagons.
+            // ScenePipeline and duplicate ink already present in split geometry.
             .Where(shape => !shape.Id.EndsWith(".whole", StringComparison.Ordinal))
             .Where(shape => FallbackHorizontalTextTrainBuilder.IsSmallGlyph(
                 shape,
@@ -84,11 +83,12 @@ public sealed class FallbackTextRecognitionAnalyzer
 }
 
 /// <summary>
-/// Greedily partitions poorly recognized residual glyphs into disjoint horizontal
-/// trains. No confidently classified glyph, primitive interpretation or SVG source
-/// provenance participates in grouping. A gap may be as large as two average glyph
-/// widths of the train assembled so far. A singleton is emitted only when that glyph
-/// could not be consumed by any larger train.
+/// A poorly recognized glyph activates its horizontal row, but is not itself the
+/// boundary of the OCR candidate. The row is populated from all small geometric
+/// glyphs at a compatible Y position, without looking at symbol classification,
+/// primitive interpretation or SVG provenance. After sorting by X, the row is cut
+/// only where a horizontal gap exceeds two average glyph widths. Every resulting
+/// piece is sent to OCR; a one-glyph piece naturally becomes a singleton fallback.
 /// </summary>
 public sealed class FallbackHorizontalTextTrainBuilder
 {
@@ -96,11 +96,11 @@ public sealed class FallbackHorizontalTextTrainBuilder
 
     private const double MaxAtomWidthInSpacings = 8.0;
     private const double MaxAtomHeightInSpacings = 5.0;
-    private const double MaxNegativeGapAverageGlyphWidths = 0.35;
     private const double MinimumVerticalOverlap = 0.20;
-    private const double CenterToleranceAverageHeight = 0.75;
+    private const double VerticalJitterInSpacings = 0.75;
 
     public IReadOnlyList<TextRecognitionCandidate> Build(
+        GeometricScene geometry,
         IReadOnlyList<GeometricShape> poorGlyphs,
         ScoreLayout layout)
     {
@@ -108,142 +108,170 @@ public sealed class FallbackHorizontalTextTrainBuilder
             0.001,
             GlyphRasterizer.ResolveSourceInterline(layout));
 
-        var glyphs = poorGlyphs
+        var seeds = poorGlyphs
             .Where(shape => IsSmallGlyph(shape, spacing))
             .GroupBy(shape => shape.Id, StringComparer.Ordinal)
             .Select(group => group.First())
-            .OrderBy(shape => shape.Bounds.MinX)
-            .ThenBy(shape => shape.Bounds.MinY)
+            .OrderBy(shape => shape.Bounds.MinY)
+            .ThenBy(shape => shape.Bounds.MinX)
             .ThenBy(shape => shape.Id, StringComparer.Ordinal)
             .ToArray();
 
-        if (glyphs.Length == 0)
+        if (seeds.Length == 0)
         {
             return Array.Empty<TextRecognitionCandidate>();
         }
 
-        var used = new HashSet<string>(StringComparer.Ordinal);
-        var trains = new List<IReadOnlyList<GeometricShape>>();
+        var atoms = geometry.Shapes
+            // Synthetic whole-path classifier alternatives duplicate raw ink and
+            // therefore must not become extra OCR wagons.
+            .Where(shape => !shape.Id.EndsWith(".whole", StringComparison.Ordinal))
+            .Where(shape => IsSmallGlyph(shape, spacing))
+            .GroupBy(shape => shape.Id, StringComparer.Ordinal)
+            .Select(group => group.First())
+            .ToArray();
 
-        foreach (var seed in glyphs)
+        var seedRows = BuildSeedRows(seeds, spacing);
+        var uniquePieces = new Dictionary<string, GeometricShape[]>(
+            StringComparer.Ordinal);
+
+        foreach (var seedRow in seedRows)
         {
-            if (used.Contains(seed.Id))
+            // X distance deliberately does not participate here. Once a bad glyph
+            // activates a row, collect every small glyph that lies on the same
+            // horizontal band. Classification and primitive type are ignored.
+            var rowGlyphs = atoms
+                .Where(atom => seedRow.Any(seed =>
+                    IsVerticallyCompatible(seed.Bounds, atom.Bounds, spacing)))
+                .OrderBy(shape => shape.Bounds.MinX)
+                .ThenBy(shape => shape.Bounds.MinY)
+                .ThenBy(shape => shape.Id, StringComparer.Ordinal)
+                .ToArray();
+
+            if (rowGlyphs.Length == 0)
             {
                 continue;
             }
 
-            var train = new List<GeometricShape> { seed };
-            used.Add(seed.Id);
+            var averageWidth = Math.Max(
+                0.001,
+                rowGlyphs.Average(shape => shape.Bounds.Width));
+            var maxGap = averageWidth * MaxGapAverageGlyphWidths;
 
-            while (true)
+            foreach (var piece in SplitAtLargeHorizontalGaps(rowGlyphs, maxGap))
             {
-                var next = FindBestRightNeighbour(train, glyphs, used);
-                if (next is null)
-                {
-                    break;
-                }
-
-                train.Add(next);
-                used.Add(next.Id);
-            }
-
-            trains.Add(train);
-        }
-
-        var runIndex = 0;
-        return trains
-            .Select(train =>
-            {
-                var ordered = train
+                var ordered = piece
                     .OrderBy(shape => shape.Bounds.MinX)
                     .ThenBy(shape => shape.Bounds.MinY)
                     .ThenBy(shape => shape.Id, StringComparer.Ordinal)
                     .ToArray();
+                var key = string.Join(
+                    "\u001f",
+                    ordered.Select(shape => shape.Id));
+                uniquePieces.TryAdd(key, ordered);
+            }
+        }
 
-                if (ordered.Length == 1)
+        var runIndex = 0;
+        return uniquePieces.Values
+            .OrderBy(piece => piece.Min(shape => shape.Bounds.MinY))
+            .ThenBy(piece => piece.Min(shape => shape.Bounds.MinX))
+            .ThenBy(piece => piece[0].Id, StringComparer.Ordinal)
+            .Select(piece =>
+            {
+                if (piece.Length == 1)
                 {
                     return TextRecognitionCandidateSvg.Create(
-                        $"fallback-glyph:{ordered[0].Id}",
+                        $"fallback-glyph:{piece[0].Id}",
                         TextCandidateKind.Prototype,
-                        ordered);
+                        piece);
                 }
 
                 runIndex++;
                 return TextRecognitionCandidateSvg.Create(
                     $"fallback-train:{runIndex}",
                     TextCandidateKind.HorizontalRun,
-                    ordered);
+                    piece);
             })
-            .OrderBy(candidate => candidate.Bounds.MinY)
-            .ThenBy(candidate => candidate.Bounds.MinX)
-            .ThenBy(candidate => candidate.Id, StringComparer.Ordinal)
             .ToArray();
     }
 
-    private static GeometricShape? FindBestRightNeighbour(
-        IReadOnlyList<GeometricShape> train,
-        IReadOnlyList<GeometricShape> glyphs,
-        IReadOnlySet<string> used)
+    private static IReadOnlyList<IReadOnlyList<GeometricShape>> BuildSeedRows(
+        IReadOnlyList<GeometricShape> seeds,
+        double spacing)
     {
-        var rightEdge = train
-            .OrderByDescending(shape => shape.Bounds.MaxX)
-            .ThenBy(shape => shape.Bounds.MinY)
-            .First();
-        var averageWidth = Math.Max(
-            0.001,
-            train.Average(shape => shape.Bounds.Width));
-        var averageHeight = Math.Max(
-            0.001,
-            train.Average(shape => shape.Bounds.Height));
-        var trainMinY = train.Min(shape => shape.Bounds.MinY);
-        var trainMaxY = train.Max(shape => shape.Bounds.MaxY);
-        var trainCenterY = (trainMinY + trainMaxY) / 2.0;
-        var maxGap = averageWidth * MaxGapAverageGlyphWidths;
-        var maxNegativeGap = averageWidth * MaxNegativeGapAverageGlyphWidths;
+        var rows = new List<List<GeometricShape>>();
 
-        return glyphs
-            .Where(candidate => !used.Contains(candidate.Id))
-            .Where(candidate => candidate.Bounds.CenterX > rightEdge.Bounds.CenterX)
-            .Select(candidate => new
+        foreach (var seed in seeds)
+        {
+            var row = rows.FirstOrDefault(existing =>
+                existing.Any(member =>
+                    IsVerticallyCompatible(
+                        member.Bounds,
+                        seed.Bounds,
+                        spacing)));
+
+            if (row is null)
             {
-                Shape = candidate,
-                Gap = candidate.Bounds.MinX - rightEdge.Bounds.MaxX,
-                CenterDelta = Math.Abs(candidate.Bounds.CenterY - trainCenterY)
-            })
-            .Where(item => item.Gap >= -maxNegativeGap && item.Gap <= maxGap)
-            .Where(item => IsVerticallyCompatible(
-                item.Shape.Bounds,
-                trainMinY,
-                trainMaxY,
-                trainCenterY,
-                averageHeight))
-            .OrderBy(item => Math.Max(0, item.Gap))
-            .ThenBy(item => item.CenterDelta)
-            .ThenBy(item => item.Shape.Bounds.MinX)
-            .ThenBy(item => item.Shape.Id, StringComparer.Ordinal)
-            .Select(item => item.Shape)
-            .FirstOrDefault();
+                rows.Add([seed]);
+            }
+            else
+            {
+                row.Add(seed);
+            }
+        }
+
+        return rows;
+    }
+
+    private static IEnumerable<IReadOnlyList<GeometricShape>> SplitAtLargeHorizontalGaps(
+        IReadOnlyList<GeometricShape> ordered,
+        double maxGap)
+    {
+        if (ordered.Count == 0)
+        {
+            yield break;
+        }
+
+        var current = new List<GeometricShape> { ordered[0] };
+
+        for (var index = 1; index < ordered.Count; index++)
+        {
+            var previous = ordered[index - 1];
+            var next = ordered[index];
+            var gap = next.Bounds.MinX - previous.Bounds.MaxX;
+
+            if (gap > maxGap)
+            {
+                yield return current.ToArray();
+                current = [next];
+            }
+            else
+            {
+                current.Add(next);
+            }
+        }
+
+        yield return current.ToArray();
     }
 
     private static bool IsVerticallyCompatible(
-        BoundsD candidate,
-        double trainMinY,
-        double trainMaxY,
-        double trainCenterY,
-        double averageHeight)
+        BoundsD first,
+        BoundsD second,
+        double spacing)
     {
         var overlap = Math.Max(
             0,
-            Math.Min(candidate.MaxY, trainMaxY)
-            - Math.Max(candidate.MinY, trainMinY));
+            Math.Min(first.MaxY, second.MaxY)
+            - Math.Max(first.MinY, second.MinY));
         var minimumHeight = Math.Max(
             0.001,
-            Math.Min(candidate.Height, trainMaxY - trainMinY));
+            Math.Min(first.Height, second.Height));
         var overlapRatio = overlap / minimumHeight;
-        var centerDelta = Math.Abs(candidate.CenterY - trainCenterY);
+        var centerDelta = Math.Abs(first.CenterY - second.CenterY);
 
         return overlapRatio >= MinimumVerticalOverlap
-            || centerDelta <= averageHeight * CenterToleranceAverageHeight;
+            || centerDelta <= spacing * VerticalJitterInSpacings;
     }
 
     public static bool IsSmallGlyph(
