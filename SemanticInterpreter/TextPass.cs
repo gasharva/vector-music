@@ -78,8 +78,9 @@ public sealed class TextPass : ISemanticPass
         var ownedShapeIds = _ownership.Assignments
             .Select(item => item.ShapeId)
             .ToHashSet(StringComparer.Ordinal);
-        var musicShapeIds = facts.Items
+        var musicShapeFamilies = facts.Items
             .SelectMany(item => item.SourceShapeIds)
+            .Select(BaseShapeFamily)
             .ToHashSet(StringComparer.Ordinal);
         var spacing = Math.Max(
             0.001,
@@ -153,7 +154,7 @@ public sealed class TextPass : ISemanticPass
                 continue;
             }
 
-            var overlap = MusicOverlap(candidate, musicShapeIds);
+            var overlap = MusicOverlap(candidate, musicShapeFamilies);
             if (overlap > AnyMusicOverlap
                 || IntersectsStaffCore(candidate.Observation.Bounds, spacing))
             {
@@ -385,18 +386,39 @@ public sealed class TextPass : ISemanticPass
 
     private static double MusicOverlap(
         Candidate candidate,
-        IReadOnlySet<string> musicShapeIds)
+        IReadOnlySet<string> musicShapeFamilies)
     {
-        var ids = candidate.Observation.SourceShapeIds
+        var families = candidate.Observation.SourceShapeIds
+            .Select(BaseShapeFamily)
             .Distinct(StringComparer.Ordinal)
             .ToArray();
 
-        if (ids.Length == 0)
+        if (families.Length == 0)
         {
             return 0;
         }
 
-        return ids.Count(musicShapeIds.Contains) / (double)ids.Length;
+        return families.Count(musicShapeFamilies.Contains)
+            / (double)families.Length;
+    }
+
+    private static string BaseShapeFamily(string shapeId)
+    {
+        const string wholeSuffix = ".whole";
+        if (shapeId.EndsWith(wholeSuffix, StringComparison.Ordinal))
+        {
+            return shapeId[..^wholeSuffix.Length];
+        }
+
+        var separator = shapeId.LastIndexOf('.');
+        if (separator > 0
+            && separator < shapeId.Length - 1
+            && int.TryParse(shapeId[(separator + 1)..], out _))
+        {
+            return shapeId[..separator];
+        }
+
+        return shapeId;
     }
 
     private bool IntersectsStaffCore(
