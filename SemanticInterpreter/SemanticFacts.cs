@@ -42,7 +42,8 @@ public sealed record KeySignatureFact(
     double MinX,
     double MaxX,
     string Reason,
-    IReadOnlyList<string> SourceShapeIds)
+    IReadOnlyList<string> SourceShapeIds,
+    bool IsInherited = false)
     : SemanticFact(
         "KeySignaturePass",
         Reason,
