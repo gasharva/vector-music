@@ -291,7 +291,7 @@ static PageSet DiscoverPages(
     if (matches.Length > 1)
     {
         throw new InvalidDataException(
-            "More than one <name>-NNN.svg score was found. "
+            "More than one <name>-N.svg score was found. "
             + "Use --base <name>. Found: "
             + string.Join(
                 ", ",
@@ -334,12 +334,13 @@ static TimeSignature? ResolveFinalTimeSignature(
     TimeSignature? inherited)
 {
     var current = inherited;
+    var measures = page.Parts
+        .FirstOrDefault()
+        ?.Measures
+        ?? [];
 
-    foreach (var measure in page.Parts
-                 .FirstOrDefault()
-                 ?.Measures
-                 .OrderBy(measure => measure.Number)
-             ?? [])
+    foreach (var measure in measures
+                 .OrderBy(measure => measure.Number))
     {
         if (measure.Attributes?.Time is { } time)
         {
