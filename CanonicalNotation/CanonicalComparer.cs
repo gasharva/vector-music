@@ -1284,8 +1284,17 @@ public sealed class CanonicalComparer
         string? at,
         string? expected,
         string? actual,
-        string message)
+        string message,
+        bool expectedNullIsWildcard = false,
+        string? rootCause = null,
+        string? rootCauseSummary = null)
     {
+        if (expectedNullIsWildcard
+            && string.IsNullOrWhiteSpace(expected))
+        {
+            return;
+        }
+
         if (Normalize(expected) == Normalize(actual))
             return;
 
@@ -1298,7 +1307,9 @@ public sealed class CanonicalComparer
             at,
             expected ?? "<null>",
             actual ?? "<null>",
-            message));
+            message,
+            rootCause,
+            rootCauseSummary));
     }
 
     private static void CompareSet(
