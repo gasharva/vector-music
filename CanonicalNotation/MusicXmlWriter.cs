@@ -30,12 +30,35 @@ public sealed class MusicXmlWriter
                     new XAttribute("type", "composer"),
                     score.Metadata.Composer)));
 
+        root.Add(ScoreDefaults());
+
+        if (!string.IsNullOrWhiteSpace(score.Metadata.Title))
+            root.Add(Credit(
+                "title",
+                score.Metadata.Title,
+                595,
+                1615,
+                22,
+                "center",
+                bold: true));
+
         if (!string.IsNullOrWhiteSpace(score.Metadata.Subtitle))
-            root.Add(new XElement(
-                "credit",
-                new XAttribute("page", "1"),
-                new XElement("credit-type", "subtitle"),
-                new XElement("credit-words", score.Metadata.Subtitle)));
+            root.Add(Credit(
+                "subtitle",
+                score.Metadata.Subtitle,
+                595,
+                1570,
+                12,
+                "center"));
+
+        if (!string.IsNullOrWhiteSpace(score.Metadata.Composer))
+            root.Add(Credit(
+                "composer",
+                score.Metadata.Composer,
+                1120,
+                1525,
+                12,
+                "right"));
 
         var partList = new XElement("part-list");
         foreach (var part in score.Parts)
@@ -65,11 +88,19 @@ public sealed class MusicXmlWriter
         _currentMeasureNumber = measure.Number;
         var mx = new XElement("measure", new XAttribute("number", measure.Number));
 
-        if (measure.Layout is not null)
+        if (measure.Layout is not null || firstMeasure)
         {
             var print = new XElement("print");
-            if (measure.Layout.BreakBefore == "page") print.SetAttributeValue("new-page", "yes");
-            else if (measure.Layout.BreakBefore == "system") print.SetAttributeValue("new-system", "yes");
+            if (measure.Layout?.BreakBefore == "page") print.SetAttributeValue("new-page", "yes");
+            else if (measure.Layout?.BreakBefore == "system") print.SetAttributeValue("new-system", "yes");
+
+            if (firstMeasure)
+            {
+                print.Add(new XElement(
+                    "system-layout",
+                    new XElement("top-system-distance", "210")));
+            }
+
             mx.Add(print);
         }
 
@@ -405,7 +436,7 @@ public sealed class MusicXmlWriter
 
             XElement? type = ev.Type switch
             {
-                "text" => new XElement("words", ev.Text ?? ""),
+                "text" => TextWords(ev),
                 "dynamic" => new XElement("dynamics", new XElement(ev.Value ?? "mf")),
                 "tempo" => new XElement("metronome",
                     new XElement("beat-unit", ev.BeatUnit ?? "quarter"),
@@ -431,6 +462,71 @@ public sealed class MusicXmlWriter
         if (!string.IsNullOrWhiteSpace(ev.Target))
             dx.Add(new XElement("sound", new XAttribute(kind, ev.Target)));
         return dx;
+    }
+
+    private static XElement ScoreDefaults()
+    {
+        return new XElement(
+            "defaults",
+            new XElement(
+                "scaling",
+                new XElement("millimeters", "7.05556"),
+                new XElement("tenths", "40")),
+            new XElement(
+                "page-layout",
+                new XElement("page-height", "1684"),
+                new XElement("page-width", "1190"),
+                new XElement(
+                    "page-margins",
+                    new XAttribute("type", "both"),
+                    new XElement("left-margin", "70"),
+                    new XElement("right-margin", "70"),
+                    new XElement("top-margin", "70"),
+                    new XElement("bottom-margin", "70"))));
+    }
+
+    private static XElement Credit(
+        string type,
+        string value,
+        double x,
+        double y,
+        double fontSize,
+        string justify,
+        bool bold = false)
+    {
+        var words = new XElement(
+            "credit-words",
+            new XAttribute("default-x", x.ToString(CultureInfo.InvariantCulture)),
+            new XAttribute("default-y", y.ToString(CultureInfo.InvariantCulture)),
+            new XAttribute("font-size", fontSize.ToString(CultureInfo.InvariantCulture)),
+            new XAttribute("justify", justify),
+            new XAttribute("valign", "top"),
+            value);
+
+        if (bold)
+            words.SetAttributeValue("font-weight", "bold");
+
+        return new XElement(
+            "credit",
+            new XAttribute("page", "1"),
+            new XElement("credit-type", type),
+            words);
+    }
+
+    private static XElement TextWords(CanonicalEvent ev)
+    {
+        var words = new XElement("words", ev.Text ?? "");
+
+        if (string.Equals(
+                ev.TextRole,
+                "Tempo",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            words.SetAttributeValue("font-weight", "bold");
+            words.SetAttributeValue("font-family", "Edwin");
+        }
+
+        return words;
     }
 
     private static XElement Direction(int staff, string? placement, XElement content)
