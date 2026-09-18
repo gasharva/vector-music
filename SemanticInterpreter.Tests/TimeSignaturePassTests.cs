@@ -53,6 +53,35 @@ public sealed class TimeSignaturePassTests
     }
 
     [Fact]
+    public void ContinuationPageWithoutPrintedSignature_UsesInheritedTime()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(1, [], []),
+            Measure(2, [], [])
+        ]);
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass((3, 4)).Run(
+            document,
+            facts);
+
+        var signature = Assert.Single(
+            facts.OfType<TimeSignatureFact>());
+
+        Assert.Equal(1, signature.MeasureNumber);
+        Assert.Equal(3, signature.Beats);
+        Assert.Equal(4, signature.BeatType);
+        Assert.True(signature.IsInherited);
+        Assert.Empty(signature.SourceShapeIds);
+        Assert.Contains(
+            facts.Trace,
+            line => line.Contains(
+                "inherited 3/4",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void NoisyExtraTimeDigits_SelectSupportedAlignedSignature()
     {
         var document = new SemanticDocument(

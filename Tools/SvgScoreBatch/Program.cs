@@ -27,7 +27,7 @@ var pageSet = DiscoverPages(inputDirectory, baseName);
 if (pageSet.Pages.Count == 0)
 {
     Console.Error.WriteLine(
-        $"No SVG pages matching <name>-NNN.svg were found in {inputDirectory}");
+        $"No SVG pages matching <name>-N.svg were found in {inputDirectory}");
     return 2;
 }
 
@@ -66,6 +66,7 @@ if (!noBuild)
 }
 
 var pageCanonicals = new List<CanonicalNotation>();
+TimeSignature? activeTimeSignature = null;
 var pagesDirectory = Path.Combine(
     outputDirectory,
     "pages");
@@ -101,6 +102,15 @@ foreach (var page in pageSet.Pages)
         processArgs.Add(Path.GetFullPath(modelPath));
     }
 
+    if (activeTimeSignature is not null)
+    {
+        processArgs.Add("--initial-time");
+        processArgs.Add(
+            $"{activeTimeSignature.Beats}/{activeTimeSignature.BeatType}");
+        Console.WriteLine(
+            $"Inherited time: {activeTimeSignature.Beats}/{activeTimeSignature.BeatType}");
+    }
+
     var exitCode = await RunProcessAsync(
         "dotnet",
         processArgs,
@@ -124,8 +134,13 @@ foreach (var page in pageSet.Pages)
         return 3;
     }
 
-    pageCanonicals.Add(
-        CanonicalJson.Read(canonicalPath));
+    var pageCanonical = CanonicalJson.Read(
+        canonicalPath);
+    pageCanonicals.Add(pageCanonical);
+
+    activeTimeSignature = ResolveFinalTimeSignature(
+        pageCanonical,
+        activeTimeSignature);
 }
 
 Console.WriteLine();
@@ -276,7 +291,7 @@ static PageSet DiscoverPages(
     if (matches.Length > 1)
     {
         throw new InvalidDataException(
-            "More than one <name>-NNN.svg score was found. "
+            "More than one <name>-N.svg score was found. "
             + "Use --base <name>. Found: "
             + string.Join(
                 ", ",
@@ -312,6 +327,28 @@ static PageSet ValidatePageSet(
     return new PageSet(
         baseName,
         ordered);
+}
+
+static TimeSignature? ResolveFinalTimeSignature(
+    CanonicalNotation page,
+    TimeSignature? inherited)
+{
+    var current = inherited;
+    var measures = page.Parts
+        .FirstOrDefault()
+        ?.Measures
+        ?? [];
+
+    foreach (var measure in measures
+                 .OrderBy(measure => measure.Number))
+    {
+        if (measure.Attributes?.Time is { } time)
+        {
+            current = time;
+        }
+    }
+
+    return current;
 }
 
 static CanonicalNotation ReadCanonical(
@@ -416,8 +453,8 @@ static void PrintUsage()
         + "[--no-build] [--fail-on-diff]");
     Console.Error.WriteLine();
     Console.Error.WriteLine(
-        "SVG pages must be named <name>-NNN.svg, for example "
-        + "prelude-001.svg, prelude-002.svg.");
+        "SVG pages must be named <name>-N.svg, for example "
+        + "prelude-1.svg, prelude-2.svg.");
 }
 
 sealed record SvgPage(

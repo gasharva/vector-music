@@ -208,6 +208,20 @@ public sealed class LogicalOwnershipAnalyzer
 
             foreach (var parent in parents)
             {
+                // Axis-aligned bounds distance is a strict lower bound for the
+                // expensive contour/polyline distance below. Most notation
+                // elements are nowhere near this glyph, so reject them here
+                // before doing O(points-left * points-right) geometry work.
+                var boundsDistance = DistanceBetweenBounds(
+                    element.Bounds,
+                    parent.Bounds);
+
+                if (boundsDistance > threshold
+                    || boundsDistance >= bestDistance)
+                {
+                    continue;
+                }
+
                 var distance = GeometryDistance(element, parent);
 
                 if (distance > threshold || distance >= bestDistance)
@@ -950,6 +964,20 @@ public sealed class LogicalOwnershipAnalyzer
         && right.MaxX >= left.MinX
         && left.MaxY >= right.MinY
         && right.MaxY >= left.MinY;
+
+    private static double DistanceBetweenBounds(
+        BoundsD left,
+        BoundsD right)
+    {
+        var dx = Math.Max(
+            Math.Max(left.MinX - right.MaxX, 0),
+            right.MinX - left.MaxX);
+        var dy = Math.Max(
+            Math.Max(left.MinY - right.MaxY, 0),
+            right.MinY - left.MaxY);
+
+        return Math.Sqrt(dx * dx + dy * dy);
+    }
 
     private static double DistanceToBounds(PointD point, BoundsD bounds)
     {

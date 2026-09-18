@@ -27,7 +27,8 @@ public sealed record TimeSignatureFact(
     double MinX,
     double MaxX,
     string Reason,
-    IReadOnlyList<string> SourceShapeIds)
+    IReadOnlyList<string> SourceShapeIds,
+    bool IsInherited = false)
     : SemanticFact(
         "TimeSignaturePass",
         Reason,

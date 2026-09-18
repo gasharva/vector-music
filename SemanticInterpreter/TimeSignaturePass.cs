@@ -3,6 +3,22 @@ namespace SvgMusic.Semantics;
 public sealed class TimeSignaturePass : ISemanticPass
 {
     private const double MinimumConfidence = 0.75;
+
+    private readonly (int Beats, int BeatType)? _inheritedSignature;
+
+    public TimeSignaturePass(
+        (int Beats, int BeatType)? inheritedSignature = null)
+    {
+        if (inheritedSignature is { } value
+            && !SupportedSignatures.Contains(value))
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(inheritedSignature),
+                $"Unsupported inherited time signature {value.Beats}/{value.BeatType}.");
+        }
+
+        _inheritedSignature = inheritedSignature;
+    }
     private const double FirstMeasureHeaderWidthFraction = 0.45;
     private const double LaterMeasureHeaderWidthFraction = 0.30;
     private const double MaximumDigitColumnOffsetInSpacings = 1.0;
@@ -45,6 +61,7 @@ public sealed class TimeSignaturePass : ISemanticPass
         foreach (var measure in measures)
         {
             var isFirstMeasure = measure.Number == firstMeasureNumber;
+            var strict = isFirstMeasure && _inheritedSignature is null;
             var measureCandidates = collector.Candidates
                 .Where(candidate => candidate.MeasureNumber == measure.Number)
                 .ToArray();
@@ -54,16 +71,26 @@ public sealed class TimeSignaturePass : ISemanticPass
                 measure.Upper,
                 measureCandidates,
                 facts,
-                strict: isFirstMeasure);
+                strict);
             var lower = TryReadStaffSignature(
                 measure,
                 measure.Lower,
                 measureCandidates,
                 facts,
-                strict: isFirstMeasure);
+                strict);
 
             if (upper is null && lower is null)
             {
+                if (isFirstMeasure && _inheritedSignature is { } inherited)
+                {
+                    AddInheritedSignature(
+                        facts,
+                        measure,
+                        inherited,
+                        "no printed time signature on continuation page");
+                    continue;
+                }
+
                 if (isFirstMeasure)
                 {
                     throw new InvalidDataException(
@@ -76,6 +103,16 @@ public sealed class TimeSignaturePass : ISemanticPass
 
             if (upper is null || lower is null)
             {
+                if (isFirstMeasure && _inheritedSignature is { } inherited)
+                {
+                    AddInheritedSignature(
+                        facts,
+                        measure,
+                        inherited,
+                        "ignored incomplete printed signature at continuation-page start");
+                    continue;
+                }
+
                 if (isFirstMeasure)
                 {
                     throw new InvalidDataException(
@@ -94,6 +131,16 @@ public sealed class TimeSignaturePass : ISemanticPass
             if (upper.Beats != lower.Beats
                 || upper.BeatType != lower.BeatType)
             {
+                if (isFirstMeasure && _inheritedSignature is { } inherited)
+                {
+                    AddInheritedSignature(
+                        facts,
+                        measure,
+                        inherited,
+                        "ignored conflicting printed signatures at continuation-page start");
+                    continue;
+                }
+
                 if (isFirstMeasure)
                 {
                     throw new InvalidDataException(
@@ -111,6 +158,16 @@ public sealed class TimeSignaturePass : ISemanticPass
 
             if (!SupportedSignatures.Contains((upper.Beats, upper.BeatType)))
             {
+                if (isFirstMeasure && _inheritedSignature is { } inherited)
+                {
+                    AddInheritedSignature(
+                        facts,
+                        measure,
+                        inherited,
+                        "ignored unsupported printed signature at continuation-page start");
+                    continue;
+                }
+
                 if (isFirstMeasure)
                 {
                     throw new InvalidDataException(
@@ -141,6 +198,27 @@ public sealed class TimeSignaturePass : ISemanticPass
                     + $"only supported geometric digit hypotheses are accepted.",
                 sources));
         }
+    }
+
+    private static void AddInheritedSignature(
+        SemanticFacts facts,
+        MeasureScene measure,
+        (int Beats, int BeatType) inherited,
+        string reason)
+    {
+        facts.Add(new TimeSignatureFact(
+            measure.Number,
+            inherited.Beats,
+            inherited.BeatType,
+            measure.XStart,
+            measure.XStart,
+            $"Inherited {inherited.Beats}/{inherited.BeatType}: {reason}.",
+            [],
+            IsInherited: true));
+
+        facts.AddTrace(
+            $"TimeSignaturePass: m{measure.Number} inherited "
+            + $"{inherited.Beats}/{inherited.BeatType}; {reason}");
     }
 
     private static StaffSignature? TryReadStaffSignature(
