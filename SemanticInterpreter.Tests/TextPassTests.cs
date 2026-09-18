@@ -12,9 +12,9 @@ public sealed class TextPassTests
         var geometry = new GeometricScene([
             // Deliberately make the subtitle tallest and the composer medium:
             // role assignment must follow Y order, not glyph height.
-            Shape("title", 10, 5, 40, 15),
-            Shape("subtitle", 10, 25, 80, 55),
-            Shape("composer", 10, 65, 60, 82)
+            Shape("title", 10, 4, 40, 9),
+            Shape("subtitle", 10, 14, 80, 29),
+            Shape("composer", 10, 34, 60, 42)
         ]);
         var analysis = Analysis(
             Observation("composer", "Anything A", 0.99, geometry),
