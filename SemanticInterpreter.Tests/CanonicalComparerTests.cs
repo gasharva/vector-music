@@ -98,20 +98,30 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
-    public void WrongVoiceAtSameOnset_DoesNotInventWrongOnset()
+    public void CollapsedSecondVoiceAtSameOnset_DoesNotInventWrongOnset()
     {
-        var expectedEvent = Chord("e1", "1/4", "1/4", "C4") with
-        {
-            Voice = 2
-        };
-        var actualEvent = Chord("a1", "1/4", "1/4", "C4") with
-        {
-            Voice = 1
-        };
+        var expected = ScoreWithEvents(
+            Chord("e1", "0", "1/4", "C4") with
+            {
+                Voice = 1
+            },
+            Chord("e2", "1/4", "1/4", "D4") with
+            {
+                Voice = 2
+            });
+        var actual = ScoreWithEvents(
+            Chord("a1", "0", "1/4", "C4") with
+            {
+                Voice = 1
+            },
+            Chord("a2", "1/4", "1/4", "D4") with
+            {
+                Voice = 1
+            });
 
         var report = new CanonicalComparer().Compare(
-            Score(expectedEvent),
-            Score(actualEvent));
+            expected,
+            actual);
 
         Assert.Contains(
             report.Issues,
@@ -308,6 +318,29 @@ public sealed class CanonicalComparerTests
             Duration = duration,
             Notes = [new CanonicalNote(pitch, 1)]
         };
+
+    private static CanonicalNotation ScoreWithEvents(
+        params CanonicalEvent[] events) =>
+        new(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            events.ToList(),
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                1,
+                                [new Clef(1, "G", 2)]))
+                    ])
+            ],
+            EmptyRelations());
 
     private static CanonicalNotation Score(
         CanonicalEvent ev,
