@@ -151,7 +151,7 @@ public sealed record CanonicalDiffReport(
                 {
                     sb.Append("- ")
                         .Append(issue.Location)
-                        .Append(" — **")
+                        .Append(" — **[")
                         .Append(issue.Severity)
                         .Append("] ")
                         .Append(issue.Code)
