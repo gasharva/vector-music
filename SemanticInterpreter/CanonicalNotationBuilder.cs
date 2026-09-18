@@ -176,6 +176,7 @@ public sealed class CanonicalNotationBuilder
                 measure.Number,
                 events,
                 attributes,
+                RightBarline: measure.RightBarline,
                 Layout: measure.BreakBefore
                     ? new LayoutHint("system")
                     : null));
