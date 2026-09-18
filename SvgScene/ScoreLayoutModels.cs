@@ -47,7 +47,10 @@ public sealed record MeasureBoundary(
     double X,
     double UpperY,
     double LowerY,
-    IReadOnlyList<string> StrokeIds);
+    IReadOnlyList<string> StrokeIds,
+    double MinStrokeWidth = 0,
+    double MaxStrokeWidth = 0,
+    bool IsFinal = false);
 
 public sealed record MeasureLayout(
     string Id,
