@@ -560,7 +560,7 @@ public sealed class MusicXmlCanonicalizer
             {
                 result.Add(new SpanRelation
                 {
-                    Id = $"{SpanIdPrefix(kind)}-{++id}",
+                    Id = $"{start.Part}.{SpanIdPrefix(kind)}-{++id}",
                     Kind = SpanKind(kind),
                     From = new TimeAnchor(start.Measure, start.At, start.Staff),
                     To = new TimeAnchor(m.Measure, m.At, m.Staff),
