@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GlyphOcrPoc": {
+      "commandName": "Project",
+      "commandLineArgs": "d:\\musica\\svg\\glyphs-svg\\"
+    }
+  }
+}

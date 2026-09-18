@@ -2,3 +2,10 @@
 */.vs/*
 */bin/*
 */obj/*
+Experiments/GlyphOcrPoc/bin/
+Experiments/GlyphOcrPoc/.vs/GlyphOcrPoc/CopilotIndices/17.14.1577.30250/CodeChunks.db
+Experiments/GlyphOcrPoc/.vs/
+Experiments/GlyphOcrPoc/obj/
+*/bin/*.*
+**/bin/
+Tools/
