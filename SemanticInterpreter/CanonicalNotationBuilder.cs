@@ -166,6 +166,9 @@ public sealed class CanonicalNotationBuilder
             events.AddRange(BuildClassifiedDynamicEvents(
                 measure.Number,
                 facts));
+            events.AddRange(BuildTextDirectionEvents(
+                measure.Number,
+                facts));
 
             measures.Add(new Measure(
                 measure.Number,
@@ -211,10 +214,17 @@ public sealed class CanonicalNotationBuilder
             + $"grace-events={measures.Sum(measure => measure.Events.Count(ev => ev.Grace == true))}; "
             + $"onsets={onsets.Length}; dotted-rests={restDots.Length}");
 
+        var detectedTitle = BestText(facts, SemanticTextRole.Title);
+        var detectedSubtitle = BestText(facts, SemanticTextRole.Subtitle);
+        var detectedComposer = BestText(facts, SemanticTextRole.Composer);
+
         return new CanonicalNotation(
             "CanonicalNotation",
-            "0.3",
-            new Metadata(title, composer),
+            "0.4",
+            new Metadata(
+                title ?? detectedTitle,
+                composer ?? detectedComposer,
+                detectedSubtitle),
             [new Part("P1", "Piano", measures)],
             new Relations(
                 beamRelations,
@@ -547,10 +557,29 @@ public sealed class CanonicalNotationBuilder
             .Select(note =>
             {
                 var pitch = pitchesByNotehead[note.ShapeId];
+                var fingerings = facts
+                    .OfType<TextFact>()
+                    .Where(text =>
+                        text.Role == SemanticTextRole.Fingering
+                        && string.Equals(
+                            text.AnchorShapeId,
+                            note.ShapeId,
+                            StringComparison.Ordinal))
+                    .OrderByDescending(text => text.Confidence)
+                    .Select(text => new TechnicalMark(
+                        "fingering",
+                        text.Text,
+                        text.Placement ?? "above"))
+                    .Distinct()
+                    .ToList();
+
                 return new CanonicalNote(
                     pitch.Pitch,
                     note.Staff,
-                    ExplicitAccidental(pitch));
+                    ExplicitAccidental(pitch),
+                    fingerings.Count > 0
+                        ? fingerings
+                        : null);
             })
             .ToList();
 
@@ -631,6 +660,45 @@ public sealed class CanonicalNotationBuilder
         return result.Count > 0
             ? result
             : null;
+    }
+
+    private static IEnumerable<CanonicalEvent> BuildTextDirectionEvents(
+        int measureNumber,
+        SemanticFacts facts)
+    {
+        return facts
+            .OfType<TextFact>()
+            .Where(fact =>
+                fact.MeasureNumber == measureNumber
+                && fact.Role is SemanticTextRole.Instruction or SemanticTextRole.Tempo)
+            .OrderBy(fact => Fraction.Parse(fact.At ?? "0").Numerator
+                / (double)Fraction.Parse(fact.At ?? "0").Denominator)
+            .ThenBy(fact => fact.Bounds.MinX)
+            .ThenBy(fact => fact.ObservationId, StringComparer.Ordinal)
+            .Select(fact => new CanonicalEvent
+            {
+                Id = $"m{measureNumber}-text-{fact.ObservationId}",
+                Type = "text",
+                At = fact.At ?? "0",
+                Staff = fact.Staff ?? 1,
+                Text = fact.Text,
+                TextRole = fact.Role.ToString(),
+                Placement = fact.Placement
+            });
+    }
+
+    private static string? BestText(
+        SemanticFacts facts,
+        SemanticTextRole role)
+    {
+        return facts
+            .OfType<TextFact>()
+            .Where(fact => fact.Role == role)
+            .OrderByDescending(fact => fact.Confidence)
+            .ThenBy(fact => fact.Bounds.MinY)
+            .ThenBy(fact => fact.Bounds.MinX)
+            .Select(fact => fact.Text)
+            .FirstOrDefault();
     }
 
     private static IEnumerable<CanonicalEvent> BuildClassifiedDynamicEvents(
