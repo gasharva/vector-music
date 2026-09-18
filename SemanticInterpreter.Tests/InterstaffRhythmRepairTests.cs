@@ -161,6 +161,201 @@ public sealed class InterstaffRhythmRepairTests
         }
     }
 
+    [Fact]
+    public void CrossStaffInternalAnchor_ShiftsImplicitVoiceStart()
+    {
+        var document = Document();
+        var facts = new SemanticFacts();
+        facts.Add(new TimeSignatureFact(
+            1, 3, 4, 0, 10, "test", ["time"]));
+
+        facts.Add(new RestFact(
+            1,
+            1,
+            "upper-rest",
+            "EIGHTH_REST",
+            0.99,
+            "eighth",
+            "1/8",
+            100,
+            150,
+            0.99,
+            "test rest",
+            ["upper-rest"]));
+        facts.Add(new VoiceFact(
+            1,
+            1,
+            VoiceTargetKind.Rest,
+            "upper-rest",
+            3,
+            true,
+            100,
+            150,
+            0.99,
+            "test voice",
+            ["upper-rest"]));
+        facts.Add(new OnsetFact(
+            1,
+            1,
+            VoiceTargetKind.Rest,
+            "upper-rest",
+            3,
+            "0",
+            100,
+            0.95,
+            "provisional voice start",
+            ["upper-rest"]));
+
+        AddNote(
+            facts,
+            "upper-note",
+            staff: 1,
+            x: 140,
+            y: 100,
+            duration: "1/8");
+        facts.Add(new VoiceFact(
+            1,
+            1,
+            VoiceTargetKind.Notehead,
+            "upper-note",
+            3,
+            true,
+            140,
+            100,
+            0.99,
+            "test voice",
+            ["upper-note"]));
+        facts.Add(new OnsetFact(
+            1,
+            1,
+            VoiceTargetKind.Notehead,
+            "upper-note",
+            3,
+            "1/8",
+            140,
+            0.95,
+            "provisional sequence",
+            ["upper-note"]));
+
+        AddNote(
+            facts,
+            "lower-first",
+            staff: 2,
+            x: 50,
+            y: 220,
+            duration: "1/4");
+        facts.Add(new VoiceFact(
+            1,
+            2,
+            VoiceTargetKind.Notehead,
+            "lower-first",
+            1,
+            true,
+            50,
+            220,
+            0.99,
+            "test voice",
+            ["lower-first"]));
+        facts.Add(new OnsetFact(
+            1,
+            2,
+            VoiceTargetKind.Notehead,
+            "lower-first",
+            1,
+            "0",
+            50,
+            0.95,
+            "lower backbone",
+            ["lower-first"]));
+
+        AddNote(
+            facts,
+            "lower-anchor",
+            staff: 2,
+            x: 102,
+            y: 220,
+            duration: "1/2");
+        facts.Add(new VoiceFact(
+            1,
+            2,
+            VoiceTargetKind.Notehead,
+            "lower-anchor",
+            1,
+            true,
+            102,
+            220,
+            0.99,
+            "test voice",
+            ["lower-anchor"]));
+        facts.Add(new OnsetFact(
+            1,
+            2,
+            VoiceTargetKind.Notehead,
+            "lower-anchor",
+            1,
+            "1/4",
+            102,
+            0.95,
+            "lower internal anchor",
+            ["lower-anchor"]));
+
+        new CrossStaffOnsetRefinementPass().Run(
+            document,
+            facts);
+
+        Assert.Equal(
+            "1/4",
+            Onset(facts, VoiceTargetKind.Rest, "upper-rest").At);
+        Assert.Equal(
+            "3/8",
+            Onset(facts, VoiceTargetKind.Notehead, "upper-note").At);
+    }
+
+    [Fact]
+    public void SingleUnanchoredLane_EndFitsFromMeasureGeometry()
+    {
+        var document = Document();
+        var facts = new SemanticFacts();
+        facts.Add(new TimeSignatureFact(
+            1, 3, 4, 0, 10, "test", ["time"]));
+
+        AddTimedVoice(
+            facts,
+            "full",
+            x: 50,
+            duration: "3/4",
+            voice: 1,
+            at: "0",
+            reason: "backbone");
+        AddTimedVoice(
+            facts,
+            "half",
+            x: 180,
+            duration: "1/2",
+            voice: 2,
+            at: "1/4",
+            reason: "cross-staff anchored");
+        AddTimedVoice(
+            facts,
+            "end-fit",
+            x: 220,
+            duration: "3/8",
+            voice: 3,
+            at: "0",
+            reason: "no cross-voice x anchor to local voice 1; secondary voice provisionally starts at measure origin");
+
+        new MeasureEndOnsetRefinementPass().Run(
+            document,
+            facts);
+
+        Assert.Equal(
+            "3/8",
+            Onset(
+                facts,
+                VoiceTargetKind.Notehead,
+                "end-fit").At);
+    }
+
     private static SemanticDocument Document() =>
         new(
         [
@@ -224,6 +419,47 @@ public sealed class InterstaffRhythmRepairTests
             null,
             0.99,
             "test duration",
+            [id]));
+    }
+
+    private static void AddTimedVoice(
+        SemanticFacts facts,
+        string id,
+        double x,
+        string duration,
+        int voice,
+        string at,
+        string reason)
+    {
+        AddNote(
+            facts,
+            id,
+            staff: 1,
+            x: x,
+            y: 100,
+            duration: duration);
+        facts.Add(new VoiceFact(
+            1,
+            1,
+            VoiceTargetKind.Notehead,
+            id,
+            voice,
+            true,
+            x,
+            100,
+            0.99,
+            "test voice",
+            [id]));
+        facts.Add(new OnsetFact(
+            1,
+            1,
+            VoiceTargetKind.Notehead,
+            id,
+            voice,
+            at,
+            x,
+            0.55,
+            reason,
             [id]));
     }
 
