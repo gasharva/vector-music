@@ -151,6 +151,67 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
+    public void EmptyTrailingMeasureWithFinalBarline_DoesNotCreateStructuralNoise()
+    {
+        var ev = Chord("e1", "0", "1/4", "C4");
+
+        var expected = new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [ev],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                1,
+                                [new Clef(1, "G", 2)]),
+                            RightBarline: "final")
+                    ])
+            ],
+            EmptyRelations());
+
+        var actual = new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [ev with { Id = "a1" }],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                1,
+                                [new Clef(1, "G", 2)])),
+                        new Measure(
+                            2,
+                            [],
+                            RightBarline: "final")
+                    ])
+            ],
+            EmptyRelations());
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.True(
+            report.IsEqual,
+            report.ToMarkdown());
+    }
+
+    [Fact]
     public void SplitPianoParts_NormalizeToOneGrandStaff()
     {
         var upper = Chord(
