@@ -552,23 +552,45 @@ public sealed class CanonicalComparer
             {
                 unmatchedActual.Remove(moved.Item);
 
-                issues.Add(new CanonicalDiffIssue(
-                    CanonicalDiffCategory.Rhythm,
-                    "event.onset",
-                    part,
-                    expectedMeasure.Number,
-                    EventStaff(expected),
-                    expected.At,
-                    expected.At,
-                    moved.Item.Event.At,
-                    $"{DescribeEvent(expected)} was found, but at the wrong musical onset."));
+                string? rootCause = null;
+                string? rootCauseSummary = null;
+
+                if (!string.Equals(
+                        expected.At,
+                        moved.Item.Event.At,
+                        StringComparison.Ordinal))
+                {
+                    rootCause = TimingRootCauseKey(
+                        part,
+                        expectedMeasure.Number,
+                        expected);
+                    rootCauseSummary = TimingRootCauseSummary(
+                        part,
+                        expectedMeasure.Number,
+                        expected);
+
+                    issues.Add(new CanonicalDiffIssue(
+                        CanonicalDiffCategory.Rhythm,
+                        "event.onset",
+                        part,
+                        expectedMeasure.Number,
+                        EventStaff(expected),
+                        expected.At,
+                        expected.At,
+                        moved.Item.Event.At,
+                        $"{DescribeEvent(expected)} was found, but at the wrong musical onset.",
+                        rootCause,
+                        rootCauseSummary));
+                }
 
                 CompareEvent(
                     part,
                     expectedMeasure.Number,
                     expected,
                     moved.Item.Event,
-                    issues);
+                    issues,
+                    rootCause,
+                    rootCauseSummary);
                 continue;
             }
 
@@ -1069,6 +1091,21 @@ public sealed class CanonicalComparer
             ? value
             : null;
     }
+
+    private static string TimingRootCauseKey(
+        string part,
+        int measure,
+        CanonicalEvent expected) =>
+        $"timeline:{part}:m{measure}:s{EventStaff(expected)?.ToString() ?? "-"}:"
+        + $"v{expected.Voice?.ToString() ?? "-"}";
+
+    private static string TimingRootCauseSummary(
+        string part,
+        int measure,
+        CanonicalEvent expected) =>
+        $"Voice/event timeline mismatch — {part} / m{measure} / "
+        + $"staff {EventStaff(expected)?.ToString() ?? "-"} / "
+        + $"voice {expected.Voice?.ToString() ?? "-"}";
 
     private static bool SameCoordinate(
         CanonicalEvent expected,
