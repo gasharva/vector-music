@@ -44,7 +44,7 @@ public sealed class TextPass : ISemanticPass
     private const double InstructionMaxGapInSpacings = 4.0;
     private const double FingeringMaxDxInSpacings = 1.25;
     private const double FingeringMaxDyInSpacings = 2.5;
-    private const double StrongMusicOverlap = 0.50;
+    private const double AnyMusicOverlap = 0.0;
 
     private readonly TextRecognitionAnalysisResult _analysis;
     private readonly GeometricScene _geometry;
@@ -154,7 +154,7 @@ public sealed class TextPass : ISemanticPass
             }
 
             var overlap = MusicOverlap(candidate, musicShapeIds);
-            if (overlap >= StrongMusicOverlap
+            if (overlap > AnyMusicOverlap
                 || IntersectsStaffCore(candidate.Observation.Bounds, spacing))
             {
                 AddFact(
@@ -167,7 +167,7 @@ public sealed class TextPass : ISemanticPass
                     null,
                     null,
                     candidate.Recognition.Confidence * (1.0 - overlap),
-                    $"rejected as text: music overlap={overlap:P0} or candidate lies in staff core");
+                    $"rejected as text: source glyph already belongs to accepted music (overlap={overlap:P0}) or candidate lies in staff core");
                 continue;
             }
 
@@ -602,11 +602,7 @@ public sealed class TextPass : ISemanticPass
                 context = new TextContext(
                     semantic.Number,
                     1,
-                    ResolveAt(
-                        semantic.Number,
-                        1,
-                        candidate.Observation.Bounds.CenterX,
-                        onsets),
+                    "0",
                     "above");
                 return true;
             }
