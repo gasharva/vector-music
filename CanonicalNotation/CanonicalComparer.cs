@@ -554,6 +554,35 @@ public sealed class CanonicalComparer
                 continue;
             }
 
+            var relocated = unmatchedActual
+                .Where(item =>
+                    string.Equals(
+                        item.Event.Type,
+                        expected.Type,
+                        StringComparison.Ordinal)
+                    && string.Equals(
+                        item.Event.At,
+                        expected.At,
+                        StringComparison.Ordinal)
+                    && SameSemanticContent(
+                        expected,
+                        item.Event))
+                .OrderByDescending(item =>
+                    Similarity(expected, item.Event))
+                .FirstOrDefault();
+
+            if (relocated is not null)
+            {
+                unmatchedActual.Remove(relocated);
+                CompareEvent(
+                    part,
+                    expectedMeasure.Number,
+                    expected,
+                    relocated.Event,
+                    issues);
+                continue;
+            }
+
             var moved = unmatchedActual
                 .Where(item => string.Equals(
                     item.Event.Type,
@@ -1654,6 +1683,47 @@ public sealed class CanonicalComparer
         string.Equals(expected.Type, actual.Type, StringComparison.Ordinal)
         && string.Equals(expected.At, actual.At, StringComparison.Ordinal)
         && EventStaff(expected) == EventStaff(actual);
+
+    private static bool SameSemanticContent(
+        CanonicalEvent expected,
+        CanonicalEvent actual)
+    {
+        if (!string.Equals(
+                expected.Type,
+                actual.Type,
+                StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        return expected.Type switch
+        {
+            "chord" => PitchBag(expected.Notes)
+                .SequenceEqual(
+                    PitchBag(actual.Notes),
+                    StringComparer.Ordinal),
+            "rest" => string.Equals(
+                expected.Duration,
+                actual.Duration,
+                StringComparison.Ordinal),
+            "dynamic" or "navigation" => Normalize(expected.Value)
+                == Normalize(actual.Value),
+            "text" => Normalize(expected.Text)
+                == Normalize(actual.Text),
+            "tempo" => expected.Bpm == actual.Bpm
+                && Normalize(expected.BeatUnit)
+                    == Normalize(actual.BeatUnit),
+            _ => Normalize(expected.Value ?? expected.Text)
+                == Normalize(actual.Value ?? actual.Text)
+        };
+    }
+
+    private static string[] PitchBag(
+        IReadOnlyList<CanonicalNote>? notes) =>
+        (notes ?? [])
+            .Select(note => note.Pitch)
+            .OrderBy(pitch => pitch, StringComparer.Ordinal)
+            .ToArray();
 
     private static double Similarity(
         CanonicalEvent expected,
