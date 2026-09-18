@@ -142,6 +142,42 @@ public sealed class TextPassTests
         Assert.Equal(SemanticTextRole.Tempo, text.Role);
         Assert.Equal(1, text.MeasureNumber);
         Assert.Equal(1, text.Staff);
+        Assert.Equal("0", text.At);
+    }
+
+    [Fact]
+    public void AcceptedMusicSourceWinsOverOcrInstructionOutsideStaff()
+    {
+        var geometry = new GeometricScene([
+            Shape("music", 80, 70, 100, 85)
+        ]);
+        var analysis = Analysis(
+            Observation("music", "du", 0.95, geometry));
+        var facts = new SemanticFacts();
+        facts.Add(new DynamicDirectionFact(
+            1,
+            1,
+            "music",
+            "mp",
+            "0",
+            "above",
+            "DYNAMICS_MP",
+            0.99,
+            90,
+            77,
+            0.99,
+            "test dynamic",
+            ["music"]));
+
+        new TextPass(
+            analysis,
+            geometry,
+            Layout(),
+            new LogicalOwnershipScene([]))
+            .Run(Document(), facts);
+
+        var text = Assert.Single(facts.OfType<TextFact>());
+        Assert.Equal(SemanticTextRole.Unknown, text.Role);
     }
 
     private static TextRecognitionAnalysisResult Analysis(
