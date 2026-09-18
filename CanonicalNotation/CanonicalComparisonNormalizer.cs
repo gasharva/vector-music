@@ -23,8 +23,14 @@ public sealed class CanonicalComparisonNormalizer
                 expected.Parts[0].Id);
         }
 
-        expected = NormalizeVoices(RemoveTrailingEmptyMeasures(expected));
-        actual = NormalizeVoices(RemoveTrailingEmptyMeasures(actual));
+        expected = NormalizeInterstaffDirections(
+            NormalizeMonophonicVoices(
+                RemoveTrailingEmptyMeasures(expected)));
+        actual = NormalizeInterstaffDirections(
+            NormalizeMonophonicVoices(
+                RemoveTrailingEmptyMeasures(actual)));
+
+        actual = AlignActualVoiceLabels(expected, actual);
 
         return new CanonicalComparisonPair(expected, actual);
     }
@@ -286,75 +292,393 @@ public sealed class CanonicalComparisonNormalizer
         };
     }
 
-    private static CanonicalNotation NormalizeVoices(
+    private static CanonicalNotation NormalizeMonophonicVoices(
         CanonicalNotation score)
     {
+        return score with
+        {
+            Parts = score.Parts
+                .Select(part => part with
+                {
+                    Measures = part.Measures
+                        .Select(measure =>
+                        {
+                            var voiceCountsByStaff = measure.Events
+                                .Where(ev =>
+                                    ev.Voice is not null
+                                    && EventStaff(ev) is not null)
+                                .GroupBy(ev => EventStaff(ev)!.Value)
+                                .ToDictionary(
+                                    group => group.Key,
+                                    group => group
+                                        .Select(ev => ev.Voice!.Value)
+                                        .Distinct()
+                                        .Count());
+
+                            return measure with
+                            {
+                                Events = measure.Events
+                                    .Select(ev =>
+                                    {
+                                        var staff = EventStaff(ev);
+
+                                        if (ev.Voice is null
+                                            || staff is null
+                                            || !voiceCountsByStaff.TryGetValue(
+                                                staff.Value,
+                                                out var count)
+                                            || count != 1)
+                                        {
+                                            return ev;
+                                        }
+
+                                        return ev with
+                                        {
+                                            Voice = 1
+                                        };
+                                    })
+                                    .ToList()
+                            };
+                        })
+                        .ToList()
+                })
+                .ToList()
+        };
+    }
+
+    private static CanonicalNotation AlignActualVoiceLabels(
+        CanonicalNotation expected,
+        CanonicalNotation actual)
+    {
+        var expectedByPart = expected.Parts.ToDictionary(
+            part => part.Id,
+            StringComparer.Ordinal);
+        var mappings = new Dictionary<
+            (string Part, int Staff, int ActualVoice),
+            int>();
+
+        foreach (var actualPart in actual.Parts)
+        {
+            if (!expectedByPart.TryGetValue(
+                    actualPart.Id,
+                    out var expectedPart))
+            {
+                continue;
+            }
+
+            var evidence = CollectVoiceEvidence(
+                expectedPart,
+                actualPart);
+
+            foreach (var staffGroup in evidence
+                         .GroupBy(item => item.Key.Staff))
+            {
+                var candidates = staffGroup
+                    .Select(item => new
+                    {
+                        item.Key.ExpectedVoice,
+                        item.Key.ActualVoice,
+                        Count = item.Value
+                    })
+                    .OrderByDescending(item => item.Count)
+                    .ThenBy(item => item.ExpectedVoice)
+                    .ThenBy(item => item.ActualVoice)
+                    .ToArray();
+
+                var usedExpected = new HashSet<int>();
+                var usedActual = new HashSet<int>();
+
+                foreach (var candidate in candidates)
+                {
+                    if (candidate.Count < 2
+                        || usedExpected.Contains(candidate.ExpectedVoice)
+                        || usedActual.Contains(candidate.ActualVoice))
+                    {
+                        continue;
+                    }
+
+                    var actualEvidence = candidates
+                        .Where(item =>
+                            item.ActualVoice == candidate.ActualVoice)
+                        .Sum(item => item.Count);
+                    var expectedEvidence = candidates
+                        .Where(item =>
+                            item.ExpectedVoice == candidate.ExpectedVoice)
+                        .Sum(item => item.Count);
+
+                    if (candidate.Count < actualEvidence * 0.75
+                        || candidate.Count < expectedEvidence * 0.75)
+                    {
+                        continue;
+                    }
+
+                    usedExpected.Add(candidate.ExpectedVoice);
+                    usedActual.Add(candidate.ActualVoice);
+                    mappings[(
+                        actualPart.Id,
+                        staffGroup.Key,
+                        candidate.ActualVoice)] =
+                        candidate.ExpectedVoice;
+                }
+            }
+        }
+
+        if (mappings.Count == 0)
+        {
+            return actual;
+        }
+
+        return actual with
+        {
+            Parts = actual.Parts
+                .Select(part => part with
+                {
+                    Measures = part.Measures
+                        .Select(measure => measure with
+                        {
+                            Events = measure.Events
+                                .Select(ev =>
+                                {
+                                    var staff = EventStaff(ev);
+
+                                    if (ev.Voice is null
+                                        || staff is null
+                                        || !mappings.TryGetValue(
+                                            (
+                                                part.Id,
+                                                staff.Value,
+                                                ev.Voice.Value
+                                            ),
+                                            out var mapped))
+                                    {
+                                        return ev;
+                                    }
+
+                                    return ev with
+                                    {
+                                        Voice = mapped
+                                    };
+                                })
+                                .ToList()
+                        })
+                        .ToList()
+                })
+                .ToList()
+        };
+    }
+
+    private static Dictionary<
+        (int Staff, int ExpectedVoice, int ActualVoice),
+        int> CollectVoiceEvidence(
+        Part expected,
+        Part actual)
+    {
+        var result = new Dictionary<
+            (int Staff, int ExpectedVoice, int ActualVoice),
+            int>();
+        var actualMeasures = actual.Measures.ToDictionary(
+            measure => measure.Number);
+
+        foreach (var expectedMeasure in expected.Measures)
+        {
+            if (!actualMeasures.TryGetValue(
+                    expectedMeasure.Number,
+                    out var actualMeasure))
+            {
+                continue;
+            }
+
+            var remaining = actualMeasure.Events.ToList();
+
+            foreach (var expectedEvent in expectedMeasure.Events)
+            {
+                var staff = EventStaff(expectedEvent);
+
+                if (staff is null
+                    || expectedEvent.Voice is null)
+                {
+                    continue;
+                }
+
+                var signature = VoiceEvidenceSignature(
+                    expectedEvent);
+                var index = remaining.FindIndex(actualEvent =>
+                    EventStaff(actualEvent) == staff
+                    && actualEvent.Voice is not null
+                    && string.Equals(
+                        VoiceEvidenceSignature(actualEvent),
+                        signature,
+                        StringComparison.Ordinal));
+
+                if (index < 0)
+                {
+                    continue;
+                }
+
+                var actualEvent = remaining[index];
+                remaining.RemoveAt(index);
+                var key = (
+                    staff.Value,
+                    expectedEvent.Voice.Value,
+                    actualEvent.Voice!.Value);
+
+                result[key] = result.GetValueOrDefault(key) + 1;
+            }
+        }
+
+        return result;
+    }
+
+    private static string VoiceEvidenceSignature(
+        CanonicalEvent ev)
+    {
+        var content = ev.Type switch
+        {
+            "chord" => string.Join(
+                "+",
+                (ev.Notes ?? [])
+                    .Select(note => note.Pitch)
+                    .OrderBy(pitch => pitch, StringComparer.Ordinal)),
+            "rest" => "rest",
+            "dynamic" => ev.Value ?? string.Empty,
+            "text" => ev.Text ?? string.Empty,
+            "tempo" => $"{ev.BeatUnit}:{ev.Bpm}",
+            "navigation" => ev.Value ?? string.Empty,
+            _ => ev.Value ?? ev.Text ?? string.Empty
+        };
+
+        return $"{ev.Type}|{ev.At}|{ev.Duration}|{ev.Grace}|{content}";
+    }
+
+    private static CanonicalNotation NormalizeInterstaffDirections(
+        CanonicalNotation score)
+    {
+        var twoStaffParts = score.Parts
+            .Where(HasTwoStaves)
+            .Select(part => part.Id)
+            .ToHashSet(StringComparer.Ordinal);
+
+        if (twoStaffParts.Count == 0)
+        {
+            return score;
+        }
+
         var parts = score.Parts
-            .Select(NormalizePartVoices)
+            .Select(part =>
+            {
+                if (!twoStaffParts.Contains(part.Id))
+                {
+                    return part;
+                }
+
+                return part with
+                {
+                    Measures = part.Measures
+                        .Select(measure => measure with
+                        {
+                            Events = measure.Events
+                                .Select(NormalizeInterstaffEvent)
+                                .ToList()
+                        })
+                        .ToList()
+                };
+            })
             .ToList();
 
         return score with
         {
-            Parts = parts
+            Parts = parts,
+            Relations = score.Relations with
+            {
+                Hairpins = score.Relations.Hairpins
+                    .Select(NormalizeInterstaffSpan)
+                    .ToList()
+            }
         };
     }
 
-    private static Part NormalizePartVoices(Part part)
-    {
-        var voicesByStaff = part.Measures
+    private static bool HasTwoStaves(Part part) =>
+        part.Measures.Any(measure =>
+            measure.Attributes?.Staves is >= 2)
+        || part.Measures
             .SelectMany(measure => measure.Events)
-            .Where(ev =>
-                ev.Voice is not null
-                && EventStaff(ev) is not null)
-            .GroupBy(ev => EventStaff(ev)!.Value)
-            .ToDictionary(
-                group => group.Key,
-                group => group
-                    .Select(ev => ev.Voice!.Value)
-                    .Distinct()
-                    .OrderBy(voice => voice)
-                    .Select((voice, index) => new
-                    {
-                        voice,
-                        normalized = index + 1
-                    })
-                    .ToDictionary(
-                        item => item.voice,
-                        item => item.normalized));
+            .Any(ev => EventStaff(ev) == 2);
 
-        var measures = part.Measures
-            .Select(measure => measure with
-            {
-                Events = measure.Events
-                    .Select(ev =>
-                    {
-                        var staff = EventStaff(ev);
-
-                        if (ev.Voice is null
-                            || staff is null
-                            || !voicesByStaff.TryGetValue(
-                                staff.Value,
-                                out var map)
-                            || !map.TryGetValue(
-                                ev.Voice.Value,
-                                out var normalized))
-                        {
-                            return ev;
-                        }
-
-                        return ev with
-                        {
-                            Voice = normalized
-                        };
-                    })
-                    .ToList()
-            })
-            .ToList();
-
-        return part with
+    private static CanonicalEvent NormalizeInterstaffEvent(
+        CanonicalEvent ev)
+    {
+        if (ev.Type is not (
+                "dynamic"
+                or "text"
+                or "tempo"
+                or "navigation"))
         {
-            Measures = measures
-        };
+            return ev;
+        }
+
+        if (ev.Staff == 1
+            && string.Equals(
+                ev.Placement,
+                "below",
+                StringComparison.Ordinal))
+        {
+            return ev with
+            {
+                Staff = 1,
+                Placement = "between"
+            };
+        }
+
+        if (ev.Staff == 2
+            && string.Equals(
+                ev.Placement,
+                "above",
+                StringComparison.Ordinal))
+        {
+            return ev with
+            {
+                Staff = 1,
+                Placement = "between"
+            };
+        }
+
+        return ev;
+    }
+
+    private static SpanRelation NormalizeInterstaffSpan(
+        SpanRelation span)
+    {
+        if (span.From.Staff == 1
+            && span.To.Staff == 1
+            && string.Equals(
+                span.Placement,
+                "below",
+                StringComparison.Ordinal))
+        {
+            return span with
+            {
+                From = span.From with { Staff = 1 },
+                To = span.To with { Staff = 1 },
+                Placement = "between"
+            };
+        }
+
+        if (span.From.Staff == 2
+            && span.To.Staff == 2
+            && string.Equals(
+                span.Placement,
+                "above",
+                StringComparison.Ordinal))
+        {
+            return span with
+            {
+                From = span.From with { Staff = 1 },
+                To = span.To with { Staff = 1 },
+                Placement = "between"
+            };
+        }
+
+        return span;
     }
 
     private static CanonicalNotation RemoveTrailingEmptyMeasures(
