@@ -27,7 +27,9 @@ public sealed record CanonicalDiffIssue(
     string Actual,
     string Message,
     string? RootCause = null,
-    string? RootCauseSummary = null)
+    string? RootCauseSummary = null,
+    int? Page = null,
+    int? LocalMeasure = null)
 {
     [JsonIgnore]
     public string Location
@@ -36,7 +38,13 @@ public sealed record CanonicalDiffIssue(
         {
             var pieces = new List<string>();
             if (!string.IsNullOrWhiteSpace(Part)) pieces.Add(Part!);
-            if (Measure is not null) pieces.Add($"m{Measure}");
+            if (Measure is not null)
+            {
+                pieces.Add(
+                    Page is not null && LocalMeasure is not null
+                        ? $"m{Measure} (page {Page} / local m{LocalMeasure})"
+                        : $"m{Measure}");
+            }
             if (Staff is not null) pieces.Add($"staff {Staff}");
             if (!string.IsNullOrWhiteSpace(At)) pieces.Add($"at {At}");
             return pieces.Count == 0
