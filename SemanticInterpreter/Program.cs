@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using SvgMusic.Canonical;
 using SvgMusic.Scene;
 using SvgMusic.Semantics;
@@ -6,7 +7,8 @@ if (args.Length < 2)
 {
     Console.Error.WriteLine(
         "Usage: dotnet run -- <input.svg> <output-directory> "
-        + "[--title <title>] [--composer <composer>] [--model <basic-classifier.zip>]");
+        + "[--title <title>] [--composer <composer>] [--model <basic-classifier.zip>] "
+        + "[--initial-time <beats/beat-type>]");
     return 2;
 }
 
@@ -15,6 +17,8 @@ var outputDirectory = args[1];
 var title = ReadOption(args, "--title");
 var composer = ReadOption(args, "--composer");
 var modelPath = ReadOption(args, "--model");
+var inheritedTimeSignature = ParseTimeSignatureOption(
+    ReadOption(args, "--initial-time"));
 
 Directory.CreateDirectory(outputDirectory);
 
@@ -28,40 +32,57 @@ var layout = new ScoreLayoutAnalyzer().Analyze(notation);
 
 Console.WriteLine("2. Classifying reusable contour prototypes...");
 var classifier = await AudiverisSymbolClassifier.CreateAsync(modelPath);
+var stopwatch = Stopwatch.StartNew();
 notation = new PrototypeSymbolClassifier(classifier).Classify(
     geometry,
     notation,
     layout);
+Console.WriteLine(
+    $"   prototype classification: {stopwatch.Elapsed.TotalSeconds:F3}s");
 
 Console.WriteLine("3. Repairing composite bass clefs...");
-notation = new BassClefCompositeRepair(classifier).Repair(
+stopwatch.Restart();
+var bassClefRepair = new BassClefCompositeRepair(classifier);
+notation = bassClefRepair.Repair(
     geometry,
     notation,
     layout);
+Console.WriteLine(
+    $"   bass-clef repair: {stopwatch.Elapsed.TotalSeconds:F3}s; "
+    + $"candidates={bassClefRepair.LastStatistics.DotPairCandidates}; "
+    + $"classifier-runs={bassClefRepair.LastStatistics.CompositeClassifications}; "
+    + $"reused-F-clefs={bassClefRepair.LastStatistics.ReusedConfidentFClefs}");
 
 Console.WriteLine("4. Assigning logical staff/measure ownership...");
+stopwatch.Restart();
 var ownershipResult = new LogicalOwnershipAnalyzer().AnalyzeAndApply(
     geometry,
     notation,
     layout);
+Console.WriteLine(
+    $"   logical ownership: {stopwatch.Elapsed.TotalSeconds:F3}s");
 notation = ownershipResult.Scene;
 var ownership = ownershipResult.Ownership;
 
+stopwatch.Restart();
 var ledgerLadderOwnership = new LedgerLadderEllipseOwnershipAssigner().AssignAndApply(
     notation,
     layout,
     ownership);
+Console.WriteLine(
+    $"   ledger-ladder ownership: {stopwatch.Elapsed.TotalSeconds:F3}s; "
+    + $"corrections={ledgerLadderOwnership.Adjustments.Count}");
 notation = ledgerLadderOwnership.Scene;
 ownership = ledgerLadderOwnership.Ownership;
 
-Console.WriteLine(
-    $"   ledger-ladder ellipse corrections: {ledgerLadderOwnership.Adjustments.Count}");
-
+stopwatch.Restart();
 var fourthGeneration = new FourthGenerationOuterBandAssigner().AssignAndApply(
     geometry,
     notation,
     layout,
     ownership);
+Console.WriteLine(
+    $"   fourth-generation ownership: {stopwatch.Elapsed.TotalSeconds:F3}s");
 notation = fourthGeneration.Scene;
 ownership = fourthGeneration.Ownership;
 
@@ -128,7 +149,7 @@ var textPass = new TextPass(
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
-        new TimeSignaturePass(),
+        new TimeSignaturePass(inheritedTimeSignature),
         new KeySignaturePass(),
         noteheadPass,
         accidentalPass,
@@ -534,6 +555,32 @@ static string? ReadOption(
     return arguments[index + 1];
 }
 
+static (int Beats, int BeatType)? ParseTimeSignatureOption(
+    string? value)
+{
+    if (string.IsNullOrWhiteSpace(value))
+    {
+        return null;
+    }
+
+    var parts = value.Split(
+        '/',
+        StringSplitOptions.TrimEntries
+        | StringSplitOptions.RemoveEmptyEntries);
+
+    if (parts.Length != 2
+        || !int.TryParse(parts[0], out var beats)
+        || !int.TryParse(parts[1], out var beatType)
+        || beats <= 0
+        || beatType <= 0)
+    {
+        throw new ArgumentException(
+            $"Invalid --initial-time value '{value}'. Expected beats/beat-type, for example 3/4.");
+    }
+
+    return (beats, beatType);
+}
+
 static IEnumerable<string> FormatFacts(SemanticFacts facts)
 {
     yield return "SEMANTIC PASS TRACE";
@@ -569,6 +616,7 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
             case TimeSignatureFact time:
                 yield return $"time m{time.MeasureNumber} "
                     + $"{time.Beats}/{time.BeatType} x={time.MinX:F2}..{time.MaxX:F2}; "
+                    + $"inherited={time.IsInherited}; "
                     + $"shapes={string.Join(',', time.SourceShapeIds)}; "
                     + $"reason={time.Reason}";
                 break;
