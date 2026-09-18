@@ -1,4 +1,7 @@
 using System.Diagnostics;
+using System.IO.Compression;
+using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using SvgMusic.Canonical;
 
@@ -16,6 +19,9 @@ var modelPath = ReadOption(args, "--model");
 var configuration = ReadOption(args, "--configuration") ?? "Release";
 var noBuild = HasFlag(args, "--no-build");
 var failOnDiff = HasFlag(args, "--fail-on-diff");
+var noDiagnosticArchive = HasFlag(
+    args,
+    "--no-diagnostic-archive");
 
 if (!Directory.Exists(inputDirectory))
 {
@@ -75,6 +81,8 @@ Directory.CreateDirectory(pagesDirectory);
 
 foreach (var page in pageSet.Pages)
 {
+    var inheritedTimeForPage = activeTimeSignature;
+    var inheritedKeyForPage = activeKeySignature;
     var pageOutput = Path.Combine(
         pagesDirectory,
         $"{page.Number:D3}");
@@ -149,6 +157,16 @@ foreach (var page in pageSet.Pages)
         canonicalPath);
     pageCanonicals.Add(pageCanonical);
 
+    if (inheritedTimeForPage is not null
+        || inheritedKeyForPage is not null)
+    {
+        WriteStandaloneContinuationPreview(
+            pageCanonical,
+            inheritedTimeForPage,
+            inheritedKeyForPage,
+            pageOutput);
+    }
+
     activeTimeSignature = ResolveFinalTimeSignature(
         pageCanonical,
         activeTimeSignature);
@@ -209,6 +227,9 @@ if (!string.IsNullOrWhiteSpace(referencePath))
     diff = new CanonicalComparer().Compare(
         reference,
         merged);
+    diff = DecorateWithPageOrigins(
+        diff,
+        pageCanonicals);
 
     var diffPrefix = Path.Combine(
         outputDirectory,
@@ -241,10 +262,283 @@ if (!string.IsNullOrWhiteSpace(referencePath))
     Console.WriteLine($"Diff JSON   : {diffJson}");
 }
 
+if (!noDiagnosticArchive)
+{
+    var archivePath = Path.Combine(
+        outputDirectory,
+        $"{pageSet.BaseName}.diagnostics.zip");
+
+    await CreateDiagnosticArchiveAsync(
+        archivePath,
+        outputDirectory,
+        pageSet,
+        referencePath,
+        repoRoot);
+
+    Console.WriteLine($"Diagnostics : {archivePath}");
+}
+
 return failOnDiff
     && diff is { IsEqual: false }
         ? 1
         : 0;
+
+static void WriteStandaloneContinuationPreview(
+    CanonicalNotation page,
+    TimeSignature? inheritedTime,
+    KeySignature? inheritedKey,
+    string pageOutput)
+{
+    if (page.Parts.Count == 0
+        || page.Parts[0].Measures.Count == 0)
+    {
+        return;
+    }
+
+    var parts = page.Parts
+        .Select((part, partIndex) =>
+        {
+            if (partIndex != 0
+                || part.Measures.Count == 0)
+            {
+                return part;
+            }
+
+            var measures = part.Measures.ToList();
+            var firstIndex = measures
+                .Select((measure, index) => new
+                {
+                    measure.Number,
+                    index
+                })
+                .OrderBy(item => item.Number)
+                .First()
+                .index;
+            var first = measures[firstIndex];
+            var attributes = first.Attributes
+                ?? new MeasureAttributes();
+
+            measures[firstIndex] = first with
+            {
+                Attributes = attributes with
+                {
+                    Time = attributes.Time
+                        ?? inheritedTime,
+                    Key = attributes.Key
+                        ?? inheritedKey
+                }
+            };
+
+            return part with
+            {
+                Measures = measures
+            };
+        })
+        .ToList();
+
+    var preview = page with
+    {
+        Parts = parts
+    };
+
+    new MuseScoreCompatibleMusicXmlWriter().Write(
+        preview,
+        Path.Combine(
+            pageOutput,
+            "kancheli.semantic.musicxml"));
+    new CompressedMusicXmlWriter().Write(
+        preview,
+        Path.Combine(
+            pageOutput,
+            "kancheli.semantic.mxl"));
+}
+
+static CanonicalDiffReport DecorateWithPageOrigins(
+    CanonicalDiffReport report,
+    IReadOnlyList<CanonicalNotation> pages)
+{
+    var origins = new Dictionary<
+        int,
+        (int Page, int LocalMeasure)>();
+    var offset = 0;
+
+    for (var pageIndex = 0;
+         pageIndex < pages.Count;
+         pageIndex++)
+    {
+        var page = pages[pageIndex];
+        var numbers = page.Parts
+            .SelectMany(part => part.Measures)
+            .Select(measure => measure.Number)
+            .Distinct()
+            .OrderBy(number => number)
+            .ToArray();
+
+        foreach (var localMeasure in numbers)
+        {
+            origins[offset + localMeasure] =
+                (pageIndex + 1, localMeasure);
+        }
+
+        offset += numbers.Length;
+    }
+
+    return report with
+    {
+        Issues = report.Issues
+            .Select(issue =>
+            {
+                if (issue.Measure is null
+                    || !origins.TryGetValue(
+                        issue.Measure.Value,
+                        out var origin))
+                {
+                    return issue;
+                }
+
+                return issue with
+                {
+                    Page = origin.Page,
+                    LocalMeasure = origin.LocalMeasure
+                };
+            })
+            .ToArray()
+    };
+}
+
+static async Task CreateDiagnosticArchiveAsync(
+    string archivePath,
+    string outputDirectory,
+    PageSet pageSet,
+    string? referencePath,
+    string repoRoot)
+{
+    if (File.Exists(archivePath))
+    {
+        File.Delete(archivePath);
+    }
+
+    var outputFiles = Directory
+        .EnumerateFiles(
+            outputDirectory,
+            "*",
+            SearchOption.AllDirectories)
+        .Where(path => !Path.GetFullPath(path).Equals(
+            Path.GetFullPath(archivePath),
+            StringComparison.OrdinalIgnoreCase))
+        .ToArray();
+
+    using var archive = ZipFile.Open(
+        archivePath,
+        ZipArchiveMode.Create);
+
+    foreach (var path in outputFiles)
+    {
+        var relative = Path.GetRelativePath(
+            outputDirectory,
+            path);
+        archive.CreateEntryFromFile(
+            path,
+            "out/" + relative.Replace(
+                '\\',
+                '/'),
+            CompressionLevel.Optimal);
+    }
+
+    foreach (var page in pageSet.Pages)
+    {
+        archive.CreateEntryFromFile(
+            page.Path,
+            "input/svg/" + Path.GetFileName(page.Path),
+            CompressionLevel.Optimal);
+    }
+
+    string? referenceFullPath = null;
+
+    if (!string.IsNullOrWhiteSpace(referencePath))
+    {
+        referenceFullPath = Path.GetFullPath(
+            referencePath);
+
+        if (File.Exists(referenceFullPath))
+        {
+            archive.CreateEntryFromFile(
+                referenceFullPath,
+                "input/reference/"
+                + Path.GetFileName(referenceFullPath),
+                CompressionLevel.Optimal);
+        }
+    }
+
+    var manifest = new
+    {
+        score = pageSet.BaseName,
+        createdUtc = DateTimeOffset.UtcNow,
+        gitHead = await TryReadGitHeadAsync(repoRoot),
+        commandLine = Environment.CommandLine,
+        pages = pageSet.Pages.Select(page => new
+        {
+            page = page.Number,
+            file = Path.GetFileName(page.Path)
+        }),
+        reference = referenceFullPath is null
+            ? null
+            : Path.GetFileName(referenceFullPath)
+    };
+
+    var entry = archive.CreateEntry(
+        "diagnostics-manifest.json",
+        CompressionLevel.Optimal);
+
+    await using var stream = entry.Open();
+    await using var writer = new StreamWriter(
+        stream,
+        new UTF8Encoding(false));
+
+    await writer.WriteAsync(
+        JsonSerializer.Serialize(
+            manifest,
+            new JsonSerializerOptions
+            {
+                WriteIndented = true
+            }));
+}
+
+static async Task<string?> TryReadGitHeadAsync(
+    string repoRoot)
+{
+    try
+    {
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = "git",
+            WorkingDirectory = repoRoot,
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+        startInfo.ArgumentList.Add("rev-parse");
+        startInfo.ArgumentList.Add("HEAD");
+
+        using var process = Process.Start(startInfo);
+
+        if (process is null)
+        {
+            return null;
+        }
+
+        var value = await process.StandardOutput.ReadToEndAsync();
+        await process.WaitForExitAsync();
+
+        return process.ExitCode == 0
+            ? value.Trim()
+            : null;
+    }
+    catch
+    {
+        return null;
+    }
+}
 
 static PageSet DiscoverPages(
     string directory,
@@ -487,7 +781,7 @@ static void PrintUsage()
         "  SvgScoreBatch <svg-folder> <output-folder> "
         + "[--base <name>] [--reference <musicxml|json>] "
         + "[--model <classifier.zip>] [--configuration Release] "
-        + "[--no-build] [--fail-on-diff]");
+        + "[--no-build] [--fail-on-diff] [--no-diagnostic-archive]");
     Console.Error.WriteLine();
     Console.Error.WriteLine(
         "SVG pages must be named <name>-N.svg, for example "
