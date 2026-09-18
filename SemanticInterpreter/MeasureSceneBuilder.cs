@@ -75,7 +75,10 @@ public sealed class MeasureSceneBuilder
                         lowerStaff.Bounds,
                         lowerStaff.AverageLineSpacing,
                         lowerElements,
-                        lowerStaff.LedgerLevels)));
+                        lowerStaff.LedgerLevels),
+                    measure.RightBoundary.IsFinal
+                        ? "final"
+                        : null));
 
                 measureNumber++;
             }
