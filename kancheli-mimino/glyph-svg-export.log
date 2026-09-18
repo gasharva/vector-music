@@ -20,12 +20,12 @@ NotationScene ellipses      : 236 (hollow: 82)
 ScoreLayout staffs          : 10
 ScoreLayout systems         : 5
 ScoreLayout measures        : 20
-Logical ownership assigned  : 590
-  generation 1              : 515
+Logical ownership assigned  : 592
+  generation 1              : 517
   generation 2              : 47
   generation 3              : 15
   generation 4              : 13
-  coordinate spans          : 93
+  coordinate spans          : 94
   prototype-1: 1 instances; representative=shape-51.1; class=ACCENT 23.0 % @30px
   prototype-2: 3 instances; representative=shape-51.2; class=DIGIT_2 35.0 % @30px
   prototype-3: 3 instances; representative=shape-51.3; class=DYNAMICS_FZ 11.5 % @30px

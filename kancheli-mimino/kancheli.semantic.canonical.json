@@ -2361,7 +2361,8 @@
                 "stem": "up"
               }
             }
-          ]
+          ],
+          "rightBarline": "final"
         }
       ]
     }

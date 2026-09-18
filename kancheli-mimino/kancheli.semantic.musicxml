@@ -2356,6 +2356,9 @@
         <stem>down</stem>
         <staff>2</staff>
       </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
     </measure>
   </part>
 </score-partwise>
