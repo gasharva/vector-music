@@ -6,6 +6,82 @@ namespace SemanticInterpreter.Tests;
 public sealed class CanonicalComparerTests
 {
     [Fact]
+    public void DiffSeverity_DefaultFilteringSilencesVoiceAndCautionaryNoise()
+    {
+        var voice = new CanonicalDiffIssue(
+            CanonicalDiffCategory.Rhythm,
+            "event.voice",
+            "P1",
+            1,
+            1,
+            "0",
+            "1",
+            "2",
+            "voice differs");
+        var accidental = new CanonicalDiffIssue(
+            CanonicalDiffCategory.Notation,
+            "note.accidental",
+            "P1",
+            2,
+            1,
+            "0",
+            "natural:True::False:",
+            "natural::::",
+            "cautionary metadata differs");
+        var tempo = new CanonicalDiffIssue(
+            CanonicalDiffCategory.Text,
+            "event.missing",
+            "P1",
+            1,
+            1,
+            "0",
+            "tempo eighth=62",
+            "<missing>",
+            "tempo is missing");
+        var hairpin = new CanonicalDiffIssue(
+            CanonicalDiffCategory.Relations,
+            "relation.hairpin.missing",
+            null,
+            4,
+            null,
+            null,
+            "hairpin",
+            "<missing>",
+            "hairpin is missing");
+
+        Assert.Equal(
+            CanonicalDiffSeverity.Warning,
+            voice.Severity);
+        Assert.Equal(
+            CanonicalDiffSeverity.Warning,
+            accidental.Severity);
+        Assert.Equal(
+            CanonicalDiffSeverity.Error,
+            tempo.Severity);
+        Assert.Equal(
+            CanonicalDiffSeverity.Critical,
+            hairpin.Severity);
+
+        var report = new CanonicalDiffReport(
+            [voice, accidental, tempo, hairpin]);
+
+        Assert.Equal(
+            2,
+            report.Filter(
+                CanonicalDiffSeverity.Error)
+                .Issues.Count);
+        Assert.Equal(
+            2,
+            report.HiddenBelow(
+                CanonicalDiffSeverity.Error));
+        Assert.Equal(
+            4,
+            report.Filter(
+                CanonicalDiffSeverity.Warning)
+                .Issues.Count);
+    }
+
+    [Fact]
     public void EventIdsDoNotMatterWhenMusicIsTheSame()
     {
         var expected = Score(
