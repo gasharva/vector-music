@@ -3,6 +3,20 @@ namespace SvgMusic.Semantics;
 public sealed class KeySignaturePass : ISemanticPass
 {
     private const double MinimumClassificationConfidence = 0.70;
+
+    private readonly int? _inheritedFifths;
+
+    public KeySignaturePass(int? inheritedFifths = null)
+    {
+        if (inheritedFifths is < -7 or > 7)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(inheritedFifths),
+                "Inherited key signature must be between -7 and 7 fifths.");
+        }
+
+        _inheritedFifths = inheritedFifths;
+    }
     private const double MaximumStepError = 0.90;
 
     // Vertical staff-step patterns in circle-of-fifths order. The absolute
@@ -32,6 +46,40 @@ public sealed class KeySignaturePass : ISemanticPass
             .SingleOrDefault(fact => fact.MeasureNumber == firstMeasure.Number)
             ?? throw new InvalidDataException(
                 "KeySignaturePass requires TimeSignaturePass to run first.");
+
+        if (time.IsInherited)
+        {
+            if (_inheritedFifths is null)
+            {
+                throw new InvalidDataException(
+                    "Continuation page has an inherited time signature but no inherited "
+                    + "key signature. Pass --initial-key <fifths> together with --initial-time.");
+            }
+
+            var fifths = _inheritedFifths.Value;
+            var kind = fifths switch
+            {
+                > 0 => "sharp",
+                < 0 => "flat",
+                _ => "none"
+            };
+
+            facts.Add(new KeySignatureFact(
+                firstMeasure.Number,
+                fifths,
+                kind,
+                Math.Abs(fifths),
+                firstMeasure.XStart,
+                firstMeasure.XStart,
+                $"Inherited key signature fifths={fifths} on continuation page.",
+                [],
+                IsInherited: true));
+
+            facts.AddTrace(
+                $"KeySignaturePass: m{firstMeasure.Number} inherited key fifths={fifths}; "
+                + "no printed key-signature geometry was required");
+            return;
+        }
 
         var upper = ReadStaffKey(
             firstMeasure,
