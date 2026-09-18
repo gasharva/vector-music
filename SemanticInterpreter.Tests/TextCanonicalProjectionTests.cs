@@ -62,17 +62,32 @@ public sealed class TextCanonicalProjectionTests
         Assert.Equal(
             "SUBTITLE",
             xml.Descendants("credit")
-                .Single()
+                .Single(node => node.Element("credit-type")?.Value == "subtitle")
+                .Element("credit-words")
+                ?.Value);
+        Assert.Equal(
+            "TITLE",
+            xml.Descendants("credit")
+                .Single(node => node.Element("credit-type")?.Value == "title")
+                .Element("credit-words")
+                ?.Value);
+        Assert.Equal(
+            "COMPOSER",
+            xml.Descendants("credit")
+                .Single(node => node.Element("credit-type")?.Value == "composer")
                 .Element("credit-words")
                 ?.Value);
 
-        var words = xml.Descendants("words")
-            .Select(item => item.Value)
-            .ToArray();
-        Assert.Contains("Cantabile", words);
-        Assert.Contains("dolce", words);
-        Assert.DoesNotContain("17", words);
-        Assert.DoesNotContain("0.", words);
+        var words = xml.Descendants("words").ToArray();
+        Assert.Contains(words, item => item.Value == "Cantabile");
+        Assert.Contains(words, item => item.Value == "dolce");
+        Assert.Equal(
+            "bold",
+            words.Single(item => item.Value == "Cantabile")
+                .Attribute("font-weight")
+                ?.Value);
+        Assert.DoesNotContain(words, item => item.Value == "17");
+        Assert.DoesNotContain(words, item => item.Value == "0.");
     }
 
     private static TextFact Text(
