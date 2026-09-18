@@ -346,6 +346,7 @@ public sealed class ScoreLayoutAnalyzer
         var endpointTolerance = spacing * 0.35;
         var xTolerance = spacing * 0.4;
         var clusterTolerance = spacing * 0.8;
+        var finalBarlineTolerance = spacing * 1.25;
 
         var boundaries = new List<MeasureBoundary>();
 
@@ -361,7 +362,9 @@ public sealed class ScoreLayoutAnalyzer
                 pairBar.CenterX,
                 upper.Bounds.MinY,
                 lower.Bounds.MaxY,
-                [pairBar.Stroke.ShapeId]));
+                [pairBar.Stroke.ShapeId],
+                pairBar.Stroke.Width,
+                pairBar.Stroke.Width));
         }
 
         // MuseScore commonly emits a piano barline as an upper segment that runs
@@ -407,12 +410,15 @@ public sealed class ScoreLayoutAnalyzer
                 (upperBar.CenterX + lowerBar.CenterX) / 2.0,
                 upper.Bounds.MinY,
                 lower.Bounds.MaxY,
-                [upperBar.Stroke.ShapeId, lowerBar.Stroke.ShapeId]));
+                [upperBar.Stroke.ShapeId, lowerBar.Stroke.ShapeId],
+                Math.Min(upperBar.Stroke.Width, lowerBar.Stroke.Width),
+                Math.Max(upperBar.Stroke.Width, lowerBar.Stroke.Width)));
         }
 
         return ClusterMeasureBoundaries(
             boundaries,
-            clusterTolerance);
+            clusterTolerance,
+            finalBarlineTolerance);
     }
 
     private static bool FitsUpperBoundarySegment(
@@ -461,7 +467,8 @@ public sealed class ScoreLayoutAnalyzer
 
     private static IReadOnlyList<MeasureBoundary> ClusterMeasureBoundaries(
         IReadOnlyList<MeasureBoundary> boundaries,
-        double xTolerance)
+        double xTolerance,
+        double finalBarlineTolerance)
     {
         if (boundaries.Count == 0)
         {
@@ -476,7 +483,13 @@ public sealed class ScoreLayoutAnalyzer
 
         foreach (var boundary in ordered.Skip(1))
         {
-            if (boundary.X - current[^1].X <= xTolerance)
+            var gap = boundary.X - current[^1].X;
+            var candidateGroup = current.Append(boundary).ToArray();
+            var looksLikeFinalPair =
+                gap <= finalBarlineTolerance
+                && HasHeavyLightContrast(candidateGroup);
+
+            if (gap <= xTolerance || looksLikeFinalPair)
             {
                 current.Add(boundary);
                 continue;
@@ -489,15 +502,61 @@ public sealed class ScoreLayoutAnalyzer
         groups.Add(current);
 
         return groups
-            .Select(group => new MeasureBoundary(
-                group.Average(boundary => boundary.X),
-                group.Min(boundary => boundary.UpperY),
-                group.Max(boundary => boundary.LowerY),
-                group.SelectMany(boundary => boundary.StrokeIds)
-                    .Distinct(StringComparer.Ordinal)
-                    .OrderBy(id => id, StringComparer.Ordinal)
-                    .ToArray()))
+            .Select(group =>
+            {
+                var isFinal = HasHeavyLightContrast(group);
+                var positiveWidths = group
+                    .SelectMany(boundary => new[]
+                    {
+                        boundary.MinStrokeWidth,
+                        boundary.MaxStrokeWidth
+                    })
+                    .Where(width => width > 0)
+                    .ToArray();
+
+                return new MeasureBoundary(
+                    isFinal
+                        ? group.Max(boundary => boundary.X)
+                        : group.Average(boundary => boundary.X),
+                    group.Min(boundary => boundary.UpperY),
+                    group.Max(boundary => boundary.LowerY),
+                    group.SelectMany(boundary => boundary.StrokeIds)
+                        .Distinct(StringComparer.Ordinal)
+                        .OrderBy(id => id, StringComparer.Ordinal)
+                        .ToArray(),
+                    positiveWidths.Length == 0
+                        ? 0
+                        : positiveWidths.Min(),
+                    positiveWidths.Length == 0
+                        ? 0
+                        : positiveWidths.Max(),
+                    isFinal);
+            })
             .ToArray();
+    }
+
+    private static bool HasHeavyLightContrast(
+        IReadOnlyList<MeasureBoundary> group)
+    {
+        var widths = group
+            .SelectMany(boundary => new[]
+            {
+                boundary.MinStrokeWidth,
+                boundary.MaxStrokeWidth
+            })
+            .Where(width => width > 0)
+            .ToArray();
+
+        if (group.Count < 2 || widths.Length < 2)
+        {
+            return false;
+        }
+
+        var minimum = widths.Min();
+        var maximum = widths.Max();
+
+        return minimum > 0
+            && maximum / minimum >= 2.0;
     }
 
     private static IReadOnlyList<MeasureLayout> BuildMeasures(
