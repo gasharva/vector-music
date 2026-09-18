@@ -1,50 +1,27 @@
 Using launch settings from SvgScene/Properties/launchSettings.json...
 Classifying contour prototypes with Audiveris BasicClassifier...
-[bass-clef-repair] CANDIDATE prototype-37 main=shape-445.2 dots=shape-545,shape-547
-[bass-clef-repair] RESULT    prototype-37 label=EIGHTH_REST confidence=47.7 % interline=20
-[bass-clef-repair] REJECT    prototype-37 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE prototype-44 main=shape-461 dots=shape-545,shape-547
-[bass-clef-repair] RESULT    prototype-44 label=STACCATISSIMO confidence=36.4 % interline=20
-[bass-clef-repair] REJECT    prototype-44 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE prototype-59 main=shape-486.1 dots=shape-505,shape-530
-[bass-clef-repair] RESULT    prototype-59 label=METRO_HALF confidence=60.1 % interline=40
-[bass-clef-repair] REJECT    prototype-59 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-445 main=shape-445.whole dots=shape-508,shape-512
-[bass-clef-repair] RESULT    compound-prototype-shape-445 label=EIGHTH_REST confidence=63.5 % interline=20
-[bass-clef-repair] REJECT    compound-prototype-shape-445 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-488 main=shape-488.whole dots=shape-523,shape-522
-[bass-clef-repair] RESULT    compound-prototype-shape-488 label=STACCATISSIMO confidence=30.6 % interline=20
-[bass-clef-repair] REJECT    compound-prototype-shape-488 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-490 main=shape-490.whole dots=shape-523,shape-522
-[bass-clef-repair] RESULT    compound-prototype-shape-490 label=STACCATISSIMO confidence=80.4 % interline=30
-[bass-clef-repair] REJECT    compound-prototype-shape-490 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-492 main=shape-492.whole dots=shape-497,shape-519
-[bass-clef-repair] RESULT    compound-prototype-shape-492 label=METRO_HALF confidence=18.5 % interline=20
-[bass-clef-repair] REJECT    compound-prototype-shape-492 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-58 main=shape-58.whole dots=shape-298,shape-297
-[bass-clef-repair] RESULT    compound-prototype-shape-58 label=EIGHTH_REST confidence=35.8 % interline=40
-[bass-clef-repair] REJECT    compound-prototype-shape-58 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-61 main=shape-61.whole dots=shape-446.1,shape-446.3
-[bass-clef-repair] RESULT    compound-prototype-shape-61 label=METRO_HALF confidence=23.7 % interline=20
-[bass-clef-repair] REJECT    compound-prototype-shape-61 composite is not a confident F_CLEF
-[bass-clef-repair] CANDIDATE compound-prototype-shape-63 main=shape-63.whole dots=shape-446.1,shape-446.3
-[bass-clef-repair] RESULT    compound-prototype-shape-63 label=METRO_HALF confidence=53.0 % interline=20
-[bass-clef-repair] REJECT    compound-prototype-shape-63 composite is not a confident F_CLEF
-[bass-clef-repair] SUMMARY   absorbedEllipses=0; remainingEllipses=246
+[bass-clef-repair] CANDIDATE prototype-37 main=shape-445.2 dots=shape-445.1,shape-445.3
+[bass-clef-repair] RESULT    prototype-37 label=F_CLEF confidence=98.6 % interline=30
+[bass-clef-repair] ABSORB    prototype-37/shape-445.2 ellipses=shape-445.1,shape-445.3
+[bass-clef-repair] ABSORB    prototype-37/shape-446.2 ellipses=shape-446.1,shape-446.3
+[bass-clef-repair] ABSORB    prototype-37/shape-447.2 ellipses=shape-447.1,shape-447.3
+[bass-clef-repair] ABSORB    prototype-37/shape-448.2 ellipses=shape-448.1,shape-448.3
+[bass-clef-repair] ABSORB    prototype-37/shape-449.2 ellipses=shape-449.1,shape-449.3
+[bass-clef-repair] SUMMARY   prototypes=77; dotPairCandidates=1; compositeClassifications=1; reusedConfidentFClefs=0; absorbedEllipses=10; remainingEllipses=236
 Classified prototypes        : 77
-Confident prototypes >= 0.75: 37
+Confident prototypes >= 0.75: 38
 GeometricScene shapes       : 677
 NotationScene contours      : 151
 NotationScene prototypes    : 77
 NotationScene strokes       : 250
 NotationScene curved strokes: 24
 NotationScene vertical zigzags: 0
-NotationScene ellipses      : 246 (hollow: 82)
+NotationScene ellipses      : 236 (hollow: 82)
 ScoreLayout staffs          : 10
 ScoreLayout systems         : 5
 ScoreLayout measures        : 20
-Logical ownership assigned  : 600
-  generation 1              : 525
+Logical ownership assigned  : 590
+  generation 1              : 515
   generation 2              : 47
   generation 3              : 15
   generation 4              : 13
@@ -85,7 +62,7 @@ Logical ownership assigned  : 600
   prototype-34: 3 instances; representative=shape-284; class=FLAG_2 92.9 % @30px
   prototype-35: 1 instances; representative=shape-287; class=FLAG_1 99.8 % @40px
   prototype-36: 5 instances; representative=shape-440; class=G_CLEF 99.9 % @20px
-  prototype-37: 5 instances; representative=shape-445.2; class=F_CLEF 27.6 % @40px
+  prototype-37: 5 instances; representative=shape-445.2; class=F_CLEF 98.6 % @30px
   prototype-38: 2 instances; representative=shape-450; class=TIME_THREE 91.3 % @40px
   prototype-39: 2 instances; representative=shape-451; class=TIME_FOUR 89.1 % @40px
   prototype-40: 4 instances; representative=shape-454; class=EIGHTH_REST 98.0 % @40px

@@ -1,11 +1,15 @@
 1. Building geometric and notation scenes...
 2. Classifying reusable contour prototypes...
 Downloading official Audiveris basic-classifier.zip...
+   prototype classification: 5.212s
 3. Repairing composite bass clefs...
+   bass-clef repair: 0.117s; candidates=1; classifier-runs=1; reused-F-clefs=0
 4. Assigning logical staff/measure ownership...
-   ledger-ladder ellipse corrections: 0
+   logical ownership: 0.251s
+   ledger-ladder ownership: 0.004s; corrections=0
+   fourth-generation ownership: 0.018s
 5. Running OCR fallback for semantic text...
-   OCR candidates: 58; recognized: 55
+   OCR candidates: 19; recognized: 16
 5b. Writing SVG parser diagnostics...
 6. Building measure-oriented semantic scene...
 7. Running granular semantic passes...
@@ -31,8 +35,8 @@ ClassifiedSymbol decision: shape=shape-61.whole; label=DYNAMICS_PP; accepted=Fal
 
 Semantic interpretation complete:
   measures   : 20
-  facts      : 1043
-  clefs      : 10
+  facts      : 1009
+  clefs      : 15
   times      : 1
   keys       : 1
   noteheads  : 152
@@ -50,7 +54,7 @@ Semantic interpretation complete:
   slurs      : 12
   hairpins   : 2
   pedals     : 4
-  text facts : 55
+  text facts : 16
   ownership ledger corrections: 0
   canonical  : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.canonical.json
   MusicXML   : /home/runner/work/vector-music/vector-music/artifacts/kancheli.semantic.musicxml
