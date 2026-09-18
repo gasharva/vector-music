@@ -1615,7 +1615,7 @@ public sealed class CanonicalComparer
                 measure.Events.Select(ev => new
                 {
                     ev.Id,
-                    Address = $"{part.Id}/m{measure.Number}@{ev.At}/v{ev.Voice?.ToString() ?? "-"}/s{EventStaff(ev)?.ToString() ?? "-"}/{ev.Type}/{ContentSignature(ev)}"
+                    Address = $"{part.Id}/m{measure.Number}@{ev.At}/s{EventStaff(ev)?.ToString() ?? "-"}/{ev.Type}/{ContentSignature(ev)}"
                 })))
             .GroupBy(item => item.Id, StringComparer.Ordinal)
             .ToDictionary(
