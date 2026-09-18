@@ -65,7 +65,16 @@ var fourthGeneration = new FourthGenerationOuterBandAssigner().AssignAndApply(
 notation = fourthGeneration.Scene;
 ownership = fourthGeneration.Ownership;
 
-Console.WriteLine("5. Writing SVG parser diagnostics...");
+Console.WriteLine("5. Running OCR fallback for semantic text...");
+using var textRecognizer = new RapidOcrTextRecognizer();
+var textAnalysis = new FallbackTextRecognitionAnalyzer(textRecognizer).Analyze(
+    geometry,
+    notation,
+    layout);
+Console.WriteLine(
+    $"   OCR candidates: {textAnalysis.Observations.Count}; recognized: {textAnalysis.Recognized.Count}");
+
+Console.WriteLine("5b. Writing SVG parser diagnostics...");
 const string parserBaseName = "parser";
 const string classifiedSymbolsFileName = "parser.classified-symbols.svg";
 const string ownershipSvgFileName = "parser.ownership.svg";
@@ -111,6 +120,11 @@ var tupletPass = new TupletPass();
 var dotPass = new DotAttachmentPass();
 var durationPass = new DurationPass();
 var chordPass = new ChordPass();
+var textPass = new TextPass(
+    textAnalysis,
+    geometry,
+    layout,
+    ownership);
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
@@ -125,7 +139,8 @@ var semanticPipeline = new SemanticPipeline(
         tupletPass,
         dotPass,
         durationPass,
-        chordPass
+        chordPass,
+        textPass
     ]);
 var facts = semanticPipeline.Run(semanticDocument);
 
@@ -143,6 +158,7 @@ const string tupletsSvgFileName = "semantic.tuplets.svg";
 const string tupletsDiagnosticsFileName = "semantic.tuplets.txt";
 const string dotsSvgFileName = "semantic.dots.svg";
 const string dotsDiagnosticsFileName = "semantic.dots.txt";
+const string textSvgFileName = "semantic.text.svg";
 
 var noteheadsSvgPath = Path.Combine(
     outputDirectory,
@@ -165,6 +181,9 @@ var tupletsSvgPath = Path.Combine(
 var dotsSvgPath = Path.Combine(
     outputDirectory,
     dotsSvgFileName);
+var textSvgPath = Path.Combine(
+    outputDirectory,
+    textSvgFileName);
 
 if (noteheadPass.LastAnalysis is not null)
 {
@@ -313,7 +332,13 @@ if (dotPass.LastAnalysis is not null)
             dotsDiagnosticsFileName));
 }
 
-Console.WriteLine("15. Building CanonicalNotation v0.3 raw preview...");
+Console.WriteLine("14b. Writing semantic text diagnostics...");
+new TextDebugRenderer().Render(
+    input,
+    facts.OfType<TextFact>(),
+    textSvgPath);
+
+Console.WriteLine("15. Building CanonicalNotation v0.4 raw preview...");
 var canonical = new CanonicalNotationBuilder().Build(
     semanticDocument,
     facts,
@@ -393,6 +418,15 @@ File.WriteAllLines(
         $"semantic.slurs={facts.OfType<SlurFact>().Count()}",
         $"semantic.hairpins={facts.OfType<HairpinFact>().Count()}",
         $"semantic.pedals={facts.OfType<PedalFact>().Count()}",
+        $"semantic.text={facts.OfType<TextFact>().Count()}",
+        $"semantic.text.title={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Title)}",
+        $"semantic.text.subtitle={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Subtitle)}",
+        $"semantic.text.composer={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Composer)}",
+        $"semantic.text.instruction={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Instruction)}",
+        $"semantic.text.tempo={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Tempo)}",
+        $"semantic.text.measureNumber={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.MeasureNumber)}",
+        $"semantic.text.fingering={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Fingering)}",
+        $"semantic.text.unknown={facts.OfType<TextFact>().Count(text => text.Role == SemanticTextRole.Unknown)}",
         $"canonical.ties={canonical.Relations.Ties.Count}",
         $"canonical.slurs={canonical.Relations.Slurs.Count}",
         $"canonical.hairpins={canonical.Relations.Hairpins.Count}",
@@ -416,6 +450,7 @@ File.WriteAllLines(
         $"semantic.tupletsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, tupletsDiagnosticsFileName))}",
         $"semantic.dotsSvg={Path.GetFullPath(dotsSvgPath)}",
         $"semantic.dotsDiagnostics={Path.GetFullPath(Path.Combine(outputDirectory, dotsDiagnosticsFileName))}",
+        $"semantic.textSvg={Path.GetFullPath(textSvgPath)}",
         $"parser.strokes={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".strokes.svg"))}",
         $"parser.arcs={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".arcs.svg"))}",
         $"parser.ellipses={Path.GetFullPath(Path.Combine(outputDirectory, parserBaseName + ".ellipses.svg"))}",
@@ -459,6 +494,7 @@ Console.WriteLine($"  ties       : {facts.OfType<TieFact>().Count()}");
 Console.WriteLine($"  slurs      : {facts.OfType<SlurFact>().Count()}");
 Console.WriteLine($"  hairpins   : {facts.OfType<HairpinFact>().Count()}");
 Console.WriteLine($"  pedals     : {facts.OfType<PedalFact>().Count()}");
+Console.WriteLine($"  text facts : {facts.OfType<TextFact>().Count()}");
 Console.WriteLine($"  ownership ledger corrections: {ledgerLadderOwnership.Adjustments.Count}");
 Console.WriteLine($"  canonical  : {Path.GetFullPath(canonicalPath)}");
 Console.WriteLine($"  MusicXML   : {Path.GetFullPath(musicXmlPath)}");
@@ -514,6 +550,15 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
     {
         switch (fact)
         {
+            case TextFact text:
+                yield return $"text role={text.Role} value='{text.Text}' "
+                    + $"m={text.MeasureNumber?.ToString() ?? "-"} staff={text.Staff?.ToString() ?? "-"} "
+                    + $"at={text.At ?? "-"} anchor={text.AnchorShapeId ?? "-"} "
+                    + $"avg-height={text.AverageGlyphHeight:F2} "
+                    + $"ocr={text.OcrConfidence:P1} confidence={text.Confidence:P1}; "
+                    + $"reason={text.Reason}";
+                break;
+
             case ClefFact clef:
                 yield return $"clef m{clef.MeasureNumber} staff={clef.Staff} "
                     + $"{clef.Sign}{clef.Line} x={clef.X:F2} "
