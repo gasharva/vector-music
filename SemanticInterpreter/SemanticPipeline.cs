@@ -79,6 +79,18 @@ public sealed class SemanticPipeline
             materialized.Add(new VoicePass());
         }
 
+        // A rest physically drawn between the piano staves can be geometrically
+        // closer to the wrong staff. Repair that ambiguity after durations/chords
+        // exist but before voice inference consumes the RestFact staff.
+        if (materialized.Any(pass => pass is VoicePass)
+            && materialized.All(pass => pass is not InterstaffRestPass))
+        {
+            var voiceIndex = materialized.FindIndex(pass => pass is VoicePass);
+            materialized.Insert(
+                voiceIndex,
+                new InterstaffRestPass());
+        }
+
         // Some overlapping voices have no simultaneous x-position to trigger the
         // primary VoicePass. Rhythmic overfill plus opposite stems can still prove
         // that a provisional single voice must be split before onset reconstruction.
@@ -110,16 +122,45 @@ public sealed class SemanticPipeline
                 new VoiceContinuityPass());
         }
 
+        // When stem-based voices still produce an overfull measure, repartition
+        // events into the minimum feasible rhythmic lanes and recompute onsets.
+        if (materialized.Any(pass => pass is VoiceContinuityPass)
+            && materialized.All(pass => pass is not RhythmicLanePass))
+        {
+            var continuityIndex = materialized.FindLastIndex(pass => pass is VoiceContinuityPass);
+            materialized.Insert(
+                continuityIndex + 1,
+                new RhythmicLanePass());
+        }
+
+        // Piano engraving aligns rhythmic columns between the two staves. A proven
+        // internal onset on one staff can therefore recover an implicit leading gap
+        // in a voice on the other staff.
+        if (materialized.Any(pass => pass is RhythmicLanePass)
+            && materialized.All(pass => pass is not CrossStaffOnsetRefinementPass))
+        {
+            var laneIndex = materialized.FindLastIndex(pass => pass is RhythmicLanePass);
+            materialized.Insert(
+                laneIndex + 1,
+                new CrossStaffOnsetRefinementPass());
+        }
+
         // A single secondary sustained event can have no exact cross-voice x anchor.
         // After all voice refinements are stable, use the barline as an additional
         // timing constraint when geometry clearly supports an end-of-measure fit.
         if (materialized.Any(pass => pass is OnsetPass)
             && materialized.All(pass => pass is not MeasureEndOnsetRefinementPass))
         {
+            var crossStaffIndex = materialized.FindLastIndex(pass => pass is CrossStaffOnsetRefinementPass);
+            var laneIndex = materialized.FindLastIndex(pass => pass is RhythmicLanePass);
             var continuityIndex = materialized.FindLastIndex(pass => pass is VoiceContinuityPass);
-            var insertionIndex = continuityIndex >= 0
-                ? continuityIndex + 1
-                : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
+            var insertionIndex = crossStaffIndex >= 0
+                ? crossStaffIndex + 1
+                : laneIndex >= 0
+                    ? laneIndex + 1
+                    : continuityIndex >= 0
+                        ? continuityIndex + 1
+                        : materialized.FindLastIndex(pass => pass is OnsetPass) + 1;
             materialized.Insert(
                 insertionIndex,
                 new MeasureEndOnsetRefinementPass());
