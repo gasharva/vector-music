@@ -9,7 +9,10 @@ public sealed record CanonicalNotation(
     List<Part> Parts,
     Relations Relations);
 
-public sealed record Metadata(string? Title = null, string? Composer = null);
+public sealed record Metadata(
+    string? Title = null,
+    string? Composer = null,
+    string? Subtitle = null);
 
 public sealed record Part(string Id, string Name, List<Measure> Measures);
 
@@ -56,6 +59,7 @@ public sealed record CanonicalEvent
     public List<CanonicalNote>? Notes { get; init; }
     public EventNotation? Notation { get; init; }
     public string? Text { get; init; }
+    public string? TextRole { get; init; }
     public string? Value { get; init; }
     public string? Target { get; init; }
     public string? Placement { get; init; }
