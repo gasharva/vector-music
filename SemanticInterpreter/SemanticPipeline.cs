@@ -269,6 +269,19 @@ public sealed class SemanticPipeline
                 new TieSpatialRecoveryPass());
         }
 
+        // MuseScore splits a tie at a system break into two independent curve
+        // fragments: note -> old system edge and new system edge -> note. Ordinary
+        // endpoint matching rejects each half because it has only one real endpoint.
+        if (materialized.Any(pass => pass is TieSpatialRecoveryPass)
+            && materialized.All(pass => pass is not CrossSystemTieRecoveryPass))
+        {
+            var recoveryIndex = materialized.FindLastIndex(
+                pass => pass is TieSpatialRecoveryPass);
+            materialized.Insert(
+                recoveryIndex + 1,
+                new CrossSystemTieRecoveryPass());
+        }
+
         // Simple classifier leftovers run last, after every specialized pass has had
         // a chance to claim its source shapes through SemanticFact.SourceShapeIds.
         if (materialized.Any(pass => pass is NoteheadPass)
