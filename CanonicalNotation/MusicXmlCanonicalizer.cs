@@ -122,7 +122,7 @@ public sealed class MusicXmlCanonicalizer
                     else
                     {
                         eventNo++;
-                        var id = $"m{measureNo}.e{eventNo}";
+                        var id = $"{partId}.m{measureNo}.e{eventNo}";
                         var at = Duration(cursor).ToString();
                         var duration = Duration(durationUnits).ToString();
                         var notation = ReadNotation(node);
@@ -371,9 +371,11 @@ public sealed class MusicXmlCanonicalizer
         var at = Duration(cursor + offset).ToString();
         var sound = direction.Element("sound");
 
+        var typeNo = 0;
         foreach (var type in direction.Elements("direction-type").Elements())
         {
-            var id = $"m{measure}.d{directionNo}";
+            typeNo++;
+            var id = $"{part}.m{measure}.d{directionNo}.{typeNo}";
             switch (type.Name.LocalName)
             {
                 case "words":
