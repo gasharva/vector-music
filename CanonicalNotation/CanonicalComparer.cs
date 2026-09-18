@@ -1087,53 +1087,378 @@ public sealed class CanonicalComparer
         var expectedEvents = BuildEventAddressMap(expected);
         var actualEvents = BuildEventAddressMap(actual);
 
-        CompareRelationSet("beam",
+        CompareRelationSet(
+            "beam",
             expected.Relations.Beams.Select(relation =>
-                $"L{relation.Level}:{relation.Hook ?? "-"}:{string.Join(">", relation.Events.Select(id => Address(expectedEvents, id)))}"),
+                $"L{relation.Level}:{relation.Hook ?? "-"}:"
+                + string.Join(
+                    ">",
+                    relation.Events.Select(id =>
+                        Address(expectedEvents, id)))),
             actual.Relations.Beams.Select(relation =>
-                $"L{relation.Level}:{relation.Hook ?? "-"}:{string.Join(">", relation.Events.Select(id => Address(actualEvents, id)))}"),
+                $"L{relation.Level}:{relation.Hook ?? "-"}:"
+                + string.Join(
+                    ">",
+                    relation.Events.Select(id =>
+                        Address(actualEvents, id)))),
             issues);
 
-        CompareRelationSet("tie",
+        ComparePlacedRelationSet(
+            "tie",
             expected.Relations.Ties.Select(relation =>
-                $"{Address(expectedEvents, relation.From.Event)}[{relation.From.Note}]->{Address(expectedEvents, relation.To.Event)}[{relation.To.Note}]:{relation.Placement ?? "-"}"),
+                new PlacedRelation(
+                    $"{Address(expectedEvents, relation.From.Event)}[{relation.From.Note}]"
+                    + $"->{Address(expectedEvents, relation.To.Event)}[{relation.To.Note}]",
+                    relation.Placement)),
             actual.Relations.Ties.Select(relation =>
-                $"{Address(actualEvents, relation.From.Event)}[{relation.From.Note}]->{Address(actualEvents, relation.To.Event)}[{relation.To.Note}]:{relation.Placement ?? "-"}"),
+                new PlacedRelation(
+                    $"{Address(actualEvents, relation.From.Event)}[{relation.From.Note}]"
+                    + $"->{Address(actualEvents, relation.To.Event)}[{relation.To.Note}]",
+                    relation.Placement)),
             issues);
 
-        CompareRelationSet("slur",
+        ComparePlacedRelationSet(
+            "slur",
             expected.Relations.Slurs.Select(relation =>
-                $"{Address(expectedEvents, relation.From)}->{Address(expectedEvents, relation.To)}:{relation.Placement ?? "-"}"),
+                new PlacedRelation(
+                    $"{Address(expectedEvents, relation.From)}"
+                    + $"->{Address(expectedEvents, relation.To)}",
+                    relation.Placement)),
             actual.Relations.Slurs.Select(relation =>
-                $"{Address(actualEvents, relation.From)}->{Address(actualEvents, relation.To)}:{relation.Placement ?? "-"}"),
+                new PlacedRelation(
+                    $"{Address(actualEvents, relation.From)}"
+                    + $"->{Address(actualEvents, relation.To)}",
+                    relation.Placement)),
             issues);
 
-        CompareRelationSet("tuplet",
-            expected.Relations.Tuplets.Select(relation =>
-                $"{relation.Actual}:{relation.Normal}:{relation.Bracket?.ToString() ?? "-"}:{string.Join(">", relation.Events.Select(id => Address(expectedEvents, id)))}"),
-            actual.Relations.Tuplets.Select(relation =>
-                $"{relation.Actual}:{relation.Normal}:{relation.Bracket?.ToString() ?? "-"}:{string.Join(">", relation.Events.Select(id => Address(actualEvents, id)))}"),
+        CompareTupletRelations(
+            expected.Relations.Tuplets,
+            actual.Relations.Tuplets,
+            expectedEvents,
+            actualEvents,
             issues);
 
-        CompareRelationSet("arpeggio",
-            expected.Relations.Arpeggios.Select(relation =>
-                $"{relation.Direction ?? "-"}:{string.Join("+", relation.Events.Select(id => Address(expectedEvents, id)).OrderBy(x => x))}"),
-            actual.Relations.Arpeggios.Select(relation =>
-                $"{relation.Direction ?? "-"}:{string.Join("+", relation.Events.Select(id => Address(actualEvents, id)).OrderBy(x => x))}"),
+        CompareArpeggioRelations(
+            expected.Relations.Arpeggios,
+            actual.Relations.Arpeggios,
+            expectedEvents,
+            actualEvents,
             issues);
 
-        CompareRelationSet("hairpin",
-            expected.Relations.Hairpins.Select(SpanSignature),
-            actual.Relations.Hairpins.Select(SpanSignature),
+        CompareSpanRelations(
+            "hairpin",
+            expected.Relations.Hairpins,
+            actual.Relations.Hairpins,
             issues);
-        CompareRelationSet("pedal",
-            expected.Relations.Pedals.Select(SpanSignature),
-            actual.Relations.Pedals.Select(SpanSignature),
+        CompareSpanRelations(
+            "pedal",
+            expected.Relations.Pedals,
+            actual.Relations.Pedals,
             issues);
-        CompareRelationSet("octave-shift",
-            expected.Relations.OctaveShifts.Select(SpanSignature),
-            actual.Relations.OctaveShifts.Select(SpanSignature),
+        CompareSpanRelations(
+            "octave-shift",
+            expected.Relations.OctaveShifts,
+            actual.Relations.OctaveShifts,
             issues);
+    }
+
+    private static void ComparePlacedRelationSet(
+        string kind,
+        IEnumerable<PlacedRelation> expected,
+        IEnumerable<PlacedRelation> actual,
+        ICollection<CanonicalDiffIssue> issues)
+    {
+        var remaining = actual.ToList();
+
+        foreach (var expectedRelation in expected)
+        {
+            var index = remaining.FindIndex(relation =>
+                string.Equals(
+                    relation.Core,
+                    expectedRelation.Core,
+                    StringComparison.Ordinal));
+
+            if (index < 0)
+            {
+                AddRelationIssue(
+                    issues,
+                    kind,
+                    "missing",
+                    expectedRelation.Core,
+                    "<missing>",
+                    $"Expected {kind} relation is missing.");
+                continue;
+            }
+
+            var actualRelation = remaining[index];
+            remaining.RemoveAt(index);
+
+            if (!string.IsNullOrWhiteSpace(expectedRelation.Placement)
+                && !string.Equals(
+                    expectedRelation.Placement,
+                    actualRelation.Placement,
+                    StringComparison.Ordinal))
+            {
+                AddRelationIssue(
+                    issues,
+                    kind,
+                    "placement",
+                    expectedRelation.Placement!,
+                    actualRelation.Placement ?? "<null>",
+                    $"{kind} placement differs.",
+                    expectedRelation.Core);
+            }
+        }
+
+        foreach (var extra in remaining)
+        {
+            AddRelationIssue(
+                issues,
+                kind,
+                "extra",
+                "<none>",
+                extra.Core,
+                $"Unexpected {kind} relation is present.");
+        }
+    }
+
+    private static void CompareTupletRelations(
+        IReadOnlyList<TupletRelation> expected,
+        IReadOnlyList<TupletRelation> actual,
+        IReadOnlyDictionary<string, string> expectedEvents,
+        IReadOnlyDictionary<string, string> actualEvents,
+        ICollection<CanonicalDiffIssue> issues)
+    {
+        var remaining = actual
+            .Select(relation => new TupletComparison(
+                TupletCore(relation, actualEvents),
+                relation.Bracket))
+            .ToList();
+
+        foreach (var relation in expected)
+        {
+            var core = TupletCore(relation, expectedEvents);
+            var index = remaining.FindIndex(item =>
+                item.Core == core);
+
+            if (index < 0)
+            {
+                AddRelationIssue(
+                    issues,
+                    "tuplet",
+                    "missing",
+                    core,
+                    "<missing>",
+                    "Expected tuplet relation is missing.");
+                continue;
+            }
+
+            var match = remaining[index];
+            remaining.RemoveAt(index);
+
+            if (relation.Bracket is not null
+                && relation.Bracket != match.Bracket)
+            {
+                AddRelationIssue(
+                    issues,
+                    "tuplet",
+                    "bracket",
+                    relation.Bracket.ToString()!,
+                    match.Bracket?.ToString() ?? "<null>",
+                    "Tuplet bracket presentation differs.",
+                    core);
+            }
+        }
+
+        foreach (var extra in remaining)
+        {
+            AddRelationIssue(
+                issues,
+                "tuplet",
+                "extra",
+                "<none>",
+                extra.Core,
+                "Unexpected tuplet relation is present.");
+        }
+    }
+
+    private static string TupletCore(
+        TupletRelation relation,
+        IReadOnlyDictionary<string, string> events) =>
+        $"{relation.Actual}:{relation.Normal}:"
+        + string.Join(
+            ">",
+            relation.Events.Select(id =>
+                Address(events, id)));
+
+    private static void CompareArpeggioRelations(
+        IReadOnlyList<ArpeggioRelation> expected,
+        IReadOnlyList<ArpeggioRelation> actual,
+        IReadOnlyDictionary<string, string> expectedEvents,
+        IReadOnlyDictionary<string, string> actualEvents,
+        ICollection<CanonicalDiffIssue> issues)
+    {
+        var remaining = actual
+            .Select(relation => new PlacedRelation(
+                ArpeggioCore(relation, actualEvents),
+                relation.Direction))
+            .ToList();
+
+        foreach (var relation in expected)
+        {
+            var core = ArpeggioCore(
+                relation,
+                expectedEvents);
+            var index = remaining.FindIndex(item =>
+                item.Core == core);
+
+            if (index < 0)
+            {
+                AddRelationIssue(
+                    issues,
+                    "arpeggio",
+                    "missing",
+                    core,
+                    "<missing>",
+                    "Expected arpeggio relation is missing.");
+                continue;
+            }
+
+            var match = remaining[index];
+            remaining.RemoveAt(index);
+
+            if (!string.IsNullOrWhiteSpace(relation.Direction)
+                && !string.Equals(
+                    relation.Direction,
+                    match.Placement,
+                    StringComparison.Ordinal))
+            {
+                AddRelationIssue(
+                    issues,
+                    "arpeggio",
+                    "direction",
+                    relation.Direction!,
+                    match.Placement ?? "<null>",
+                    "Arpeggio direction differs.",
+                    core);
+            }
+        }
+
+        foreach (var extra in remaining)
+        {
+            AddRelationIssue(
+                issues,
+                "arpeggio",
+                "extra",
+                "<none>",
+                extra.Core,
+                "Unexpected arpeggio relation is present.");
+        }
+    }
+
+    private static string ArpeggioCore(
+        ArpeggioRelation relation,
+        IReadOnlyDictionary<string, string> events) =>
+        string.Join(
+            "+",
+            relation.Events
+                .Select(id => Address(events, id))
+                .OrderBy(value => value, StringComparer.Ordinal));
+
+    private static void CompareSpanRelations(
+        string kind,
+        IReadOnlyList<SpanRelation> expected,
+        IReadOnlyList<SpanRelation> actual,
+        ICollection<CanonicalDiffIssue> issues)
+    {
+        var remaining = actual.ToList();
+
+        foreach (var expectedSpan in expected)
+        {
+            var core = SpanCore(expectedSpan);
+            var index = remaining.FindIndex(span =>
+                SpanCore(span) == core);
+
+            if (index < 0)
+            {
+                AddRelationIssue(
+                    issues,
+                    kind,
+                    "missing",
+                    core,
+                    "<missing>",
+                    $"Expected {kind} relation is missing.");
+                continue;
+            }
+
+            var actualSpan = remaining[index];
+            remaining.RemoveAt(index);
+
+            CompareOptionalRelationPresentation(
+                issues,
+                kind,
+                core,
+                "line",
+                expectedSpan.Line?.ToString(),
+                actualSpan.Line?.ToString());
+            CompareOptionalRelationPresentation(
+                issues,
+                kind,
+                core,
+                "start-mark",
+                expectedSpan.StartMark?.ToString(),
+                actualSpan.StartMark?.ToString());
+            CompareOptionalRelationPresentation(
+                issues,
+                kind,
+                core,
+                "placement",
+                expectedSpan.Placement,
+                actualSpan.Placement);
+        }
+
+        foreach (var extra in remaining)
+        {
+            AddRelationIssue(
+                issues,
+                kind,
+                "extra",
+                "<none>",
+                SpanCore(extra),
+                $"Unexpected {kind} relation is present.");
+        }
+    }
+
+    private static string SpanCore(SpanRelation relation) =>
+        $"{relation.Kind}:{Anchor(relation.From)}->{Anchor(relation.To)}:"
+        + $"{relation.Type ?? "-"}:{relation.Direction ?? "-"}:"
+        + $"{relation.Size?.ToString() ?? "-"}";
+
+    private static void CompareOptionalRelationPresentation(
+        ICollection<CanonicalDiffIssue> issues,
+        string kind,
+        string core,
+        string property,
+        string? expected,
+        string? actual)
+    {
+        if (string.IsNullOrWhiteSpace(expected)
+            || string.Equals(
+                expected,
+                actual,
+                StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        AddRelationIssue(
+            issues,
+            kind,
+            property,
+            expected!,
+            actual ?? "<null>",
+            $"{kind} {property} presentation differs.",
+            core);
     }
 
     private static void CompareRelationSet(
@@ -1156,33 +1481,71 @@ public sealed class CanonicalComparer
 
             for (var index = actualCount; index < expectedCount; index++)
             {
-                issues.Add(new CanonicalDiffIssue(
-                    CanonicalDiffCategory.Relations,
-                    $"relation.{kind}.missing",
-                    null,
-                    ExtractMeasure(signature),
-                    null,
-                    null,
+                AddRelationIssue(
+                    issues,
+                    kind,
+                    "missing",
                     signature,
                     "<missing>",
-                    $"Expected {kind} relation is missing."));
+                    $"Expected {kind} relation is missing.");
             }
 
             for (var index = expectedCount; index < actualCount; index++)
             {
-                issues.Add(new CanonicalDiffIssue(
-                    CanonicalDiffCategory.Relations,
-                    $"relation.{kind}.extra",
-                    null,
-                    ExtractMeasure(signature),
-                    null,
-                    null,
+                AddRelationIssue(
+                    issues,
+                    kind,
+                    "extra",
                     "<none>",
                     signature,
-                    $"Unexpected {kind} relation is present."));
+                    $"Unexpected {kind} relation is present.");
             }
         }
     }
+
+    private static void AddRelationIssue(
+        ICollection<CanonicalDiffIssue> issues,
+        string kind,
+        string suffix,
+        string expected,
+        string actual,
+        string message,
+        string? signatureForLocation = null)
+    {
+        var signature = signatureForLocation
+            ?? (expected == "<none>"
+                ? actual
+                : expected);
+        var measure = ExtractMeasure(signature);
+        var rootCause =
+            $"relation:{kind}:m{measure?.ToString() ?? "-"}";
+        var summary =
+            $"{kind} relation mismatch"
+            + (measure is null
+                ? string.Empty
+                : $" — m{measure}");
+
+        issues.Add(new CanonicalDiffIssue(
+            CanonicalDiffCategory.Relations,
+            $"relation.{kind}.{suffix}",
+            null,
+            measure,
+            null,
+            null,
+            expected,
+            actual,
+            message,
+            rootCause,
+            summary));
+    }
+
+    private sealed record PlacedRelation(
+        string Core,
+        string? Placement);
+
+    private sealed record TupletComparison(
+        string Core,
+        bool? Bracket);
 
     private static Dictionary<string, int> ToBag(
         IEnumerable<string> values) =>
