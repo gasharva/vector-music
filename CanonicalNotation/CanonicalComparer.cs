@@ -1157,7 +1157,7 @@ public sealed class CanonicalComparer
                 $"{value.Type}:{value.Subtype ?? "-"}:{value.Placement ?? "-"}");
 
     private static IEnumerable<string> ClefSignatures(
-        IReadOnlyList<Clef>? values) =>
+        IEnumerable<Clef>? values) =>
         (values ?? [])
             .Select(value =>
                 $"{value.Staff}:{value.Sign}:{value.Line}:{value.OctaveChange?.ToString() ?? "-"}");
