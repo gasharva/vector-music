@@ -2,11 +2,15 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
   <work>
-    <work-title>YELLOW LEAVES (Mimino)</work-title>
+    <work-title>YELLOW LEAVES</work-title>
   </work>
   <identification>
-    <creator type="composer">Giya Kancheli</creator>
+    <creator type="composer">Giya Kancheli (1935-2019)</creator>
   </identification>
+  <credit page="1">
+    <credit-type>subtitle</credit-type>
+    <credit-words>(valse from the film "Mimino")</credit-words>
+  </credit>
   <part-list>
     <score-part id="P1">
       <part-name>Piano</part-name>
@@ -46,6 +50,12 @@
         <staff>1</staff>
         <beam number="1">begin</beam>
       </note>
+      <direction placement="above">
+        <direction-type>
+          <words>Cantabile ( = 62)</words>
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <note>
         <pitch>
           <step>F</step>
@@ -335,6 +345,12 @@
       </note>
     </measure>
     <measure number="4">
+      <direction placement="below">
+        <direction-type>
+          <words>du</words>
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <direction placement="below">
         <direction-type>
           <wedge type="crescendo" number="1" />
@@ -853,6 +869,12 @@
       </note>
     </measure>
     <measure number="8">
+      <direction placement="above">
+        <direction-type>
+          <words>Ped.</words>
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <direction placement="below">
         <direction-type>
           <pedal type="resume" number="2" line="yes" sign="yes" />
@@ -1298,6 +1320,12 @@
       </note>
     </measure>
     <measure number="12">
+      <direction placement="below">
+        <direction-type>
+          <words>du</words>
+        </direction-type>
+        <staff>1</staff>
+      </direction>
       <direction placement="below">
         <direction-type>
           <wedge type="crescendo" number="2" />
