@@ -7,12 +7,14 @@ namespace SemanticInterpreter.Tests;
 public sealed class TextPassTests
 {
     [Fact]
-    public void HeaderRolesComeFromUnownedGlyphHeightNotTextContent()
+    public void HeaderRolesComeFromVerticalOrderNotGlyphHeightOrContent()
     {
         var geometry = new GeometricScene([
-            Shape("composer", 10, 10, 40, 20),
-            Shape("subtitle", 10, 10, 60, 30),
-            Shape("title", 10, 5, 80, 35)
+            // Deliberately make the subtitle tallest and the composer medium:
+            // role assignment must follow Y order, not glyph height.
+            Shape("title", 10, 5, 40, 15),
+            Shape("subtitle", 10, 25, 80, 55),
+            Shape("composer", 10, 65, 60, 82)
         ]);
         var analysis = Analysis(
             Observation("composer", "Anything A", 0.99, geometry),
