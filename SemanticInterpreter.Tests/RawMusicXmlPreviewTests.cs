@@ -100,6 +100,21 @@ public sealed class RawMusicXmlPreviewTests
             0.93,
             "test duration",
             ["note", "stem"]));
+        facts.Add(new TextFact(
+            "ocr-finger",
+            SemanticTextRole.Fingering,
+            "3",
+            new BoundsD(98, 95, 104, 105),
+            10,
+            0.99,
+            1,
+            1,
+            null,
+            "note",
+            "above",
+            0.99,
+            "test fingering",
+            ["finger"]));
 
         var canonical = new CanonicalNotationBuilder().Build(
             document,
@@ -117,6 +132,10 @@ public sealed class RawMusicXmlPreviewTests
         Assert.Equal("Db5", note.Pitch);
         Assert.Equal(1, note.Staff);
         Assert.Equal("flat", note.Accidental?.Type);
+        var fingering = Assert.Single(note.Technical!);
+        Assert.Equal("fingering", fingering.Type);
+        Assert.Equal("3", fingering.Value);
+        Assert.Equal("above", fingering.Placement);
 
         var xml = new MusicXmlWriter().Write(canonical);
         var xmlNote = Assert.Single(xml.Descendants("note"));
@@ -126,5 +145,11 @@ public sealed class RawMusicXmlPreviewTests
         Assert.Equal("eighth", xmlNote.Element("type")?.Value);
         Assert.Equal("flat", xmlNote.Element("accidental")?.Value);
         Assert.Equal("up", xmlNote.Element("stem")?.Value);
+        Assert.Equal(
+            "3",
+            xmlNote.Element("notations")
+                ?.Element("technical")
+                ?.Element("fingering")
+                ?.Value);
     }
 }
