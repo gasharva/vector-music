@@ -19,6 +19,9 @@ var modelPath = ReadOption(args, "--model");
 var configuration = ReadOption(args, "--configuration") ?? "Release";
 var noBuild = HasFlag(args, "--no-build");
 var failOnDiff = HasFlag(args, "--fail-on-diff");
+var diffLevel = ParseDiffSeverity(
+    ReadOption(args, "--diff-level")
+    ?? "error");
 var noDiagnosticArchive = HasFlag(
     args,
     "--no-diagnostic-archive");
@@ -50,6 +53,7 @@ Console.WriteLine($"Pages       : {pageSet.Pages.Count}");
 Console.WriteLine($"Input       : {inputDirectory}");
 Console.WriteLine($"Output      : {outputDirectory}");
 Console.WriteLine($"Repository  : {repoRoot}");
+Console.WriteLine($"Diff level  : {diffLevel}");
 
 if (!noBuild)
 {
@@ -224,18 +228,20 @@ if (!string.IsNullOrWhiteSpace(referencePath))
         referenceCanonicalPath,
         CanonicalJson.Serialize(reference));
 
-    diff = new CanonicalComparer().Compare(
+    var fullDiff = new CanonicalComparer().Compare(
         reference,
         merged);
-    diff = DecorateWithPageOrigins(
-        diff,
+    fullDiff = DecorateWithPageOrigins(
+        fullDiff,
         pageCanonicals);
+    diff = fullDiff.Filter(diffLevel);
 
     var diffPrefix = Path.Combine(
         outputDirectory,
         $"{pageSet.BaseName}.diff");
     var diffMarkdown = diffPrefix + ".md";
     var diffJson = diffPrefix + ".json";
+    var diffAllJson = diffPrefix + ".all.json";
 
     await File.WriteAllTextAsync(
         diffMarkdown,
@@ -243,11 +249,31 @@ if (!string.IsNullOrWhiteSpace(referencePath))
     await File.WriteAllTextAsync(
         diffJson,
         diff.ToJson());
+    await File.WriteAllTextAsync(
+        diffAllJson,
+        fullDiff.ToJson());
 
+    var hidden = fullDiff.HiddenBelow(diffLevel);
     Console.WriteLine(
         diff.IsEqual
-            ? "Semantic diff: clean."
-            : $"Semantic diff: {diff.Issues.Count} issue(s).");
+            ? hidden == 0
+                ? "Semantic diff: clean."
+                : $"Semantic diff: clean at {diffLevel}; hidden below level={hidden}."
+            : $"Semantic diff: {diff.Issues.Count} issue(s) at {diffLevel}+"
+                + (hidden > 0
+                    ? $"; hidden below level={hidden}."
+                    : "."));
+
+    foreach (var severity in Enum.GetValues<CanonicalDiffSeverity>()
+                 .OrderByDescending(value => value))
+    {
+        var count = diff.Issues.Count(issue => issue.Severity == severity);
+        if (count > 0)
+        {
+            Console.WriteLine(
+                $"  {severity,-12} details={count,4}");
+        }
+    }
 
     foreach (var group in diff.RootCauses
                  .GroupBy(root => root.Category)
@@ -260,6 +286,7 @@ if (!string.IsNullOrWhiteSpace(referencePath))
 
     Console.WriteLine($"Diff MD     : {diffMarkdown}");
     Console.WriteLine($"Diff JSON   : {diffJson}");
+    Console.WriteLine($"Diff all    : {diffAllJson}");
 }
 
 if (!noDiagnosticArchive)
@@ -745,6 +772,21 @@ static async Task<int> RunProcessAsync(
     return process.ExitCode;
 }
 
+static CanonicalDiffSeverity ParseDiffSeverity(
+    string value)
+{
+    if (Enum.TryParse<CanonicalDiffSeverity>(
+            value,
+            ignoreCase: true,
+            out var severity))
+    {
+        return severity;
+    }
+
+    throw new ArgumentException(
+        $"Invalid --diff-level '{value}'. Expected warning, error, or critical.");
+}
+
 static string? ReadOption(
     IReadOnlyList<string> arguments,
     string name)
@@ -781,6 +823,7 @@ static void PrintUsage()
         "  SvgScoreBatch <svg-folder> <output-folder> "
         + "[--base <name>] [--reference <musicxml|json>] "
         + "[--model <classifier.zip>] [--configuration Release] "
+        + "[--diff-level warning|error|critical] "
         + "[--no-build] [--fail-on-diff] [--no-diagnostic-archive]");
     Console.Error.WriteLine();
     Console.Error.WriteLine(
