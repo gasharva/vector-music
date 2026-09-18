@@ -64,6 +64,28 @@ public sealed class ScoreLayoutAnalyzerTests
         Assert.Contains("final-thick-upper", final.StrokeIds);
     }
 
+    [Fact]
+    public void HeavyLightFinalBarline_CollapsesAcrossWiderGapAndMarksFinal()
+    {
+        var strokes = StaffLines();
+
+        AddMuseScoreBarline(strokes, "left", 0);
+        AddMuseScoreBarline(strokes, "middle", 100);
+        AddMuseScoreBarline(strokes, "final-thin", 188, width: 1);
+        AddMuseScoreBarline(strokes, "final-thick", 200, width: 3);
+
+        var pair = Pair(strokes);
+
+        Assert.Equal(3, pair.Boundaries.Count);
+        Assert.Equal(2, pair.Measures.Count);
+
+        var final = pair.Boundaries.OrderBy(boundary => boundary.X).Last();
+        Assert.True(final.IsFinal);
+        Assert.Equal(200, final.X);
+        Assert.Equal(1, final.MinStrokeWidth);
+        Assert.Equal(3, final.MaxStrokeWidth);
+    }
+
     private static StaffPairLayout Pair(List<Stroke> strokes)
     {
         var notation = new NotationScene(
@@ -106,26 +128,28 @@ public sealed class ScoreLayoutAnalyzerTests
     private static void AddMuseScoreBarline(
         ICollection<Stroke> strokes,
         string id,
-        double x)
+        double x,
+        double width = 1)
     {
         // Matches the physical split used by the sample SVG: the upper piece
         // continues through the inter-staff gap to the top line of the lower
         // staff; the lower piece spans the lower staff itself.
-        strokes.Add(Vertical($"{id}-upper", x, 0, 100));
-        strokes.Add(Vertical($"{id}-lower", x, 100, 140));
+        strokes.Add(Vertical($"{id}-upper", x, 0, 100, width));
+        strokes.Add(Vertical($"{id}-lower", x, 100, 140, width));
     }
 
     private static Stroke Vertical(
         string id,
         double x,
         double y1,
-        double y2)
+        double y2,
+        double width = 1)
     {
         return new Stroke(
             id,
             new PointD(x, y1),
             new PointD(x, y2),
-            1,
+            width,
             "test",
             null);
     }
