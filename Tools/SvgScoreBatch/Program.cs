@@ -67,6 +67,7 @@ if (!noBuild)
 
 var pageCanonicals = new List<CanonicalNotation>();
 TimeSignature? activeTimeSignature = null;
+KeySignature? activeKeySignature = null;
 var pagesDirectory = Path.Combine(
     outputDirectory,
     "pages");
@@ -111,6 +112,16 @@ foreach (var page in pageSet.Pages)
             $"Inherited time: {activeTimeSignature.Beats}/{activeTimeSignature.BeatType}");
     }
 
+    if (activeKeySignature is not null)
+    {
+        processArgs.Add("--initial-key");
+        processArgs.Add(
+            activeKeySignature.Fifths.ToString(
+                System.Globalization.CultureInfo.InvariantCulture));
+        Console.WriteLine(
+            $"Inherited key : fifths={activeKeySignature.Fifths}");
+    }
+
     var exitCode = await RunProcessAsync(
         "dotnet",
         processArgs,
@@ -141,6 +152,9 @@ foreach (var page in pageSet.Pages)
     activeTimeSignature = ResolveFinalTimeSignature(
         pageCanonical,
         activeTimeSignature);
+    activeKeySignature = ResolveFinalKeySignature(
+        pageCanonical,
+        activeKeySignature);
 }
 
 Console.WriteLine();
@@ -327,6 +341,28 @@ static PageSet ValidatePageSet(
     return new PageSet(
         baseName,
         ordered);
+}
+
+static KeySignature? ResolveFinalKeySignature(
+    CanonicalNotation page,
+    KeySignature? inherited)
+{
+    var current = inherited;
+    var measures = page.Parts
+        .FirstOrDefault()
+        ?.Measures
+        ?? [];
+
+    foreach (var measure in measures
+                 .OrderBy(measure => measure.Number))
+    {
+        if (measure.Attributes?.Key is { } key)
+        {
+            current = key;
+        }
+    }
+
+    return current;
 }
 
 static TimeSignature? ResolveFinalTimeSignature(
