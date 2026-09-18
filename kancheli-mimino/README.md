@@ -1,6 +1,6 @@
 # Semantic interpretation artifacts - artifacts
 
-Commit: `7981371ccbe6539c7f3709b47b6180be06514963`
+Commit: `1a9f141e08be507e63eb1511f2f72e3d8dc20220`
 
 - [Compressed MusicXML (.mxl)](kancheli.semantic.mxl) — Primary end-to-end result for opening in MuseScore.
 - [MusicXML (.musicxml)](kancheli.semantic.musicxml) — Generated MusicXML before compression.
