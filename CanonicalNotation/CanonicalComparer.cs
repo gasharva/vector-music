@@ -605,7 +605,9 @@ public sealed class CanonicalComparer
         int measure,
         CanonicalEvent expected,
         CanonicalEvent actual,
-        ICollection<CanonicalDiffIssue> issues)
+        ICollection<CanonicalDiffIssue> issues,
+        string? rootCause = null,
+        string? rootCauseSummary = null)
     {
         var staff = EventStaff(expected) ?? EventStaff(actual);
         var at = expected.At;
@@ -613,17 +615,23 @@ public sealed class CanonicalComparer
         CompareScalar(issues, CanonicalDiffCategory.Rhythm, "event.duration",
             part, measure, staff, at,
             expected.Duration, actual.Duration,
-            $"{DescribeEvent(expected)} duration differs.");
+            $"{DescribeEvent(expected)} duration differs.",
+            rootCause: rootCause,
+            rootCauseSummary: rootCauseSummary);
 
         CompareScalar(issues, CanonicalDiffCategory.Rhythm, "event.voice",
             part, measure, staff, at,
             expected.Voice?.ToString(), actual.Voice?.ToString(),
-            $"{DescribeEvent(expected)} voice differs.");
+            $"{DescribeEvent(expected)} voice differs.",
+            rootCause: rootCause,
+            rootCauseSummary: rootCauseSummary);
 
         CompareScalar(issues, CanonicalDiffCategory.Rhythm, "event.staff",
             part, measure, staff, at,
             expected.Staff?.ToString(), actual.Staff?.ToString(),
-            $"{DescribeEvent(expected)} staff differs.");
+            $"{DescribeEvent(expected)} staff differs.",
+            rootCause: rootCause,
+            rootCauseSummary: rootCauseSummary);
 
         CompareScalar(issues, CanonicalDiffCategory.Notation, "event.grace",
             part, measure, staff, at,
@@ -654,7 +662,8 @@ public sealed class CanonicalComparer
             CompareScalar(issues, CanonicalDiffCategory.Text, "text.role",
                 part, measure, staff, at,
                 expected.TextRole, actual.TextRole,
-                "Text semantic role differs.");
+                "Text semantic role differs.",
+                expectedNullIsWildcard: true);
         }
         else if (expected.Type is "dynamic" or "navigation")
         {
@@ -681,7 +690,8 @@ public sealed class CanonicalComparer
         CompareScalar(issues, CategoryFor(expected), "event.placement",
             part, measure, staff, at,
             expected.Placement, actual.Placement,
-            $"{DescribeEvent(expected)} placement differs.");
+            $"{DescribeEvent(expected)} placement differs.",
+            expectedNullIsWildcard: true);
     }
 
     private static void CompareNotes(
@@ -1065,7 +1075,6 @@ public sealed class CanonicalComparer
         CanonicalEvent actual) =>
         string.Equals(expected.Type, actual.Type, StringComparison.Ordinal)
         && string.Equals(expected.At, actual.At, StringComparison.Ordinal)
-        && expected.Voice == actual.Voice
         && EventStaff(expected) == EventStaff(actual);
 
     private static double Similarity(
