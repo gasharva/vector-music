@@ -68,6 +68,68 @@ public sealed class MeasureEndOnsetRefinementPass : ISemanticPass
                     continue;
                 }
 
+                foreach (var voiceGroup in byVoice)
+                {
+                    var single = voiceGroup.ToArray();
+                    if (single.Length != 1)
+                    {
+                        continue;
+                    }
+
+                    var ev = single[0];
+                    if (ev.Voice.TargetKind == VoiceTargetKind.Rest
+                        || !string.Equals(ev.Onset.At, "0", StringComparison.Ordinal)
+                        || !ev.Onset.Reason.Contains(
+                            "no cross-voice x anchor",
+                            StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    var duration = Fraction.Parse(ev.Duration);
+                    var endFit = currentMeasureLength - duration;
+                    var endFitValue = ToDouble(endFit);
+                    var measureLength = ToDouble(currentMeasureLength);
+                    if (endFitValue <= FractionTolerance
+                        || endFitValue >= measureLength - FractionTolerance)
+                    {
+                        continue;
+                    }
+
+                    var width = measure.XEnd - measure.XStart;
+                    if (width <= 1e-6)
+                    {
+                        continue;
+                    }
+
+                    var t = Math.Clamp(
+                        (ev.Voice.AnchorX - measure.XStart) / width,
+                        0,
+                        1);
+                    var estimate = t * measureLength;
+                    var currentError = Math.Abs(estimate);
+                    var endFitError = Math.Abs(estimate - endFitValue);
+
+                    if (currentError - endFitError < MinimumImprovement)
+                    {
+                        continue;
+                    }
+
+                    corrections.Add((
+                        ev.Onset,
+                        ev.Onset with
+                        {
+                            At = endFit.Reduce().ToString(),
+                            Confidence = Math.Min(
+                                ev.Onset.Confidence + 0.25,
+                                0.86),
+                            Reason = ev.Onset.Reason
+                                + $"; measure-end fallback: page geometry estimates {estimate:F3}, "
+                                + $"and duration {duration} ending at {currentMeasureLength} "
+                                + $"implies onset {endFit}"
+                        }));
+                }
+
                 var backbone = byVoice
                     .OrderByDescending(g => g.Count())
                     .ThenBy(g => g.Key)
