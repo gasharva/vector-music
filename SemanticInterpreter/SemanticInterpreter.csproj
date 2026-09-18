@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="../SvgScene/SvgScene.csproj" />
     <ProjectReference Include="../CanonicalNotation/CanonicalNotation.Cli.csproj" />
+    <PackageReference Include="RapidOcrNet" Version="4.2.0" />
   </ItemGroup>
 
 </Project>
