@@ -23,6 +23,16 @@ public sealed class MusicXmlCanonicalizer
         var title = root.Element("work")?.Element("work-title")?.Value.Trim();
         var composer = root.Element("identification")?.Elements("creator")
             .FirstOrDefault(x => (string?)x.Attribute("type") == "composer")?.Value.Trim();
+        var subtitle = root.Elements("credit")
+            .FirstOrDefault(credit =>
+                string.Equals(
+                    credit.Element("credit-type")?.Value.Trim(),
+                    "subtitle",
+                    StringComparison.OrdinalIgnoreCase))
+            ?.Elements("credit-words")
+            .FirstOrDefault()
+            ?.Value
+            .Trim();
 
         var partNames = root.Element("part-list")?.Elements("score-part")
             .ToDictionary(
@@ -46,8 +56,8 @@ public sealed class MusicXmlCanonicalizer
 
         return new CanonicalNotation(
             "CanonicalNotation",
-            "0.3",
-            new Metadata(title, composer),
+            "0.4",
+            new Metadata(title, composer, subtitle),
             parts,
             BuildRelations());
     }
