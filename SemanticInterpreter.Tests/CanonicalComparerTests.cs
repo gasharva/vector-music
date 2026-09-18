@@ -184,6 +184,39 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
+    public void RelationIdentity_IgnoresVoiceLabelButVoiceDifferenceRemainsVisible()
+    {
+        var expected = RelationVoiceScore(
+            changedFirstVoice: false);
+        var actual = RelationVoiceScore(
+            changedFirstVoice: true);
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Code == "event.voice");
+
+        Assert.DoesNotContain(
+            report.Issues,
+            issue => issue.Code.StartsWith(
+                "relation.beam",
+                StringComparison.Ordinal));
+        Assert.DoesNotContain(
+            report.Issues,
+            issue => issue.Code.StartsWith(
+                "relation.tie",
+                StringComparison.Ordinal));
+        Assert.DoesNotContain(
+            report.Issues,
+            issue => issue.Code.StartsWith(
+                "relation.slur",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void InterstaffDynamicBelowUpper_EqualsAboveLowerStaff()
     {
         var expected = DirectionScore(
@@ -414,6 +447,79 @@ public sealed class CanonicalComparerTests
             new Metadata(),
             [new Part("P1", "Piano", measures)],
             EmptyRelations());
+    }
+
+    private static CanonicalNotation RelationVoiceScore(
+        bool changedFirstVoice)
+    {
+        var first = Chord(
+            changedFirstVoice ? "a1" : "e1",
+            "0",
+            "1/8",
+            "C4") with
+        {
+            Voice = changedFirstVoice ? 3 : 1
+        };
+        var second = Chord(
+            changedFirstVoice ? "a2" : "e2",
+            "1/8",
+            "1/8",
+            "D4") with
+        {
+            Voice = 2
+        };
+        var third = Chord(
+            changedFirstVoice ? "a3" : "e3",
+            "1/4",
+            "1/8",
+            "E4") with
+        {
+            Voice = 2
+        };
+
+        return new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [first, second, third],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                1,
+                                [new Clef(1, "G", 2)]))
+                    ])
+            ],
+            new Relations(
+                [
+                    new BeamRelation(
+                        "beam-1",
+                        1,
+                        [first.Id, second.Id, third.Id])
+                ],
+                [
+                    new TieRelation(
+                        "tie-1",
+                        new NoteAnchor(first.Id, "C4"),
+                        new NoteAnchor(second.Id, "D4"))
+                ],
+                [
+                    new SlurRelation(
+                        "slur-1",
+                        first.Id,
+                        third.Id)
+                ],
+                [],
+                [],
+                [],
+                [],
+                []));
     }
 
     private static CanonicalNotation DirectionScore(
