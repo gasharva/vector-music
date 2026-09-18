@@ -132,6 +132,41 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
+    public void SameRestOnWrongStaff_IsOneStaffIssueNotMissingPlusExtra()
+    {
+        var expectedRest = new CanonicalEvent
+        {
+            Id = "expected-rest",
+            Type = "rest",
+            At = "0",
+            Staff = 1,
+            Voice = 2,
+            Duration = "1/8",
+            Notation = new EventNotation("eighth")
+        };
+        var actualRest = expectedRest with
+        {
+            Id = "actual-rest",
+            Staff = 2,
+            Voice = 5
+        };
+
+        var expected = ScoreWithEvents(expectedRest);
+        var actual = ScoreWithEvents(actualRest);
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Code == "event.staff");
+        Assert.DoesNotContain(
+            report.Issues,
+            issue => issue.Code is "event.missing" or "event.extra");
+    }
+
+    [Fact]
     public void GloballySwappedPolyphonicVoiceLabels_AreCompensated()
     {
         var expected = PolyphonicVoiceScore(
