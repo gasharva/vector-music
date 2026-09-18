@@ -42,6 +42,7 @@ jobs:
         run: |
           dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
           dotnet build Tools/TextOcrDiagnostics/TextOcrDiagnostics.csproj --configuration Release
+          dotnet build Tools/SvgScoreBatch/SvgScoreBatch.csproj --configuration Release
 
       - name: Interpret Kancheli Mimino SVG
         shell: bash
