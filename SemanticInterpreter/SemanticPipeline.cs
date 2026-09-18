@@ -22,6 +22,11 @@ public sealed class SemanticPipeline
     public SemanticPipeline(IEnumerable<ISemanticPass> passes)
     {
         var materialized = passes.ToList();
+        var deferredTextPasses = materialized
+            .Where(pass => pass is TextPass)
+            .ToArray();
+        materialized.RemoveAll(pass => pass is TextPass);
+
 
         // Grace heads are not a parallel note-recognition path. NoteheadPass first
         // accepts every notehead; this pass only tags a reduced-size subcluster so
@@ -230,6 +235,11 @@ public sealed class SemanticPipeline
         {
             materialized.Add(new ClassifiedSymbolPass());
         }
+
+        // Text semantics deliberately runs after all music passes, including the
+        // residual classified-symbol pass. It may inspect music evidence but never
+        // removes or rewrites already accepted musical facts.
+        materialized.AddRange(deferredTextPasses);
 
         _passes = materialized;
     }
