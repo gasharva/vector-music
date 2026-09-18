@@ -6,6 +6,13 @@ namespace SvgMusic.Scene;
 /// primitives on their own, but the classifier expects them together with the
 /// main clef contour.
 /// </summary>
+public sealed record BassClefCompositeRepairStatistics(
+    int Prototypes,
+    int DotPairCandidates,
+    int CompositeClassifications,
+    int ReusedConfidentFClefs,
+    int AbsorbedEllipses);
+
 public sealed class BassClefCompositeRepair
 {
     private const double MinimumConfidence = 0.75;
@@ -25,6 +32,9 @@ public sealed class BassClefCompositeRepair
 
     public IReadOnlyList<string> Diagnostics => _diagnostics;
 
+    public BassClefCompositeRepairStatistics LastStatistics { get; private set; } =
+        new(0, 0, 0, 0, 0);
+
     public NotationScene Repair(
         GeometricScene geometry,
         NotationScene notation,
@@ -43,6 +53,12 @@ public sealed class BassClefCompositeRepair
         var absorbedByInstance = new Dictionary<string, IReadOnlyList<string>>(
             StringComparer.Ordinal);
         var consumedEllipseShapeIds = new HashSet<string>(StringComparer.Ordinal);
+        var filledEllipses = notation.Ellipses
+            .Where(ellipse => !ellipse.IsHollow)
+            .ToArray();
+        var dotPairCandidates = 0;
+        var compositeClassifications = 0;
+        var reusedConfidentFClefs = 0;
 
         foreach (var prototype in notation.Prototypes)
         {
@@ -55,13 +71,15 @@ public sealed class BassClefCompositeRepair
 
             var representativePair = FindDotPair(
                 mainShape,
-                notation.Ellipses,
+                filledEllipses,
                 consumedEllipseShapeIds);
 
             if (representativePair is null)
             {
                 continue;
             }
+
+            dotPairCandidates++;
 
             var dotShapes = representativePair
                 .Select(ellipse => shapesById.GetValueOrDefault(ellipse.ShapeId))
@@ -78,9 +96,29 @@ public sealed class BassClefCompositeRepair
                 $"CANDIDATE {prototype.Id} main={mainShape.Id} "
                 + $"dots={string.Join(',', representativePair.Select(item => item.ShapeId))}");
 
-            var classification = ClassifyComposite(
-                [mainShape, .. dotShapes],
-                sourceInterline);
+            var existing = classifications.GetValueOrDefault(
+                prototype.Id);
+            SymbolClassification? classification;
+
+            if (existing is not null
+                && existing.Label.Equals(
+                    "F_CLEF",
+                    StringComparison.Ordinal)
+                && existing.Confidence >= MinimumConfidence)
+            {
+                // The prototype classifier already proved this is an F clef.
+                // The repair step only needs the dots to absorb them; running the
+                // expensive three-scale composite classifier again adds no evidence.
+                classification = existing;
+                reusedConfidentFClefs++;
+            }
+            else
+            {
+                compositeClassifications++;
+                classification = ClassifyComposite(
+                    [mainShape, .. dotShapes],
+                    sourceInterline);
+            }
 
             if (classification is null)
             {
@@ -118,7 +156,7 @@ public sealed class BassClefCompositeRepair
 
                 var pair = FindDotPair(
                     instanceShape,
-                    notation.Ellipses,
+                    filledEllipses,
                     consumedEllipseShapeIds);
 
                 if (pair is null)
@@ -165,8 +203,19 @@ public sealed class BassClefCompositeRepair
             .Where(ellipse => !consumedEllipseShapeIds.Contains(ellipse.ShapeId))
             .ToArray();
 
+        LastStatistics = new BassClefCompositeRepairStatistics(
+            notation.Prototypes.Count,
+            dotPairCandidates,
+            compositeClassifications,
+            reusedConfidentFClefs,
+            consumedEllipseShapeIds.Count);
+
         _diagnostics.Add(
-            $"SUMMARY   absorbedEllipses={consumedEllipseShapeIds.Count}; "
+            $"SUMMARY   prototypes={LastStatistics.Prototypes}; "
+            + $"dotPairCandidates={LastStatistics.DotPairCandidates}; "
+            + $"compositeClassifications={LastStatistics.CompositeClassifications}; "
+            + $"reusedConfidentFClefs={LastStatistics.ReusedConfidentFClefs}; "
+            + $"absorbedEllipses={consumedEllipseShapeIds.Count}; "
             + $"remainingEllipses={ellipses.Length}");
 
         return notation with
@@ -232,12 +281,22 @@ public sealed class BassClefCompositeRepair
 
         var maxDistance = mainShape.Bounds.Width * 0.5;
 
+        // Before this filter every prototype scanned all filled ellipses to its
+        // right and then tried every pair, including noteheads on unrelated
+        // staves. A real F-clef dot pair must live vertically next to the main
+        // contour, so this cheap bounding window collapses the quadratic pair
+        // search to a handful of local ellipses without changing viable pairs.
+        var minY = mainShape.Bounds.MinY - maxDistance;
+        var maxY = mainShape.Bounds.MaxY + maxDistance;
+
         var candidates = ellipses
-            .Where(ellipse => !ellipse.IsHollow)
             .Where(ellipse => !excludedShapeIds.Contains(ellipse.ShapeId))
             .Where(ellipse => ellipse.Center.X > mainShape.Bounds.MaxX)
             .Where(ellipse =>
                 ellipse.Center.X - mainShape.Bounds.MaxX <= maxDistance)
+            .Where(ellipse =>
+                ellipse.Center.Y >= minY
+                && ellipse.Center.Y <= maxY)
             .OrderBy(ellipse => ellipse.Center.Y)
             .ToArray();
 
@@ -252,9 +311,13 @@ public sealed class BassClefCompositeRepair
                 var verticalDistance = lower.Center.Y - upper.Center.Y;
                 var horizontalDistance = Math.Abs(lower.Center.X - upper.Center.X);
 
+                var pairCenterY = (upper.Center.Y + lower.Center.Y) / 2.0;
+
                 if (verticalDistance <= 0
                     || verticalDistance > maxDistance
-                    || horizontalDistance > maxDistance)
+                    || horizontalDistance > maxDistance
+                    || pairCenterY < mainShape.Bounds.MinY
+                    || pairCenterY > mainShape.Bounds.MaxY)
                 {
                     continue;
                 }
