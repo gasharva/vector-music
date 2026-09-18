@@ -157,7 +157,7 @@
       ],
       "Recognition": {
         "Text": "Cantabile ( = 62)",
-        "Confidence": 0.967593
+        "Confidence": 0.967592
       }
     },
     {
@@ -340,7 +340,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962388
+        "Confidence": 0.962387
       }
     },
     {
@@ -375,7 +375,7 @@
       ],
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.912874
+        "Confidence": 0.912873
       }
     },
     {
@@ -458,7 +458,7 @@
       ],
       "Recognition": {
         "Text": "0",
-        "Confidence": 0.660789
+        "Confidence": 0.660788
       }
     },
     {
@@ -529,7 +529,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
@@ -547,7 +547,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962271
+        "Confidence": 0.96227
       }
     },
     {
@@ -631,7 +631,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991929
+        "Confidence": 0.991928
       }
     },
     {
@@ -745,7 +745,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962497
+        "Confidence": 0.962496
       }
     },
     {
@@ -1025,7 +1025,7 @@
       ],
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.729871
+        "Confidence": 0.729872
       }
     },
     {
@@ -1098,7 +1098,7 @@
       ],
       "Recognition": {
         "Text": "0",
-        "Confidence": 0.663357
+        "Confidence": 0.663358
       }
     },
     {
@@ -1116,7 +1116,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962497
+        "Confidence": 0.962496
       }
     }
   ]

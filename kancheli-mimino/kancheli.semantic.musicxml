@@ -376,12 +376,6 @@
     <measure number="4">
       <direction placement="below">
         <direction-type>
-          <words>mp</words>
-        </direction-type>
-        <staff>1</staff>
-      </direction>
-      <direction placement="below">
-        <direction-type>
           <wedge type="crescendo" number="1" />
         </direction-type>
         <staff>1</staff>
@@ -898,12 +892,6 @@
       </note>
     </measure>
     <measure number="8">
-      <direction placement="above">
-        <direction-type>
-          <words>Ped.</words>
-        </direction-type>
-        <staff>1</staff>
-      </direction>
       <direction placement="below">
         <direction-type>
           <pedal type="resume" number="2" line="yes" sign="yes" />
@@ -1349,12 +1337,6 @@
       </note>
     </measure>
     <measure number="12">
-      <direction placement="below">
-        <direction-type>
-          <words>mp</words>
-        </direction-type>
-        <staff>1</staff>
-      </direction>
       <direction placement="below">
         <direction-type>
           <wedge type="crescendo" number="2" />

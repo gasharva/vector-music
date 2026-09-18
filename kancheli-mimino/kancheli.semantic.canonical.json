@@ -487,15 +487,6 @@
               "staff": 2,
               "value": "mp",
               "placement": "above"
-            },
-            {
-              "id": "m4-text-fallback-train:6",
-              "type": "text",
-              "at": "0",
-              "staff": 1,
-              "text": "mp",
-              "textRole": "Instruction",
-              "placement": "below"
             }
           ]
         },
@@ -1010,15 +1001,6 @@
                 "noteType": "quarter",
                 "stem": "up"
               }
-            },
-            {
-              "id": "m8-text-fallback-train:11",
-              "type": "text",
-              "at": "0",
-              "staff": 1,
-              "text": "Ped.",
-              "textRole": "Instruction",
-              "placement": "above"
             }
           ]
         },
@@ -1464,15 +1446,6 @@
               "staff": 2,
               "value": "mp",
               "placement": "above"
-            },
-            {
-              "id": "m12-text-fallback-train:18",
-              "type": "text",
-              "at": "0",
-              "staff": 1,
-              "text": "mp",
-              "textRole": "Instruction",
-              "placement": "below"
             }
           ]
         },
