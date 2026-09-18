@@ -119,12 +119,13 @@ switch (command)
                 ? "Canonical scores are semantically equal."
                 : $"{report.Issues.Count} semantic difference(s).");
 
-        foreach (var group in report.Issues
-                     .GroupBy(issue => issue.Category)
+        foreach (var group in report.RootCauses
+                     .GroupBy(root => root.Category)
                      .OrderBy(group => group.Key))
         {
             Console.WriteLine(
-                $"  {group.Key,-12} {group.Count(),4}");
+                $"  {group.Key,-12} roots={group.Count(),3} "
+                + $"details={group.Sum(root => root.Issues.Count),4}");
         }
 
         Console.WriteLine(markdownPath);
