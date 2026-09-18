@@ -174,37 +174,52 @@ public sealed record CanonicalDiffReport(
             return issue.RootCause!;
         }
 
-        return issue.Code switch
+        if (issue.Code is "metadata.title"
+            or "metadata.subtitle"
+            or "metadata.composer")
         {
-            "metadata.title"
-                or "metadata.subtitle"
-                or "metadata.composer"
-                => issue.Code,
+            return issue.Code;
+        }
 
-            "time" or "key" or "staves" or "clef"
-                => issue.Code,
+        if (issue.Code is "time" or "key" or "staves" or "clef")
+        {
+            return issue.Code;
+        }
 
-            "event.missing" or "event.extra"
-                => $"{issue.Code}:{issue.Part}:m{issue.Measure}:s{issue.Staff}",
+        var location =
+            $"{issue.Part}:m{issue.Measure}:s{issue.Staff}:at{issue.At}";
 
-            _ => $"{issue.Code}:{issue.Part}:m{issue.Measure}:s{issue.Staff}"
+        return issue.Category switch
+        {
+            CanonicalDiffCategory.Rhythm => $"rhythm:{location}",
+            CanonicalDiffCategory.Pitch => $"pitch:{location}",
+            CanonicalDiffCategory.Notation => $"notation:{location}",
+            CanonicalDiffCategory.Text => $"text:{location}",
+            _ => $"{issue.Code}:{location}"
         };
     }
 
     private static string GenericRootCauseSummary(
         CanonicalDiffIssue issue)
     {
-        return issue.Code switch
+        if (issue.Code == "metadata.title") return "Title metadata differs";
+        if (issue.Code == "metadata.subtitle") return "Subtitle metadata differs";
+        if (issue.Code == "metadata.composer") return "Composer metadata differs";
+        if (issue.Code == "time") return "Time-signature state differs";
+        if (issue.Code == "key") return "Key-signature state differs";
+        if (issue.Code == "staves") return "Staff-count model differs";
+        if (issue.Code == "clef") return "Clef state differs";
+
+        return issue.Category switch
         {
-            "metadata.title" => "Title metadata differs",
-            "metadata.subtitle" => "Subtitle metadata differs",
-            "metadata.composer" => "Composer metadata differs",
-            "time" => "Time-signature state differs",
-            "key" => "Key-signature state differs",
-            "staves" => "Staff-count model differs",
-            "clef" => "Clef state differs",
-            "event.missing" => $"Missing event(s) near {CompactLocation(issue)}",
-            "event.extra" => $"Unexpected event(s) near {CompactLocation(issue)}",
+            CanonicalDiffCategory.Rhythm =>
+                $"Rhythm/event interpretation — {CompactLocation(issue)}",
+            CanonicalDiffCategory.Pitch =>
+                $"Pitch/chord interpretation — {CompactLocation(issue)}",
+            CanonicalDiffCategory.Notation =>
+                $"Notation interpretation — {CompactLocation(issue)}",
+            CanonicalDiffCategory.Text =>
+                $"Text/tempo interpretation — {CompactLocation(issue)}",
             _ => $"{issue.Code} at {CompactLocation(issue)}"
         };
     }
