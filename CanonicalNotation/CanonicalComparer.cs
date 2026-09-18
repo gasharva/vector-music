@@ -16,6 +16,13 @@ public enum CanonicalDiffCategory
     Relations
 }
 
+public enum CanonicalDiffSeverity
+{
+    Warning = 0,
+    Error = 1,
+    Critical = 2
+}
+
 public sealed record CanonicalDiffIssue(
     CanonicalDiffCategory Category,
     string Code,
@@ -31,6 +38,9 @@ public sealed record CanonicalDiffIssue(
     int? Page = null,
     int? LocalMeasure = null)
 {
+    public CanonicalDiffSeverity Severity =>
+        CanonicalDiffSeverityPolicy.GetSeverity(this);
+
     [JsonIgnore]
     public string Location
     {
@@ -64,6 +74,23 @@ public sealed record CanonicalDiffReport(
     IReadOnlyList<CanonicalDiffIssue> Issues)
 {
     public bool IsEqual => Issues.Count == 0;
+
+    public CanonicalDiffReport Filter(
+        CanonicalDiffSeverity minimumSeverity) =>
+        new(
+            Issues
+                .Where(issue => issue.Severity >= minimumSeverity)
+                .ToArray());
+
+    public int HiddenBelow(
+        CanonicalDiffSeverity minimumSeverity) =>
+        Issues.Count(issue =>
+            issue.Severity < minimumSeverity);
+
+    public IReadOnlyDictionary<CanonicalDiffSeverity, int> SeverityCounts =>
+        Issues
+            .GroupBy(issue => issue.Severity)
+            .ToDictionary(group => group.Key, group => group.Count());
 
     public IReadOnlyDictionary<CanonicalDiffCategory, int> Counts =>
         Issues
@@ -125,6 +152,8 @@ public sealed record CanonicalDiffReport(
                     sb.Append("- ")
                         .Append(issue.Location)
                         .Append(" — **")
+                        .Append(issue.Severity)
+                        .Append("] ")
                         .Append(issue.Code)
                         .Append("** ")
                         .AppendLine(issue.Message);
@@ -259,6 +288,78 @@ public sealed record CanonicalDiffReport(
         {
             return double.PositiveInfinity;
         }
+    }
+}
+
+internal static class CanonicalDiffSeverityPolicy
+{
+    public static CanonicalDiffSeverity GetSeverity(
+        CanonicalDiffIssue issue)
+    {
+        if (issue.Code == "event.voice")
+        {
+            return CanonicalDiffSeverity.Warning;
+        }
+
+        if (issue.Code == "event.onset"
+            && issue.Message.StartsWith(
+                "text '",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            return CanonicalDiffSeverity.Warning;
+        }
+
+        if (issue.Code == "note.accidental"
+            && SameAccidentalKind(
+                issue.Expected,
+                issue.Actual))
+        {
+            return CanonicalDiffSeverity.Warning;
+        }
+
+        if (issue.Category == CanonicalDiffCategory.Pitch)
+        {
+            return CanonicalDiffSeverity.Critical;
+        }
+
+        if (issue.Category == CanonicalDiffCategory.Rhythm)
+        {
+            return CanonicalDiffSeverity.Critical;
+        }
+
+        if (issue.Code.StartsWith(
+                "relation.tie.",
+                StringComparison.Ordinal)
+            || issue.Code.StartsWith(
+                "relation.hairpin.",
+                StringComparison.Ordinal))
+        {
+            return CanonicalDiffSeverity.Critical;
+        }
+
+        return CanonicalDiffSeverity.Error;
+    }
+
+    private static bool SameAccidentalKind(
+        string expected,
+        string actual)
+    {
+        static string Kind(string value)
+        {
+            var index = value.IndexOf(':');
+            return index < 0
+                ? value.Trim()
+                : value[..index].Trim();
+        }
+
+        var left = Kind(expected);
+        var right = Kind(actual);
+
+        return !string.IsNullOrWhiteSpace(left)
+            && string.Equals(
+                left,
+                right,
+                StringComparison.OrdinalIgnoreCase);
     }
 }
 
