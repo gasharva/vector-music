@@ -8,7 +8,7 @@ if (args.Length < 2)
     Console.Error.WriteLine(
         "Usage: dotnet run -- <input.svg> <output-directory> "
         + "[--title <title>] [--composer <composer>] [--model <basic-classifier.zip>] "
-        + "[--initial-time <beats/beat-type>]");
+        + "[--initial-time <beats/beat-type>] [--initial-key <fifths>]");
     return 2;
 }
 
@@ -19,6 +19,8 @@ var composer = ReadOption(args, "--composer");
 var modelPath = ReadOption(args, "--model");
 var inheritedTimeSignature = ParseTimeSignatureOption(
     ReadOption(args, "--initial-time"));
+var inheritedKeySignature = ParseKeySignatureOption(
+    ReadOption(args, "--initial-key"));
 
 Directory.CreateDirectory(outputDirectory);
 
@@ -150,7 +152,7 @@ var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
         new TimeSignaturePass(inheritedTimeSignature),
-        new KeySignaturePass(),
+        new KeySignaturePass(inheritedKeySignature),
         noteheadPass,
         accidentalPass,
         new PitchPass(),
@@ -555,6 +557,24 @@ static string? ReadOption(
     return arguments[index + 1];
 }
 
+static int? ParseKeySignatureOption(string? value)
+{
+    if (string.IsNullOrWhiteSpace(value))
+    {
+        return null;
+    }
+
+    if (!int.TryParse(value, out var fifths)
+        || fifths < -7
+        || fifths > 7)
+    {
+        throw new ArgumentException(
+            $"Invalid --initial-key value '{value}'. Expected an integer from -7 to 7.");
+    }
+
+    return fifths;
+}
+
 static (int Beats, int BeatType)? ParseTimeSignatureOption(
     string? value)
 {
@@ -625,6 +645,7 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                 yield return $"key m{key.MeasureNumber} fifths={key.Fifths} "
                     + $"kind={key.AccidentalKind} count={key.AccidentalCount} "
                     + $"x={key.MinX:F2}..{key.MaxX:F2}; "
+                    + $"inherited={key.IsInherited}; "
                     + $"shapes={string.Join(',', key.SourceShapeIds)}; "
                     + $"reason={key.Reason}";
                 break;
