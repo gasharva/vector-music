@@ -56,8 +56,6 @@ jobs:
             -- \
             Samples/kancheli-mimino/kancheli-mimino.svg \
             artifacts \
-            --title "YELLOW LEAVES (Mimino)" \
-            --composer "Giya Kancheli" \
             | tee artifacts/semantic-run.log
 
       - name: Generate OCR text diagnostics
@@ -149,6 +147,8 @@ jobs:
           grep -q '^canonical.pedals=4$' artifacts/semantic-summary.txt
           grep -q '^parser.verticalZigZags=' artifacts/semantic-summary.txt
           test -f artifacts/parser.ocr.runs.svg
+          test -f artifacts/semantic.text.svg
+          grep -q '^semantic.text=' artifacts/semantic-summary.txt
 
           python3 - <<'PY'
           from pathlib import Path
@@ -299,6 +299,7 @@ jobs:
             semantic.stems.svg
             semantic.beams.svg
             semantic.dots.svg
+            semantic.text.svg
             semantic.noteheads.txt
             zigzag-scene.json
             glyph-svg-export.log
