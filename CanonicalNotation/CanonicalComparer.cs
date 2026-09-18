@@ -585,94 +585,154 @@ public sealed class CanonicalComparer
         IReadOnlyList<CanonicalNote> actual,
         ICollection<CanonicalDiffIssue> issues)
     {
-        var expectedOrdered = expected
-            .OrderBy(note => note.Staff)
-            .ThenBy(note => PitchValue(note.Pitch))
-            .ThenBy(note => note.Pitch)
-            .ToArray();
-        var actualOrdered = actual
-            .OrderBy(note => note.Staff)
-            .ThenBy(note => PitchValue(note.Pitch))
-            .ThenBy(note => note.Pitch)
-            .ToArray();
-
-        if (expectedOrdered.Length != actualOrdered.Length)
+        if (expected.Count != actual.Count)
         {
             issues.Add(new CanonicalDiffIssue(
                 CanonicalDiffCategory.Pitch,
                 "chord.note-count",
                 part,
                 measure,
-                expectedOrdered.FirstOrDefault()?.Staff,
+                expected.FirstOrDefault()?.Staff,
                 at,
-                expectedOrdered.Length.ToString(),
-                actualOrdered.Length.ToString(),
+                expected.Count.ToString(),
+                actual.Count.ToString(),
                 "Chord note count differs."));
         }
 
-        var count = Math.Min(
-            expectedOrdered.Length,
-            actualOrdered.Length);
+        var remaining = actual
+            .Select((note, index) => new IndexedNote(index, note))
+            .ToList();
 
-        for (var index = 0; index < count; index++)
+        foreach (var expectedNote in expected
+                     .OrderBy(note => note.Staff)
+                     .ThenBy(note => PitchValue(note.Pitch))
+                     .ThenBy(note => note.Pitch))
         {
-            var expectedNote = expectedOrdered[index];
-            var actualNote = actualOrdered[index];
-            var staff = expectedNote.Staff ?? actualNote.Staff;
+            var match = remaining.FirstOrDefault(item =>
+                item.Note.Staff == expectedNote.Staff
+                && string.Equals(
+                    item.Note.Pitch,
+                    expectedNote.Pitch,
+                    StringComparison.Ordinal));
 
-            CompareScalar(issues, CanonicalDiffCategory.Pitch, "note.pitch",
-                part, measure, staff, at,
-                expectedNote.Pitch, actualNote.Pitch,
-                $"Pitch differs for chord note #{index + 1}.");
+            match ??= remaining.FirstOrDefault(item =>
+                string.Equals(
+                    item.Note.Pitch,
+                    expectedNote.Pitch,
+                    StringComparison.Ordinal));
 
-            CompareScalar(issues, CanonicalDiffCategory.Pitch, "note.staff",
-                part, measure, staff, at,
-                expectedNote.Staff?.ToString(),
-                actualNote.Staff?.ToString(),
-                $"Staff differs for {expectedNote.Pitch}.");
+            match ??= remaining
+                .Where(item => item.Note.Staff == expectedNote.Staff)
+                .OrderBy(item => Math.Abs(
+                    PitchValue(item.Note.Pitch)
+                    - PitchValue(expectedNote.Pitch)))
+                .FirstOrDefault();
 
-            CompareScalar(issues, CanonicalDiffCategory.Notation,
-                "note.accidental",
-                part, measure, staff, at,
-                AccidentalSignature(expectedNote.Accidental),
-                AccidentalSignature(actualNote.Accidental),
-                $"Explicit accidental differs for {expectedNote.Pitch}.");
+            match ??= remaining
+                .OrderBy(item => Math.Abs(
+                    PitchValue(item.Note.Pitch)
+                    - PitchValue(expectedNote.Pitch)))
+                .FirstOrDefault();
 
-            CompareSet(issues, CanonicalDiffCategory.Notation,
-                "note.technical",
-                part, measure, staff, at,
-                TechnicalSignatures(expectedNote.Technical),
-                TechnicalSignatures(actualNote.Technical),
-                $"Technical marks differ for {expectedNote.Pitch}.");
-        }
+            if (match is null)
+            {
+                issues.Add(new CanonicalDiffIssue(
+                    CanonicalDiffCategory.Pitch,
+                    "note.missing",
+                    part,
+                    measure,
+                    expectedNote.Staff,
+                    at,
+                    NoteSignature(expectedNote),
+                    "<missing>",
+                    $"Expected note {expectedNote.Pitch} is missing from chord."));
+                continue;
+            }
 
-        foreach (var note in expectedOrdered.Skip(count))
-        {
-            issues.Add(new CanonicalDiffIssue(
-                CanonicalDiffCategory.Pitch,
-                "note.missing",
+            remaining.Remove(match);
+            CompareNote(
                 part,
                 measure,
-                note.Staff,
                 at,
-                NoteSignature(note),
-                "<missing>",
-                $"Expected note {note.Pitch} is missing from chord."));
+                expectedNote,
+                match.Note,
+                issues);
         }
 
-        foreach (var note in actualOrdered.Skip(count))
+        foreach (var extra in remaining
+                     .OrderBy(item => item.Note.Staff)
+                     .ThenBy(item => PitchValue(item.Note.Pitch)))
         {
             issues.Add(new CanonicalDiffIssue(
                 CanonicalDiffCategory.Pitch,
                 "note.extra",
                 part,
                 measure,
-                note.Staff,
+                extra.Note.Staff,
                 at,
                 "<none>",
-                NoteSignature(note),
-                $"Unexpected note {note.Pitch} is present in chord."));
+                NoteSignature(extra.Note),
+                $"Unexpected note {extra.Note.Pitch} is present in chord."));
         }
+    }
+
+    private static void CompareNote(
+        string part,
+        int measure,
+        string at,
+        CanonicalNote expected,
+        CanonicalNote actual,
+        ICollection<CanonicalDiffIssue> issues)
+    {
+        var staff = expected.Staff ?? actual.Staff;
+
+        CompareScalar(
+            issues,
+            CanonicalDiffCategory.Pitch,
+            "note.pitch",
+            part,
+            measure,
+            staff,
+            at,
+            expected.Pitch,
+            actual.Pitch,
+            $"Pitch differs: expected {expected.Pitch}, got {actual.Pitch}.");
+
+        CompareScalar(
+            issues,
+            CanonicalDiffCategory.Pitch,
+            "note.staff",
+            part,
+            measure,
+            staff,
+            at,
+            expected.Staff?.ToString(),
+            actual.Staff?.ToString(),
+            $"Staff differs for note {expected.Pitch}.");
+
+        CompareScalar(
+            issues,
+            CanonicalDiffCategory.Notation,
+            "note.accidental",
+            part,
+            measure,
+            staff,
+            at,
+            AccidentalSignature(expected.Accidental),
+            AccidentalSignature(actual.Accidental),
+            $"Explicit accidental differs for {expected.Pitch}.");
+
+        CompareSet(
+            issues,
+            CanonicalDiffCategory.Notation,
+            "note.technical",
+            part,
+            measure,
+            staff,
+            at,
+            TechnicalSignatures(expected.Technical),
+            TechnicalSignatures(actual.Technical),
+            $"Technical marks differ for {expected.Pitch}.");
     }
 
     private static void CompareNotation(
@@ -1194,7 +1254,12 @@ public sealed class CanonicalComparer
         if (attributes.Staves is not null)
             state.Staves = attributes.Staves;
         if (attributes.Clefs is not null)
-            state.Clefs = attributes.Clefs;
+        {
+            foreach (var clef in attributes.Clefs)
+            {
+                state.Clefs[clef.Staff] = clef;
+            }
+        }
     }
 
     private sealed class AttributeState
@@ -1202,7 +1267,7 @@ public sealed class CanonicalComparer
         public TimeSignature? Time { get; set; }
         public KeySignature? Key { get; set; }
         public int? Staves { get; set; }
-        public IReadOnlyList<Clef>? Clefs { get; set; }
+        public Dictionary<int, Clef> Clefs { get; } = [];
     }
 
     private sealed record PartPair(
@@ -1212,4 +1277,8 @@ public sealed class CanonicalComparer
     private sealed record IndexedEvent(
         int Index,
         CanonicalEvent Event);
+
+    private sealed record IndexedNote(
+        int Index,
+        CanonicalNote Note);
 }
