@@ -141,6 +141,13 @@ public sealed class InterstaffRhythmRepairTests
             "0",
             Onset(facts, VoiceTargetKind.Rest, "rest").At);
 
+        Assert.Equal(
+            2,
+            VoiceOf(facts, VoiceTargetKind.Notehead, "long").LocalVoice);
+        Assert.Equal(
+            1,
+            VoiceOf(facts, VoiceTargetKind.Rest, "rest").LocalVoice);
+
         var expected = new[]
         {
             "1/8",
@@ -152,12 +159,19 @@ public sealed class InterstaffRhythmRepairTests
 
         for (var index = 0; index < expected.Length; index++)
         {
+            var id = $"melody-{index}";
             Assert.Equal(
                 expected[index],
                 Onset(
                     facts,
                     VoiceTargetKind.Notehead,
-                    $"melody-{index}").At);
+                    id).At);
+            Assert.Equal(
+                1,
+                VoiceOf(
+                    facts,
+                    VoiceTargetKind.Notehead,
+                    id).LocalVoice);
         }
     }
 
@@ -479,6 +493,16 @@ public sealed class InterstaffRhythmRepairTests
             0.99,
             "test voice",
             [id]);
+
+    private static VoiceFact VoiceOf(
+        SemanticFacts facts,
+        VoiceTargetKind kind,
+        string id) =>
+        Assert.Single(
+            facts.OfType<VoiceFact>(),
+            voice =>
+                voice.TargetKind == kind
+                && voice.TargetId == id);
 
     private static OnsetFact Onset(
         SemanticFacts facts,
