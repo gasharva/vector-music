@@ -78,23 +78,221 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
-    public void MarkdownGroupsIssuesByCategoryAndLocation()
+    public void MarkdownGroupsIssuesByCategoryAndRootCause()
     {
         var expected = Score(
             Chord("e1", "0", "1/4", "C4"));
         var actual = Score(
             Chord("a1", "0", "1/8", "D4"));
 
-        var markdown = new CanonicalComparer()
-            .Compare(expected, actual)
-            .ToMarkdown();
+        var report = new CanonicalComparer()
+            .Compare(expected, actual);
+        var markdown = report.ToMarkdown();
 
         Assert.Contains("## Rhythm", markdown);
         Assert.Contains("## Pitch", markdown);
-        Assert.Contains("### P1 / m1 / staff 1 / at 0", markdown);
+        Assert.Contains("root cause", markdown);
         Assert.Contains("event.duration", markdown);
         Assert.Contains("note.pitch", markdown);
+        Assert.NotEmpty(report.RootCauses);
     }
+
+    [Fact]
+    public void WrongVoiceAtSameOnset_DoesNotInventWrongOnset()
+    {
+        var expectedEvent = Chord("e1", "1/4", "1/4", "C4") with
+        {
+            Voice = 2
+        };
+        var actualEvent = Chord("a1", "1/4", "1/4", "C4") with
+        {
+            Voice = 1
+        };
+
+        var report = new CanonicalComparer().Compare(
+            Score(expectedEvent),
+            Score(actualEvent));
+
+        Assert.Contains(
+            report.Issues,
+            issue => issue.Code == "event.voice");
+        Assert.DoesNotContain(
+            report.Issues,
+            issue => issue.Code == "event.onset");
+    }
+
+    [Fact]
+    public void UnspecifiedSlurPlacement_DoesNotProduceMissingAndExtraPair()
+    {
+        var expected = ScoreWithSlur(
+            placement: null);
+        var actual = ScoreWithSlur(
+            placement: "above");
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.DoesNotContain(
+            report.Issues,
+            issue => issue.Code.StartsWith(
+                "relation.slur",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void SplitPianoParts_NormalizeToOneGrandStaff()
+    {
+        var upper = Chord(
+            "P1.m1.e1",
+            "0",
+            "1/4",
+            "C5");
+        var lower = Chord(
+            "P2.m1.e1",
+            "0",
+            "1/4",
+            "C3");
+
+        var expected = new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano RH",
+                    [
+                        new Measure(
+                            1,
+                            [upper],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                null,
+                                [new Clef(1, "G", 2)]))
+                    ]),
+                new Part(
+                    "P2",
+                    "Piano LH",
+                    [
+                        new Measure(
+                            1,
+                            [lower],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                null,
+                                [new Clef(1, "F", 4)]))
+                    ])
+            ],
+            EmptyRelations());
+
+        var actual = new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [
+                                upper with
+                                {
+                                    Id = "actual-upper",
+                                    Notes = [new CanonicalNote("C5", 1)]
+                                },
+                                lower with
+                                {
+                                    Id = "actual-lower",
+                                    Voice = 5,
+                                    Notes = [new CanonicalNote("C3", 2)]
+                                }
+                            ],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                2,
+                                [
+                                    new Clef(1, "G", 2),
+                                    new Clef(2, "F", 4)
+                                ]))
+                    ])
+            ],
+            EmptyRelations());
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.True(
+            report.IsEqual,
+            report.ToMarkdown());
+    }
+
+    private static CanonicalNotation ScoreWithSlur(
+        string? placement)
+    {
+        var first = Chord(
+            "e1",
+            "0",
+            "1/4",
+            "C4");
+        var second = Chord(
+            "e2",
+            "1/4",
+            "1/4",
+            "D4");
+
+        return new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [first, second],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                1,
+                                [new Clef(1, "G", 2)]))
+                    ])
+            ],
+            new Relations(
+                [],
+                [],
+                [
+                    new SlurRelation(
+                        "slur-1",
+                        first.Id,
+                        second.Id,
+                        placement)
+                ],
+                [],
+                [],
+                [],
+                [],
+                []));
+    }
+
+    private static Relations EmptyRelations() =>
+        new(
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []);
 
     private static CanonicalEvent Chord(
         string id,
