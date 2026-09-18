@@ -132,6 +132,42 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
+    public void GloballySwappedPolyphonicVoiceLabels_AreCompensated()
+    {
+        var expected = PolyphonicVoiceScore(
+            swapVoices: false);
+        var actual = PolyphonicVoiceScore(
+            swapVoices: true);
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.True(
+            report.IsEqual,
+            report.ToMarkdown());
+    }
+
+    [Fact]
+    public void InterstaffDynamicBelowUpper_EqualsAboveLowerStaff()
+    {
+        var expected = DirectionScore(
+            staff: 1,
+            placement: "below");
+        var actual = DirectionScore(
+            staff: 2,
+            placement: "above");
+
+        var report = new CanonicalComparer().Compare(
+            expected,
+            actual);
+
+        Assert.True(
+            report.IsEqual,
+            report.ToMarkdown());
+    }
+
+    [Fact]
     public void UnspecifiedSlurPlacement_DoesNotProduceMissingAndExtraPair()
     {
         var expected = ScoreWithSlur(
@@ -302,6 +338,86 @@ public sealed class CanonicalComparerTests
         Assert.True(
             report.IsEqual,
             report.ToMarkdown());
+    }
+
+    private static CanonicalNotation PolyphonicVoiceScore(
+        bool swapVoices)
+    {
+        int Voice(int expected) =>
+            swapVoices
+                ? expected == 1 ? 2 : 1
+                : expected;
+
+        var measures = new List<Measure>();
+
+        for (var measure = 1; measure <= 2; measure++)
+        {
+            measures.Add(new Measure(
+                measure,
+                [
+                    Chord($"v1-{measure}", "0", "1/4", measure == 1 ? "C4" : "D4") with
+                    {
+                        Voice = Voice(1)
+                    },
+                    Chord($"v2-{measure}", "1/4", "1/4", measure == 1 ? "G4" : "A4") with
+                    {
+                        Voice = Voice(2)
+                    }
+                ],
+                measure == 1
+                    ? new MeasureAttributes(
+                        new TimeSignature(4, 4),
+                        new KeySignature(0),
+                        1,
+                        [new Clef(1, "G", 2)])
+                    : null));
+        }
+
+        return new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [new Part("P1", "Piano", measures)],
+            EmptyRelations());
+    }
+
+    private static CanonicalNotation DirectionScore(
+        int staff,
+        string placement)
+    {
+        var dynamic = new CanonicalEvent
+        {
+            Id = "dynamic",
+            Type = "dynamic",
+            At = "0",
+            Staff = staff,
+            Value = "ppp",
+            Placement = placement
+        };
+
+        return new CanonicalNotation(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [dynamic],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                2,
+                                [
+                                    new Clef(1, "G", 2),
+                                    new Clef(2, "F", 4)
+                                ]))
+                    ])
+            ],
+            EmptyRelations());
     }
 
     private static CanonicalNotation ScoreWithSlur(
