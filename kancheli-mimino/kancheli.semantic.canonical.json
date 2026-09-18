@@ -117,7 +117,7 @@
             {
               "id": "m1-text-fallback-train:4",
               "type": "text",
-              "at": "3/16",
+              "at": "0",
               "staff": 1,
               "text": "Cantabile ( = 62)",
               "textRole": "Tempo",
@@ -493,7 +493,7 @@
               "type": "text",
               "at": "0",
               "staff": 1,
-              "text": "du",
+              "text": "mp",
               "textRole": "Instruction",
               "placement": "below"
             }
@@ -1470,7 +1470,7 @@
               "type": "text",
               "at": "0",
               "staff": 1,
-              "text": "du",
+              "text": "mp",
               "textRole": "Instruction",
               "placement": "below"
             }

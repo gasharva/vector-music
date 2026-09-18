@@ -581,108 +581,108 @@
     <rect x="2348.87" y="347.975" width="568.89" height="48.047" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="2348.87" y="342.975" fill="#7b2cbf">Composer: Giya Kancheli (1935-2019)<title>unowned header text above first system; avgGlyphHeight=31.72; OCR=98.3 %; semantic=98.3 %; avgGlyphHeight=31.72</title></text>
     <rect x="406.591" y="462.425" width="597.219" height="73.719" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="406.591" y="457.425" fill="#7b2cbf">Tempo: Cantabile ( = 62)<title>multi-glyph text above first measure of system; m1@3/16; OCR=96.8 %; semantic=96.8 %; avgGlyphHeight=39.20</title></text>
+    <text x="406.591" y="457.425" fill="#7b2cbf">Tempo: Cantabile ( = 62)<title>multi-glyph text above first measure of system; m1@0; OCR=96.8 %; semantic=96.8 %; avgGlyphHeight=39.20</title></text>
     <rect x="1596.42" y="671.118" width="27.062" height="73.961" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1596.42" y="666.118" fill="#777">Unknown: #<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=89.0 %; semantic=0.0 %; avgGlyphHeight=73.96</title></text>
+    <text x="1596.42" y="666.118" fill="#777">Unknown: #<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=89.0 %; semantic=0.0 %; avgGlyphHeight=73.96</title></text>
     <rect x="505.627" y="721.239" width="93.936" height="57.103" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="505.627" y="716.239" fill="#777">Unknown: 08.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=95.5 %; semantic=0.0 %; avgGlyphHeight=24.81</title></text>
+    <text x="505.627" y="716.239" fill="#777">Unknown: 08.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=95.5 %; semantic=0.0 %; avgGlyphHeight=24.81</title></text>
     <rect x="2771.33" y="730.964" width="78.04" height="47.281" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2771.33" y="725.964" fill="#7b2cbf">Instruction: du<title>text outside staff core near m4/s1@0; OCR=77.3 %; semantic=77.3 %; avgGlyphHeight=37.68</title></text>
+    <text x="2771.33" y="725.964" fill="#7b2cbf">Instruction: mp<title>text outside staff core near m4/s1@0; OCR=99.7 %; semantic=99.7 %; avgGlyphHeight=37.68</title></text>
     <rect x="2677.85" y="833.644" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2677.85" y="828.644" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2677.85" y="828.644" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="1637.6" y="847.504" width="60.968" height="112.543" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1637.6" y="842.504" fill="#777">Unknown: 0. 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=88.0 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="1637.6" y="842.504" fill="#777">Unknown: 0. 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=88.0 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="306.112" y="848.18" width="148.804" height="110.759" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="306.112" y="843.18" fill="#777">Unknown: 2: 1<title>rejected as text: music overlap=40 % or candidate lies in staff core; OCR=60.1 %; semantic=36.0 %; avgGlyphHeight=45.60</title></text>
+    <text x="306.112" y="843.18" fill="#777">Unknown: 2: 1<title>rejected as text: source glyph already belongs to accepted music (overlap=40 %) or candidate lies in staff core; OCR=60.1 %; semantic=36.0 %; avgGlyphHeight=45.60</title></text>
     <rect x="2560.13" y="861.364" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2560.13" y="856.364" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2560.13" y="856.364" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="1080.84" y="875.224" width="60.968" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1080.84" y="870.224" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="1080.84" y="870.224" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2442.41" y="875.224" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2442.41" y="870.224" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2442.41" y="870.224" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="538.596" y="902.944" width="60.967" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="538.596" y="897.944" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="538.596" y="897.944" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2324.7" y="930.664" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2324.7" y="925.664" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2324.7" y="925.664" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="2193.12" y="1096.89" width="108.89" height="61.6" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="2193.12" y="1091.89" fill="#7b2cbf">Instruction: Ped.<title>text outside staff core near m8/s1@0; OCR=91.3 %; semantic=91.3 %; avgGlyphHeight=35.96</title></text>
     <rect x="143.701" y="1118.05" width="34.656" height="44.53" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="143.701" y="1113.05" fill="#7b2cbf">MeasureNumber: 5<title>positioned above measure start m5; OCR=99.8 %; semantic=99.8 %; avgGlyphHeight=44.53</title></text>
     <rect x="316.68" y="1500.39" width="60.967" height="84.823" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="316.68" y="1495.39" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=68.2 %; semantic=0.0 %; avgGlyphHeight=23.28</title></text>
+    <text x="316.68" y="1495.39" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=68.2 %; semantic=0.0 %; avgGlyphHeight=23.28</title></text>
     <rect x="1067.12" y="1500.39" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1067.12" y="1495.39" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="1067.12" y="1495.39" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="1217.9" y="1500.39" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1217.9" y="1495.39" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=66.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="1217.9" y="1495.39" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=66.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="2590.2" y="1500.39" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2590.2" y="1495.39" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2590.2" y="1495.39" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="2460.96" y="1514.25" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2460.96" y="1509.25" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2460.96" y="1509.25" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="167.512" y="1514.926" width="73.631" height="96.24" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="167.512" y="1509.926" fill="#777">Unknown: 2:<title>rejected as text: music overlap=0 % or candidate lies in staff core; OCR=99.2 %; semantic=99.2 %; avgGlyphHeight=39.58</title></text>
+    <text x="167.512" y="1509.926" fill="#777">Unknown: 2:<title>rejected as text: source glyph already belongs to accepted music (overlap=0 %) or candidate lies in staff core; OCR=99.2 %; semantic=99.2 %; avgGlyphHeight=39.58</title></text>
     <rect x="937.883" y="1528.11" width="60.967" height="34.044" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="937.883" y="1523.11" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=99.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="937.883" y="1523.11" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=99.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="1581.29" y="1569.69" width="60.958" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1581.29" y="1564.69" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="1581.29" y="1564.69" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2331.73" y="1569.69" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2331.73" y="1564.69" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2331.73" y="1564.69" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="147.42" y="1783.92" width="30.719" height="45.35" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="147.42" y="1778.92" fill="#7b2cbf">MeasureNumber: 9<title>positioned above measure start m9; OCR=99.9 %; semantic=99.9 %; avgGlyphHeight=45.35</title></text>
     <rect x="1472.37" y="1985.419" width="102.148" height="73.961" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1472.37" y="1980.419" fill="#777">Unknown: #O.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=78.4 %; semantic=0.0 %; avgGlyphHeight=38.14</title></text>
+    <text x="1472.37" y="1980.419" fill="#777">Unknown: #O.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=78.4 %; semantic=0.0 %; avgGlyphHeight=38.14</title></text>
     <rect x="315.675" y="2007.82" width="60.967" height="34.044" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="315.675" y="2002.82" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=99.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="315.675" y="2002.82" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=99.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2759.52" y="2011.29" width="78.03" height="47.28" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2759.52" y="2006.29" fill="#7b2cbf">Instruction: du<title>text outside staff core near m12/s1@0; OCR=77.3 %; semantic=77.3 %; avgGlyphHeight=37.68</title></text>
+    <text x="2759.52" y="2006.29" fill="#7b2cbf">Instruction: mp<title>text outside staff core near m12/s1@0; OCR=99.7 %; semantic=99.7 %; avgGlyphHeight=37.68</title></text>
     <rect x="167.512" y="2113.97" width="209.13" height="110.776" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="167.512" y="2108.97" fill="#777">Unknown: 9: 8:<title>rejected as text: music overlap=62 % or candidate lies in staff core; OCR=98.7 %; semantic=37.0 %; avgGlyphHeight=28.63</title></text>
+    <text x="167.512" y="2108.97" fill="#777">Unknown: 9: 8:<title>rejected as text: source glyph already belongs to accepted music (overlap=62 %) or candidate lies in staff core; OCR=98.7 %; semantic=37.0 %; avgGlyphHeight=28.63</title></text>
     <rect x="2654.22" y="2113.97" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2654.22" y="2108.97" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2654.22" y="2108.97" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="1513.55" y="2127.83" width="60.968" height="112.543" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1513.55" y="2122.83" fill="#777">Unknown: 0. 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=88.0 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="1513.55" y="2122.83" fill="#777">Unknown: 0. 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=88.0 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2524.69" y="2141.69" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2524.69" y="2136.69" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2524.69" y="2136.69" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="907.356" y="2155.55" width="60.966" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="907.356" y="2150.55" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="907.356" y="2150.55" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2395.16" y="2155.55" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2395.16" y="2150.55" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2395.16" y="2150.55" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="2265.62" y="2210.99" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2265.62" y="2205.99" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2265.62" y="2205.99" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="2122.23" y="2377.22" width="108.89" height="61.6" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="2122.23" y="2372.22" fill="#7b2cbf">MeasureNumber: Ped.<title>positioned above measure start m16; OCR=91.3 %; semantic=91.3 %; avgGlyphHeight=35.96</title></text>
     <rect x="142.357" y="2397.47" width="62.393" height="45.44" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="142.357" y="2392.47" fill="#7b2cbf">MeasureNumber: 13<title>positioned above measure start m13; OCR=100.0 %; semantic=100.0 %; avgGlyphHeight=44.60</title></text>
     <rect x="316.68" y="2780.72" width="60.967" height="84.823" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="316.68" y="2775.72" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=68.2 %; semantic=0.0 %; avgGlyphHeight=23.28</title></text>
+    <text x="316.68" y="2775.72" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=68.2 %; semantic=0.0 %; avgGlyphHeight=23.28</title></text>
     <rect x="2583.48" y="2780.72" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2583.48" y="2775.72" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2583.48" y="2775.72" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="2451.56" y="2794.58" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2451.56" y="2789.58" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2451.56" y="2789.58" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="167.512" y="2795.256" width="73.631" height="96.24" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="167.512" y="2790.256" fill="#777">Unknown: 2:<title>rejected as text: music overlap=0 % or candidate lies in staff core; OCR=99.2 %; semantic=99.2 %; avgGlyphHeight=39.58</title></text>
+    <text x="167.512" y="2790.256" fill="#777">Unknown: 2:<title>rejected as text: source glyph already belongs to accepted music (overlap=0 %) or candidate lies in staff core; OCR=99.2 %; semantic=99.2 %; avgGlyphHeight=39.58</title></text>
     <rect x="949.972" y="2803.676" width="60.966" height="94.248" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="949.972" y="2798.676" fill="#777">Unknown: .0 •<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=94.4 %; semantic=0.0 %; avgGlyphHeight=17.19</title></text>
+    <text x="949.972" y="2798.676" fill="#777">Unknown: 0. •<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=70.3 %; semantic=0.0 %; avgGlyphHeight=17.19</title></text>
     <rect x="2715.4" y="2808.44" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2715.4" y="2803.44" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2715.4" y="2803.44" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="1554.42" y="2850.02" width="60.968" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1554.42" y="2845.02" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="1554.42" y="2845.02" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2319.64" y="2850.02" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2319.64" y="2845.02" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2319.64" y="2845.02" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="142.357" y="3064.99" width="66.235" height="43.76" fill="none" stroke="#7b2cbf" stroke-width="2" vector-effect="non-scaling-stroke" />
     <text x="142.357" y="3059.99" fill="#7b2cbf">MeasureNumber: 17<title>positioned above measure start m17; OCR=100.0 %; semantic=100.0 %; avgGlyphHeight=43.69</title></text>
     <rect x="2275.43" y="3498.7" width="60.968" height="34.044" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2275.43" y="3493.7" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=99.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="2275.43" y="3493.7" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=99.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="2445.57" y="3504.019" width="70.016" height="73.961" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2445.57" y="3499.019" fill="#777">Unknown: #<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=73.0 %; semantic=0.0 %; avgGlyphHeight=51.67</title></text>
+    <text x="2445.57" y="3499.019" fill="#777">Unknown: #<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=73.0 %; semantic=0.0 %; avgGlyphHeight=51.67</title></text>
     <rect x="964.946" y="3504.695" width="90.402" height="69.733" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="964.946" y="3499.695" fill="#777">Unknown: bo.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=99.1 %; semantic=0.0 %; avgGlyphHeight=36.73</title></text>
+    <text x="964.946" y="3499.695" fill="#777">Unknown: bo.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=99.1 %; semantic=0.0 %; avgGlyphHeight=36.73</title></text>
     <rect x="2683.67" y="3512.56" width="36.036" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="2683.67" y="3507.56" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
+    <text x="2683.67" y="3507.56" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=87.1 %; semantic=0.0 %; avgGlyphHeight=29.38</title></text>
     <rect x="167.512" y="3513.236" width="73.631" height="96.24" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="167.512" y="3508.236" fill="#777">Unknown: 2:<title>rejected as text: music overlap=0 % or candidate lies in staff core; OCR=99.2 %; semantic=99.2 %; avgGlyphHeight=39.58</title></text>
+    <text x="167.512" y="3508.236" fill="#777">Unknown: 2:<title>rejected as text: source glyph already belongs to accepted music (overlap=0 %) or candidate lies in staff core; OCR=99.2 %; semantic=99.2 %; avgGlyphHeight=39.58</title></text>
     <rect x="1603.42" y="3549.376" width="60.968" height="34.148" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="1603.42" y="3544.376" fill="#777">Unknown: 0<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=66.3 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="1603.42" y="3544.376" fill="#777">Unknown: 0<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=66.3 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
     <rect x="342.339" y="3568" width="60.966" height="29.383" fill="none" stroke="#777" stroke-width="2" vector-effect="non-scaling-stroke" />
-    <text x="342.339" y="3563" fill="#777">Unknown: 0.<title>rejected as text: music overlap=100 % or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
+    <text x="342.339" y="3563" fill="#777">Unknown: 0.<title>rejected as text: source glyph already belongs to accepted music (overlap=100 %) or candidate lies in staff core; OCR=96.2 %; semantic=0.0 %; avgGlyphHeight=20.24</title></text>
   </g>
 </svg>

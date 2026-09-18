@@ -157,7 +157,7 @@
       ],
       "Recognition": {
         "Text": "Cantabile ( = 62)",
-        "Confidence": 0.967592
+        "Confidence": 0.967593
       }
     },
     {
@@ -211,8 +211,8 @@
         "shape-460.1"
       ],
       "Recognition": {
-        "Text": "du",
-        "Confidence": 0.773479
+        "Text": "mp",
+        "Confidence": 0.997392
       }
     },
     {
@@ -340,7 +340,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962387
+        "Confidence": 0.962388
       }
     },
     {
@@ -375,7 +375,7 @@
       ],
       "Recognition": {
         "Text": "Ped.",
-        "Confidence": 0.912873
+        "Confidence": 0.912874
       }
     },
     {
@@ -458,7 +458,7 @@
       ],
       "Recognition": {
         "Text": "0",
-        "Confidence": 0.660788
+        "Confidence": 0.660789
       }
     },
     {
@@ -529,7 +529,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991928
+        "Confidence": 0.991929
       }
     },
     {
@@ -547,7 +547,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.96227
+        "Confidence": 0.962271
       }
     },
     {
@@ -631,7 +631,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.991928
+        "Confidence": 0.991929
       }
     },
     {
@@ -648,8 +648,8 @@
         "shape-462.1"
       ],
       "Recognition": {
-        "Text": "du",
-        "Confidence": 0.773482
+        "Text": "mp",
+        "Confidence": 0.997382
       }
     },
     {
@@ -745,7 +745,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962496
+        "Confidence": 0.962497
       }
     },
     {
@@ -918,8 +918,8 @@
         "shape-548"
       ],
       "Recognition": {
-        "Text": ".0 \u2022",
-        "Confidence": 0.944026
+        "Text": "0. \u2022",
+        "Confidence": 0.702845
       }
     },
     {
@@ -1025,7 +1025,7 @@
       ],
       "Recognition": {
         "Text": "#",
-        "Confidence": 0.729872
+        "Confidence": 0.729871
       }
     },
     {
@@ -1098,7 +1098,7 @@
       ],
       "Recognition": {
         "Text": "0",
-        "Confidence": 0.663358
+        "Confidence": 0.663357
       }
     },
     {
@@ -1116,7 +1116,7 @@
       ],
       "Recognition": {
         "Text": "0.",
-        "Confidence": 0.962496
+        "Confidence": 0.962497
       }
     }
   ]
