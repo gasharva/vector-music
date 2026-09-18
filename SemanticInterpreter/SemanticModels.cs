@@ -14,7 +14,8 @@ public sealed record MeasureScene(
     double XEnd,
     bool BreakBefore,
     StaffMeasureScene Upper,
-    StaffMeasureScene Lower);
+    StaffMeasureScene Lower,
+    string? RightBarline = null);
 
 public sealed record StaffMeasureScene(
     int StaffNumber,
