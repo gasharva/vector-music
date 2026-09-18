@@ -100,12 +100,13 @@ public sealed class RhythmicLanePass : ISemanticPass
                 }
 
                 var changed = false;
+                var assignedVoices = AssignVoiceNumbers(lanes);
 
                 for (var laneIndex = 0;
                      laneIndex < lanes.Count;
                      laneIndex++)
                 {
-                    var localVoice = laneIndex + 1;
+                    var localVoice = assignedVoices[laneIndex];
 
                     foreach (var ev in lanes[laneIndex].Events)
                     {
@@ -129,7 +130,7 @@ public sealed class RhythmicLanePass : ISemanticPass
                                     + $"; rhythmic-lane repair: measure total {total} "
                                     + $"in {currentMeasureLength} measure requires "
                                     + $"{targetVoiceCount} concurrent lanes; "
-                                    + $"assigned lane {localVoice}"
+                                    + $"assigned preserved/conventional voice {localVoice}"
                             }));
                     }
                 }
@@ -145,7 +146,7 @@ public sealed class RhythmicLanePass : ISemanticPass
                     + $"total={total}; lanes={string.Join(
                         ", ",
                         lanes.Select((lane, index) =>
-                            $"v{index + 1}:{lane.Total}[{string.Join(
+                            $"v{assignedVoices[index]}:{lane.Total}[{string.Join(
                                 '+',
                                 lane.Events.Select(ev => ev.Voice.TargetId))}]"))}");
             }
@@ -257,6 +258,71 @@ public sealed class RhythmicLanePass : ISemanticPass
         }
 
         return lanes;
+    }
+
+    private static IReadOnlyList<int> AssignVoiceNumbers(
+        IReadOnlyList<Lane> lanes)
+    {
+        var result = Enumerable
+            .Repeat(0, lanes.Count)
+            .ToArray();
+        var usedVoices = new HashSet<int>();
+        var assignedLanes = new HashSet<int>();
+
+        var candidates = lanes
+            .SelectMany((lane, laneIndex) =>
+                lane.Events
+                    .GroupBy(ev => ev.Voice.LocalVoice)
+                    .Select(group => new
+                    {
+                        LaneIndex = laneIndex,
+                        Voice = group.Key,
+                        Support = group.Sum(ev => ToDouble(ev.Duration)),
+                        Count = group.Count(),
+                        LaneTotal = ToDouble(lane.Total)
+                    }))
+            .OrderByDescending(candidate => candidate.Support)
+            .ThenByDescending(candidate => candidate.Count)
+            .ThenByDescending(candidate => candidate.LaneTotal)
+            .ThenBy(candidate => candidate.LaneIndex)
+            .ThenBy(candidate => candidate.Voice)
+            .ToArray();
+
+        foreach (var candidate in candidates)
+        {
+            if (candidate.Voice <= 0
+                || assignedLanes.Contains(candidate.LaneIndex)
+                || usedVoices.Contains(candidate.Voice))
+            {
+                continue;
+            }
+
+            result[candidate.LaneIndex] = candidate.Voice;
+            assignedLanes.Add(candidate.LaneIndex);
+            usedVoices.Add(candidate.Voice);
+        }
+
+        var nextVoice = 1;
+
+        for (var laneIndex = 0;
+             laneIndex < lanes.Count;
+             laneIndex++)
+        {
+            if (result[laneIndex] != 0)
+            {
+                continue;
+            }
+
+            while (usedVoices.Contains(nextVoice))
+            {
+                nextVoice++;
+            }
+
+            result[laneIndex] = nextVoice;
+            usedVoices.Add(nextVoice);
+        }
+
+        return result;
     }
 
     private static bool Fits(
