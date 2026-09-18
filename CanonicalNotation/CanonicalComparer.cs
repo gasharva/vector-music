@@ -245,6 +245,11 @@ public sealed class CanonicalComparer
         CanonicalNotation expected,
         CanonicalNotation actual)
     {
+        var normalized = new CanonicalComparisonNormalizer()
+            .Normalize(expected, actual);
+        expected = normalized.Expected;
+        actual = normalized.Actual;
+
         var issues = new List<CanonicalDiffIssue>();
 
         CompareMetadata(expected.Metadata, actual.Metadata, issues);
