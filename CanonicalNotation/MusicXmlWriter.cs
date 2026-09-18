@@ -30,6 +30,13 @@ public sealed class MusicXmlWriter
                     new XAttribute("type", "composer"),
                     score.Metadata.Composer)));
 
+        if (!string.IsNullOrWhiteSpace(score.Metadata.Subtitle))
+            root.Add(new XElement(
+                "credit",
+                new XAttribute("page", "1"),
+                new XElement("credit-type", "subtitle"),
+                new XElement("credit-words", score.Metadata.Subtitle)));
+
         var partList = new XElement("part-list");
         foreach (var part in score.Parts)
         {
