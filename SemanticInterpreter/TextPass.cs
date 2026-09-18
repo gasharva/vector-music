@@ -37,7 +37,6 @@ public sealed record TextFact(
 public sealed class TextPass : ISemanticPass
 {
     private const double HeaderClearanceInSpacings = 5.0;
-    private const double HeaderHeightGroupingTolerance = 0.08;
     private const double MeasureNumberMaxGapInSpacings = 3.0;
     private const double MeasureNumberMaxDxInSpacings = 2.0;
     private const double TempoMaxGapInSpacings = 5.0;
@@ -308,62 +307,27 @@ public sealed class TextPass : ISemanticPass
             return result;
         }
 
-        var groups = new List<List<Candidate>>();
+        // Header semantics are positional, not typographic. Font/glyph height is
+        // strongly affected by lowercase/uppercase content and style, while the
+        // conventional score header order is stable: title, optional subtitle,
+        // composer. Keep OCR content out of this decision.
+        var ordered = candidates
+            .OrderBy(candidate => candidate.Observation.Bounds.CenterY)
+            .ThenBy(candidate => candidate.Observation.Bounds.MinX)
+            .ToArray();
 
-        foreach (var candidate in candidates
-                     .OrderBy(item => item.AverageGlyphHeight)
-                     .ThenBy(item => item.Observation.Bounds.MinY)
-                     .ThenBy(item => item.Observation.Bounds.MinX))
+        if (ordered.Length == 1)
         {
-            if (groups.Count == 0)
-            {
-                groups.Add([candidate]);
-                continue;
-            }
-
-            var current = groups[^1];
-            var average = Math.Max(
-                0.001,
-                current.Average(item => item.AverageGlyphHeight));
-            var relativeDelta = Math.Abs(candidate.AverageGlyphHeight - average)
-                / average;
-
-            if (relativeDelta <= HeaderHeightGroupingTolerance)
-            {
-                current.Add(candidate);
-            }
-            else
-            {
-                groups.Add([candidate]);
-            }
-        }
-
-        if (groups.Count == 1)
-        {
-            foreach (var candidate in groups[0])
-            {
-                result[candidate.Observation.Id] = SemanticTextRole.Title;
-            }
-
+            result[ordered[0].Observation.Id] = SemanticTextRole.Title;
             return result;
         }
 
-        foreach (var candidate in groups[0])
-        {
-            result[candidate.Observation.Id] = SemanticTextRole.Composer;
-        }
+        result[ordered[0].Observation.Id] = SemanticTextRole.Title;
+        result[ordered[^1].Observation.Id] = SemanticTextRole.Composer;
 
-        foreach (var candidate in groups[^1])
+        foreach (var candidate in ordered.Skip(1).SkipLast(1))
         {
-            result[candidate.Observation.Id] = SemanticTextRole.Title;
-        }
-
-        foreach (var group in groups.Skip(1).SkipLast(1))
-        {
-            foreach (var candidate in group)
-            {
-                result[candidate.Observation.Id] = SemanticTextRole.Subtitle;
-            }
+            result[candidate.Observation.Id] = SemanticTextRole.Subtitle;
         }
 
         return result;
