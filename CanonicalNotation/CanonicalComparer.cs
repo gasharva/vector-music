@@ -25,7 +25,9 @@ public sealed record CanonicalDiffIssue(
     string? At,
     string Expected,
     string Actual,
-    string Message)
+    string Message,
+    string? RootCause = null,
+    string? RootCauseSummary = null)
 {
     [JsonIgnore]
     public string Location
@@ -44,6 +46,12 @@ public sealed record CanonicalDiffIssue(
     }
 }
 
+public sealed record CanonicalDiffRootCause(
+    CanonicalDiffCategory Category,
+    string Key,
+    string Summary,
+    IReadOnlyList<CanonicalDiffIssue> Issues);
+
 public sealed record CanonicalDiffReport(
     IReadOnlyList<CanonicalDiffIssue> Issues)
 {
@@ -54,44 +62,61 @@ public sealed record CanonicalDiffReport(
             .GroupBy(issue => issue.Category)
             .ToDictionary(group => group.Key, group => group.Count());
 
+    public IReadOnlyList<CanonicalDiffRootCause> RootCauses =>
+        BuildRootCauses(Issues);
+
     public string ToMarkdown()
     {
         var sb = new StringBuilder();
         sb.AppendLine("# Canonical semantic diff");
         sb.AppendLine();
-        sb.AppendLine(IsEqual
-            ? "No semantic differences."
-            : $"{Issues.Count} semantic difference(s).");
+
+        if (IsEqual)
+        {
+            sb.AppendLine("No semantic differences.");
+            return sb.ToString();
+        }
+
+        sb.AppendLine(
+            $"{Issues.Count} concrete difference(s), grouped into "
+            + $"{RootCauses.Count} root cause(s).");
         sb.AppendLine();
 
         foreach (var category in Enum.GetValues<CanonicalDiffCategory>())
         {
-            var categoryIssues = Issues
-                .Where(issue => issue.Category == category)
-                .OrderBy(issue => issue.Part)
-                .ThenBy(issue => issue.Measure)
-                .ThenBy(issue => FractionValue(issue.At))
-                .ThenBy(issue => issue.Staff)
-                .ThenBy(issue => issue.Code)
+            var groups = RootCauses
+                .Where(group => group.Category == category)
                 .ToArray();
 
-            if (categoryIssues.Length == 0)
+            if (groups.Length == 0)
             {
                 continue;
             }
 
-            sb.AppendLine($"## {category} ({categoryIssues.Length})");
+            sb.AppendLine(
+                $"## {category} — {groups.Length} root cause(s), "
+                + $"{groups.Sum(group => group.Issues.Count)} detail(s)");
             sb.AppendLine();
 
-            foreach (var locationGroup in categoryIssues
-                         .GroupBy(issue => issue.Location))
+            foreach (var group in groups)
             {
-                sb.AppendLine($"### {locationGroup.Key}");
+                sb.Append("### ")
+                    .Append(group.Summary)
+                    .Append(" (")
+                    .Append(group.Issues.Count)
+                    .AppendLine(")");
                 sb.AppendLine();
 
-                foreach (var issue in locationGroup)
+                foreach (var issue in group.Issues
+                             .OrderBy(issue => issue.Part)
+                             .ThenBy(issue => issue.Measure)
+                             .ThenBy(issue => FractionValue(issue.At))
+                             .ThenBy(issue => issue.Staff)
+                             .ThenBy(issue => issue.Code))
                 {
-                    sb.Append("- **")
+                    sb.Append("- ")
+                        .Append(issue.Location)
+                        .Append(" — **")
                         .Append(issue.Code)
                         .Append("** ")
                         .AppendLine(issue.Message);
@@ -117,6 +142,83 @@ public sealed record CanonicalDiffReport(
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 Converters = { new JsonStringEnumConverter() }
             });
+
+    private static IReadOnlyList<CanonicalDiffRootCause> BuildRootCauses(
+        IReadOnlyList<CanonicalDiffIssue> issues)
+    {
+        return issues
+            .GroupBy(issue => new
+            {
+                issue.Category,
+                Key = RootCauseKey(issue)
+            })
+            .Select(group =>
+            {
+                var first = group.First();
+                return new CanonicalDiffRootCause(
+                    group.Key.Category,
+                    group.Key.Key,
+                    first.RootCauseSummary
+                        ?? GenericRootCauseSummary(first),
+                    group.ToArray());
+            })
+            .OrderBy(group => group.Category)
+            .ThenBy(group => group.Summary, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    private static string RootCauseKey(CanonicalDiffIssue issue)
+    {
+        if (!string.IsNullOrWhiteSpace(issue.RootCause))
+        {
+            return issue.RootCause!;
+        }
+
+        return issue.Code switch
+        {
+            "metadata.title"
+                or "metadata.subtitle"
+                or "metadata.composer"
+                => issue.Code,
+
+            "time" or "key" or "staves" or "clef"
+                => issue.Code,
+
+            "event.missing" or "event.extra"
+                => $"{issue.Code}:{issue.Part}:m{issue.Measure}:s{issue.Staff}",
+
+            _ => $"{issue.Code}:{issue.Part}:m{issue.Measure}:s{issue.Staff}"
+        };
+    }
+
+    private static string GenericRootCauseSummary(
+        CanonicalDiffIssue issue)
+    {
+        return issue.Code switch
+        {
+            "metadata.title" => "Title metadata differs",
+            "metadata.subtitle" => "Subtitle metadata differs",
+            "metadata.composer" => "Composer metadata differs",
+            "time" => "Time-signature state differs",
+            "key" => "Key-signature state differs",
+            "staves" => "Staff-count model differs",
+            "clef" => "Clef state differs",
+            "event.missing" => $"Missing event(s) near {CompactLocation(issue)}",
+            "event.extra" => $"Unexpected event(s) near {CompactLocation(issue)}",
+            _ => $"{issue.Code} at {CompactLocation(issue)}"
+        };
+    }
+
+    private static string CompactLocation(CanonicalDiffIssue issue)
+    {
+        var values = new List<string>();
+        if (!string.IsNullOrWhiteSpace(issue.Part)) values.Add(issue.Part!);
+        if (issue.Measure is not null) values.Add($"m{issue.Measure}");
+        if (issue.Staff is not null) values.Add($"staff {issue.Staff}");
+        return values.Count == 0
+            ? "score"
+            : string.Join(" / ", values);
+    }
 
     private static double FractionValue(string? value)
     {
