@@ -55,7 +55,14 @@ public sealed class RapidOcrTextRecognizer : ITextRecognizer, IDisposable
             File.WriteAllText(svgPath, candidate.Svg);
             Rasterize(svgPath, pngPath);
 
-            var result = _ocr.Detect(pngPath, RapidOcrOptions.Default);
+            var options = RapidOcrOptions.Default with
+            {
+                // Vector-score text is always upright. The angle classifier only
+                // distinguishes 0/180 degrees and can turn musical glyphs upside
+                // down before recognition (for example mp -> du).
+                DoAngle = false
+            };
+            var result = _ocr.Detect(pngPath, options);
             var blocks = result.TextBlocks ?? [];
             var text = string.Join(
                 " ",
