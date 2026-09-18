@@ -149,15 +149,15 @@ public sealed class TextPassTests
     public void AcceptedMusicSourceWinsOverOcrInstructionOutsideStaff()
     {
         var geometry = new GeometricScene([
-            Shape("music", 80, 70, 100, 85)
+            Shape("shape-460.1", 80, 70, 100, 85)
         ]);
         var analysis = Analysis(
-            Observation("music", "du", 0.95, geometry));
+            Observation("shape-460.1", "mp", 0.95, geometry));
         var facts = new SemanticFacts();
         facts.Add(new DynamicDirectionFact(
             1,
             1,
-            "music",
+            "shape-460.whole",
             "mp",
             "0",
             "above",
@@ -167,7 +167,7 @@ public sealed class TextPassTests
             77,
             0.99,
             "test dynamic",
-            ["music"]));
+            ["shape-460.whole"]));
 
         new TextPass(
             analysis,
