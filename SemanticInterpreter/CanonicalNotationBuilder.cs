@@ -25,6 +25,7 @@ public sealed class CanonicalNotationBuilder
                 group => group.ToArray());
         var timeFacts = facts
             .OfType<TimeSignatureFact>()
+            .Where(fact => !fact.IsInherited)
             .ToDictionary(
                 fact => fact.MeasureNumber);
         var keyFacts = facts
