@@ -221,7 +221,7 @@ static PageSet DiscoverPages(
     string? requestedBase)
 {
     var regex = new Regex(
-        @"^(?<base>.+)-(?<page>\d{3})\.svg$",
+        @"^(?<base>.+)-(?<page>\d+)\.svg$",
         RegexOptions.IgnoreCase
         | RegexOptions.CultureInvariant);
 
