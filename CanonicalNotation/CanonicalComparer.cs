@@ -861,17 +861,15 @@ public sealed class CanonicalComparer
             AccidentalSignature(actual.Accidental),
             $"Explicit accidental differs for {expected.Pitch}.");
 
-        CompareSet(
+        CompareTechnicalMarks(
             issues,
-            CanonicalDiffCategory.Notation,
-            "note.technical",
             part,
             measure,
             staff,
             at,
-            TechnicalSignatures(expected.Technical),
-            TechnicalSignatures(actual.Technical),
-            $"Technical marks differ for {expected.Pitch}.");
+            expected.Technical,
+            actual.Technical,
+            expected.Pitch);
     }
 
     private static void CompareNotation(
@@ -904,24 +902,181 @@ public sealed class CanonicalComparer
             expected?.Notehead, actual?.Notehead,
             "Notehead style differs.");
 
-        CompareSet(issues, CanonicalDiffCategory.Notation,
+        CompareNotationMarks(
+            issues,
             "notation.articulations",
-            part, measure, staff, at,
-            MarkSignatures(expected?.Articulations),
-            MarkSignatures(actual?.Articulations),
-            "Articulations differ.");
-        CompareSet(issues, CanonicalDiffCategory.Notation,
+            "Articulations",
+            part,
+            measure,
+            staff,
+            at,
+            expected?.Articulations,
+            actual?.Articulations);
+        CompareNotationMarks(
+            issues,
             "notation.ornaments",
-            part, measure, staff, at,
-            MarkSignatures(expected?.Ornaments),
-            MarkSignatures(actual?.Ornaments),
-            "Ornaments differ.");
-        CompareSet(issues, CanonicalDiffCategory.Notation,
+            "Ornaments",
+            part,
+            measure,
+            staff,
+            at,
+            expected?.Ornaments,
+            actual?.Ornaments);
+        CompareNotationMarks(
+            issues,
             "notation.fermatas",
-            part, measure, staff, at,
-            MarkSignatures(expected?.Fermatas),
-            MarkSignatures(actual?.Fermatas),
-            "Fermatas differ.");
+            "Fermatas",
+            part,
+            measure,
+            staff,
+            at,
+            expected?.Fermatas,
+            actual?.Fermatas);
+    }
+
+    private static void CompareNotationMarks(
+        ICollection<CanonicalDiffIssue> issues,
+        string code,
+        string label,
+        string part,
+        int measure,
+        int? staff,
+        string at,
+        IReadOnlyList<NotationMark>? expected,
+        IReadOnlyList<NotationMark>? actual)
+    {
+        var remaining = (actual ?? [])
+            .ToList();
+
+        foreach (var expectedMark in expected ?? [])
+        {
+            var index = remaining.FindIndex(mark =>
+                string.Equals(
+                    mark.Type,
+                    expectedMark.Type,
+                    StringComparison.Ordinal)
+                && string.Equals(
+                    mark.Subtype,
+                    expectedMark.Subtype,
+                    StringComparison.Ordinal));
+
+            if (index < 0)
+            {
+                issues.Add(new CanonicalDiffIssue(
+                    CanonicalDiffCategory.Notation,
+                    code,
+                    part,
+                    measure,
+                    staff,
+                    at,
+                    $"{expectedMark.Type}:{expectedMark.Subtype ?? "-"}",
+                    "<missing>",
+                    $"{label}: expected mark is missing."));
+                continue;
+            }
+
+            var actualMark = remaining[index];
+            remaining.RemoveAt(index);
+
+            CompareScalar(
+                issues,
+                CanonicalDiffCategory.Notation,
+                code + ".placement",
+                part,
+                measure,
+                staff,
+                at,
+                expectedMark.Placement,
+                actualMark.Placement,
+                $"{label}: placement differs for {expectedMark.Type}.",
+                expectedNullIsWildcard: true);
+        }
+
+        foreach (var extra in remaining)
+        {
+            issues.Add(new CanonicalDiffIssue(
+                CanonicalDiffCategory.Notation,
+                code,
+                part,
+                measure,
+                staff,
+                at,
+                "<none>",
+                $"{extra.Type}:{extra.Subtype ?? "-"}",
+                $"{label}: unexpected mark is present."));
+        }
+    }
+
+    private static void CompareTechnicalMarks(
+        ICollection<CanonicalDiffIssue> issues,
+        string part,
+        int measure,
+        int? staff,
+        string at,
+        IReadOnlyList<TechnicalMark>? expected,
+        IReadOnlyList<TechnicalMark>? actual,
+        string pitch)
+    {
+        var remaining = (actual ?? [])
+            .ToList();
+
+        foreach (var expectedMark in expected ?? [])
+        {
+            var index = remaining.FindIndex(mark =>
+                string.Equals(
+                    mark.Type,
+                    expectedMark.Type,
+                    StringComparison.Ordinal)
+                && string.Equals(
+                    mark.Value,
+                    expectedMark.Value,
+                    StringComparison.Ordinal));
+
+            if (index < 0)
+            {
+                issues.Add(new CanonicalDiffIssue(
+                    CanonicalDiffCategory.Notation,
+                    "note.technical",
+                    part,
+                    measure,
+                    staff,
+                    at,
+                    $"{expectedMark.Type}:{expectedMark.Value ?? "-"}",
+                    "<missing>",
+                    $"Technical mark differs for {pitch}."));
+                continue;
+            }
+
+            var actualMark = remaining[index];
+            remaining.RemoveAt(index);
+
+            CompareScalar(
+                issues,
+                CanonicalDiffCategory.Notation,
+                "note.technical.placement",
+                part,
+                measure,
+                staff,
+                at,
+                expectedMark.Placement,
+                actualMark.Placement,
+                $"Technical-mark placement differs for {pitch}.",
+                expectedNullIsWildcard: true);
+        }
+
+        foreach (var extra in remaining)
+        {
+            issues.Add(new CanonicalDiffIssue(
+                CanonicalDiffCategory.Notation,
+                "note.technical",
+                part,
+                measure,
+                staff,
+                at,
+                "<none>",
+                $"{extra.Type}:{extra.Value ?? "-"}",
+                $"Unexpected technical mark is present for {pitch}."));
+        }
     }
 
     private static void CompareRelations(
