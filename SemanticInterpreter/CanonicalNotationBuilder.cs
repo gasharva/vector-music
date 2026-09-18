@@ -30,6 +30,7 @@ public sealed class CanonicalNotationBuilder
                 fact => fact.MeasureNumber);
         var keyFacts = facts
             .OfType<KeySignatureFact>()
+            .Where(fact => !fact.IsInherited)
             .ToDictionary(
                 fact => fact.MeasureNumber);
         var noteheads = facts.OfType<NoteheadFact>().ToArray();
