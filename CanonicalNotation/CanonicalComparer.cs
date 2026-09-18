@@ -365,8 +365,8 @@ public sealed class CanonicalComparer
         CompareSet(
             issues, CanonicalDiffCategory.Attributes, "clef",
             part, measure, null, null,
-            ClefSignatures(expected.Clefs),
-            ClefSignatures(actual.Clefs),
+            ClefSignatures(expected.Clefs.Values),
+            ClefSignatures(actual.Clefs.Values),
             "Effective clefs differ.");
     }
 
