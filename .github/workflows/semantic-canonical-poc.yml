@@ -57,7 +57,7 @@ jobs:
               echo "=== $variant page-$page ==="
               mkdir -p "artifacts/cairo-layout/$variant-$page"
 
-              dotnet SemanticInterpreter/bin/Release/net8.0/SemanticInterpreter.dll                 "Samples/cairo-yellow-leaves/$variant/page-$page.svg"                 "artifacts/cairo-layout/$variant-$page"                 > "artifacts/cairo-layout/$variant-$page/run.log" 2>&1
+              dotnet SemanticInterpreter/bin/Release/net8.0/SemanticInterpreter.dll                 "Samples/cairo-yellow-leaves/$variant/page-$page.svg"                 "artifacts/cairo-layout/$variant-$page"                 --layout-only                 > "artifacts/cairo-layout/$variant-$page/run.log" 2>&1
 
               status=$?
               echo "exit=$status"
