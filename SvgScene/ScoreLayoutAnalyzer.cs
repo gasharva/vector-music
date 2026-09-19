@@ -679,6 +679,14 @@ public sealed class ScoreLayoutAnalyzer
         // Exact staff-edge endpoint agreement is the important evidence here;
         // unlike a loose "spans most of staff" rule it does not accept ordinary
         // note stems merely because they happen to be long.
+        var lowerBars = vertical
+            .Where(stroke => FitsStaffBoundarySegment(
+                stroke,
+                lower,
+                endpointTolerance))
+            .ToList();
+        var usedLower = new HashSet<string>(StringComparer.Ordinal);
+
         foreach (var connector in vertical.Where(stroke =>
                      FitsInterstaffConnector(
                          stroke,
@@ -686,13 +694,33 @@ public sealed class ScoreLayoutAnalyzer
                          lower,
                          endpointTolerance)))
         {
+            var lowerBar = lowerBars
+                .Where(bar => !usedLower.Contains(bar.Stroke.ShapeId))
+                .OrderBy(bar => Math.Abs(bar.CenterX - connector.CenterX))
+                .FirstOrDefault();
+            var hasMatchingLower =
+                lowerBar is not null
+                && Math.Abs(lowerBar.CenterX - connector.CenterX) <= xTolerance;
+
+            if (hasMatchingLower)
+            {
+                usedLower.Add(lowerBar!.Stroke.ShapeId);
+            }
+
+            var ids = hasMatchingLower
+                ? new[] { connector.Stroke.ShapeId, lowerBar!.Stroke.ShapeId }
+                : new[] { connector.Stroke.ShapeId };
+            var widths = hasMatchingLower
+                ? new[] { connector.Stroke.Width, lowerBar!.Stroke.Width }
+                : new[] { connector.Stroke.Width };
+
             boundaries.Add(new MeasureBoundary(
                 connector.CenterX,
                 upper.Bounds.MinY,
                 lower.Bounds.MaxY,
-                [connector.Stroke.ShapeId],
-                connector.Stroke.Width,
-                connector.Stroke.Width));
+                ids,
+                widths.Min(),
+                widths.Max()));
         }
 
         var upperBars = vertical
@@ -701,13 +729,6 @@ public sealed class ScoreLayoutAnalyzer
                 upper,
                 endpointTolerance))
             .ToList();
-        var lowerBars = vertical
-            .Where(stroke => FitsStaffBoundarySegment(
-                stroke,
-                lower,
-                endpointTolerance))
-            .ToList();
-        var usedLower = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var upperBar in upperBars.OrderBy(bar => bar.CenterX))
         {
