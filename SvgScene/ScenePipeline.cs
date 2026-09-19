@@ -9,6 +9,9 @@ public sealed class ScenePipeline
     private readonly CompositeCandidateDetector _compositeDetector;
     private readonly CompositeCandidateResolver _compositeResolver;
 
+    public IReadOnlyList<CompositeCandidateDecision> LastCompositeDecisions =>
+        _compositeResolver.LastDecisions;
+
     public ScenePipeline(
         ISvgNormalizer normalizer,
         IShapeClusterer clusterer,
