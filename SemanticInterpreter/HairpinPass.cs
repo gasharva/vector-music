@@ -80,30 +80,6 @@ public sealed class HairpinPass : ISemanticPass
                 continue;
             }
 
-            if (source.Ownership is null)
-            {
-                decisions.Add(Reject(
-                    source.ShapeId,
-                    "unmapped-ownership",
-                    source.Confidence,
-                    $"{source.ShapeId}: hairpin has no logical ownership"));
-                continue;
-            }
-
-            if (!string.Equals(
-                    source.Ownership.Start.StaffId,
-                    source.Ownership.End.StaffId,
-                    StringComparison.Ordinal))
-            {
-                decisions.Add(Reject(
-                    source.ShapeId,
-                    "cross-staff-hairpin",
-                    source.Confidence,
-                    $"{source.ShapeId}: hairpin ownership crosses staffs "
-                    + $"{source.Ownership.Start.StaffId}->{source.Ownership.End.StaffId}"));
-                continue;
-            }
-
             var startX = LeftX(source);
             var endX = RightX(source);
             var musicalStaff = ResolveMusicalStaffContext(
@@ -126,10 +102,12 @@ public sealed class HairpinPass : ISemanticPass
             var staffId = musicalStaff.Coordinate.StaffId;
             var startFallback = new LogicalCoordinate(
                 staffId,
-                source.Ownership.Start.MeasureId);
+                source.Ownership?.Start.MeasureId
+                    ?? musicalStaff.Coordinate.MeasureId);
             var endFallback = new LogicalCoordinate(
                 staffId,
-                source.Ownership.End.MeasureId);
+                source.Ownership?.End.MeasureId
+                    ?? musicalStaff.Coordinate.MeasureId);
             var startContext = ResolveContextAtX(
                 contexts,
                 staffId,
@@ -177,13 +155,28 @@ public sealed class HairpinPass : ISemanticPass
                     startContext.MeasureNumber,
                     startAt,
                     endContext.MeasureNumber,
+                    endAt)
+                && startContext.MeasureNumber == endContext.MeasureNumber)
+            {
+                // A confidently recognized wedge is musically more important than
+                // an exact rhythmic endpoint. If snapping collapses both endpoints
+                // onto one event, preserve the hairpin over the whole measure.
+                startAt = Fraction.Zero.ToString();
+                endAt = timing.ResolveMeasureEnd(
+                    endContext.MeasureNumber);
+            }
+
+            if (!IsForwardSpan(
+                    startContext.MeasureNumber,
+                    startAt,
+                    endContext.MeasureNumber,
                     endAt))
             {
                 decisions.Add(Reject(
                     source.ShapeId,
                     "non-positive-span",
                     source.Confidence,
-                    $"{source.ShapeId}: resolved span is not forward in musical time: "
+                    $"{source.ShapeId}: even measure-level fallback is not forward: "
                     + $"m{startContext.MeasureNumber}:{startAt} -> m{endContext.MeasureNumber}:{endAt}"));
                 continue;
             }
@@ -194,7 +187,7 @@ public sealed class HairpinPass : ISemanticPass
             var placement = ResolvePlacement(source, startContext);
             var reason =
                 $"{source.ShapeId}: geometric {type} ({source.Confidence:P0}); "
-                + $"genericOwnership={source.Ownership.Start.StaffId}; "
+                + $"genericOwnership={source.Ownership?.Start.StaffId ?? "none"}; "
                 + $"semanticStaff={staffId}/{startContext.StaffNumber}; placement={placement}; "
                 + $"x={startX:F2}->{endX:F2}; "
                 + $"m{startContext.MeasureNumber}:{startAt} -> m{endContext.MeasureNumber}:{endAt}";
@@ -233,6 +226,12 @@ public sealed class HairpinPass : ISemanticPass
             $"HairpinPass: candidates={decisions.Count}; "
             + $"accepted={decisions.Count(decision => decision.Accepted)}; "
             + $"rejected={decisions.Count(decision => !decision.Accepted)}");
+
+        foreach (var rejected in decisions.Where(decision => !decision.Accepted))
+        {
+            facts.AddTrace(
+                $"HairpinPass reject: {rejected.Decision}; {rejected.Reason}");
+        }
     }
 
     private static IReadOnlyList<HairpinElement> CollectHairpins(
@@ -278,26 +277,24 @@ public sealed class HairpinPass : ISemanticPass
         double endX,
         TimingResolver timing)
     {
-        var ownership = source.Ownership!;
-        var ownershipContext = contexts.FirstOrDefault(context =>
-            context.Coordinate == ownership.Start);
-
-        if (ownershipContext is null)
-        {
-            return null;
-        }
+        var ownership = source.Ownership;
+        var ownershipContext = ownership is null
+            ? null
+            : contexts.FirstOrDefault(context =>
+                context.Coordinate == ownership.Start);
 
         var y = CenterY(source);
         var candidates = contexts
             .Where(context =>
-                string.Equals(
-                    context.SystemId,
-                    ownershipContext.SystemId,
-                    StringComparison.Ordinal)
-                && string.Equals(
-                    context.PairId,
-                    ownershipContext.PairId,
-                    StringComparison.Ordinal)
+                (ownershipContext is null
+                    || (string.Equals(
+                            context.SystemId,
+                            ownershipContext.SystemId,
+                            StringComparison.Ordinal)
+                        && string.Equals(
+                            context.PairId,
+                            ownershipContext.PairId,
+                            StringComparison.Ordinal)))
                 && startX >= context.XStart - CoordinateEpsilon
                 && startX <= context.XEnd + CoordinateEpsilon)
             .GroupBy(
@@ -311,7 +308,11 @@ public sealed class HairpinPass : ISemanticPass
 
         if (candidates.Length == 0)
         {
-            return ownershipContext;
+            return ownershipContext
+                ?? contexts
+                    .OrderBy(context => DistanceToStaff(y, context.StaffBounds))
+                    .ThenBy(context => Math.Abs(context.XStart - startX))
+                    .FirstOrDefault();
         }
 
         return candidates
@@ -323,7 +324,8 @@ public sealed class HairpinPass : ISemanticPass
                     endX,
                     new LogicalCoordinate(
                         context.Coordinate.StaffId,
-                        source.Ownership!.End.MeasureId),
+                        source.Ownership?.End.MeasureId
+                            ?? context.Coordinate.MeasureId),
                     preferLaterAtBoundary: false)
                     ?? context;
                 var spacing = Math.Max(
@@ -354,10 +356,12 @@ public sealed class HairpinPass : ISemanticPass
             .OrderBy(candidate => candidate.Score)
             .ThenBy(candidate => candidate.RhythmicFit)
             .ThenBy(candidate => candidate.VerticalDistance)
-            .ThenByDescending(candidate => string.Equals(
-                candidate.Context.Coordinate.StaffId,
-                ownership.Start.StaffId,
-                StringComparison.Ordinal))
+            .ThenByDescending(candidate =>
+                ownership is not null
+                && string.Equals(
+                    candidate.Context.Coordinate.StaffId,
+                    ownership.Start.StaffId,
+                    StringComparison.Ordinal))
             .ThenBy(candidate => candidate.Context.StaffNumber)
             .Select(candidate => candidate.Context)
             .First();
@@ -587,6 +591,9 @@ public sealed class HairpinPass : ISemanticPass
             // previous note duration (that rule belongs to pedal-like spans).
             return ResolveStartAt(measureNumber, staff, x);
         }
+
+        public string ResolveMeasureEnd(int measureNumber) =>
+            MeasureDuration(measureNumber).ToString();
 
         public double NearestAnchorDistanceInSpacings(
             int measureNumber,
