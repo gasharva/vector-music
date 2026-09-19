@@ -667,20 +667,38 @@ public sealed class ScoreLayoutAnalyzer
                 pairBar.Stroke.Width));
         }
 
-        // MuseScore commonly emits a piano barline as an upper segment that runs
-        // from the top of the upper staff to the top of the lower staff, plus a
-        // lower segment spanning the lower staff. A local upper+lower pair is also
-        // accepted for engravers that split both staves independently.
+        // A barline can be encoded in several geometry-equivalent ways.
         //
-        // Requiring those endpoint phases is important: the old SpansStaff rule
-        // accepted ordinary note stems that merely covered most of each staff.
-        // When stems happened to line up vertically in both staves, they created
-        // phantom measure boundaries.
+        // 1. Cairo/Poppler often leaves a single inter-staff connector whose
+        //    endpoints are exactly the top lines of the two staves. The lower
+        //    staff-local part may be absorbed into compound filled geometry and
+        //    therefore never emerge as an independent vertical stroke.
+        //
+        // 2. Other engravers split the barline into one local segment per staff.
+        //
+        // Exact staff-edge endpoint agreement is the important evidence here;
+        // unlike a loose "spans most of staff" rule it does not accept ordinary
+        // note stems merely because they happen to be long.
+        foreach (var connector in vertical.Where(stroke =>
+                     FitsInterstaffConnector(
+                         stroke,
+                         upper,
+                         lower,
+                         endpointTolerance)))
+        {
+            boundaries.Add(new MeasureBoundary(
+                connector.CenterX,
+                upper.Bounds.MinY,
+                lower.Bounds.MaxY,
+                [connector.Stroke.ShapeId],
+                connector.Stroke.Width,
+                connector.Stroke.Width));
+        }
+
         var upperBars = vertical
-            .Where(stroke => FitsUpperBoundarySegment(
+            .Where(stroke => FitsStaffBoundarySegment(
                 stroke,
                 upper,
-                lower,
                 endpointTolerance))
             .ToList();
         var lowerBars = vertical
@@ -721,17 +739,16 @@ public sealed class ScoreLayoutAnalyzer
             finalBarlineTolerance);
     }
 
-    private static bool FitsUpperBoundarySegment(
+    private static bool FitsInterstaffConnector(
         NormalizedStroke stroke,
         StaffLayout upper,
         StaffLayout lower,
         double tolerance)
     {
-        return FitsStaffBoundarySegment(stroke, upper, tolerance)
-            || (Math.Abs(stroke.YStart - upper.Bounds.MinY) <= tolerance
-                && Math.Abs(stroke.YEnd - lower.Bounds.MinY) <= tolerance
-                && IsWithinStaffWidth(stroke, upper, tolerance)
-                && IsWithinStaffWidth(stroke, lower, tolerance));
+        return Math.Abs(stroke.YStart - upper.Bounds.MinY) <= tolerance
+            && Math.Abs(stroke.YEnd - lower.Bounds.MinY) <= tolerance
+            && IsWithinStaffWidth(stroke, upper, tolerance)
+            && IsWithinStaffWidth(stroke, lower, tolerance);
     }
 
     private static bool FitsStaffBoundarySegment(
