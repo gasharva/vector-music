@@ -1,17 +1,20 @@
 # SvgCanonicalizer
 
-Geometry-only preprocessor for arbitrary SVG notation.
+Geometry-only SVG preprocessor for arbitrary notation sources.
 
-It deliberately does **not** use SVG producer hints (classes, ids, data attributes) as recognition evidence. The existing `SvgScene.SvgNormalizer` resolves visible geometry, including `<use>` instances and transforms. This project then writes a flat SVG containing only explicit path geometry and paint attributes.
+The canonicalizer deliberately ignores producer hints such as source classes,
+ids and data attributes as recognition evidence. Its first invariant is visual:
+the generated SVG should render the same picture as the input.
 
-## Current V1
+## Current approach
 
-- resolves `<use>` through SvgScene geometry normalization;
-- flattens transforms into coordinates;
-- removes defs/groups/classes/ids/data-* from the output;
-- converts supported visible geometry to flat `<path>` elements;
-- samples curves into explicit line geometry;
-- preserves multiple fill contours together with even-odd fill so holes survive.
+The input is parsed and rendered by Svg.Skia into an Skia picture. That picture
+is replayed into `SKSvgCanvas`, which writes a fresh SVG from visible drawing
+operations rather than copying the producer DOM.
+
+This removes source-specific `<use>` indirection and producer metadata while
+preserving curves, fills, holes and strokes much more faithfully than the
+analysis-oriented `SvgScene.SvgNormalizer` round-trip.
 
 No musical semantics are performed here.
 
@@ -30,3 +33,5 @@ dotnet run --project SvgCanonicalizer -- `
   Samples/cairo-yellow-leaves/optimized `
   artifacts/cairo-yellow-leaves-canonical
 ```
+
+The output is intended to be fed unchanged into SvgScene / SemanticInterpreter.
