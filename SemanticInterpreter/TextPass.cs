@@ -34,6 +34,23 @@ public sealed record TextFact(
         Reason,
         SourceShapeIds);
 
+public sealed record MetronomeMarkFact(
+    string ObservationId,
+    int MeasureNumber,
+    int Staff,
+    string At,
+    string BeatUnit,
+    decimal Bpm,
+    string? InstructionText,
+    string BeatGlyphShapeId,
+    double Confidence,
+    string Reason,
+    IReadOnlyList<string> SourceShapeIds)
+    : SemanticFact(
+        "TextPass",
+        Reason,
+        SourceShapeIds);
+
 public sealed class TextPass : ISemanticPass
 {
     private const double HeaderClearanceInSpacings = 5.0;
@@ -209,6 +226,16 @@ public sealed class TextPass : ISemanticPass
                     "above",
                     candidate.Recognition.Confidence,
                     $"multi-glyph text above first measure of system; m{tempoContext.MeasureNumber}@{tempoContext.At}");
+
+                if (TryBuildMetronomeMark(
+                        candidate,
+                        tempoContext,
+                        spacing,
+                        out var metronomeMark))
+                {
+                    facts.Add(metronomeMark);
+                }
+
                 continue;
             }
 
@@ -595,6 +622,133 @@ public sealed class TextPass : ISemanticPass
         }
 
         return false;
+    }
+
+    private bool TryBuildMetronomeMark(
+        Candidate candidate,
+        TextContext context,
+        double spacing,
+        out MetronomeMarkFact fact)
+    {
+        fact = null!;
+
+        var match = System.Text.RegularExpressions.Regex.Match(
+            candidate.Recognition.Text.Trim(),
+            @"^(?<prefix>.*?)(?:\(\s*)?=\s*(?<bpm>\d+(?:[\.,]\d+)?)\s*\)?\s*$",
+            System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
+        if (!match.Success)
+        {
+            return false;
+        }
+
+        var bpmText = match.Groups["bpm"].Value.Replace(',', '.');
+        if (!decimal.TryParse(
+                bpmText,
+                System.Globalization.NumberStyles.AllowDecimalPoint,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out var bpm)
+            || bpm <= 0)
+        {
+            return false;
+        }
+
+        var sourceFamilies = candidate.Observation.SourceShapeIds
+            .Select(BaseShapeFamily)
+            .ToHashSet(StringComparer.Ordinal);
+        var observation = candidate.Observation.Bounds;
+
+        var beatGlyph = _geometry.Shapes
+            .Where(shape =>
+                !string.IsNullOrWhiteSpace(shape.SourceClass)
+                && shape.SourceClass!.Contains(
+                    "Tempo",
+                    StringComparison.OrdinalIgnoreCase))
+            .Where(shape => !sourceFamilies.Contains(
+                BaseShapeFamily(shape.Id)))
+            .Where(shape =>
+                shape.Bounds.MaxX >= observation.MinX - spacing * 0.5
+                && shape.Bounds.MinX <= observation.MaxX + spacing * 0.5
+                && shape.Bounds.MaxY >= observation.MinY - spacing * 1.5
+                && shape.Bounds.MinY <= observation.MaxY + spacing * 1.5)
+            .Where(shape =>
+                shape.Bounds.Height >= spacing * 0.65
+                && shape.Bounds.Height <= spacing * 4.0
+                && shape.Bounds.Width >= spacing * 0.20
+                && shape.Bounds.Width <= spacing * 3.0)
+            .OrderBy(shape => shape.Bounds.Width)
+            .ThenBy(shape => Math.Abs(
+                shape.Bounds.CenterY - observation.CenterY))
+            .FirstOrDefault();
+
+        if (beatGlyph is null)
+        {
+            return false;
+        }
+
+        var heightInSpacings = beatGlyph.Bounds.Height / spacing;
+        var aspect = beatGlyph.Bounds.Width
+            / Math.Max(beatGlyph.Bounds.Height, 0.001);
+
+        // MuseScore writes the metronome-note glyph as one compound Tempo path,
+        // unlike score notes which arrive as separate head/stem/flag primitives.
+        // Extract only structural evidence here, then delegate the actual musical
+        // duration rule to WrittenDurationClassifier (also used by DurationPass).
+        var hasStem = heightInSpacings >= 1.35;
+        var isHollow = beatGlyph.EffectiveContours.Count > 1;
+
+        var subdivisionLevel = 0;
+        if (!isHollow && hasStem)
+        {
+            subdivisionLevel = aspect switch
+            {
+                <= 0.52 => 0,
+                <= 0.82 => 1,
+                _ => 2
+            };
+        }
+
+        var written = WrittenDurationClassifier.Classify(
+            isHollow,
+            hasStem,
+            subdivisionLevel);
+
+        var instruction = match.Groups["prefix"].Value
+            .Trim()
+            .TrimEnd('(')
+            .Trim();
+        if (instruction.Length == 0)
+        {
+            instruction = null;
+        }
+
+        var sourceIds = candidate.Observation.SourceShapeIds
+            .Append(beatGlyph.Id)
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+        var confidence = Math.Clamp(
+            candidate.Recognition.Confidence * 0.95,
+            0,
+            1);
+        var reason =
+            $"metronome mark parsed from OCR BPM and Tempo-class beat glyph; "
+            + $"glyph={beatGlyph.Id}; contours={beatGlyph.EffectiveContours.Count}; "
+            + $"aspect={aspect:F2}; height={heightInSpacings:F2}sp; "
+            + $"beat={written.NoteType}; bpm={bpm}";
+
+        fact = new MetronomeMarkFact(
+            candidate.Observation.Id,
+            context.MeasureNumber,
+            context.Staff,
+            context.At,
+            written.NoteType,
+            bpm,
+            instruction,
+            beatGlyph.Id,
+            confidence,
+            reason,
+            sourceIds);
+        return true;
     }
 
     private bool TryResolveInstruction(
