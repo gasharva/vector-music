@@ -147,7 +147,8 @@ var textPass = new TextPass(
     textAnalysis,
     geometry,
     layout,
-    ownership);
+    ownership,
+    notation);
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
