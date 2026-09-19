@@ -8,7 +8,8 @@ if (args.Length < 2)
     Console.Error.WriteLine(
         "Usage: dotnet run -- <input.svg> <output-directory> "
         + "[--title <title>] [--composer <composer>] [--model <basic-classifier.zip>] "
-        + "[--initial-time <beats/beat-type>] [--initial-key <fifths>]");
+        + "[--initial-time <beats/beat-type>] [--initial-key <fifths>] "
+        + "[--wait-for-debugger]");
     return 2;
 }
 
@@ -21,6 +22,22 @@ var inheritedTimeSignature = ParseTimeSignatureOption(
     ReadOption(args, "--initial-time"));
 var inheritedKeySignature = ParseKeySignatureOption(
     ReadOption(args, "--initial-key"));
+var waitForDebugger = args.Any(argument =>
+    argument.Equals(
+        "--wait-for-debugger",
+        StringComparison.OrdinalIgnoreCase));
+
+if (waitForDebugger && !Debugger.IsAttached)
+{
+    Console.WriteLine(
+        "Waiting for debugger: requesting Visual Studio attach...");
+    Debugger.Launch();
+}
+
+if (waitForDebugger && Debugger.IsAttached)
+{
+    Debugger.Break();
+}
 
 Directory.CreateDirectory(outputDirectory);
 
