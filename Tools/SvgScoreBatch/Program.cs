@@ -841,7 +841,8 @@ static void PrintUsage()
     Console.Error.WriteLine(
         "  SvgScoreBatch <svg-folder> <output-folder> "
         + "[--base <name>] [--reference <musicxml|json>] "
-        + "[--model <classifier.zip>] [--configuration Release] "
+        + "[--model <classifier.zip>] [--configuration Debug|Release] "
+        + "[--debug-semantic] "
         + "[--diff-level warning|error|critical] "
         + "[--no-build] [--fail-on-diff] [--no-diagnostic-archive]");
     Console.Error.WriteLine();
