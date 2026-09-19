@@ -17,10 +17,6 @@ public sealed class ShapeClusterer : IShapeClusterer
 {
     private readonly double _distanceThreshold;
     private readonly IGeometryAnalyzer _geometryAnalyzer;
-    private readonly IHairpinExtractor _hairpinExtractor;
-    private readonly BracketSpannerExtractor _bracketSpannerExtractor;
-    private readonly VerticalZigZagRunExtractor _verticalZigZagRunExtractor;
-    private readonly VerticalZigZagExtractor _verticalZigZagExtractor;
     private readonly IArcExtractor _arcExtractor;
     private readonly IEllipseLikeExtractor _ellipseExtractor;
     private readonly ShapeDescriptorMatcher _descriptorMatcher;
@@ -35,17 +31,9 @@ public sealed class ShapeClusterer : IShapeClusterer
         IGeometryAnalyzer? geometryAnalyzer = null,
         IArcExtractor? arcExtractor = null,
         IEllipseLikeExtractor? ellipseExtractor = null,
-        IHairpinExtractor? hairpinExtractor = null,
-        BracketSpannerExtractor? bracketSpannerExtractor = null,
-        VerticalZigZagExtractor? verticalZigZagExtractor = null,
-        VerticalZigZagRunExtractor? verticalZigZagRunExtractor = null,
         double distanceThreshold = 0.035)
     {
         _geometryAnalyzer = geometryAnalyzer ?? new GeometryAnalyzer();
-        _hairpinExtractor = hairpinExtractor ?? new HairpinExtractor();
-        _bracketSpannerExtractor = bracketSpannerExtractor ?? new BracketSpannerExtractor();
-        _verticalZigZagRunExtractor = verticalZigZagRunExtractor ?? new VerticalZigZagRunExtractor();
-        _verticalZigZagExtractor = verticalZigZagExtractor ?? new VerticalZigZagExtractor();
         _arcExtractor = arcExtractor ?? new ArcExtractor();
         _ellipseExtractor = ellipseExtractor ?? new EllipseLikeExtractor();
         _descriptorMatcher = new ShapeDescriptorMatcher();
@@ -57,49 +45,14 @@ public sealed class ShapeClusterer : IShapeClusterer
         _geometryAnalyzer.ClearDiagnostics();
         _arcExtractor.ClearDiagnostics();
 
-        var bracketExtraction = _bracketSpannerExtractor.Extract(scene);
-        var consumedByBrackets = bracketExtraction.ConsumedShapeIds;
-        var zigZagRunExtraction = _verticalZigZagRunExtractor.Extract(scene);
-        var consumedByZigZagRuns = zigZagRunExtraction.ConsumedShapeIds;
         var prototypes = new List<ShapePrototype>();
         var instances = new List<ShapeInstance>();
         var strokes = new List<Stroke>();
         var curvedStrokes = new List<CurvedStroke>();
         var ellipses = new List<EllipseLike>();
-        var hairpins = new List<HairpinPrimitive>();
-        var verticalZigZags = new List<VerticalZigZagPrimitive>(zigZagRunExtraction.ZigZags);
 
         foreach (var shape in scene.Shapes)
         {
-            if (consumedByBrackets.Contains(shape.Id)
-                || consumedByZigZagRuns.Contains(shape.Id))
-            {
-                continue;
-            }
-
-            // Some producers emit one continuous wavy path instead of repeated
-            // glyph tiles. Keep the single-shape detector as a complementary path.
-            if (_verticalZigZagExtractor.TryCreateVerticalZigZag(
-                shape,
-                out var verticalZigZag))
-            {
-                verticalZigZags.Add(verticalZigZag);
-                continue;
-            }
-
-            // A very long, shallow hairpin can look almost straight to the generic
-            // PCA stroke detector: its opening is tiny compared with its horizontal
-            // span. Hairpin geometry is more specific than a generic stroke, so give
-            // it first refusal. The extractor itself is deliberately strict about
-            // requiring two straight branches, vertically separated endpoints and a
-            // single opposite apex, so ordinary staff/ledger/bar lines are rejected.
-            if (_hairpinExtractor.TryCreateHairpin(
-                shape,
-                out var hairpin))
-            {
-                hairpins.Add(hairpin);
-                continue;
-            }
 
             if (_geometryAnalyzer.TryCreateStroke(
                 shape,
@@ -136,12 +89,7 @@ public sealed class ShapeClusterer : IShapeClusterer
             instances,
             strokes,
             curvedStrokes,
-            ellipses)
-        {
-            Hairpins = hairpins,
-            BracketSpanners = bracketExtraction.Brackets,
-            VerticalZigZags = verticalZigZags
-        };
+            ellipses);
     }
 
     private void AddResidualShape(
