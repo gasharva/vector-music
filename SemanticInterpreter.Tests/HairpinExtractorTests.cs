@@ -30,11 +30,11 @@ public sealed class HairpinExtractorTests
     }
 
     [Fact]
-    public void LongShallowMuseScoreHairpin_WinsBeforeGenericStrokeExtraction()
+    public void LongShallowMuseScoreHairpin_IsResolvedAfterPrimitiveExtraction()
     {
-        // This is the actual hairpin below measures 7-8. Its 24px opening over
-        // an 863px span is shallow enough that the generic PCA stroke detector
-        // also considers it straight unless hairpins are given first refusal.
+        // This is the actual hairpin below measures 7-8. Generic PCA is allowed
+        // to see it as a stroke, but the non-destructive hairpin candidate survives
+        // and wins later when layout has not reserved that source geometry.
         var shape = Shape(
             "m7-hairpin",
             [
@@ -46,7 +46,14 @@ public sealed class HairpinExtractorTests
             sourceKind: "polyline");
 
         var scene = new GeometricScene([shape]);
-        var notation = new ShapeClusterer().Cluster(scene);
+        var candidates = new CompositeCandidateDetector().Detect(scene);
+        var primitiveNotation = new ShapeClusterer().Cluster(scene);
+        var layout = new ScoreLayout([], []);
+
+        var notation = new CompositeCandidateResolver().Resolve(
+            primitiveNotation,
+            candidates,
+            layout);
 
         var hairpin = Assert.Single(notation.Hairpins);
         Assert.Equal(HairpinKind.Crescendo, hairpin.Kind);
