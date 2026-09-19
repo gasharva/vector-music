@@ -68,6 +68,17 @@ jobs:
             exit 1
           fi
 
+      - name: Upload canonical SVG preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: cairo-yellow-leaves-canonical-svg
+          path: |
+            artifacts/cairo-canonical/page-001.svg
+            artifacts/cairo-canonical/page-002.svg
+            artifacts/cairo-canonical/canonicalizer.log
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Probe canonicalized Cairo layout
         shell: bash
         run: |
