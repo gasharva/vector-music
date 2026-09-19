@@ -273,7 +273,9 @@ var textPass = new TextPass(
 var semanticPipeline = new SemanticPipeline(
     [
         new ClefPass(),
-        new TimeSignaturePass(inheritedTimeSignature),
+        new TimeSignaturePass(
+            inheritedTimeSignature,
+            settings),
         new KeySignaturePass(inheritedKeySignature),
         noteheadPass,
         accidentalPass,
