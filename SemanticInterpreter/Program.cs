@@ -74,6 +74,25 @@ if (layoutAnalyzer.LastDiagnostics is { } layoutDiagnostics)
             Console.WriteLine($"     {candidate}");
         }
     }
+
+    if (layoutDiagnostics.StaffCount > 0)
+    {
+        Console.WriteLine("   detected staffs:");
+        foreach (var staff in layoutDiagnostics.StaffDescriptions)
+        {
+            Console.WriteLine($"     {staff}");
+        }
+    }
+
+    if (layoutDiagnostics.StaffCount > 0
+        && layoutDiagnostics.BoundaryCount == 0)
+    {
+        Console.WriteLine("   vertical layout candidates:");
+        foreach (var candidate in layoutDiagnostics.VerticalCandidates)
+        {
+            Console.WriteLine($"     {candidate}");
+        }
+    }
 }
 
 if (layoutOnly)
