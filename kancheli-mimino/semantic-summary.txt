@@ -1,5 +1,9 @@
 input=/home/runner/work/vector-music/vector-music/Samples/kancheli-mimino/kancheli-mimino.svg
 geometry.shapes=677
+layout.staffs=10
+layout.systems=5
+layout.boundaries=25
+layout.measures=20
 notation.instances=151
 notation.strokes=250
 notation.curves=24
