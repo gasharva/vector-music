@@ -67,24 +67,25 @@ public sealed class SlurPassTests
     }
 
     [Fact]
-    public void SamePitchArc_WithExplicitSlurSourceClass_RemainsSlur()
+    public void SamePitchArc_TouchingStemsButFarFromNoteheads_RemainsSlur()
     {
         const double spacing = 20;
         var document = Document(
             Curve(
                 "phrase-slur",
                 [
-                    new PointD(100, 160),
-                    new PointD(150, 125),
-                    new PointD(200, 160)
+                    new PointD(100, 100),
+                    new PointD(150, 70),
+                    new PointD(200, 100)
                 ],
-                spacing,
-                sourceClass: "SlurSegment"));
+                spacing));
         var facts = new SemanticFacts();
-        facts.Add(Notehead("left", 100, 160, 2, spacing));
-        facts.Add(Notehead("right", 200, 160, 2, spacing));
+        facts.Add(Notehead("left", 100, 180, 2, spacing));
+        facts.Add(Notehead("right", 200, 180, 2, spacing));
         facts.Add(Pitch("left", "D4"));
         facts.Add(Pitch("right", "D4"));
+        facts.Add(Stem("s-left", "left", 100, 100, 100, 180));
+        facts.Add(Stem("s-right", "right", 200, 100, 200, 180));
 
         var pass = new SlurPass();
         pass.Run(document, facts);
