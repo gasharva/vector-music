@@ -85,6 +85,45 @@ public sealed class PrototypeSymbolClassifierGateTests
         Assert.False(diagnostic.Skipped);
     }
 
+    [Fact]
+    public void SmallGlyphOutsideStaffPair_UsesNearestMeasureScale()
+    {
+        var classifier = new CountingClassifier();
+        var settings = new SvgMusicSettings
+        {
+            PrototypeClassifier = new PrototypeClassifierSettings
+            {
+                MaxMeasureWidthFraction = 0.25,
+                MaxMeasureHeightFraction = 0.60
+            }
+        };
+
+        // Pedal marks, tempo marks and dynamics legitimately live outside the
+        // vertical staff-pair bounds. The measure supplies scale, not clipping.
+        var geometry = new GeometricScene(
+            [FilledRectangle("outside", 10, 125, 12, 18)]);
+        var notation = Notation(
+            "outside",
+            x: 10,
+            y: 125,
+            width: 12,
+            height: 18);
+        var layout = Layout(
+            measureWidth: 100,
+            measureHeight: 100);
+
+        var runner = new PrototypeSymbolClassifier(
+            classifier,
+            settings: settings);
+        runner.Classify(
+            geometry,
+            notation,
+            layout);
+
+        Assert.Equal(3, classifier.Calls);
+        Assert.False(Assert.Single(runner.LastDiagnostics).Skipped);
+    }
+
     private static NotationScene Notation(
         string shapeId,
         double x = 0,
