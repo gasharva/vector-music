@@ -8,5 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="../../CanonicalNotation/CanonicalNotation.Cli.csproj" />
+    <ProjectReference Include="../../SemanticInterpreter/SemanticInterpreter.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>
