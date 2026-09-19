@@ -221,7 +221,8 @@ internal sealed class OpenCurveArcExtractor
             sameSideRatio,
             approximation,
             shape.SourceKind,
-            shape.SourceIndex);
+            shape.SourceIndex,
+            SourceClass: shape.SourceClass);
 
         return new OpenCurveArcResult(
             true,
