@@ -94,8 +94,27 @@ public sealed class AudiverisSymbolClassifier : ISymbolClassifier
     }
 }
 
+public sealed record PrototypeScaleClassificationDiagnostic(
+    int Interline,
+    int RasterWidth,
+    int RasterHeight,
+    int ForegroundPixels,
+    double RasterizeMilliseconds,
+    double ClassifyMilliseconds);
+
+public sealed record PrototypeClassificationDiagnostic(
+    string PrototypeId,
+    string ShapeId,
+    double ShapeWidth,
+    double ShapeHeight,
+    int PointCount,
+    double TotalMilliseconds,
+    IReadOnlyList<PrototypeScaleClassificationDiagnostic> Scales);
+
 public sealed class PrototypeSymbolClassifier
 {
+    public IReadOnlyList<PrototypeClassificationDiagnostic> LastDiagnostics { get; private set; }
+        = Array.Empty<PrototypeClassificationDiagnostic>();
     private static readonly int[] Interlines = [20, 30, 40];
 
     private readonly ISymbolClassifier _classifier;
@@ -121,6 +140,7 @@ public sealed class PrototypeSymbolClassifier
         var sourceInterline = GlyphRasterizer.ResolveSourceInterline(layout);
         var classifications = new Dictionary<string, SymbolClassification>(
             StringComparer.Ordinal);
+        var diagnostics = new List<PrototypeClassificationDiagnostic>();
 
         foreach (var prototype in notation.Prototypes)
         {
@@ -132,16 +152,30 @@ public sealed class PrototypeSymbolClassifier
             }
 
             var scales = new List<SymbolScaleResult>();
+            var scaleDiagnostics = new List<PrototypeScaleClassificationDiagnostic>();
+            var prototypeStopwatch = System.Diagnostics.Stopwatch.StartNew();
 
             foreach (var interline in Interlines)
             {
+                var scaleStopwatch = System.Diagnostics.Stopwatch.StartNew();
                 var glyph = _rasterizer.Rasterize(
                     shape,
                     sourceInterline,
                     interline);
+                var rasterizeMilliseconds = scaleStopwatch.Elapsed.TotalMilliseconds;
 
+                scaleStopwatch.Restart();
                 var predictions = _classifier.Classify(glyph);
+                var classifyMilliseconds = scaleStopwatch.Elapsed.TotalMilliseconds;
                 var winner = predictions.FirstOrDefault();
+
+                scaleDiagnostics.Add(new PrototypeScaleClassificationDiagnostic(
+                    interline,
+                    glyph.Width,
+                    glyph.Height,
+                    glyph.ForegroundPixels,
+                    rasterizeMilliseconds,
+                    classifyMilliseconds));
 
                 if (winner is null)
                 {
@@ -154,6 +188,15 @@ public sealed class PrototypeSymbolClassifier
                     winner.Confidence,
                     predictions));
             }
+
+            diagnostics.Add(new PrototypeClassificationDiagnostic(
+                prototype.Id,
+                shape.Id,
+                shape.Bounds.Width,
+                shape.Bounds.Height,
+                shape.EffectiveContours.Sum(contour => contour.Points.Count),
+                prototypeStopwatch.Elapsed.TotalMilliseconds,
+                scaleDiagnostics));
 
             if (scales.Count == 0)
             {
@@ -183,6 +226,10 @@ public sealed class PrototypeSymbolClassifier
             {
                 Classification = classifications.GetValueOrDefault(instance.PrototypeId)
             })
+            .ToArray();
+
+        LastDiagnostics = diagnostics
+            .OrderByDescending(item => item.TotalMilliseconds)
             .ToArray();
 
         return notation with
