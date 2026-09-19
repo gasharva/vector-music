@@ -206,17 +206,9 @@ public sealed class StemAttachmentAnalyzer
         // property: the stem must actually serve noteheads from multiple staffs.
         var isCrossStaff = attachedStaffs.Length > 1;
         var bestMatch = matches[0];
-        var verticalityScore = Math.Clamp(
-            1.0 - candidate.VerticalRatio / MaximumVerticalRatio,
-            0,
-            1);
-        var edgeScore = Math.Clamp(
-            1.0 - bestMatch.EdgeDistanceInSpacings / MaximumHeadEdgeDistanceInSpacings,
-            0,
-            1);
-        var confidence = 0.45 * bestMatch.Score
-            + 0.30 * verticalityScore
-            + 0.25 * edgeScore;
+        var confidence = ComputeConfidence(
+            candidate,
+            matches);
 
         return new StemDecision(
             candidate,
@@ -296,7 +288,7 @@ public sealed class StemAttachmentAnalyzer
             score);
     }
 
-    private static StemDirection InferDirection(
+    internal static StemDirection InferDirection(
         StemCandidate candidate,
         IReadOnlyList<StemNoteheadMatch> matches)
     {
@@ -323,6 +315,28 @@ public sealed class StemAttachmentAnalyzer
         }
 
         return StemDirection.Ambiguous;
+    }
+
+    internal static double ComputeConfidence(
+        StemCandidate candidate,
+        IReadOnlyList<StemNoteheadMatch> matches)
+    {
+        var bestMatch = matches
+            .OrderByDescending(match => match.Score)
+            .ThenBy(match => match.EdgeDistanceInSpacings)
+            .First();
+        var verticalityScore = Math.Clamp(
+            1.0 - candidate.VerticalRatio / MaximumVerticalRatio,
+            0,
+            1);
+        var edgeScore = Math.Clamp(
+            1.0 - bestMatch.EdgeDistanceInSpacings / MaximumHeadEdgeDistanceInSpacings,
+            0,
+            1);
+
+        return 0.45 * bestMatch.Score
+            + 0.30 * verticalityScore
+            + 0.25 * edgeScore;
     }
 
     private static double AveragePositive(
