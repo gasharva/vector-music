@@ -24,7 +24,7 @@ public sealed record SlurFact(
 
 public sealed record SlurDecision(
     string CurveShapeId,
-    CurvedStroke Curve,
+    CurvedStroke? Curve,
     bool Accepted,
     string Decision,
     NoteheadFact? FromNotehead,
@@ -167,7 +167,23 @@ public sealed class SlurPass : ISemanticPass
             })
             .ToArray();
 
-        var curveObservations = CollectCurves(document);
+        var crossSystemCurves = facts
+            .OfType<CrossSystemCurveFact>()
+            .ToArray();
+        var crossSystemById = crossSystemCurves
+            .ToDictionary(
+                curve => curve.CurveId,
+                StringComparer.Ordinal);
+        var fragmentShapeIds = facts
+            .OfType<CrossSystemCurveFragmentFact>()
+            .Select(fragment => fragment.CurveShapeId)
+            .ToHashSet(StringComparer.Ordinal);
+
+        var curveObservations = CollectCurves(document)
+            .Where(observation =>
+                !fragmentShapeIds.Contains(
+                    observation.Curve.ShapeId))
+            .ToArray();
         var decisions = new List<SlurDecision>();
 
         foreach (var observation in curveObservations
@@ -176,12 +192,38 @@ public sealed class SlurPass : ISemanticPass
             decisions.Add(Decide(observation, anchors));
         }
 
+        foreach (var crossSystem in crossSystemCurves
+                     .OrderBy(curve => curve.CurveId, StringComparer.Ordinal))
+        {
+            decisions.Add(
+                DecideCrossSystem(
+                    crossSystem,
+                    anchors));
+        }
+
         LastAnalysis = new SlurAnalysisResult(decisions);
 
         foreach (var decision in decisions.Where(decision => decision.Accepted))
         {
             var from = decision.FromNotehead!;
             var to = decision.ToNotehead!;
+            var sourceShapeIds = crossSystemById.TryGetValue(
+                    decision.CurveShapeId,
+                    out var crossSystem)
+                ? crossSystem.SourceShapeIds
+                    .Concat(new[]
+                    {
+                        from.ShapeId,
+                        to.ShapeId
+                    })
+                    .Distinct(StringComparer.Ordinal)
+                    .ToArray()
+                : new[]
+                {
+                    decision.CurveShapeId,
+                    from.ShapeId,
+                    to.ShapeId
+                };
 
             facts.Add(new SlurFact(
                 decision.CurveShapeId,
@@ -196,14 +238,112 @@ public sealed class SlurPass : ISemanticPass
                 decision.EndDistanceInSpacings!.Value,
                 decision.Confidence,
                 decision.Reason,
-                [decision.CurveShapeId, from.ShapeId, to.ShapeId]));
+                sourceShapeIds));
         }
 
         facts.AddTrace(
             $"SlurPass: curves={decisions.Count}; accepted={decisions.Count(decision => decision.Accepted)}; "
             + $"tie-like={decisions.Count(decision => decision.Decision == "tie-like")}; "
+            + $"cross-system={crossSystemCurves.Length}; "
             + $"vertical/non-span={decisions.Count(decision => decision.Decision == "non-horizontal-arch")}; "
             + $"unattached={decisions.Count(decision => decision.Decision == "no-endpoint-pair")}");
+    }
+
+    private static SlurDecision DecideCrossSystem(
+        CrossSystemCurveFact curve,
+        IReadOnlyList<EndpointAnchor> anchors)
+    {
+        var from = anchors
+            .Where(anchor =>
+                anchor.Notehead.MeasureNumber
+                    == curve.StartMeasureNumber
+                && anchor.Notehead.Staff
+                    == curve.StartStaff
+                && string.Equals(
+                    anchor.Notehead.ShapeId,
+                    curve.FromNoteheadId,
+                    StringComparison.Ordinal))
+            .FirstOrDefault();
+        var to = anchors
+            .Where(anchor =>
+                anchor.Notehead.MeasureNumber
+                    == curve.EndMeasureNumber
+                && anchor.Notehead.Staff
+                    == curve.EndStaff
+                && string.Equals(
+                    anchor.Notehead.ShapeId,
+                    curve.ToNoteheadId,
+                    StringComparison.Ordinal))
+            .FirstOrDefault();
+
+        if (from is null || to is null)
+        {
+            return new SlurDecision(
+                curve.CurveId,
+                null,
+                false,
+                "no-endpoint-pair",
+                from?.Notehead,
+                to?.Notehead,
+                curve.Placement,
+                curve.StartDistanceInSpacings,
+                curve.EndDistanceInSpacings,
+                0,
+                $"{curve.CurveId}: reconstructed cross-system curve lost a semantic endpoint");
+        }
+
+        if (SameTarget(from, to)
+            || ComesAfter(
+                from.Notehead,
+                to.Notehead))
+        {
+            return new SlurDecision(
+                curve.CurveId,
+                null,
+                false,
+                "no-endpoint-pair",
+                from.Notehead,
+                to.Notehead,
+                curve.Placement,
+                curve.StartDistanceInSpacings,
+                curve.EndDistanceInSpacings,
+                0,
+                $"{curve.CurveId}: reconstructed cross-system endpoints are not chronological distinct events");
+        }
+
+        if (IsSamePitchVoice(from, to)
+            && IsTieAdjacent(from, to))
+        {
+            return new SlurDecision(
+                curve.CurveId,
+                null,
+                false,
+                "tie-like",
+                from.Notehead,
+                to.Notehead,
+                curve.Placement,
+                curve.StartDistanceInSpacings,
+                curve.EndDistanceInSpacings,
+                0,
+                $"{curve.CurveId}: reconstructed cross-system curve joins same-pitch "
+                + $"{from.Pitch.Pitch} events in one staff/voice; reserved for TiePass");
+        }
+
+        return new SlurDecision(
+            curve.CurveId,
+            null,
+            true,
+            "slur",
+            from.Notehead,
+            to.Notehead,
+            curve.Placement,
+            curve.StartDistanceInSpacings,
+            curve.EndDistanceInSpacings,
+            curve.Confidence,
+            $"{curve.CurveId}: reconstructed cross-system curve endpoints attach to "
+            + $"{from.Notehead.ShapeId}/{from.Pitch.Pitch} and "
+            + $"{to.Notehead.ShapeId}/{to.Pitch.Pitch}; "
+            + $"placement={curve.Placement ?? "unspecified"}");
     }
 
     private static IReadOnlyList<CurveObservation> CollectCurves(
