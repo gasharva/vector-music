@@ -11,6 +11,7 @@ on:
       - "AudiverisGlyphPoc/**"
       - "CanonicalNotation/**"
       - "Samples/kancheli-mimino/**"
+      - "Samples/cairo-yellow-leaves/**"
       - "Tools/**"
       - ".github/workflows/semantic-canonical-poc.yml"
   workflow_dispatch:
@@ -43,6 +44,36 @@ jobs:
           dotnet build SemanticInterpreter/SemanticInterpreter.csproj --configuration Release
           dotnet build Tools/TextOcrDiagnostics/TextOcrDiagnostics.csproj --configuration Release
           dotnet build Tools/SvgScoreBatch/SvgScoreBatch.csproj --configuration Release
+
+      - name: Probe Cairo Yellow Leaves layout
+        shell: bash
+        run: |
+          set +e
+          mkdir -p artifacts/cairo-layout
+
+          for variant in cairo optimized; do
+            for page in 001 002; do
+              echo
+              echo "=== $variant page-$page ==="
+              mkdir -p "artifacts/cairo-layout/$variant-$page"
+
+              dotnet SemanticInterpreter/bin/Release/net8.0/SemanticInterpreter.dll                 "Samples/cairo-yellow-leaves/$variant/page-$page.svg"                 "artifacts/cairo-layout/$variant-$page"                 > "artifacts/cairo-layout/$variant-$page/run.log" 2>&1
+
+              status=$?
+              echo "exit=$status"
+              cat "artifacts/cairo-layout/$variant-$page/run.log"
+            done
+          done
+
+          exit 0
+
+      - name: Upload Cairo layout diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: cairo-yellow-leaves-layout
+          path: artifacts/cairo-layout/
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Interpret Kancheli Mimino SVG
         shell: bash
