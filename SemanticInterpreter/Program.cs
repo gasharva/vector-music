@@ -47,7 +47,30 @@ var scenePipeline = new ScenePipeline(
     new SvgNormalizer(),
     clusterer);
 var (geometry, notation) = scenePipeline.Run(input);
-var layout = new ScoreLayoutAnalyzer().Analyze(notation);
+var layoutAnalyzer = new ScoreLayoutAnalyzer();
+var layout = layoutAnalyzer.Analyze(notation);
+
+if (layoutAnalyzer.LastDiagnostics is { } layoutDiagnostics)
+{
+    Console.WriteLine(
+        $"   layout: strokes={layoutDiagnostics.StrokeCount}; "
+        + $"horizontal={layoutDiagnostics.HorizontalStrokeCount}; "
+        + $"logical-horizontal={layoutDiagnostics.LogicalHorizontalCount}; "
+        + $"vertical={layoutDiagnostics.VerticalStrokeCount}; "
+        + $"staffs={layoutDiagnostics.StaffCount}; "
+        + $"systems={layoutDiagnostics.SystemCount}; "
+        + $"boundaries={layoutDiagnostics.BoundaryCount}; "
+        + $"measures={layoutDiagnostics.MeasureCount}");
+
+    if (layoutDiagnostics.StaffCount == 0)
+    {
+        Console.WriteLine("   long horizontal layout candidates:");
+        foreach (var candidate in layoutDiagnostics.LongHorizontalCandidates)
+        {
+            Console.WriteLine($"     {candidate}");
+        }
+    }
+}
 
 Console.WriteLine("2. Classifying reusable contour prototypes...");
 var classifier = await AudiverisSymbolClassifier.CreateAsync(modelPath);
@@ -431,6 +454,10 @@ File.WriteAllLines(
     [
         $"input={Path.GetFullPath(input)}",
         $"geometry.shapes={geometry.Shapes.Count}",
+        $"layout.staffs={layout.Staffs.Count}",
+        $"layout.systems={layout.Systems.Count}",
+        $"layout.boundaries={layout.Systems.SelectMany(system => system.StaffPairs).Sum(pair => pair.Boundaries.Count)}",
+        $"layout.measures={layout.Systems.SelectMany(system => system.StaffPairs).Sum(pair => pair.Measures.Count)}",
         $"notation.instances={notation.Instances.Count}",
         $"notation.strokes={notation.Strokes.Count}",
         $"notation.curves={notation.CurvedStrokes.Count}",
