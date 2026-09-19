@@ -672,26 +672,26 @@ public sealed class TextPass : ISemanticPass
                 spacing,
                 out var classifiedBeat))
         {
-            var instruction = match.Groups["prefix"].Value
+            var _instruction = match.Groups["prefix"].Value
                 .Trim()
                 .TrimEnd('(')
                 .Trim();
-            if (instruction.Length == 0)
+            if (_instruction.Length == 0)
             {
-                instruction = null;
+                _instruction = null;
             }
 
-            var sourceIds = candidate.Observation.SourceShapeIds
+            var _sourceIds = candidate.Observation.SourceShapeIds
                 .Append(classifiedBeat.ShapeId)
                 .Distinct(StringComparer.Ordinal)
                 .ToArray();
-            var confidence = Math.Clamp(
+            var _confidence = Math.Clamp(
                 Math.Min(
                     candidate.Recognition.Confidence,
                     classifiedBeat.Confidence),
                 0,
                 1);
-            var reason =
+            var _reason =
                 $"metronome mark parsed from OCR BPM and geometry classifier; "
                 + $"glyph={classifiedBeat.ShapeId}; label={classifiedBeat.Label}; "
                 + $"beat={classifiedBeat.BeatUnit}; bpm={bpm}";
@@ -703,11 +703,11 @@ public sealed class TextPass : ISemanticPass
                 context.At,
                 classifiedBeat.BeatUnit,
                 bpm,
-                instruction,
+                _instruction,
                 classifiedBeat.ShapeId,
-                confidence,
-                reason,
-                sourceIds);
+                _confidence,
+                _reason,
+                _sourceIds);
             return true;
         }
 
