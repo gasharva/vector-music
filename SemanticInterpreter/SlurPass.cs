@@ -452,17 +452,24 @@ public sealed class SlurPass : ISemanticPass
             slurEndCandidates,
             requireSamePitch: false);
 
-        if (bestTie is not null
+        var sourceSaysSlur = HasSourceClass(curve, "SlurSegment");
+        var sourceSaysTie = HasSourceClass(curve, "TieSegment");
+
+        if (!sourceSaysSlur
+            && bestTie is not null
             && IsTieAdjacent(bestTie.Start.Anchor, bestTie.End.Anchor))
         {
             var tiePreferenceMargin =
-                bestSlur is not null
-                && ConnectsSameChordPair(bestTie, bestSlur)
-                    ? SameChordPairTiePreferenceMarginInSpacings
-                    : TiePreferenceMarginInSpacings;
+                sourceSaysTie
+                    ? double.PositiveInfinity
+                    : bestSlur is not null
+                      && ConnectsSameChordPair(bestTie, bestSlur)
+                        ? SameChordPairTiePreferenceMarginInSpacings
+                        : TiePreferenceMarginInSpacings;
 
             if (bestSlur is null
-                ? bestTie.Score <= MaximumUnopposedTieScoreInSpacings
+                ? sourceSaysTie
+                    || bestTie.Score <= MaximumUnopposedTieScoreInSpacings
                 : bestTie.Score <= bestSlur.Score + tiePreferenceMargin)
             {
                 return TieLike(curve, left, right, bestTie);
@@ -479,7 +486,8 @@ public sealed class SlurPass : ISemanticPass
 
         // A same-pitch pair can also win the ordinary geometric search exactly. Keep
         // the semantic boundary explicit even when the wide tie pass was unnecessary.
-        if (IsSamePitchVoice(bestSlur.Start.Anchor, bestSlur.End.Anchor)
+        if (!sourceSaysSlur
+            && IsSamePitchVoice(bestSlur.Start.Anchor, bestSlur.End.Anchor)
             && IsTieAdjacent(bestSlur.Start.Anchor, bestSlur.End.Anchor))
         {
             return TieLike(curve, left, right, bestSlur);
@@ -554,6 +562,18 @@ public sealed class SlurPass : ISemanticPass
         }
 
         return best;
+    }
+
+    private static bool HasSourceClass(
+        CurvedStroke curve,
+        string className)
+    {
+        return curve.SourceClass?
+            .Split(
+                new[] { ' ', '\t', '\r', '\n' },
+                StringSplitOptions.RemoveEmptyEntries)
+            .Contains(className, StringComparer.Ordinal)
+            == true;
     }
 
     private static bool ConnectsSameChordPair(
