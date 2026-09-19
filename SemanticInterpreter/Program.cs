@@ -94,6 +94,12 @@ if (layoutAnalyzer.LastDiagnostics is { } layoutDiagnostics)
             Console.WriteLine($"     {candidate}");
         }
     }
+
+    Console.WriteLine("   measure-boundary diagnostics:");
+    foreach (var detail in layoutDiagnostics.MeasureBoundaryDetails)
+    {
+        Console.WriteLine($"     {detail}");
+    }
 }
 
 if (layoutOnly)
