@@ -420,56 +420,61 @@ public sealed class SlurPass : ISemanticPass
                 $"{curve.ShapeId}: horizontal span {horizontalSpan:F2}sp is too small for a note-to-note slur");
         }
 
-        // Use a wider search radius for the tie hypothesis. Engraving can place a tie
-        // endpoint on the far side of a chord or shared stem; pitch identity is a much
-        // stronger clue than raw nearest-neighbour distance in that case.
-        var wideStartCandidates = EndpointCandidates(
+        // Ties and slurs share arc geometry, but their endpoint semantics differ:
+        // a tie belongs to a particular notehead, while a phrase slur may terminate
+        // naturally at a chord stem. Keep the wider same-pitch search for ties, but
+        // measure it against noteheads only. Slur attachment may use noteheads or stems.
+        // This is producer-independent and resolves same-pitch chord ambiguities without
+        // consulting SVG classes such as TieSegment/SlurSegment.
+        var tieStartCandidates = EndpointCandidates(
             left,
             observation,
             anchors,
             spacing,
-            MaximumTieEndpointDistanceInSpacings);
-        var wideEndCandidates = EndpointCandidates(
+            MaximumTieEndpointDistanceInSpacings,
+            includeStem: false);
+        var tieEndCandidates = EndpointCandidates(
             right,
             observation,
             anchors,
             spacing,
-            MaximumTieEndpointDistanceInSpacings);
-
+            MaximumTieEndpointDistanceInSpacings,
+            includeStem: false);
         var bestTie = FindBestPair(
-            wideStartCandidates,
-            wideEndCandidates,
+            tieStartCandidates,
+            tieEndCandidates,
             requireSamePitch: true);
 
-        var slurStartCandidates = wideStartCandidates
-            .Where(candidate => candidate.DistanceInSpacings <= MaximumSlurEndpointDistanceInSpacings)
-            .ToArray();
-        var slurEndCandidates = wideEndCandidates
-            .Where(candidate => candidate.DistanceInSpacings <= MaximumSlurEndpointDistanceInSpacings)
-            .ToArray();
+        var slurStartCandidates = EndpointCandidates(
+            left,
+            observation,
+            anchors,
+            spacing,
+            MaximumSlurEndpointDistanceInSpacings,
+            includeStem: true);
+        var slurEndCandidates = EndpointCandidates(
+            right,
+            observation,
+            anchors,
+            spacing,
+            MaximumSlurEndpointDistanceInSpacings,
+            includeStem: true);
         var bestSlur = FindBestPair(
             slurStartCandidates,
             slurEndCandidates,
             requireSamePitch: false);
 
-        var sourceSaysSlur = HasSourceClass(curve, "SlurSegment");
-        var sourceSaysTie = HasSourceClass(curve, "TieSegment");
-
-        if (!sourceSaysSlur
-            && bestTie is not null
+        if (bestTie is not null
             && IsTieAdjacent(bestTie.Start.Anchor, bestTie.End.Anchor))
         {
             var tiePreferenceMargin =
-                sourceSaysTie
-                    ? double.PositiveInfinity
-                    : bestSlur is not null
-                      && ConnectsSameChordPair(bestTie, bestSlur)
-                        ? SameChordPairTiePreferenceMarginInSpacings
-                        : TiePreferenceMarginInSpacings;
+                bestSlur is not null
+                && ConnectsSameChordPair(bestTie, bestSlur)
+                    ? SameChordPairTiePreferenceMarginInSpacings
+                    : TiePreferenceMarginInSpacings;
 
             if (bestSlur is null
-                ? sourceSaysTie
-                    || bestTie.Score <= MaximumUnopposedTieScoreInSpacings
+                ? bestTie.Score <= MaximumUnopposedTieScoreInSpacings
                 : bestTie.Score <= bestSlur.Score + tiePreferenceMargin)
             {
                 return TieLike(curve, left, right, bestTie);
@@ -482,15 +487,6 @@ public sealed class SlurPass : ISemanticPass
                 curve,
                 "no-endpoint-pair",
                 $"{curve.ShapeId}: no distinct chronological pitched events lie close enough to both arc endpoints");
-        }
-
-        // A same-pitch pair can also win the ordinary geometric search exactly. Keep
-        // the semantic boundary explicit even when the wide tie pass was unnecessary.
-        if (!sourceSaysSlur
-            && IsSamePitchVoice(bestSlur.Start.Anchor, bestSlur.End.Anchor)
-            && IsTieAdjacent(bestSlur.Start.Anchor, bestSlur.End.Anchor))
-        {
-            return TieLike(curve, left, right, bestSlur);
         }
 
         var from = bestSlur.Start.Anchor;
@@ -562,18 +558,6 @@ public sealed class SlurPass : ISemanticPass
         }
 
         return best;
-    }
-
-    private static bool HasSourceClass(
-        CurvedStroke curve,
-        string className)
-    {
-        return curve.SourceClass?
-            .Split(
-                new[] { ' ', '\t', '\r', '\n' },
-                StringSplitOptions.RemoveEmptyEntries)
-            .Contains(className, StringComparer.Ordinal)
-            == true;
     }
 
     private static bool ConnectsSameChordPair(
@@ -673,14 +657,15 @@ public sealed class SlurPass : ISemanticPass
         CurveObservation observation,
         IReadOnlyList<EndpointAnchor> anchors,
         double spacing,
-        double maximumDistanceInSpacings)
+        double maximumDistanceInSpacings,
+        bool includeStem)
     {
         return anchors
             .Where(anchor => observation.Measures.Contains(anchor.Notehead.MeasureNumber))
             .Where(anchor => observation.Staffs.Contains(anchor.Notehead.Staff))
             .Select(anchor => new EndpointChoice(
                 anchor,
-                EndpointDistance(endpoint, anchor) / spacing))
+                EndpointDistance(endpoint, anchor, includeStem) / spacing))
             .Where(candidate => candidate.DistanceInSpacings <= maximumDistanceInSpacings)
             .OrderBy(candidate => candidate.DistanceInSpacings)
             .ThenBy(candidate => candidate.Anchor.Notehead.MeasureNumber)
@@ -692,7 +677,8 @@ public sealed class SlurPass : ISemanticPass
 
     private static double EndpointDistance(
         PointD point,
-        EndpointAnchor anchor)
+        EndpointAnchor anchor,
+        bool includeStem)
     {
         var note = anchor.Notehead;
         var dx = point.X - note.CenterX;
@@ -702,7 +688,7 @@ public sealed class SlurPass : ISemanticPass
             0,
             centerDistance - Math.Max(note.MajorRadius, note.MinorRadius));
 
-        if (anchor.Stem is null)
+        if (!includeStem || anchor.Stem is null)
         {
             return noteBoundaryDistance;
         }
