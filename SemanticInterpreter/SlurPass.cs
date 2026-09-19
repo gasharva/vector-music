@@ -56,6 +56,7 @@ public sealed class SlurPass : ISemanticPass
     private const double MaximumSlurEndpointDistanceInSpacings = 2.20;
     private const double MaximumTieEndpointDistanceInSpacings = 3.25;
     private const double TiePreferenceMarginInSpacings = 0.80;
+    private const double SameChordPairTiePreferenceMarginInSpacings = 1.60;
     private const double MaximumUnopposedTieScoreInSpacings = 5.00;
     private const double DifferentVoicePenaltyInSpacings = 0.35;
     private const double DifferentStaffPenaltyInSpacings = 0.45;
@@ -445,12 +446,20 @@ public sealed class SlurPass : ISemanticPass
             requireSamePitch: false);
 
         if (bestTie is not null
-            && IsTieAdjacent(bestTie.Start.Anchor, bestTie.End.Anchor)
-            && (bestSlur is null
-                ? bestTie.Score <= MaximumUnopposedTieScoreInSpacings
-                : bestTie.Score <= bestSlur.Score + TiePreferenceMarginInSpacings))
+            && IsTieAdjacent(bestTie.Start.Anchor, bestTie.End.Anchor))
         {
-            return TieLike(curve, left, right, bestTie);
+            var tiePreferenceMargin =
+                bestSlur is not null
+                && ConnectsSameChordPair(bestTie, bestSlur)
+                    ? SameChordPairTiePreferenceMarginInSpacings
+                    : TiePreferenceMarginInSpacings;
+
+            if (bestSlur is null
+                ? bestTie.Score <= MaximumUnopposedTieScoreInSpacings
+                : bestTie.Score <= bestSlur.Score + tiePreferenceMargin)
+            {
+                return TieLike(curve, left, right, bestTie);
+            }
         }
 
         if (bestSlur is null)
@@ -538,6 +547,24 @@ public sealed class SlurPass : ISemanticPass
         }
 
         return best;
+    }
+
+    private static bool ConnectsSameChordPair(
+        PairChoice first,
+        PairChoice second)
+    {
+        return first.Start.Anchor.TargetKind == VoiceTargetKind.Chord
+            && first.End.Anchor.TargetKind == VoiceTargetKind.Chord
+            && second.Start.Anchor.TargetKind == VoiceTargetKind.Chord
+            && second.End.Anchor.TargetKind == VoiceTargetKind.Chord
+            && string.Equals(
+                first.Start.Anchor.TargetId,
+                second.Start.Anchor.TargetId,
+                StringComparison.Ordinal)
+            && string.Equals(
+                first.End.Anchor.TargetId,
+                second.End.Anchor.TargetId,
+                StringComparison.Ordinal);
     }
 
     private static bool SameTarget(
