@@ -69,6 +69,38 @@ public sealed class HairpinPassTests
     }
 
     [Fact]
+    public void InterstaffHairpin_PrefersStaffWhoseRhythmMatchesEndpoints()
+    {
+        var ownership = Ownership("upper", "m1");
+        var hairpin = Hairpin(
+            "interstaff-crescendo",
+            HairpinKind.Crescendo,
+            apex: new PointD(25, 170),
+            openUpper: new PointD(75, 165),
+            openLower: new PointD(75, 175),
+            confidence: 0.98,
+            ownership);
+        var document = OneMeasure(
+            upperElements: [Element(hairpin)],
+            lowerElements: []);
+        var facts = new SemanticFacts();
+
+        // The wedge is geometrically ambiguous between the two staves. The upper
+        // staff only offers measure boundaries, while the lower staff has exact
+        // rhythmic anchors at both wedge endpoints.
+        AddNote(facts, 1, 2, "lower-start", 25, "1/8", "1/8");
+        AddNote(facts, 1, 2, "lower-end", 75, "5/8", "1/8");
+
+        var pass = new HairpinPass();
+        pass.Run(document, facts);
+
+        var fact = Assert.Single(facts.OfType<HairpinFact>());
+        Assert.Equal(2, fact.Staff);
+        Assert.Equal("1/8", fact.StartAt);
+        Assert.Equal("5/8", fact.EndAt);
+    }
+
+    [Fact]
     public void LowConfidenceGeometricCandidate_IsRejected()
     {
         var ownership = Ownership("lower", "m1");
