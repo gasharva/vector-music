@@ -668,7 +668,6 @@ public sealed class TextPass : ISemanticPass
 
         if (TryResolveClassifiedBeatGlyph(
                 observation,
-                sourceFamilies,
                 spacing,
                 out var classifiedBeat))
         {
@@ -836,7 +835,6 @@ public sealed class TextPass : ISemanticPass
 
     private bool TryResolveClassifiedBeatGlyph(
         BoundsD observation,
-        IReadOnlySet<string> sourceFamilies,
         double spacing,
         out ClassifiedBeat beat)
     {
@@ -847,10 +845,8 @@ public sealed class TextPass : ISemanticPass
             return false;
         }
 
-        var candidate = _notation.Instances
+        var beatCandidates = _notation.Instances
             .Where(instance => instance.Classification is not null)
-            .Where(instance =>
-                !sourceFamilies.Contains(BaseShapeFamily(instance.ShapeId)))
             .Select(instance =>
             {
                 var classification = instance.Classification!;
@@ -871,12 +867,15 @@ public sealed class TextPass : ISemanticPass
                 };
             })
             .Where(item => item.BeatUnit is not null)
-            .Where(item => item.Classification.Confidence >= 0.80)
             .Where(item =>
                 item.Bounds.CenterX >= observation.MinX - spacing * 0.5
                 && item.Bounds.CenterX <= observation.MaxX + spacing * 0.5
                 && item.Bounds.MaxY >= observation.MinY - spacing * 2.0
                 && item.Bounds.MinY <= observation.MaxY + spacing * 2.0)
+            .ToArray();
+
+        var candidate = beatCandidates
+            .Where(item => item.Classification.Confidence >= 0.80)
             .OrderBy(item => Math.Abs(
                 item.Bounds.CenterY - observation.CenterY))
             .ThenBy(item => Math.Abs(
