@@ -174,9 +174,12 @@ public sealed class SlurPass : ISemanticPass
             .ToDictionary(
                 curve => curve.CurveId,
                 StringComparer.Ordinal);
-        var fragmentShapeIds = facts
-            .OfType<CrossSystemCurveFragmentFact>()
-            .Select(fragment => fragment.CurveShapeId)
+        var fragmentShapeIds = crossSystemCurves
+            .SelectMany(curve => new[]
+            {
+                curve.OutgoingCurveShapeId,
+                curve.IncomingCurveShapeId
+            })
             .ToHashSet(StringComparer.Ordinal);
 
         var curveObservations = CollectCurves(document)
