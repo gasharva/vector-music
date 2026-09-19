@@ -1,14 +1,25 @@
 1. Building geometric and notation scenes...
    layout: strokes=250; horizontal=83; logical-horizontal=81; vertical=167; staffs=10; systems=5; boundaries=25; measures=20
+   detected staffs:
+     staff-1: x=280.332..2918.280 y=571.292..680.439 spacing=27.287
+     staff-2: x=280.332..2918.280 y=848.284..959.164 spacing=27.720
+     staff-3: x=141.732..2918.280 y=1217.110..1327.990 spacing=27.720
+     staff-4: x=141.732..2918.280 y=1515.030..1625.910 spacing=27.720
+     staff-5: x=141.732..2918.280 y=1883.860..1994.740 spacing=27.720
+     staff-6: x=141.732..2918.280 y=2128.610..2239.490 spacing=27.720
+     staff-7: x=141.732..2918.280 y=2497.440..2608.320 spacing=27.720
+     staff-8: x=141.732..2918.280 y=2795.360..2906.240 spacing=27.720
+     staff-9: x=141.732..2918.280 y=3164.190..3275.070 spacing=27.720
+     staff-10: x=141.732..2918.280 y=3513.340..3624.220 spacing=27.720
 2. Classifying reusable contour prototypes...
 Downloading official Audiveris basic-classifier.zip...
-   prototype classification: 4.164s
+   prototype classification: 4.837s
 3. Repairing composite bass clefs...
-   bass-clef repair: 0.098s; candidates=1; classifier-runs=1; reused-F-clefs=0
+   bass-clef repair: 0.109s; candidates=1; classifier-runs=1; reused-F-clefs=0
 4. Assigning logical staff/measure ownership...
-   logical ownership: 0.250s
-   ledger-ladder ownership: 0.003s; corrections=0
-   fourth-generation ownership: 0.014s
+   logical ownership: 0.258s
+   ledger-ladder ownership: 0.004s; corrections=0
+   fourth-generation ownership: 0.018s
 5. Running OCR fallback for semantic text...
    OCR candidates: 19; recognized: 16
 5b. Writing SVG parser diagnostics...
