@@ -54,11 +54,14 @@ public sealed class ShapeClusterer : IShapeClusterer
         foreach (var shape in scene.Shapes)
         {
 
-            if (_geometryAnalyzer.TryCreateStroke(
+            // Specific primitive models get first refusal. In particular an
+            // open shallow arc can satisfy the generic PCA straightness tolerance,
+            // so generic Stroke must remain the fallback rather than stealing it.
+            if (_ellipseExtractor.TryCreateEllipse(
                 shape,
-                out var stroke))
+                out var ellipse))
             {
-                strokes.Add(stroke);
+                ellipses.Add(ellipse);
                 continue;
             }
 
@@ -70,11 +73,11 @@ public sealed class ShapeClusterer : IShapeClusterer
                 continue;
             }
 
-            if (_ellipseExtractor.TryCreateEllipse(
+            if (_geometryAnalyzer.TryCreateStroke(
                 shape,
-                out var ellipse))
+                out var stroke))
             {
-                ellipses.Add(ellipse);
+                strokes.Add(stroke);
                 continue;
             }
 
