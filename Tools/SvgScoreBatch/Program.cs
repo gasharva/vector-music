@@ -453,6 +453,8 @@ static async Task CreateDiagnosticArchiveAsync(
         .Where(path => !Path.GetFullPath(path).Equals(
             Path.GetFullPath(archivePath),
             StringComparison.OrdinalIgnoreCase))
+        //remove svg with color maps from diagnoistics
+        .Where(path => !path.Contains("\\pages\\") || Path.GetExtension(path) != ".svg")
         .ToArray();
 
     using var archive = ZipFile.Open(
