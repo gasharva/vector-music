@@ -109,7 +109,9 @@ public sealed class HairpinPass : ISemanticPass
             var musicalStaff = ResolveMusicalStaffContext(
                 contexts,
                 source,
-                startX);
+                startX,
+                endX,
+                timing);
 
             if (musicalStaff is null)
             {
@@ -260,6 +262,7 @@ public sealed class HairpinPass : ISemanticPass
                     measure.Number,
                     staff.StaffNumber,
                     staff.StaffBounds,
+                    staff.LineSpacing,
                     measure.XStart,
                     measure.XEnd));
             }
@@ -271,7 +274,9 @@ public sealed class HairpinPass : ISemanticPass
     private static CoordinateContext? ResolveMusicalStaffContext(
         IReadOnlyList<CoordinateContext> contexts,
         HairpinPrimitive source,
-        double x)
+        double startX,
+        double endX,
+        TimingResolver timing)
     {
         var ownership = source.Ownership!;
         var ownershipContext = contexts.FirstOrDefault(context =>
@@ -293,8 +298,8 @@ public sealed class HairpinPass : ISemanticPass
                     context.PairId,
                     ownershipContext.PairId,
                     StringComparison.Ordinal)
-                && x >= context.XStart - CoordinateEpsilon
-                && x <= context.XEnd + CoordinateEpsilon)
+                && startX >= context.XStart - CoordinateEpsilon
+                && startX <= context.XEnd + CoordinateEpsilon)
             .GroupBy(
                 context => context.Coordinate.StaffId,
                 StringComparer.Ordinal)
@@ -310,12 +315,51 @@ public sealed class HairpinPass : ISemanticPass
         }
 
         return candidates
-            .OrderBy(context => DistanceToStaff(y, context.StaffBounds))
-            .ThenByDescending(context => string.Equals(
-                context.Coordinate.StaffId,
+            .Select(context =>
+            {
+                var endContext = ResolveContextAtX(
+                    contexts,
+                    context.Coordinate.StaffId,
+                    endX,
+                    new LogicalCoordinate(
+                        context.Coordinate.StaffId,
+                        source.Ownership!.End.MeasureId),
+                    preferLaterAtBoundary: false)
+                    ?? context;
+                var spacing = Math.Max(
+                    (context.LineSpacing + endContext.LineSpacing) / 2.0,
+                    0.001);
+                var rhythmicFit =
+                    timing.NearestAnchorDistanceInSpacings(
+                        context.MeasureNumber,
+                        context.StaffNumber,
+                        startX,
+                        spacing)
+                    + timing.NearestAnchorDistanceInSpacings(
+                        endContext.MeasureNumber,
+                        endContext.StaffNumber,
+                        endX,
+                        spacing);
+                var verticalDistance =
+                    DistanceToStaff(y, context.StaffBounds) / spacing;
+
+                return new
+                {
+                    Context = context,
+                    Score = rhythmicFit + 0.35 * verticalDistance,
+                    RhythmicFit = rhythmicFit,
+                    VerticalDistance = verticalDistance
+                };
+            })
+            .OrderBy(candidate => candidate.Score)
+            .ThenBy(candidate => candidate.RhythmicFit)
+            .ThenBy(candidate => candidate.VerticalDistance)
+            .ThenByDescending(candidate => string.Equals(
+                candidate.Context.Coordinate.StaffId,
                 ownership.Start.StaffId,
                 StringComparison.Ordinal))
-            .ThenBy(context => context.StaffNumber)
+            .ThenBy(candidate => candidate.Context.StaffNumber)
+            .Select(candidate => candidate.Context)
             .First();
     }
 
@@ -453,6 +497,7 @@ public sealed class HairpinPass : ISemanticPass
         int MeasureNumber,
         int StaffNumber,
         BoundsD StaffBounds,
+        double LineSpacing,
         double XStart,
         double XEnd);
 
@@ -541,6 +586,27 @@ public sealed class HairpinPass : ISemanticPass
             // stops. Snap to the nearest onset or measure boundary; do not add the
             // previous note duration (that rule belongs to pedal-like spans).
             return ResolveStartAt(measureNumber, staff, x);
+        }
+
+        public double NearestAnchorDistanceInSpacings(
+            int measureNumber,
+            int staff,
+            double x,
+            double spacing)
+        {
+            var measure = _document.Measures.Single(item => item.Number == measureNumber);
+            var distances = new List<double>
+            {
+                Math.Abs(measure.XStart - x),
+                Math.Abs(measure.XEnd - x)
+            };
+
+            distances.AddRange(
+                _onsets
+                    .Where(item => item.MeasureNumber == measureNumber && item.Staff == staff)
+                    .Select(item => Math.Abs(item.AnchorX - x)));
+
+            return distances.Min() / Math.Max(spacing, 0.001);
         }
 
         private Fraction MeasureDuration(int measureNumber)
