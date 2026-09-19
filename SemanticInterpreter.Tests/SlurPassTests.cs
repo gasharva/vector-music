@@ -103,6 +103,64 @@ public sealed class SlurPassTests
     }
 
     [Fact]
+    public void ChordPairAmbiguity_PrefersSamePitchTieOverCloserCrossPitchAttachment()
+    {
+        const double spacing = 20;
+        var document = Document(
+            Curve(
+                "ambiguous-chord-curve",
+                [
+                    new PointD(100, 160),
+                    new PointD(150, 140),
+                    new PointD(200, 190)
+                ],
+                spacing));
+        var facts = new SemanticFacts();
+
+        facts.Add(Notehead("left-upper", 100, 160, 1, spacing));
+        facts.Add(Notehead("left-lower", 100, 190, 0, spacing));
+        facts.Add(Notehead("right-upper", 200, 160, 1, spacing));
+        facts.Add(Notehead("right-lower", 200, 190, 0, spacing));
+        facts.Add(Pitch("left-upper", "Bb3"));
+        facts.Add(Pitch("left-lower", "A3"));
+        facts.Add(Pitch("right-upper", "Bb3"));
+        facts.Add(Pitch("right-lower", "A3"));
+
+        facts.Add(new ChordFact(
+            1,
+            "left-chord",
+            [1],
+            ["left-upper", "left-lower"],
+            null,
+            "filled",
+            "eighth",
+            100,
+            0.99,
+            "test chord",
+            ["left-upper", "left-lower"]));
+        facts.Add(new ChordFact(
+            1,
+            "right-chord",
+            [1],
+            ["right-upper", "right-lower"],
+            null,
+            "hollow",
+            "half",
+            200,
+            0.99,
+            "test chord",
+            ["right-upper", "right-lower"]));
+
+        var pass = new SlurPass();
+        pass.Run(document, facts);
+
+        Assert.Empty(facts.OfType<SlurFact>());
+        var decision = Assert.Single(pass.LastAnalysis!.Decisions);
+        Assert.Equal("tie-like", decision.Decision);
+        Assert.Equal(decision.FromNotehead!.CenterY, decision.ToNotehead!.CenterY);
+    }
+
+    [Fact]
     public void VerticalParenthesisLikeCurve_IsRejectedBeforeEndpointMatching()
     {
         const double spacing = 20;
