@@ -233,6 +233,26 @@ public sealed class SemanticPipeline
                 new ArpeggioPass());
         }
 
+        // Curves split by a system break are still present as raw CurvedStroke
+        // fragments, but neither half has two real note endpoints. Reconstruct a
+        // logical complete curve first; SlurPass/TiePass can then classify it with
+        // exactly the same pitch/voice semantics as every ordinary curve.
+        if (materialized.Any(pass => pass is NoteheadPass)
+            && materialized.All(pass => pass is not CrossSystemCurvePass))
+        {
+            var existingSlurIndex = materialized.FindIndex(pass => pass is SlurPass);
+            var existingTieIndex = materialized.FindIndex(pass => pass is TiePass);
+            var insertionIndex = existingSlurIndex >= 0
+                ? existingSlurIndex
+                : existingTieIndex >= 0
+                    ? existingTieIndex
+                    : materialized.Count;
+
+            materialized.Insert(
+                insertionIndex,
+                new CrossSystemCurvePass());
+        }
+
         // Curves are already extracted geometrically. SlurPass classifies their
         // pitched endpoints first and deliberately reserves same-pitch arches.
         if (materialized.Any(pass => pass is NoteheadPass)
@@ -247,6 +267,25 @@ public sealed class SemanticPipeline
             {
                 materialized.Add(new SlurPass());
             }
+        }
+
+        // If SlurPass was supplied explicitly, keep the cross-system reconstruction
+        // immediately before it even when the caller's pass order was unusual.
+        var crossSystemCurveIndex = materialized.FindIndex(
+            pass => pass is CrossSystemCurvePass);
+        var slurPassIndex = materialized.FindIndex(
+            pass => pass is SlurPass);
+        if (crossSystemCurveIndex >= 0
+            && slurPassIndex >= 0
+            && crossSystemCurveIndex > slurPassIndex)
+        {
+            var pass = materialized[crossSystemCurveIndex];
+            materialized.RemoveAt(crossSystemCurveIndex);
+            slurPassIndex = materialized.FindIndex(
+                item => item is SlurPass);
+            materialized.Insert(
+                slurPassIndex,
+                pass);
         }
 
         // TiePass consumes the same-pitch arc hypotheses after SlurPass has claimed
@@ -267,19 +306,6 @@ public sealed class SemanticPipeline
             materialized.Insert(
                 tieIndex + 1,
                 new TieSpatialRecoveryPass());
-        }
-
-        // MuseScore splits a tie at a system break into two independent curve
-        // fragments: note -> old system edge and new system edge -> note. Ordinary
-        // endpoint matching rejects each half because it has only one real endpoint.
-        if (materialized.Any(pass => pass is TieSpatialRecoveryPass)
-            && materialized.All(pass => pass is not CrossSystemTieRecoveryPass))
-        {
-            var recoveryIndex = materialized.FindLastIndex(
-                pass => pass is TieSpatialRecoveryPass);
-            materialized.Insert(
-                recoveryIndex + 1,
-                new CrossSystemTieRecoveryPass());
         }
 
         // Simple classifier leftovers run last, after every specialized pass has had
