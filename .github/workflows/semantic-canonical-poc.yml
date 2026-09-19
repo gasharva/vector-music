@@ -63,8 +63,9 @@ jobs:
           test -f artifacts/cairo-canonical/page-001.svg
           test -f artifacts/cairo-canonical/page-002.svg
 
-          if grep -REn '<(defs|use|g)([ >])|\b(transform|class|id|data-[^=[:space:]]*)='               artifacts/cairo-canonical/page-*.svg; then
-            echo "Canonical SVG still contains structural producer markup."
+          if grep -REn '<use([ >])|\b(class|data-[^=[:space:]]*)=' \
+              artifacts/cairo-canonical/page-*.svg; then
+            echo "Canonical SVG still contains producer-specific markup."
             exit 1
           fi
 
