@@ -413,7 +413,8 @@ public sealed class ArcExtractor : IArcExtractor
             sameSideRatio,
             approximation,
             shape.SourceKind,
-            shape.SourceIndex);
+            shape.SourceIndex,
+            SourceClass: shape.SourceClass);
 
         Accept(
             shape,
