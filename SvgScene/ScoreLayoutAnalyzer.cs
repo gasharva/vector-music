@@ -1,7 +1,19 @@
 namespace SvgMusic.Scene;
 
+public sealed record ScoreLayoutDiagnostics(
+    int StrokeCount,
+    int HorizontalStrokeCount,
+    int LogicalHorizontalCount,
+    int VerticalStrokeCount,
+    int StaffCount,
+    int SystemCount,
+    int BoundaryCount,
+    int MeasureCount,
+    IReadOnlyList<string> LongHorizontalCandidates);
+
 public sealed class ScoreLayoutAnalyzer
 {
+    public ScoreLayoutDiagnostics? LastDiagnostics { get; private set; }
     public ScoreLayout Analyze(NotationScene notation)
     {
         var horizontal = notation.Strokes
@@ -17,6 +29,34 @@ public sealed class ScoreLayoutAnalyzer
 
         var staffs = DetectStaffs(logicalHorizontal);
         var systems = BuildSystemsAndPairs(staffs, vertical, horizontal);
+
+        var maximumLength = logicalHorizontal.Count == 0
+            ? 0
+            : logicalHorizontal.Max(stroke => stroke.Length);
+        var longThreshold = maximumLength * 0.45;
+        var longCandidates = logicalHorizontal
+            .Where(stroke => stroke.Length >= longThreshold)
+            .OrderBy(stroke => stroke.CenterY)
+            .Select(stroke =>
+                $"{stroke.Stroke.ShapeId}: y={stroke.CenterY:F3} "
+                + $"x={stroke.XStart:F3}..{stroke.XEnd:F3} "
+                + $"len={stroke.Length:F3}")
+            .ToArray();
+
+        LastDiagnostics = new ScoreLayoutDiagnostics(
+            notation.Strokes.Count,
+            horizontal.Count,
+            logicalHorizontal.Count,
+            vertical.Count,
+            staffs.Count,
+            systems.Count,
+            systems
+                .SelectMany(system => system.StaffPairs)
+                .Sum(pair => pair.Boundaries.Count),
+            systems
+                .SelectMany(system => system.StaffPairs)
+                .Sum(pair => pair.Measures.Count),
+            longCandidates);
 
         return new ScoreLayout(
             systems,
