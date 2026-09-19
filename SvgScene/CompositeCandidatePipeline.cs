@@ -85,6 +85,9 @@ public sealed class CompositeCandidateResolver
     public IReadOnlyList<CompositeCandidateDecision> LastDecisions { get; private set; }
         = Array.Empty<CompositeCandidateDecision>();
 
+    public IReadOnlySet<string> LastAcceptedSourceShapeIds { get; private set; }
+        = new HashSet<string>(StringComparer.Ordinal);
+
     public NotationScene Resolve(
         NotationScene notation,
         CompositeGeometryCandidates candidates,
@@ -197,6 +200,9 @@ public sealed class CompositeCandidateResolver
             .ToHashSet(StringComparer.Ordinal);
 
         LastDecisions = decisions;
+        LastAcceptedSourceShapeIds = new HashSet<string>(
+            acceptedIds,
+            StringComparer.Ordinal);
 
         return notation with
         {
