@@ -90,6 +90,50 @@ public sealed class TextCanonicalProjectionTests
         Assert.DoesNotContain(words, item => item.Value == "0.");
     }
 
+    [Fact]
+    public void BuilderSplitsMetronomeTextIntoInstructionAndTempoEvent()
+    {
+        var document = Document();
+        var facts = new SemanticFacts();
+        var text = Text(
+            SemanticTextRole.Tempo,
+            "Pastoso (= 76)",
+            measure: 1,
+            staff: 1,
+            at: "0",
+            placement: "above");
+        facts.Add(text);
+        facts.Add(new MetronomeMarkFact(
+            text.ObservationId,
+            1,
+            1,
+            "0",
+            "eighth",
+            76m,
+            "Pastoso",
+            "tempo-note",
+            0.98,
+            "test metronome",
+            ["tempo-word", "tempo-note", "tempo-bpm"]));
+
+        var canonical = new CanonicalNotationBuilder().Build(
+            document,
+            facts,
+            null,
+            null);
+
+        var events = canonical.Parts.Single().Measures.Single().Events;
+        Assert.Contains(events, ev =>
+            ev.Type == "text"
+            && ev.Text == "Pastoso");
+        Assert.Contains(events, ev =>
+            ev.Type == "tempo"
+            && ev.BeatUnit == "eighth"
+            && ev.Bpm == 76m);
+        Assert.DoesNotContain(events, ev =>
+            ev.Text == "Pastoso (= 76)");
+    }
+
     private static TextFact Text(
         SemanticTextRole role,
         string value,
