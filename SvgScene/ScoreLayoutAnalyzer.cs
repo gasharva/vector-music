@@ -9,7 +9,9 @@ public sealed record ScoreLayoutDiagnostics(
     int SystemCount,
     int BoundaryCount,
     int MeasureCount,
-    IReadOnlyList<string> LongHorizontalCandidates);
+    IReadOnlyList<string> LongHorizontalCandidates,
+    IReadOnlyList<string> StaffDescriptions,
+    IReadOnlyList<string> VerticalCandidates);
 
 public sealed class ScoreLayoutAnalyzer
 {
@@ -43,6 +45,30 @@ public sealed class ScoreLayoutAnalyzer
                 + $"len={stroke.Length:F3}")
             .ToArray();
 
+        var staffDescriptions = staffs
+            .Select(staff =>
+                $"{staff.Id}: x={staff.Bounds.MinX:F3}..{staff.Bounds.MaxX:F3} "
+                + $"y={staff.Bounds.MinY:F3}..{staff.Bounds.MaxY:F3} "
+                + $"spacing={staff.AverageLineSpacing:F3}")
+            .ToArray();
+
+        var verticalCandidates = vertical
+            .Where(stroke =>
+                staffs.Count == 0
+                || staffs.Any(staff =>
+                    stroke.CenterX >= staff.Bounds.MinX - 2 * staff.AverageLineSpacing
+                    && stroke.CenterX <= staff.Bounds.MaxX + 2 * staff.AverageLineSpacing
+                    && stroke.YEnd >= staff.Bounds.MinY - 2 * staff.AverageLineSpacing
+                    && stroke.YStart <= staff.Bounds.MaxY + 2 * staff.AverageLineSpacing))
+            .OrderBy(stroke => stroke.CenterX)
+            .ThenBy(stroke => stroke.YStart)
+            .Select(stroke =>
+                $"{stroke.Stroke.ShapeId}: x={stroke.CenterX:F3} "
+                + $"y={stroke.YStart:F3}..{stroke.YEnd:F3} "
+                + $"len={stroke.Length:F3} w={stroke.Stroke.Width:F3}")
+            .Take(250)
+            .ToArray();
+
         LastDiagnostics = new ScoreLayoutDiagnostics(
             notation.Strokes.Count,
             horizontal.Count,
@@ -56,7 +82,9 @@ public sealed class ScoreLayoutAnalyzer
             systems
                 .SelectMany(system => system.StaffPairs)
                 .Sum(pair => pair.Measures.Count),
-            longCandidates);
+            longCandidates,
+            staffDescriptions,
+            verticalCandidates);
 
         return new ScoreLayout(
             systems,
