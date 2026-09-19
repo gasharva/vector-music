@@ -23,7 +23,8 @@ public sealed record PrototypeClassifierSettings
 
     /// <summary>
     /// A generic classified glyph must fit within this fraction of its staff
-    /// pair's full vertical measure height.
+    /// pair's full vertical measure height. Treble clefs can occupy slightly
+    /// more than half of a grand-staff pair height.
     /// </summary>
-    public double MaxMeasureHeightFraction { get; init; } = 0.40;
+    public double MaxMeasureHeightFraction { get; init; } = 0.60;
 }
