@@ -92,18 +92,47 @@ public sealed class CompoundClassificationHypothesisTests
     private static NotationScene EmptyNotation() =>
         new([], [], [], [], []);
 
-    private static ScoreLayout Layout(double spacing) =>
-        new(
+    private static ScoreLayout Layout(double spacing)
+    {
+        var upper = new StaffLayout(
+            "staff-1",
+            "system-1",
+            new BoundsD(0, 0, 200, 40),
             [],
+            spacing,
+            []);
+        var lower = new StaffLayout(
+            "staff-2",
+            "system-1",
+            new BoundsD(0, 60, 200, 100),
+            [],
+            spacing,
+            []);
+        var left = new MeasureBoundary(0, 0, 100, []);
+        var right = new MeasureBoundary(200, 0, 100, []);
+        var measure = new MeasureLayout(
+            "measure-1",
+            0,
+            200,
+            left,
+            right);
+        var pair = new StaffPairLayout(
+            "pair-1",
+            upper.Id,
+            lower.Id,
+            new BoundsD(0, 0, 200, 100),
+            [measure],
+            [left, right]);
+
+        return new ScoreLayout(
             [
-                new StaffLayout(
-                    "staff-1",
+                new ScoreSystem(
                     "system-1",
-                    new BoundsD(0, 100, 200, 140),
-                    [],
-                    spacing,
-                    [])
-            ]);
+                    pair.Bounds,
+                    [pair])
+            ],
+            [upper, lower]);
+    }
 
     private sealed class FixedClassifier : ISymbolClassifier
     {
