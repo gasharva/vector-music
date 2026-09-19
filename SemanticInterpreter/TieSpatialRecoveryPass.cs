@@ -16,16 +16,32 @@ public sealed class TieSpatialRecoveryPass : ISemanticPass
         SemanticDocument document,
         SemanticFacts facts)
     {
+        var claimedCurveShapeIds = facts.OfType<SlurFact>()
+            .SelectMany(slur => slur.SourceShapeIds.Append(slur.CurveShapeId))
+            .Concat(
+                facts.OfType<TieFact>()
+                    .SelectMany(tie => tie.SourceShapeIds.Append(tie.CurveShapeId)))
+            .ToHashSet(StringComparer.Ordinal);
+
         var curves = document.Measures
-            .SelectMany(measure => new[] { measure.Upper, measure.Lower })
-            .SelectMany(staff => staff.Elements.OfType<CurveElement>())
-            .GroupBy(curve => curve.ShapeId, StringComparer.Ordinal)
-            .Select(group => group.First())
+            .SelectMany(measure => new[]
+            {
+                (Staff: measure.Upper.StaffNumber, Elements: measure.Upper.Elements),
+                (Staff: measure.Lower.StaffNumber, Elements: measure.Lower.Elements)
+            })
+            .SelectMany(item => item.Elements
+                .OfType<CurveElement>()
+                .Select(curve => (item.Staff, Curve: curve)))
+            .GroupBy(item => item.Curve.ShapeId, StringComparer.Ordinal)
+            .Select(group => new SpatialCurve(
+                group.First().Curve,
+                group.Select(item => item.Staff).ToHashSet()))
+            .Where(item => !claimedCurveShapeIds.Contains(item.Curve.ShapeId))
             .ToArray();
 
         if (curves.Length == 0)
         {
-            facts.AddTrace("TieSpatialRecoveryPass: no curves");
+            facts.AddTrace("TieSpatialRecoveryPass: no unclaimed curves");
             return;
         }
 
@@ -42,24 +58,46 @@ public sealed class TieSpatialRecoveryPass : ISemanticPass
                 {
                     Elements = measure.Upper.Elements
                         .Where(element => element is not CurveElement)
-                        .Concat(curves)
+                        .Concat(curves
+                            .Where(item => item.StaffNumbers.Contains(measure.Upper.StaffNumber))
+                            .Select(item => (SemanticElement)item.Curve))
                         .ToArray()
                 },
                 measure.Lower with
                 {
                     Elements = measure.Lower.Elements
                         .Where(element => element is not CurveElement)
+                        .Concat(curves
+                            .Where(item => item.StaffNumbers.Contains(measure.Lower.StaffNumber))
+                            .Select(item => (SemanticElement)item.Curve))
                         .ToArray()
                 }))
             .ToArray();
 
-        var before = facts.OfType<TieFact>().Count();
-        new TieOwnershipRecoveryPass().Run(
-            new SemanticDocument(expandedMeasures),
+        var spatialDocument = new SemanticDocument(expandedMeasures);
+
+        // The normal SlurPass can miss a curve whose parser ownership exposes it on
+        // only one side of a barline. Once the spatial view makes that same curve
+        // visible to both measures, let the ordinary slur/tie classifier inspect it
+        // before the deliberately aggressive same-pitch tie recovery.
+        var slursBefore = facts.OfType<SlurFact>().Count();
+        new SlurPass(includeCrossSystemCurves: false).Run(
+            spatialDocument,
             facts);
-        var recovered = facts.OfType<TieFact>().Count() - before;
+        var recoveredSlurs = facts.OfType<SlurFact>().Count() - slursBefore;
+
+        var tiesBefore = facts.OfType<TieFact>().Count();
+        new TieOwnershipRecoveryPass().Run(
+            spatialDocument,
+            facts);
+        var recoveredTies = facts.OfType<TieFact>().Count() - tiesBefore;
 
         facts.AddTrace(
-            $"TieSpatialRecoveryPass: curves={curves.Length}; recovered={recovered}");
+            $"TieSpatialRecoveryPass: unclaimed-curves={curves.Length}; "
+            + $"recovered-slurs={recoveredSlurs}; recovered-ties={recoveredTies}");
     }
+
+    private sealed record SpatialCurve(
+        CurveElement Curve,
+        IReadOnlySet<int> StaffNumbers);
 }
