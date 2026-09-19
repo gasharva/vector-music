@@ -11,7 +11,8 @@ public sealed record ScoreLayoutDiagnostics(
     int MeasureCount,
     IReadOnlyList<string> LongHorizontalCandidates,
     IReadOnlyList<string> StaffDescriptions,
-    IReadOnlyList<string> VerticalCandidates);
+    IReadOnlyList<string> VerticalCandidates,
+    IReadOnlyList<string> MeasureBoundaryDetails);
 
 public sealed class ScoreLayoutAnalyzer
 {
@@ -69,6 +70,66 @@ public sealed class ScoreLayoutAnalyzer
             .Take(250)
             .ToArray();
 
+        var measureBoundaryDetails = new List<string>();
+        var staffById = staffs.ToDictionary(staff => staff.Id, StringComparer.Ordinal);
+
+        foreach (var system in systems)
+        {
+            foreach (var pair in system.StaffPairs)
+            {
+                if (!staffById.TryGetValue(pair.UpperStaffId, out var upper)
+                    || !staffById.TryGetValue(pair.LowerStaffId, out var lower))
+                {
+                    continue;
+                }
+
+                var spacing = Math.Min(
+                    upper.AverageLineSpacing,
+                    lower.AverageLineSpacing);
+                var endpointTolerance = spacing * 0.35;
+
+                measureBoundaryDetails.Add(
+                    $"{system.Id}/{pair.Id}: measures={pair.Measures.Count}; "
+                    + $"accepted=[{string.Join(", ", pair.Boundaries.Select(boundary => boundary.X.ToString("F3")))}]");
+
+                foreach (var stroke in vertical
+                             .Where(stroke =>
+                                 stroke.Length >= spacing * 3.5
+                                 && stroke.CenterX >= pair.Bounds.MinX - spacing
+                                 && stroke.CenterX <= pair.Bounds.MaxX + spacing)
+                             .OrderBy(stroke => stroke.CenterX))
+                {
+                    var nearRelevantEdge =
+                        Math.Min(
+                            Math.Min(
+                                Math.Abs(stroke.YStart - upper.Bounds.MinY),
+                                Math.Abs(stroke.YEnd - upper.Bounds.MaxY)),
+                            Math.Min(
+                                Math.Abs(stroke.YEnd - lower.Bounds.MinY),
+                                Math.Abs(stroke.YEnd - lower.Bounds.MaxY)))
+                        <= spacing * 1.5;
+
+                    if (!nearRelevantEdge)
+                    {
+                        continue;
+                    }
+
+                    measureBoundaryDetails.Add(
+                        $"  {stroke.Stroke.ShapeId}: x={stroke.CenterX:F3}; "
+                        + $"y={stroke.YStart:F3}..{stroke.YEnd:F3}; len={stroke.Length:F3}; "
+                        + $"pair={FitsPairBoundary(stroke, upper, lower, endpointTolerance)}; "
+                        + $"connector={FitsInterstaffConnector(stroke, upper, lower, endpointTolerance)}; "
+                        + $"upper={FitsStaffBoundarySegment(stroke, upper, endpointTolerance)}; "
+                        + $"lower={FitsStaffBoundarySegment(stroke, lower, endpointTolerance)}; "
+                        + $"dUT={Math.Abs(stroke.YStart - upper.Bounds.MinY):F3}; "
+                        + $"dUB={Math.Abs(stroke.YEnd - upper.Bounds.MaxY):F3}; "
+                        + $"dLT={Math.Abs(stroke.YEnd - lower.Bounds.MinY):F3}; "
+                        + $"dLB={Math.Abs(stroke.YEnd - lower.Bounds.MaxY):F3}; "
+                        + $"tol={endpointTolerance:F3}");
+                }
+            }
+        }
+
         LastDiagnostics = new ScoreLayoutDiagnostics(
             notation.Strokes.Count,
             horizontal.Count,
@@ -84,7 +145,8 @@ public sealed class ScoreLayoutAnalyzer
                 .Sum(pair => pair.Measures.Count),
             longCandidates,
             staffDescriptions,
-            verticalCandidates);
+            verticalCandidates,
+            measureBoundaryDetails);
 
         return new ScoreLayout(
             systems,
