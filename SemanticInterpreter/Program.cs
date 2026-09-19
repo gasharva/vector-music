@@ -46,6 +46,7 @@ if (waitForDebugger && Debugger.IsAttached)
 Directory.CreateDirectory(outputDirectory);
 
 Console.WriteLine("1. Building geometric and notation scenes...");
+var settings = SvgMusicSettings.Default;
 var clusterer = new ShapeClusterer();
 var scenePipeline = new ScenePipeline(
     new SvgNormalizer(),
@@ -115,7 +116,9 @@ if (layoutOnly)
 Console.WriteLine("2. Classifying reusable contour prototypes...");
 var classifier = await AudiverisSymbolClassifier.CreateAsync(modelPath);
 var stopwatch = Stopwatch.StartNew();
-var prototypeClassifier = new PrototypeSymbolClassifier(classifier);
+var prototypeClassifier = new PrototypeSymbolClassifier(
+    classifier,
+    settings: settings);
 notation = prototypeClassifier.Classify(
     geometry,
     notation,
@@ -132,7 +135,8 @@ if (prototypeClassifier.LastDiagnostics.Count > 0)
         Console.WriteLine(
             $"     {item.PrototypeId}/{item.ShapeId}: "
             + $"shape={item.ShapeWidth:F2}x{item.ShapeHeight:F2}; "
-            + $"points={item.PointCount}; total={item.TotalMilliseconds:F1}ms");
+            + $"points={item.PointCount}; total={item.TotalMilliseconds:F1}ms; "
+            + (item.Skipped ? $"SKIPPED; {item.Reason}" : item.Reason));
 
         foreach (var scale in item.Scales)
         {
