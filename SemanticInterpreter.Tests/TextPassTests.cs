@@ -151,10 +151,11 @@ public sealed class TextPassTests
     public void TempoText_WithUnrecognizedTempoNote_RecoversEighthBeatAndBpm()
     {
         var geometry = new GeometricScene([
-            Shape("tempo-word", 80, 60, 112, 75, "Tempo"),
+            Shape("tempo-word", 80, 60, 112, 75),
             // Tall compact compound glyph: aspect 0.60 -> one flag -> eighth.
-            Shape("tempo-note", 116, 45, 134, 75, "Tempo"),
-            Shape("tempo-bpm", 140, 60, 190, 75, "Tempo")
+            // No SVG class/id hint is available to the semantic recognizer.
+            Shape("tempo-note", 116, 45, 134, 75),
+            Shape("tempo-bpm", 140, 60, 190, 75)
         ]);
         var analysis = Analysis(
             new TextRecognitionObservation(
@@ -318,8 +319,7 @@ public sealed class TextPassTests
         double minX,
         double minY,
         double maxX,
-        double maxY,
-        string? sourceClass = null)
+        double maxY)
     {
         var points = new[]
         {
@@ -336,7 +336,6 @@ public sealed class TextPassTests
             new BoundsD(minX, minY, maxX, maxY),
             IsClosed: true,
             Contours: [new GeometricContour(points, true)],
-            HasFill: true,
-            SourceClass: sourceClass);
+            HasFill: true);
     }
 }
