@@ -96,7 +96,8 @@ public sealed record CurvedStroke(
     QuadraticApproximation? Quadratic,
     string SourceKind,
     string? SourceIndex,
-    LogicalOwnership? Ownership = null);
+    LogicalOwnership? Ownership = null,
+    string? SourceClass = null);
 
 public sealed record QuadraticApproximation(
     PointD Start,
