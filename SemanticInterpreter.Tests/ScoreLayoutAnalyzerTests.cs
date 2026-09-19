@@ -6,6 +6,55 @@ namespace SemanticInterpreter.Tests;
 public sealed class ScoreLayoutAnalyzerTests
 {
     [Fact]
+    public void SegmentedStaffLines_AreMergedIntoLogicalStaffs()
+    {
+        var strokes = new List<Stroke>();
+
+        foreach (var (prefix, top) in new[]
+                 {
+                     ("upper", 0.0),
+                     ("lower", 100.0)
+                 })
+        {
+            for (var line = 0; line < 5; line++)
+            {
+                var y = top + line * 10;
+                var boundaries = new[] { 0.0, 55.0, 105.0, 155.0, 200.0 };
+
+                for (var segment = 0; segment < boundaries.Length - 1; segment++)
+                {
+                    strokes.Add(new Stroke(
+                        $"{prefix}-line-{line}-segment-{segment}",
+                        new PointD(boundaries[segment], y),
+                        new PointD(boundaries[segment + 1], y),
+                        1,
+                        "test",
+                        null));
+                }
+            }
+        }
+
+        AddMuseScoreBarline(strokes, "left", 0);
+        AddMuseScoreBarline(strokes, "middle", 100);
+        AddMuseScoreBarline(strokes, "right", 200);
+
+        var notation = new NotationScene(
+            [],
+            [],
+            strokes,
+            [],
+            []);
+        var layout = new ScoreLayoutAnalyzer().Analyze(notation);
+
+        Assert.Equal(2, layout.Staffs.Count);
+        var pair = Assert.Single(Assert.Single(layout.Systems).StaffPairs);
+        Assert.Equal(3, pair.Boundaries.Count);
+        Assert.Equal(2, pair.Measures.Count);
+        Assert.All(layout.Staffs, staff =>
+            Assert.Equal(200, staff.Bounds.Width, 6));
+    }
+
+    [Fact]
     public void AlignedStemLikeVerticals_DoNotBecomeMeasureBoundaries()
     {
         var strokes = StaffLines();
