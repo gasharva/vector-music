@@ -66,17 +66,20 @@ public sealed class TextPass : ISemanticPass
     private readonly GeometricScene _geometry;
     private readonly ScoreLayout _layout;
     private readonly LogicalOwnershipScene _ownership;
+    private readonly NotationScene? _notation;
 
     public TextPass(
         TextRecognitionAnalysisResult analysis,
         GeometricScene geometry,
         ScoreLayout layout,
-        LogicalOwnershipScene ownership)
+        LogicalOwnershipScene ownership,
+        NotationScene? notation = null)
     {
         _analysis = analysis;
         _geometry = geometry;
         _layout = layout;
         _ownership = ownership;
+        _notation = notation;
     }
 
     public string Name => nameof(TextPass);
@@ -663,6 +666,51 @@ public sealed class TextPass : ISemanticPass
             .ToHashSet(StringComparer.Ordinal);
         var observation = candidate.Observation.Bounds;
 
+        if (TryResolveClassifiedBeatGlyph(
+                observation,
+                sourceFamilies,
+                spacing,
+                out var classifiedBeat))
+        {
+            var instruction = match.Groups["prefix"].Value
+                .Trim()
+                .TrimEnd('(')
+                .Trim();
+            if (instruction.Length == 0)
+            {
+                instruction = null;
+            }
+
+            var sourceIds = candidate.Observation.SourceShapeIds
+                .Append(classifiedBeat.ShapeId)
+                .Distinct(StringComparer.Ordinal)
+                .ToArray();
+            var confidence = Math.Clamp(
+                Math.Min(
+                    candidate.Recognition.Confidence,
+                    classifiedBeat.Confidence),
+                0,
+                1);
+            var reason =
+                $"metronome mark parsed from OCR BPM and geometry classifier; "
+                + $"glyph={classifiedBeat.ShapeId}; label={classifiedBeat.Label}; "
+                + $"beat={classifiedBeat.BeatUnit}; bpm={bpm}";
+
+            fact = new MetronomeMarkFact(
+                candidate.Observation.Id,
+                context.MeasureNumber,
+                context.Staff,
+                context.At,
+                classifiedBeat.BeatUnit,
+                bpm,
+                instruction,
+                classifiedBeat.ShapeId,
+                confidence,
+                reason,
+                sourceIds);
+            return true;
+        }
+
         // OCR deliberately ignores the musical beat symbol. Find the missing
         // geometry inside the recognized horizontal run without consulting SVG ids,
         // CSS classes or producer metadata. Group split contours back by their
@@ -785,6 +833,117 @@ public sealed class TextPass : ISemanticPass
             sourceIds);
         return true;
     }
+
+    private bool TryResolveClassifiedBeatGlyph(
+        BoundsD observation,
+        IReadOnlySet<string> sourceFamilies,
+        double spacing,
+        out ClassifiedBeat beat)
+    {
+        beat = default;
+
+        if (_notation is null)
+        {
+            return false;
+        }
+
+        var candidate = _notation.Instances
+            .Where(instance => instance.Classification is not null)
+            .Where(instance =>
+                !sourceFamilies.Contains(BaseShapeFamily(instance.ShapeId)))
+            .Select(instance =>
+            {
+                var classification = instance.Classification!;
+                var normalized = NormalizeClassifierLabel(classification.Label);
+                var beatUnit = BeatUnitFromClassifierLabel(normalized);
+                var bounds = new BoundsD(
+                    instance.X,
+                    instance.Y,
+                    instance.X + instance.Width,
+                    instance.Y + instance.Height);
+
+                return new
+                {
+                    Instance = instance,
+                    Classification = classification,
+                    BeatUnit = beatUnit,
+                    Bounds = bounds
+                };
+            })
+            .Where(item => item.BeatUnit is not null)
+            .Where(item => item.Classification.Confidence >= 0.80)
+            .Where(item =>
+                item.Bounds.CenterX >= observation.MinX - spacing * 0.5
+                && item.Bounds.CenterX <= observation.MaxX + spacing * 0.5
+                && item.Bounds.MaxY >= observation.MinY - spacing * 2.0
+                && item.Bounds.MinY <= observation.MaxY + spacing * 2.0)
+            .OrderBy(item => Math.Abs(
+                item.Bounds.CenterY - observation.CenterY))
+            .ThenBy(item => Math.Abs(
+                item.Bounds.CenterX - observation.CenterX))
+            .ThenByDescending(item => item.Classification.Confidence)
+            .FirstOrDefault();
+
+        if (candidate is null)
+        {
+            return false;
+        }
+
+        beat = new ClassifiedBeat(
+            candidate.Instance.ShapeId,
+            candidate.Classification.Label,
+            candidate.BeatUnit!,
+            candidate.Classification.Confidence);
+        return true;
+    }
+
+    private static string? BeatUnitFromClassifierLabel(string label)
+    {
+        if (label.Contains("EIGHTH", StringComparison.Ordinal))
+        {
+            return "eighth";
+        }
+
+        if (label.Contains("SIXTEENTH", StringComparison.Ordinal)
+            || label.Contains("16TH", StringComparison.Ordinal))
+        {
+            return "16th";
+        }
+
+        if (label.Contains("QUARTER", StringComparison.Ordinal))
+        {
+            return "quarter";
+        }
+
+        if (label.Contains("HALF", StringComparison.Ordinal))
+        {
+            return "half";
+        }
+
+        if (label.Contains("WHOLE", StringComparison.Ordinal))
+        {
+            return "whole";
+        }
+
+        return null;
+    }
+
+    private static string NormalizeClassifierLabel(string label) =>
+        new(
+            label
+                .Trim()
+                .ToUpperInvariant()
+                .Select(character =>
+                    char.IsLetterOrDigit(character)
+                        ? character
+                        : '_')
+                .ToArray());
+
+    private readonly record struct ClassifiedBeat(
+        string ShapeId,
+        string Label,
+        string BeatUnit,
+        double Confidence);
 
     private bool TryResolveInstruction(
         Candidate candidate,
