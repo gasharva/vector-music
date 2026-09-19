@@ -18,6 +18,7 @@ var referencePath = ReadOption(args, "--reference");
 var modelPath = ReadOption(args, "--model");
 var configuration = ReadOption(args, "--configuration") ?? "Release";
 var noBuild = HasFlag(args, "--no-build");
+var debugSemantic = HasFlag(args, "--debug-semantic");
 var failOnDiff = HasFlag(args, "--fail-on-diff");
 var diffLevel = ParseDiffSeverity(
     ReadOption(args, "--diff-level")
@@ -47,6 +48,13 @@ var semanticProject = Path.Combine(
     repoRoot,
     "SemanticInterpreter",
     "SemanticInterpreter.csproj");
+var semanticDll = Path.Combine(
+    repoRoot,
+    "SemanticInterpreter",
+    "bin",
+    configuration,
+    "net8.0",
+    "SemanticInterpreter.dll");
 
 Console.WriteLine($"Score       : {pageSet.BaseName}");
 Console.WriteLine($"Pages       : {pageSet.Pages.Count}");
@@ -54,6 +62,8 @@ Console.WriteLine($"Input       : {inputDirectory}");
 Console.WriteLine($"Output      : {outputDirectory}");
 Console.WriteLine($"Repository  : {repoRoot}");
 Console.WriteLine($"Diff level  : {diffLevel}");
+Console.WriteLine($"Semantic DLL: {semanticDll}");
+Console.WriteLine($"Debug child : {debugSemantic}");
 
 if (!noBuild)
 {
@@ -96,18 +106,25 @@ foreach (var page in pageSet.Pages)
     Console.WriteLine(
         $"=== Page {page.Number:D3}: {Path.GetFileName(page.Path)} ===");
 
+    if (!File.Exists(semanticDll))
+    {
+        Console.Error.WriteLine(
+            $"SemanticInterpreter binary not found: {semanticDll}. "
+            + "Build it first or omit --no-build.");
+        return 3;
+    }
+
     var processArgs = new List<string>
     {
-        "run",
-        "--project",
-        semanticProject,
-        "--configuration",
-        configuration,
-        "--no-build",
-        "--",
+        semanticDll,
         page.Path,
         pageOutput
     };
+
+    if (debugSemantic)
+    {
+        processArgs.Add("--wait-for-debugger");
+    }
 
     if (!string.IsNullOrWhiteSpace(modelPath))
     {
