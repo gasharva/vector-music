@@ -327,6 +327,11 @@ internal static class CanonicalDiffSeverityPolicy
             return CanonicalDiffSeverity.Critical;
         }
 
+        if (issue.Code == "relation.hairpin.span")
+        {
+            return CanonicalDiffSeverity.Warning;
+        }
+
         if (issue.Code.StartsWith(
                 "relation.tie.",
                 StringComparison.Ordinal)
@@ -1531,6 +1536,16 @@ public sealed class CanonicalComparer
             var core = SpanCore(expectedSpan);
             var index = remaining.FindIndex(span =>
                 SpanCore(span) == core);
+            var relaxedHairpinMatch = false;
+
+            if (index < 0
+                && string.Equals(kind, "hairpin", StringComparison.Ordinal))
+            {
+                index = remaining.FindIndex(span =>
+                    HairpinSemanticCore(span)
+                        == HairpinSemanticCore(expectedSpan));
+                relaxedHairpinMatch = index >= 0;
+            }
 
             if (index < 0)
             {
@@ -1546,6 +1561,18 @@ public sealed class CanonicalComparer
 
             var actualSpan = remaining[index];
             remaining.RemoveAt(index);
+
+            if (relaxedHairpinMatch)
+            {
+                AddRelationIssue(
+                    issues,
+                    kind,
+                    "span",
+                    core,
+                    SpanCore(actualSpan),
+                    "Hairpin exists in the expected measure, but its exact rhythmic span differs.",
+                    core);
+            }
 
             CompareOptionalRelationPresentation(
                 issues,
@@ -1586,6 +1613,10 @@ public sealed class CanonicalComparer
         $"{relation.Kind}:{Anchor(relation.From)}->{Anchor(relation.To)}:"
         + $"{relation.Type ?? "-"}:{relation.Direction ?? "-"}:"
         + $"{relation.Size?.ToString() ?? "-"}";
+
+    private static string HairpinSemanticCore(SpanRelation relation) =>
+        $"{relation.Kind}:m{relation.From.Measure}->m{relation.To.Measure}:"
+        + $"{relation.Type ?? "-"}";
 
     private static void CompareOptionalRelationPresentation(
         ICollection<CanonicalDiffIssue> issues,
