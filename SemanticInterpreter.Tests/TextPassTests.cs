@@ -148,6 +148,39 @@ public sealed class TextPassTests
     }
 
     [Fact]
+    public void TempoText_WithUnrecognizedTempoNote_RecoversEighthBeatAndBpm()
+    {
+        var geometry = new GeometricScene([
+            Shape("tempo-word", 80, 60, 112, 75, "Tempo"),
+            // Tall compact compound glyph: aspect 0.60 -> one flag -> eighth.
+            Shape("tempo-note", 116, 45, 134, 75, "Tempo"),
+            Shape("tempo-bpm", 140, 60, 190, 75, "Tempo")
+        ]);
+        var analysis = Analysis(
+            new TextRecognitionObservation(
+                "tempo",
+                TextCandidateKind.HorizontalRun,
+                new BoundsD(80, 60, 190, 75),
+                ["tempo-word", "tempo-bpm"],
+                null,
+                new TextRecognition("Pastoso (= 76)", 0.99, "test")));
+        var facts = new SemanticFacts();
+
+        new TextPass(
+            analysis,
+            geometry,
+            Layout(),
+            new LogicalOwnershipScene([]))
+            .Run(Document(), facts);
+
+        var mark = Assert.Single(facts.OfType<MetronomeMarkFact>());
+        Assert.Equal("eighth", mark.BeatUnit);
+        Assert.Equal(76m, mark.Bpm);
+        Assert.Equal("Pastoso", mark.InstructionText);
+        Assert.Equal("tempo-note", mark.BeatGlyphShapeId);
+    }
+
+    [Fact]
     public void AcceptedMusicSourceWinsOverOcrInstructionOutsideStaff()
     {
         var geometry = new GeometricScene([
@@ -285,7 +318,8 @@ public sealed class TextPassTests
         double minX,
         double minY,
         double maxX,
-        double maxY)
+        double maxY,
+        string? sourceClass = null)
     {
         var points = new[]
         {
@@ -302,6 +336,7 @@ public sealed class TextPassTests
             new BoundsD(minX, minY, maxX, maxY),
             IsClosed: true,
             Contours: [new GeometricContour(points, true)],
-            HasFill: true);
+            HasFill: true,
+            SourceClass: sourceClass);
     }
 }
