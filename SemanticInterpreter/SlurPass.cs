@@ -62,6 +62,13 @@ public sealed class SlurPass : ISemanticPass
     private const double DifferentStaffPenaltyInSpacings = 0.45;
     private const int EndpointCandidateLimit = 14;
 
+    private readonly bool _includeCrossSystemCurves;
+
+    public SlurPass(bool includeCrossSystemCurves = true)
+    {
+        _includeCrossSystemCurves = includeCrossSystemCurves;
+    }
+
     public string Name => nameof(SlurPass);
 
     public SlurAnalysisResult? LastAnalysis { get; private set; }
@@ -168,9 +175,9 @@ public sealed class SlurPass : ISemanticPass
             })
             .ToArray();
 
-        var crossSystemCurves = facts
-            .OfType<CrossSystemCurveFact>()
-            .ToArray();
+        var crossSystemCurves = _includeCrossSystemCurves
+            ? facts.OfType<CrossSystemCurveFact>().ToArray()
+            : [];
         var crossSystemById = crossSystemCurves
             .ToDictionary(
                 curve => curve.CurveId,
