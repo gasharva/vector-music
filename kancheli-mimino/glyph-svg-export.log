@@ -8,8 +8,8 @@ Classifying contour prototypes with Audiveris BasicClassifier...
 [bass-clef-repair] ABSORB    prototype-37/shape-448.2 ellipses=shape-448.1,shape-448.3
 [bass-clef-repair] ABSORB    prototype-37/shape-449.2 ellipses=shape-449.1,shape-449.3
 [bass-clef-repair] SUMMARY   prototypes=77; dotPairCandidates=1; compositeClassifications=1; reusedConfidentFClefs=0; absorbedEllipses=10; remainingEllipses=236
-Classified prototypes        : 77
-Confident prototypes >= 0.75: 38
+Classified prototypes        : 75
+Confident prototypes >= 0.75: 37
 GeometricScene shapes       : 677
 NotationScene contours      : 151
 NotationScene prototypes    : 77
@@ -84,8 +84,8 @@ Logical ownership assigned  : 592
   prototype-56: 1 instances; representative=shape-482; class=EIGHTH_set 89.4 % @20px
   prototype-57: 1 instances; representative=shape-483.3; class=TUPLET_SIX 73.2 % @20px
   prototype-58: 1 instances; representative=shape-483.4; class=DIGIT_2 88.5 % @40px
-  prototype-59: 4 instances; representative=shape-486.1; class=PEDAL_MARK 94.6 % @20px
-  prototype-60: 5 instances; representative=shape-567; class=ARPEGGIATO 13.1 % @40px
+  prototype-60: 4 instances; representative=shape-486.1; class=PEDAL_MARK 94.6 % @20px
+  prototype-61: 5 instances; representative=shape-567
   compound-prototype-shape-445: 1 instances; representative=shape-445.whole; class=F_CLEF 98.6 % @30px
   compound-prototype-shape-446: 1 instances; representative=shape-446.whole; class=F_CLEF 98.6 % @30px
   compound-prototype-shape-447: 1 instances; representative=shape-447.whole; class=F_CLEF 98.6 % @30px
@@ -98,7 +98,7 @@ Logical ownership assigned  : 592
   compound-prototype-shape-490: 1 instances; representative=shape-490.whole; class=PEDAL_MARK 99.1 % @20px
   compound-prototype-shape-492: 1 instances; representative=shape-492.whole; class=PEDAL_MARK 99.1 % @20px
   compound-prototype-shape-53: 1 instances; representative=shape-53.whole; class=CLUTTER 32.6 % @20px
-  compound-prototype-shape-57: 1 instances; representative=shape-57.whole; class=CLUTTER 99.3 % @20px
+  compound-prototype-shape-57: 1 instances; representative=shape-57.whole
   compound-prototype-shape-58: 1 instances; representative=shape-58.whole; class=HW_REST_set 9.0 % @20px
   compound-prototype-shape-59: 1 instances; representative=shape-59.whole; class=PEDAL_MARK 12.1 % @30px
   compound-prototype-shape-61: 1 instances; representative=shape-61.whole; class=DYNAMICS_PP 15.9 % @30px

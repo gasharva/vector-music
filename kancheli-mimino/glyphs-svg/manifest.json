@@ -334,9 +334,9 @@
       "HasFill": true,
       "HasStroke": false,
       "StrokeWidth": 0,
-      "AudiverisLabel": "CLUTTER",
-      "AudiverisConfidence": 0.9934746722671284,
-      "AudiverisInterline": 20
+      "AudiverisLabel": null,
+      "AudiverisConfidence": null,
+      "AudiverisInterline": null
     },
     {
       "PrototypeId": "compound-prototype-shape-58",
@@ -1847,32 +1847,6 @@
       "AudiverisInterline": 40
     },
     {
-      "PrototypeId": "prototype-59",
-      "RepresentativeShapeId": "shape-486.1",
-      "InstanceCount": 4,
-      "FileName": "prototype-59__shape-486.1.svg",
-      "SourceKind": "path",
-      "SourceId": null,
-      "SourceIndex": null,
-      "SourceClass": "PedalSegment",
-      "SourceBounds": {
-        "MinX": 2122.23,
-        "MinY": 2377.22,
-        "MaxX": 2219.68,
-        "MaxY": 2438.82,
-        "Width": 97.44999999999982,
-        "Height": 61.600000000000364,
-        "CenterX": 2170.955,
-        "CenterY": 2408.02
-      },
-      "HasFill": true,
-      "HasStroke": false,
-      "StrokeWidth": 0,
-      "AudiverisLabel": "PEDAL_MARK",
-      "AudiverisConfidence": 0.9459168194211505,
-      "AudiverisInterline": 20
-    },
-    {
       "PrototypeId": "prototype-6",
       "RepresentativeShapeId": "shape-52.4",
       "InstanceCount": 1,
@@ -1900,9 +1874,35 @@
     },
     {
       "PrototypeId": "prototype-60",
+      "RepresentativeShapeId": "shape-486.1",
+      "InstanceCount": 4,
+      "FileName": "prototype-60__shape-486.1.svg",
+      "SourceKind": "path",
+      "SourceId": null,
+      "SourceIndex": null,
+      "SourceClass": "PedalSegment",
+      "SourceBounds": {
+        "MinX": 2122.23,
+        "MinY": 2377.22,
+        "MaxX": 2219.68,
+        "MaxY": 2438.82,
+        "Width": 97.44999999999982,
+        "Height": 61.600000000000364,
+        "CenterX": 2170.955,
+        "CenterY": 2408.02
+      },
+      "HasFill": true,
+      "HasStroke": false,
+      "StrokeWidth": 0,
+      "AudiverisLabel": "PEDAL_MARK",
+      "AudiverisConfidence": 0.9459168194211505,
+      "AudiverisInterline": 20
+    },
+    {
+      "PrototypeId": "prototype-61",
       "RepresentativeShapeId": "shape-567",
       "InstanceCount": 5,
-      "FileName": "prototype-60__shape-567.svg",
+      "FileName": "prototype-61__shape-567.svg",
       "SourceKind": "path",
       "SourceId": null,
       "SourceIndex": null,
@@ -1920,9 +1920,9 @@
       "HasFill": true,
       "HasStroke": false,
       "StrokeWidth": 0,
-      "AudiverisLabel": "ARPEGGIATO",
-      "AudiverisConfidence": 0.13064303577080252,
-      "AudiverisInterline": 40
+      "AudiverisLabel": null,
+      "AudiverisConfidence": null,
+      "AudiverisInterline": null
     },
     {
       "PrototypeId": "prototype-7",

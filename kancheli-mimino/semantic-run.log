@@ -96,61 +96,68 @@
        shape-100: x=2890.280; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
        shape-76: x=2910.660; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
        shape-101: x=2910.660; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
+   composite candidate decisions:
+     hairpin/shape-485: ACCEPT; accepted after structural layout claims; sources=[shape-485]
+     hairpin/shape-484: ACCEPT; accepted after structural layout claims; sources=[shape-484]
+     bracket/bracket-1: ACCEPT; accepted after structural layout claims; sources=[shape-487]
+     bracket/bracket-2: ACCEPT; accepted after structural layout claims; sources=[shape-489]
+     bracket/bracket-3: ACCEPT; accepted after structural layout claims; sources=[shape-491]
+     bracket/bracket-4: ACCEPT; accepted after structural layout claims; sources=[shape-493]
 2. Classifying reusable contour prototypes...
-   prototype classification: 1.578s
+   prototype classification: 1.812s
    slowest prototype classifications:
-     prototype-1/shape-51.1: shape=64.68x79.97; points=10; total=106.9ms
-       i20: 56x67; fg=707; raster=5.0ms; classify=63.8ms
-       i30: 79x96; fg=1591; raster=1.0ms; classify=14.1ms
-       i40: 103x125; fg=2761; raster=0.3ms; classify=22.4ms
-     prototype-4/shape-51.6: shape=96.42x79.97; points=14; total=97.5ms
-       i20: 79x67; fg=1496; raster=0.1ms; classify=15.1ms
-       i30: 114x96; fg=3374; raster=0.2ms; classify=29.8ms
-       i40: 149x125; fg=5962; raster=0.2ms; classify=52.1ms
-     prototype-2/shape-51.2: shape=50.00x79.97; points=13; total=69.4ms
-       i20: 46x67; fg=1012; raster=0.1ms; classify=11.1ms
-       i30: 64x96; fg=2316; raster=1.5ms; classify=21.3ms
-       i40: 82x125; fg=4006; raster=0.2ms; classify=35.1ms
-     prototype-5/shape-52.3: shape=67.03x79.97; points=13; total=62.8ms
-       i20: 58x67; fg=1001; raster=0.2ms; classify=10.0ms
-       i30: 82x96; fg=2209; raster=0.2ms; classify=19.3ms
-       i40: 106x125; fg=3930; raster=0.2ms; classify=32.9ms
-     prototype-36/shape-440: shape=70.96x197.16; points=545; total=58.5ms
-       i20: 61x152; fg=2367; raster=0.7ms; classify=8.2ms
-       i30: 86x223; fg=5329; raster=1.0ms; classify=17.3ms
-       i40: 112x294; fg=9467; raster=1.4ms; classify=29.9ms
-     prototype-60/shape-567: shape=25.09x404.86; points=241; total=47.6ms
-       i20: 28x302; fg=1988; raster=0.6ms; classify=6.3ms
-       i30: 37x448; fg=4477; raster=0.9ms; classify=14.0ms
-       i40: 46x594; fg=7980; raster=1.2ms; classify=24.5ms
-     prototype-3/shape-51.3: shape=46.36x79.97; points=7; total=38.8ms
-       i20: 43x67; fg=639; raster=0.1ms; classify=6.7ms
-       i30: 60x96; fg=1462; raster=0.1ms; classify=12.6ms
-       i40: 76x125; fg=2401; raster=0.1ms; classify=19.1ms
-     prototype-6/shape-52.4: shape=66.50x79.97; points=8; total=38.5ms
-       i20: 57x67; fg=857; raster=0.2ms; classify=8.4ms
-       i30: 81x96; fg=1943; raster=0.2ms; classify=16.3ms
-       i40: 105x125; fg=3445; raster=0.2ms; classify=13.4ms
-     compound-prototype-shape-486/shape-486.whole: shape=108.89x61.60; points=1072; total=38.2ms
-       i20: 88x54; fg=1322; raster=0.5ms; classify=5.6ms
-       i30: 127x76; fg=2976; raster=0.7ms; classify=11.4ms
-       i40: 167x98; fg=5314; raster=0.9ms; classify=19.2ms
-     compound-prototype-shape-490/shape-490.whole: shape=108.89x61.60; points=1072; total=37.6ms
-       i20: 88x54; fg=1321; raster=0.5ms; classify=5.4ms
-       i30: 127x76; fg=2976; raster=0.7ms; classify=11.1ms
-       i40: 167x98; fg=5312; raster=0.9ms; classify=19.0ms
-     compound-prototype-shape-492/shape-492.whole: shape=108.90x61.60; points=1072; total=37.5ms
-       i20: 88x54; fg=1322; raster=0.5ms; classify=5.4ms
-       i30: 127x76; fg=2975; raster=0.7ms; classify=11.1ms
-       i40: 167x98; fg=5316; raster=0.9ms; classify=18.9ms
-     prototype-59/shape-486.1: shape=97.45x61.60; points=1023; total=37.5ms
-       i20: 80x54; fg=1285; raster=0.5ms; classify=5.5ms
-       i30: 115x76; fg=2888; raster=0.7ms; classify=11.2ms
-       i40: 150x98; fg=5158; raster=0.8ms; classify=18.8ms
+     prototype-1/shape-51.1: shape=64.68x79.97; points=10; total=108.6ms; within local measure size gate
+       i20: 56x67; fg=707; raster=5.0ms; classify=68.2ms
+       i30: 79x96; fg=1591; raster=1.2ms; classify=13.6ms
+       i40: 103x125; fg=2761; raster=0.3ms; classify=19.8ms
+     prototype-4/shape-51.6: shape=96.42x79.97; points=14; total=90.4ms; within local measure size gate
+       i20: 79x67; fg=1496; raster=0.2ms; classify=16.0ms
+       i30: 114x96; fg=3374; raster=0.3ms; classify=27.7ms
+       i40: 149x125; fg=5962; raster=0.3ms; classify=45.9ms
+     prototype-2/shape-51.2: shape=50.00x79.97; points=13; total=72.4ms; within local measure size gate
+       i20: 46x67; fg=1012; raster=0.2ms; classify=11.4ms
+       i30: 64x96; fg=2316; raster=2.0ms; classify=22.1ms
+       i40: 82x125; fg=4006; raster=0.2ms; classify=36.5ms
+     prototype-7/shape-52.6: shape=54.40x82.88; points=389; total=70.9ms; within local measure size gate
+       i20: 49x69; fg=973; raster=2.2ms; classify=12.3ms
+       i30: 68x99; fg=2184; raster=0.6ms; classify=21.6ms
+       i40: 88x129; fg=3860; raster=0.8ms; classify=33.4ms
+     prototype-36/shape-440: shape=70.96x197.16; points=545; total=62.0ms; within local measure size gate
+       i20: 61x152; fg=2367; raster=0.8ms; classify=8.9ms
+       i30: 86x223; fg=5329; raster=1.1ms; classify=18.2ms
+       i40: 112x294; fg=9467; raster=1.5ms; classify=31.5ms
+     prototype-5/shape-52.3: shape=67.03x79.97; points=13; total=61.8ms; within local measure size gate
+       i20: 58x67; fg=1001; raster=0.2ms; classify=10.9ms
+       i30: 82x96; fg=2209; raster=0.2ms; classify=19.6ms
+       i40: 106x125; fg=3930; raster=0.2ms; classify=30.6ms
+     prototype-6/shape-52.4: shape=66.50x79.97; points=8; total=51.3ms; within local measure size gate
+       i20: 57x67; fg=857; raster=0.2ms; classify=8.8ms
+       i30: 81x96; fg=1943; raster=0.2ms; classify=16.0ms
+       i40: 105x125; fg=3445; raster=0.2ms; classify=25.8ms
+     prototype-60/shape-486.1: shape=97.45x61.60; points=1023; total=44.7ms; within local measure size gate
+       i20: 80x54; fg=1285; raster=0.5ms; classify=8.0ms
+       i30: 115x76; fg=2888; raster=0.7ms; classify=13.2ms
+       i40: 150x98; fg=5158; raster=0.9ms; classify=21.3ms
+     compound-prototype-shape-492/shape-492.whole: shape=108.90x61.60; points=1072; total=41.7ms; within local measure size gate
+       i20: 88x54; fg=1322; raster=0.6ms; classify=6.7ms
+       i30: 127x76; fg=2975; raster=0.8ms; classify=12.5ms
+       i40: 167x98; fg=5316; raster=1.0ms; classify=20.1ms
+     compound-prototype-shape-490/shape-490.whole: shape=108.89x61.60; points=1072; total=41.5ms; within local measure size gate
+       i20: 88x54; fg=1321; raster=0.5ms; classify=6.7ms
+       i30: 127x76; fg=2976; raster=0.8ms; classify=12.0ms
+       i40: 167x98; fg=5312; raster=1.0ms; classify=20.4ms
+     compound-prototype-shape-488/shape-488.whole: shape=108.89x61.60; points=1072; total=41.4ms; within local measure size gate
+       i20: 88x54; fg=1321; raster=0.5ms; classify=6.8ms
+       i30: 127x76; fg=2976; raster=0.8ms; classify=12.3ms
+       i40: 167x98; fg=5312; raster=1.0ms; classify=19.9ms
+     compound-prototype-shape-486/shape-486.whole: shape=108.89x61.60; points=1072; total=41.3ms; within local measure size gate
+       i20: 88x54; fg=1322; raster=0.5ms; classify=6.5ms
+       i30: 127x76; fg=2976; raster=0.8ms; classify=12.3ms
+       i40: 167x98; fg=5314; raster=1.0ms; classify=20.1ms
 3. Repairing composite bass clefs...
-   bass-clef repair: 0.043s; candidates=1; classifier-runs=1; reused-F-clefs=0
+   bass-clef repair: 0.038s; candidates=1; classifier-runs=1; reused-F-clefs=0
 4. Assigning logical staff/measure ownership...
-   logical ownership: 0.249s
+   logical ownership: 0.251s
    ledger-ladder ownership: 0.004s; corrections=0
    fourth-generation ownership: 0.018s
 5. Running OCR fallback for semantic text...
