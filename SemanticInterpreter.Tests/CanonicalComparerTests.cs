@@ -82,6 +82,56 @@ public sealed class CanonicalComparerTests
     }
 
     [Fact]
+    public void HairpinInSameMeasureWithDifferentEndpoints_IsWarningNotMissingExtra()
+    {
+        var expected = ScoreWithHairpin(
+            new SpanRelation
+            {
+                Id = "expected",
+                Kind = "hairpin",
+                From = new TimeAnchor(12, "1/8", 1),
+                To = new TimeAnchor(12, "5/8", 1),
+                Type = "crescendo"
+            });
+        var actual = ScoreWithHairpin(
+            new SpanRelation
+            {
+                Id = "actual",
+                Kind = "hairpin",
+                From = new TimeAnchor(12, "1/8", 1),
+                To = new TimeAnchor(12, "1/2", 1),
+                Type = "crescendo"
+            });
+
+        var report = new CanonicalComparer().Compare(expected, actual);
+
+        var issue = Assert.Single(report.Issues);
+        Assert.Equal("relation.hairpin.span", issue.Code);
+        Assert.Equal(CanonicalDiffSeverity.Warning, issue.Severity);
+    }
+
+    [Fact]
+    public void MissingHairpinStillRemainsCritical()
+    {
+        var expected = ScoreWithHairpin(
+            new SpanRelation
+            {
+                Id = "expected",
+                Kind = "hairpin",
+                From = new TimeAnchor(4, "1/8", 1),
+                To = new TimeAnchor(4, "5/8", 1),
+                Type = "crescendo"
+            });
+        var actual = ScoreWithHairpin();
+
+        var report = new CanonicalComparer().Compare(expected, actual);
+
+        var issue = Assert.Single(report.Issues);
+        Assert.Equal("relation.hairpin.missing", issue.Code);
+        Assert.Equal(CanonicalDiffSeverity.Critical, issue.Severity);
+    }
+
+    [Fact]
     public void EventIdsDoNotMatterWhenMusicIsTheSame()
     {
         var expected = Score(
@@ -686,6 +736,37 @@ public sealed class CanonicalComparerTests
                 [],
                 []));
     }
+
+    private static CanonicalNotation ScoreWithHairpin(
+        params SpanRelation[] hairpins) =>
+        new(
+            "CanonicalNotation",
+            "0.4",
+            new Metadata(),
+            [
+                new Part(
+                    "P1",
+                    "Piano",
+                    [
+                        new Measure(
+                            1,
+                            [],
+                            new MeasureAttributes(
+                                new TimeSignature(4, 4),
+                                new KeySignature(0),
+                                1,
+                                [new Clef(1, "G", 2)]))
+                    ])
+            ],
+            new Relations(
+                [],
+                [],
+                [],
+                [],
+                [],
+                hairpins.ToList(),
+                [],
+                []));
 
     private static Relations EmptyRelations() =>
         new(
