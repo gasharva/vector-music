@@ -36,7 +36,8 @@ public sealed class SvgCanonicalizerTests
             output);
 
         var document = XDocument.Load(output);
-        var root = Assert.NotNull(document.Root);
+        Assert.NotNull(document.Root);
+        var root = document.Root!;
         var descendants = root.Descendants().ToArray();
 
         Assert.Single(descendants);
