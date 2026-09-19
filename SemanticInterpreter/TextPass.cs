@@ -230,6 +230,13 @@ public sealed class TextPass : ISemanticPass
                     candidate.Recognition.Confidence,
                     $"multi-glyph text above first measure of system; m{tempoContext.MeasureNumber}@{tempoContext.At}");
 
+                foreach (var diagnostic in DescribeClassifiedBeatCandidates(
+                             candidate.Observation.Bounds,
+                             spacing))
+                {
+                    facts.AddTrace(diagnostic);
+                }
+
                 if (TryBuildMetronomeMark(
                         candidate,
                         tempoContext,
@@ -242,6 +249,12 @@ public sealed class TextPass : ISemanticPass
                         + $"beat={metronomeMark.BeatUnit}; bpm={metronomeMark.Bpm}; "
                         + $"glyph={metronomeMark.BeatGlyphShapeId}; "
                         + $"text={metronomeMark.InstructionText ?? "-"}");
+                }
+                else
+                {
+                    facts.AddTrace(
+                        $"MetronomeMark: no beat glyph resolved for OCR '{candidate.Recognition.Text.Trim()}' "
+                        + $"at x={candidate.Observation.Bounds.MinX:F2}..{candidate.Observation.Bounds.MaxX:F2}");
                 }
 
                 continue;
@@ -831,6 +844,67 @@ public sealed class TextPass : ISemanticPass
             reason,
             sourceIds);
         return true;
+    }
+
+    private IEnumerable<string> DescribeClassifiedBeatCandidates(
+        BoundsD observation,
+        double spacing)
+    {
+        if (_notation is null)
+        {
+            yield return "Metronome classifier candidates: notation scene unavailable";
+            yield break;
+        }
+
+        var candidates = _notation.Instances
+            .Where(instance => instance.Classification is not null)
+            .Select(instance =>
+            {
+                var classification = instance.Classification!;
+                var label = NormalizeClassifierLabel(classification.Label);
+                var bounds = new BoundsD(
+                    instance.X,
+                    instance.Y,
+                    instance.X + instance.Width,
+                    instance.Y + instance.Height);
+
+                return new
+                {
+                    instance.ShapeId,
+                    Label = classification.Label,
+                    NormalizedLabel = label,
+                    classification.Confidence,
+                    Bounds = bounds,
+                    BeatUnit = BeatUnitFromClassifierLabel(label)
+                };
+            })
+            .Where(item =>
+                item.Bounds.CenterX >= observation.MinX - spacing * 0.5
+                && item.Bounds.CenterX <= observation.MaxX + spacing * 0.5
+                && item.Bounds.MaxY >= observation.MinY - spacing * 2.0
+                && item.Bounds.MinY <= observation.MaxY + spacing * 2.0)
+            .Where(item => item.BeatUnit is not null)
+            .OrderByDescending(item => item.Confidence)
+            .ThenBy(item => item.Bounds.CenterX)
+            .ToArray();
+
+        if (candidates.Length == 0)
+        {
+            yield return
+                $"Metronome classifier candidates: none near OCR run "
+                + $"x={observation.MinX:F2}..{observation.MaxX:F2}";
+            yield break;
+        }
+
+        foreach (var item in candidates)
+        {
+            yield return
+                $"Metronome classifier candidate: shape={item.ShapeId}; "
+                + $"label={item.Label}; beat={item.BeatUnit}; "
+                + $"confidence={item.Confidence:P1}; "
+                + $"bounds={item.Bounds.MinX:F2},{item.Bounds.MinY:F2}.."
+                + $"{item.Bounds.MaxX:F2},{item.Bounds.MaxY:F2}";
+        }
     }
 
     private bool TryResolveClassifiedBeatGlyph(
