@@ -67,6 +67,35 @@ public sealed class SlurPassTests
     }
 
     [Fact]
+    public void SamePitchArc_WithExplicitSlurSourceClass_RemainsSlur()
+    {
+        const double spacing = 20;
+        var document = Document(
+            Curve(
+                "phrase-slur",
+                [
+                    new PointD(100, 160),
+                    new PointD(150, 125),
+                    new PointD(200, 160)
+                ],
+                spacing,
+                sourceClass: "SlurSegment"));
+        var facts = new SemanticFacts();
+        facts.Add(Notehead("left", 100, 160, 2, spacing));
+        facts.Add(Notehead("right", 200, 160, 2, spacing));
+        facts.Add(Pitch("left", "D4"));
+        facts.Add(Pitch("right", "D4"));
+
+        var pass = new SlurPass();
+        pass.Run(document, facts);
+
+        var slur = Assert.Single(facts.OfType<SlurFact>());
+        Assert.Equal("left", slur.FromNoteheadId);
+        Assert.Equal("right", slur.ToNoteheadId);
+        Assert.Equal("slur", Assert.Single(pass.LastAnalysis!.Decisions).Decision);
+    }
+
+    [Fact]
     public void SamePitchArc_WithInterveningRhythmicEvent_IsSlurNotTie()
     {
         const double spacing = 20;
@@ -251,7 +280,8 @@ public sealed class SlurPassTests
     private static CurveElement Curve(
         string id,
         IReadOnlyList<PointD> points,
-        double spacing)
+        double spacing,
+        string? sourceClass = null)
     {
         var ownership = new LogicalOwnership(
             new LogicalCoordinate("staff-1", "measure-1"),
@@ -269,7 +299,8 @@ public sealed class SlurPassTests
             null,
             "path",
             null,
-            ownership);
+            ownership,
+            sourceClass);
 
         return new CurveElement
         {
