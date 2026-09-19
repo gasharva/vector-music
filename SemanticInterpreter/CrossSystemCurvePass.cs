@@ -85,9 +85,11 @@ public sealed class CrossSystemCurvePass : ISemanticPass
     // Leaves has the continuation fragment at ~4.55sp from the barline.
     private const double MaximumSystemStartBandInSpacings = 7.00;
 
-    // An endpoint that is this close to a real pitched target is not an open
-    // system-edge endpoint; it belongs to an ordinary complete curve instead.
-    private const double NoteAttachmentExclusionInSpacings = 2.20;
+    // A split fragment can be short enough that its open system-edge endpoint is
+    // still geometrically near the same note. Treat it as open only when that end
+    // is materially worse than the true note-side endpoint.
+    private const double MinimumOpenEndpointDistanceInSpacings = 0.65;
+    private const double MinimumOpenEndpointSeparationInSpacings = 0.75;
 
     public string Name => nameof(CrossSystemCurvePass);
 
@@ -364,19 +366,6 @@ public sealed class CrossSystemCurvePass : ISemanticPass
             return null;
         }
 
-        // A real note at the right endpoint means this is an ordinary complete
-        // curve near the system edge, not an incomplete continuation fragment.
-        if (ClosestAnchorDistance(
-                right,
-                measure.Number,
-                staff,
-                spacing,
-                anchors)
-            <= NoteAttachmentExclusionInSpacings)
-        {
-            return null;
-        }
-
         var anchor = ClosestAnchor(
             left,
             measure.Number,
@@ -387,6 +376,25 @@ public sealed class CrossSystemCurvePass : ISemanticPass
         if (anchor is null
             || anchor.Distance
                 > MaximumNoteEndpointDistanceInSpacings)
+        {
+            return null;
+        }
+
+        var openEndpointDistance = ClosestAnchorDistance(
+            right,
+            measure.Number,
+            staff,
+            spacing,
+            anchors);
+
+        // A normal complete curve has a genuine note attachment at both ends.
+        // For a split fragment the system-edge end must be noticeably less attached
+        // than the real note-side end, even if the fragment itself is short.
+        if (openEndpointDistance
+                <= MinimumOpenEndpointDistanceInSpacings
+            || openEndpointDistance
+                <= anchor.Distance
+                    + MinimumOpenEndpointSeparationInSpacings)
         {
             return null;
         }
@@ -431,19 +439,6 @@ public sealed class CrossSystemCurvePass : ISemanticPass
             return null;
         }
 
-        // Same protection as outgoing: if the left endpoint already belongs to a
-        // note, this is a normal curve beginning on the first beat of the system.
-        if (ClosestAnchorDistance(
-                left,
-                measure.Number,
-                staff,
-                spacing,
-                anchors)
-            <= NoteAttachmentExclusionInSpacings)
-        {
-            return null;
-        }
-
         var anchor = ClosestAnchor(
             right,
             measure.Number,
@@ -454,6 +449,22 @@ public sealed class CrossSystemCurvePass : ISemanticPass
         if (anchor is null
             || anchor.Distance
                 > MaximumNoteEndpointDistanceInSpacings)
+        {
+            return null;
+        }
+
+        var openEndpointDistance = ClosestAnchorDistance(
+            left,
+            measure.Number,
+            staff,
+            spacing,
+            anchors);
+
+        if (openEndpointDistance
+                <= MinimumOpenEndpointDistanceInSpacings
+            || openEndpointDistance
+                <= anchor.Distance
+                    + MinimumOpenEndpointSeparationInSpacings)
         {
             return null;
         }
