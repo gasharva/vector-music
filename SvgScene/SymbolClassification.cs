@@ -109,6 +109,8 @@ public sealed record PrototypeClassificationDiagnostic(
     double ShapeHeight,
     int PointCount,
     double TotalMilliseconds,
+    bool Skipped,
+    string Reason,
     IReadOnlyList<PrototypeScaleClassificationDiagnostic> Scales);
 
 public sealed class PrototypeSymbolClassifier
@@ -119,13 +121,16 @@ public sealed class PrototypeSymbolClassifier
 
     private readonly ISymbolClassifier _classifier;
     private readonly GlyphRasterizer _rasterizer;
+    private readonly PrototypeClassifierSettings _settings;
 
     public PrototypeSymbolClassifier(
         ISymbolClassifier classifier,
-        GlyphRasterizer? rasterizer = null)
+        GlyphRasterizer? rasterizer = null,
+        SvgMusicSettings? settings = null)
     {
         _classifier = classifier;
         _rasterizer = rasterizer ?? new GlyphRasterizer();
+        _settings = (settings ?? SvgMusicSettings.Default).PrototypeClassifier;
     }
 
     public NotationScene Classify(
@@ -148,6 +153,25 @@ public sealed class PrototypeSymbolClassifier
                     prototype.RepresentativeShapeId,
                     out var shape))
             {
+                continue;
+            }
+
+            if (!PassesLocalMeasureSizeGate(
+                    prototype,
+                    notation,
+                    layout,
+                    out var gateReason))
+            {
+                diagnostics.Add(new PrototypeClassificationDiagnostic(
+                    prototype.Id,
+                    shape.Id,
+                    shape.Bounds.Width,
+                    shape.Bounds.Height,
+                    shape.EffectiveContours.Sum(contour => contour.Points.Count),
+                    0,
+                    true,
+                    gateReason,
+                    Array.Empty<PrototypeScaleClassificationDiagnostic>()));
                 continue;
             }
 
@@ -196,6 +220,8 @@ public sealed class PrototypeSymbolClassifier
                 shape.Bounds.Height,
                 shape.EffectiveContours.Sum(contour => contour.Points.Count),
                 prototypeStopwatch.Elapsed.TotalMilliseconds,
+                false,
+                "within local measure size gate",
                 scaleDiagnostics));
 
             if (scales.Count == 0)
@@ -237,5 +263,71 @@ public sealed class PrototypeSymbolClassifier
             Prototypes = prototypes,
             Instances = instances
         };
+    }
+
+    private bool PassesLocalMeasureSizeGate(
+        ShapePrototype prototype,
+        NotationScene notation,
+        ScoreLayout layout,
+        out string reason)
+    {
+        var instance = notation.Instances
+            .FirstOrDefault(item =>
+                item.PrototypeId == prototype.Id
+                && item.ShapeId == prototype.RepresentativeShapeId)
+            ?? notation.Instances.FirstOrDefault(item =>
+                item.PrototypeId == prototype.Id);
+
+        if (instance is null)
+        {
+            reason = "no prototype instance";
+            return false;
+        }
+
+        var centerX = instance.X + instance.Width / 2.0;
+        var centerY = instance.Y + instance.Height / 2.0;
+
+        foreach (var pair in layout.Systems.SelectMany(system => system.StaffPairs))
+        {
+            if (centerY < pair.Bounds.MinY
+                || centerY > pair.Bounds.MaxY)
+            {
+                continue;
+            }
+
+            var measure = pair.Measures.FirstOrDefault(item =>
+                centerX >= item.XStart
+                && centerX <= item.XEnd);
+
+            if (measure is null)
+            {
+                continue;
+            }
+
+            var measureWidth = measure.XEnd - measure.XStart;
+            var measureHeight = pair.Bounds.Height;
+            var maxWidth = measureWidth * _settings.MaxMeasureWidthFraction;
+            var maxHeight = measureHeight * _settings.MaxMeasureHeightFraction;
+
+            if (instance.Width <= maxWidth
+                && instance.Height <= maxHeight)
+            {
+                reason =
+                    $"local measure={measure.Id}; "
+                    + $"shape={instance.Width:F2}x{instance.Height:F2}; "
+                    + $"limit={maxWidth:F2}x{maxHeight:F2}";
+                return true;
+            }
+
+            reason =
+                $"outside local measure size gate; measure={measure.Id}; "
+                + $"shape={instance.Width:F2}x{instance.Height:F2}; "
+                + $"limit={maxWidth:F2}x{maxHeight:F2}";
+            return false;
+        }
+
+        reason =
+            $"no containing local measure for center=({centerX:F2},{centerY:F2})";
+        return false;
     }
 }
