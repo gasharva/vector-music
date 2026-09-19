@@ -16,7 +16,8 @@ public sealed class CompoundClassificationHypothesisBuilder
     public (GeometricScene Geometry, NotationScene Notation) Augment(
         GeometricScene geometry,
         NotationScene notation,
-        ScoreLayout layout)
+        ScoreLayout layout,
+        IReadOnlySet<string>? excludedSourceShapeIds = null)
     {
         var spacing = Math.Max(
             0.001,
@@ -44,6 +45,12 @@ public sealed class CompoundClassificationHypothesisBuilder
                 .Select(item => item.Shape)
                 .OrderBy(shape => shape.Id, StringComparer.Ordinal)
                 .ToArray();
+
+            if (parts.Any(part =>
+                    excludedSourceShapeIds?.Contains(part.Id) == true))
+            {
+                continue;
+            }
 
             if (parts.Length < 2)
             {
