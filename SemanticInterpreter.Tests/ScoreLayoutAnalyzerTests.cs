@@ -6,6 +6,36 @@ namespace SemanticInterpreter.Tests;
 public sealed class ScoreLayoutAnalyzerTests
 {
     [Fact]
+    public void StandaloneInterstaffConnectors_AreMeasureBoundaries()
+    {
+        var strokes = StaffLines();
+
+        foreach (var (id, x) in new[]
+                 {
+                     ("left", 0.0),
+                     ("middle", 100.0),
+                     ("right", 200.0)
+                 })
+        {
+            // Cairo-style connector: upper-staff top -> lower-staff top.
+            // No separate lower-staff vertical segment is present.
+            strokes.Add(Vertical(
+                $"{id}-connector",
+                x,
+                0,
+                100));
+        }
+
+        var pair = Pair(strokes);
+
+        Assert.Equal(3, pair.Boundaries.Count);
+        Assert.Equal(2, pair.Measures.Count);
+        Assert.All(
+            pair.Boundaries,
+            boundary => Assert.Single(boundary.StrokeIds));
+    }
+
+    [Fact]
     public void MissingTopLineOfLowerStaff_IsRecoveredFromBarlineEndpoints()
     {
         var strokes = new List<Stroke>();
