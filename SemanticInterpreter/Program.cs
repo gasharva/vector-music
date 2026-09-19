@@ -9,7 +9,7 @@ if (args.Length < 2)
         "Usage: dotnet run -- <input.svg> <output-directory> "
         + "[--title <title>] [--composer <composer>] [--model <basic-classifier.zip>] "
         + "[--initial-time <beats/beat-type>] [--initial-key <fifths>] "
-        + "[--wait-for-debugger]");
+        + "[--wait-for-debugger] [--layout-only]");
     return 2;
 }
 
@@ -25,6 +25,10 @@ var inheritedKeySignature = ParseKeySignatureOption(
 var waitForDebugger = args.Any(argument =>
     argument.Equals(
         "--wait-for-debugger",
+        StringComparison.OrdinalIgnoreCase));
+var layoutOnly = args.Any(argument =>
+    argument.Equals(
+        "--layout-only",
         StringComparison.OrdinalIgnoreCase));
 
 if (waitForDebugger && !Debugger.IsAttached)
@@ -70,6 +74,16 @@ if (layoutAnalyzer.LastDiagnostics is { } layoutDiagnostics)
             Console.WriteLine($"     {candidate}");
         }
     }
+}
+
+if (layoutOnly)
+{
+    Console.WriteLine("Layout-only probe complete.");
+    return layout.Systems
+        .SelectMany(system => system.StaffPairs)
+        .Any(pair => pair.Measures.Count > 0)
+        ? 0
+        : 4;
 }
 
 Console.WriteLine("2. Classifying reusable contour prototypes...");
