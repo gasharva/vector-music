@@ -69,7 +69,12 @@ public sealed class AudiverisSymbolClassifier : ISymbolClassifier
             }
         }
 
-        if (x.Count == 0)
+        // ART moments need a non-zero radius around the glyph centroid.
+        // Rasterization of very small/degenerate SVG geometry (common after
+        // PDF -> SVG conversion) can legitimately collapse to a single foreground
+        // pixel. Such a point is not a classifiable music symbol and must not take
+        // down classification of the whole page.
+        if (x.Count < 2)
         {
             return Array.Empty<SymbolPrediction>();
         }
