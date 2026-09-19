@@ -68,7 +68,16 @@
       </attributes>
       <direction placement="above">
         <direction-type>
-          <words font-weight="bold" font-family="Edwin">Cantabile ( = 62)</words>
+          <words font-weight="bold" font-family="Edwin">Cantabile</words>
+        </direction-type>
+        <staff>1</staff>
+      </direction>
+      <direction placement="above">
+        <direction-type>
+          <metronome>
+            <beat-unit>eighth</beat-unit>
+            <per-minute>62</per-minute>
+          </metronome>
         </direction-type>
         <staff>1</staff>
       </direction>

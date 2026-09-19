@@ -1,13 +1,13 @@
 1. Building geometric and notation scenes...
 2. Classifying reusable contour prototypes...
 Downloading official Audiveris basic-classifier.zip...
-   prototype classification: 5.497s
+   prototype classification: 4.324s
 3. Repairing composite bass clefs...
-   bass-clef repair: 0.122s; candidates=1; classifier-runs=1; reused-F-clefs=0
+   bass-clef repair: 0.098s; candidates=1; classifier-runs=1; reused-F-clefs=0
 4. Assigning logical staff/measure ownership...
-   logical ownership: 0.258s
-   ledger-ladder ownership: 0.004s; corrections=0
-   fourth-generation ownership: 0.019s
+   logical ownership: 0.232s
+   ledger-ladder ownership: 0.003s; corrections=0
+   fourth-generation ownership: 0.014s
 5. Running OCR fallback for semantic text...
    OCR candidates: 19; recognized: 16
 5b. Writing SVG parser diagnostics...
@@ -35,7 +35,7 @@ ClassifiedSymbol decision: shape=shape-61.whole; label=DYNAMICS_PP; accepted=Fal
 
 Semantic interpretation complete:
   measures   : 20
-  facts      : 1009
+  facts      : 1010
   clefs      : 15
   times      : 1
   keys       : 1

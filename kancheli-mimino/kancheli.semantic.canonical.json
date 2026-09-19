@@ -119,9 +119,18 @@
               "type": "text",
               "at": "0",
               "staff": 1,
-              "text": "Cantabile ( = 62)",
+              "text": "Cantabile",
               "textRole": "Tempo",
               "placement": "above"
+            },
+            {
+              "id": "m1-tempo-fallback-train:4",
+              "type": "tempo",
+              "at": "0",
+              "staff": 1,
+              "placement": "above",
+              "beatUnit": "eighth",
+              "bpm": 62
             }
           ],
           "attributes": {
