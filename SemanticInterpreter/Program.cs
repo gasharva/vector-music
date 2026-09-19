@@ -437,6 +437,8 @@ File.WriteAllLines(
         $"semantic.durations={facts.OfType<DurationFact>().Count()}",
         $"semantic.chords={facts.OfType<ChordFact>().Count()}",
         $"semantic.chordNoteheads={facts.OfType<ChordFact>().Sum(chord => chord.NoteheadIds.Count)}",
+        $"semantic.crossSystemCurveFragments={facts.OfType<CrossSystemCurveFragmentFact>().Count()}",
+        $"semantic.crossSystemCurves={facts.OfType<CrossSystemCurveFact>().Count()}",
         $"semantic.ties={facts.OfType<TieFact>().Count()}",
         $"semantic.slurs={facts.OfType<SlurFact>().Count()}",
         $"semantic.hairpins={facts.OfType<HairpinFact>().Count()}",
@@ -513,6 +515,8 @@ Console.WriteLine($"  dot targets: {facts.OfType<DotAttachmentFact>().Count()}")
 Console.WriteLine($"  augm. dots : {facts.OfType<DotAttachmentFact>().Sum(dot => dot.Count)}");
 Console.WriteLine($"  durations  : {facts.OfType<DurationFact>().Count()}");
 Console.WriteLine($"  chords     : {facts.OfType<ChordFact>().Count()}");
+Console.WriteLine($"  xsys frags : {facts.OfType<CrossSystemCurveFragmentFact>().Count()}");
+Console.WriteLine($"  xsys curves: {facts.OfType<CrossSystemCurveFact>().Count()}");
 Console.WriteLine($"  ties       : {facts.OfType<TieFact>().Count()}");
 Console.WriteLine($"  slurs      : {facts.OfType<SlurFact>().Count()}");
 Console.WriteLine($"  hairpins   : {facts.OfType<HairpinFact>().Count()}");
@@ -753,6 +757,27 @@ static IEnumerable<string> FormatFacts(SemanticFacts facts)
                     + $"staffs=[{string.Join(',', chord.Staffs)}] "
                     + $"noteheads=[{string.Join(',', chord.NoteheadIds)}] "
                     + $"confidence={chord.Confidence:P1}; reason={chord.Reason}";
+                break;
+
+            case CrossSystemCurveFragmentFact fragment:
+                yield return $"cross-system-fragment {fragment.CurveShapeId} "
+                    + $"m{fragment.MeasureNumber} staff={fragment.Staff} "
+                    + $"kind={fragment.Kind} attached={fragment.AttachedNoteheadId} "
+                    + $"note-distance={fragment.NoteDistanceInSpacings:F2}sp "
+                    + $"edge-distance={fragment.EdgeDistanceInSpacings:F2}sp "
+                    + $"placement={fragment.Placement ?? "unspecified"} "
+                    + $"confidence={fragment.Confidence:P1}; reason={fragment.Reason}";
+                break;
+
+            case CrossSystemCurveFact curve:
+                yield return $"cross-system-curve {curve.CurveId} "
+                    + $"m{curve.StartMeasureNumber}/s{curve.StartStaff}"
+                    + $"->m{curve.EndMeasureNumber}/s{curve.EndStaff} "
+                    + $"noteheads={curve.FromNoteheadId}->{curve.ToNoteheadId} "
+                    + $"fragments={curve.OutgoingCurveShapeId}+{curve.IncomingCurveShapeId} "
+                    + $"placement={curve.Placement ?? "unspecified"} "
+                    + $"distance={curve.StartDistanceInSpacings:F2}/{curve.EndDistanceInSpacings:F2}sp "
+                    + $"confidence={curve.Confidence:P1}; reason={curve.Reason}";
                 break;
 
             case TieFact tie:
