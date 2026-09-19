@@ -123,8 +123,81 @@ public sealed class TimeSignaturePassTests
         Assert.Contains(
             facts.Trace,
             line => line.Contains(
-                "selected 3/4 from 2 of 5 TIME_* glyphs",
+                "selected 3/4 from 2 of 5 time-signature glyphs",
                 StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CantabileC_AboveStaff_IsNotCommonTime()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(
+                        1,
+                        1,
+                        "cantabile-c",
+                        "COMMON_TIME",
+                        new BoundsD(55, 40, 75, 70),
+                        confidence: 0.75),
+                    TimeShape(1, 1, "upper-real-3", "TIME_THREE", new BoundsD(40, 115, 50, 125)),
+                    TimeShape(1, 1, "upper-real-4", "TIME_FOUR", new BoundsD(40, 155, 50, 165))
+                ],
+                [
+                    TimeShape(1, 2, "lower-real-3", "TIME_THREE", new BoundsD(40, 235, 50, 245)),
+                    TimeShape(1, 2, "lower-real-4", "TIME_FOUR", new BoundsD(40, 275, 50, 285))
+                ])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass().Run(document, facts);
+
+        var signature = Assert.Single(facts.OfType<TimeSignatureFact>());
+        Assert.Equal(3, signature.Beats);
+        Assert.Equal(4, signature.BeatType);
+        Assert.DoesNotContain("cantabile-c", signature.SourceShapeIds);
+        Assert.Contains(
+            facts.Trace,
+            line => line.Contains(
+                "vertical gate rejected cantabile-c/COMMON_TIME",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void CommonTimeAndDigitSignature_CompeteAsPeerHypotheses()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(
+                        1,
+                        1,
+                        "weak-common",
+                        "COMMON_TIME",
+                        new BoundsD(40, 120, 55, 160),
+                        confidence: 0.76),
+                    TimeShape(1, 1, "upper-real-3", "TIME_THREE", new BoundsD(40, 115, 50, 125)),
+                    TimeShape(1, 1, "upper-real-4", "TIME_FOUR", new BoundsD(40, 155, 50, 165))
+                ],
+                [
+                    TimeShape(1, 2, "lower-real-3", "TIME_THREE", new BoundsD(40, 235, 50, 245)),
+                    TimeShape(1, 2, "lower-real-4", "TIME_FOUR", new BoundsD(40, 275, 50, 285))
+                ])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass().Run(document, facts);
+
+        var signature = Assert.Single(facts.OfType<TimeSignatureFact>());
+        Assert.Equal(3, signature.Beats);
+        Assert.Equal(4, signature.BeatType);
+        Assert.DoesNotContain("weak-common", signature.SourceShapeIds);
     }
 
     [Fact]
@@ -197,7 +270,8 @@ public sealed class TimeSignaturePassTests
         int staff,
         string id,
         string label,
-        BoundsD bounds)
+        BoundsD bounds,
+        double confidence = 0.99)
     {
         var ownership = new LogicalOwnership(
             new LogicalCoordinate($"staff-{staff}", $"measure-{measure}"),
@@ -208,7 +282,7 @@ public sealed class TimeSignaturePassTests
             "test");
         var classification = new SymbolClassification(
             label,
-            0.99,
+            confidence,
             20,
             []);
         var source = new ShapeInstance(
