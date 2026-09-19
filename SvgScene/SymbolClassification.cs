@@ -287,47 +287,71 @@ public sealed class PrototypeSymbolClassifier
         var centerX = instance.X + instance.Width / 2.0;
         var centerY = instance.Y + instance.Height / 2.0;
 
-        foreach (var pair in layout.Systems.SelectMany(system => system.StaffPairs))
+        var contexts = layout.Systems
+            .SelectMany(system => system.StaffPairs)
+            .SelectMany(pair => pair.Measures.Select(measure => new
+            {
+                Pair = pair,
+                Measure = measure,
+                HorizontalDistance = DistanceToInterval(
+                    centerX,
+                    measure.XStart,
+                    measure.XEnd),
+                VerticalDistance = DistanceToInterval(
+                    centerY,
+                    pair.Bounds.MinY,
+                    pair.Bounds.MaxY)
+            }))
+            .OrderBy(item => item.HorizontalDistance)
+            .ThenBy(item => item.VerticalDistance)
+            .ThenBy(item => item.Measure.XStart)
+            .ToArray();
+
+        var context = contexts.FirstOrDefault();
+        if (context is null)
         {
-            if (centerY < pair.Bounds.MinY
-                || centerY > pair.Bounds.MaxY)
-            {
-                continue;
-            }
-
-            var measure = pair.Measures.FirstOrDefault(item =>
-                centerX >= item.XStart
-                && centerX <= item.XEnd);
-
-            if (measure is null)
-            {
-                continue;
-            }
-
-            var measureWidth = measure.XEnd - measure.XStart;
-            var measureHeight = pair.Bounds.Height;
-            var maxWidth = measureWidth * _settings.MaxMeasureWidthFraction;
-            var maxHeight = measureHeight * _settings.MaxMeasureHeightFraction;
-
-            if (instance.Width <= maxWidth
-                && instance.Height <= maxHeight)
-            {
-                reason =
-                    $"local measure={measure.Id}; "
-                    + $"shape={instance.Width:F2}x{instance.Height:F2}; "
-                    + $"limit={maxWidth:F2}x{maxHeight:F2}";
-                return true;
-            }
-
-            reason =
-                $"outside local measure size gate; measure={measure.Id}; "
-                + $"shape={instance.Width:F2}x{instance.Height:F2}; "
-                + $"limit={maxWidth:F2}x{maxHeight:F2}";
+            reason = "score layout contains no measures";
             return false;
         }
 
+        var measureWidth =
+            context.Measure.XEnd - context.Measure.XStart;
+        var measureHeight = context.Pair.Bounds.Height;
+        var maxWidth =
+            measureWidth * _settings.MaxMeasureWidthFraction;
+        var maxHeight =
+            measureHeight * _settings.MaxMeasureHeightFraction;
+
+        if (instance.Width <= maxWidth
+            && instance.Height <= maxHeight)
+        {
+            reason =
+                $"local measure={context.Measure.Id}; "
+                + $"shape={instance.Width:F2}x{instance.Height:F2}; "
+                + $"limit={maxWidth:F2}x{maxHeight:F2}; "
+                + $"context-distance={context.HorizontalDistance:F2}x"
+                + $"{context.VerticalDistance:F2}";
+            return true;
+        }
+
         reason =
-            $"no containing local measure for center=({centerX:F2},{centerY:F2})";
+            $"outside local measure size gate; measure={context.Measure.Id}; "
+            + $"shape={instance.Width:F2}x{instance.Height:F2}; "
+            + $"limit={maxWidth:F2}x{maxHeight:F2}; "
+            + $"context-distance={context.HorizontalDistance:F2}x"
+            + $"{context.VerticalDistance:F2}";
         return false;
+    }
+
+    private static double DistanceToInterval(
+        double value,
+        double start,
+        double end)
+    {
+        if (value < start)
+            return start - value;
+        if (value > end)
+            return value - end;
+        return 0;
     }
 }
