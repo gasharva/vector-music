@@ -94,10 +94,10 @@ public sealed class SvgCanonicalizerTests
 
         Assert.True(
             different <= before.Length * 0.002,
-            $"Rendered pixel difference was {different} of {before.Length} bytes.");
+            $"Rendered pixel difference was {different} of {before.Length} pixels.");
     }
 
-    private static byte[] Render(
+    private static SKColor[] Render(
         string path,
         int width,
         int height)
@@ -125,7 +125,17 @@ public sealed class SvgCanonicalizerTests
         canvas.DrawPicture(picture);
         canvas.Flush();
 
-        return bitmap.Bytes;
+        var pixels = new SKColor[width * height];
+
+        for (var y = 0; y < height; y++)
+        {
+            for (var x = 0; x < width; x++)
+            {
+                pixels[y * width + x] = bitmap.GetPixel(x, y);
+            }
+        }
+
+        return pixels;
     }
 
     private sealed class TempSvgFixture : IDisposable
