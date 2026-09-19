@@ -376,12 +376,6 @@
     <measure number="4">
       <direction placement="below">
         <direction-type>
-          <wedge type="crescendo" number="1" />
-        </direction-type>
-        <staff>1</staff>
-      </direction>
-      <direction placement="below">
-        <direction-type>
           <pedal type="resume" number="1" line="yes" sign="yes" />
         </direction-type>
         <staff>2</staff>
@@ -400,6 +394,13 @@
       </note>
       <direction placement="above">
         <direction-type>
+          <wedge type="crescendo" number="1" />
+        </direction-type>
+        <offset>-10</offset>
+        <staff>2</staff>
+      </direction>
+      <direction placement="above">
+        <direction-type>
           <dynamics>
             <mp />
           </dynamics>
@@ -407,11 +408,12 @@
         <offset>-2</offset>
         <staff>2</staff>
       </direction>
-      <direction placement="below">
+      <direction placement="above">
         <direction-type>
           <wedge type="stop" number="1" />
         </direction-type>
-        <staff>1</staff>
+        <offset>-2</offset>
+        <staff>2</staff>
       </direction>
       <direction placement="below">
         <direction-type>
@@ -1339,12 +1341,6 @@
     <measure number="12">
       <direction placement="below">
         <direction-type>
-          <wedge type="crescendo" number="2" />
-        </direction-type>
-        <staff>1</staff>
-      </direction>
-      <direction placement="below">
-        <direction-type>
           <pedal type="resume" number="3" line="yes" sign="yes" />
         </direction-type>
         <staff>2</staff>
@@ -1363,6 +1359,13 @@
       </note>
       <direction placement="above">
         <direction-type>
+          <wedge type="crescendo" number="2" />
+        </direction-type>
+        <offset>-10</offset>
+        <staff>2</staff>
+      </direction>
+      <direction placement="above">
+        <direction-type>
           <dynamics>
             <mp />
           </dynamics>
@@ -1370,11 +1373,12 @@
         <offset>-2</offset>
         <staff>2</staff>
       </direction>
-      <direction placement="below">
+      <direction placement="above">
         <direction-type>
           <wedge type="stop" number="2" />
         </direction-type>
-        <staff>1</staff>
+        <offset>-2</offset>
+        <staff>2</staff>
       </direction>
       <direction placement="below">
         <direction-type>

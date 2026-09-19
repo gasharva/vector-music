@@ -2630,32 +2630,32 @@
         "kind": "hairpin",
         "from": {
           "measure": 4,
-          "at": "0",
-          "staff": 1
+          "at": "1/8",
+          "staff": 2
         },
         "to": {
           "measure": 4,
-          "at": "3/4",
-          "staff": 1
+          "at": "5/8",
+          "staff": 2
         },
         "type": "crescendo",
-        "placement": "below"
+        "placement": "above"
       },
       {
         "id": "hairpin-2",
         "kind": "hairpin",
         "from": {
           "measure": 12,
-          "at": "0",
-          "staff": 1
+          "at": "1/8",
+          "staff": 2
         },
         "to": {
           "measure": 12,
-          "at": "3/4",
-          "staff": 1
+          "at": "5/8",
+          "staff": 2
         },
         "type": "crescendo",
-        "placement": "below"
+        "placement": "above"
       }
     ],
     "pedals": [
