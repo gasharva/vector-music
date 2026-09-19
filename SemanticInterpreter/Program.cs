@@ -109,12 +109,36 @@ if (layoutOnly)
 Console.WriteLine("2. Classifying reusable contour prototypes...");
 var classifier = await AudiverisSymbolClassifier.CreateAsync(modelPath);
 var stopwatch = Stopwatch.StartNew();
-notation = new PrototypeSymbolClassifier(classifier).Classify(
+var prototypeClassifier = new PrototypeSymbolClassifier(classifier);
+notation = prototypeClassifier.Classify(
     geometry,
     notation,
     layout);
 Console.WriteLine(
     $"   prototype classification: {stopwatch.Elapsed.TotalSeconds:F3}s");
+
+if (prototypeClassifier.LastDiagnostics.Count > 0)
+{
+    Console.WriteLine("   slowest prototype classifications:");
+
+    foreach (var item in prototypeClassifier.LastDiagnostics.Take(12))
+    {
+        Console.WriteLine(
+            $"     {item.PrototypeId}/{item.ShapeId}: "
+            + $"shape={item.ShapeWidth:F2}x{item.ShapeHeight:F2}; "
+            + $"points={item.PointCount}; total={item.TotalMilliseconds:F1}ms");
+
+        foreach (var scale in item.Scales)
+        {
+            Console.WriteLine(
+                $"       i{scale.Interline}: "
+                + $"{scale.RasterWidth}x{scale.RasterHeight}; "
+                + $"fg={scale.ForegroundPixels}; "
+                + $"raster={scale.RasterizeMilliseconds:F1}ms; "
+                + $"classify={scale.ClassifyMilliseconds:F1}ms");
+        }
+    }
+}
 
 Console.WriteLine("3. Repairing composite bass clefs...");
 stopwatch.Restart();
