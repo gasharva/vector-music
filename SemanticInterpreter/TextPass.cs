@@ -663,27 +663,59 @@ public sealed class TextPass : ISemanticPass
             .ToHashSet(StringComparer.Ordinal);
         var observation = candidate.Observation.Bounds;
 
+        // OCR deliberately ignores the musical beat symbol. Find the missing
+        // geometry inside the recognized horizontal run without consulting SVG ids,
+        // CSS classes or producer metadata. Group split contours back by their
+        // geometric source family because a compound note glyph may have been split
+        // into independent primitives earlier in the scene pipeline.
         var beatGlyph = _geometry.Shapes
-            .Where(shape =>
-                !string.IsNullOrWhiteSpace(shape.SourceClass)
-                && shape.SourceClass!.Contains(
-                    "Tempo",
-                    StringComparison.OrdinalIgnoreCase))
-            .Where(shape => !sourceFamilies.Contains(
-                BaseShapeFamily(shape.Id)))
-            .Where(shape =>
-                shape.Bounds.MaxX >= observation.MinX - spacing * 0.5
-                && shape.Bounds.MinX <= observation.MaxX + spacing * 0.5
-                && shape.Bounds.MaxY >= observation.MinY - spacing * 1.5
-                && shape.Bounds.MinY <= observation.MaxY + spacing * 1.5)
-            .Where(shape =>
-                shape.Bounds.Height >= spacing * 0.65
-                && shape.Bounds.Height <= spacing * 4.0
-                && shape.Bounds.Width >= spacing * 0.20
-                && shape.Bounds.Width <= spacing * 3.0)
-            .OrderBy(shape => shape.Bounds.Width)
-            .ThenBy(shape => Math.Abs(
-                shape.Bounds.CenterY - observation.CenterY))
+            .GroupBy(
+                shape => BaseShapeFamily(shape.Id),
+                StringComparer.Ordinal)
+            .Where(group => !sourceFamilies.Contains(group.Key))
+            .Select(group =>
+            {
+                var shapes = group.ToArray();
+                var bounds = new BoundsD(
+                    shapes.Min(shape => shape.Bounds.MinX),
+                    shapes.Min(shape => shape.Bounds.MinY),
+                    shapes.Max(shape => shape.Bounds.MaxX),
+                    shapes.Max(shape => shape.Bounds.MaxY));
+                var contourCount = shapes.Sum(shape =>
+                    shape.EffectiveContours.Count);
+                var hasNestedContours = shapes.Any(shape =>
+                    shape.EffectiveContours.Count > 1);
+                var hasFill = shapes.Any(shape => shape.HasFill);
+
+                return new
+                {
+                    Family = group.Key,
+                    Shapes = shapes,
+                    Bounds = bounds,
+                    ContourCount = contourCount,
+                    HasNestedContours = hasNestedContours,
+                    HasFill = hasFill
+                };
+            })
+            .Where(group =>
+                group.Bounds.CenterX >= observation.MinX
+                && group.Bounds.CenterX <= observation.MaxX
+                && group.Bounds.MaxY >= observation.MinY - spacing * 1.75
+                && group.Bounds.MinY <= observation.MaxY + spacing * 1.75)
+            .Where(group =>
+                group.Bounds.Height >= spacing * 1.20
+                && group.Bounds.Height <= spacing * 4.20
+                && group.Bounds.Width >= spacing * 0.20
+                && group.Bounds.Width <= spacing * 3.20)
+            .Where(group =>
+                group.Bounds.Width / Math.Max(group.Bounds.Height, 0.001)
+                    is >= 0.12 and <= 1.15)
+            .OrderByDescending(group => group.HasFill)
+            .ThenBy(group => Math.Abs(
+                group.Bounds.CenterY - observation.CenterY) / spacing)
+            .ThenBy(group => Math.Abs(
+                group.Bounds.Height / spacing - 2.6))
+            .ThenBy(group => group.Bounds.Width)
             .FirstOrDefault();
 
         if (beatGlyph is null)
@@ -695,12 +727,10 @@ public sealed class TextPass : ISemanticPass
         var aspect = beatGlyph.Bounds.Width
             / Math.Max(beatGlyph.Bounds.Height, 0.001);
 
-        // MuseScore writes the metronome-note glyph as one compound Tempo path,
-        // unlike score notes which arrive as separate head/stem/flag primitives.
-        // Extract only structural evidence here, then delegate the actual musical
-        // duration rule to WrittenDurationClassifier (also used by DurationPass).
+        // The adapter extracts only visual evidence from the compound glyph.
+        // Musical duration semantics themselves are shared with ordinary notes.
         var hasStem = heightInSpacings >= 1.35;
-        var isHollow = beatGlyph.EffectiveContours.Count > 1;
+        var isHollow = beatGlyph.HasNestedContours;
 
         var subdivisionLevel = 0;
         if (!isHollow && hasStem)
@@ -728,7 +758,7 @@ public sealed class TextPass : ISemanticPass
         }
 
         var sourceIds = candidate.Observation.SourceShapeIds
-            .Append(beatGlyph.Id)
+            .Concat(beatGlyph.Shapes.Select(shape => shape.Id))
             .Distinct(StringComparer.Ordinal)
             .ToArray();
         var confidence = Math.Clamp(
@@ -736,8 +766,8 @@ public sealed class TextPass : ISemanticPass
             0,
             1);
         var reason =
-            $"metronome mark parsed from OCR BPM and Tempo-class beat glyph; "
-            + $"glyph={beatGlyph.Id}; contours={beatGlyph.EffectiveContours.Count}; "
+            $"metronome mark parsed from OCR BPM and nearby note-like geometry; "
+            + $"glyph={beatGlyph.Family}; contours={beatGlyph.ContourCount}; "
             + $"aspect={aspect:F2}; height={heightInSpacings:F2}sp; "
             + $"beat={written.NoteType}; bpm={bpm}";
 
@@ -749,7 +779,7 @@ public sealed class TextPass : ISemanticPass
             written.NoteType,
             bpm,
             instruction,
-            beatGlyph.Id,
+            beatGlyph.Family,
             confidence,
             reason,
             sourceIds);
