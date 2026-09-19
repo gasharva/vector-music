@@ -108,27 +108,11 @@ public sealed class GlyphRasterizer
                 contour.IsClosed))
             .ToArray();
 
-        for (var y = 0; y < height; y++)
-        {
-            for (var x = 0; x < width; x++)
-            {
-                var sample = new PointD(x + 0.5, y + 0.5);
-                var inside = false;
-
-                foreach (var contour in contours.Where(contour => contour.IsClosed))
-                {
-                    if (PointInPolygon(sample, contour.Points))
-                    {
-                        inside = !inside;
-                    }
-                }
-
-                if (inside)
-                {
-                    pixels[y * width + x] = 0;
-                }
-            }
-        }
+        FillClosedContoursEvenOdd(
+            pixels,
+            width,
+            height,
+            contours.Where(contour => contour.IsClosed));
 
         var strokeWidth = shape.StrokeWidth > 0
             ? Math.Max(1.0, shape.StrokeWidth * scale)
@@ -154,41 +138,83 @@ public sealed class GlyphRasterizer
             shapes.Max(shape => shape.Bounds.MaxY));
     }
 
-    private static bool PointInPolygon(
-        PointD point,
-        IReadOnlyList<PointD> polygon)
+    private static void FillClosedContoursEvenOdd(
+        byte[] pixels,
+        int width,
+        int height,
+        IEnumerable<RasterContour> closedContours)
     {
-        if (polygon.Count < 3)
+        var contours = closedContours
+            .Where(contour => contour.Points.Count >= 3)
+            .ToArray();
+
+        if (contours.Length == 0)
         {
-            return false;
+            return;
         }
 
-        var inside = false;
-        var previous = polygon.Count - 1;
+        var intersections = new List<double>();
 
-        for (var current = 0; current < polygon.Count; current++)
+        for (var y = 0; y < height; y++)
         {
-            var a = polygon[current];
-            var b = polygon[previous];
-            var crosses = (a.Y > point.Y) != (b.Y > point.Y);
+            intersections.Clear();
+            var sampleY = y + 0.5;
 
-            if (crosses)
+            foreach (var contour in contours)
             {
-                var xAtY = (b.X - a.X)
-                    * (point.Y - a.Y)
-                    / (b.Y - a.Y)
-                    + a.X;
+                var points = contour.Points;
+                var previous = points.Count - 1;
 
-                if (point.X < xAtY)
+                for (var current = 0; current < points.Count; current++)
                 {
-                    inside = !inside;
+                    var a = points[current];
+                    var b = points[previous];
+
+                    // Half-open edge rule: include an edge for exactly one of
+                    // its endpoint scanlines. This is the scanline equivalent
+                    // of the previous even/odd PointInPolygon test and avoids
+                    // double-counting polygon vertices.
+                    var crosses = (a.Y > sampleY) != (b.Y > sampleY);
+                    if (crosses)
+                    {
+                        intersections.Add(
+                            (b.X - a.X)
+                            * (sampleY - a.Y)
+                            / (b.Y - a.Y)
+                            + a.X);
+                    }
+
+                    previous = current;
                 }
             }
 
-            previous = current;
-        }
+            if (intersections.Count < 2)
+            {
+                continue;
+            }
 
-        return inside;
+            intersections.Sort();
+
+            for (var index = 0; index + 1 < intersections.Count; index += 2)
+            {
+                var left = intersections[index];
+                var right = intersections[index + 1];
+
+                // Pixels are sampled at x + 0.5, exactly as in the old
+                // PointInPolygon rasterizer.
+                var minX = Math.Max(
+                    0,
+                    (int)Math.Ceiling(left - 0.5));
+                var maxX = Math.Min(
+                    width - 1,
+                    (int)Math.Ceiling(right - 0.5) - 1);
+
+                for (var x = minX; x <= maxX; x++)
+                {
+                    pixels[y * width + x] = 0;
+                }
+            }
+        }
     }
 
     private static void DrawPolyline(
