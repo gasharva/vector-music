@@ -92,7 +92,7 @@ public sealed class VerticalZigZagExtractorTests
     }
 
     [Fact]
-    public void ShapeClusterer_RemovesVerticalZigZagFromResidualClassifierInput()
+    public void VerticalZigZagCandidate_SuppressesResidualOnlyAfterLayoutResolution()
     {
         var zigZag = Shape(
             "zigzag",
@@ -108,7 +108,14 @@ public sealed class VerticalZigZagExtractorTests
                 new PointD(10, 32)
             ]);
 
-        var notation = new ShapeClusterer().Cluster(new GeometricScene([zigZag]));
+        var scene = new GeometricScene([zigZag]);
+        var candidates = new CompositeCandidateDetector().Detect(scene);
+        var primitiveNotation = new ShapeClusterer().Cluster(scene);
+
+        var notation = new CompositeCandidateResolver().Resolve(
+            primitiveNotation,
+            candidates,
+            new ScoreLayout([], []));
 
         var primitive = Assert.Single(notation.VerticalZigZags);
         Assert.Equal("zigzag", primitive.ShapeId);
@@ -117,13 +124,19 @@ public sealed class VerticalZigZagExtractorTests
     }
 
     [Fact]
-    public void RepeatedAlignedGlyphTiles_AreAssembledIntoOneVerticalZigZagRun()
+    public void RepeatedAlignedGlyphTiles_AreResolvedIntoOneVerticalZigZagRun()
     {
         var shapes = Enumerable.Range(0, 9)
             .Select(index => Tile($"tile-{index}", 100, 200 + index * 18.7))
             .ToArray();
+        var scene = new GeometricScene(shapes);
+        var candidates = new CompositeCandidateDetector().Detect(scene);
+        var primitiveNotation = new ShapeClusterer().Cluster(scene);
 
-        var notation = new ShapeClusterer().Cluster(new GeometricScene(shapes));
+        var notation = new CompositeCandidateResolver().Resolve(
+            primitiveNotation,
+            candidates,
+            new ScoreLayout([], []));
 
         var primitive = Assert.Single(notation.VerticalZigZags);
         Assert.Equal("tile-0", primitive.ShapeId);
