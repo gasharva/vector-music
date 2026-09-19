@@ -66,7 +66,8 @@ if (layoutAnalyzer.LastDiagnostics is { } layoutDiagnostics)
         + $"boundaries={layoutDiagnostics.BoundaryCount}; "
         + $"measures={layoutDiagnostics.MeasureCount}");
 
-    if (layoutDiagnostics.StaffCount == 0)
+    if (layoutDiagnostics.StaffCount == 0
+        || layoutDiagnostics.BoundaryCount == 0)
     {
         Console.WriteLine("   long horizontal layout candidates:");
         foreach (var candidate in layoutDiagnostics.LongHorizontalCandidates)
