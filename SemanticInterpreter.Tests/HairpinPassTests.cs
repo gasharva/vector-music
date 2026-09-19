@@ -101,6 +101,39 @@ public sealed class HairpinPassTests
     }
 
     [Fact]
+    public void CrossStaffParserOwnership_DoesNotDiscardConfidentHairpin()
+    {
+        var ownership = new LogicalOwnership(
+            new LogicalCoordinate("upper", "m1"),
+            new LogicalCoordinate("lower", "m1"),
+            1,
+            null,
+            0,
+            "ambiguous parser ownership");
+        var hairpin = Hairpin(
+            "ambiguous-hairpin",
+            HairpinKind.Crescendo,
+            apex: new PointD(25, 170),
+            openUpper: new PointD(75, 165),
+            openLower: new PointD(75, 175),
+            confidence: 0.99,
+            ownership);
+        var document = OneMeasure(
+            upperElements: [Element(hairpin)],
+            lowerElements: []);
+        var facts = new SemanticFacts();
+        AddNote(facts, 1, 2, "lower-start", 25, "1/8", "1/8");
+        AddNote(facts, 1, 2, "lower-end", 75, "5/8", "1/8");
+
+        new HairpinPass().Run(document, facts);
+
+        var fact = Assert.Single(facts.OfType<HairpinFact>());
+        Assert.Equal("crescendo", fact.Type);
+        Assert.Equal(1, fact.StartMeasureNumber);
+        Assert.Equal(1, fact.EndMeasureNumber);
+    }
+
+    [Fact]
     public void LowConfidenceGeometricCandidate_IsRejected()
     {
         var ownership = Ownership("lower", "m1");
