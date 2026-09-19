@@ -11,12 +11,146 @@
      staff-8: x=141.732..2918.280 y=2795.360..2906.240 spacing=27.720
      staff-9: x=141.732..2918.280 y=3164.190..3275.070 spacing=27.720
      staff-10: x=141.732..2918.280 y=3513.340..3624.220 spacing=27.720
+   measure-boundary diagnostics:
+     system-1/staff-pair-1: measures=4; accepted=[282.827, 1033.670, 1575.910, 2169.830, 2915.780]
+       shape-86: x=282.827; y=568.035..848.284; len=280.249; pair=False; connector=True; upper=False; lower=False; dUT=3.257; dUB=167.845; dLT=0.000; dLB=110.880; tol=9.550
+       shape-104: x=282.827; y=846.759..960.688; len=113.929; pair=False; connector=False; upper=False; lower=True; dUT=275.467; dUB=280.249; dLT=112.404; dLB=1.524; tol=9.550
+       shape-179: x=573.108; y=576.420..703.724; len=127.304; pair=False; connector=False; upper=False; lower=False; dUT=5.128; dUB=23.285; dLT=144.560; dLB=255.440; tol=9.550
+       shape-270: x=573.108; y=827.494..968.589; len=141.095; pair=False; connector=False; upper=False; lower=False; dUT=256.202; dUB=288.150; dLT=120.305; dLB=9.425; tol=9.550
+       shape-65: x=1033.670; y=568.035..848.284; len=280.249; pair=False; connector=True; upper=False; lower=False; dUT=3.257; dUB=167.845; dLT=0.000; dLB=110.880; tol=9.550
+       shape-92: x=1033.670; y=846.759..960.688; len=113.929; pair=False; connector=False; upper=False; lower=True; dUT=275.467; dUB=280.249; dLT=112.404; dLB=1.524; tol=9.550
+       shape-255: x=1082.370; y=811.361..979.954; len=168.593; pair=False; connector=False; upper=False; lower=False; dUT=240.069; dUB=299.515; dLT=131.670; dLB=20.790; tol=9.550
+       shape-70: x=1575.910; y=568.035..848.284; len=280.249; pair=False; connector=True; upper=False; lower=False; dUT=3.257; dUB=167.845; dLT=0.000; dLB=110.880; tol=9.550
+       shape-95: x=1575.910; y=846.759..960.688; len=113.929; pair=False; connector=False; upper=False; lower=True; dUT=275.467; dUB=280.249; dLT=112.404; dLB=1.524; tol=9.550
+       shape-72: x=2169.830; y=568.035..848.284; len=280.249; pair=False; connector=True; upper=False; lower=False; dUT=3.257; dUB=167.845; dLT=0.000; dLB=110.880; tol=9.550
+       shape-93: x=2169.830; y=846.759..960.688; len=113.929; pair=False; connector=False; upper=False; lower=True; dUT=275.467; dUB=280.249; dLT=112.404; dLB=1.524; tol=9.550
+       shape-85: x=2915.780; y=568.035..848.284; len=280.249; pair=False; connector=True; upper=False; lower=False; dUT=3.257; dUB=167.845; dLT=0.000; dLB=110.880; tol=9.550
+       shape-108: x=2915.780; y=846.759..960.688; len=113.929; pair=False; connector=False; upper=False; lower=True; dUT=275.467; dUB=280.249; dLT=112.404; dLB=1.524; tol=9.550
+     system-2/staff-pair-2: measures=4; accepted=[144.227, 900.738, 1511.170, 2165.340, 2915.780]
+       shape-87: x=144.227; y=1215.590..1515.030; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-110: x=144.227; y=1513.510..1627.440; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-262: x=318.205; y=1519.690..1653.630; len=133.940; pair=False; connector=False; upper=False; lower=False; dUT=302.580; dUB=325.640; dLT=138.600; dLB=27.720; tol=9.702
+       shape-192: x=545.046; y=1203.250..1323.560; len=120.310; pair=False; connector=False; upper=False; lower=False; dUT=13.860; dUB=4.430; dLT=191.470; dLB=302.350; tol=9.702
+       shape-181: x=738.901; y=1196.320..1309.700; len=113.380; pair=False; connector=False; upper=False; lower=False; dUT=20.790; dUB=18.290; dLT=205.330; dLB=316.210; tol=9.702
+       shape-67: x=900.738; y=1215.590..1515.030; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-109: x=900.738; y=1513.510..1627.440; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-278: x=1101.630; y=1411.310..1510.600; len=99.290; pair=False; connector=False; upper=False; lower=False; dUT=194.200; dUB=182.610; dLT=4.430; dLB=115.310; tol=9.702
+       shape-80: x=1511.170; y=1215.590..1515.030; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-98: x=1511.170; y=1513.510..1627.440; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-265: x=1582.810; y=1505.830..1660.560; len=154.730; pair=False; connector=False; upper=False; lower=False; dUT=288.720; dUB=332.570; dLT=145.530; dLB=34.650; tol=9.702
+       shape-81: x=2165.340; y=1215.590..1515.030; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-102: x=2165.340; y=1513.510..1627.440; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-221: x=2237.000; y=1196.320..1351.280; len=154.960; pair=False; connector=False; upper=False; lower=False; dUT=20.790; dUB=23.290; dLT=163.750; dLB=274.630; tol=9.702
+       shape-271: x=2237.000; y=1480.250..1635.340; len=155.090; pair=False; connector=False; upper=False; lower=False; dUT=263.140; dUB=307.350; dLT=120.310; dLB=9.430; tol=9.702
+       shape-247: x=2720.960; y=1491.970..1598.190; len=106.220; pair=False; connector=False; upper=False; lower=False; dUT=274.860; dUB=270.200; dLT=83.160; dLB=27.720; tol=9.702
+       shape-214: x=2753.950; y=1203.250..1309.700; len=106.450; pair=False; connector=False; upper=False; lower=False; dUT=13.860; dUB=18.290; dLT=205.330; dLB=316.210; tol=9.702
+       shape-84: x=2915.780; y=1215.590..1515.030; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-106: x=2915.780; y=1513.510..1627.440; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+     system-3/staff-pair-3: measures=4; accepted=[144.227, 860.180, 1451.860, 2098.950, 2915.780]
+       shape-89: x=144.227; y=1882.340..2128.610; len=246.270; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=133.870; dLT=0.000; dLB=110.880; tol=9.702
+       shape-114: x=144.227; y=2127.090..2241.020; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=243.230; dUB=246.280; dLT=112.410; dLB=1.530; tol=9.702
+       shape-248: x=317.200; y=2133.270..2253.350; len=120.080; pair=False; connector=False; upper=False; lower=False; dUT=249.410; dUB=258.610; dLT=124.740; dLB=13.860; tol=9.702
+       shape-203: x=600.747; y=1863.070..1976.450; len=113.380; pair=False; connector=False; upper=False; lower=False; dUT=20.790; dUB=18.290; dLT=152.160; dLB=263.040; tol=9.702
+       shape-82: x=860.180; y=1882.340..2128.610; len=246.270; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=133.870; dLT=0.000; dLB=110.880; tol=9.702
+       shape-91: x=860.180; y=2127.090..2241.020; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=243.230; dUB=246.280; dLT=112.410; dLB=1.530; tol=9.702
+       shape-268: x=908.880; y=2091.690..2260.280; len=168.590; pair=False; connector=False; upper=False; lower=False; dUT=207.830; dUB=265.540; dLT=131.670; dLB=20.790; tol=9.702
+       shape-74: x=1451.860; y=1882.340..2128.610; len=246.270; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=133.870; dLT=0.000; dLB=110.880; tol=9.702
+       shape-96: x=1451.860; y=2127.090..2241.020; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=243.230; dUB=246.280; dLT=112.410; dLB=1.530; tol=9.702
+       shape-79: x=2098.950; y=1882.340..2128.610; len=246.270; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=133.870; dLT=0.000; dLB=110.880; tol=9.702
+       shape-94: x=2098.950; y=2127.090..2241.020; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=243.230; dUB=246.280; dLT=112.410; dLB=1.530; tol=9.702
+       shape-68: x=2915.780; y=1882.340..2128.610; len=246.270; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=133.870; dLT=0.000; dLB=110.880; tol=9.702
+       shape-115: x=2915.780; y=2127.090..2241.020; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=243.230; dUB=246.280; dLT=112.410; dLB=1.530; tol=9.702
+     system-4/staff-pair-4: measures=4; accepted=[144.227, 912.827, 1504.480, 2150.570, 2915.780]
+       shape-73: x=144.227; y=2495.920..2795.360; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-112: x=144.227; y=2793.840..2907.770; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-251: x=318.205; y=2800.020..2933.960; len=133.940; pair=False; connector=False; upper=False; lower=False; dUT=302.580; dUB=325.640; dLT=138.600; dLB=27.720; tol=9.702
+       shape-215: x=549.076; y=2483.580..2603.890; len=120.310; pair=False; connector=False; upper=False; lower=False; dUT=13.860; dUB=4.430; dLT=191.470; dLB=302.350; tol=9.702
+       shape-198: x=746.959; y=2476.650..2590.030; len=113.380; pair=False; connector=False; upper=False; lower=False; dUT=20.790; dUB=18.290; dLT=205.330; dLB=316.210; tol=9.702
+       shape-66: x=912.827; y=2495.920..2795.360; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-107: x=912.827; y=2793.840..2907.770; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-269: x=984.483; y=2753.780..2901.810; len=148.030; pair=False; connector=False; upper=False; lower=False; dUT=256.340; dUB=293.490; dLT=106.450; dLB=4.430; tol=9.702
+       shape-83: x=1504.480; y=2495.920..2795.360; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-116: x=1504.480; y=2793.840..2907.770; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-272: x=1555.950; y=2786.160..2940.890; len=154.730; pair=False; connector=False; upper=False; lower=False; dUT=288.720; dUB=332.570; dLT=145.530; dLB=34.650; tol=9.702
+       shape-177: x=1588.930; y=2469.720..2617.750; len=148.030; pair=False; connector=False; upper=False; lower=False; dUT=27.720; dUB=9.430; dLT=177.610; dLB=288.490; tol=9.702
+       shape-189: x=1984.700; y=2483.580..2603.890; len=120.310; pair=False; connector=False; upper=False; lower=False; dUT=13.860; dUB=4.430; dLT=191.470; dLB=302.350; tol=9.702
+       shape-90: x=2150.570; y=2495.920..2795.360; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-111: x=2150.570; y=2793.840..2907.770; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+       shape-277: x=2222.230; y=2760.580..2915.670; len=155.090; pair=False; connector=False; upper=False; lower=False; dUT=263.140; dUB=307.350; dLT=120.310; dLB=9.430; tol=9.702
+       shape-77: x=2915.780; y=2495.920..2795.360; len=299.440; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=187.040; dLT=0.000; dLB=110.880; tol=9.702
+       shape-103: x=2915.780; y=2793.840..2907.770; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=296.400; dUB=299.450; dLT=112.410; dLB=1.530; tol=9.702
+     system-5/staff-pair-5: measures=4; accepted=[144.227, 914.235, 1566.280, 2218.270, 2910.660]
+       shape-69: x=144.227; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
+       shape-105: x=144.227; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
+       shape-267: x=343.863; y=3504.140..3658.870; len=154.730; pair=False; connector=False; upper=False; lower=False; dUT=339.950; dUB=383.800; dLT=145.530; dLB=34.650; tol=9.702
+       shape-78: x=914.235; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
+       shape-113: x=914.235; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
+       shape-275: x=1028.890; y=3478.690..3633.650; len=154.960; pair=False; connector=False; upper=False; lower=False; dUT=314.500; dUB=358.580; dLT=120.310; dLB=9.430; tol=9.702
+       shape-88: x=1566.280; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
+       shape-99: x=1566.280; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
+       shape-276: x=1604.950; y=3490.280..3651.940; len=161.660; pair=False; connector=False; upper=False; lower=False; dUT=326.090; dUB=376.870; dLT=138.600; dLB=27.720; tol=9.702
+       shape-241: x=1637.920; y=3196.570..3330.510; len=133.940; pair=False; connector=False; upper=False; lower=False; dUT=32.380; dUB=55.440; dLT=182.830; dLB=293.710; tol=9.702
+       shape-71: x=2218.270; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
+       shape-97: x=2218.270; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
+       shape-75: x=2890.280; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
+       shape-100: x=2890.280; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
+       shape-76: x=2910.660; y=3162.670..3513.340; len=350.670; pair=False; connector=True; upper=False; lower=False; dUT=1.520; dUB=238.270; dLT=0.000; dLB=110.880; tol=9.702
+       shape-101: x=2910.660; y=3511.820..3625.750; len=113.930; pair=False; connector=False; upper=False; lower=True; dUT=347.630; dUB=350.680; dLT=112.410; dLB=1.530; tol=9.702
 2. Classifying reusable contour prototypes...
-   prototype classification: 1.620s
+   prototype classification: 1.578s
+   slowest prototype classifications:
+     prototype-1/shape-51.1: shape=64.68x79.97; points=10; total=106.9ms
+       i20: 56x67; fg=707; raster=5.0ms; classify=63.8ms
+       i30: 79x96; fg=1591; raster=1.0ms; classify=14.1ms
+       i40: 103x125; fg=2761; raster=0.3ms; classify=22.4ms
+     prototype-4/shape-51.6: shape=96.42x79.97; points=14; total=97.5ms
+       i20: 79x67; fg=1496; raster=0.1ms; classify=15.1ms
+       i30: 114x96; fg=3374; raster=0.2ms; classify=29.8ms
+       i40: 149x125; fg=5962; raster=0.2ms; classify=52.1ms
+     prototype-2/shape-51.2: shape=50.00x79.97; points=13; total=69.4ms
+       i20: 46x67; fg=1012; raster=0.1ms; classify=11.1ms
+       i30: 64x96; fg=2316; raster=1.5ms; classify=21.3ms
+       i40: 82x125; fg=4006; raster=0.2ms; classify=35.1ms
+     prototype-5/shape-52.3: shape=67.03x79.97; points=13; total=62.8ms
+       i20: 58x67; fg=1001; raster=0.2ms; classify=10.0ms
+       i30: 82x96; fg=2209; raster=0.2ms; classify=19.3ms
+       i40: 106x125; fg=3930; raster=0.2ms; classify=32.9ms
+     prototype-36/shape-440: shape=70.96x197.16; points=545; total=58.5ms
+       i20: 61x152; fg=2367; raster=0.7ms; classify=8.2ms
+       i30: 86x223; fg=5329; raster=1.0ms; classify=17.3ms
+       i40: 112x294; fg=9467; raster=1.4ms; classify=29.9ms
+     prototype-60/shape-567: shape=25.09x404.86; points=241; total=47.6ms
+       i20: 28x302; fg=1988; raster=0.6ms; classify=6.3ms
+       i30: 37x448; fg=4477; raster=0.9ms; classify=14.0ms
+       i40: 46x594; fg=7980; raster=1.2ms; classify=24.5ms
+     prototype-3/shape-51.3: shape=46.36x79.97; points=7; total=38.8ms
+       i20: 43x67; fg=639; raster=0.1ms; classify=6.7ms
+       i30: 60x96; fg=1462; raster=0.1ms; classify=12.6ms
+       i40: 76x125; fg=2401; raster=0.1ms; classify=19.1ms
+     prototype-6/shape-52.4: shape=66.50x79.97; points=8; total=38.5ms
+       i20: 57x67; fg=857; raster=0.2ms; classify=8.4ms
+       i30: 81x96; fg=1943; raster=0.2ms; classify=16.3ms
+       i40: 105x125; fg=3445; raster=0.2ms; classify=13.4ms
+     compound-prototype-shape-486/shape-486.whole: shape=108.89x61.60; points=1072; total=38.2ms
+       i20: 88x54; fg=1322; raster=0.5ms; classify=5.6ms
+       i30: 127x76; fg=2976; raster=0.7ms; classify=11.4ms
+       i40: 167x98; fg=5314; raster=0.9ms; classify=19.2ms
+     compound-prototype-shape-490/shape-490.whole: shape=108.89x61.60; points=1072; total=37.6ms
+       i20: 88x54; fg=1321; raster=0.5ms; classify=5.4ms
+       i30: 127x76; fg=2976; raster=0.7ms; classify=11.1ms
+       i40: 167x98; fg=5312; raster=0.9ms; classify=19.0ms
+     compound-prototype-shape-492/shape-492.whole: shape=108.90x61.60; points=1072; total=37.5ms
+       i20: 88x54; fg=1322; raster=0.5ms; classify=5.4ms
+       i30: 127x76; fg=2975; raster=0.7ms; classify=11.1ms
+       i40: 167x98; fg=5316; raster=0.9ms; classify=18.9ms
+     prototype-59/shape-486.1: shape=97.45x61.60; points=1023; total=37.5ms
+       i20: 80x54; fg=1285; raster=0.5ms; classify=5.5ms
+       i30: 115x76; fg=2888; raster=0.7ms; classify=11.2ms
+       i40: 150x98; fg=5158; raster=0.8ms; classify=18.8ms
 3. Repairing composite bass clefs...
-   bass-clef repair: 0.037s; candidates=1; classifier-runs=1; reused-F-clefs=0
+   bass-clef repair: 0.043s; candidates=1; classifier-runs=1; reused-F-clefs=0
 4. Assigning logical staff/measure ownership...
-   logical ownership: 0.237s
+   logical ownership: 0.249s
    ledger-ladder ownership: 0.004s; corrections=0
    fourth-generation ownership: 0.018s
 5. Running OCR fallback for semantic text...
