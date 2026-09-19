@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudiverisGlyphPoc", "Audive
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanonicalNotation.Cli", "CanonicalNotation\CanonicalNotation.Cli.csproj", "{363A9F65-F049-BEFD-135D-C3C6872D4B87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgCanonicalizer", "SvgCanonicalizer\SvgCanonicalizer.csproj", "{A83A4F17-7E65-4F4D-9E17-6E5B2D66C101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgCanonicalizer.Tests", "SvgCanonicalizer.Tests\SvgCanonicalizer.Tests.csproj", "{B94B5A28-8F76-405E-AF28-7F6C3E77D202}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{363A9F65-F049-BEFD-135D-C3C6872D4B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{363A9F65-F049-BEFD-135D-C3C6872D4B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{363A9F65-F049-BEFD-135D-C3C6872D4B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83A4F17-7E65-4F4D-9E17-6E5B2D66C101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83A4F17-7E65-4F4D-9E17-6E5B2D66C101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83A4F17-7E65-4F4D-9E17-6E5B2D66C101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83A4F17-7E65-4F4D-9E17-6E5B2D66C101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B94B5A28-8F76-405E-AF28-7F6C3E77D202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B94B5A28-8F76-405E-AF28-7F6C3E77D202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B94B5A28-8F76-405E-AF28-7F6C3E77D202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B94B5A28-8F76-405E-AF28-7F6C3E77D202}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
