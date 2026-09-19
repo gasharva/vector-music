@@ -113,6 +113,19 @@ if (layoutOnly)
         : 4;
 }
 
+if (scenePipeline.LastCompositeDecisions.Count > 0)
+{
+    Console.WriteLine("   composite candidate decisions:");
+    foreach (var decision in scenePipeline.LastCompositeDecisions)
+    {
+        Console.WriteLine(
+            $"     {decision.Kind}/{decision.Id}: "
+            + $"{(decision.Accepted ? "ACCEPT" : "REJECT")}; "
+            + $"{decision.Reason}; "
+            + $"sources=[{string.Join(",", decision.SourceShapeIds)}]");
+    }
+}
+
 Console.WriteLine("2. Classifying reusable contour prototypes...");
 var classifier = await AudiverisSymbolClassifier.CreateAsync(modelPath);
 var stopwatch = Stopwatch.StartNew();
