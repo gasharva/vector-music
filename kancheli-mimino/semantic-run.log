@@ -12,13 +12,13 @@
      staff-9: x=141.732..2918.280 y=3164.190..3275.070 spacing=27.720
      staff-10: x=141.732..2918.280 y=3513.340..3624.220 spacing=27.720
 2. Classifying reusable contour prototypes...
-   prototype classification: 5.263s
+   prototype classification: 1.621s
 3. Repairing composite bass clefs...
-   bass-clef repair: 0.119s; candidates=1; classifier-runs=1; reused-F-clefs=0
+   bass-clef repair: 0.036s; candidates=1; classifier-runs=1; reused-F-clefs=0
 4. Assigning logical staff/measure ownership...
-   logical ownership: 0.253s
+   logical ownership: 0.241s
    ledger-ladder ownership: 0.004s; corrections=0
-   fourth-generation ownership: 0.019s
+   fourth-generation ownership: 0.018s
 5. Running OCR fallback for semantic text...
    OCR candidates: 19; recognized: 16
 5b. Writing SVG parser diagnostics...
