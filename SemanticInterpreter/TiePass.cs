@@ -81,8 +81,14 @@ public sealed class TiePass : ISemanticPass
             .OrderBy(decision => decision.CurveShapeId, StringComparer.Ordinal)
             .ToArray()
             ?? Array.Empty<SlurDecision>();
+        var crossSystemById = facts
+            .OfType<CrossSystemCurveFact>()
+            .ToDictionary(
+                curve => curve.CurveId,
+                StringComparer.Ordinal);
         var tieLikeIds = tieLike
             .Where(decision => !claimedBySlur.Contains(decision.CurveShapeId))
+            .Where(decision => !crossSystemById.ContainsKey(decision.CurveShapeId))
             .Select(decision => decision.CurveShapeId)
             .ToHashSet(StringComparer.Ordinal);
         var matched = TieCandidateMatcher.Match(
@@ -99,6 +105,52 @@ public sealed class TiePass : ISemanticPass
                     candidate,
                     "claimed-by-slur",
                     $"{candidate.CurveShapeId}: curve is already owned by SlurPass"));
+                continue;
+            }
+
+            if (crossSystemById.TryGetValue(
+                    candidate.CurveShapeId,
+                    out var crossSystem))
+            {
+                var from = candidate.FromNotehead!;
+                var to = candidate.ToNotehead!;
+                var pitch = facts
+                    .OfType<PitchFact>()
+                    .Where(item =>
+                        item.MeasureNumber == from.MeasureNumber
+                        && string.Equals(
+                            item.NoteheadId,
+                            from.ShapeId,
+                            StringComparison.Ordinal))
+                    .OrderByDescending(item => item.Confidence)
+                    .Select(item => item.Pitch)
+                    .FirstOrDefault();
+
+                if (pitch is null)
+                {
+                    decisions.Add(Reject(
+                        candidate,
+                        "no-unique-pair",
+                        $"{candidate.CurveShapeId}: reconstructed cross-system tie lost source pitch"));
+                    continue;
+                }
+
+                decisions.Add(new TieDecision(
+                    candidate.CurveShapeId,
+                    true,
+                    "tie",
+                    from,
+                    to,
+                    pitch,
+                    crossSystem.Placement,
+                    crossSystem.StartDistanceInSpacings,
+                    crossSystem.EndDistanceInSpacings,
+                    crossSystem.Confidence,
+                    $"{candidate.CurveShapeId}: reconstructed cross-system curve classified "
+                    + $"as tie {from.ShapeId}->{to.ShapeId} at {pitch}; "
+                    + $"fragments={crossSystem.OutgoingCurveShapeId}+"
+                    + $"{crossSystem.IncomingCurveShapeId}; "
+                    + $"placement={crossSystem.Placement ?? "unspecified"}"));
                 continue;
             }
 
@@ -142,6 +194,24 @@ public sealed class TiePass : ISemanticPass
             var from = decision.FromNotehead!;
             var to = decision.ToNotehead!;
 
+            var sourceShapeIds = crossSystemById.TryGetValue(
+                    decision.CurveShapeId,
+                    out var crossSystem)
+                ? crossSystem.SourceShapeIds
+                    .Concat(new[]
+                    {
+                        from.ShapeId,
+                        to.ShapeId
+                    })
+                    .Distinct(StringComparer.Ordinal)
+                    .ToArray()
+                : new[]
+                {
+                    decision.CurveShapeId,
+                    from.ShapeId,
+                    to.ShapeId
+                };
+
             facts.Add(new TieFact(
                 decision.CurveShapeId,
                 from.MeasureNumber,
@@ -155,11 +225,12 @@ public sealed class TiePass : ISemanticPass
                 decision.EndDistanceInSpacings!.Value,
                 decision.Confidence,
                 decision.Reason,
-                [decision.CurveShapeId, from.ShapeId, to.ShapeId]));
+                sourceShapeIds));
         }
 
         facts.AddTrace(
             $"TiePass: candidates={decisions.Count}; accepted={decisions.Count(decision => decision.Accepted)}; "
+            + $"cross-system={decisions.Count(decision => crossSystemById.ContainsKey(decision.CurveShapeId) && decision.Accepted)}; "
             + $"claimed-by-slur={decisions.Count(decision => decision.Decision == "claimed-by-slur")}; "
             + $"unmatched={decisions.Count(decision => decision.Decision == "no-unique-pair")}");
     }
