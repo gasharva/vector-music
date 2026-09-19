@@ -58,7 +58,7 @@ static void Print(SvgCanonicalizationResult result)
     Console.WriteLine(
         $"{Path.GetFileName(result.InputPath)} -> {result.OutputPath}");
     Console.WriteLine(
-        $"  paths={result.PathCount}; paths={result.PathCount}; "
+        $"  paths={result.PathCount}; "
         + $"bounds={result.Bounds.MinX:F3},{result.Bounds.MinY:F3}.."
         + $"{result.Bounds.MaxX:F3},{result.Bounds.MaxY:F3}");
 }
