@@ -234,6 +234,11 @@ public sealed class TextPass : ISemanticPass
                         out var metronomeMark))
                 {
                     facts.Add(metronomeMark);
+                    facts.AddTrace(
+                        $"MetronomeMark: m{metronomeMark.MeasureNumber}@{metronomeMark.At}; "
+                        + $"beat={metronomeMark.BeatUnit}; bpm={metronomeMark.Bpm}; "
+                        + $"glyph={metronomeMark.BeatGlyphShapeId}; "
+                        + $"text={metronomeMark.InstructionText ?? "-"}");
                 }
 
                 continue;
