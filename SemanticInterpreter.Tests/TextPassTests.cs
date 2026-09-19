@@ -148,12 +148,12 @@ public sealed class TextPassTests
     }
 
     [Fact]
-    public void TempoText_WithUnrecognizedTempoNote_RecoversEighthBeatAndBpm()
+    public void TempoText_WithClassifiedCompoundNote_RecoversEighthBeatAndBpm()
     {
         var geometry = new GeometricScene([
             Shape("tempo-word", 80, 60, 112, 75),
-            // Tall compact compound glyph: aspect 0.60 -> one flag -> eighth.
-            // No SVG class/id hint is available to the semantic recognizer.
+            // Whole connected note glyph. Primitive ellipse/stroke decomposition is
+            // intentionally absent: only the geometry classifier recognizes it.
             Shape("tempo-note", 116, 45, 134, 75),
             Shape("tempo-bpm", 140, 60, 190, 75)
         ]);
@@ -165,13 +165,36 @@ public sealed class TextPassTests
                 ["tempo-word", "tempo-bpm"],
                 null,
                 new TextRecognition("Pastoso (= 76)", 0.99, "test")));
+        var classification = new SymbolClassification(
+            "EIGHTH_SET",
+            0.89,
+            30,
+            []);
+        var notation = new NotationScene(
+            [],
+            [
+                new ShapeInstance(
+                    "tempo-note",
+                    "tempo-note-prototype",
+                    116,
+                    45,
+                    18,
+                    30,
+                    "path",
+                    null,
+                    classification)
+            ],
+            [],
+            [],
+            []);
         var facts = new SemanticFacts();
 
         new TextPass(
             analysis,
             geometry,
             Layout(),
-            new LogicalOwnershipScene([]))
+            new LogicalOwnershipScene([]),
+            notation)
             .Run(Document(), facts);
 
         var mark = Assert.Single(facts.OfType<MetronomeMarkFact>());
@@ -179,6 +202,7 @@ public sealed class TextPassTests
         Assert.Equal(76m, mark.Bpm);
         Assert.Equal("Pastoso", mark.InstructionText);
         Assert.Equal("tempo-note", mark.BeatGlyphShapeId);
+        Assert.Contains("EIGHTH_SET", mark.Reason);
     }
 
     [Fact]
