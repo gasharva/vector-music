@@ -669,16 +669,60 @@ public sealed class CanonicalNotationBuilder
         int measureNumber,
         SemanticFacts facts)
     {
-        return facts
-            .OfType<TextFact>()
-            .Where(fact =>
-                fact.MeasureNumber == measureNumber
-                && fact.Role is SemanticTextRole.Instruction or SemanticTextRole.Tempo)
-            .OrderBy(fact => Fraction.Parse(fact.At ?? "0").Numerator
-                / (double)Fraction.Parse(fact.At ?? "0").Denominator)
-            .ThenBy(fact => fact.Bounds.MinX)
-            .ThenBy(fact => fact.ObservationId, StringComparer.Ordinal)
-            .Select(fact => new CanonicalEvent
+        var metronomeByObservation = facts
+            .OfType<MetronomeMarkFact>()
+            .Where(mark => mark.MeasureNumber == measureNumber)
+            .GroupBy(mark => mark.ObservationId, StringComparer.Ordinal)
+            .ToDictionary(
+                group => group.Key,
+                group => group
+                    .OrderByDescending(mark => mark.Confidence)
+                    .First(),
+                StringComparer.Ordinal);
+
+        foreach (var fact in facts
+                     .OfType<TextFact>()
+                     .Where(fact =>
+                         fact.MeasureNumber == measureNumber
+                         && fact.Role is SemanticTextRole.Instruction or SemanticTextRole.Tempo)
+                     .OrderBy(fact => Fraction.Parse(fact.At ?? "0").Numerator
+                         / (double)Fraction.Parse(fact.At ?? "0").Denominator)
+                     .ThenBy(fact => fact.Bounds.MinX)
+                     .ThenBy(fact => fact.ObservationId, StringComparer.Ordinal))
+        {
+            if (fact.Role == SemanticTextRole.Tempo
+                && metronomeByObservation.TryGetValue(
+                    fact.ObservationId,
+                    out var mark))
+            {
+                if (!string.IsNullOrWhiteSpace(mark.InstructionText))
+                {
+                    yield return new CanonicalEvent
+                    {
+                        Id = $"m{measureNumber}-text-{fact.ObservationId}",
+                        Type = "text",
+                        At = fact.At ?? "0",
+                        Staff = fact.Staff ?? 1,
+                        Text = mark.InstructionText,
+                        TextRole = fact.Role.ToString(),
+                        Placement = fact.Placement
+                    };
+                }
+
+                yield return new CanonicalEvent
+                {
+                    Id = $"m{measureNumber}-tempo-{fact.ObservationId}",
+                    Type = "tempo",
+                    At = mark.At,
+                    Staff = mark.Staff,
+                    Placement = fact.Placement ?? "above",
+                    BeatUnit = mark.BeatUnit,
+                    Bpm = mark.Bpm
+                };
+                continue;
+            }
+
+            yield return new CanonicalEvent
             {
                 Id = $"m{measureNumber}-text-{fact.ObservationId}",
                 Type = "text",
@@ -687,7 +731,8 @@ public sealed class CanonicalNotationBuilder
                 Text = fact.Text,
                 TextRole = fact.Role.ToString(),
                 Placement = fact.Placement
-            });
+            };
+        }
     }
 
     private static string? BestText(
