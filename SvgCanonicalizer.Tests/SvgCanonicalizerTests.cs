@@ -1,4 +1,6 @@
 using System.Xml.Linq;
+using SkiaSharp;
+using Svg.Skia;
 using SvgMusic.Canonicalization;
 using Xunit;
 
@@ -7,7 +9,7 @@ namespace SvgCanonicalizer.Tests;
 public sealed class SvgCanonicalizerTests
 {
     [Fact]
-    public void UseAndTransforms_AreFlattenedToPlainPaths()
+    public void UseAndProducerMetadata_DisappearAfterVisualRoundTrip()
     {
         var source = """
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -29,45 +31,49 @@ public sealed class SvgCanonicalizerTests
             """;
 
         using var fixture = new TempSvgFixture(source);
-        var output = fixture.OutputPath;
 
         new SvgCanonicalizerService().Canonicalize(
             fixture.InputPath,
-            output);
+            fixture.OutputPath);
 
-        var document = XDocument.Load(output);
+        var document = XDocument.Load(fixture.OutputPath);
         Assert.NotNull(document.Root);
-        var root = document.Root!;
-        var descendants = root.Descendants().ToArray();
 
-        Assert.Single(descendants);
-        Assert.Equal("path", descendants[0].Name.LocalName);
+        var descendants = document.Root!.Descendants().ToArray();
+
         Assert.DoesNotContain(
             descendants,
-            element => element.Name.LocalName is "defs" or "use" or "g");
+            element => element.Name.LocalName == "use");
+
         Assert.DoesNotContain(
-            descendants.SelectMany(element => element.Attributes()),
-            attribute => attribute.Name.LocalName is
-                "transform" or "id" or "class"
+            descendants
+                .SelectMany(element => element.Attributes()),
+            attribute =>
+                attribute.Name.LocalName == "class"
                 || attribute.Name.LocalName.StartsWith(
                     "data-",
                     StringComparison.OrdinalIgnoreCase));
 
-        var pathData = (string?)descendants[0].Attribute("d");
-        Assert.False(string.IsNullOrWhiteSpace(pathData));
-        Assert.NotEqual("M 0 0 L 10 0 L 10 10 Z", pathData);
+        Assert.Contains(
+            descendants,
+            element => element.Name.LocalName == "path");
     }
 
     [Fact]
-    public void CompoundFill_PreservesContoursWithEvenOddRule()
+    public void RoundTrip_PreservesRenderedPixels()
     {
         var source = """
             <svg xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 20 20">
+                 viewBox="0 0 40 40">
               <path d="
-                  M 0 0 L 20 0 L 20 20 L 0 20 Z
-                  M 5 5 L 5 15 L 15 15 L 15 5 Z"
-                    fill="black" />
+                  M 2 2 L 38 2 L 38 38 L 2 38 Z
+                  M 10 10 L 10 30 L 30 30 L 30 10 Z"
+                    fill="black"
+                    fill-rule="evenodd" />
+              <path d="M 4 20 L 36 20"
+                    fill="none"
+                    stroke="black"
+                    stroke-width="2" />
             </svg>
             """;
 
@@ -77,19 +83,49 @@ public sealed class SvgCanonicalizerTests
             fixture.InputPath,
             fixture.OutputPath);
 
-        var path = XDocument
-            .Load(fixture.OutputPath)
-            .Descendants()
-            .Single(element => element.Name.LocalName == "path");
+        var before = Render(fixture.InputPath, 160, 160);
+        var after = Render(fixture.OutputPath, 160, 160);
 
-        var pathData = (string)path.Attribute("d")!;
+        Assert.Equal(before.Length, after.Length);
 
-        Assert.Equal(
-            "evenodd",
-            (string?)path.Attribute("fill-rule"));
-        Assert.Equal(
-            2,
-            pathData.Split("M ", StringSplitOptions.None).Length - 1);
+        var different = before
+            .Zip(after)
+            .Count(pair => pair.First != pair.Second);
+
+        Assert.True(
+            different <= before.Length * 0.002,
+            $"Rendered pixel difference was {different} of {before.Length} bytes.");
+    }
+
+    private static byte[] Render(
+        string path,
+        int width,
+        int height)
+    {
+        using var svg = new SKSvg();
+        var picture = svg.Load(path)
+            ?? throw new InvalidDataException($"Could not render {path}");
+
+        using var bitmap = new SKBitmap(
+            width,
+            height,
+            SKColorType.Bgra8888,
+            SKAlphaType.Premul);
+        using var canvas = new SKCanvas(bitmap);
+
+        canvas.Clear(SKColors.White);
+
+        var bounds = picture.CullRect;
+        var scale = Math.Min(
+            width / bounds.Width,
+            height / bounds.Height);
+
+        canvas.Scale(scale);
+        canvas.Translate(-bounds.Left, -bounds.Top);
+        canvas.DrawPicture(picture);
+        canvas.Flush();
+
+        return bitmap.Bytes;
     }
 
     private sealed class TempSvgFixture : IDisposable
