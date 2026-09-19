@@ -6,6 +6,59 @@ namespace SemanticInterpreter.Tests;
 public sealed class ScoreLayoutAnalyzerTests
 {
     [Fact]
+    public void MissingTopLineOfLowerStaff_IsRecoveredFromBarlineEndpoints()
+    {
+        var strokes = new List<Stroke>();
+
+        for (var line = 0; line < 5; line++)
+        {
+            var y = line * 10.0;
+            strokes.Add(new Stroke(
+                $"upper-line-{line}",
+                new PointD(0, y),
+                new PointD(200, y),
+                1,
+                "test",
+                null));
+        }
+
+        // Cairo can absorb the top line of the lower staff into connected
+        // barline geometry. Only the remaining four long horizontals survive.
+        for (var line = 1; line < 5; line++)
+        {
+            var y = 100 + line * 10.0;
+            strokes.Add(new Stroke(
+                $"lower-line-{line}",
+                new PointD(0, y),
+                new PointD(200, y),
+                1,
+                "test",
+                null));
+        }
+
+        AddMuseScoreBarline(strokes, "left", 0);
+        AddMuseScoreBarline(strokes, "middle", 100);
+        AddMuseScoreBarline(strokes, "right", 200);
+
+        var notation = new NotationScene(
+            [],
+            [],
+            strokes,
+            [],
+            []);
+        var layout = new ScoreLayoutAnalyzer().Analyze(notation);
+
+        Assert.Equal(2, layout.Staffs.Count);
+        var lower = layout.Staffs[1];
+        Assert.Equal(100, lower.Bounds.MinY, 6);
+        Assert.Equal(140, lower.Bounds.MaxY, 6);
+
+        var pair = Assert.Single(Assert.Single(layout.Systems).StaffPairs);
+        Assert.Equal(3, pair.Boundaries.Count);
+        Assert.Equal(2, pair.Measures.Count);
+    }
+
+    [Fact]
     public void SegmentedStaffLines_AreMergedIntoLogicalStaffs()
     {
         var strokes = new List<Stroke>();
