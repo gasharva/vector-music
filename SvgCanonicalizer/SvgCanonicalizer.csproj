@@ -11,4 +11,9 @@
     <ProjectReference Include="../SvgScene/SvgScene.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Svg.Skia" Version="5.2.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.148.0" />
+  </ItemGroup>
+
 </Project>
