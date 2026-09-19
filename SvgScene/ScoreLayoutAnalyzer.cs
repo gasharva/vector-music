@@ -29,7 +29,7 @@ public sealed class ScoreLayoutAnalyzer
             .Where(IsVertical)
             .ToList();
 
-        var staffs = DetectStaffs(logicalHorizontal);
+        var staffs = DetectStaffs(logicalHorizontal, vertical);
         var systems = BuildSystemsAndPairs(staffs, vertical, horizontal);
 
         var maximumLength = logicalHorizontal.Count == 0
@@ -199,7 +199,8 @@ public sealed class ScoreLayoutAnalyzer
     }
 
     private static List<StaffLayout> DetectStaffs(
-        IReadOnlyList<NormalizedStroke> horizontal)
+        IReadOnlyList<NormalizedStroke> horizontal,
+        IReadOnlyList<NormalizedStroke> vertical)
     {
         if (horizontal.Count < 5)
         {
@@ -217,30 +218,145 @@ public sealed class ScoreLayoutAnalyzer
         var result = new List<StaffLayout>();
         var staffNumber = 0;
 
-        for (var index = 0; index <= candidates.Count - 5;)
+        for (var index = 0; index < candidates.Count;)
         {
-            var group = candidates
+            var fullGroup = candidates
                 .Skip(index)
                 .Take(5)
                 .ToArray();
 
-            if (!LooksLikeStaff(group))
+            if (fullGroup.Length == 5
+                && LooksLikeStaff(fullGroup))
             {
-                index++;
+                staffNumber++;
+                result.Add(CreateStaff(
+                    $"staff-{staffNumber}",
+                    string.Empty,
+                    fullGroup,
+                    []));
+
+                index += 5;
                 continue;
             }
 
-            staffNumber++;
-            result.Add(CreateStaff(
-                $"staff-{staffNumber}",
-                string.Empty,
-                group,
-                []));
+            var fourLineGroup = candidates
+                .Skip(index)
+                .Take(4)
+                .ToArray();
 
-            index += 5;
+            if (fourLineGroup.Length == 4
+                && TryRecoverMissingEdgeStaffLine(
+                    fourLineGroup,
+                    vertical,
+                    staffNumber + 1,
+                    out var recoveredGroup))
+            {
+                staffNumber++;
+                result.Add(CreateStaff(
+                    $"staff-{staffNumber}",
+                    string.Empty,
+                    recoveredGroup,
+                    []));
+
+                index += 4;
+                continue;
+            }
+
+            index++;
         }
 
         return result;
+    }
+
+    private static bool TryRecoverMissingEdgeStaffLine(
+        IReadOnlyList<NormalizedStroke> fourLines,
+        IReadOnlyList<NormalizedStroke> vertical,
+        int staffNumber,
+        out IReadOnlyList<NormalizedStroke> recovered)
+    {
+        recovered = Array.Empty<NormalizedStroke>();
+
+        var gaps = Enumerable.Range(0, 3)
+            .Select(index =>
+                fourLines[index + 1].CenterY
+                - fourLines[index].CenterY)
+            .ToArray();
+
+        if (gaps.Any(gap => gap <= 0))
+        {
+            return false;
+        }
+
+        var spacing = gaps.Average();
+        var maxDeviation = gaps
+            .Max(gap => Math.Abs(gap - spacing));
+        if (maxDeviation > spacing * 0.22)
+        {
+            return false;
+        }
+
+        var commonXStart = fourLines.Max(line => line.XStart);
+        var commonXEnd = fourLines.Min(line => line.XEnd);
+        var averageLength = fourLines.Average(line => line.Length);
+        if (commonXEnd - commonXStart < averageLength * 0.72)
+        {
+            return false;
+        }
+
+        var shortest = fourLines.Min(line => line.Length);
+        var longest = fourLines.Max(line => line.Length);
+        if (shortest < longest * 0.70)
+        {
+            return false;
+        }
+
+        var missingTopY = fourLines[0].CenterY - spacing;
+        var missingBottomY = fourLines[^1].CenterY + spacing;
+        var endpointTolerance = spacing * 0.22;
+        var minimumVerticalLength = spacing * 3.5;
+
+        int EndpointEvidence(double targetY) =>
+            vertical.Count(stroke =>
+                stroke.Length >= minimumVerticalLength
+                && stroke.CenterX >= commonXStart - spacing
+                && stroke.CenterX <= commonXEnd + spacing
+                && (Math.Abs(stroke.YStart - targetY) <= endpointTolerance
+                    || Math.Abs(stroke.YEnd - targetY) <= endpointTolerance));
+
+        var topEvidence = EndpointEvidence(missingTopY);
+        var bottomEvidence = EndpointEvidence(missingBottomY);
+
+        if (topEvidence == bottomEvidence
+            || Math.Max(topEvidence, bottomEvidence) == 0)
+        {
+            return false;
+        }
+
+        var missingY = topEvidence > bottomEvidence
+            ? missingTopY
+            : missingBottomY;
+        var xStart = fourLines.Min(line => line.XStart);
+        var xEnd = fourLines.Max(line => line.XEnd);
+        var width = fourLines
+            .Select(line => line.Stroke.Width)
+            .Where(value => value > 0)
+            .DefaultIfEmpty(1.0)
+            .Average();
+        var inferredStroke = new Stroke(
+            $"inferred-staff-{staffNumber}-edge",
+            new PointD(xStart, missingY),
+            new PointD(xEnd, missingY),
+            width,
+            "inferred-from-geometry",
+            null);
+        var inferred = NormalizeStroke(inferredStroke);
+
+        recovered = (topEvidence > bottomEvidence
+                ? new[] { inferred }.Concat(fourLines)
+                : fourLines.Concat([inferred]))
+            .ToArray();
+
+        return LooksLikeStaff(recovered);
     }
 
     private static bool LooksLikeStaff(IReadOnlyList<NormalizedStroke> lines)
