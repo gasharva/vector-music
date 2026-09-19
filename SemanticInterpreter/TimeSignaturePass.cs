@@ -1,3 +1,5 @@
+using SvgMusic.Scene;
+
 namespace SvgMusic.Semantics;
 
 public sealed class TimeSignaturePass : ISemanticPass
@@ -5,9 +7,11 @@ public sealed class TimeSignaturePass : ISemanticPass
     private const double MinimumConfidence = 0.75;
 
     private readonly (int Beats, int BeatType)? _inheritedSignature;
+    private readonly TimeSignatureSettings _settings;
 
     public TimeSignaturePass(
-        (int Beats, int BeatType)? inheritedSignature = null)
+        (int Beats, int BeatType)? inheritedSignature = null,
+        SvgMusicSettings? settings = null)
     {
         if (inheritedSignature is { } value
             && !SupportedSignatures.Contains(value))
@@ -18,6 +22,7 @@ public sealed class TimeSignaturePass : ISemanticPass
         }
 
         _inheritedSignature = inheritedSignature;
+        _settings = (settings ?? SvgMusicSettings.Default).TimeSignature;
     }
     private const double FirstMeasureHeaderWidthFraction = 0.45;
     private const double LaterMeasureHeaderWidthFraction = 0.30;
@@ -221,7 +226,7 @@ public sealed class TimeSignaturePass : ISemanticPass
             + $"{inherited.Beats}/{inherited.BeatType}; {reason}");
     }
 
-    private static StaffSignature? TryReadStaffSignature(
+    private StaffSignature? TryReadStaffSignature(
         MeasureScene measure,
         StaffMeasureScene staff,
         IReadOnlyList<TimeCandidate> allCandidates,
@@ -250,7 +255,7 @@ public sealed class TimeSignaturePass : ISemanticPass
         var headerLimit = measure.XStart
             + (measure.XEnd - measure.XStart) * headerWidthFraction;
 
-        var candidates = allCandidates
+        var headerCandidates = allCandidates
             .Where(candidate =>
                 candidate.Staff == staff.StaffNumber
                 && candidate.CenterX > leftBoundary
@@ -259,84 +264,41 @@ public sealed class TimeSignaturePass : ISemanticPass
             .ThenBy(candidate => candidate.CenterY)
             .ToArray();
 
+        var spacing = Math.Max(staff.LineSpacing, 0.001);
+        var verticalTolerance =
+            spacing * _settings.VerticalCenterToleranceInSpacings;
+        var candidates = headerCandidates
+            .Where(candidate =>
+                candidate.CenterY >= staff.StaffBounds.MinY - verticalTolerance
+                && candidate.CenterY <= staff.StaffBounds.MaxY + verticalTolerance)
+            .ToArray();
+
+        var rejectedByVerticalGate = headerCandidates
+            .Where(candidate => !candidates.Contains(candidate))
+            .ToArray();
+
+        if (rejectedByVerticalGate.Length > 0)
+        {
+            facts.AddTrace(
+                $"TimeSignaturePass: m{measure.Number} staff {staff.StaffNumber} "
+                + "vertical gate rejected "
+                + string.Join(
+                    ", ",
+                    rejectedByVerticalGate.Select(candidate =>
+                        $"{candidate.ShapeId}/{candidate.Label}"
+                        + $"@y={candidate.CenterY:F2}")));
+        }
+
         if (candidates.Length == 0)
         {
             return null;
         }
 
-        var common = candidates
-            .Where(candidate => candidate.Label == "COMMON_TIME")
-            .ToArray();
-        var cut = candidates
-            .Where(candidate => candidate.Label == "CUT_TIME")
-            .ToArray();
-
-        if (common.Length > 0 || cut.Length > 0)
-        {
-            var symbolicCandidates = common
-                .Concat(cut)
-                .OrderBy(candidate => candidate.CenterX)
-                .ThenByDescending(candidate => candidate.Confidence)
-                .ToArray();
-
-            var symbolic = symbolicCandidates[0];
-            var value = symbolic.Label == "COMMON_TIME"
-                ? (Beats: 4, BeatType: 4)
-                : (Beats: 2, BeatType: 2);
-
-            return new StaffSignature(
-                value.Beats,
-                value.BeatType,
-                symbolic.Bounds.MinX,
-                symbolic.Bounds.MaxX,
-                [symbolic.ShapeId]);
-        }
-
-        var digits = candidates
-            .Select(candidate => new TimeDigitCandidate(
-                candidate,
-                ParseTimeDigit(candidate.Label)))
-            .ToArray();
-
-        if (digits.Any(item => item.Digit is null))
-        {
-            return RejectOrThrow(
-                strict,
-                facts,
-                measure.Number,
-                staff.StaffNumber,
-                "unexpected classifier labels: "
-                + string.Join(", ", candidates.Select(candidate => candidate.Label)));
-        }
-
-        var staffMiddleY = staff.StaffBounds.CenterY;
-        var numerator = digits
-            .Where(item => item.Candidate.CenterY < staffMiddleY)
-            .Select(item => item with { Digit = item.Digit!.Value })
-            .OrderBy(item => item.Candidate.CenterX)
-            .ToArray();
-        var denominator = digits
-            .Where(item => item.Candidate.CenterY >= staffMiddleY)
-            .Select(item => item with { Digit = item.Digit!.Value })
-            .OrderBy(item => item.Candidate.CenterX)
-            .ToArray();
-
-        if (numerator.Length == 0 || denominator.Length == 0)
-        {
-            return RejectOrThrow(
-                strict,
-                facts,
-                measure.Number,
-                staff.StaffNumber,
-                $"incomplete candidate: numerator glyphs={numerator.Length}, "
-                + $"denominator glyphs={denominator.Length}");
-        }
-
-        var selected = SelectBestSupportedDigitSignature(
-            numerator,
-            denominator,
+        var selected = SelectBestSupportedSignature(
+            candidates,
+            staff,
             leftBoundary,
-            Math.Max(staff.LineSpacing, 0.001));
+            spacing);
 
         if (selected is null)
         {
@@ -345,7 +307,7 @@ public sealed class TimeSignaturePass : ISemanticPass
                 facts,
                 measure.Number,
                 staff.StaffNumber,
-                "no supported compact digit hypothesis among: "
+                "no supported compact time-signature hypothesis among: "
                 + string.Join(", ", candidates.Select(candidate => candidate.Label)));
         }
 
@@ -354,65 +316,112 @@ public sealed class TimeSignaturePass : ISemanticPass
             facts.AddTrace(
                 $"TimeSignaturePass: m{measure.Number} staff {staff.StaffNumber} "
                 + $"selected {selected.Beats}/{selected.BeatType} from "
-                + $"{selected.SourceShapeIds.Count} of {candidates.Length} TIME_* glyphs");
+                + $"{selected.SourceShapeIds.Count} of {candidates.Length} time-signature glyphs");
         }
 
         return selected;
     }
 
-    private static StaffSignature? SelectBestSupportedDigitSignature(
-        IReadOnlyList<TimeDigitCandidate> numerator,
-        IReadOnlyList<TimeDigitCandidate> denominator,
+    private StaffSignature? SelectBestSupportedSignature(
+        IReadOnlyList<TimeCandidate> candidates,
+        StaffMeasureScene staff,
         double leftBoundary,
         double spacing)
     {
         var hypotheses = new List<SignatureHypothesis>();
+        var staffMiddleY = staff.StaffBounds.CenterY;
 
-        foreach (var signature in SupportedSignatures)
+        foreach (var symbolic in candidates.Where(candidate =>
+                     candidate.Label is "COMMON_TIME" or "CUT_TIME"))
         {
-            foreach (var top in MatchNumber(numerator, signature.Beats))
+            var value = symbolic.Label == "COMMON_TIME"
+                ? (Beats: 4, BeatType: 4)
+                : (Beats: 2, BeatType: 2);
+            var score = ScoreHypothesis(
+                [symbolic],
+                leftBoundary,
+                spacing,
+                staffMiddleY,
+                alignment: 0,
+                compactness: symbolic.Bounds.Width / spacing);
+
+            hypotheses.Add(new SignatureHypothesis(
+                new StaffSignature(
+                    value.Beats,
+                    value.BeatType,
+                    symbolic.Bounds.MinX,
+                    symbolic.Bounds.MaxX,
+                    [symbolic.ShapeId]),
+                score));
+        }
+
+        var digits = candidates
+            .Select(candidate => new TimeDigitCandidate(
+                candidate,
+                ParseTimeDigit(candidate.Label)))
+            .Where(item => item.Digit is not null)
+            .Select(item => item with { Digit = item.Digit!.Value })
+            .ToArray();
+
+        var numerator = digits
+            .Where(item => item.Candidate.CenterY < staffMiddleY)
+            .OrderBy(item => item.Candidate.CenterX)
+            .ToArray();
+        var denominator = digits
+            .Where(item => item.Candidate.CenterY >= staffMiddleY)
+            .OrderBy(item => item.Candidate.CenterX)
+            .ToArray();
+
+        if (numerator.Length > 0 && denominator.Length > 0)
+        {
+            foreach (var signature in SupportedSignatures)
             {
-                foreach (var bottom in MatchNumber(denominator, signature.BeatType))
+                foreach (var top in MatchNumber(numerator, signature.Beats))
                 {
-                    var topCenter = top.Average(item => item.Candidate.CenterX);
-                    var bottomCenter = bottom.Average(item => item.Candidate.CenterX);
-                    var alignment = Math.Abs(topCenter - bottomCenter) / spacing;
-                    if (alignment > MaximumDigitColumnOffsetInSpacings)
+                    foreach (var bottom in MatchNumber(denominator, signature.BeatType))
                     {
-                        continue;
+                        var topCenter = top.Average(item => item.Candidate.CenterX);
+                        var bottomCenter = bottom.Average(item => item.Candidate.CenterX);
+                        var alignment = Math.Abs(topCenter - bottomCenter) / spacing;
+                        if (alignment > MaximumDigitColumnOffsetInSpacings)
+                        {
+                            continue;
+                        }
+
+                        var topSpan = top.Max(item => item.Candidate.Bounds.MaxX)
+                            - top.Min(item => item.Candidate.Bounds.MinX);
+                        var bottomSpan = bottom.Max(item => item.Candidate.Bounds.MaxX)
+                            - bottom.Min(item => item.Candidate.Bounds.MinX);
+                        if (topSpan / spacing > MaximumMultiDigitSpanInSpacings
+                            || bottomSpan / spacing > MaximumMultiDigitSpanInSpacings)
+                        {
+                            continue;
+                        }
+
+                        var all = top
+                            .Concat(bottom)
+                            .Select(item => item.Candidate)
+                            .ToArray();
+                        var compactness = (topSpan + bottomSpan) / spacing;
+                        var score = ScoreHypothesis(
+                            all,
+                            leftBoundary,
+                            spacing,
+                            staffMiddleY,
+                            alignment,
+                            compactness);
+
+                        hypotheses.Add(new SignatureHypothesis(
+                            new StaffSignature(
+                                signature.Beats,
+                                signature.BeatType,
+                                all.Min(item => item.Bounds.MinX),
+                                all.Max(item => item.Bounds.MaxX),
+                                all.Select(item => item.ShapeId)
+                                    .Distinct(StringComparer.Ordinal)
+                                    .ToArray()),
+                            score));
                     }
-
-                    var topSpan = top.Max(item => item.Candidate.Bounds.MaxX)
-                        - top.Min(item => item.Candidate.Bounds.MinX);
-                    var bottomSpan = bottom.Max(item => item.Candidate.Bounds.MaxX)
-                        - bottom.Min(item => item.Candidate.Bounds.MinX);
-                    if (topSpan / spacing > MaximumMultiDigitSpanInSpacings
-                        || bottomSpan / spacing > MaximumMultiDigitSpanInSpacings)
-                    {
-                        continue;
-                    }
-
-                    var all = top.Concat(bottom).ToArray();
-                    var minX = all.Min(item => item.Candidate.Bounds.MinX);
-                    var maxX = all.Max(item => item.Candidate.Bounds.MaxX);
-                    var leftDistance = Math.Max(0, minX - leftBoundary) / spacing;
-                    var compactness = (topSpan + bottomSpan) / spacing;
-                    var confidencePenalty = 1.0 - all.Average(item => item.Candidate.Confidence);
-                    var score = alignment
-                        + leftDistance * 0.08
-                        + compactness * 0.03
-                        + confidencePenalty * 0.25;
-
-                    hypotheses.Add(new SignatureHypothesis(
-                        new StaffSignature(
-                            signature.Beats,
-                            signature.BeatType,
-                            minX,
-                            maxX,
-                            all.Select(item => item.Candidate.ShapeId)
-                                .Distinct(StringComparer.Ordinal)
-                                .ToArray()),
-                        score));
                 }
             }
         }
@@ -423,6 +432,31 @@ public sealed class TimeSignaturePass : ISemanticPass
             .ThenByDescending(hypothesis => hypothesis.Signature.SourceShapeIds.Count)
             .Select(hypothesis => hypothesis.Signature)
             .FirstOrDefault();
+    }
+
+    private double ScoreHypothesis(
+        IReadOnlyList<TimeCandidate> candidates,
+        double leftBoundary,
+        double spacing,
+        double staffMiddleY,
+        double alignment,
+        double compactness)
+    {
+        var minX = candidates.Min(item => item.Bounds.MinX);
+        var minY = candidates.Min(item => item.Bounds.MinY);
+        var maxY = candidates.Max(item => item.Bounds.MaxY);
+        var verticalCenter = (minY + maxY) / 2.0;
+        var verticalCenterOffset =
+            Math.Abs(verticalCenter - staffMiddleY) / spacing;
+        var leftDistance = Math.Max(0, minX - leftBoundary) / spacing;
+        var confidencePenalty =
+            1.0 - candidates.Average(item => item.Confidence);
+
+        return alignment
+            + leftDistance * 0.08
+            + compactness * 0.03
+            + confidencePenalty * 0.25
+            + verticalCenterOffset * _settings.VerticalCenterScoreWeight;
     }
 
     private static IEnumerable<IReadOnlyList<TimeDigitCandidate>> MatchNumber(
