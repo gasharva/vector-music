@@ -19,11 +19,11 @@ public sealed record PrototypeClassifierSettings
     /// local measure's width. Text is handled by OCR and long structural marks
     /// by dedicated geometry passes.
     /// </summary>
-    public double MaxMeasureWidthFraction { get; init; } = 0.30;
+    public double MaxMeasureWidthFraction { get; init; } = 0.25;
 
     /// <summary>
     /// A generic classified glyph must fit within this fraction of its staff
     /// pair's full vertical measure height.
     /// </summary>
-    public double MaxMeasureHeightFraction { get; init; } = 0.45;
+    public double MaxMeasureHeightFraction { get; init; } = 0.40;
 }
