@@ -91,39 +91,14 @@ public sealed class DurationPass : ISemanticPass
             var isHollow = notehead.FillKind.Equals(
                 "hollow",
                 StringComparison.OrdinalIgnoreCase);
-
-            Fraction baseDuration;
-            string noteType;
-            var fallbackWithoutStem = false;
-
-            if (isHollow)
-            {
-                if (stem is null)
-                {
-                    baseDuration = new Fraction(1, 1);
-                    noteType = "whole";
-                }
-                else
-                {
-                    baseDuration = new Fraction(1, 2);
-                    noteType = "half";
-                }
-
-                // Hollow noteheads are not subdivided by flags/beams in ordinary notation.
-                // If geometry says otherwise, preserve the notehead semantics and lower confidence.
-                subdivisionLevel = 0;
-            }
-            else
-            {
-                if (stem is null)
-                {
-                    fallbackWithoutStem = true;
-                }
-
-                var denominator = 4L * Pow2(subdivisionLevel);
-                baseDuration = new Fraction(1, denominator).Reduce();
-                noteType = NoteTypeForDenominator(denominator);
-            }
+            var written = WrittenDurationClassifier.Classify(
+                isHollow,
+                stem is not null,
+                subdivisionLevel);
+            var baseDuration = written.Duration;
+            var noteType = written.NoteType;
+            subdivisionLevel = written.SubdivisionLevel;
+            var fallbackWithoutStem = written.FallbackWithoutStem;
 
             var matchingDots = dots
                 .Where(dot =>
