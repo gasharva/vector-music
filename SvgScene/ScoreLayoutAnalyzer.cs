@@ -8,18 +8,126 @@ public sealed class ScoreLayoutAnalyzer
             .Select(NormalizeStroke)
             .Where(IsHorizontal)
             .ToList();
+        var logicalHorizontal = MergeCollinearHorizontalSegments(horizontal);
 
         var vertical = notation.Strokes
             .Select(NormalizeStroke)
             .Where(IsVertical)
             .ToList();
 
-        var staffs = DetectStaffs(horizontal);
+        var staffs = DetectStaffs(logicalHorizontal);
         var systems = BuildSystemsAndPairs(staffs, vertical, horizontal);
 
         return new ScoreLayout(
             systems,
             staffs);
+    }
+
+    private static List<NormalizedStroke> MergeCollinearHorizontalSegments(
+        IReadOnlyList<NormalizedStroke> horizontal)
+    {
+        if (horizontal.Count == 0)
+        {
+            return [];
+        }
+
+        var positiveWidths = horizontal
+            .Select(stroke => stroke.Stroke.Width)
+            .Where(width => width > 0)
+            .OrderBy(width => width)
+            .ToArray();
+        var medianWidth = positiveWidths.Length == 0
+            ? 0.5
+            : positiveWidths[positiveWidths.Length / 2];
+        var yTolerance = Math.Max(0.25, medianWidth * 1.5);
+        var gapTolerance = Math.Max(0.75, medianWidth * 3.0);
+
+        var yGroups = new List<List<NormalizedStroke>>();
+
+        foreach (var stroke in horizontal.OrderBy(stroke => stroke.CenterY))
+        {
+            var group = yGroups.LastOrDefault();
+            if (group is null
+                || Math.Abs(stroke.CenterY - group.Average(item => item.CenterY))
+                    > yTolerance)
+            {
+                yGroups.Add([stroke]);
+            }
+            else
+            {
+                group.Add(stroke);
+            }
+        }
+
+        var result = new List<NormalizedStroke>();
+        var syntheticIndex = 0;
+
+        foreach (var yGroup in yGroups)
+        {
+            var ordered = yGroup
+                .OrderBy(stroke => stroke.XStart)
+                .ThenBy(stroke => stroke.XEnd)
+                .ToArray();
+
+            var run = new List<NormalizedStroke>();
+
+            void Flush()
+            {
+                if (run.Count == 0)
+                {
+                    return;
+                }
+
+                if (run.Count == 1)
+                {
+                    result.Add(run[0]);
+                    run.Clear();
+                    return;
+                }
+
+                var xStart = run.Min(item => item.XStart);
+                var xEnd = run.Max(item => item.XEnd);
+                var centerY = run.Average(item => item.CenterY);
+                var width = run
+                    .Select(item => item.Stroke.Width)
+                    .Where(value => value > 0)
+                    .DefaultIfEmpty(medianWidth)
+                    .Average();
+                var stroke = new Stroke(
+                    $"logical-horizontal-{++syntheticIndex}",
+                    new PointD(xStart, centerY),
+                    new PointD(xEnd, centerY),
+                    width,
+                    "logical-horizontal-run",
+                    null);
+
+                result.Add(NormalizeStroke(stroke));
+                run.Clear();
+            }
+
+            foreach (var stroke in ordered)
+            {
+                if (run.Count == 0)
+                {
+                    run.Add(stroke);
+                    continue;
+                }
+
+                var currentEnd = run.Max(item => item.XEnd);
+                if (stroke.XStart <= currentEnd + gapTolerance)
+                {
+                    run.Add(stroke);
+                    continue;
+                }
+
+                Flush();
+                run.Add(stroke);
+            }
+
+            Flush();
+        }
+
+        return result;
     }
 
     private static List<StaffLayout> DetectStaffs(
@@ -241,8 +349,16 @@ public sealed class ScoreLayoutAnalyzer
         var minimumLedgerLength = staff.AverageLineSpacing * 0.55;
         var yTolerance = staff.AverageLineSpacing * 0.28;
 
+        var staffLineTolerance = staff.AverageLineSpacing * 0.18;
         var candidates = horizontal
             .Where(stroke => !staffStrokeIds.Contains(stroke.Stroke.ShapeId))
+            .Where(stroke => !staff.Lines.Any(line =>
+                Math.Abs(stroke.CenterY - line.Y) <= staffLineTolerance
+                && HorizontalOverlap(
+                    stroke.XStart,
+                    stroke.XEnd,
+                    line.XStart,
+                    line.XEnd) > 0))
             .Where(stroke => stroke.Length >= minimumLedgerLength)
             .Where(stroke => stroke.Length <= maximumLedgerLength)
             .Where(stroke => HorizontalOverlap(
