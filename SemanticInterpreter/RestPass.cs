@@ -7,7 +7,7 @@ public sealed record RestCandidate(
     int Staff,
     double StaffTopY,
     double LineSpacing,
-    ShapeElement Shape,
+    SemanticElement Element,
     string ClassificationLabel,
     double ClassificationConfidence);
 
@@ -74,13 +74,13 @@ public sealed class RestPass : ISemanticPass
 
         var decisions = collector.Candidates
             .GroupBy(candidate =>
-                (candidate.MeasureNumber, candidate.Staff, candidate.Shape.ShapeId))
+                (candidate.MeasureNumber, candidate.Staff, candidate.Element.ShapeId))
             .Select(group => group.First())
             .Select(candidate => Decide(candidate, stems))
             .OrderBy(decision => decision.Candidate.MeasureNumber)
             .ThenBy(decision => decision.Candidate.Staff)
-            .ThenBy(decision => decision.Candidate.Shape.CenterX)
-            .ThenBy(decision => decision.Candidate.Shape.CenterY)
+            .ThenBy(decision => decision.Candidate.Element.CenterX)
+            .ThenBy(decision => decision.Candidate.Element.CenterY)
             .ToArray();
 
         LastAnalysis = new RestAnalysisResult(decisions);
@@ -88,21 +88,21 @@ public sealed class RestPass : ISemanticPass
         foreach (var decision in decisions.Where(decision => decision.Accepted))
         {
             var candidate = decision.Candidate;
-            var shape = candidate.Shape;
+            var element = candidate.Element;
 
             facts.Add(new RestFact(
                 candidate.MeasureNumber,
                 candidate.Staff,
-                shape.ShapeId,
+                element.ShapeId,
                 candidate.ClassificationLabel,
                 candidate.ClassificationConfidence,
                 decision.NoteType!,
                 decision.Duration!,
-                shape.CenterX,
-                shape.CenterY,
+                element.CenterX,
+                element.CenterY,
                 decision.Confidence,
                 decision.Reason,
-                [shape.ShapeId]));
+                [element.ShapeId]));
         }
     }
 
@@ -111,6 +111,17 @@ public sealed class RestPass : ISemanticPass
         IReadOnlyList<StemAttachmentFact> stems)
     {
         var label = candidate.ClassificationLabel;
+
+        if (label == "GEOMETRIC_EIGHTH_REST")
+        {
+            return Accept(
+                candidate,
+                "eighth",
+                "1/8",
+                candidate.ClassificationConfidence,
+                "narrow vertical curved stroke is centered inside the staff and "
+                + "matches eighth-rest proportions");
+        }
 
         if (label == "HW_REST_set")
         {
@@ -204,7 +215,7 @@ public sealed class RestPass : ISemanticPass
         IReadOnlyList<StemAttachmentFact> stems)
     {
         var margin = candidate.LineSpacing * StemGuardMarginInSpacings;
-        var bounds = candidate.Shape.Bounds;
+        var bounds = candidate.Element.Bounds;
 
         return stems.Any(stem =>
         {
@@ -269,6 +280,28 @@ public sealed class RestPass : ISemanticPass
 
         public IReadOnlyList<RestCandidate> Candidates => _candidates;
 
+        protected override void VisitCurve(
+            MeasureScene measure,
+            StaffMeasureScene staff,
+            CurveElement curve)
+        {
+            if (!IsGeometricEighthRest(
+                    staff,
+                    curve))
+            {
+                return;
+            }
+
+            _candidates.Add(new RestCandidate(
+                measure.Number,
+                staff.StaffNumber,
+                staff.StaffBounds.MinY,
+                staff.LineSpacing,
+                curve,
+                "GEOMETRIC_EIGHTH_REST",
+                0.90));
+        }
+
         protected override void VisitShape(
             MeasureScene measure,
             StaffMeasureScene staff,
@@ -291,6 +324,31 @@ public sealed class RestPass : ISemanticPass
                 shape,
                 classification.Label,
                 classification.Confidence));
+        }
+
+        private static bool IsGeometricEighthRest(
+            StaffMeasureScene staff,
+            CurveElement curve)
+        {
+            var spacing = staff.LineSpacing;
+            if (spacing <= 0)
+            {
+                return false;
+            }
+
+            var bounds = curve.Bounds;
+            var width = bounds.Width / spacing;
+            var height = bounds.Height / spacing;
+            var aspect = height / Math.Max(width, 1e-9);
+            var centerY = bounds.CenterY;
+
+            return centerY >= staff.StaffBounds.MinY
+                && centerY <= staff.StaffBounds.MaxY
+                && width >= 0.35
+                && width <= 0.90
+                && height >= 1.40
+                && height <= 2.30
+                && aspect >= 1.80;
         }
 
         private static bool IsRestLabel(string label)
