@@ -5,6 +5,11 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using SvgMusic.Canonical;
 
+if (StressTreeRunner.ShouldRun(args))
+{
+    return await StressTreeRunner.RunAsync(args);
+}
+
 if (args.Length < 2)
 {
     PrintUsage();
@@ -838,6 +843,12 @@ static bool HasFlag(
 static void PrintUsage()
 {
     Console.Error.WriteLine("Usage:");
+    Console.Error.WriteLine(
+        "  SvgScoreBatch <stress-root> [--tree] "
+        + "[--model <classifier.zip>] [--configuration Debug|Release] "
+        + "[--diff-level warning|error|critical] [--no-build] "
+        + "[--fail-on-diff] [--no-diagnostic-archive] [--keep-existing-out]");
+    Console.Error.WriteLine();
     Console.Error.WriteLine(
         "  SvgScoreBatch <svg-folder> <output-folder> "
         + "[--base <name>] [--reference <musicxml|json>] "
