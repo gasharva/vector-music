@@ -1,0 +1,71 @@
+name: Stress regression
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "Stress/**"
+      - "SemanticInterpreter/**"
+      - "SemanticInterpreter.Tests/**"
+      - "SvgScene/**"
+      - "CanonicalNotation/**"
+      - "Tools/SvgScoreBatch/**"
+      - ".github/workflows/stress-regression.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: stress-regression-master
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  stress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Test and build
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet test SemanticInterpreter.Tests/SemanticInterpreter.Tests.csproj --configuration Release
+          dotnet build Tools/SvgScoreBatch/SvgScoreBatch.csproj --configuration Release
+
+      - name: Run stress tree
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          dotnet Tools/SvgScoreBatch/bin/Release/net8.0/SvgScoreBatch.dll \
+            Stress \
+            --configuration Release \
+            --no-build \
+            --diff-level error
+
+          cat Stress/stress-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload stress results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stress-regression
+          path: |
+            Stress/stress-summary.md
+            Stress/stress-summary.json
+            Stress/**/out/*.diff.md
+            Stress/**/out/*.diff.json
+            Stress/**/out/*.diff.all.json
+            Stress/**/out/*.diagnostics.zip
+            Stress/**/out/batch.log
+          if-no-files-found: warn
+          retention-days: 30
