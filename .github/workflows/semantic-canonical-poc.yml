@@ -56,6 +56,7 @@ jobs:
         run: |
           set +e
           mkdir -p artifacts/cairo-layout
+          failed=0
 
           for variant in cairo optimized; do
             for page in 001 002; do
@@ -63,17 +64,33 @@ jobs:
               echo "=== $variant page-$page ==="
               mkdir -p "artifacts/cairo-layout/$variant-$page"
 
-              dotnet SemanticInterpreter/bin/Release/net8.0/SemanticInterpreter.dll                 "Samples/cairo-yellow-leaves/$variant/page-$page.svg"                 "artifacts/cairo-layout/$variant-$page"                 --layout-only                 > "artifacts/cairo-layout/$variant-$page/run.log" 2>&1
+              dotnet SemanticInterpreter/bin/Release/net8.0/SemanticInterpreter.dll \
+                "Samples/cairo-yellow-leaves/$variant/page-$page.svg" \
+                "artifacts/cairo-layout/$variant-$page" \
+                --layout-only \
+                > "artifacts/cairo-layout/$variant-$page/run.log" 2>&1
 
               status=$?
               echo "exit=$status"
               cat "artifacts/cairo-layout/$variant-$page/run.log"
+
+              expected=20
+              if [ "$page" = "002" ]; then
+                expected=15
+              fi
+
+              if [ "$status" -ne 0 ] \
+                || ! grep -q "measures=$expected" "artifacts/cairo-layout/$variant-$page/run.log"; then
+                echo "ERROR: $variant page-$page did not recover expected $expected measures"
+                failed=1
+              fi
             done
           done
 
-          exit 0
+          exit "$failed"
 
       - name: Upload Cairo layout diagnostics
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cairo-yellow-leaves-layout
