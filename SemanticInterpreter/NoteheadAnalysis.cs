@@ -179,7 +179,9 @@ public sealed class StaffGridRule
     private const double MaximumErrorInHalfSteps = 0.30;
     private const int BottomStaffLineStep = 8;
 
-    public StaffGridMatch Evaluate(NoteheadCandidate candidate)
+    public StaffGridMatch Evaluate(
+        NoteheadCandidate candidate,
+        double maximumErrorInHalfSteps = MaximumErrorInHalfSteps)
     {
         var halfStep = candidate.LineSpacing / 2.0;
 
@@ -197,7 +199,7 @@ public sealed class StaffGridRule
         var rawStep = (candidate.Ellipse.CenterY - candidate.StaffTopY) / halfStep;
         var nearestStep = (int)Math.Round(rawStep);
         var error = Math.Abs(rawStep - nearestStep);
-        var isAligned = error <= MaximumErrorInHalfSteps;
+        var isAligned = error <= maximumErrorInHalfSteps;
 
         if (!isAligned)
         {
@@ -305,6 +307,7 @@ public sealed class StaffGridRule
 public sealed class NoteheadAnalyzer
 {
     private const double MaximumGridError = 0.30;
+    private const double MaximumStemSupportedGridError = 0.52;
 
     private readonly EllipseSizeProfiler _sizeProfiler;
     private readonly StaffGridRule _staffGridRule;
@@ -329,7 +332,7 @@ public sealed class NoteheadAnalyzer
 
         var profile = _sizeProfiler.Analyze(candidates);
         var decisions = candidates
-            .Select(candidate => Decide(candidate, profile))
+            .Select(candidate => Decide(candidate, profile, document))
             .OrderBy(decision => decision.Candidate.MeasureNumber)
             .ThenBy(decision => decision.Candidate.StaffNumber)
             .ThenBy(decision => decision.Candidate.Ellipse.CenterX)
@@ -342,7 +345,8 @@ public sealed class NoteheadAnalyzer
 
     private NoteheadDecision Decide(
         NoteheadCandidate candidate,
-        EllipseSizeProfile profile)
+        EllipseSizeProfile profile,
+        SemanticDocument document)
     {
         var grid = _staffGridRule.Evaluate(candidate);
         var fillKind = candidate.Ellipse.Source.IsHollow
@@ -365,6 +369,44 @@ public sealed class NoteheadAnalyzer
 
         if (!grid.IsAligned)
         {
+            var hasStemSupport = HasRawStemSupport(
+                candidate,
+                document);
+
+            if (hasStemSupport
+                && grid.ErrorInHalfSteps <= MaximumStemSupportedGridError)
+            {
+                var rescuedGrid = _staffGridRule.Evaluate(
+                    candidate,
+                    MaximumStemSupportedGridError);
+
+                if (rescuedGrid.IsValid)
+                {
+                    var rescueConfidence = Math.Clamp(
+                        0.76
+                        + 0.16
+                        * (1.0
+                            - rescuedGrid.ErrorInHalfSteps
+                            / MaximumStemSupportedGridError),
+                        0,
+                        1);
+
+                    return new NoteheadDecision(
+                        candidate,
+                        true,
+                        "stem-supported-notehead",
+                        rescuedGrid,
+                        fillKind,
+                        rescueConfidence,
+                        $"center is {rescuedGrid.ErrorInHalfSteps:F3} half-step(s) "
+                        + "from nearest staff position, outside the ordinary grid gate; "
+                        + "rescued by a touching thin vertical stem; "
+                        + $"{rescuedGrid.SupportReason}; fill={fillKind}");
+                }
+
+                grid = rescuedGrid;
+            }
+
             return new NoteheadDecision(
                 candidate,
                 false,
@@ -372,7 +414,8 @@ public sealed class NoteheadAnalyzer
                 grid,
                 fillKind,
                 0,
-                $"center is {grid.ErrorInHalfSteps:F3} half-step(s) from nearest staff position");
+                $"center is {grid.ErrorInHalfSteps:F3} half-step(s) from nearest staff position; "
+                + $"raw-stem-support={hasStemSupport}");
         }
 
         if (!grid.HasLedgerSupport)
@@ -405,6 +448,109 @@ public sealed class NoteheadAnalyzer
             confidence,
             $"{sizeReason}; staff-step={grid.NearestStep}; "
             + $"grid-error={grid.ErrorInHalfSteps:F3}; {grid.SupportReason}; fill={fillKind}");
+    }
+
+    private static bool HasRawStemSupport(
+        NoteheadCandidate candidate,
+        SemanticDocument document)
+    {
+        const double maximumVerticalRatio = 0.18;
+        const double minimumLengthInSpacings = 1.25;
+        const double maximumWidthInSpacings = 0.38;
+        const double maximumHeadEdgeDistanceInSpacings = 0.34;
+        const double verticalTouchToleranceInSpacings = 0.18;
+
+        var spacing = candidate.LineSpacing;
+        if (spacing <= 0)
+        {
+            return false;
+        }
+
+        var measure = document.Measures
+            .FirstOrDefault(item =>
+                item.Number == candidate.MeasureNumber);
+
+        if (measure is null)
+        {
+            return false;
+        }
+
+        var ellipse = candidate.Ellipse.Source;
+        var horizontalRadius = Math.Max(
+            ellipse.MajorRadius,
+            ellipse.MinorRadius);
+        var verticalRadius = Math.Max(
+            Math.Min(
+                ellipse.MajorRadius,
+                ellipse.MinorRadius),
+            spacing * 0.22);
+        var maximumEdgeDistance =
+            spacing * maximumHeadEdgeDistanceInSpacings;
+        var touchTolerance =
+            spacing * verticalTouchToleranceInSpacings;
+
+        return measure.Upper.Elements
+            .OfType<StrokeElement>()
+            .Concat(
+                measure.Lower.Elements
+                    .OfType<StrokeElement>())
+            .GroupBy(
+                stroke => stroke.ShapeId,
+                StringComparer.Ordinal)
+            .Select(group => group.First())
+            .Any(stroke =>
+            {
+                var source = stroke.Source;
+                var dx = Math.Abs(
+                    source.End.X - source.Start.X);
+                var dy = Math.Abs(
+                    source.End.Y - source.Start.Y);
+                var length = Math.Sqrt(
+                    dx * dx + dy * dy);
+                var verticalRatio = dy <= 0.001
+                    ? double.PositiveInfinity
+                    : dx / dy;
+                var normalizedWidth =
+                    source.Width / spacing;
+
+                if (length < spacing * minimumLengthInSpacings
+                    || verticalRatio > maximumVerticalRatio
+                    || normalizedWidth > maximumWidthInSpacings)
+                {
+                    return false;
+                }
+
+                var stemX =
+                    (source.Start.X + source.End.X) / 2.0;
+                var leftEdge =
+                    candidate.Ellipse.CenterX - horizontalRadius;
+                var rightEdge =
+                    candidate.Ellipse.CenterX + horizontalRadius;
+                var edgeDistance = Math.Min(
+                    Math.Abs(stemX - leftEdge),
+                    Math.Abs(stemX - rightEdge));
+
+                if (edgeDistance > maximumEdgeDistance)
+                {
+                    return false;
+                }
+
+                var stemMinY = Math.Min(
+                    source.Start.Y,
+                    source.End.Y);
+                var stemMaxY = Math.Max(
+                    source.Start.Y,
+                    source.End.Y);
+                var noteMinY =
+                    candidate.Ellipse.CenterY - verticalRadius
+                    - touchTolerance;
+                var noteMaxY =
+                    candidate.Ellipse.CenterY + verticalRadius
+                    + touchTolerance;
+
+                return stemMaxY >= noteMinY
+                    && stemMinY <= noteMaxY;
+            });
     }
 
     private sealed class EllipseCollector : SemanticVisitor
