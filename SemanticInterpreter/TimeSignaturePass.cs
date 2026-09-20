@@ -120,6 +120,21 @@ public sealed class TimeSignaturePass : ISemanticPass
 
                 if (isFirstMeasure)
                 {
+                    var readable = upper ?? lower;
+
+                    if (readable is not null
+                        && SupportedSignatures.Contains(
+                            (readable.Beats, readable.BeatType)))
+                    {
+                        AddSingleStaffSignature(
+                            facts,
+                            measure,
+                            readable,
+                            upper is null ? measure.Lower.StaffNumber : measure.Upper.StaffNumber,
+                            upper is null ? measure.Upper.StaffNumber : measure.Lower.StaffNumber);
+                        continue;
+                    }
+
                     throw new InvalidDataException(
                         $"Incomplete time signature in measure {measure.Number}: "
                         + $"upper={(upper is null ? "missing" : $"{upper.Beats}/{upper.BeatType}")}, "
@@ -203,6 +218,29 @@ public sealed class TimeSignaturePass : ISemanticPass
                     + $"only supported geometric digit hypotheses are accepted.",
                 sources));
         }
+    }
+
+    private static void AddSingleStaffSignature(
+        SemanticFacts facts,
+        MeasureScene measure,
+        StaffSignature signature,
+        int readableStaff,
+        int incompleteStaff)
+    {
+        facts.Add(new TimeSignatureFact(
+            measure.Number,
+            signature.Beats,
+            signature.BeatType,
+            signature.MinX,
+            signature.MaxX,
+            $"Recovered {signature.Beats}/{signature.BeatType} from staff {readableStaff}; "
+                + $"peer staff {incompleteStaff} had incomplete or unsupported time-signature evidence.",
+            signature.SourceShapeIds));
+
+        facts.AddTrace(
+            $"TimeSignaturePass: m{measure.Number} recovered "
+            + $"{signature.Beats}/{signature.BeatType} from staff {readableStaff}; "
+            + $"peer staff {incompleteStaff} incomplete");
     }
 
     private static void AddInheritedSignature(
@@ -302,13 +340,12 @@ public sealed class TimeSignaturePass : ISemanticPass
 
         if (selected is null)
         {
-            return RejectOrThrow(
-                strict,
-                facts,
-                measure.Number,
-                staff.StaffNumber,
-                "no supported compact time-signature hypothesis among: "
+            facts.AddTrace(
+                $"TimeSignaturePass: rejected time-signature candidate in "
+                + $"m{measure.Number} staff {staff.StaffNumber}: "
+                + "no supported compact time-signature hypothesis among: "
                 + string.Join(", ", candidates.Select(candidate => candidate.Label)));
+            return null;
         }
 
         if (selected.SourceShapeIds.Count < candidates.Length)
@@ -497,26 +534,6 @@ public sealed class TimeSignaturePass : ISemanticPass
                 }
             }
         }
-    }
-
-    private static StaffSignature? RejectOrThrow(
-        bool strict,
-        SemanticFacts facts,
-        int measureNumber,
-        int staffNumber,
-        string reason)
-    {
-        if (strict)
-        {
-            throw new InvalidDataException(
-                $"Invalid time signature in measure {measureNumber}, "
-                + $"staff {staffNumber}: {reason}.");
-        }
-
-        facts.AddTrace(
-            $"TimeSignaturePass: ignored later time-signature candidate in "
-            + $"m{measureNumber} staff {staffNumber}: {reason}");
-        return null;
     }
 
     private static int? ParseTimeDigit(string label)
