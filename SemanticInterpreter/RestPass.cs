@@ -231,8 +231,8 @@ public sealed class RestPass : ISemanticPass
 
             return stemX >= bounds.MinX - margin
                 && stemX <= bounds.MaxX + margin
-                && candidate.Shape.CenterY >= minY
-                && candidate.Shape.CenterY <= maxY;
+                && candidate.Element.CenterY >= minY
+                && candidate.Element.CenterY <= maxY;
         });
     }
 
