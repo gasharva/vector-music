@@ -18,18 +18,13 @@ public interface IEllipseLikeExtractor
 public sealed class EllipseLikeExtractor : IEllipseLikeExtractor
 {
     private readonly double _maxFitError;
-    private readonly double _maxHollowOuterFitError;
     private readonly double _maxAxisRatio;
 
     public EllipseLikeExtractor(
         double maxFitError = 0.18,
-        double maxHollowOuterFitError = 0.26,
         double maxAxisRatio = 4.0)
     {
         _maxFitError = maxFitError;
-        _maxHollowOuterFitError = Math.Max(
-            maxFitError,
-            maxHollowOuterFitError);
         _maxAxisRatio = maxAxisRatio;
     }
 
@@ -63,25 +58,15 @@ public sealed class EllipseLikeExtractor : IEllipseLikeExtractor
         }
 
         var outer = fits[0];
-        var inner = FindInnerEllipse(
-            outer,
-            fits.Skip(1));
 
-        // Filled noteheads and dots should remain strict: a single distorted
-        // closed contour is far too easy to confuse with arbitrary notation.
-        //
-        // Hollow noteheads give us stronger purely geometric evidence: a second,
-        // well-fitted, concentric ellipse-like contour inside the outer contour.
-        // Engraving fonts can deliberately stylize the outer bowl enough to exceed
-        // the ordinary ellipse fit threshold (Finale Maestro is one example), while
-        // the inner hole remains clean. Allow that outer contour a modestly wider
-        // fit band only when the inner geometric witness is present.
-        if (!IsAcceptableEllipse(outer)
-            && !(inner is not null
-                && IsAcceptableHollowOuterEllipse(outer)))
+        if (!IsAcceptableEllipse(outer))
         {
             return false;
         }
+
+        var inner = FindInnerEllipse(
+            outer,
+            fits.Skip(1));
 
         ellipse = new EllipseLike(
             shape.Id,
@@ -103,21 +88,6 @@ public sealed class EllipseLikeExtractor : IEllipseLikeExtractor
     private bool IsAcceptableEllipse(EllipseFit fit)
     {
         if (fit.Error > _maxFitError)
-        {
-            return false;
-        }
-
-        var axisRatio =
-            fit.MajorRadius /
-            Math.Max(fit.MinorRadius, 1e-9);
-
-        return axisRatio <= _maxAxisRatio;
-    }
-
-    private bool IsAcceptableHollowOuterEllipse(
-        EllipseFit fit)
-    {
-        if (fit.Error > _maxHollowOuterFitError)
         {
             return false;
         }
