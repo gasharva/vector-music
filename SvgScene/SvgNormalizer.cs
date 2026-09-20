@@ -123,6 +123,19 @@ public sealed class SvgNormalizer : ISvgNormalizer
             source,
             instanceElement);
 
+        // Stroke width lives in the same user coordinate system as the source
+        // geometry. When transforms are baked into points, bake their scale into
+        // stroke width as well. Cairo commonly emits e.g. stroke-width="9.09"
+        // under matrix(0.06 ...), whose visible width is about 0.55.
+        if (paint.HasStroke && paint.StrokeWidth > 0)
+        {
+            paint = paint with
+            {
+                StrokeWidth =
+                    paint.StrokeWidth * transform.ApproximateStrokeScale
+            };
+        }
+
         if (kind == "path")
         {
             AddPath(
@@ -1191,6 +1204,21 @@ public sealed class SvgNormalizer : ISvgNormalizer
             return new PointD(
                 A * point.X + C * point.Y + E,
                 B * point.X + D * point.Y + F);
+        }
+
+        /// <summary>
+        /// Scalar approximation of the linear transform's scale for properties
+        /// such as stroke width. Exact for uniform scale + rotation; for a general
+        /// affine transform it uses the RMS scale of the transformed basis vectors.
+        /// </summary>
+        public double ApproximateStrokeScale
+        {
+            get
+            {
+                var squared =
+                    A * A + B * B + C * C + D * D;
+                return Math.Sqrt(Math.Max(0, squared / 2.0));
+            }
         }
 
         public AffineTransform Then(AffineTransform next)
