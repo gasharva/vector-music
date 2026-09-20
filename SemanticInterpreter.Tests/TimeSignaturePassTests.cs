@@ -201,6 +201,58 @@ public sealed class TimeSignaturePassTests
     }
 
     [Fact]
+    public void InitialPartialNineOverEight_OnOneStaff_UsesCompletePeerStaff()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(
+                        1,
+                        1,
+                        "upper-nine",
+                        "TIME_NINE",
+                        new BoundsD(40, 115, 50, 125))
+                ],
+                [
+                    TimeShape(
+                        1,
+                        2,
+                        "lower-nine",
+                        "TIME_NINE",
+                        new BoundsD(40, 235, 50, 245)),
+                    TimeShape(
+                        1,
+                        2,
+                        "lower-eight",
+                        "TIME_EIGHT",
+                        new BoundsD(40, 275, 50, 285))
+                ])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass().Run(document, facts);
+
+        var signature = Assert.Single(
+            facts.OfType<TimeSignatureFact>());
+
+        Assert.Equal(9, signature.Beats);
+        Assert.Equal(8, signature.BeatType);
+        Assert.Equal(
+            new[] { "lower-eight", "lower-nine" },
+            signature.SourceShapeIds
+                .OrderBy(id => id, StringComparer.Ordinal)
+                .ToArray());
+        Assert.Contains(
+            facts.Trace,
+            line => line.Contains(
+                "recovered 9/8 from staff 2",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
     public void LaterPartialTimeLikeGlyphs_AreIgnoredInsteadOfBreakingPipeline()
     {
         var document = new SemanticDocument(
