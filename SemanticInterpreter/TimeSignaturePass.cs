@@ -340,11 +340,16 @@ public sealed class TimeSignaturePass : ISemanticPass
 
         if (selected is null)
         {
+            var reason =
+                "no supported compact time-signature hypothesis among: "
+                + string.Join(", ", candidates.Select(candidate => candidate.Label));
+
             facts.AddTrace(
-                $"TimeSignaturePass: rejected time-signature candidate in "
-                + $"m{measure.Number} staff {staff.StaffNumber}: "
-                + "no supported compact time-signature hypothesis among: "
-                + string.Join(", ", candidates.Select(candidate => candidate.Label)));
+                strict
+                    ? $"TimeSignaturePass: rejected initial time-signature candidate in "
+                        + $"m{measure.Number} staff {staff.StaffNumber}: {reason}"
+                    : $"TimeSignaturePass: ignored later time-signature candidate in "
+                        + $"m{measure.Number} staff {staff.StaffNumber}: {reason}");
             return null;
         }
 
