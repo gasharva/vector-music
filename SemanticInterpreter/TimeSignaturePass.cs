@@ -96,6 +96,30 @@ public sealed class TimeSignaturePass : ISemanticPass
                     continue;
                 }
 
+                if (isFirstMeasure
+                    && TryInferUniqueSignatureFromSymmetricNumerator(
+                        measure,
+                        measureCandidates,
+                        out var inferred))
+                {
+                    facts.Add(new TimeSignatureFact(
+                        measure.Number,
+                        inferred.Beats,
+                        inferred.BeatType,
+                        inferred.MinX,
+                        inferred.MaxX,
+                        $"Recovered {inferred.Beats}/{inferred.BeatType} from "
+                            + "matching numerator-only evidence on both staves; "
+                            + "the numerator maps to exactly one supported signature.",
+                        inferred.SourceShapeIds));
+
+                    facts.AddTrace(
+                        $"TimeSignaturePass: m{measure.Number} recovered "
+                        + $"{inferred.Beats}/{inferred.BeatType} from symmetric "
+                        + "numerator-only evidence on both staves");
+                    continue;
+                }
+
                 if (isFirstMeasure)
                 {
                     throw new InvalidDataException(
@@ -218,6 +242,90 @@ public sealed class TimeSignaturePass : ISemanticPass
                     + $"only supported geometric digit hypotheses are accepted.",
                 sources));
         }
+    }
+
+    private bool TryInferUniqueSignatureFromSymmetricNumerator(
+        MeasureScene measure,
+        IReadOnlyList<TimeCandidate> allCandidates,
+        out StaffSignature signature)
+    {
+        signature = default!;
+
+        var staffs = new[]
+        {
+            measure.Upper,
+            measure.Lower
+        };
+        var numeratorDigits = new List<(int Staff, int Digit, TimeCandidate Candidate)>();
+
+        foreach (var staff in staffs)
+        {
+            var spacing = Math.Max(staff.LineSpacing, 0.001);
+            var verticalTolerance =
+                spacing * _settings.VerticalCenterToleranceInSpacings;
+            var headerLimit = measure.XStart
+                + (measure.XEnd - measure.XStart) * FirstMeasureHeaderWidthFraction;
+
+            var candidates = allCandidates
+                .Where(candidate =>
+                    candidate.Staff == staff.StaffNumber
+                    && candidate.CenterX > measure.XStart
+                    && candidate.CenterX <= headerLimit
+                    && candidate.CenterY >= staff.StaffBounds.MinY - verticalTolerance
+                    && candidate.CenterY <= staff.StaffBounds.MaxY + verticalTolerance
+                    && candidate.CenterY < staff.StaffBounds.CenterY)
+                .Select(candidate => new
+                {
+                    Candidate = candidate,
+                    Digit = ParseTimeDigit(candidate.Label)
+                })
+                .Where(item => item.Digit is not null)
+                .OrderBy(item => item.Candidate.CenterX)
+                .ToArray();
+
+            if (candidates.Length != 1)
+            {
+                return false;
+            }
+
+            numeratorDigits.Add((
+                staff.StaffNumber,
+                candidates[0].Digit!.Value,
+                candidates[0].Candidate));
+        }
+
+        if (numeratorDigits.Count != 2
+            || numeratorDigits[0].Digit != numeratorDigits[1].Digit)
+        {
+            return false;
+        }
+
+        var numerator = numeratorDigits[0].Digit;
+        var matching = SupportedSignatures
+            .Where(item => item.Beats == numerator)
+            .ToArray();
+
+        if (matching.Length != 1)
+        {
+            return false;
+        }
+
+        var value = matching[0];
+        var sources = numeratorDigits
+            .Select(item => item.Candidate)
+            .ToArray();
+
+        signature = new StaffSignature(
+            value.Beats,
+            value.BeatType,
+            sources.Min(item => item.Bounds.MinX),
+            sources.Max(item => item.Bounds.MaxX),
+            sources
+                .Select(item => item.ShapeId)
+                .Distinct(StringComparer.Ordinal)
+                .ToArray());
+
+        return true;
     }
 
     private static void AddSingleStaffSignature(
