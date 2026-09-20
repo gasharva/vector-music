@@ -181,7 +181,7 @@ public sealed class RestPass : ISemanticPass
         // whole rests hang from an upper staff line, half rests sit on a lower one.
         // Our staff top is line 0 and one line spacing spans two pitch steps.
         var pitch = 2.0
-            * (candidate.Shape.CenterY - candidate.StaffTopY)
+            * (candidate.Element.CenterY - candidate.StaffTopY)
             / candidate.LineSpacing
             - 4.0;
         var doubledPitch = (int)Math.Round(
