@@ -83,6 +83,53 @@ public sealed class RestPassTests
     }
 
     [Fact]
+    public void NarrowVerticalCurveInsideStaff_IsRecoveredAsEighthRest()
+    {
+        var document = Document(
+            Curve(
+                "curve-rest",
+                new BoundsD(
+                    100,
+                    120,
+                    112,
+                    156)));
+        var facts = new SemanticFacts();
+
+        var pass = new RestPass();
+        pass.Run(document, facts);
+
+        var rest = Assert.Single(
+            facts.OfType<RestFact>());
+
+        Assert.Equal("eighth", rest.NoteType);
+        Assert.Equal("1/8", rest.Duration);
+        Assert.Equal(
+            "GEOMETRIC_EIGHTH_REST",
+            rest.ClassificationLabel);
+    }
+
+    [Fact]
+    public void SameNarrowVerticalCurveAboveStaff_IsNotRest()
+    {
+        var document = Document(
+            Curve(
+                "decorative-curve",
+                new BoundsD(
+                    100,
+                    55,
+                    112,
+                    91)));
+        var facts = new SemanticFacts();
+
+        var pass = new RestPass();
+        pass.Run(document, facts);
+
+        Assert.Empty(
+            facts.OfType<RestFact>());
+        Assert.Empty(pass.LastAnalysis!.Decisions);
+    }
+
+    [Fact]
     public void LowConfidenceRestClassification_IsIgnored()
     {
         var document = Document(
@@ -96,7 +143,7 @@ public sealed class RestPassTests
         Assert.Empty(pass.LastAnalysis!.Decisions);
     }
 
-    private static SemanticDocument Document(params ShapeElement[] shapes)
+    private static SemanticDocument Document(params SemanticElement[] shapes)
     {
         return new SemanticDocument(
         [
@@ -121,6 +168,44 @@ public sealed class RestPassTests
                     20,
                     Array.Empty<SemanticElement>()))
         ]);
+    }
+
+    private static CurveElement Curve(
+        string id,
+        BoundsD bounds)
+    {
+        var ownership = new LogicalOwnership(
+            new LogicalCoordinate("staff-1", "measure-1"),
+            new LogicalCoordinate("staff-1", "measure-1"),
+            1,
+            null,
+            0,
+            "test");
+
+        var centerline = new[]
+        {
+            new PointD(bounds.MinX, bounds.MinY),
+            new PointD(bounds.MaxX, bounds.MinY + bounds.Height * 0.25),
+            new PointD(bounds.MinX + bounds.Width * 0.55, bounds.MaxY)
+        };
+        var source = new CurvedStroke(
+            id,
+            centerline,
+            new[] { 1.0, 1.0, 1.0 },
+            0.25,
+            1.0,
+            null,
+            "path",
+            null,
+            ownership);
+
+        return new CurveElement
+        {
+            ShapeId = id,
+            Bounds = bounds,
+            Ownership = ownership,
+            Source = source
+        };
     }
 
     private static ShapeElement Shape(
