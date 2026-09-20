@@ -201,6 +201,88 @@ public sealed class TimeSignaturePassTests
     }
 
     [Fact]
+    public void InitialNineNumerator_OnBothStaves_InfersUniqueNineOverEight()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(
+                        1,
+                        1,
+                        "upper-nine",
+                        "TIME_NINE",
+                        new BoundsD(40, 115, 50, 125))
+                ],
+                [
+                    TimeShape(
+                        1,
+                        2,
+                        "lower-nine",
+                        "TIME_NINE",
+                        new BoundsD(40, 235, 50, 245))
+                ])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        new TimeSignaturePass().Run(document, facts);
+
+        var signature = Assert.Single(
+            facts.OfType<TimeSignatureFact>());
+
+        Assert.Equal(9, signature.Beats);
+        Assert.Equal(8, signature.BeatType);
+        Assert.Equal(
+            new[] { "lower-nine", "upper-nine" },
+            signature.SourceShapeIds
+                .OrderBy(id => id, StringComparer.Ordinal)
+                .ToArray());
+        Assert.Contains(
+            facts.Trace,
+            line => line.Contains(
+                "symmetric numerator-only evidence",
+                StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void InitialAmbiguousThreeNumerator_OnBothStaves_IsNotInferred()
+    {
+        var document = new SemanticDocument(
+        [
+            Measure(
+                1,
+                [
+                    TimeShape(
+                        1,
+                        1,
+                        "upper-three",
+                        "TIME_THREE",
+                        new BoundsD(40, 115, 50, 125))
+                ],
+                [
+                    TimeShape(
+                        1,
+                        2,
+                        "lower-three",
+                        "TIME_THREE",
+                        new BoundsD(40, 235, 50, 245))
+                ])
+        ]);
+
+        var facts = new SemanticFacts();
+
+        var exception = Assert.Throws<InvalidDataException>(
+            () => new TimeSignaturePass().Run(document, facts));
+
+        Assert.Contains(
+            "No time signature found",
+            exception.Message,
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void InitialPartialNineOverEight_OnOneStaff_UsesCompletePeerStaff()
     {
         var document = new SemanticDocument(
