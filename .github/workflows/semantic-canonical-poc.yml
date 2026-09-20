@@ -98,6 +98,31 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Smoke-test recursive stress tree mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/stress-tree-smoke
+          mkdir -p artifacts/stress-tree-smoke/piece/variant
+
+          cp Samples/cairo-yellow-leaves/optimized/page-001.svg \
+            artifacts/stress-tree-smoke/piece/variant/page-001.svg
+          cp Samples/kancheli-mimino/kancheli-mimino.musicxml \
+            artifacts/stress-tree-smoke/piece/variant/reference.musicxml
+
+          dotnet Tools/SvgScoreBatch/bin/Release/net8.0/SvgScoreBatch.dll \
+            artifacts/stress-tree-smoke \
+            --configuration Release \
+            --no-build \
+            --diff-level error \
+            --no-diagnostic-archive
+
+          test -f artifacts/stress-tree-smoke/stress-summary.md
+          test -f artifacts/stress-tree-smoke/stress-summary.json
+          test -f artifacts/stress-tree-smoke/piece/variant/out/page.diff.json
+          test -f artifacts/stress-tree-smoke/piece/variant/out/batch.log
+          grep -q 'piece/variant' artifacts/stress-tree-smoke/stress-summary.md
+
       - name: Run full optimized Cairo score batch
         shell: bash
         run: |
