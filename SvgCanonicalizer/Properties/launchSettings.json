@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SvgCanonicalizer": {
+      "commandName": "Project",
+      "commandLineArgs": "d:\\musica\\harness\\yellow-leaves-internetized\\optimized\\ d:\\musica\\harness\\yellow-leaves-internetized\\simplified\\"
+    }
+  }
+}
